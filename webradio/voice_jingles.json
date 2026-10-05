@@ -11,6 +11,22 @@
     "CreaZik Radio. Éclectique, curieuse, et fabriquée sur place.",
     "Le calcul se fait sur une machine personnelle, pas dans un centre de données lointain.",
     "Votre avis compte : un pouce vers le haut, ou vers le bas, et la radio s'adapte à vos goûts.",
-    "Une radio qui tourne sur une IA locale : un choix de sobriété, de proximité et de liberté."
-  ]
+    "Une radio qui tourne sur une IA locale : un choix de sobriété, de proximité et de liberté.",
+    "CreaZik Radio : une radio qui se fabrique elle-même. Chaque morceau est généré en local, un par un.",
+    "Ici, pas de catalogue de morceaux enregistrés : la musique est créée par une IA, sur place.",
+    "Les paroles que vous entendez sont inventées pour cette radio, et les poèmes sont tombés dans le domaine public.",
+    "Vos pouces façonnent la programmation : plus un morceau plaît, plus il revient.",
+    "Une IA locale, c'est un ordinateur, une carte graphique, et beaucoup de curiosité.",
+    "Générer en local, c'est aussi choisir ses outils et savoir exactement ce qui tourne sur sa machine.",
+    "Du flamenco au hard techno, en passant par la poésie : CreaZik Radio explore les styles du monde.",
+    "Écrivez un commentaire sur le morceau en cours : il sera lu par les auditeurs de ce morceau.",
+    "Cette radio tourne sur un seul ordinateur, sans abonnement à un service de création musicale en ligne.",
+    "Nous estimons l'énergie utilisée pour générer chaque morceau, et nous en parlerons quand la mesure sera fiable."
+  ],
+  "pronounce": {
+    "CreaZik": "Créa Zique",
+    "L'IA": "L'intelligence artificielle",
+    "l'IA": "l'intelligence artificielle",
+    "IA": "intelligence artificielle"
+  }
 }

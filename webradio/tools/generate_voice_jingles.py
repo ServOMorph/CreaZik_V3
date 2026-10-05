@@ -1,4 +1,5 @@
 import json
+import re
 import sys
 import time
 from datetime import datetime
@@ -27,6 +28,12 @@ def fade(wav, seconds):
     return wav
 
 
+def spoken(text, mapping):
+    for src in sorted(mapping, key=len, reverse=True):
+        text = re.sub(r"(?<![\wÀ-ÿ])" + re.escape(src) + r"(?![\wÀ-ÿ])", mapping[src], text)
+    return text
+
+
 def main():
     cfg = json.loads((ROOT / "voice_jingles.json").read_text(encoding="utf-8"))
     texts = cfg["texts"]
@@ -46,7 +53,7 @@ def main():
         if only and i not in only:
             continue
         t0 = time.time()
-        chunks = [np.asarray(a, dtype=np.float32) for _, _, a in pipe(text, voice=cfg["voice"], speed=cfg["speed"])]
+        chunks = [np.asarray(a, dtype=np.float32) for _, _, a in pipe(spoken(text, cfg.get("pronounce", {})), voice=cfg["voice"], speed=cfg["speed"])]
         wav = np.concatenate(chunks)
         peak = float(np.max(np.abs(wav))) or 1.0
         wav = fade(wav * (0.89 / peak), 0.06)
