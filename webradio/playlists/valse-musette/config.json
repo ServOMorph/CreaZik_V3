@@ -1,0 +1,77 @@
+{
+  "playlist_name": "Playlist Valse musette et bal",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./playlists/valse-musette/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "01 - Valse musette",
+      "prompt": "French musette accordion, valse, java, polka, village ball, valse musette, instrumental",
+      "type": "instrumental",
+      "duration": 80
+    },
+    {
+      "id": "2",
+      "name": "02 - Java",
+      "prompt": "French musette accordion, valse, java, polka, village ball, java dance, instrumental",
+      "type": "instrumental",
+      "duration": 115
+    },
+    {
+      "id": "3",
+      "name": "03 - Polka",
+      "prompt": "French musette accordion, valse, java, polka, village ball, polka, instrumental",
+      "type": "instrumental",
+      "duration": 100
+    },
+    {
+      "id": "4",
+      "name": "04 - Paso doble",
+      "prompt": "French musette accordion, valse, java, polka, village ball, paso doble, instrumental",
+      "type": "instrumental",
+      "duration": 65
+    },
+    {
+      "id": "5",
+      "name": "05 - Tango musette",
+      "prompt": "French musette accordion, valse, java, polka, village ball, tango musette, instrumental",
+      "type": "instrumental",
+      "duration": 105
+    },
+    {
+      "id": "6",
+      "name": "06 - Bal du 14 juillet",
+      "prompt": "French musette accordion, valse, java, polka, village ball, 14 July ball, instrumental",
+      "type": "instrumental",
+      "duration": 50
+    },
+    {
+      "id": "7",
+      "name": "07 - Guinguette",
+      "prompt": "French musette accordion, valse, java, polka, village ball, guinguette, instrumental",
+      "type": "instrumental",
+      "duration": 130
+    },
+    {
+      "id": "8",
+      "name": "08 - Marche",
+      "prompt": "French musette accordion, valse, java, polka, village ball, brass march, instrumental",
+      "type": "instrumental",
+      "duration": 80
+    },
+    {
+      "id": "9",
+      "name": "09 - Valse lente",
+      "prompt": "French musette accordion, valse, java, polka, village ball, slow waltz, instrumental",
+      "type": "instrumental",
+      "duration": 50
+    },
+    {
+      "id": "10",
+      "name": "10 - Finale de bal",
+      "prompt": "French musette accordion, valse, java, polka, village ball, ball finale, instrumental",
+      "type": "instrumental",
+      "duration": 100
+    }
+  ]
+}

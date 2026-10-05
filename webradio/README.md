@@ -1,193 +1,57 @@
-# 🎵 CreaZik Benchmark Suite
+# CreaZik WebRadio
 
-Benchmark complet pour tester les modèles de génération musicale avec IA, en commençant par ACE-Step 1.5.
+Radio en direct dont tous les morceaux sont générés en local par IA (ACE-Step 1.5 sur le GPU de la machine). Le serveur Python programme la radio, les navigateurs jouent le direct.
 
-## Structure
+## Démarrage
 
-```
-benchmark/
-├── config.json           # Configuration des tests
-├── benchmark.py          # Runner principal
-├── ace_wrapper.py        # Wrapper ACE-Step
-├── model_updater.py      # Gestionnaire de modèles
-├── ui.html              # Interface web explorer
-├── README.md            # Cette documentation
-└── outputs/             # Résultats générés (créé automatiquement)
-    ├── benchmark_results.json
-    ├── BENCHMARK.md
-    └── *.wav            # Fichiers audio générés
+```powershell
+.\services.ps1 status            # état des 4 services
+.\services.ps1 start             # démarre ceux qui sont arrêtés
+.\services.ps1 restart -Only serveur
+.\services.ps1 stop              # pensez à relancer ensuite avec start
 ```
 
-## Configuration Initiale
+Services : `serveur` (page et moteur de radio, port 5000, écoute locale), `generation` (rotation ACE-Step), `analyse` (profils sonores pour l'animation), `compression` (MP3 pour le web). Le moteur reprend le morceau en cours après un redémarrage du serveur.
 
-### 1. Localiser ACE-Step 1.5
+Pages : `/` écoute (auditeurs et admin), `/radio.html` gestion (admin, connexion sur `/login`), `/ui.html` explorateur de playlists.
 
-Mets à jour le chemin dans [config.json](config.json) :
-```json
-{
-  "ace_step_path": "CHEMIN_VERS_ACE_STEP_1_5",
-  ...
-}
+## Organisation
+
+| Élément | Rôle |
+|---|---|
+| `playlists/<id>/config.json` | morceaux à générer (prompt, type, durée, paroles) |
+| `playlists/<id>/lyrics/` | paroles (inventées) |
+| `playlists/<id>/outputs/` | WAV, MP3, profils sonores, `playlist_results.json` (non versionnés) |
+| `playlists.json` | registre des playlists (libellé, description, rôle jingle) |
+| `scenes_spec.json` | fiche de style visuelle de chaque playlist |
+| `radio_content.json` | textes des jingles et des publicités |
+| `radio_settings.json` | réglages de la radio (poids, jingles, transitions, publicités) |
+| `radio_engine.py` | moteur de radio en direct (tirage, jingles, transitions, publicités) |
+| `server.py` | serveur web, rôles, API |
+| `run_rotation.py`, `run_queue.py`, `generate.py`, `ace_worker.py` | génération supervisée |
+| `listen.html/css/js`, `scenes.js`, `transitions.js`, `motion.js` | page d'écoute et visuels |
+
+## Ajouter une playlist (procédure)
+
+1. Créer `playlists/<id>/config.json` (modèle : une playlist existante). Durée tirée autour de 90 s plus ou moins 45 s : lancer `python set_durations.py`.
+2. Si vocale : écrire des paroles inventées dans `lyrics/` (jamais de paroles protégées).
+3. Déclarer la playlist dans `playlists.json` (libellé et description sans nom d'artiste).
+4. Ajouter son identifiant dans `series.txt` (la rotation le relit à chaque tour).
+5. Ajouter sa fiche de style dans `scenes_spec.json` : motif, deux teintes, vitesse, densité (un visuel inédit est généré automatiquement si la fiche manque, mais il faut en créer une soigneusement).
+6. Si la playlist regroupe des versions des mêmes chansons, ajouter `"song_group"` dans sa configuration (délai entre versions d'une même chanson).
+
+## Données de la radio
+
+- Direct : `GET /api/radio/state` (public), actions admin `POST /api/radio/action`.
+- Réglages : `POST /api/radio` (admin). Statistiques de passage : `GET /api/radio/stats` (admin). Énergie de génération mesurée : `GET /api/energy`.
+- Pouces : `POST /api/vote` (chaque clic compte). Commentaires : `GET/POST /api/comments` (filtre `?key=` par morceau).
+
+## Tests
+
+```powershell
+python tests/test_radio_engine.py     # moteur de radio (14 tests)
 ```
 
-### 2. Intégrer l'appel ACE-Step
+## Sécurité
 
-Modifie [ace_wrapper.py](ace_wrapper.py) ligne ~50 avec la commande réelle d'ACE-Step :
-```python
-# À décommenter et adapter avec la vraie commande ACE-Step
-command = [
-    str(self.ace_step_path / "generate.py"),
-    "--prompt", prompt,
-    "--output", output_path,
-    "--duration", str(duration),
-]
-```
-
-## Utilisation
-
-### Lancer le benchmark complet
-```bash
-python benchmark/benchmark.py benchmark/config.json
-```
-
-Génère 10 musiques avec les prompts définis dans `config.json`.
-
-### Explorer les résultats
-```bash
-# Ouvrir l'interface web (simplement ouvrir ui.html dans un navigateur)
-start benchmark/ui.html
-```
-
-L'UI propose :
-- 🎵 Lecteur audio pour chaque génération
-- 📊 Statistiques (total, générées, échouées)
-- 🏷️ Filtres par statut
-- 📥 Export des résultats
-- 📋 Copie des prompts
-
-### Gérer les modèles
-
-```bash
-# Lister tous les modèles disponibles
-python benchmark/model_updater.py list
-
-# Mettre à jour le registre
-python benchmark/model_updater.py update
-
-# Vérifier le cache local
-python benchmark/model_updater.py status
-
-# Télécharger un modèle
-python benchmark/model_updater.py download facebook/musicgen-medium
-
-# Supprimer un modèle du cache
-python benchmark/model_updater.py remove facebook/musicgen-medium
-```
-
-## Fichiers de Configuration
-
-### config.json
-
-Définit :
-- `ace_step_path` : Chemin vers ACE-Step 1.5
-- `output_dir` : Dossier des résultats
-- `models` : Liste des modèles à tester
-- `test_cases` : 10 prompts de test (genres, styles, tempo)
-
-Exemple d'ajout d'un test :
-```json
-{
-  "id": "11",
-  "name": "Votre Genre",
-  "prompt": "votre description musicale",
-  "type": "instrumental",
-  "duration": 30
-}
-```
-
-## Workflow Complet
-
-### Phase 1 : Benchmark ACE-Step ✓ (Actuellement)
-1. Configuration
-2. Lancer benchmark
-3. Explorer résultats
-4. Évaluer qualité
-
-### Phase 2 : Tester autres modèles (Futur)
-- MusicGen (Medium, Large)
-- Stable Audio Open
-- Autres modèles HuggingFace
-
-### Phase 3 : Intégration FL Studio
-- Export MIDI
-- Couches audio
-- Contrôle en temps réel
-
-## Résultats & Exports
-
-Les résultats sont sauvegardés dans `outputs/` :
-
-- **benchmark_results.json** : Métadonnées complètes (JSON)
-- **BENCHMARK.md** : Rapport texte lisible
-- **{id}_{name}.wav** : Fichiers audio générés
-
-Export possible depuis l'UI :
-- JSON pour traitement ultérieur
-- Fichiers individuels
-- Comparaisons multi-modèles (futur)
-
-## Notes Techniques
-
-### Contraintes
-- Génération sur machine locale (pas de cloud)
-- Durée max : 30s par track (configurable)
-- Format : WAV (sans perte)
-
-### Performance
-- 10 tracks ≈ 5-10 min selon la machine
-- Cache HuggingFace (D:/HuggingFaceCache)
-- Pas de limitation GPU (adaptive)
-
-### Extensibilité
-- Ajouter nouveaux modèles via `config.json`
-- Wrapper générique pour chaque model type
-- API JSON pour intégrations futures
-
-## Troubleshooting
-
-| Problème | Solution |
-|----------|----------|
-| ACE-Step non trouvé | Mettre à jour le chemin dans `config.json` |
-| Pas de son généré | Vérifier intégration dans `ace_wrapper.py` |
-| UI ne charge pas | Ouvrir `ui.html` localement, pas via serveur |
-| Erreur modèle HF | Vérifier connexion internet, cache |
-
-## Commandes Rapides
-
-```bash
-# Setup complet
-cd benchmark
-python model_updater.py update
-
-# Lancer benchmark
-python benchmark.py config.json
-
-# Voir résultats
-start ui.html
-
-# Exporter pour comparaison
-# (Via l'UI → Export Results)
-```
-
-## Prochaines Étapes
-
-1. **Intégrer ACE-Step** : Tester génération réelle
-2. **Comparer modèles** : MusicGen vs ACE-Step vs Stable Audio
-3. **Créer FL Studio plugin** : Intégrer dans DAW
-4. **Améliorer prompts** : Refiner via feedback utilisateur
-
----
-
-**Version** : 1.0  
-**Dernière mise à jour** : 2026-10-05  
-**Statut** : Benchmark framework prêt, intégration ACE-Step en attente
+Écoute sur `127.0.0.1` uniquement (tunnel installé sur la machine). Seuls l'interface, les résultats et les fichiers audio sont servis. Mot de passe admin à changer dans la page de gestion (défaut `admin`). Détails et pistes dans `ARCHITECTURE_WEBRADIO.md`.

@@ -1,0 +1,77 @@
+{
+  "playlist_name": "Playlist Tango",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./playlists/tango/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "01 - Nuit de Buenos Aires",
+      "prompt": "Argentine tango, bandoneon, violin, piano, upright bass, dramatic, slow romantic tango, instrumental",
+      "type": "instrumental",
+      "duration": 105
+    },
+    {
+      "id": "2",
+      "name": "02 - Milonga du port",
+      "prompt": "Argentine tango, bandoneon, violin, piano, upright bass, dramatic, milonga, lively, instrumental",
+      "type": "instrumental",
+      "duration": 110
+    },
+    {
+      "id": "3",
+      "name": "03 - Tango nuevo",
+      "prompt": "Argentine tango, bandoneon, violin, piano, upright bass, dramatic, tango nuevo, modern harmonies, instrumental",
+      "type": "instrumental",
+      "duration": 110
+    },
+    {
+      "id": "4",
+      "name": "04 - Staccato dramatique",
+      "prompt": "Argentine tango, bandoneon, violin, piano, upright bass, dramatic, fast staccato tango, dramatic, instrumental",
+      "type": "instrumental",
+      "duration": 50
+    },
+    {
+      "id": "5",
+      "name": "05 - Valse criolla",
+      "prompt": "Argentine tango, bandoneon, violin, piano, upright bass, dramatic, tango waltz, instrumental",
+      "type": "instrumental",
+      "duration": 55
+    },
+    {
+      "id": "6",
+      "name": "06 - Nostalgie",
+      "prompt": "Argentine tango, bandoneon, violin, piano, upright bass, dramatic, nostalgic tango, melancholic, instrumental",
+      "type": "instrumental",
+      "duration": 85
+    },
+    {
+      "id": "7",
+      "name": "07 - Tango de cinéma",
+      "prompt": "Argentine tango, bandoneon, violin, piano, upright bass, dramatic, cinematic tango, instrumental",
+      "type": "instrumental",
+      "duration": 50
+    },
+    {
+      "id": "8",
+      "name": "08 - Trio jazzy",
+      "prompt": "Argentine tango, bandoneon, violin, piano, upright bass, dramatic, jazzy tango trio, instrumental",
+      "type": "instrumental",
+      "duration": 125
+    },
+    {
+      "id": "9",
+      "name": "09 - Tango sombre",
+      "prompt": "Argentine tango, bandoneon, violin, piano, upright bass, dramatic, dark tango, tense, instrumental",
+      "type": "instrumental",
+      "duration": 50
+    },
+    {
+      "id": "10",
+      "name": "10 - Tango joueur",
+      "prompt": "Argentine tango, bandoneon, violin, piano, upright bass, dramatic, joyful tango, playful, instrumental",
+      "type": "instrumental",
+      "duration": 60
+    }
+  ]
+}

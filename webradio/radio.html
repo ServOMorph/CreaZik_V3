@@ -3,37 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="theme-color" content="#1e1e2e">
+    <meta name="theme-color" content="#0b0b14">
     <title>CreaZik - Gestion WebRadio</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        html { -webkit-text-size-adjust: 100%; -webkit-tap-highlight-color: transparent; }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #1e1e2e 0%, #2d2d44 100%);
-            color: #e0e0e0;
-            min-height: 100vh;
-            padding: 12px;
-            padding-left: max(12px, env(safe-area-inset-left));
-            padding-right: max(12px, env(safe-area-inset-right));
-            padding-bottom: max(24px, env(safe-area-inset-bottom));
+        :root {
+            --ink: #0b0b14;
+            --ink-2: #11111d;
+            --text: #f0f0f8;
+            --muted: #a9a9c6;
+            --faint: #7d7d9a;
+            --a1: hsl(330 92% 68%);
+            --a2: hsl(200 88% 66%);
+            --a1-a: hsla(330, 92%, 68%, 0.16);
+            --a2-a: hsla(200, 88%, 66%, 0.14);
+            --on-accent: hsl(330 45% 9%);
+            --grad: linear-gradient(135deg, var(--a1), var(--a2));
+            --glass: rgba(255, 255, 255, 0.055);
+            --glass-2: rgba(255, 255, 255, 0.09);
+            --stroke: rgba(255, 255, 255, 0.1);
+            --stroke-2: rgba(255, 255, 255, 0.18);
+            --err: #ff8f8f;
+            --ok: #82e8ae;
+            --r-s: 12px;
+            --r-m: 18px;
+            --r-l: 24px;
         }
 
-        .container { max-width: 900px; margin: 0 auto; }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        html { -webkit-text-size-adjust: 100%; background: var(--ink); }
+
+        body {
+            position: relative;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.45;
+            -webkit-font-smoothing: antialiased;
+            padding: 12px;
+            padding-top: max(14px, env(safe-area-inset-top));
+            padding-left: max(14px, env(safe-area-inset-left));
+            padding-right: max(14px, env(safe-area-inset-right));
+            padding-bottom: max(28px, env(safe-area-inset-bottom));
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            background:
+                radial-gradient(90% 45% at 50% -8%, var(--a1-a), transparent 70%),
+                radial-gradient(70% 40% at 105% 40%, var(--a2-a), transparent 70%),
+                linear-gradient(180deg, var(--ink-2), var(--ink));
+        }
+
+        button, select, input, textarea { font-family: inherit; }
+
+        button:focus-visible, a:focus-visible, summary:focus-visible, select:focus-visible,
+        input:focus-visible, textarea:focus-visible {
+            outline: 2px solid var(--a2);
+            outline-offset: 2px;
+        }
+
+        .container { max-width: 760px; margin: 0 auto; }
 
         .top {
             display: flex;
             align-items: center;
             gap: 10px;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
         }
 
         .top h1 {
             flex: 1;
-            font-size: 1.3em;
-            background: linear-gradient(135deg, #ff6b9d, #00d4ff);
+            min-width: 0;
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: -0.005em;
+            line-height: 1.15;
+            background: var(--grad);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -44,39 +94,44 @@
             align-items: center;
             justify-content: center;
             min-height: 44px;
-            padding: 8px 14px;
-            border-radius: 8px;
-            border: 1px solid #ff6b9d;
-            background: rgba(255, 107, 157, 0.2);
-            color: #ff6b9d;
+            padding: 8px 16px;
+            border-radius: 22px;
+            border: 1px solid var(--stroke-2);
+            background: var(--glass-2);
+            color: var(--text);
             text-decoration: none;
-            font-size: 0.9em;
-            font-weight: 600;
+            font-size: 0.875rem;
+            font-weight: 700;
             cursor: pointer;
+            transition: transform 0.15s ease, background 0.2s ease, border-color 0.2s ease;
         }
+
+        a.back:active, .btn:active { transform: scale(0.96); background: var(--a1-a); border-color: var(--a1); }
 
         .saved {
-            font-size: 0.8em;
-            color: #4caf50;
-            min-height: 1.2em;
-            margin-bottom: 8px;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            color: var(--ok);
+            min-height: 1.3em;
+            margin-bottom: 10px;
         }
 
-        .saved.err { color: #f44336; }
+        .saved.err { color: var(--err); }
 
         .fold {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 107, 157, 0.3);
-            border-radius: 10px;
-            margin-bottom: 12px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03));
+            border: 1px solid var(--stroke);
+            border-radius: var(--r-l);
+            margin-bottom: 14px;
+            box-shadow: 0 14px 34px -20px rgba(0, 0, 0, 0.7);
         }
 
         .fold > summary {
             display: flex;
             align-items: center;
             gap: 10px;
-            min-height: 48px;
-            padding: 0 12px;
+            min-height: 52px;
+            padding: 0 16px;
             cursor: pointer;
             list-style: none;
             user-select: none;
@@ -85,72 +140,90 @@
 
         .fold > summary::-webkit-details-marker { display: none; }
 
+        .fold > summary::before {
+            content: "";
+            flex: none;
+            width: 4px;
+            height: 18px;
+            border-radius: 2px;
+            background: var(--grad);
+        }
+
         .fold > summary::after {
             content: "";
             flex: none;
             width: 9px;
             height: 9px;
             margin-left: auto;
-            border-right: 2px solid #999;
-            border-bottom: 2px solid #999;
+            border-right: 2px solid var(--muted);
+            border-bottom: 2px solid var(--muted);
             transform: rotate(-45deg);
-            transition: transform 0.2s;
+            transition: transform 0.2s ease;
         }
 
         .fold[open] > summary::after { transform: rotate(45deg); }
 
-        .fold > summary:focus-visible { outline: 2px solid #6496ff; outline-offset: -2px; border-radius: 10px; }
-
         .fold > summary h2 {
             flex: 1;
-            font-size: 1em;
-            color: #ff6b9d;
+            font-size: 1rem;
+            font-weight: 800;
+            letter-spacing: -0.005em;
+            color: var(--text);
         }
 
-        .fold-body { padding: 0 12px 12px; }
-
-        @media (prefers-reduced-motion: reduce) {
-            .fold > summary::after, .playlist .chev { transition: none; }
-        }
+        .fold-body { padding: 0 16px 16px; }
 
         .row {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 10px;
-            padding: 8px 0;
-            border-top: 1px solid rgba(255, 107, 157, 0.15);
-            font-size: 0.9em;
+            gap: 12px;
+            padding: 12px 0;
+            border-top: 1px solid var(--stroke);
+            font-size: 0.9375rem;
+            font-weight: 600;
         }
 
         .row:first-of-type { border-top: none; }
 
-        .row .hint { color: #888; font-size: 0.8em; display: block; }
+        .row .hint {
+            color: var(--muted);
+            font-size: 0.8125rem;
+            font-weight: 400;
+            display: block;
+            margin-top: 2px;
+            line-height: 1.35;
+        }
 
-        .stepper { display: flex; align-items: center; gap: 6px; }
+        .stepper { display: flex; align-items: center; gap: 4px; flex: none; }
 
         .stepper button {
             width: 44px;
             height: 44px;
-            border-radius: 8px;
-            border: 1px solid #ff6b9d;
-            background: rgba(255, 107, 157, 0.2);
-            color: #ff6b9d;
-            font-size: 1.3em;
+            border-radius: 50%;
+            border: 1px solid var(--stroke-2);
+            background: var(--glass-2);
+            color: var(--text);
+            font-size: 1.3rem;
+            line-height: 1;
             cursor: pointer;
+            transition: transform 0.15s ease, background 0.2s ease, border-color 0.2s ease;
         }
 
+        .stepper button:active { transform: scale(0.9); background: var(--a1-a); border-color: var(--a1); }
+
         .stepper .val {
-            min-width: 36px;
+            min-width: 40px;
             text-align: center;
-            font-weight: bold;
-            font-size: 1.1em;
+            font-weight: 800;
+            font-size: 1.1rem;
+            font-variant-numeric: tabular-nums;
         }
 
         .switch {
             position: relative;
-            width: 52px;
-            height: 30px;
+            width: 56px;
+            height: 32px;
             flex: 0 0 auto;
         }
 
@@ -159,9 +232,10 @@
         .switch .slider {
             position: absolute;
             inset: 0;
-            background: #555;
-            border-radius: 30px;
-            transition: background 0.2s;
+            background: rgba(255, 255, 255, 0.16);
+            border: 1px solid var(--stroke-2);
+            border-radius: 32px;
+            transition: background 0.25s ease, box-shadow 0.25s ease;
         }
 
         .switch .slider::after {
@@ -173,75 +247,158 @@
             top: 3px;
             border-radius: 50%;
             background: #fff;
-            transition: transform 0.2s;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+            transition: transform 0.25s ease;
         }
 
-        .switch input:checked + .slider { background: #ff6b9d; }
-        .switch input:checked + .slider::after { transform: translateX(22px); }
+        .switch input:checked + .slider { background: var(--grad); border-color: transparent; box-shadow: 0 0 16px -2px var(--a1); }
+        .switch input:checked + .slider::after { transform: translateX(24px); }
+        .switch input:focus-visible + .slider { outline: 2px solid var(--a2); outline-offset: 2px; }
+
+        select {
+            min-height: 44px;
+            max-width: 52%;
+            padding: 0 12px;
+            border-radius: var(--r-s);
+            border: 1px solid var(--stroke-2);
+            background: rgba(0, 0, 0, 0.3);
+            color: var(--text);
+            font-size: 16px;
+        }
+
+        input[type=text], input[type=password], textarea {
+            border: 1px solid var(--stroke-2) !important;
+            border-radius: var(--r-s) !important;
+            background: rgba(0, 0, 0, 0.32) !important;
+            color: var(--text) !important;
+            font-size: 16px;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        input[type=text]:focus, input[type=password]:focus, textarea:focus {
+            border-color: var(--a1) !important;
+            box-shadow: 0 0 0 3px var(--a1-a);
+            outline: none;
+        }
+
+        textarea { font-size: 13px; }
 
         .playlist {
-            border-top: 1px solid rgba(255, 107, 157, 0.15);
-            padding: 8px 0;
+            border-top: 1px solid var(--stroke);
+            padding: 10px 0;
         }
 
         .playlist:first-of-type { border-top: none; }
 
         .playlist-head {
             display: grid;
-            grid-template-columns: 1fr 110px 28px;
+            grid-template-columns: 1fr 110px 30px;
             align-items: center;
-            gap: 8px;
-            font-size: 0.9em;
+            gap: 10px;
+            font-size: 0.9375rem;
+            font-weight: 600;
         }
 
-        .playlist-name { cursor: pointer; min-width: 0; }
-        .playlist-name .count { color: #888; font-size: 0.8em; }
-        .playlist-name .chev { color: #999; margin-left: 4px; display: inline-block; transition: transform 0.2s; }
+        .playlist-name { cursor: pointer; min-width: 0; display: block; padding: 10px 0; }
+        .playlist-name .count { color: var(--muted); font-size: 0.8125rem; font-weight: 400; }
+        .playlist-name .chev { color: var(--muted); margin-left: 6px; display: inline-block; transition: transform 0.2s ease; }
         .playlist.open .chev { transform: rotate(180deg); }
+        .playlist.open > .playlist-head .playlist-name { color: var(--a1); }
 
         input[type=range] {
+            -webkit-appearance: none;
+            appearance: none;
             width: 100%;
-            min-height: 32px;
-            accent-color: #ff6b9d;
+            height: 44px;
+            background: transparent;
+            cursor: pointer;
         }
 
-        .w-val { text-align: right; color: #ff6b9d; font-weight: bold; }
+        input[type=range]::-webkit-slider-runnable-track {
+            height: 6px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.16);
+        }
 
-        .tracks { display: none; padding: 6px 0 2px 8px; }
+        input[type=range]::-moz-range-track {
+            height: 6px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.16);
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 26px;
+            height: 26px;
+            margin-top: -10px;
+            border-radius: 50%;
+            border: 0;
+            background: var(--grad);
+            box-shadow: 0 0 14px -1px var(--a1), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+        }
+
+        input[type=range]::-moz-range-thumb {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            border: 0;
+            background: var(--grad);
+            box-shadow: 0 0 14px -1px var(--a1);
+        }
+
+        .w-val { text-align: right; color: var(--a1); font-weight: 800; font-variant-numeric: tabular-nums; }
+
+        .tracks { display: none; padding: 6px 0 2px 6px; }
         .playlist.open .tracks { display: block; }
 
         .track {
             display: flex;
             align-items: center;
-            gap: 10px;
-            min-height: 40px;
-            font-size: 0.85em;
+            gap: 12px;
+            min-height: 44px;
+            font-size: 0.875rem;
         }
 
-        .track input { width: 22px; height: 22px; accent-color: #ff6b9d; flex: 0 0 auto; }
+        .track input { width: 22px; height: 22px; accent-color: hsl(330 92% 68%); flex: 0 0 auto; }
         .track .tname { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-        .track .star { color: #ffd54f; }
-        .track.off .tname { color: #777; text-decoration: line-through; }
+        .track .star { color: #ffd76a; }
+        .track.off .tname { color: var(--faint); text-decoration: line-through; }
 
-        .mini-actions { display: flex; gap: 8px; margin: 4px 0 6px; flex-wrap: wrap; }
+        .mini-actions { display: flex; gap: 8px; margin: 6px 0 8px; flex-wrap: wrap; }
         .mini-actions button {
-            padding: 6px 10px;
-            min-height: 36px;
-            border-radius: 6px;
-            border: 1px solid #6496ff;
-            background: rgba(100, 150, 255, 0.15);
-            color: #6496ff;
-            font-size: 0.8em;
+            padding: 0 14px;
+            min-height: 44px;
+            border-radius: 22px;
+            border: 1px solid var(--stroke-2);
+            background: var(--glass-2);
+            color: var(--a2);
+            font-size: 0.8125rem;
+            font-weight: 700;
             cursor: pointer;
+            transition: transform 0.15s ease, background 0.2s ease;
         }
 
-        .info { color: #888; font-size: 0.8em; margin-top: 6px; line-height: 1.4; }
+        .mini-actions button:active { transform: scale(0.96); background: var(--a2-a); }
+
+        .info { color: var(--muted); font-size: 0.8125rem; margin-top: 8px; line-height: 1.45; }
+
+        @media (prefers-reduced-motion: reduce) {
+            a.back, .btn, .stepper button, .mini-actions button, .switch .slider, .switch .slider::after,
+            .fold > summary::after, .playlist .chev, input, textarea { transition: none; }
+            a.back:active, .btn:active, .stepper button:active, .mini-actions button:active { transform: none; }
+        }
+
+        @media (max-width: 400px) {
+            .row { flex-wrap: wrap; }
+            .playlist-head { grid-template-columns: 1fr 96px 26px; gap: 8px; }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="top">
             <a class="back" href="/listen.html">&larr; Écoute</a>
+            <a class="back" href="/ui.html">Explorateur</a>
             <h1>Gestion WebRadio</h1>
             <button class="btn" onclick="resetAll()">Réinitialiser</button>
         </div>
@@ -284,6 +441,10 @@
             <div class="row">
                 <span>Anti-répétition<span class="hint">Nombre de morceaux avant qu'un même morceau puisse revenir</span></span>
                 <div class="stepper"><button onclick="step('no_repeat', -1, 0, 50)">&minus;</button><span class="val" id="v_no_repeat"></span><button onclick="step('no_repeat', 1, 0, 50)">+</button></div>
+            </div>
+            <div class="row">
+                <span>Délai entre versions d'une chanson<span class="hint">Nombre de morceaux avant qu'une même chanson revienne, quelle que soit sa version (0 = désactivé)</span></span>
+                <div class="stepper"><button onclick="step('no_repeat_songs', -1, 0, 60)">&minus;</button><span class="val" id="v_no_repeat_songs"></span><button onclick="step('no_repeat_songs', 1, 0, 60)">+</button></div>
             </div>
             </div>
         </details>
@@ -363,7 +524,7 @@
 
     <script>
         const DEFAULTS = {default_weight: 5, weights: {}, jingle_every: 5, jingles_enabled: true,
-                          favorites_only: false, no_repeat: 3, excluded: [], thumb_strength: 0.15,
+                          favorites_only: false, no_repeat: 3, no_repeat_songs: 15, excluded: [], thumb_strength: 0.15,
                           ads_enabled: true, ads_every: 5, ad_seconds: 9, ad_offset_s: 10, visual_transition_s: 5,
                           transitions: {
                               active: 'fondu',
@@ -381,6 +542,9 @@
         let results = {};
         let favs = new Set();
         let votes = {};
+        let shares = {};
+        let trackShares = {};
+        let statsTimer = null;
         let openPlaylists = new Set();
         let saveTimer = null;
 
@@ -405,7 +569,18 @@
                 const d = await getJSON('./' + b.results, null);
                 results[b.id] = d ? (d.generations || []).filter(t => t.status === 'generated') : [];
             }
+            await loadStats();
             render();
+        }
+
+        async function loadStats() {
+            const st = await getJSON('/api/radio/stats', []);
+            shares = {};
+            trackShares = {};
+            st.forEach(p => {
+                shares[p.id] = p.share;
+                p.tracks.forEach(t => { trackShares[t.key] = t.share; });
+            });
         }
 
         function save() {
@@ -418,6 +593,7 @@
                     const r = await fetch('/api/radio', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(settings)});
                     if (!r.ok) throw new Error(r.status);
                     el.textContent = 'Enregistré - pris en compte au prochain morceau';
+                    loadStats().then(refreshCounts);
                 } catch (e) {
                     el.className = 'saved err';
                     el.textContent = 'Échec de l\'enregistrement';
@@ -476,7 +652,8 @@
                 const el = document.getElementById('count-' + b.id);
                 if (!el) return;
                 const n = results[b.id].filter(t => !settings.excluded.includes(keyOf(b, t))).length;
-                el.textContent = '(' + n + '/' + results[b.id].length + ' actifs)';
+                const sh = shares[b.id];
+                el.textContent = '(' + n + '/' + results[b.id].length + ' actifs' + (sh !== undefined ? ', ' + sh + ' % du temps' : '') + ')';
             });
         }
 
@@ -501,13 +678,18 @@
             renderLists();
         }
 
+        function shareLabel(k) {
+            const v = trackShares[k];
+            return v === undefined ? '' : '<span class="hint" style="display:inline"> ' + v + ' %</span>';
+        }
+
         function trackRow(b, t) {
             const k = keyOf(b, t);
             const on = !settings.excluded.includes(k);
             return `<label class="track ${on ? '' : 'off'}">
                 <input type="checkbox" ${on ? 'checked' : ''} onchange="toggleTrack('${k}', this.checked, this.parentElement)">
                 <span class="tname">${esc(t.name)}</span>
-                ${voteLabel(k)}
+                ${voteLabel(k)}${shareLabel(k)}
                 ${favs.has(k) ? '<span class="star">&#9733;</span>' : ''}
             </label>`;
         }
@@ -539,7 +721,7 @@
         }
 
         function render() {
-            ['default_weight', 'no_repeat', 'jingle_every', 'thumb_strength', 'ads_every', 'ad_seconds', 'ad_offset_s', 'visual_transition_s'].forEach(k => document.getElementById('v_' + k).textContent = settings[k]);
+            ['default_weight', 'no_repeat', 'no_repeat_songs', 'jingle_every', 'thumb_strength', 'ads_every', 'ad_seconds', 'ad_offset_s', 'visual_transition_s'].forEach(k => document.getElementById('v_' + k).textContent = settings[k]);
             document.getElementById('favorites_only').checked = !!settings.favorites_only;
             document.getElementById('jingles_enabled').checked = !!settings.jingles_enabled;
             document.getElementById('ads_enabled').checked = !!settings.ads_enabled;

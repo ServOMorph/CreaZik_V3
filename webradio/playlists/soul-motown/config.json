@@ -1,0 +1,77 @@
+{
+  "playlist_name": "Playlist Soul et Motown",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./playlists/soul-motown/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "01 - Soul du matin",
+      "prompt": "soul, Motown style, tambourine, horns, strings, tight rhythm section, morning soul, uplifting, instrumental",
+      "type": "instrumental",
+      "duration": 80
+    },
+    {
+      "id": "2",
+      "name": "02 - Ballade soul",
+      "prompt": "soul, Motown style, tambourine, horns, strings, tight rhythm section, soul ballad, slow, instrumental",
+      "type": "instrumental",
+      "duration": 120
+    },
+    {
+      "id": "3",
+      "name": "03 - Danse du samedi",
+      "prompt": "soul, Motown style, tambourine, horns, strings, tight rhythm section, dance soul, upbeat, instrumental",
+      "type": "instrumental",
+      "duration": 45
+    },
+    {
+      "id": "4",
+      "name": "04 - Cuivres chauds",
+      "prompt": "soul, Motown style, tambourine, horns, strings, tight rhythm section, horn-driven soul, instrumental",
+      "type": "instrumental",
+      "duration": 55
+    },
+    {
+      "id": "5",
+      "name": "05 - Soul sucrée",
+      "prompt": "soul, Motown style, tambourine, horns, strings, tight rhythm section, sweet soul, instrumental",
+      "type": "instrumental",
+      "duration": 65
+    },
+    {
+      "id": "6",
+      "name": "06 - Groove tendu",
+      "prompt": "soul, Motown style, tambourine, horns, strings, tight rhythm section, tight groove, instrumental",
+      "type": "instrumental",
+      "duration": 70
+    },
+    {
+      "id": "7",
+      "name": "07 - Cordes de velours",
+      "prompt": "soul, Motown style, tambourine, horns, strings, tight rhythm section, velvet strings soul, instrumental",
+      "type": "instrumental",
+      "duration": 55
+    },
+    {
+      "id": "8",
+      "name": "08 - Soul de rue",
+      "prompt": "soul, Motown style, tambourine, horns, strings, tight rhythm section, street soul, instrumental",
+      "type": "instrumental",
+      "duration": 120
+    },
+    {
+      "id": "9",
+      "name": "09 - Fête",
+      "prompt": "soul, Motown style, tambourine, horns, strings, tight rhythm section, party soul, instrumental",
+      "type": "instrumental",
+      "duration": 115
+    },
+    {
+      "id": "10",
+      "name": "10 - Soul du soir",
+      "prompt": "soul, Motown style, tambourine, horns, strings, tight rhythm section, evening soul, instrumental",
+      "type": "instrumental",
+      "duration": 125
+    }
+  ]
+}

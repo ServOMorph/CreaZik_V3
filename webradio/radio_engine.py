@@ -29,6 +29,7 @@ DEFAULT_RADIO = {
     "jingles_enabled": True,
     "favorites_only": False,
     "no_repeat": 3,
+    "no_repeat_songs": 15,
     "excluded": [],
     "thumb_strength": 0.15,
     "ads_enabled": True,
@@ -107,6 +108,8 @@ class Catalog:
         playlists = []
         for p in registry:
             data = read_json(self.root / p["results"], {})
+            cfg = read_json(self.root / "playlists" / p["id"] / "config.json", {})
+            group = cfg.get("song_group")
             is_jingle = p.get("role") == "jingle"
             keys = []
             for g in data.get("generations", []):
@@ -118,11 +121,11 @@ class Catalog:
                     continue
                 key = f"{p['id']}:{g['test_case_id']}"
                 tracks[key] = {
-                    "key": key, "playlist": p["id"], "playlist_label": p.get("label", p["id"]),
+                    "key": key, "song": f"{group}:{g['test_case_id']}" if group else key, "playlist": p["id"], "playlist_label": p.get("label", p["id"]),
                     "playlist_description": p.get("description", ""), "jingle": is_jingle,
                     "name": g.get("name", key), "prompt": g.get("prompt", ""), "type": g.get("type", ""),
                     "generated_at": g.get("generated_at", ""), "model": g.get("model") or data.get("model", ""),
-                    "file": rel, "duration": dur,
+                    "file": rel, "duration": dur, "energy_wh_est": g.get("energy_wh_est"),
                 }
                 keys.append(key)
             if keys:
@@ -134,7 +137,7 @@ class Catalog:
 
 
 class RadioEngine:
-    def __init__(self, root, time_fn=time.time, rng=None):
+    def __init__(self, root, time_fn=time.time, rng=None, persist=False):
         self.root = Path(root)
         self.now = time_fn
         self.rng = rng or random.Random()
@@ -154,10 +157,53 @@ class RadioEngine:
         self.since_ad = 0
         self.ad_seq = 0
         self.jingle_msg_seq = 0
+        self.song_history = []
         self._last_refresh = 0.0
         self._settings = (None, dict(DEFAULT_RADIO))
         self._votes = (None, {})
         self._favs = (None, set())
+        self.persist = persist
+        if persist:
+            self._load_state()
+
+    def _state_path(self):
+        return self.root / "radio_state.json"
+
+    def _save_state(self):
+        data = {
+            "uid": self.uid, "rev": self.rev, "active": self.active, "current_uid": self.current["uid"] if self.current else None,
+            "explicit": self.explicit, "auto": self.auto, "played": self.played, "history": self.history,
+            "since_jingle": self.since_jingle, "jingle_seq": self.jingle_seq, "since_ad": self.since_ad,
+            "ad_seq": self.ad_seq, "jingle_msg_seq": self.jingle_msg_seq, "song_history": self.song_history,
+        }
+        tmp = self._state_path().with_suffix(".tmp")
+        try:
+            tmp.write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
+            os.replace(tmp, self._state_path())
+        except OSError:
+            pass
+
+    def _load_state(self):
+        data = read_json(self._state_path(), None)
+        if not data:
+            return
+        t = self.now()
+        self.uid = data.get("uid", 0)
+        self.rev = data.get("rev", 0) + 1
+        self.active = [it for it in data.get("active", []) if it.get("end", 0) > t]
+        cur_uid = data.get("current_uid")
+        pool = data.get("active", [])
+        self.current = next((it for it in pool if it.get("uid") == cur_uid), None)
+        self.explicit = data.get("explicit", [])
+        self.auto = data.get("auto", [])
+        self.played = data.get("played", [])
+        self.history = data.get("history", [])
+        self.since_jingle = data.get("since_jingle", 0)
+        self.jingle_seq = data.get("jingle_seq", 0)
+        self.since_ad = data.get("since_ad", 0)
+        self.ad_seq = data.get("ad_seq", 0)
+        self.jingle_msg_seq = data.get("jingle_msg_seq", 0)
+        self.song_history = data.get("song_history", [])
 
     def _cached(self, slot, path, loader):
         mtime = Catalog._mtime(path)
@@ -212,7 +258,7 @@ class RadioEngine:
             k = float(self.settings().get("thumb_strength", 0.15))
         except (TypeError, ValueError):
             k = 0.15
-        return max(1e-6, min(20.0, math.exp(k * score)))
+        return max(1e-9, min(20.0, math.exp(k * score)))
 
     def _weight(self, playlist_id):
         st = self.settings()
@@ -240,7 +286,11 @@ class RadioEngine:
                 out.extend(k for k in pl["keys"] if k not in excluded)
         return out
 
-    def _pick_track(self, used, last=None):
+    def _song_of(self, key):
+        tr = self.cat.tracks.get(key)
+        return tr["song"] if tr else key
+
+    def _pick_track(self, used, last=None, songs=None):
         groups = self._playable_groups()
         if not groups:
             return None
@@ -255,7 +305,13 @@ class RadioEngine:
         keys = chosen[1]
         avoid = last or (self.current["key"] if self.current else None)
         cands = [k for k in keys if k != avoid] or keys
-        weights = [self._multiplier(k) * (0.01 if k in used else 1.0) for k in cands]
+        songs = songs or set()
+        fresh = [k for k in cands if k not in used and self._song_of(k) not in songs and self._multiplier(k) >= 0.05]
+        if fresh:
+            cands = fresh
+            weights = [self._multiplier(k) for k in cands]
+        else:
+            weights = [self._multiplier(k) * (0.01 if k in used else 1.0) for k in cands]
         return self.rng.choices(cands, weights=weights, k=1)[0]
 
     def _auto_ok(self, key):
@@ -273,6 +329,9 @@ class RadioEngine:
         used = set(self.history)
         for it in self.active:
             used.add(it["key"])
+        songs = set(self.song_history)
+        for it in self.active:
+            songs.add(it.get("song") or it["key"])
         last = self.current["key"] if self.current else None
 
         def add(entry):
@@ -287,6 +346,7 @@ class RadioEngine:
             else:
                 sim += 1
                 used.add(entry["key"])
+                songs.add(self._song_of(entry["key"]))
                 last = entry["key"]
 
         self.explicit = [e for e in self.explicit if e["key"] in self.cat.tracks]
@@ -298,7 +358,7 @@ class RadioEngine:
                 break
             add({"key": k, "jingle": False})
         while len(out) < QUEUE_LEN:
-            k = self._pick_track(used, last)
+            k = self._pick_track(used, last, songs)
             if not k:
                 break
             self.auto.append(k)
@@ -322,6 +382,9 @@ class RadioEngine:
         self.history.append(entry["key"])
         keep = int(self.settings().get("no_repeat") or 0)
         self.history = self.history[-keep:] if keep > 0 else []
+        self.song_history.append(self._song_of(entry["key"]))
+        keep_songs = int(self.settings().get("no_repeat_songs") or 0)
+        self.song_history = self.song_history[-keep_songs:] if keep_songs > 0 else []
 
     def _consume(self, entry):
         if entry.get("explicit"):
@@ -360,6 +423,8 @@ class RadioEngine:
         self.current = item
         self._compose()
         self.rev += 1
+        if self.persist:
+            self._save_state()
         return True
 
     def _attach_overlay(self, item):
@@ -449,6 +514,31 @@ class RadioEngine:
                 ]
             return out
 
+    def stats(self):
+        with self.lock:
+            self.cat.refresh()
+            groups = self._playable_groups()
+            total = sum(self._weight(pl["id"]) for pl, _ in groups) or 1
+            out = []
+            for pl, keys in groups:
+                share = self._weight(pl["id"]) / total
+                mult = {k: self._multiplier(k) for k in keys}
+                msum = sum(mult.values()) or 1
+                out.append({"id": pl["id"], "label": pl["label"], "share": round(share * 100, 2),
+                            "tracks": [{"key": k, "share": round(share * mult[k] / msum * 100, 3)} for k in keys]})
+            return out
+
+    def energy(self):
+        with self.lock:
+            self.cat.refresh()
+            measured = [t for t in self.cat.tracks.values() if t.get("energy_wh_est") is not None]
+            total = sum(t["energy_wh_est"] for t in measured)
+            return {"tracks_total": len(self.cat.tracks), "tracks_measured": len(measured),
+                    "wh_total": round(total, 2),
+                    "wh_per_track_avg": round(total / len(measured), 3) if measured else None,
+                    "kind": "estimation",
+                    "scope": "estimation de l'énergie du GPU pendant la génération, d'après son taux d'utilisation et sa puissance maximale (115 W) ; hors processeur, ventilation et diffusion ; le GPU n'expose pas sa puissance réelle"}
+
     def library(self):
         with self.lock:
             self.cat.refresh()
@@ -508,6 +598,8 @@ class RadioEngine:
                 return False
             self._compose()
             self.rev += 1
+            if self.persist:
+                self._save_state()
             return True
 
     def _remove(self, index):

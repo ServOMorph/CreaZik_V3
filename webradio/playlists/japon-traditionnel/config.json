@@ -1,0 +1,77 @@
+{
+  "playlist_name": "Playlist Japon traditionnel",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./playlists/japon-traditionnel/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "01 - Jardin calme",
+      "prompt": "traditional Japanese, koto, shakuhachi, taiko, shamisen, calm garden, instrumental",
+      "type": "instrumental",
+      "duration": 75
+    },
+    {
+      "id": "2",
+      "name": "02 - Taiko de fête",
+      "prompt": "traditional Japanese, koto, shakuhachi, taiko, shamisen, festival taiko, instrumental",
+      "type": "instrumental",
+      "duration": 100
+    },
+    {
+      "id": "3",
+      "name": "03 - Drame de samouraï",
+      "prompt": "traditional Japanese, koto, shakuhachi, taiko, shamisen, samurai drama, instrumental",
+      "type": "instrumental",
+      "duration": 130
+    },
+    {
+      "id": "4",
+      "name": "04 - Cerisiers en fleurs",
+      "prompt": "traditional Japanese, koto, shakuhachi, taiko, shamisen, sakura spring, instrumental",
+      "type": "instrumental",
+      "duration": 110
+    },
+    {
+      "id": "5",
+      "name": "05 - Silence d'hiver",
+      "prompt": "traditional Japanese, koto, shakuhachi, taiko, shamisen, winter silence, instrumental",
+      "type": "instrumental",
+      "duration": 105
+    },
+    {
+      "id": "6",
+      "name": "06 - Cloches de temple",
+      "prompt": "traditional Japanese, koto, shakuhachi, taiko, shamisen, temple bells, instrumental",
+      "type": "instrumental",
+      "duration": 120
+    },
+    {
+      "id": "7",
+      "name": "07 - Danse populaire",
+      "prompt": "traditional Japanese, koto, shakuhachi, taiko, shamisen, folk dance, instrumental",
+      "type": "instrumental",
+      "duration": 60
+    },
+    {
+      "id": "8",
+      "name": "08 - Lanternes de nuit",
+      "prompt": "traditional Japanese, koto, shakuhachi, taiko, shamisen, night lanterns, instrumental",
+      "type": "instrumental",
+      "duration": 105
+    },
+    {
+      "id": "9",
+      "name": "09 - Fil de la rivière",
+      "prompt": "traditional Japanese, koto, shakuhachi, taiko, shamisen, river flow, instrumental",
+      "type": "instrumental",
+      "duration": 55
+    },
+    {
+      "id": "10",
+      "name": "10 - Brume de montagne",
+      "prompt": "traditional Japanese, koto, shakuhachi, taiko, shamisen, mountain mist, instrumental",
+      "type": "instrumental",
+      "duration": 90
+    }
+  ]
+}

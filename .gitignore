@@ -7,6 +7,7 @@ webradio/admin_credentials.json
 webradio/admin_token.txt
 webradio/comments.json
 webradio/votes.json
+webradio/radio_state.json
 webradio/favorites.json
 webradio/radio_settings.json
 webradio/*.tmp
@@ -15,3 +16,4 @@ webradio/playlists/*/outputs/
 webradio/**/*.wav
 !webradio/silence.wav
 webradio/playlists/perso/lyrics_originales_pdf/
+radio_state.json

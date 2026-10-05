@@ -222,6 +222,240 @@
     "description": "9 morceaux de hard rock en anglais : riffs bluesy, voix rauque et refrains en chœur, paroles inventées, générés en local."
   },
   {
+    "id": "disco-es",
+    "label": "Playlist Disco - Vocal espagnol",
+    "results": "playlists/disco-es/outputs/playlist_results.json",
+    "description": "10 morceaux disco chantés en espagnol, aux paroles inventées, générés en local."
+  },
+  {
+    "id": "disco-pt",
+    "label": "Playlist Disco - Vocal portugais",
+    "results": "playlists/disco-pt/outputs/playlist_results.json",
+    "description": "10 morceaux disco chantés en portugais, aux paroles inventées, générés en local."
+  },
+  {
+    "id": "disco-it",
+    "label": "Playlist Disco - Vocal italien",
+    "results": "playlists/disco-it/outputs/playlist_results.json",
+    "description": "10 morceaux disco chantés en italien, aux paroles inventées, générés en local."
+  },
+  {
+    "id": "disco-de",
+    "label": "Playlist Disco - Vocal allemand",
+    "results": "playlists/disco-de/outputs/playlist_results.json",
+    "description": "10 morceaux disco chantés en allemand, aux paroles inventées, générés en local."
+  },
+  {
+    "id": "flamenco",
+    "label": "Playlist Flamenco",
+    "results": "playlists/flamenco/outputs/playlist_results.json",
+    "description": "10 morceaux de flamenco instrumental : guitare, palmas et cajón, des palos les plus lents aux plus festifs."
+  },
+  {
+    "id": "tango",
+    "label": "Playlist Tango",
+    "results": "playlists/tango/outputs/playlist_results.json",
+    "description": "10 morceaux de tango argentin instrumental : bandonéon, violon, piano et contrebasse."
+  },
+  {
+    "id": "reggae-dub",
+    "label": "Playlist Reggae et dub",
+    "results": "playlists/reggae-dub/outputs/playlist_results.json",
+    "description": "10 morceaux de reggae et de dub instrumentaux : contretemps de guitare, basse profonde et échos."
+  },
+  {
+    "id": "afrobeats",
+    "label": "Playlist Afrobeats",
+    "results": "playlists/afrobeats/outputs/playlist_results.json",
+    "description": "10 morceaux d'afrobeats instrumentaux : percussions syncopées, guitares brillantes et basses rondes."
+  },
+  {
+    "id": "maghreb",
+    "label": "Playlist Musiques du Maghreb",
+    "results": "playlists/maghreb/outputs/playlist_results.json",
+    "description": "10 morceaux inspirés des musiques d'Afrique du Nord : oud, darbouka, qanûn et violon, instrumentaux."
+  },
+  {
+    "id": "klezmer",
+    "label": "Playlist Klezmer",
+    "results": "playlists/klezmer/outputs/playlist_results.json",
+    "description": "10 morceaux de klezmer instrumental : clarinette, accordéon, violon et tuba."
+  },
+  {
+    "id": "balkans",
+    "label": "Playlist Fanfares des Balkans",
+    "results": "playlists/balkans/outputs/playlist_results.json",
+    "description": "10 morceaux de fanfares balkaniques instrumentales : trompettes, tuba et caisse claire."
+  },
+  {
+    "id": "celtique",
+    "label": "Playlist Musique celtique",
+    "results": "playlists/celtique/outputs/playlist_results.json",
+    "description": "10 morceaux de musique celtique instrumentale : violon, tin whistle, bodhrán et cornemuse."
+  },
+  {
+    "id": "nordique",
+    "label": "Playlist Folk nordique",
+    "results": "playlists/nordique/outputs/playlist_results.json",
+    "description": "10 morceaux de folk nordique instrumental : nyckelharpa, violon, tambours profonds et bourdons."
+  },
+  {
+    "id": "gamelan",
+    "label": "Playlist Gamelan",
+    "results": "playlists/gamelan/outputs/playlist_results.json",
+    "description": "10 morceaux inspirés du gamelan javanais et balinais : métallophones, gongs et tambours kendang."
+  },
+  {
+    "id": "inde-classique",
+    "label": "Playlist Musique classique indienne",
+    "results": "playlists/inde-classique/outputs/playlist_results.json",
+    "description": "10 morceaux inspirés de la musique classique indienne : sitar, tabla, tanpura et bansuri."
+  },
+  {
+    "id": "bollywood",
+    "label": "Playlist Bollywood",
+    "results": "playlists/bollywood/outputs/playlist_results.json",
+    "description": "10 morceaux instrumentaux dans l'esprit des musiques de films indiens : dholak, tabla, cordes et sitar."
+  },
+  {
+    "id": "japon-traditionnel",
+    "label": "Playlist Japon traditionnel",
+    "results": "playlists/japon-traditionnel/outputs/playlist_results.json",
+    "description": "10 morceaux inspirés des musiques traditionnelles japonaises : koto, shakuhachi, taiko et shamisen."
+  },
+  {
+    "id": "chine-traditionnelle",
+    "label": "Playlist Chine traditionnelle",
+    "results": "playlists/chine-traditionnelle/outputs/playlist_results.json",
+    "description": "10 morceaux inspirés des musiques traditionnelles chinoises : guzheng, erhu, pipa et flûte dizi."
+  },
+  {
+    "id": "polynesie",
+    "label": "Playlist Hawaï et Polynésie",
+    "results": "playlists/polynesie/outputs/playlist_results.json",
+    "description": "10 morceaux inspirés d'Hawaï et de la Polynésie : ukulélé, guitare slack key, guitare steel et tambours."
+  },
+  {
+    "id": "mariachi",
+    "label": "Playlist Mariachi",
+    "results": "playlists/mariachi/outputs/playlist_results.json",
+    "description": "10 morceaux de mariachi instrumental : trompettes, violons, guitarrón et vihuela."
+  },
+  {
+    "id": "salsa-latine",
+    "label": "Playlist Salsa et musiques latines",
+    "results": "playlists/salsa-latine/outputs/playlist_results.json",
+    "description": "10 morceaux de salsa et de musiques latines instrumentales : piano montuno, congas, timbales et trompettes."
+  },
+  {
+    "id": "bachata-merengue",
+    "label": "Playlist Bachata et merengue",
+    "results": "playlists/bachata-merengue/outputs/playlist_results.json",
+    "description": "10 morceaux de bachata et de merengue instrumentaux : guitare, bongos et güira."
+  },
+  {
+    "id": "bresil",
+    "label": "Playlist Brésil : samba et MPB",
+    "results": "playlists/bresil/outputs/playlist_results.json",
+    "description": "10 morceaux de samba et de MPB instrumentaux : guitare nylon, cavaquinho et percussions."
+  },
+  {
+    "id": "caraibes",
+    "label": "Playlist Caraïbes",
+    "results": "playlists/caraibes/outputs/playlist_results.json",
+    "description": "10 morceaux des Caraïbes instrumentaux : steel drums, calypso, soca et zouk."
+  },
+  {
+    "id": "gospel",
+    "label": "Playlist Gospel instrumental",
+    "results": "playlists/gospel/outputs/playlist_results.json",
+    "description": "10 morceaux de gospel instrumental : orgue, piano, claquements de mains et chœur sans paroles."
+  },
+  {
+    "id": "blues",
+    "label": "Playlist Blues",
+    "results": "playlists/blues/outputs/playlist_results.json",
+    "description": "10 morceaux de blues instrumental : guitare électrique, harmonica et shuffle."
+  },
+  {
+    "id": "jazz-varie",
+    "label": "Playlist Jazz varié",
+    "results": "playlists/jazz-varie/outputs/playlist_results.json",
+    "description": "10 morceaux de jazz instrumental dans des styles variés : bebop, cool, modal, big band et fusion."
+  },
+  {
+    "id": "soul-motown",
+    "label": "Playlist Soul et Motown",
+    "results": "playlists/soul-motown/outputs/playlist_results.json",
+    "description": "10 morceaux de soul instrumentale dans l'esprit Motown : tambourin, cuivres et cordes."
+  },
+  {
+    "id": "hip-hop-beats",
+    "label": "Playlist Beats hip-hop",
+    "results": "playlists/hip-hop-beats/outputs/playlist_results.json",
+    "description": "10 instrumentaux hip-hop : boom bap, basses profondes et samples poussiéreux, sans voix."
+  },
+  {
+    "id": "drum-and-bass",
+    "label": "Playlist Drum and bass",
+    "results": "playlists/drum-and-bass/outputs/playlist_results.json",
+    "description": "10 morceaux de drum and bass instrumentaux : breakbeats rapides et basses profondes."
+  },
+  {
+    "id": "house-trance",
+    "label": "Playlist House et trance",
+    "results": "playlists/house-trance/outputs/playlist_results.json",
+    "description": "10 morceaux de house et de trance instrumentaux : kick régulier, arpèges et nappes."
+  },
+  {
+    "id": "ambient-chill",
+    "label": "Playlist Ambient et chill",
+    "results": "playlists/ambient-chill/outputs/playlist_results.json",
+    "description": "10 morceaux ambient, lo-fi et chillout instrumentaux pour se détendre."
+  },
+  {
+    "id": "metal",
+    "label": "Playlist Metal instrumental",
+    "results": "playlists/metal/outputs/playlist_results.json",
+    "description": "10 morceaux de metal instrumental : riffs lourds, doubles pédales et solos."
+  },
+  {
+    "id": "punk-indie",
+    "label": "Playlist Punk et indie rock",
+    "results": "playlists/punk-indie/outputs/playlist_results.json",
+    "description": "10 morceaux de punk et d'indie rock instrumentaux : guitares directes et énergie brute."
+  },
+  {
+    "id": "classique-varie",
+    "label": "Playlist Classique varié",
+    "results": "playlists/classique-varie/outputs/playlist_results.json",
+    "description": "10 morceaux de musique classique instrumentale : baroque, romantique, chambre et minimalisme."
+  },
+  {
+    "id": "country-bluegrass",
+    "label": "Playlist Country et bluegrass",
+    "results": "playlists/country-bluegrass/outputs/playlist_results.json",
+    "description": "10 morceaux de country et de bluegrass instrumentaux : banjo, violon, guitare steel et mandoline."
+  },
+  {
+    "id": "ska-rocksteady",
+    "label": "Playlist Ska",
+    "results": "playlists/ska-rocksteady/outputs/playlist_results.json",
+    "description": "10 morceaux de ska et de rocksteady instrumentaux : cuivres, contretemps et basse marchante."
+  },
+  {
+    "id": "valse-musette",
+    "label": "Playlist Valse musette et bal",
+    "results": "playlists/valse-musette/outputs/playlist_results.json",
+    "description": "10 morceaux de bal populaire : valse musette, java et polka à l'accordéon."
+  },
+  {
+    "id": "medieval-renaissance",
+    "label": "Playlist Médiéval et Renaissance",
+    "results": "playlists/medieval-renaissance/outputs/playlist_results.json",
+    "description": "10 morceaux de musique médiévale et Renaissance instrumentale : luth, flûte, vièle et tambourin."
+  },
+  {
     "id": "jingles",
     "label": "Jingles (5 s)",
     "results": "playlists/jingles/outputs/playlist_results.json",

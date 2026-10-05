@@ -1,0 +1,97 @@
+{
+  "playlist_name": "Playlist Disco - Vocal allemand",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./playlists/disco-de/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "01 - Discokugel",
+      "prompt": "disco, four-on-the-floor kick, funky rhythm guitar, lush strings, brass stabs, groovy bass, 118 bpm, female vocal",
+      "type": "vocal",
+      "duration": 90,
+      "lyrics_file": "playlists/disco-de/lyrics/01.txt",
+      "language": "de"
+    },
+    {
+      "id": "2",
+      "name": "02 - Tanzen bis zur Sonne",
+      "prompt": "disco, driving bassline, hand claps, shimmering strings, bright brass, 120 bpm, male vocal",
+      "type": "vocal",
+      "duration": 70,
+      "lyrics_file": "playlists/disco-de/lyrics/02.txt",
+      "language": "de"
+    },
+    {
+      "id": "3",
+      "name": "03 - Samtboden",
+      "prompt": "smooth disco, warm bass, wah guitar, soft strings, 112 bpm, duet vocal, romantic",
+      "type": "vocal",
+      "duration": 105,
+      "lyrics_file": "playlists/disco-de/lyrics/03.txt",
+      "language": "de"
+    },
+    {
+      "id": "4",
+      "name": "04 - Glitzer in den Augen",
+      "prompt": "disco pop, sparkling synths, tight drums, funky guitar, 122 bpm, female vocal, joyful",
+      "type": "vocal",
+      "duration": 70,
+      "lyrics_file": "playlists/disco-de/lyrics/04.txt",
+      "language": "de"
+    },
+    {
+      "id": "5",
+      "name": "05 - Boogie auf der Allee",
+      "prompt": "disco funk, slap bass, brass section, congas, 116 bpm, male vocal, playful",
+      "type": "vocal",
+      "duration": 50,
+      "lyrics_file": "playlists/disco-de/lyrics/05.txt",
+      "language": "de"
+    },
+    {
+      "id": "6",
+      "name": "06 - Samstagstraum",
+      "prompt": "classic disco, orchestral strings, rhythmic guitar, pounding kick, 124 bpm, female vocal",
+      "type": "vocal",
+      "duration": 65,
+      "lyrics_file": "playlists/disco-de/lyrics/06.txt",
+      "language": "de"
+    },
+    {
+      "id": "7",
+      "name": "07 - Liebe auf der Tanzfläche",
+      "prompt": "disco, pulsing bass, shimmering hi-hats, string stabs, 120 bpm, duet vocal",
+      "type": "vocal",
+      "duration": 70,
+      "lyrics_file": "playlists/disco-de/lyrics/07.txt",
+      "language": "de"
+    },
+    {
+      "id": "8",
+      "name": "08 - Schüttel die Nacht",
+      "prompt": "funky disco, rhythm guitar chops, handclaps, bright brass, 119 bpm, male vocal, energetic",
+      "type": "vocal",
+      "duration": 115,
+      "lyrics_file": "playlists/disco-de/lyrics/08.txt",
+      "language": "de"
+    },
+    {
+      "id": "9",
+      "name": "09 - Hohe Absätze",
+      "prompt": "retro disco, fat bass, string swells, funky drums, 117 bpm, female vocal, confident",
+      "type": "vocal",
+      "duration": 105,
+      "lyrics_file": "playlists/disco-de/lyrics/09.txt",
+      "language": "de"
+    },
+    {
+      "id": "10",
+      "name": "10 - Das letzte Lied",
+      "prompt": "disco ballad, warm strings, mellow bass, soft claps, 108 bpm, duet vocal, nostalgic",
+      "type": "vocal",
+      "duration": 105,
+      "lyrics_file": "playlists/disco-de/lyrics/10.txt",
+      "language": "de"
+    }
+  ]
+}

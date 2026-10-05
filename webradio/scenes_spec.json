@@ -279,6 +279,279 @@
       "hue2": 50,
       "speed": 1.2,
       "density": 0.8
+    },
+    "disco-es": {
+      "motif": "mosaic",
+      "hue": 350,
+      "hue2": 140,
+      "speed": 1.1,
+      "density": 0.7
+    },
+    "disco-pt": {
+      "motif": "mosaic",
+      "hue": 140,
+      "hue2": 290,
+      "speed": 1.1,
+      "density": 0.7
+    },
+    "disco-it": {
+      "motif": "mosaic",
+      "hue": 150,
+      "hue2": 300,
+      "speed": 1.1,
+      "density": 0.7
+    },
+    "disco-de": {
+      "motif": "mosaic",
+      "hue": 50,
+      "hue2": 200,
+      "speed": 1.1,
+      "density": 0.7
+    },
+    "flamenco": {
+      "motif": "particles",
+      "hue": 13,
+      "hue2": 143,
+      "speed": 0.5,
+      "density": 0.45
+    },
+    "tango": {
+      "motif": "strings",
+      "hue": 60,
+      "hue2": 210,
+      "speed": 0.65,
+      "density": 0.55
+    },
+    "reggae-dub": {
+      "motif": "bars",
+      "hue": 107,
+      "hue2": 277,
+      "speed": 0.8,
+      "density": 0.65
+    },
+    "afrobeats": {
+      "motif": "spokes",
+      "hue": 154,
+      "hue2": 344,
+      "speed": 0.95,
+      "density": 0.75
+    },
+    "maghreb": {
+      "motif": "smoke",
+      "hue": 201,
+      "hue2": 51,
+      "speed": 1.1,
+      "density": 0.85
+    },
+    "klezmer": {
+      "motif": "aurora",
+      "hue": 248,
+      "hue2": 18,
+      "speed": 1.25,
+      "density": 0.45
+    },
+    "balkans": {
+      "motif": "stars",
+      "hue": 295,
+      "hue2": 85,
+      "speed": 1.4,
+      "density": 0.55
+    },
+    "celtique": {
+      "motif": "wave",
+      "hue": 342,
+      "hue2": 152,
+      "speed": 0.5,
+      "density": 0.65
+    },
+    "nordique": {
+      "motif": "bokeh",
+      "hue": 29,
+      "hue2": 219,
+      "speed": 0.65,
+      "density": 0.75
+    },
+    "gamelan": {
+      "motif": "rings",
+      "hue": 76,
+      "hue2": 286,
+      "speed": 0.8,
+      "density": 0.85
+    },
+    "inde-classique": {
+      "motif": "grid",
+      "hue": 123,
+      "hue2": 253,
+      "speed": 0.95,
+      "density": 0.45
+    },
+    "bollywood": {
+      "motif": "mosaic",
+      "hue": 170,
+      "hue2": 320,
+      "speed": 1.1,
+      "density": 0.55
+    },
+    "japon-traditionnel": {
+      "motif": "particles",
+      "hue": 217,
+      "hue2": 27,
+      "speed": 1.25,
+      "density": 0.65
+    },
+    "chine-traditionnelle": {
+      "motif": "strings",
+      "hue": 264,
+      "hue2": 94,
+      "speed": 1.4,
+      "density": 0.75
+    },
+    "polynesie": {
+      "motif": "bars",
+      "hue": 311,
+      "hue2": 161,
+      "speed": 0.5,
+      "density": 0.85
+    },
+    "mariachi": {
+      "motif": "spokes",
+      "hue": 358,
+      "hue2": 128,
+      "speed": 0.65,
+      "density": 0.45
+    },
+    "salsa-latine": {
+      "motif": "smoke",
+      "hue": 45,
+      "hue2": 195,
+      "speed": 0.8,
+      "density": 0.55
+    },
+    "bachata-merengue": {
+      "motif": "aurora",
+      "hue": 92,
+      "hue2": 262,
+      "speed": 0.95,
+      "density": 0.65
+    },
+    "bresil": {
+      "motif": "stars",
+      "hue": 139,
+      "hue2": 329,
+      "speed": 1.1,
+      "density": 0.75
+    },
+    "caraibes": {
+      "motif": "wave",
+      "hue": 186,
+      "hue2": 36,
+      "speed": 1.25,
+      "density": 0.85
+    },
+    "gospel": {
+      "motif": "bokeh",
+      "hue": 233,
+      "hue2": 3,
+      "speed": 1.4,
+      "density": 0.45
+    },
+    "blues": {
+      "motif": "rings",
+      "hue": 280,
+      "hue2": 70,
+      "speed": 0.5,
+      "density": 0.55
+    },
+    "jazz-varie": {
+      "motif": "grid",
+      "hue": 327,
+      "hue2": 137,
+      "speed": 0.65,
+      "density": 0.65
+    },
+    "soul-motown": {
+      "motif": "mosaic",
+      "hue": 14,
+      "hue2": 204,
+      "speed": 0.8,
+      "density": 0.75
+    },
+    "hip-hop-beats": {
+      "motif": "particles",
+      "hue": 61,
+      "hue2": 271,
+      "speed": 0.95,
+      "density": 0.85
+    },
+    "drum-and-bass": {
+      "motif": "strings",
+      "hue": 108,
+      "hue2": 238,
+      "speed": 1.1,
+      "density": 0.45
+    },
+    "house-trance": {
+      "motif": "bars",
+      "hue": 155,
+      "hue2": 305,
+      "speed": 1.25,
+      "density": 0.55
+    },
+    "ambient-chill": {
+      "motif": "spokes",
+      "hue": 202,
+      "hue2": 12,
+      "speed": 1.4,
+      "density": 0.65
+    },
+    "metal": {
+      "motif": "smoke",
+      "hue": 249,
+      "hue2": 79,
+      "speed": 0.5,
+      "density": 0.75
+    },
+    "punk-indie": {
+      "motif": "aurora",
+      "hue": 296,
+      "hue2": 146,
+      "speed": 0.65,
+      "density": 0.85
+    },
+    "classique-varie": {
+      "motif": "stars",
+      "hue": 343,
+      "hue2": 113,
+      "speed": 0.8,
+      "density": 0.45
+    },
+    "country-bluegrass": {
+      "motif": "wave",
+      "hue": 30,
+      "hue2": 180,
+      "speed": 0.95,
+      "density": 0.55
+    },
+    "ska-rocksteady": {
+      "motif": "bokeh",
+      "hue": 77,
+      "hue2": 247,
+      "speed": 1.1,
+      "density": 0.65
+    },
+    "valse-musette": {
+      "motif": "rings",
+      "hue": 124,
+      "hue2": 314,
+      "speed": 1.25,
+      "density": 0.75
+    },
+    "medieval-renaissance": {
+      "motif": "grid",
+      "hue": 171,
+      "hue2": 21,
+      "speed": 1.4,
+      "density": 0.85
     }
   }
 }

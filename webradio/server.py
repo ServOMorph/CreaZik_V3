@@ -34,7 +34,7 @@ ADMIN_POST_TARGETS = {
     "/api/content": (HERE / "radio_content.json", "dict"),
 }
 
-STATIC_FILES = {"/ui.html", "/listen.html", "/silence.wav", "/listen.css", "/listen.js", "/visuals.js",
+STATIC_FILES = {"/listen.html", "/silence.wav", "/listen.css", "/listen.js", "/visuals.js",
                 "/scenes.js", "/transitions.js", "/motion.js", "/scenes_spec.json", "/radio_content.json",
                 "/playlists.json", "/favorites.json", "/radio_settings.json"}
 STATIC_PATTERNS = [
@@ -44,10 +44,11 @@ STATIC_PATTERNS = [
     re.compile(r"^/[\w\-]+/(?:outputs/)?[^/]+\.(?:wav|mp3|flac|ogg)\.viz\.json$"),
     re.compile(r"^/radio/[\w\-]+\.json$"),
 ]
-ADMIN_PAGES = {"/radio.html"}
+ADMIN_PAGES = {"/radio.html", "/ui.html"}
 LOGIN_NEXT = ("/radio.html", "/ui.html", "/listen.html")
 
 RANGE_RE = re.compile(r"bytes=(\d*)-(\d*)")
+RESULTS_RE = re.compile(r"^/playlists/[\w\-]+/outputs/playlist_results\.json$")
 CTRL_RE = re.compile(r"[\x00-\x08\x0b-\x1f\x7f]")
 
 CSP = ("default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; "
@@ -140,7 +141,7 @@ class State:
 
 
 STATE = State()
-ENGINE = RadioEngine(HERE)
+ENGINE = RadioEngine(HERE, persist=True)
 COMMENTS_LOCK = threading.Lock()
 
 VOTES_FILE = HERE / "votes.json"
@@ -325,6 +326,15 @@ class Handler(SimpleHTTPRequestHandler):
         if path == "/api/radio/state":
             self._send_json(200, ENGINE.snapshot(admin=self._is_admin()))
             return
+        if path == "/api/energy":
+            self._send_json(200, ENGINE.energy())
+            return
+        if path == "/api/radio/stats":
+            if not self._is_admin():
+                self.send_error(401)
+                return
+            self._send_json(200, ENGINE.stats())
+            return
         if path == "/api/radio/library":
             if not self._is_admin():
                 self.send_error(401)
@@ -332,8 +342,11 @@ class Handler(SimpleHTTPRequestHandler):
             self._send_json(200, ENGINE.library())
             return
         if path == "/api/comments":
+            key = parse_qs(parts.query).get("key", [""])[0]
             with COMMENTS_LOCK:
                 items = read_comments()
+            if key:
+                items = [c for c in items if c.get("key") == key]
             self._send_json(200, items[-200:][::-1])
             return
         if path == "/api/votes":
@@ -354,6 +367,9 @@ class Handler(SimpleHTTPRequestHandler):
             path = "/listen.html"
         if not self._allowed_static(path):
             self.send_error(404)
+            return
+        if RESULTS_RE.match(path) and not (HERE / path.lstrip("/")).exists():
+            self._send_json(200, {"model": "", "generations": []})
             return
         self.path = path
         self._serve(head)
@@ -467,10 +483,13 @@ class Handler(SimpleHTTPRequestHandler):
         name = clean_text(body.get("name", ""), 30) or "Anonyme"
         text = clean_text(body.get("text", ""), 500)
         track = clean_text(body.get("track", ""), 120)
+        key = str(body.get("key", ""))
+        if key and not VOTE_KEY_RE.match(key):
+            key = ""
         if not text:
             self._send_json(400, {"error": "commentaire vide"})
             return
-        item = {"id": secrets.token_hex(4), "name": name, "text": text, "track": track,
+        item = {"id": secrets.token_hex(4), "name": name, "text": text, "track": track, "key": key,
                 "ts": datetime.now().isoformat(timespec="seconds")}
         with COMMENTS_LOCK:
             items = read_comments()

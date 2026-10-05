@@ -4,7 +4,9 @@ import json
 import os
 import re
 import shutil
+import subprocess
 import sys
+import threading
 import time
 from datetime import datetime
 
@@ -72,6 +74,53 @@ def save():
 
 
 SECTION_SECONDS = 14.5
+
+
+IDLE_W = 10.0
+
+
+class GpuPowerMeter:
+    def __init__(self, interval=0.5):
+        self.interval = interval
+        self.samples = []
+        self._stop = threading.Event()
+        self._thread = None
+
+    def _read(self):
+        try:
+            out = subprocess.run(
+                ["nvidia-smi", "--query-gpu=utilization.gpu,power.limit", "--format=csv,noheader,nounits"],
+                capture_output=True, text=True, timeout=5)
+            util, limit = [float(x) for x in out.stdout.strip().splitlines()[0].split(",")]
+            self.limit_w = limit
+            return IDLE_W + (limit - IDLE_W) * util / 100.0, util
+        except Exception:
+            return None
+
+    def _run(self):
+        last = time.time()
+        while not self._stop.is_set():
+            reading = self._read()
+            now = time.time()
+            if reading is not None:
+                self.samples.append((reading[0], now - last, reading[1]))
+            last = now
+            self._stop.wait(self.interval)
+
+    def start(self):
+        self._thread = threading.Thread(target=self._run, daemon=True)
+        self._thread.start()
+
+    def stop(self):
+        self._stop.set()
+        if self._thread:
+            self._thread.join(timeout=5)
+        total_s = sum(dt for _, dt, _ in self.samples)
+        if not self.samples or total_s <= 0:
+            return None
+        wh = sum(w * dt for w, dt, _ in self.samples) / 3600.0
+        return {"energy_wh_est": round(wh, 3),
+                "gpu_util_avg_pct": round(sum(u * dt for _, dt, u in self.samples) / total_s, 1)}
 
 
 def fit_lyrics(text, duration):
@@ -146,6 +195,8 @@ for i, (case, entry) in enumerate(zip(cases, entries), 1):
         seed=case.get("seed", -1),
     )
     t0 = time.time()
+    meter = GpuPowerMeter()
+    meter.start()
     try:
         res = generate_music(
             dit, llm, params=params,
@@ -164,6 +215,9 @@ for i, (case, entry) in enumerate(zip(cases, entries), 1):
     except Exception as e:
         entry["status"] = "failed"
         entry["error"] = str(e)[:300]
+    measure = meter.stop()
+    if measure:
+        entry.update(measure)
     gc.collect()
     torch.cuda.empty_cache()
     entry["elapsed_s"] = round(time.time() - t0, 1)

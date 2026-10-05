@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aperçu des visuels</title>
+<style>
+body { margin: 0; padding: 8px; background: #101018; color: #ddd; font: 12px system-ui, sans-serif; }
+h2 { margin: 14px 0 6px; font-size: 14px; color: #ff6b9d; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, 375px); gap: 8px; }
+.cell { width: 375px; }
+canvas { width: 375px; height: 240px; display: block; background: #000; border-radius: 6px; }
+</style>
+</head>
+<body>
+<h2>Motifs de scènes</h2><div class="grid" id="scenes"></div>
+<h2>Jingles</h2><div class="grid" id="jingles"></div>
+<h2>Publicités</h2><div class="grid" id="ads"></div>
+<h2>Transitions (mi-parcours)</h2><div class="grid" id="trans"></div>
+<script src="../scenes.js"></script>
+<script src="../transitions.js"></script>
+<script src="../motion.js"></script>
+<script>
+(function () {
+    const W = 375, H = 240;
+    const content = {
+        jingle_messages: [{title: 'CreaZik Radio', lines: ['Musique générée par une IA locale', 'Sur un PC personnel, sans serveur de calcul distant']}],
+        ads: [
+            {headline: 'SéréniaTech', sub: 'Accompagnement numérique pour associations, TPE et indépendants', cta: 'serenia-tech.fr'},
+            {headline: 'Votre informatique, sereinement', sub: 'Structurez-la à votre rythme', cta: 'Prendre rendez-vous'},
+            {headline: 'Sans jargon, avec bienveillance', sub: 'Une approche humaine du numérique', cta: 'Découvrir mes services'},
+            {headline: 'Formation à l\'IA éthique', sub: 'Se former à l\'IA, pas à pas', cta: 'Découvrir nos formations'},
+            {headline: 'Automatisation et IA sur-mesure', sub: 'Des outils développés pour votre activité', cta: 'serenia-tech.fr'},
+            {headline: 'Partout en France', sub: 'À distance ou en présentiel', cta: 'serenia-tech.fr'},
+            {headline: 'Formations IA', sub: 'Réseau Alfie, avec prise en charge OPCO', cta: 'Découvrir nos formations'},
+            {headline: '30 minutes offertes', sub: 'Premier rendez-vous gratuit et sans engagement', cta: 'Prendre rendez-vous'},
+            {headline: 'Prise en main, bureautique, sécurité', sub: 'L\'accompagnement informatique au quotidien', cta: 'Découvrir mes services'},
+            {headline: 'Associations, TPE, indépendants', sub: 'Le numérique à votre mesure', cta: 'serenia-tech.fr'}
+        ]
+    };
+    const data = {freq: new Uint8Array(64), wave: new Uint8Array(128), level: 0.6, bass: 0.7, mid: 0.5, treble: 0.4,
+                  progress: 0.4, t: 30, playing: true, playlist: 'x'};
+
+    function feed(t) {
+        for (let i = 0; i < 64; i++) data.freq[i] = 40 + 160 * Math.max(0, Math.sin(i * 0.3 + t * 3)) * (1 - i / 90);
+        for (let i = 0; i < 128; i++) data.wave[i] = 128 + 90 * Math.sin(i * 0.2 + t * 5) * 0.6;
+        data.level = 0.55 + 0.25 * Math.sin(t * 2);
+        data.bass = 0.6 + 0.3 * Math.sin(t * 3);
+        data.t = t;
+    }
+
+    function cell(parent, label) {
+        const d = document.createElement('div');
+        d.className = 'cell';
+        const c = document.createElement('canvas');
+        c.width = W * 2; c.height = H * 2;
+        const l = document.createElement('div');
+        l.textContent = label;
+        d.appendChild(c); d.appendChild(l); parent.appendChild(d);
+        const ctx = c.getContext('2d');
+        ctx.setTransform(2, 0, 0, 2, 0, 0);
+        return ctx;
+    }
+
+    const errors = [];
+    function safe(label, fn) {
+        try { fn(); } catch (e) { errors.push(label + ': ' + e.message); }
+    }
+
+    const motifs = CreaScenes.motifs;
+    const hues = [[200, 260], [330, 200], [20, 340], [280, 190], [35, 90], [0, 25], [220, 45], [40, 20], [150, 200], [310, 50], [120, 300], [170, 260]];
+    motifs.forEach((m, i) => {
+        const ctx = cell(document.getElementById('scenes'), m + ' (' + hues[i][0] + '/' + hues[i][1] + ')');
+        safe('scene ' + m, () => {
+            const scene = CreaScenes.create('prev-' + m, {motif: m, hue: hues[i][0], hue2: hues[i][1], speed: 1, density: 0.7});
+            for (let k = 0; k < 90; k++) { feed(k / 30); scene.draw(ctx, W, H, data, k / 30); }
+        });
+    });
+
+    const base = CreaScenes.create('prev-base', {motif: 'aurora', hue: 220, hue2: 45, speed: 0.8, density: 0.6});
+    for (let v = 0; v < CreaMotion.jingle.variants; v++) {
+        const ctx = cell(document.getElementById('jingles'), 'jingle variante ' + (v + 1));
+        safe('jingle ' + v, () => {
+            for (let k = 0; k < 60; k++) { feed(k / 30); base.draw(ctx, W, H, data, k / 30); }
+            ctx.save(); ctx.globalAlpha = CreaMotion.envelope(2.4, 5, 0.8);
+            CreaMotion.jingle.draw(ctx, W, H, 2.4, 5, content.jingle_messages[0], v, data);
+            ctx.restore();
+        });
+    }
+    CreaMotion.ads.forEach((ad, i) => {
+        const ctx = cell(document.getElementById('ads'), 'pub ' + (i + 1) + ' : ' + (ad.name || ad.id));
+        safe('ad ' + i, () => {
+            for (let k = 0; k < 60; k++) { feed(k / 30); base.draw(ctx, W, H, data, k / 30); }
+            ctx.save(); ctx.globalAlpha = CreaMotion.envelope(4.5, 9, 0.8);
+            ad.draw(ctx, W, H, 4.5, 9, content.ads[i], data);
+            ctx.restore();
+        });
+    });
+
+    CreaTransitions.types.forEach(type => {
+        const ctx = cell(document.getElementById('trans'), 'transition ' + type + ' a 50 %');
+        safe('trans ' + type, () => {
+            const a = CreaScenes.create('ta', {motif: 'rings', hue: 200, hue2: 260, speed: 1, density: 0.6});
+            const b = CreaScenes.create('tb', {motif: 'grid', hue: 20, hue2: 340, speed: 1, density: 0.6});
+            const eng = CreaTransitions.create();
+            feed(1);
+            eng.start((c, w, h) => a.draw(c, w, h, data, 1), (c, w, h) => b.draw(c, w, h, data, 1), type, 4000);
+            const t0 = performance.now();
+            eng.render(ctx, W, H, t0);
+            eng.render(ctx, W, H, t0 + 2000);
+        });
+    });
+
+    document.title = errors.length ? 'ERREURS: ' + errors.join(' | ') : 'OK';
+}());
+</script>
+</body>
+</html>

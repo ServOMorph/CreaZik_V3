@@ -379,6 +379,10 @@
         applyMediaSession();
         updateThumbs();
         renderProgram();
+        const area = $('comText');
+        if (area) area.placeholder = it.jingle ? 'Ton commentaire sur la radio...' : 'Ton commentaire sur « ' + it.name + ' »...';
+        featuredId = null;
+        loadComments();
     }
 
     function applyMediaSession() {
@@ -567,6 +571,14 @@
         return scenes[id];
     }
 
+    function applyTheme(id) {
+        const spec = (specs.playlists || {})[id] || (window.CreaScenes ? window.CreaScenes.autoSpec(id) : null);
+        if (!spec) return;
+        const root = document.documentElement.style;
+        root.setProperty('--pl-h1', String(Math.round(spec.hue)));
+        root.setProperty('--pl-h2', String(Math.round(spec.hue2)));
+    }
+
     function transitionMs() {
         const s = live.ui && live.ui.visual_transition_s;
         return Math.max(3, Math.min(10, Number(s) || 5)) * 1000;
@@ -606,9 +618,11 @@
         if (!transEngine && window.CreaTransitions) transEngine = window.CreaTransitions.create();
         if (sceneKey === null) {
             sceneKey = wanted;
+            applyTheme(wanted);
         } else if (wanted !== sceneKey) {
             const from = sceneKey;
             sceneKey = wanted;
+            applyTheme(wanted);
             if (transEngine) {
                 const type = window.CreaTransitions.pick(from + '>' + wanted);
                 transEngine.start((c, ww, hh) => getScene(from).draw(c, ww, hh, data, nowSec),
@@ -826,7 +840,7 @@
         const author = $('featuredAuthor');
         if (!text) return;
         if (!comments.length) {
-            text.textContent = 'Sois le premier à laisser un commentaire.';
+            text.textContent = current && !current.jingle ? 'Aucun commentaire sur ce morceau pour le moment : sois le premier !' : 'Sois le premier à laisser un commentaire.';
             if (author) author.textContent = '';
             return;
         }
@@ -851,9 +865,18 @@
         }, 350);
     }
 
+    let commentsKey = '';
+
     async function loadComments() {
-        comments = await getJSON('/api/comments', []);
-        if (!featuredId) showFeatured();
+        const key = current && !current.jingle ? current.key : '';
+        commentsKey = key;
+        const list = await getJSON('/api/comments' + (key ? '?key=' + encodeURIComponent(key) : ''), []);
+        if (commentsKey !== key) return;
+        comments = list;
+        if (!featuredId || !comments.some(c => c.id === featuredId)) {
+            featuredId = null;
+            showFeatured();
+        }
     }
 
     async function postComment(ev) {
@@ -866,7 +889,7 @@
         const track = current ? ((current.jingle ? 'Jingle' : current.name) + ' - ' + $('nowSub').textContent) : '';
         try {
             const r = await fetch('/api/comments', {method: 'POST', headers: {'Content-Type': 'application/json'},
-                                                    body: JSON.stringify({name, text, track})});
+                                                    body: JSON.stringify({name, text, track, key: current && !current.jingle ? current.key : ''})});
             if (r.ok) {
                 $('comText').value = '';
                 try { localStorage.setItem('comName', name); } catch (e) {}
@@ -920,5 +943,6 @@
         autoplayAfterLogin();
     }
 
+    window.__radioDebug = () => ({current, T: serverNow(), live: {active: live.active, upcoming: live.upcoming.length}, content, sceneKey, listening, transActive: !!(transEngine && transEngine.active)});
     window.addEventListener('load', init);
 }());

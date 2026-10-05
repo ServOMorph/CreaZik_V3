@@ -1,0 +1,77 @@
+{
+  "playlist_name": "Playlist Bachata et merengue",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./playlists/bachata-merengue/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "01 - Bachata romantique",
+      "prompt": "bachata and merengue, guitar, bongos, guira, bachata romantic, instrumental",
+      "type": "instrumental",
+      "duration": 50
+    },
+    {
+      "id": "2",
+      "name": "02 - Merengue rapide",
+      "prompt": "bachata and merengue, guitar, bongos, guira, merengue fast, instrumental",
+      "type": "instrumental",
+      "duration": 60
+    },
+    {
+      "id": "3",
+      "name": "03 - Bachata sensuelle",
+      "prompt": "bachata and merengue, guitar, bongos, guira, bachata sensual, instrumental",
+      "type": "instrumental",
+      "duration": 125
+    },
+    {
+      "id": "4",
+      "name": "04 - Merengue typique",
+      "prompt": "bachata and merengue, guitar, bongos, guira, merengue tipico accordion, instrumental",
+      "type": "instrumental",
+      "duration": 45
+    },
+    {
+      "id": "5",
+      "name": "05 - Danse dominicaine",
+      "prompt": "bachata and merengue, guitar, bongos, guira, dominican dance, instrumental",
+      "type": "instrumental",
+      "duration": 100
+    },
+    {
+      "id": "6",
+      "name": "06 - Plage ensoleillée",
+      "prompt": "bachata and merengue, guitar, bongos, guira, sunny beach, instrumental",
+      "type": "instrumental",
+      "duration": 60
+    },
+    {
+      "id": "7",
+      "name": "07 - Boîte de nuit",
+      "prompt": "bachata and merengue, guitar, bongos, guira, night club, instrumental",
+      "type": "instrumental",
+      "duration": 100
+    },
+    {
+      "id": "8",
+      "name": "08 - Boléro lent",
+      "prompt": "bachata and merengue, guitar, bongos, guira, slow bolero, instrumental",
+      "type": "instrumental",
+      "duration": 85
+    },
+    {
+      "id": "9",
+      "name": "09 - Fête",
+      "prompt": "bachata and merengue, guitar, bongos, guira, festive, instrumental",
+      "type": "instrumental",
+      "duration": 85
+    },
+    {
+      "id": "10",
+      "name": "10 - Tropical",
+      "prompt": "bachata and merengue, guitar, bongos, guira, tropical, instrumental",
+      "type": "instrumental",
+      "duration": 130
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "playlist_name": "Playlist Beats hip-hop",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./playlists/hip-hop-beats/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "01 - Boom bap",
+      "prompt": "hip-hop instrumental beat, no vocals, deep bass, crisp drums, boom bap, dusty samples, 90 bpm, instrumental",
+      "type": "instrumental",
+      "duration": 50
+    },
+    {
+      "id": "2",
+      "name": "02 - Jazz hop",
+      "prompt": "hip-hop instrumental beat, no vocals, deep bass, crisp drums, jazz hop, mellow keys, 85 bpm, instrumental",
+      "type": "instrumental",
+      "duration": 100
+    },
+    {
+      "id": "3",
+      "name": "03 - Trap sombre",
+      "prompt": "hip-hop instrumental beat, no vocals, deep bass, crisp drums, dark trap, 808 bass, 140 bpm, instrumental",
+      "type": "instrumental",
+      "duration": 55
+    },
+    {
+      "id": "4",
+      "name": "04 - Soul sample",
+      "prompt": "hip-hop instrumental beat, no vocals, deep bass, crisp drums, soulful sample chop, 88 bpm, instrumental",
+      "type": "instrumental",
+      "duration": 125
+    },
+    {
+      "id": "5",
+      "name": "05 - Funk hop",
+      "prompt": "hip-hop instrumental beat, no vocals, deep bass, crisp drums, funky bass hop, 95 bpm, instrumental",
+      "type": "instrumental",
+      "duration": 115
+    },
+    {
+      "id": "6",
+      "name": "06 - Cinéma hip-hop",
+      "prompt": "hip-hop instrumental beat, no vocals, deep bass, crisp drums, cinematic hip-hop, strings, 80 bpm, instrumental",
+      "type": "instrumental",
+      "duration": 105
+    },
+    {
+      "id": "7",
+      "name": "07 - Lo-fi hop",
+      "prompt": "hip-hop instrumental beat, no vocals, deep bass, crisp drums, lo-fi hip-hop, vinyl crackle, 75 bpm, instrumental",
+      "type": "instrumental",
+      "duration": 115
+    },
+    {
+      "id": "8",
+      "name": "08 - Beat de rue",
+      "prompt": "hip-hop instrumental beat, no vocals, deep bass, crisp drums, gritty street beat, 92 bpm, instrumental",
+      "type": "instrumental",
+      "duration": 65
+    },
+    {
+      "id": "9",
+      "name": "09 - Beat léger",
+      "prompt": "hip-hop instrumental beat, no vocals, deep bass, crisp drums, bright upbeat hip-hop, 100 bpm, instrumental",
+      "type": "instrumental",
+      "duration": 100
+    },
+    {
+      "id": "10",
+      "name": "10 - Beat de nuit",
+      "prompt": "hip-hop instrumental beat, no vocals, deep bass, crisp drums, night drive hip-hop, 85 bpm, instrumental",
+      "type": "instrumental",
+      "duration": 70
+    }
+  ]
+}

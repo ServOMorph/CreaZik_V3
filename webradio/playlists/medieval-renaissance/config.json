@@ -1,0 +1,77 @@
+{
+  "playlist_name": "Playlist Médiéval et Renaissance",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./playlists/medieval-renaissance/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "01 - Danse médiévale",
+      "prompt": "medieval and Renaissance, lute, recorder, vielle, tambourine, medieval dance, instrumental",
+      "type": "instrumental",
+      "duration": 125
+    },
+    {
+      "id": "2",
+      "name": "02 - Estampie",
+      "prompt": "medieval and Renaissance, lute, recorder, vielle, tambourine, estampie, instrumental",
+      "type": "instrumental",
+      "duration": 80
+    },
+    {
+      "id": "3",
+      "name": "03 - Pavane",
+      "prompt": "medieval and Renaissance, lute, recorder, vielle, tambourine, pavane, stately, instrumental",
+      "type": "instrumental",
+      "duration": 135
+    },
+    {
+      "id": "4",
+      "name": "04 - Galliarde",
+      "prompt": "medieval and Renaissance, lute, recorder, vielle, tambourine, galliard, lively, instrumental",
+      "type": "instrumental",
+      "duration": 120
+    },
+    {
+      "id": "5",
+      "name": "05 - Chant de troubadour",
+      "prompt": "medieval and Renaissance, lute, recorder, vielle, tambourine, troubadour tune, instrumental",
+      "type": "instrumental",
+      "duration": 60
+    },
+    {
+      "id": "6",
+      "name": "06 - Cour royale",
+      "prompt": "medieval and Renaissance, lute, recorder, vielle, tambourine, royal court, instrumental",
+      "type": "instrumental",
+      "duration": 85
+    },
+    {
+      "id": "7",
+      "name": "07 - Taverne",
+      "prompt": "medieval and Renaissance, lute, recorder, vielle, tambourine, tavern tune, instrumental",
+      "type": "instrumental",
+      "duration": 130
+    },
+    {
+      "id": "8",
+      "name": "08 - Pastorale",
+      "prompt": "medieval and Renaissance, lute, recorder, vielle, tambourine, pastoral, instrumental",
+      "type": "instrumental",
+      "duration": 65
+    },
+    {
+      "id": "9",
+      "name": "09 - Procession",
+      "prompt": "medieval and Renaissance, lute, recorder, vielle, tambourine, procession, instrumental",
+      "type": "instrumental",
+      "duration": 60
+    },
+    {
+      "id": "10",
+      "name": "10 - Fête de village",
+      "prompt": "medieval and Renaissance, lute, recorder, vielle, tambourine, village feast, instrumental",
+      "type": "instrumental",
+      "duration": 85
+    }
+  ]
+}

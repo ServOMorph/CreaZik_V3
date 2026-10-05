@@ -16,6 +16,7 @@ Suivi de toutes les demandes de la conversation. Statuts : FAIT (livré et contr
 | 1.9 | Pouces haut et bas, valeurs enregistrées, clics illimités qui pèsent sur le poids (100 clics = le morceau ne passe presque plus) | FAIT (serveur, moteur testé, lecteur) ; non vu sur iPhone |
 | 1.10 | Favoris | FAIT non vérifié |
 | 1.11 | Commentaires, un commentaire au hasard toutes les 5 s | FAIT non vérifié |
+| 1.12 | Les commentaires sont associés aux morceaux (affichage des commentaires du morceau en cours) | FAIT : serveur (filtre par morceau) et lecteur ; non vu sur iPhone |
 
 ## 2. Visuels et motion design
 | # | Demande | Statut |
@@ -27,32 +28,33 @@ Suivi de toutes les demandes de la conversation. Statuts : FAIT (livré et contr
 | 2.5 | Motion design pendant les jingles : nom de la radio et message IA locale | FAIT non vu : 3 variantes, textes éditables dans la gestion |
 | 2.6 | Motion design régulier (tous les 5 morceaux) pour serenia-tech.fr, 10 designs | FAIT non vu : 10 designs, textes tirés du contenu du site |
 | 2.7 | Texte défilant, contact, animation liée à la musique | FAIT |
-| 2.8 | L'agent design doit proposer un design plus moderne et plus stylisé | A FAIRE : refonte visuelle des pages (écoute, gestion, explorateur) après vérification des visuels |
+| 2.8 | L'agent design doit proposer un design plus moderne et plus stylisé | FAIT pour la page d'écoute, la gestion et l'explorateur (couleurs qui suivent la playlist, verre dépoli) ; l'explorateur est réservé à l'admin |
 
 ## 3. Voix et jingles
 | # | Demande | Statut |
 |---|---|---|
 | 3.1 | Recherche de la meilleure voix open source adaptée au PC | FAIT (Kokoro et Chatterbox, installés sur D:) |
 | 3.2 | Jingles parlés pour valoriser l'IA locale | FAIT : 10 jingles parlés générés (Kokoro), textes sobres et vérifiables, à valider par l'utilisateur |
-| 3.3 | Mesure d'énergie pour appuyer le discours | A FAIRE |
+| 3.3 | Mesure d'énergie pour appuyer le discours | FAIT en estimation : le GPU n'expose pas sa puissance (nvidia-smi renvoie « N/A »), donc énergie estimée d'après son taux d'utilisation et sa puissance maximale (115 W), enregistrée à chaque morceau ; `GET /api/energy`. Aucun chiffre public tant qu'il n'est pas validé |
 
 ## 4. Génération et playlists
 | # | Demande | Statut |
 |---|---|---|
 | 4.1 | Génération en tournante (un morceau par playlist à tour de rôle) | FAIT (en cours d'exécution) |
 | 4.2 | Durée des morceaux 1 min 30 plus ou moins 45 s | FAIT (paroles adaptées à la durée) |
-| 4.3 | Morceaux « pas terminés à 1 min 30 » à déboguer | EN COURS : fins de fichiers mesurées (pas de coupure sèche, 2 à 5 s de silence final), transcription des paroles à relancer |
+| 4.3 | Morceaux « pas terminés à 1 min 30 » à déboguer | FAIT pour les fichiers : 89 sur 89 ont la durée prévue, fins sans coupure sèche ; transcription des paroles impossible (bibliothèque audio manquante) |
+| 4.3b | Vérifier que certains morceaux ne sont pas entiers, juste avant le morceau en cours | FAIT : cause probable = coupures du direct (essais « suivant » et redémarrages du serveur) ; le moteur reprend maintenant le morceau en cours après un redémarrage ; à confirmer à l'écoute |
 | 4.4 | Relance systématique après arrêt, relance automatique des plantages | FAIT (services.ps1, superviseur) |
-| 4.5 | Playlists demandées : Perso et ses 6 versions, instrumental, disco EN, groove EN, electro atmosphérique, electro-pop FR, années 50, futuriste, poésie FR et EN, percussions Amérique du Sud et Afrique, rap FR mélodique, tribal, a cappella hommes et femmes, guitare, harpe, piano seuls, chant mongol, didgeridoo, electro spatiale, synthés épiques, rock progressif instrumental, funk saxophone, tech, hard tech, jeux vidéo, hard rock | FAIT : 40 playlists configurées, en génération |
-| 4.6 | Disco en espagnol, portugais, italien, allemand (accord donné) | A FAIRE |
+| 4.5 | Playlists demandées : Perso et ses 6 versions, instrumental, disco EN, groove EN, electro atmosphérique, electro-pop FR, années 50, futuriste, poésie FR et EN, percussions Amérique du Sud et Afrique, rap FR mélodique, tribal, a cappella hommes et femmes, guitare, harpe, piano seuls, chant mongol, didgeridoo, electro spatiale, synthés épiques, rock progressif instrumental, funk saxophone, tech, hard tech, jeux vidéo, hard rock | FAIT : 78 playlists configurées, en génération |
+| 4.6 | Disco en espagnol, portugais, italien, allemand (accord donné) | FAIT : 4 playlists configurées (paroles inventées) |
 | 4.7 | Couvertures de morceaux avec une IA locale (nom de l'IA à fournir) | EN ATTENTE du nom ; à lancer quand la file est vide |
-| 4.8 | Compléter la radio : playlists éclectiques, tous les styles du monde | EN COURS : à poursuivre en continu |
+| 4.8 | Compléter la radio : playlists éclectiques, tous les styles du monde | EN COURS : 35 playlists de styles du monde ajoutées (flamenco, tango, reggae, afrobeats, Maghreb, klezmer, Balkans, celtique, nordique, gamelan, Inde, Bollywood, Japon, Chine, Polynésie, mariachi, salsa, bachata, Brésil, Caraïbes, gospel, blues, jazz, soul, hip-hop, drum and bass, house et trance, ambient, metal, punk et indie, classique, country, ska, valse musette, médiéval) ; à poursuivre |
 
 ## 5. Pondération
 | # | Demande | Statut |
 |---|---|---|
 | 5.1 | Analyse du système de pondération | FAIT (rapport remis) |
-| 5.2 | Gains rapides : file revalidée (fait dans le moteur), délai entre versions d'une même chanson, pourcentages réels affichés | EN COURS : file revalidée faite ; reste le délai par chanson et l'affichage des pourcentages |
+| 5.2 | Gains rapides : file revalidée, délai entre versions d'une même chanson, pourcentages réels affichés | FAIT : tests (14) ; pourcentages visibles dans la gestion |
 
 ## 6. Sécurité, administration, accès
 | # | Demande | Statut |
@@ -67,9 +69,9 @@ Suivi de toutes les demandes de la conversation. Statuts : FAIT (livré et contr
 ## 7. Qualité
 | # | Demande | Statut |
 |---|---|---|
-| 7.1 | Tests automatiques du moteur | FAIT (11 tests) |
+| 7.1 | Tests automatiques du moteur | FAIT (14 tests) |
 | 7.2 | Vérification dans un vrai navigateur (Playwright) | EN COURS : lecteur et admin vérifiés ; visuels, transitions, motion design à vérifier |
-| 7.3 | Documentation à jour, anciens fichiers obsolètes archivés | A FAIRE |
+| 7.3 | Documentation à jour, anciens fichiers obsolètes archivés | FAIT : README du dossier webradio réécrit, anciens documents déplacés dans `_archive_docs/` ; `_contexte/signals.md` à mettre à jour par `/close` |
 | 7.4 | Tests manuels à faire par l'utilisateur listés | FAIT (tests_manuels.md) |
 
 ## Ordre d'exécution restant

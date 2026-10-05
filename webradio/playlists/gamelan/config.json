@@ -1,0 +1,77 @@
+{
+  "playlist_name": "Playlist Gamelan",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./playlists/gamelan/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "01 - Méditation lente",
+      "prompt": "Javanese and Balinese gamelan, metallophones, gongs, kendang drums, slow meditative, instrumental",
+      "type": "instrumental",
+      "duration": 70
+    },
+    {
+      "id": "2",
+      "name": "02 - Fête lumineuse",
+      "prompt": "Javanese and Balinese gamelan, metallophones, gongs, kendang drums, bright festive, instrumental",
+      "type": "instrumental",
+      "duration": 55
+    },
+    {
+      "id": "3",
+      "name": "03 - Kebyar rapide",
+      "prompt": "Javanese and Balinese gamelan, metallophones, gongs, kendang drums, Balinese kebyar fast, instrumental",
+      "type": "instrumental",
+      "duration": 125
+    },
+    {
+      "id": "4",
+      "name": "04 - Rituel",
+      "prompt": "Javanese and Balinese gamelan, metallophones, gongs, kendang drums, ritual, instrumental",
+      "type": "instrumental",
+      "duration": 55
+    },
+    {
+      "id": "5",
+      "name": "05 - Berceuse douce",
+      "prompt": "Javanese and Balinese gamelan, metallophones, gongs, kendang drums, gentle lullaby, instrumental",
+      "type": "instrumental",
+      "duration": 50
+    },
+    {
+      "id": "6",
+      "name": "06 - Théâtre d'ombres",
+      "prompt": "Javanese and Balinese gamelan, metallophones, gongs, kendang drums, shadow puppet theatre mood, instrumental",
+      "type": "instrumental",
+      "duration": 105
+    },
+    {
+      "id": "7",
+      "name": "07 - Motif de pluie",
+      "prompt": "Javanese and Balinese gamelan, metallophones, gongs, kendang drums, rain-like pattern, instrumental",
+      "type": "instrumental",
+      "duration": 125
+    },
+    {
+      "id": "8",
+      "name": "08 - Cérémonie du temple",
+      "prompt": "Javanese and Balinese gamelan, metallophones, gongs, kendang drums, temple ceremony, instrumental",
+      "type": "instrumental",
+      "duration": 105
+    },
+    {
+      "id": "9",
+      "name": "09 - Calme du soir",
+      "prompt": "Javanese and Balinese gamelan, metallophones, gongs, kendang drums, evening calm, instrumental",
+      "type": "instrumental",
+      "duration": 130
+    },
+    {
+      "id": "10",
+      "name": "10 - Gong puissant",
+      "prompt": "Javanese and Balinese gamelan, metallophones, gongs, kendang drums, powerful gong, instrumental",
+      "type": "instrumental",
+      "duration": 135
+    }
+  ]
+}

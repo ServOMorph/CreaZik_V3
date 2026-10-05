@@ -1,0 +1,77 @@
+{
+  "playlist_name": "Playlist Flamenco",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./playlists/flamenco/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "01 - Rumba du matin",
+      "prompt": "flamenco, nylon guitar, palmas handclaps, cajon, passionate, rumba flamenca, upbeat, instrumental",
+      "type": "instrumental",
+      "duration": 45
+    },
+    {
+      "id": "2",
+      "name": "02 - Soleá de minuit",
+      "prompt": "flamenco, nylon guitar, palmas handclaps, cajon, passionate, soleá, slow and deep, instrumental",
+      "type": "instrumental",
+      "duration": 85
+    },
+    {
+      "id": "3",
+      "name": "03 - Bulerías en fête",
+      "prompt": "flamenco, nylon guitar, palmas handclaps, cajon, passionate, bulerías, fast and rhythmic, instrumental",
+      "type": "instrumental",
+      "duration": 50
+    },
+    {
+      "id": "4",
+      "name": "04 - Alegrías de Cadix",
+      "prompt": "flamenco, nylon guitar, palmas handclaps, cajon, passionate, alegrías, bright, instrumental",
+      "type": "instrumental",
+      "duration": 45
+    },
+    {
+      "id": "5",
+      "name": "05 - Tangos andalous",
+      "prompt": "flamenco, nylon guitar, palmas handclaps, cajon, passionate, tangos flamencos, swaying, instrumental",
+      "type": "instrumental",
+      "duration": 70
+    },
+    {
+      "id": "6",
+      "name": "06 - Seguiriya sombre",
+      "prompt": "flamenco, nylon guitar, palmas handclaps, cajon, passionate, seguiriyas, dramatic, instrumental",
+      "type": "instrumental",
+      "duration": 135
+    },
+    {
+      "id": "7",
+      "name": "07 - Farruca élégante",
+      "prompt": "flamenco, nylon guitar, palmas handclaps, cajon, passionate, farruca, serious and elegant, instrumental",
+      "type": "instrumental",
+      "duration": 120
+    },
+    {
+      "id": "8",
+      "name": "08 - Fandango du village",
+      "prompt": "flamenco, nylon guitar, palmas handclaps, cajon, passionate, fandango, lyrical, instrumental",
+      "type": "instrumental",
+      "duration": 125
+    },
+    {
+      "id": "9",
+      "name": "09 - Taranto des mines",
+      "prompt": "flamenco, nylon guitar, palmas handclaps, cajon, passionate, taranto, mysterious, instrumental",
+      "type": "instrumental",
+      "duration": 95
+    },
+    {
+      "id": "10",
+      "name": "10 - Zambra du Sacromonte",
+      "prompt": "flamenco, nylon guitar, palmas handclaps, cajon, passionate, zambra, hypnotic, instrumental",
+      "type": "instrumental",
+      "duration": 110
+    }
+  ]
+}

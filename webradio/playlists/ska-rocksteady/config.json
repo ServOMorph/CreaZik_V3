@@ -1,0 +1,77 @@
+{
+  "playlist_name": "Playlist Ska",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./playlists/ska-rocksteady/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "01 - Ska rapide",
+      "prompt": "ska, offbeat guitar, horn section, walking bass, upbeat, fast ska, instrumental",
+      "type": "instrumental",
+      "duration": 90
+    },
+    {
+      "id": "2",
+      "name": "02 - Rocksteady",
+      "prompt": "ska, offbeat guitar, horn section, walking bass, upbeat, rocksteady, smooth, instrumental",
+      "type": "instrumental",
+      "duration": 70
+    },
+    {
+      "id": "3",
+      "name": "03 - Ska-punk",
+      "prompt": "ska, offbeat guitar, horn section, walking bass, upbeat, ska punk, energetic, instrumental",
+      "type": "instrumental",
+      "duration": 90
+    },
+    {
+      "id": "4",
+      "name": "04 - Ska jazzy",
+      "prompt": "ska, offbeat guitar, horn section, walking bass, upbeat, jazzy ska, instrumental",
+      "type": "instrumental",
+      "duration": 105
+    },
+    {
+      "id": "5",
+      "name": "05 - 2 Tone",
+      "prompt": "ska, offbeat guitar, horn section, walking bass, upbeat, two-tone ska, instrumental",
+      "type": "instrumental",
+      "duration": 80
+    },
+    {
+      "id": "6",
+      "name": "06 - Ska du dimanche",
+      "prompt": "ska, offbeat guitar, horn section, walking bass, upbeat, sunny ska, instrumental",
+      "type": "instrumental",
+      "duration": 55
+    },
+    {
+      "id": "7",
+      "name": "07 - Cuivres en tête",
+      "prompt": "ska, offbeat guitar, horn section, walking bass, upbeat, horn-led ska, instrumental",
+      "type": "instrumental",
+      "duration": 90
+    },
+    {
+      "id": "8",
+      "name": "08 - Fête",
+      "prompt": "ska, offbeat guitar, horn section, walking bass, upbeat, party ska, instrumental",
+      "type": "instrumental",
+      "duration": 80
+    },
+    {
+      "id": "9",
+      "name": "09 - Ska lent",
+      "prompt": "ska, offbeat guitar, horn section, walking bass, upbeat, slow ska, instrumental",
+      "type": "instrumental",
+      "duration": 135
+    },
+    {
+      "id": "10",
+      "name": "10 - Finale",
+      "prompt": "ska, offbeat guitar, horn section, walking bass, upbeat, ska finale, instrumental",
+      "type": "instrumental",
+      "duration": 125
+    }
+  ]
+}

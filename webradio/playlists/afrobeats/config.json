@@ -1,0 +1,77 @@
+{
+  "playlist_name": "Playlist Afrobeats",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./playlists/afrobeats/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "01 - Énergie de piste",
+      "prompt": "Afrobeats, log drums, syncopated percussion, bright guitar, round bass, dance floor energy, 105 bpm, instrumental",
+      "type": "instrumental",
+      "duration": 65
+    },
+    {
+      "id": "2",
+      "name": "02 - Amapiano doux",
+      "prompt": "Afrobeats, log drums, syncopated percussion, bright guitar, round bass, smooth amapiano influence, instrumental",
+      "type": "instrumental",
+      "duration": 105
+    },
+    {
+      "id": "3",
+      "name": "03 - Guitares highlife",
+      "prompt": "Afrobeats, log drums, syncopated percussion, bright guitar, round bass, highlife guitars, instrumental",
+      "type": "instrumental",
+      "duration": 115
+    },
+    {
+      "id": "4",
+      "name": "04 - Club et synthés",
+      "prompt": "Afrobeats, log drums, syncopated percussion, bright guitar, round bass, club afrobeats with synth, instrumental",
+      "type": "instrumental",
+      "duration": 130
+    },
+    {
+      "id": "5",
+      "name": "05 - Coucher de soleil",
+      "prompt": "Afrobeats, log drums, syncopated percussion, bright guitar, round bass, sunset chill, instrumental",
+      "type": "instrumental",
+      "duration": 135
+    },
+    {
+      "id": "6",
+      "name": "06 - Tout en percussions",
+      "prompt": "Afrobeats, log drums, syncopated percussion, bright guitar, round bass, percussion heavy, instrumental",
+      "type": "instrumental",
+      "duration": 70
+    },
+    {
+      "id": "7",
+      "name": "07 - Claviers mélodiques",
+      "prompt": "Afrobeats, log drums, syncopated percussion, bright guitar, round bass, melodic keys, instrumental",
+      "type": "instrumental",
+      "duration": 105
+    },
+    {
+      "id": "8",
+      "name": "08 - Rebond à 100",
+      "prompt": "Afrobeats, log drums, syncopated percussion, bright guitar, round bass, bouncy 100 bpm, instrumental",
+      "type": "instrumental",
+      "duration": 115
+    },
+    {
+      "id": "9",
+      "name": "09 - Fête de nuit",
+      "prompt": "Afrobeats, log drums, syncopated percussion, bright guitar, round bass, night party, instrumental",
+      "type": "instrumental",
+      "duration": 120
+    },
+    {
+      "id": "10",
+      "name": "10 - Ambiance de festival",
+      "prompt": "Afrobeats, log drums, syncopated percussion, bright guitar, round bass, festival mood, instrumental",
+      "type": "instrumental",
+      "duration": 115
+    }
+  ]
+}

@@ -264,9 +264,12 @@
         var a = t * sp - j * 0.09;
         var ex = Math.cos(a) * rx;
         var ey = Math.sin(a) * ry;
-        ctx.fillStyle = rgba(i === 1 ? BLUE : TEAL, E * (1 - j / 8) * 0.95);
+        var dx = cx + ex * cr - ey * sr;
+        var dy = cy + ex * sr + ey * cr;
+        var hid = Math.abs(dx - cx) < L.maxW / 2 + 8 && dy > L.top - 8 && dy < L.top + L.total + 8 ? 0.12 : 1;
+        ctx.fillStyle = rgba(i === 1 ? BLUE : TEAL, E * (1 - j / 8) * 0.95 * hid);
         ctx.beginPath();
-        ctx.arc(cx + ex * cr - ey * sr, cy + ex * sr + ey * cr, 4.5 - j * 0.45, 0, TAU);
+        ctx.arc(dx, dy, 4.5 - j * 0.45, 0, TAU);
         ctx.fill();
       }
     }
@@ -480,7 +483,7 @@
     }
     var xe2 = w * sm((t - 0.6) / 1.4);
     if (xe2 > 2) {
-      var yb = cyc + th / 2 + 18;
+      var yb = Math.max(10, cyc - th / 2 - 14);
       ctx.beginPath();
       for (i = 0; i * step <= xe2; i++) {
         var x2 = w - i * step;

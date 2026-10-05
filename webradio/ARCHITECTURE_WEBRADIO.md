@@ -97,7 +97,7 @@ Page `radio.html` à faire évoluer : arbre catégories, playlists avec curseurs
 Un lecteur serveur (Liquidsoap, qui se pilote par script) lit playlists et jingles et pousse un flux vers Icecast ; les auditeurs ouvrent une seule URL de flux. Avantages : même contenu pour tous, reprise après coupure, métadonnées "en cours de lecture", compatible lecteurs et applis radio. Inconvénient : deux composants à installer et à sécuriser. À valider.
 
 ## 6. Sobriété énergétique
-- **Mesurer** : échantillonner la puissance du GPU pendant chaque génération (`nvidia-smi`) et enregistrer l'énergie (Wh) par morceau. Aucun chiffre n'est annoncé sans cette mesure.
+- **Estimer** : le GPU de la machine n'expose pas sa puissance (`nvidia-smi` renvoie « N/A »). L'énergie par morceau est donc estimée d'après le taux d'utilisation et la puissance maximale de 115 W (champ `energy_wh_est`, `GET /api/energy`). Une vraie mesure demanderait une prise connectée. Aucun chiffre n'est annoncé tant qu'il n'est pas validé.
 - **Réduire** : réutiliser le catalogue plutôt que générer en continu, utiliser les modèles et réglages légers (ACE-Step turbo, 8 pas), limiter la file, générer en heures creuses ou à la demande.
 - **Afficher** : tableau de bord admin (Wh total, Wh par morceau, nombre d'écoutes par morceau, coût par écoute).
 

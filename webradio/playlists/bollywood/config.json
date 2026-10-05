@@ -1,0 +1,77 @@
+{
+  "playlist_name": "Playlist Bollywood",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./playlists/bollywood/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "01 - Danse énergique",
+      "prompt": "Bollywood instrumental, dholak, tabla, strings, sitar flourishes, cinematic, dance number, upbeat, instrumental",
+      "type": "instrumental",
+      "duration": 125
+    },
+    {
+      "id": "2",
+      "name": "02 - Mélodie romantique",
+      "prompt": "Bollywood instrumental, dholak, tabla, strings, sitar flourishes, cinematic, romantic melody, instrumental",
+      "type": "instrumental",
+      "duration": 85
+    },
+    {
+      "id": "3",
+      "name": "03 - Énergie de festival",
+      "prompt": "Bollywood instrumental, dholak, tabla, strings, sitar flourishes, cinematic, festival energy, instrumental",
+      "type": "instrumental",
+      "duration": 90
+    },
+    {
+      "id": "4",
+      "name": "04 - Rétro années 70",
+      "prompt": "Bollywood instrumental, dholak, tabla, strings, sitar flourishes, cinematic, retro 1970s, instrumental",
+      "type": "instrumental",
+      "duration": 100
+    },
+    {
+      "id": "5",
+      "name": "05 - Scène dramatique",
+      "prompt": "Bollywood instrumental, dholak, tabla, strings, sitar flourishes, cinematic, dramatic scene, instrumental",
+      "type": "instrumental",
+      "duration": 90
+    },
+    {
+      "id": "6",
+      "name": "06 - Mariage",
+      "prompt": "Bollywood instrumental, dholak, tabla, strings, sitar flourishes, cinematic, wedding, instrumental",
+      "type": "instrumental",
+      "duration": 85
+    },
+    {
+      "id": "7",
+      "name": "07 - Espiègle",
+      "prompt": "Bollywood instrumental, dholak, tabla, strings, sitar flourishes, cinematic, playful, instrumental",
+      "type": "instrumental",
+      "duration": 70
+    },
+    {
+      "id": "8",
+      "name": "08 - Lever de soleil",
+      "prompt": "Bollywood instrumental, dholak, tabla, strings, sitar flourishes, cinematic, sunrise, instrumental",
+      "type": "instrumental",
+      "duration": 125
+    },
+    {
+      "id": "9",
+      "name": "09 - Fusion pop moderne",
+      "prompt": "Bollywood instrumental, dholak, tabla, strings, sitar flourishes, cinematic, modern pop-fusion, instrumental",
+      "type": "instrumental",
+      "duration": 90
+    },
+    {
+      "id": "10",
+      "name": "10 - Grand final",
+      "prompt": "Bollywood instrumental, dholak, tabla, strings, sitar flourishes, cinematic, grand finale, instrumental",
+      "type": "instrumental",
+      "duration": 125
+    }
+  ]
+}

@@ -12,3 +12,7 @@
 - Sections pliables : Gestion WebRadio (5 sections) et panneau Programmation de la page d'écoute, état mémorisé après rechargement.
 - Programmation admin : clic sur un morceau, un jingle ou une playlist pour le lire ensuite, bouton lire maintenant, retrait de la file.
 - Après le renommage benchmark vers playlist : page d'écoute, menu des playlists dans l'explorateur (ui.html), lecture d'un morceau de chaque playlist.
+- Direct : appuyer sur play, vérifier qu'on rejoint le morceau en cours (pas un nouveau départ) ; en mode admin, tester « suivant », « lire maintenant » et la lecture d'une playlist entière.
+- Visuels : un décor différent par playlist, transition douce au changement de playlist, motion design pendant un jingle, publicité du site tous les 5 morceaux (9 s), lisibilité à 375 px.
+- Commentaires associés au morceau : écrire un commentaire sur un morceau, vérifier qu'il s'affiche seulement sur ce morceau.
+- Fins de morceaux : écouter la fin de plusieurs morceaux pour confirmer qu'aucun n'est coupé (cause probable corrigée : essais « suivant » et redémarrages du serveur).
