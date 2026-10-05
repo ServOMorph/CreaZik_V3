@@ -5,7 +5,9 @@ import random
 import struct
 import threading
 import time
+from datetime import datetime
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 QUEUE_LEN = 8
 PLAYED_LEN = 8
@@ -13,6 +15,8 @@ SKIP_FADE_OUT = 1.5
 SKIP_FADE_IN = 1.0
 MAX_CF_RATIO = 0.4
 REFRESH_EVERY_S = 5.0
+LOCAL_TZ = ZoneInfo("Europe/Paris")
+ENERGY_WEIGHTS = {"onset": 0.35, "centroid_hz": 0.25, "rms_db": 0.2, "bpm": 0.2}
 
 DEFAULT_TRANSITIONS = {
     "active": "fondu",
@@ -37,6 +41,14 @@ DEFAULT_RADIO = {
     "ad_seconds": 9,
     "ad_offset_s": 10,
     "visual_transition_s": 5,
+    "dynamics_enabled": True,
+    "dynamics_strength": 1.0,
+    "dyn_base": 0.5,
+    "dyn_amp": 0.33,
+    "dyn_peak_hour": 17.5,
+    "dyn_weekend_shift_h": 1.0,
+    "dyn_energy_sigma": 0.25,
+    "dyn_tempo_tolerance": 0.25,
     "transitions": DEFAULT_TRANSITIONS,
 }
 
@@ -78,12 +90,19 @@ class Catalog:
         self.tracks = {}
         self.playlists = []
         self._durations = {}
+        self._features = {}
 
     def _signature(self, registry):
         parts = [self._mtime(self.root / "playlists.json")]
         for p in registry:
             parts.append(self._mtime(self.root / p["results"]))
         return tuple(parts)
+
+    def _feature_count(self):
+        try:
+            return sum(1 for _ in self.root.glob("playlists/*/outputs/*.feat.json"))
+        except OSError:
+            return 0
 
     @staticmethod
     def _mtime(path):
@@ -99,9 +118,42 @@ class Catalog:
             self._durations[key] = wav_duration(path)
         return self._durations[key]
 
+    def _load_features(self, rel):
+        path = self.root / (rel + ".feat.json")
+        key = (rel, self._mtime(path))
+        if key not in self._features:
+            self._features[key] = read_json(path, None)
+        return self._features[key]
+
+    @staticmethod
+    def _ranks(values):
+        order = sorted(range(len(values)), key=lambda i: values[i])
+        ranks = [0.0] * len(values)
+        n = max(1, len(values) - 1)
+        for pos, i in enumerate(order):
+            ranks[i] = pos / n
+        return ranks
+
+    def _compute_energy(self, tracks):
+        pool = [t for t in tracks.values() if not t["jingle"] and t.get("feat")]
+        if len(pool) < 3:
+            return
+        columns = {}
+        for name in ENERGY_WEIGHTS:
+            vals = []
+            for t in pool:
+                v = t["feat"].get(name)
+                if name == "bpm" and v:
+                    v = max(70.0, min(170.0, v))
+                vals.append(float(v) if v is not None else 0.0)
+            columns[name] = self._ranks(vals)
+        for i, t in enumerate(pool):
+            t["energy"] = round(sum(ENERGY_WEIGHTS[n] * columns[n][i] for n in ENERGY_WEIGHTS), 4)
+            t["bpm"] = t["feat"].get("bpm")
+
     def refresh(self):
         registry = read_json(self.root / "playlists.json", [])
-        sig = self._signature(registry)
+        sig = self._signature(registry) + (self._feature_count(),)
         if sig == self.sig:
             return False
         tracks = {}
@@ -126,10 +178,12 @@ class Catalog:
                     "name": g.get("name", key), "prompt": g.get("prompt", ""), "type": g.get("type", ""),
                     "generated_at": g.get("generated_at", ""), "model": g.get("model") or data.get("model", ""),
                     "file": rel, "duration": dur, "energy_wh_est": g.get("energy_wh_est"),
+                    "feat": self._load_features(rel), "energy": None, "bpm": None,
                 }
                 keys.append(key)
             if keys:
                 playlists.append({"id": p["id"], "label": p.get("label", p["id"]), "jingle": is_jingle, "keys": keys})
+        self._compute_energy(tracks)
         self.tracks = tracks
         self.playlists = playlists
         self.sig = sig
@@ -286,19 +340,85 @@ class RadioEngine:
                 out.extend(k for k in pl["keys"] if k not in excluded)
         return out
 
+    def dyn_target(self, t):
+        st = self.settings()
+        local = datetime.fromtimestamp(t, LOCAL_TZ)
+        hour = local.hour + local.minute / 60.0
+        peak = float(st.get("dyn_peak_hour", 17.5))
+        if local.weekday() >= 5:
+            peak += float(st.get("dyn_weekend_shift_h", 1.0))
+        e = float(st.get("dyn_base", 0.5)) + float(st.get("dyn_amp", 0.33)) * math.cos(2 * math.pi * (hour - peak) / 24.0)
+        return max(0.0, min(1.0, e))
+
+    def _dyn_factor(self, key, prev_key, slot_time):
+        st = self.settings()
+        strength = float(st.get("dynamics_strength", 1.0) or 0)
+        if not st.get("dynamics_enabled", True) or strength <= 0:
+            return 1.0
+        tr = self.cat.tracks.get(key)
+        if tr is None:
+            return 1.0
+        f = 1.0
+        if tr.get("energy") is not None:
+            sigma = max(0.05, float(st.get("dyn_energy_sigma", 0.25)))
+            f *= math.exp(-0.5 * ((tr["energy"] - self.dyn_target(slot_time)) / sigma) ** 2)
+        prev = self.cat.tracks.get(prev_key) if prev_key else None
+        if prev and prev.get("bpm") and tr.get("bpm"):
+            tol = max(0.05, float(st.get("dyn_tempo_tolerance", 0.25)))
+            r = tr["bpm"] / prev["bpm"]
+            d = min(abs(math.log2(r)), abs(math.log2(2 * r)), abs(math.log2(r / 2)))
+            f *= math.exp(-0.5 * (d / tol) ** 2)
+        return max(1e-3, f) ** strength
+
+    def dynamics_info(self):
+        with self.lock:
+            self.cat.refresh()
+            t = self.now()
+            curve = [{"h": h / 2.0, "e": round(self._curve_at(h / 2.0, t), 3)} for h in range(0, 49)]
+            local = datetime.fromtimestamp(t, LOCAL_TZ)
+            with_energy = sum(1 for tr in self.cat.tracks.values() if tr.get("energy") is not None and not tr["jingle"])
+            total = sum(1 for tr in self.cat.tracks.values() if not tr["jingle"])
+            return {"enabled": bool(self.settings().get("dynamics_enabled", True)), "hour": round(local.hour + local.minute / 60.0, 2),
+                    "target_now": round(self.dyn_target(t), 3), "curve": curve,
+                    "tracks_with_features": with_energy, "tracks_total": total}
+
+    def _curve_at(self, hour, t):
+        st = self.settings()
+        local = datetime.fromtimestamp(t, LOCAL_TZ)
+        peak = float(st.get("dyn_peak_hour", 17.5))
+        if local.weekday() >= 5:
+            peak += float(st.get("dyn_weekend_shift_h", 1.0))
+        e = float(st.get("dyn_base", 0.5)) + float(st.get("dyn_amp", 0.33)) * math.cos(2 * math.pi * (hour - peak) / 24.0)
+        return max(0.0, min(1.0, e))
+
     def _song_of(self, key):
         tr = self.cat.tracks.get(key)
         return tr["song"] if tr else key
 
-    def _pick_track(self, used, last=None, songs=None):
+    def _pick_track(self, used, last=None, songs=None, slot_time=None):
         groups = self._playable_groups()
         if not groups:
             return None
-        total = sum(self._weight(pl["id"]) for pl, _ in groups)
+        if slot_time is None:
+            slot_time = self.now()
+        prev_key = last or (self.current["key"] if self.current else None)
+        others = [g for g in groups if any(k != prev_key for k in g[1])]
+        if others:
+            groups = others
+        factors = {}
+        for _, keys in groups:
+            for k in keys:
+                factors[k] = self._dyn_factor(k, prev_key, slot_time)
+
+        def group_weight(g):
+            keys = g[1]
+            return self._weight(g[0]["id"]) * (sum(factors[k] for k in keys) / len(keys))
+
+        total = sum(group_weight(g) for g in groups)
         r = self.rng.random() * total
         chosen = groups[-1]
         for g in groups:
-            r -= self._weight(g[0]["id"])
+            r -= group_weight(g)
             if r < 0:
                 chosen = g
                 break
@@ -309,9 +429,9 @@ class RadioEngine:
         fresh = [k for k in cands if k not in used and self._song_of(k) not in songs and self._multiplier(k) >= 0.05]
         if fresh:
             cands = fresh
-            weights = [self._multiplier(k) for k in cands]
+            weights = [self._multiplier(k) * factors[k] for k in cands]
         else:
-            weights = [self._multiplier(k) * (0.01 if k in used else 1.0) for k in cands]
+            weights = [self._multiplier(k) * factors[k] * (0.01 if k in used else 1.0) for k in cands]
         return self.rng.choices(cands, weights=weights, k=1)[0]
 
     def _auto_ok(self, key):
@@ -333,6 +453,8 @@ class RadioEngine:
         for it in self.active:
             songs.add(it.get("song") or it["key"])
         last = self.current["key"] if self.current else None
+        t_now = self.now()
+        slot_clock = [t_now + (max(0.0, self.current["end"] - t_now) if self.current else 0.0)]
 
         def add(entry):
             nonlocal sim, jseq, last
@@ -341,6 +463,8 @@ class RadioEngine:
                 jseq += 1
                 sim = 0
             out.append(entry)
+            tr_slot = self.cat.tracks.get(entry["key"])
+            slot_clock[0] += tr_slot["duration"] if tr_slot else 90.0
             if entry["jingle"]:
                 sim = 0
             else:
@@ -358,12 +482,21 @@ class RadioEngine:
                 break
             add({"key": k, "jingle": False})
         while len(out) < QUEUE_LEN:
-            k = self._pick_track(used, last, songs)
+            k = self._pick_track(used, last, songs, slot_clock[0])
             if not k:
                 break
             self.auto.append(k)
             add({"key": k, "jingle": False})
-        self.upcoming = out
+        cleaned = []
+        for e in out:
+            prev = cleaned[-1] if cleaned else None
+            same_as_last = e["key"] == (prev["key"] if prev else (self.current["key"] if self.current else None))
+            if same_as_last and not e["jingle"] and not e.get("explicit") and len(self.cat.tracks) > 1:
+                if e["key"] in self.auto:
+                    self.auto.remove(e["key"])
+                continue
+            cleaned.append(e)
+        self.upcoming = cleaned
 
     def _item(self, entry, start, fade_in):
         tr = self.cat.tracks[entry["key"]]

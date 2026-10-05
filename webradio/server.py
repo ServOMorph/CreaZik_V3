@@ -326,6 +326,9 @@ class Handler(SimpleHTTPRequestHandler):
         if path == "/api/radio/state":
             self._send_json(200, ENGINE.snapshot(admin=self._is_admin()))
             return
+        if path == "/api/radio/dynamics":
+            self._send_json(200, ENGINE.dynamics_info())
+            return
         if path == "/api/energy":
             self._send_json(200, ENGINE.energy())
             return

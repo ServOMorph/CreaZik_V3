@@ -278,6 +278,21 @@ def test_song_cooldown_across_versions():
             assert songs[i] not in songs[i - window:i], (i, songs[i - window:i + 1])
 
 
+def test_no_consecutive_repeat_with_single_track_playlists():
+    with tempfile.TemporaryDirectory() as tmp:
+        eng, clock = make(tmp, {f"p{i}": (1, 10, False) for i in range(6)},
+                          {"jingles_enabled": False, "no_repeat": 0, "no_repeat_songs": 0,
+                           "dynamics_enabled": False, "transitions": preset()}, seed=11)
+        seq = run(eng, clock, 10 * 4000, step=1.0)
+        keys = [k for _, k, _ in seq]
+        assert len(keys) > 300
+        for a, b in zip(keys, keys[1:]):
+            assert a != b, (a, b)
+        snap = eng.snapshot(admin=True)["queue"]
+        for a, b in zip(snap, snap[1:]):
+            assert a["key"] != b["key"], [q["key"] for q in snap]
+
+
 def test_stats_sum_to_100():
     with tempfile.TemporaryDirectory() as tmp:
         eng, clock = make(tmp, {"a": (4, 10, False), "b": (8, 10, False)}, {"weights": {"a": 5, "b": 5}, "transitions": preset()})

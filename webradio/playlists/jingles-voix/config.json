@@ -73,6 +73,76 @@
       "prompt": "Une radio qui tourne sur une IA locale : un choix de sobriété, de proximité et de liberté.",
       "type": "voice",
       "duration": 0
+    },
+    {
+      "id": "11",
+      "name": "Jingle voix 11",
+      "prompt": "CreaZik Radio : une radio qui se fabrique elle-même. Chaque morceau est généré en local, un par un.",
+      "type": "voice",
+      "duration": 0
+    },
+    {
+      "id": "12",
+      "name": "Jingle voix 12",
+      "prompt": "Ici, pas de catalogue de morceaux enregistrés : la musique est créée par une IA, sur place.",
+      "type": "voice",
+      "duration": 0
+    },
+    {
+      "id": "13",
+      "name": "Jingle voix 13",
+      "prompt": "Les paroles que vous entendez sont inventées pour cette radio, et les poèmes sont tombés dans le domaine public.",
+      "type": "voice",
+      "duration": 0
+    },
+    {
+      "id": "14",
+      "name": "Jingle voix 14",
+      "prompt": "Vos pouces façonnent la programmation : plus un morceau plaît, plus il revient.",
+      "type": "voice",
+      "duration": 0
+    },
+    {
+      "id": "15",
+      "name": "Jingle voix 15",
+      "prompt": "Une IA locale, c'est un ordinateur, une carte graphique, et beaucoup de curiosité.",
+      "type": "voice",
+      "duration": 0
+    },
+    {
+      "id": "16",
+      "name": "Jingle voix 16",
+      "prompt": "Générer en local, c'est aussi choisir ses outils et savoir exactement ce qui tourne sur sa machine.",
+      "type": "voice",
+      "duration": 0
+    },
+    {
+      "id": "17",
+      "name": "Jingle voix 17",
+      "prompt": "Du flamenco au hard techno, en passant par la poésie : CreaZik Radio explore les styles du monde.",
+      "type": "voice",
+      "duration": 0
+    },
+    {
+      "id": "18",
+      "name": "Jingle voix 18",
+      "prompt": "Écrivez un commentaire sur le morceau en cours : il sera lu par les auditeurs de ce morceau.",
+      "type": "voice",
+      "duration": 0
+    },
+    {
+      "id": "19",
+      "name": "Jingle voix 19",
+      "prompt": "Cette radio tourne sur un seul ordinateur, sans abonnement à un service de création musicale en ligne.",
+      "type": "voice",
+      "duration": 0
+    },
+    {
+      "id": "20",
+      "name": "Jingle voix 20",
+      "prompt": "Nous estimons l'énergie utilisée pour générer chaque morceau, et nous en parlerons quand la mesure sera fiable.",
+      "type": "voice",
+      "duration": 0
     }
   ]
 }

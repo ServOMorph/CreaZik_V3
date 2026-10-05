@@ -34,7 +34,7 @@ Suivi de toutes les demandes de la conversation. Statuts : FAIT (livré et contr
 | # | Demande | Statut |
 |---|---|---|
 | 3.1 | Recherche de la meilleure voix open source adaptée au PC | FAIT (Kokoro et Chatterbox, installés sur D:) |
-| 3.2 | Jingles parlés pour valoriser l'IA locale | FAIT : 10 jingles parlés générés (Kokoro), textes sobres et vérifiables, à valider par l'utilisateur |
+| 3.2 | Jingles parlés pour valoriser l'IA locale | FAIT : 20 jingles parlés (Kokoro), textes sobres et vérifiables, prononciation de la marque corrigée, intelligibilité contrôlée par transcription (8 % d'erreurs de mots, surtout le nom CreaZik) ; à écouter et valider par l'utilisateur |
 | 3.3 | Mesure d'énergie pour appuyer le discours | FAIT en estimation : le GPU n'expose pas sa puissance (nvidia-smi renvoie « N/A »), donc énergie estimée d'après son taux d'utilisation et sa puissance maximale (115 W), enregistrée à chaque morceau ; `GET /api/energy`. Aucun chiffre public tant qu'il n'est pas validé |
 
 ## 4. Génération et playlists
@@ -65,6 +65,15 @@ Suivi de toutes les demandes de la conversation. Statuts : FAIT (livré et contr
 | 6.4 | Agent de design dédié à l'UI | FAIT |
 | 6.5 | Vocabulaire : benchmarks remplacés par playlists dans tout le code | FAIT |
 | 6.6 | Commit | FAIT à la fin de ce plan (voir historique git) |
+
+## 8. Dynamique de la journée et cohérence des enchaînements
+| # | Demande | Statut |
+|---|---|---|
+| 8.1 | Analyser sur le web les habitudes d'écoute et les horaires pour caler la dynamique | FAIT : Médiamétrie (radio en France) et études d'écoute en streaming ; limites notées dans l'architecture |
+| 8.2 | Mesurer tempo et énergie de chaque morceau à partir de l'audio | A FAIRE |
+| 8.3 | Harmoniser les enchaînements selon les tempos | A FAIRE |
+| 8.4 | Dynamique sinusoïdale calée sur les horaires français (doux le matin, plus pêchu vers 17 h) | A FAIRE |
+| 8.5 | Réglages et courbe visibles dans la gestion, tests automatiques | A FAIRE |
 
 ## 7. Qualité
 | # | Demande | Statut |
