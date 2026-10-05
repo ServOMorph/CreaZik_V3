@@ -1,0 +1,77 @@
+{
+  "playlist_name": "Playlist Hard tech",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./playlists/hard-tech/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "01 - Rave souterraine",
+      "prompt": "hard techno, relentless distorted kick, rumbling bass, acid lines, 150 bpm, instrumental",
+      "type": "instrumental",
+      "duration": 55
+    },
+    {
+      "id": "2",
+      "name": "02 - Acide brûlant",
+      "prompt": "hard techno with squelching acid synth, punishing kick, fast hi-hats, 148 bpm, instrumental",
+      "type": "instrumental",
+      "duration": 70
+    },
+    {
+      "id": "3",
+      "name": "03 - Mécanique lourde",
+      "prompt": "industrial hard techno, heavy machine rhythms, noise bursts, 152 bpm, instrumental",
+      "type": "instrumental",
+      "duration": 115
+    },
+    {
+      "id": "4",
+      "name": "04 - Transe dure",
+      "prompt": "hard trance techno, rolling rumble bass, hypnotic stabs, 145 bpm, instrumental",
+      "type": "instrumental",
+      "duration": 105
+    },
+    {
+      "id": "5",
+      "name": "05 - Cercle de feu",
+      "prompt": "peak time hard techno, huge kick, dark synth hook, 150 bpm, instrumental",
+      "type": "instrumental",
+      "duration": 90
+    },
+    {
+      "id": "6",
+      "name": "06 - Marteau de nuit",
+      "prompt": "hammering hard techno, fast kick pattern, distorted percussion, 155 bpm, instrumental",
+      "type": "instrumental",
+      "duration": 85
+    },
+    {
+      "id": "7",
+      "name": "07 - Métal liquide",
+      "prompt": "hard techno with metallic textures, industrial clangs, tense risers, 148 bpm, instrumental",
+      "type": "instrumental",
+      "duration": 50
+    },
+    {
+      "id": "8",
+      "name": "08 - Bunker",
+      "prompt": "dark bunker techno, subterranean rumble, raw drums, menacing atmosphere, 146 bpm, instrumental",
+      "type": "instrumental",
+      "duration": 45
+    },
+    {
+      "id": "9",
+      "name": "09 - Euphorie violente",
+      "prompt": "euphoric hard techno, anthemic lead, pounding kick, 150 bpm, instrumental",
+      "type": "instrumental",
+      "duration": 100
+    },
+    {
+      "id": "10",
+      "name": "10 - Dernier train pour l'enfer",
+      "prompt": "relentless hard techno, accelerating drums, siren textures, 158 bpm, instrumental",
+      "type": "instrumental",
+      "duration": 130
+    }
+  ]
+}

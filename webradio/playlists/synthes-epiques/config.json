@@ -1,0 +1,77 @@
+{
+  "playlist_name": "Playlist Synthés épiques et cinématiques",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./playlists/synthes-epiques/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "01 - Aube conquérante",
+      "prompt": "epic cinematic synthesizer, brass-like synth, majestic pads, heroic theme, slow tempo",
+      "type": "instrumental",
+      "duration": 95
+    },
+    {
+      "id": "2",
+      "name": "02 - Course vers la lumière",
+      "prompt": "heroic synth piano theme with driving pulse, uplifting, cinematic, 100 bpm",
+      "type": "instrumental",
+      "duration": 110
+    },
+    {
+      "id": "3",
+      "name": "03 - Ville de pluie",
+      "prompt": "futuristic noir synth, sparse electric piano, deep pads, saxophone-like synth lead, rainy mood, slow",
+      "type": "instrumental",
+      "duration": 65
+    },
+    {
+      "id": "4",
+      "name": "04 - Mythes anciens",
+      "prompt": "ancient mythology cinematic synth, choir pads, timpani, vast and ceremonial",
+      "type": "instrumental",
+      "duration": 50
+    },
+    {
+      "id": "5",
+      "name": "05 - Cosmos lointain",
+      "prompt": "cosmic synth soundscape, slow melody, vast reverb, sense of awe, 60 bpm",
+      "type": "instrumental",
+      "duration": 115
+    },
+    {
+      "id": "6",
+      "name": "06 - Odyssée marine",
+      "prompt": "oceanic synth melody, flowing arpeggios, warm string pads, adventurous",
+      "type": "instrumental",
+      "duration": 50
+    },
+    {
+      "id": "7",
+      "name": "07 - Rêve d'Orient",
+      "prompt": "mystic synth, ethnic flute-like leads, resonant percussion, exotic atmosphere",
+      "type": "instrumental",
+      "duration": 110
+    },
+    {
+      "id": "8",
+      "name": "08 - Triomphe",
+      "prompt": "triumphant synth fanfare, big drums, choir pads, uplifting",
+      "type": "instrumental",
+      "duration": 105
+    },
+    {
+      "id": "9",
+      "name": "09 - Souvenirs au piano",
+      "prompt": "piano and warm synth pads, nostalgic melody, tender",
+      "type": "instrumental",
+      "duration": 70
+    },
+    {
+      "id": "10",
+      "name": "10 - Mer de nuages",
+      "prompt": "airy synth pads, gentle piano motif, floating, peaceful",
+      "type": "instrumental",
+      "duration": 85
+    }
+  ]
+}

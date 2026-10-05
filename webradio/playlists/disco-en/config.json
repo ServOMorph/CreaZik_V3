@@ -1,0 +1,97 @@
+{
+  "playlist_name": "Playlist Disco - Vocal anglais",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./playlists/disco-en/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "01 - Midnight Mirrorball",
+      "prompt": "disco, four-on-the-floor kick, funky rhythm guitar, lush strings, brass stabs, groovy bass, 118 bpm, female English vocal",
+      "type": "vocal",
+      "duration": 90,
+      "lyrics_file": "playlists/disco-en/lyrics/01.txt",
+      "language": "en"
+    },
+    {
+      "id": "2",
+      "name": "02 - Dance Till the Sun",
+      "prompt": "disco, driving bassline, hand claps, shimmering strings, bright brass, 120 bpm, male English vocal",
+      "type": "vocal",
+      "duration": 120,
+      "lyrics_file": "playlists/disco-en/lyrics/02.txt",
+      "language": "en"
+    },
+    {
+      "id": "3",
+      "name": "03 - Velvet Floor",
+      "prompt": "smooth disco, warm bass, wah guitar, soft strings, 112 bpm, duet English vocal, romantic",
+      "type": "vocal",
+      "duration": 90,
+      "lyrics_file": "playlists/disco-en/lyrics/03.txt",
+      "language": "en"
+    },
+    {
+      "id": "4",
+      "name": "04 - Glitter in My Eyes",
+      "prompt": "disco pop, sparkling synths, tight drums, funky guitar, 122 bpm, female English vocal, joyful",
+      "type": "vocal",
+      "duration": 90,
+      "lyrics_file": "playlists/disco-en/lyrics/04.txt",
+      "language": "en"
+    },
+    {
+      "id": "5",
+      "name": "05 - Boogie on the Boulevard",
+      "prompt": "disco funk, slap bass, brass section, congas, 116 bpm, male English vocal, playful",
+      "type": "vocal",
+      "duration": 60,
+      "lyrics_file": "playlists/disco-en/lyrics/05.txt",
+      "language": "en"
+    },
+    {
+      "id": "6",
+      "name": "06 - Saturday Night Dream",
+      "prompt": "classic disco, orchestral strings, rhythmic guitar, pounding kick, 124 bpm, female English vocal",
+      "type": "vocal",
+      "duration": 80,
+      "lyrics_file": "playlists/disco-en/lyrics/06.txt",
+      "language": "en"
+    },
+    {
+      "id": "7",
+      "name": "07 - Love on the Dancefloor",
+      "prompt": "disco, pulsing bass, shimmering hi-hats, string stabs, 120 bpm, duet English vocal",
+      "type": "vocal",
+      "duration": 100,
+      "lyrics_file": "playlists/disco-en/lyrics/07.txt",
+      "language": "en"
+    },
+    {
+      "id": "8",
+      "name": "08 - Shake the Night",
+      "prompt": "funky disco, rhythm guitar chops, handclaps, bright brass, 119 bpm, male English vocal, energetic",
+      "type": "vocal",
+      "duration": 100,
+      "lyrics_file": "playlists/disco-en/lyrics/08.txt",
+      "language": "en"
+    },
+    {
+      "id": "9",
+      "name": "09 - Platform Heels",
+      "prompt": "retro disco, fat bass, string swells, funky drums, 117 bpm, female English vocal, confident",
+      "type": "vocal",
+      "duration": 125,
+      "lyrics_file": "playlists/disco-en/lyrics/09.txt",
+      "language": "en"
+    },
+    {
+      "id": "10",
+      "name": "10 - Last Song at the Club",
+      "prompt": "disco ballad, warm strings, mellow bass, soft claps, 108 bpm, duet English vocal, nostalgic",
+      "type": "vocal",
+      "duration": 120,
+      "lyrics_file": "playlists/disco-en/lyrics/10.txt",
+      "language": "en"
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "playlist_name": "Playlist A cappella voix de femmes",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./playlists/acappella-femmes/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "01 - Silver Moon",
+      "prompt": "a cappella female choir, no instruments, luminous female harmonies, soprano alto, ethereal slow harmonies, moonlit mood, floating",
+      "duration": 95,
+      "type": "vocal",
+      "lyrics_file": "playlists/acappella-femmes/lyrics/01.txt",
+      "language": "en"
+    },
+    {
+      "id": "2",
+      "name": "02 - Garden Song",
+      "prompt": "a cappella female choir, no instruments, luminous female harmonies, soprano alto, bright joyful harmonies, folk feeling, light rhythmic vocal percussion",
+      "duration": 130,
+      "type": "vocal",
+      "lyrics_file": "playlists/acappella-femmes/lyrics/02.txt",
+      "language": "en"
+    },
+    {
+      "id": "3",
+      "name": "03 - Lullaby for the Sea",
+      "prompt": "a cappella female choir, no instruments, luminous female harmonies, soprano alto, tender lullaby harmonies, soft and slow, ocean calm",
+      "duration": 55,
+      "type": "vocal",
+      "lyrics_file": "playlists/acappella-femmes/lyrics/03.txt",
+      "language": "en"
+    },
+    {
+      "id": "4",
+      "name": "04 - Morning Market",
+      "prompt": "a cappella female choir, no instruments, luminous female harmonies, soprano alto, lively rhythmic harmonies, playful call and response, vocal percussion",
+      "duration": 130,
+      "type": "vocal",
+      "lyrics_file": "playlists/acappella-femmes/lyrics/04.txt",
+      "language": "en"
+    },
+    {
+      "id": "5",
+      "name": "05 - Rain Chorus",
+      "prompt": "a cappella female choir, no instruments, luminous female harmonies, soprano alto, gentle layered harmonies, rhythmic like falling rain, soothing",
+      "duration": 80,
+      "type": "vocal",
+      "lyrics_file": "playlists/acappella-femmes/lyrics/05.txt",
+      "language": "en"
+    },
+    {
+      "id": "6",
+      "name": "06 - Berceuse du soir",
+      "prompt": "a cappella female choir, no instruments, luminous female harmonies, soprano alto, French lullaby harmonies, soft and slow, tender",
+      "duration": 75,
+      "type": "vocal",
+      "lyrics_file": "playlists/acappella-femmes/lyrics/06.txt",
+      "language": "fr"
+    },
+    {
+      "id": "7",
+      "name": "07 - La fontaine",
+      "prompt": "a cappella female choir, no instruments, luminous female harmonies, soprano alto, French folk harmonies, bright and flowing, water imagery",
+      "duration": 110,
+      "type": "vocal",
+      "lyrics_file": "playlists/acappella-femmes/lyrics/07.txt",
+      "language": "fr"
+    },
+    {
+      "id": "8",
+      "name": "08 - Chanson de la rivière",
+      "prompt": "a cappella female choir, no instruments, luminous female harmonies, soprano alto, French flowing harmonies, gentle and expansive, nature",
+      "duration": 135,
+      "type": "vocal",
+      "lyrics_file": "playlists/acappella-femmes/lyrics/08.txt",
+      "language": "fr"
+    },
+    {
+      "id": "9",
+      "name": "09 - Les voix du matin",
+      "prompt": "a cappella female choir, no instruments, luminous female harmonies, soprano alto, French dawn harmonies, rising and luminous, joyful",
+      "duration": 55,
+      "type": "vocal",
+      "lyrics_file": "playlists/acappella-femmes/lyrics/09.txt",
+      "language": "fr"
+    },
+    {
+      "id": "10",
+      "name": "10 - Le jardin secret",
+      "prompt": "a cappella female choir, no instruments, luminous female harmonies, soprano alto, French mysterious harmonies, soft and intimate, secret garden mood",
+      "duration": 65,
+      "type": "vocal",
+      "lyrics_file": "playlists/acappella-femmes/lyrics/10.txt",
+      "language": "fr"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+__pycache__/
+*.pyc
+.playwright-mcp/
+listen_admin_375.png
+_backup_avant_renommage/
+webradio/admin_credentials.json
+webradio/admin_token.txt
+webradio/comments.json
+webradio/votes.json
+webradio/favorites.json
+webradio/radio_settings.json
+webradio/*.tmp
+webradio/logs/
+webradio/playlists/*/outputs/
+webradio/**/*.wav
+!webradio/silence.wav
+webradio/playlists/perso/lyrics_originales_pdf/

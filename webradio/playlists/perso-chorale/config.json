@@ -1,0 +1,196 @@
+{
+  "playlist_name": "Playlist Perso - Chant de chorale",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./playlists/perso-chorale/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "01 - Je prends mon temps - Chant de chorale",
+      "prompt": "choir, mixed choir four-part harmony SATB, a cappella, church acoustics, warm and full",
+      "type": "vocal",
+      "duration": 110,
+      "lyrics_file": "playlists/perso/lyrics/01.txt",
+      "language": "fr"
+    },
+    {
+      "id": "2",
+      "name": "02 - Les quais la nuit - Chant de chorale",
+      "prompt": "choir, mixed choir four-part harmony SATB, a cappella, church acoustics, warm and full",
+      "type": "vocal",
+      "duration": 85,
+      "lyrics_file": "playlists/perso/lyrics/02.txt",
+      "language": "fr"
+    },
+    {
+      "id": "3",
+      "name": "03 - Demain, on change - Chant de chorale",
+      "prompt": "choir, mixed choir four-part harmony SATB, a cappella, church acoustics, warm and full",
+      "type": "vocal",
+      "duration": 110,
+      "lyrics_file": "playlists/perso/lyrics/03.txt",
+      "language": "fr"
+    },
+    {
+      "id": "4",
+      "name": "04 - Minuit sur l'autoroute - Chant de chorale",
+      "prompt": "choir, mixed choir four-part harmony SATB, a cappella, church acoustics, warm and full",
+      "type": "vocal",
+      "duration": 100,
+      "lyrics_file": "playlists/perso/lyrics/04.txt",
+      "language": "fr"
+    },
+    {
+      "id": "5",
+      "name": "05 - Mon voisin est un hérisson - Chant de chorale",
+      "prompt": "choir, mixed choir four-part harmony SATB, a cappella, church acoustics, warm and full",
+      "type": "vocal",
+      "duration": 65,
+      "lyrics_file": "playlists/perso/lyrics/05.txt",
+      "language": "fr"
+    },
+    {
+      "id": "6",
+      "name": "06 - Le bateau du matin - Chant de chorale",
+      "prompt": "choir, mixed choir four-part harmony SATB, a cappella, church acoustics, warm and full",
+      "type": "vocal",
+      "duration": 95,
+      "lyrics_file": "playlists/perso/lyrics/06.txt",
+      "language": "fr"
+    },
+    {
+      "id": "7",
+      "name": "07 - Les souliers de ma grand-mère - Chant de chorale",
+      "prompt": "choir, mixed choir four-part harmony SATB, a cappella, church acoustics, warm and full",
+      "type": "vocal",
+      "duration": 85,
+      "lyrics_file": "playlists/perso/lyrics/07.txt",
+      "language": "fr"
+    },
+    {
+      "id": "8",
+      "name": "08 - Elle danse seule - Chant de chorale",
+      "prompt": "choir, mixed choir four-part harmony SATB, a cappella, church acoustics, warm and full",
+      "type": "vocal",
+      "duration": 110,
+      "lyrics_file": "playlists/perso/lyrics/08.txt",
+      "language": "fr"
+    },
+    {
+      "id": "9",
+      "name": "09 - Une route en été - Chant de chorale",
+      "prompt": "choir, mixed choir four-part harmony SATB, a cappella, church acoustics, warm and full",
+      "type": "vocal",
+      "duration": 110,
+      "lyrics_file": "playlists/perso/lyrics/09.txt",
+      "language": "fr"
+    },
+    {
+      "id": "10",
+      "name": "10 - Le facteur et la fleuriste - Chant de chorale",
+      "prompt": "choir, mixed choir four-part harmony SATB, a cappella, church acoustics, warm and full",
+      "type": "vocal",
+      "duration": 85,
+      "lyrics_file": "playlists/perso/lyrics/10.txt",
+      "language": "fr"
+    },
+    {
+      "id": "11",
+      "name": "11 - Chemin de montagne - Chant de chorale",
+      "prompt": "choir, mixed choir four-part harmony SATB, a cappella, church acoustics, warm and full",
+      "type": "vocal",
+      "duration": 135,
+      "lyrics_file": "playlists/perso/lyrics/11.txt",
+      "language": "fr"
+    },
+    {
+      "id": "12",
+      "name": "12 - Là où brille la mer - Chant de chorale",
+      "prompt": "choir, mixed choir four-part harmony SATB, a cappella, church acoustics, warm and full",
+      "type": "vocal",
+      "duration": 125,
+      "lyrics_file": "playlists/perso/lyrics/12.txt",
+      "language": "fr"
+    },
+    {
+      "id": "13",
+      "name": "13 - Blues du lundi - Chant de chorale",
+      "prompt": "choir, mixed choir four-part harmony SATB, a cappella, church acoustics, warm and full",
+      "type": "vocal",
+      "duration": 100,
+      "lyrics_file": "playlists/perso/lyrics/13.txt",
+      "language": "fr"
+    },
+    {
+      "id": "14",
+      "name": "14 - Le vent et le large - Chant de chorale",
+      "prompt": "choir, mixed choir four-part harmony SATB, a cappella, church acoustics, warm and full",
+      "type": "vocal",
+      "duration": 100,
+      "lyrics_file": "playlists/perso/lyrics/14.txt",
+      "language": "fr"
+    },
+    {
+      "id": "15",
+      "name": "15 - La dernière nuit - Chant de chorale",
+      "prompt": "choir, mixed choir four-part harmony SATB, a cappella, church acoustics, warm and full",
+      "type": "vocal",
+      "duration": 70,
+      "lyrics_file": "playlists/perso/lyrics/15.txt",
+      "language": "fr"
+    },
+    {
+      "id": "16",
+      "name": "16 - Une carte postale - Chant de chorale",
+      "prompt": "choir, mixed choir four-part harmony SATB, a cappella, church acoustics, warm and full",
+      "type": "vocal",
+      "duration": 55,
+      "lyrics_file": "playlists/perso/lyrics/16.txt",
+      "language": "fr"
+    },
+    {
+      "id": "17",
+      "name": "17 - Les gars de la côte - Chant de chorale",
+      "prompt": "choir, mixed choir four-part harmony SATB, a cappella, church acoustics, warm and full",
+      "type": "vocal",
+      "duration": 130,
+      "lyrics_file": "playlists/perso/lyrics/17.txt",
+      "language": "fr"
+    },
+    {
+      "id": "18",
+      "name": "18 - La maison au bout du chemin - Chant de chorale",
+      "prompt": "choir, mixed choir four-part harmony SATB, a cappella, church acoustics, warm and full",
+      "type": "vocal",
+      "duration": 120,
+      "lyrics_file": "playlists/perso/lyrics/18.txt",
+      "language": "fr"
+    },
+    {
+      "id": "19",
+      "name": "19 - Les amis du port - Chant de chorale",
+      "prompt": "choir, mixed choir four-part harmony SATB, a cappella, church acoustics, warm and full",
+      "type": "vocal",
+      "duration": 55,
+      "lyrics_file": "playlists/perso/lyrics/19.txt",
+      "language": "fr"
+    },
+    {
+      "id": "20",
+      "name": "20 - Chantons la vie - Chant de chorale",
+      "prompt": "choir, mixed choir four-part harmony SATB, a cappella, church acoustics, warm and full",
+      "type": "vocal",
+      "duration": 125,
+      "lyrics_file": "playlists/perso/lyrics/20.txt",
+      "language": "fr"
+    },
+    {
+      "id": "21",
+      "name": "21 - Le bar du coin - Chant de chorale",
+      "prompt": "choir, mixed choir four-part harmony SATB, a cappella, church acoustics, warm and full",
+      "type": "vocal",
+      "duration": 90,
+      "lyrics_file": "playlists/perso/lyrics/21.txt",
+      "language": "fr"
+    }
+  ]
+}

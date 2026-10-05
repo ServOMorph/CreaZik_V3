@@ -1,0 +1,196 @@
+{
+  "playlist_name": "Playlist Perso - Classique",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./playlists/perso-classique/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "01 - Je prends mon temps - Classique",
+      "prompt": "classical music, orchestral strings, piano, art song, lyrical operatic vocal",
+      "type": "vocal",
+      "duration": 45,
+      "lyrics_file": "playlists/perso/lyrics/01.txt",
+      "language": "fr"
+    },
+    {
+      "id": "2",
+      "name": "02 - Les quais la nuit - Classique",
+      "prompt": "classical music, orchestral strings, piano, art song, lyrical operatic vocal",
+      "type": "vocal",
+      "duration": 110,
+      "lyrics_file": "playlists/perso/lyrics/02.txt",
+      "language": "fr"
+    },
+    {
+      "id": "3",
+      "name": "03 - Demain, on change - Classique",
+      "prompt": "classical music, orchestral strings, piano, art song, lyrical operatic vocal",
+      "type": "vocal",
+      "duration": 75,
+      "lyrics_file": "playlists/perso/lyrics/03.txt",
+      "language": "fr"
+    },
+    {
+      "id": "4",
+      "name": "04 - Minuit sur l'autoroute - Classique",
+      "prompt": "classical music, orchestral strings, piano, art song, lyrical operatic vocal",
+      "type": "vocal",
+      "duration": 50,
+      "lyrics_file": "playlists/perso/lyrics/04.txt",
+      "language": "fr"
+    },
+    {
+      "id": "5",
+      "name": "05 - Mon voisin est un hérisson - Classique",
+      "prompt": "classical music, orchestral strings, piano, art song, lyrical operatic vocal",
+      "type": "vocal",
+      "duration": 65,
+      "lyrics_file": "playlists/perso/lyrics/05.txt",
+      "language": "fr"
+    },
+    {
+      "id": "6",
+      "name": "06 - Le bateau du matin - Classique",
+      "prompt": "classical music, orchestral strings, piano, art song, lyrical operatic vocal",
+      "type": "vocal",
+      "duration": 130,
+      "lyrics_file": "playlists/perso/lyrics/06.txt",
+      "language": "fr"
+    },
+    {
+      "id": "7",
+      "name": "07 - Les souliers de ma grand-mère - Classique",
+      "prompt": "classical music, orchestral strings, piano, art song, lyrical operatic vocal",
+      "type": "vocal",
+      "duration": 90,
+      "lyrics_file": "playlists/perso/lyrics/07.txt",
+      "language": "fr"
+    },
+    {
+      "id": "8",
+      "name": "08 - Elle danse seule - Classique",
+      "prompt": "classical music, orchestral strings, piano, art song, lyrical operatic vocal",
+      "type": "vocal",
+      "duration": 90,
+      "lyrics_file": "playlists/perso/lyrics/08.txt",
+      "language": "fr"
+    },
+    {
+      "id": "9",
+      "name": "09 - Une route en été - Classique",
+      "prompt": "classical music, orchestral strings, piano, art song, lyrical operatic vocal",
+      "type": "vocal",
+      "duration": 60,
+      "lyrics_file": "playlists/perso/lyrics/09.txt",
+      "language": "fr"
+    },
+    {
+      "id": "10",
+      "name": "10 - Le facteur et la fleuriste - Classique",
+      "prompt": "classical music, orchestral strings, piano, art song, lyrical operatic vocal",
+      "type": "vocal",
+      "duration": 125,
+      "lyrics_file": "playlists/perso/lyrics/10.txt",
+      "language": "fr"
+    },
+    {
+      "id": "11",
+      "name": "11 - Chemin de montagne - Classique",
+      "prompt": "classical music, orchestral strings, piano, art song, lyrical operatic vocal",
+      "type": "vocal",
+      "duration": 75,
+      "lyrics_file": "playlists/perso/lyrics/11.txt",
+      "language": "fr"
+    },
+    {
+      "id": "12",
+      "name": "12 - Là où brille la mer - Classique",
+      "prompt": "classical music, orchestral strings, piano, art song, lyrical operatic vocal",
+      "type": "vocal",
+      "duration": 75,
+      "lyrics_file": "playlists/perso/lyrics/12.txt",
+      "language": "fr"
+    },
+    {
+      "id": "13",
+      "name": "13 - Blues du lundi - Classique",
+      "prompt": "classical music, orchestral strings, piano, art song, lyrical operatic vocal",
+      "type": "vocal",
+      "duration": 135,
+      "lyrics_file": "playlists/perso/lyrics/13.txt",
+      "language": "fr"
+    },
+    {
+      "id": "14",
+      "name": "14 - Le vent et le large - Classique",
+      "prompt": "classical music, orchestral strings, piano, art song, lyrical operatic vocal",
+      "type": "vocal",
+      "duration": 55,
+      "lyrics_file": "playlists/perso/lyrics/14.txt",
+      "language": "fr"
+    },
+    {
+      "id": "15",
+      "name": "15 - La dernière nuit - Classique",
+      "prompt": "classical music, orchestral strings, piano, art song, lyrical operatic vocal",
+      "type": "vocal",
+      "duration": 50,
+      "lyrics_file": "playlists/perso/lyrics/15.txt",
+      "language": "fr"
+    },
+    {
+      "id": "16",
+      "name": "16 - Une carte postale - Classique",
+      "prompt": "classical music, orchestral strings, piano, art song, lyrical operatic vocal",
+      "type": "vocal",
+      "duration": 90,
+      "lyrics_file": "playlists/perso/lyrics/16.txt",
+      "language": "fr"
+    },
+    {
+      "id": "17",
+      "name": "17 - Les gars de la côte - Classique",
+      "prompt": "classical music, orchestral strings, piano, art song, lyrical operatic vocal",
+      "type": "vocal",
+      "duration": 100,
+      "lyrics_file": "playlists/perso/lyrics/17.txt",
+      "language": "fr"
+    },
+    {
+      "id": "18",
+      "name": "18 - La maison au bout du chemin - Classique",
+      "prompt": "classical music, orchestral strings, piano, art song, lyrical operatic vocal",
+      "type": "vocal",
+      "duration": 55,
+      "lyrics_file": "playlists/perso/lyrics/18.txt",
+      "language": "fr"
+    },
+    {
+      "id": "19",
+      "name": "19 - Les amis du port - Classique",
+      "prompt": "classical music, orchestral strings, piano, art song, lyrical operatic vocal",
+      "type": "vocal",
+      "duration": 90,
+      "lyrics_file": "playlists/perso/lyrics/19.txt",
+      "language": "fr"
+    },
+    {
+      "id": "20",
+      "name": "20 - Chantons la vie - Classique",
+      "prompt": "classical music, orchestral strings, piano, art song, lyrical operatic vocal",
+      "type": "vocal",
+      "duration": 65,
+      "lyrics_file": "playlists/perso/lyrics/20.txt",
+      "language": "fr"
+    },
+    {
+      "id": "21",
+      "name": "21 - Le bar du coin - Classique",
+      "prompt": "classical music, orchestral strings, piano, art song, lyrical operatic vocal",
+      "type": "vocal",
+      "duration": 60,
+      "lyrics_file": "playlists/perso/lyrics/21.txt",
+      "language": "fr"
+    }
+  ]
+}

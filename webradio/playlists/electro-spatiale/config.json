@@ -1,0 +1,77 @@
+{
+  "playlist_name": "Playlist Electro spatiale analogique",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./playlists/electro-spatiale/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "01 - Aube spatiale",
+      "prompt": "analog space electronic, evolving sequencer arpeggios, lush analog pads, steady kick, cinematic, 110 bpm",
+      "type": "instrumental",
+      "duration": 70
+    },
+    {
+      "id": "2",
+      "name": "02 - Harpe de lumière",
+      "prompt": "electronic music with laser-like bright arpeggios, rhythmic sequencer, spacey synth leads, 120 bpm",
+      "type": "instrumental",
+      "duration": 130
+    },
+    {
+      "id": "3",
+      "name": "03 - Oxygène du soir",
+      "prompt": "vintage analog synthesizer melody, pulsing bass sequence, warm pads, floating, 100 bpm",
+      "type": "instrumental",
+      "duration": 130
+    },
+    {
+      "id": "4",
+      "name": "04 - Équinoxe",
+      "prompt": "analog electronic, bubbling arpeggios, drum machine, melodic synth theme, 118 bpm",
+      "type": "instrumental",
+      "duration": 75
+    },
+    {
+      "id": "5",
+      "name": "05 - Cité des étoiles",
+      "prompt": "electronic, majestic pads, big synth brass, arpeggiated sequences, 105 bpm",
+      "type": "instrumental",
+      "duration": 85
+    },
+    {
+      "id": "6",
+      "name": "06 - Voyage orbital",
+      "prompt": "ambient analog electronic, slow evolving drone and bell tones, 80 bpm",
+      "type": "instrumental",
+      "duration": 60
+    },
+    {
+      "id": "7",
+      "name": "07 - Rythmes magnétiques",
+      "prompt": "analog electronic dance, funky sequencer bass, vocoder-like textures, 122 bpm",
+      "type": "instrumental",
+      "duration": 55
+    },
+    {
+      "id": "8",
+      "name": "08 - Souffle cosmique",
+      "prompt": "ambient space electronic, sweeping filters, soft sequences, 70 bpm",
+      "type": "instrumental",
+      "duration": 125
+    },
+    {
+      "id": "9",
+      "name": "09 - Concert de lumière",
+      "prompt": "epic electronic, driving sequences, soaring lead synth, big finale, 125 bpm",
+      "type": "instrumental",
+      "duration": 55
+    },
+    {
+      "id": "10",
+      "name": "10 - Nuit de cristal",
+      "prompt": "delicate electronic, crystal bell arpeggios, soft pads, 90 bpm",
+      "type": "instrumental",
+      "duration": 135
+    }
+  ]
+}

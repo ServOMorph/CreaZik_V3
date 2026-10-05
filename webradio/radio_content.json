@@ -1,0 +1,21 @@
+{
+  "radio_name": "CreaZik Radio",
+  "site": {"name": "SéréniaTech", "url": "serenia-tech.fr", "email": "sereniatech33@gmail.com"},
+  "jingle_messages": [
+    {"title": "CreaZik Radio", "lines": ["Musique générée par une IA locale", "Sur un PC personnel, sans serveur de calcul distant"]},
+    {"title": "CreaZik Radio", "lines": ["100 % IA locale", "Une démarche sobre et responsable"]},
+    {"title": "CreaZik Radio", "lines": ["Des morceaux créés ici, sur place", "L'IA locale, une alternative à la création à distance"]}
+  ],
+  "ads": [
+    {"headline": "SéréniaTech", "sub": "Accompagnement numérique pour associations, TPE et indépendants", "cta": "serenia-tech.fr"},
+    {"headline": "Votre informatique, sereinement", "sub": "Structurez-la à votre rythme", "cta": "Prendre rendez-vous"},
+    {"headline": "Sans jargon, avec bienveillance", "sub": "Une approche humaine du numérique", "cta": "Découvrir mes services"},
+    {"headline": "Formation à l'IA éthique", "sub": "Se former à l'IA, pas à pas", "cta": "Découvrir nos formations"},
+    {"headline": "Automatisation et IA sur-mesure", "sub": "Des outils développés pour votre activité", "cta": "serenia-tech.fr"},
+    {"headline": "Partout en France", "sub": "À distance ou en présentiel", "cta": "serenia-tech.fr"},
+    {"headline": "Formations IA", "sub": "Réseau Alfie, avec prise en charge OPCO", "cta": "Découvrir nos formations"},
+    {"headline": "30 minutes offertes", "sub": "Premier rendez-vous gratuit et sans engagement", "cta": "Prendre rendez-vous"},
+    {"headline": "Prise en main, bureautique, sécurité", "sub": "L'accompagnement informatique au quotidien", "cta": "Découvrir mes services"},
+    {"headline": "Associations, TPE, indépendants", "sub": "Le numérique à votre mesure", "cta": "serenia-tech.fr"}
+  ]
+}

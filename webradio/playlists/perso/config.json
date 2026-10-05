@@ -1,0 +1,196 @@
+{
+  "playlist_name": "Playlist Perso - 21 chansons",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./playlists/perso/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "01 - Je prends mon temps",
+      "prompt": "French chanson, gypsy jazz (jazz manouche), swing and pop, lively and playful",
+      "type": "vocal",
+      "duration": 90,
+      "lyrics_file": "playlists/perso/lyrics/01.txt",
+      "language": "fr"
+    },
+    {
+      "id": "2",
+      "name": "02 - Les quais la nuit",
+      "prompt": "French pop with folk and pop-rock touches, acoustic guitars, supple light rhythm, retro 1920s Paris cabaret atmosphere, female and male vocal duet, romantic, playful, poetic",
+      "type": "vocal",
+      "duration": 90,
+      "lyrics_file": "playlists/perso/lyrics/02.txt",
+      "language": "fr"
+    },
+    {
+      "id": "3",
+      "name": "03 - Demain, on change",
+      "prompt": "French pop, socially engaged chanson, pop-rock",
+      "type": "vocal",
+      "duration": 90,
+      "lyrics_file": "playlists/perso/lyrics/03.txt",
+      "language": "fr"
+    },
+    {
+      "id": "4",
+      "name": "04 - Minuit sur l'autoroute",
+      "prompt": "1980s synthpop, French variety pop and dance-pop",
+      "type": "vocal",
+      "duration": 90,
+      "lyrics_file": "playlists/perso/lyrics/04.txt",
+      "language": "fr"
+    },
+    {
+      "id": "5",
+      "name": "05 - Mon voisin est un hérisson",
+      "prompt": "French rock, garage rock, humorous chanson",
+      "type": "vocal",
+      "duration": 90,
+      "lyrics_file": "playlists/perso/lyrics/05.txt",
+      "language": "fr"
+    },
+    {
+      "id": "6",
+      "name": "06 - Le bateau du matin",
+      "prompt": "French chanson, folk and traditional Irish music",
+      "type": "vocal",
+      "duration": 90,
+      "lyrics_file": "playlists/perso/lyrics/06.txt",
+      "language": "fr"
+    },
+    {
+      "id": "7",
+      "name": "07 - Les souliers de ma grand-mère",
+      "prompt": "French chanson, pop, folk with retro influences",
+      "type": "vocal",
+      "duration": 90,
+      "lyrics_file": "playlists/perso/lyrics/07.txt",
+      "language": "fr"
+    },
+    {
+      "id": "8",
+      "name": "08 - Elle danse seule",
+      "prompt": "1980s French variety pop, synthpop and pop-rock",
+      "type": "vocal",
+      "duration": 90,
+      "lyrics_file": "playlists/perso/lyrics/08.txt",
+      "language": "fr"
+    },
+    {
+      "id": "9",
+      "name": "09 - Une route en été",
+      "prompt": "French variety pop, pop-folk and country-pop",
+      "type": "vocal",
+      "duration": 90,
+      "lyrics_file": "playlists/perso/lyrics/09.txt",
+      "language": "fr"
+    },
+    {
+      "id": "10",
+      "name": "10 - Le facteur et la fleuriste",
+      "prompt": "French variety pop, narrative chanson, light pop",
+      "type": "vocal",
+      "duration": 90,
+      "lyrics_file": "playlists/perso/lyrics/10.txt",
+      "language": "fr"
+    },
+    {
+      "id": "11",
+      "name": "11 - Chemin de montagne",
+      "prompt": "French folk, popular chanson, marching song",
+      "type": "vocal",
+      "duration": 90,
+      "lyrics_file": "playlists/perso/lyrics/11.txt",
+      "language": "fr"
+    },
+    {
+      "id": "12",
+      "name": "12 - Là où brille la mer",
+      "prompt": "French chanson, variety pop with Latin and Mediterranean influences",
+      "type": "vocal",
+      "duration": 90,
+      "lyrics_file": "playlists/perso/lyrics/12.txt",
+      "language": "fr"
+    },
+    {
+      "id": "13",
+      "name": "13 - Blues du lundi",
+      "prompt": "Jazz, French chanson and swing",
+      "type": "vocal",
+      "duration": 90,
+      "lyrics_file": "playlists/perso/lyrics/13.txt",
+      "language": "fr"
+    },
+    {
+      "id": "14",
+      "name": "14 - Le vent et le large",
+      "prompt": "French chanson, folk-rock, sea shanty",
+      "type": "vocal",
+      "duration": 90,
+      "lyrics_file": "playlists/perso/lyrics/14.txt",
+      "language": "fr"
+    },
+    {
+      "id": "15",
+      "name": "15 - La dernière nuit",
+      "prompt": "French rock, blues-rock, dramatic ballad",
+      "type": "vocal",
+      "duration": 90,
+      "lyrics_file": "playlists/perso/lyrics/15.txt",
+      "language": "fr"
+    },
+    {
+      "id": "16",
+      "name": "16 - Une carte postale",
+      "prompt": "French chanson, folk, acoustic pop, realist chanson",
+      "type": "vocal",
+      "duration": 90,
+      "lyrics_file": "playlists/perso/lyrics/16.txt",
+      "language": "fr"
+    },
+    {
+      "id": "17",
+      "name": "17 - Les gars de la côte",
+      "prompt": "Sea shanty, traditional Breton music, maritime folk",
+      "type": "vocal",
+      "duration": 90,
+      "lyrics_file": "playlists/perso/lyrics/17.txt",
+      "language": "fr"
+    },
+    {
+      "id": "18",
+      "name": "18 - La maison au bout du chemin",
+      "prompt": "French chanson, acoustic folk, country-folk",
+      "type": "vocal",
+      "duration": 90,
+      "lyrics_file": "playlists/perso/lyrics/18.txt",
+      "language": "fr"
+    },
+    {
+      "id": "19",
+      "name": "19 - Les amis du port",
+      "prompt": "French chanson, gypsy jazz, acoustic swing",
+      "type": "vocal",
+      "duration": 90,
+      "lyrics_file": "playlists/perso/lyrics/19.txt",
+      "language": "fr"
+    },
+    {
+      "id": "20",
+      "name": "20 - Chantons la vie",
+      "prompt": "Musical theatre song, swing, light jazz",
+      "type": "vocal",
+      "duration": 90,
+      "lyrics_file": "playlists/perso/lyrics/20.txt",
+      "language": "fr"
+    },
+    {
+      "id": "21",
+      "name": "21 - Le bar du coin",
+      "prompt": "French chanson, French rock, humorous blues-rock",
+      "type": "vocal",
+      "duration": 90,
+      "lyrics_file": "playlists/perso/lyrics/21.txt",
+      "language": "fr"
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "playlist_name": "Jingles parlés",
+  "engine": "kokoro",
+  "output_dir": "./playlists/jingles-voix/outputs",
+  "voice": "ff_siwis",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "Jingle voix 01",
+      "prompt": "CreaZik Radio. Une radio de musiques générées par une intelligence artificielle qui tourne en local.",
+      "type": "voice",
+      "duration": 0
+    },
+    {
+      "id": "2",
+      "name": "Jingle voix 02",
+      "prompt": "Ici, la musique est créée sur un ordinateur personnel, sans serveur de calcul distant.",
+      "type": "voice",
+      "duration": 0
+    },
+    {
+      "id": "3",
+      "name": "Jingle voix 03",
+      "prompt": "L'IA locale : une autre façon de créer, plus proche de nous, et pensée pour rester sobre.",
+      "type": "voice",
+      "duration": 0
+    },
+    {
+      "id": "4",
+      "name": "Jingle voix 04",
+      "prompt": "Chaque morceau que vous écoutez a été généré ici, sur une seule carte graphique.",
+      "type": "voice",
+      "duration": 0
+    },
+    {
+      "id": "5",
+      "name": "Jingle voix 05",
+      "prompt": "Vous écoutez CreaZik Radio : des musiques du monde entier, imaginées par une IA locale.",
+      "type": "voice",
+      "duration": 0
+    },
+    {
+      "id": "6",
+      "name": "Jingle voix 06",
+      "prompt": "Créer en local, c'est garder la main sur ses outils et sur ses données.",
+      "type": "voice",
+      "duration": 0
+    },
+    {
+      "id": "7",
+      "name": "Jingle voix 07",
+      "prompt": "CreaZik Radio. Éclectique, curieuse, et fabriquée sur place.",
+      "type": "voice",
+      "duration": 0
+    },
+    {
+      "id": "8",
+      "name": "Jingle voix 08",
+      "prompt": "Le calcul se fait sur une machine personnelle, pas dans un centre de données lointain.",
+      "type": "voice",
+      "duration": 0
+    },
+    {
+      "id": "9",
+      "name": "Jingle voix 09",
+      "prompt": "Votre avis compte : un pouce vers le haut, ou vers le bas, et la radio s'adapte à vos goûts.",
+      "type": "voice",
+      "duration": 0
+    },
+    {
+      "id": "10",
+      "name": "Jingle voix 10",
+      "prompt": "Une radio qui tourne sur une IA locale : un choix de sobriété, de proximité et de liberté.",
+      "type": "voice",
+      "duration": 0
+    }
+  ]
+}

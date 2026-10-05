@@ -1,0 +1,77 @@
+{
+  "playlist_name": "Playlist Tech",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./playlists/tech/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "01 - Minimal de nuit",
+      "prompt": "minimal tech house, tight groove, rolling bassline, crisp hi-hats, sparse stabs, 124 bpm, instrumental",
+      "type": "instrumental",
+      "duration": 110
+    },
+    {
+      "id": "2",
+      "name": "02 - Deep tech",
+      "prompt": "deep tech house, warm sub bass, dub chords, hypnotic groove, 123 bpm, instrumental",
+      "type": "instrumental",
+      "duration": 45
+    },
+    {
+      "id": "3",
+      "name": "03 - Tech mélodique",
+      "prompt": "melodic tech house, plucked arpeggio, airy pads, steady kick, uplifting, 124 bpm, instrumental",
+      "type": "instrumental",
+      "duration": 70
+    },
+    {
+      "id": "4",
+      "name": "04 - Warehouse",
+      "prompt": "warehouse tech, punchy kick, metallic percussion, dark atmosphere, 126 bpm, instrumental",
+      "type": "instrumental",
+      "duration": 105
+    },
+    {
+      "id": "5",
+      "name": "05 - Groove percussif",
+      "prompt": "percussive tech house, congas and shakers, bouncy bass, 125 bpm, instrumental",
+      "type": "instrumental",
+      "duration": 95
+    },
+    {
+      "id": "6",
+      "name": "06 - Tech funky",
+      "prompt": "funky tech house, sampled-style stabs, groovy bass, swung hi-hats, 124 bpm, instrumental",
+      "type": "instrumental",
+      "duration": 80
+    },
+    {
+      "id": "7",
+      "name": "07 - Pulsation industrielle",
+      "prompt": "industrial tech, mechanical rhythms, filtered noise, driving kick, 127 bpm, instrumental",
+      "type": "instrumental",
+      "duration": 95
+    },
+    {
+      "id": "8",
+      "name": "08 - Tech cosmique",
+      "prompt": "cosmic tech house, spacey pads, evolving arpeggios, deep kick, 122 bpm, instrumental",
+      "type": "instrumental",
+      "duration": 105
+    },
+    {
+      "id": "9",
+      "name": "09 - Boucle hypnotique",
+      "prompt": "hypnotic loop-based techno-house, repetitive riff, subtle changes, 125 bpm, instrumental",
+      "type": "instrumental",
+      "duration": 115
+    },
+    {
+      "id": "10",
+      "name": "10 - Lever de soleil sur le dancefloor",
+      "prompt": "uplifting tech house, building energy, emotional chords, big drop, 126 bpm, instrumental",
+      "type": "instrumental",
+      "duration": 80
+    }
+  ]
+}

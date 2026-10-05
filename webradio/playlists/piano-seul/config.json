@@ -1,0 +1,77 @@
+{
+  "playlist_name": "Playlist Piano seul",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./playlists/piano-seul/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "01 - Nocturne du soir",
+      "prompt": "solo piano nocturne, singing right hand melody, soft pedal, romantic, no other instruments",
+      "duration": 120,
+      "type": "instrumental"
+    },
+    {
+      "id": "2",
+      "name": "02 - Jazz au piano",
+      "prompt": "solo jazz piano, rich voicings, walking left hand, smooth swing, no other instruments",
+      "duration": 115,
+      "type": "instrumental"
+    },
+    {
+      "id": "3",
+      "name": "03 - Minimalisme répété",
+      "prompt": "solo minimalist piano, repeating patterns, gradual changes, hypnotic, no other instruments",
+      "duration": 80,
+      "type": "instrumental"
+    },
+    {
+      "id": "4",
+      "name": "04 - Ragtime joyeux",
+      "prompt": "solo ragtime piano, syncopated, stride left hand, playful, no other instruments",
+      "duration": 95,
+      "type": "instrumental"
+    },
+    {
+      "id": "5",
+      "name": "05 - Piano de pluie",
+      "prompt": "solo piano, gentle slow notes, melancholic, rainy day mood, no other instruments",
+      "duration": 100,
+      "type": "instrumental"
+    },
+    {
+      "id": "6",
+      "name": "06 - Boogie-woogie",
+      "prompt": "solo boogie-woogie piano, driving left hand, energetic, no other instruments",
+      "duration": 110,
+      "type": "instrumental"
+    },
+    {
+      "id": "7",
+      "name": "07 - Étude brillante",
+      "prompt": "solo classical piano etude, fast virtuosic runs, bright, no other instruments",
+      "duration": 110,
+      "type": "instrumental"
+    },
+    {
+      "id": "8",
+      "name": "08 - Berceuse pour piano",
+      "prompt": "solo piano lullaby, simple tender melody, very soft, no other instruments",
+      "duration": 115,
+      "type": "instrumental"
+    },
+    {
+      "id": "9",
+      "name": "09 - Piano de cinéma",
+      "prompt": "solo cinematic piano, emotional building theme, wide dynamics, no other instruments",
+      "duration": 65,
+      "type": "instrumental"
+    },
+    {
+      "id": "10",
+      "name": "10 - Blues de bar",
+      "prompt": "solo blues piano, slow late night, expressive, no other instruments",
+      "duration": 55,
+      "type": "instrumental"
+    }
+  ]
+}

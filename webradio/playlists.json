@@ -1,0 +1,238 @@
+[
+  {
+    "id": "test",
+    "label": "Playlist Test - Validation",
+    "results": "playlists/test/outputs/playlist_results.json",
+    "description": "Morceau de validation des paroles françaises et de la durée de 1 min 30."
+  },
+  {
+    "id": "auto",
+    "label": "Playlist Auto - 10 styles",
+    "results": "playlists/auto/outputs/playlist_results.json",
+    "description": "Playlist de départ : 10 styles (electro, rap, ambient, jazz, rock, classique, techno, lo-fi, synthwave, folk), générés automatiquement pour tester l'IA ACE-Step 1.5."
+  },
+  {
+    "id": "perso",
+    "label": "Playlist Perso - 21 chansons",
+    "results": "playlists/perso/outputs/playlist_results.json",
+    "description": "Playlist Perso : 21 chansons aux paroles inventées en français, dans des styles inspirés de la chanson française, générées en local."
+  },
+  {
+    "id": "perso-electro",
+    "label": "Playlist Perso - Electro",
+    "results": "playlists/perso-electro/outputs/playlist_results.json",
+    "description": "Les 21 chansons de la playlist Perso réinterprétées en version electro."
+  },
+  {
+    "id": "perso-folk",
+    "label": "Playlist Perso - Folk",
+    "results": "playlists/perso-folk/outputs/playlist_results.json",
+    "description": "Les 21 chansons de la playlist Perso réinterprétées en version folk acoustique."
+  },
+  {
+    "id": "perso-rock",
+    "label": "Playlist Perso - Rock",
+    "results": "playlists/perso-rock/outputs/playlist_results.json",
+    "description": "Les 21 chansons de la playlist Perso réinterprétées en version rock."
+  },
+  {
+    "id": "perso-classique",
+    "label": "Playlist Perso - Classique",
+    "results": "playlists/perso-classique/outputs/playlist_results.json",
+    "description": "Les 21 chansons de la playlist Perso réinterprétées en version classique."
+  },
+  {
+    "id": "perso-gregorien",
+    "label": "Playlist Perso - Chant grégorien",
+    "results": "playlists/perso-gregorien/outputs/playlist_results.json",
+    "description": "Les 21 chansons de la playlist Perso réinterprétées en chant grégorien."
+  },
+  {
+    "id": "perso-chorale",
+    "label": "Playlist Perso - Chant de chorale",
+    "results": "playlists/perso-chorale/outputs/playlist_results.json",
+    "description": "Les 21 chansons de la playlist Perso réinterprétées en chant de chorale."
+  },
+  {
+    "id": "instrumental",
+    "label": "Playlist Instrumental",
+    "results": "playlists/instrumental/outputs/playlist_results.json",
+    "description": "Playlist de 21 morceaux instrumentaux (musique de film, piano solo, electro, trance Goa, musique du monde...)."
+  },
+  {
+    "id": "disco-en",
+    "label": "Playlist Disco - Vocal anglais",
+    "results": "playlists/disco-en/outputs/playlist_results.json",
+    "description": "Playlist de 10 morceaux disco chantés en anglais, aux paroles inventées, générés en local."
+  },
+  {
+    "id": "groove-en",
+    "label": "Playlist Groove - Vocal anglais",
+    "results": "playlists/groove-en/outputs/playlist_results.json",
+    "description": "Playlist de 10 morceaux groove (funk et soul) chantés en anglais, aux paroles inventées, générés en local."
+  },
+  {
+    "id": "electro-atmospherique",
+    "label": "Playlist Electro atmosphérique",
+    "results": "playlists/electro-atmospherique/outputs/playlist_results.json",
+    "description": "10 morceaux d'electronica atmosphérique : pianos mélancoliques, rythmes downtempo, nappes, avec quelques voix chantées en anglais."
+  },
+  {
+    "id": "electro-pop-fr",
+    "label": "Playlist Electro-pop française",
+    "results": "playlists/electro-pop-fr/outputs/playlist_results.json",
+    "description": "10 morceaux d'electro-pop chantés en français, aux paroles inventées, mêlant humour, percussions et basses synthétiques."
+  },
+  {
+    "id": "annees-50",
+    "label": "Playlist Années 50",
+    "results": "playlists/annees-50/outputs/playlist_results.json",
+    "description": "10 morceaux dans l'esprit des années 1950 (doo-wop, rockabilly, crooner, musette, jazz de cave), chantés en anglais et en français, paroles inventées."
+  },
+  {
+    "id": "futuriste-2046",
+    "label": "Playlist Futuriste - dans 20 ans",
+    "results": "playlists/futuriste-2046/outputs/playlist_results.json",
+    "description": "10 morceaux instrumentaux imaginant la musique que l'on pourrait entendre dans 20 ans, générés en local."
+  },
+  {
+    "id": "poesie-fr",
+    "label": "Playlist Poésie française",
+    "results": "playlists/poesie-fr/outputs/playlist_results.json",
+    "description": "10 poèmes français du domaine public (Verlaine, Hugo, Apollinaire, Ronsard, Du Bellay, Rimbaud, Baudelaire, Desbordes-Valmore et Nerval), récités et chantés en IA locale."
+  },
+  {
+    "id": "poesie-en",
+    "label": "Playlist Poésie anglaise",
+    "results": "playlists/poesie-en/outputs/playlist_results.json",
+    "description": "10 poèmes anglais du domaine public (Dickinson, Blake, Wordsworth, Keats, Yeats, Rossetti, Poe, Tennyson, Shelley, Burns), récités et chantés en IA locale."
+  },
+  {
+    "id": "percussion-amerique-sud",
+    "label": "Playlist Percussions d'Amérique du Sud",
+    "results": "playlists/percussion-amerique-sud/outputs/playlist_results.json",
+    "description": "10 morceaux de percussions inspirées d'Amérique du Sud (samba, candomblé, capoeira, cumbia, candombe, Andes, bossa, maracatu, salsa, festejo), instrumentaux, générés en local."
+  },
+  {
+    "id": "percussion-afrique",
+    "label": "Playlist Percussions africaines",
+    "results": "playlists/percussion-afrique/outputs/playlist_results.json",
+    "description": "10 morceaux de percussions inspirées d'Afrique (djembé, talking drum, gnawa, kpanlogo, ngoma, sabar, afrobeat...), instrumentaux, générés en local."
+  },
+  {
+    "id": "rap-fr-melodique",
+    "label": "Playlist Rap français mélodique",
+    "results": "playlists/rap-fr-melodique/outputs/playlist_results.json",
+    "description": "10 morceaux de rap français mélodique (voix autotunée, beats trap, synthés aux accents méditerranéens), aux paroles inventées sur le quotidien, la famille, le soleil et l'ambition."
+  },
+  {
+    "id": "tribal",
+    "label": "Playlist Tribal",
+    "results": "playlists/tribal/outputs/playlist_results.json",
+    "description": "10 morceaux tribaux : tambours rituels, chants graves et danses, instrumentaux, générés en local."
+  },
+  {
+    "id": "acappella-hommes",
+    "label": "Playlist A cappella voix d'hommes",
+    "results": "playlists/acappella-hommes/outputs/playlist_results.json",
+    "description": "10 morceaux a cappella pour voix d'hommes (chants de marins, de montagne, de veillée), en anglais et en français, paroles inventées."
+  },
+  {
+    "id": "acappella-femmes",
+    "label": "Playlist A cappella voix de femmes",
+    "results": "playlists/acappella-femmes/outputs/playlist_results.json",
+    "description": "10 morceaux a cappella pour voix de femmes (berceuses, chants de jardin, de rivière, de matin), en anglais et en français, paroles inventées."
+  },
+  {
+    "id": "guitare-seule",
+    "label": "Playlist Guitare seule",
+    "results": "playlists/guitare-seule/outputs/playlist_results.json",
+    "description": "10 morceaux pour guitare seule (fingerstyle, flamenco, blues, classique, jazz...), instrumentaux."
+  },
+  {
+    "id": "harpe-seule",
+    "label": "Playlist Harpe seule",
+    "results": "playlists/harpe-seule/outputs/playlist_results.json",
+    "description": "10 morceaux pour harpe seule (celtique, concert, médiévale, glissandos...), instrumentaux."
+  },
+  {
+    "id": "piano-seul",
+    "label": "Playlist Piano seul",
+    "results": "playlists/piano-seul/outputs/playlist_results.json",
+    "description": "10 morceaux pour piano seul (nocturne, jazz, minimalisme, ragtime, blues...), instrumentaux."
+  },
+  {
+    "id": "chant-mongol",
+    "label": "Playlist Chant mongol",
+    "results": "playlists/chant-mongol/outputs/playlist_results.json",
+    "description": "10 morceaux inspirés des chants et des musiques de Mongolie (chant diphonique, chant long, vièle morin khuur), voix sans paroles, générés en local."
+  },
+  {
+    "id": "didgeridoo",
+    "label": "Playlist Didgeridoo",
+    "results": "playlists/didgeridoo/outputs/playlist_results.json",
+    "description": "10 morceaux de didgeridoo (bourdons, respiration circulaire, bâtons, ambiances), instrumentaux."
+  },
+  {
+    "id": "electro-spatiale",
+    "label": "Playlist Electro spatiale analogique",
+    "results": "playlists/electro-spatiale/outputs/playlist_results.json",
+    "description": "10 morceaux d'electro analogique aux accents spatiaux : séquenceurs, arpèges, nappes de synthétiseurs, instrumentaux."
+  },
+  {
+    "id": "synthes-epiques",
+    "label": "Playlist Synthés épiques et cinématiques",
+    "results": "playlists/synthes-epiques/outputs/playlist_results.json",
+    "description": "10 morceaux de synthétiseurs épiques : thèmes héroïques, nappes de cinéma, piano et ambiances oniriques, instrumentaux."
+  },
+  {
+    "id": "rock-progressif-instrumental",
+    "label": "Playlist Rock progressif instrumental",
+    "results": "playlists/rock-progressif-instrumental/outputs/playlist_results.json",
+    "description": "10 morceaux de rock progressif instrumental : guitares superposées, thèmes celtiques, crescendos et cloches, instrumentaux."
+  },
+  {
+    "id": "funk-saxophone",
+    "label": "Playlist Funk saxophone",
+    "results": "playlists/funk-saxophone/outputs/playlist_results.json",
+    "description": "10 morceaux de funk au saxophone : riffs, cuivres, grooves serrés et ambiances second line, instrumentaux."
+  },
+  {
+    "id": "tech",
+    "label": "Playlist Tech",
+    "results": "playlists/tech/outputs/playlist_results.json",
+    "description": "10 morceaux de tech house et tech minimale : grooves serrés, basses roulantes, ambiances nocturnes, instrumentaux."
+  },
+  {
+    "id": "hard-tech",
+    "label": "Playlist Hard tech",
+    "results": "playlists/hard-tech/outputs/playlist_results.json",
+    "description": "10 morceaux de hard techno : kicks puissants, acid, rythmes industriels et énergie brute, instrumentaux."
+  },
+  {
+    "id": "jeux-video",
+    "label": "Playlist Jeux vidéo",
+    "results": "playlists/jeux-video/outputs/playlist_results.json",
+    "description": "10 morceaux dans l'esprit des musiques de jeux vidéo : chiptune, aventure orchestrale, combat de boss, donjons et menus, instrumentaux."
+  },
+  {
+    "id": "hard-rock",
+    "label": "Playlist Hard rock",
+    "results": "playlists/hard-rock/outputs/playlist_results.json",
+    "description": "9 morceaux de hard rock en anglais : riffs bluesy, voix rauque et refrains en chœur, paroles inventées, générés en local."
+  },
+  {
+    "id": "jingles",
+    "label": "Jingles (5 s)",
+    "results": "playlists/jingles/outputs/playlist_results.json",
+    "description": "Jingles musicaux de 5 secondes générés en local.",
+    "role": "jingle"
+  },
+  {
+    "id": "jingles-voix",
+    "label": "Jingles parlés",
+    "results": "playlists/jingles-voix/outputs/playlist_results.json",
+    "role": "jingle",
+    "description": "Jingles parlés en français (voix de synthèse locale) présentant la démarche d'IA locale de la radio."
+  }
+]

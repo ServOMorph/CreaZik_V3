@@ -1,0 +1,97 @@
+{
+  "playlist_name": "Playlist A cappella voix d'hommes",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./playlists/acappella-hommes/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "01 - Hauling Song",
+      "prompt": "a cappella male choir, no instruments, rich male harmonies, bass baritone tenor, sea shanty call and response, rhythmic and powerful",
+      "duration": 95,
+      "type": "vocal",
+      "lyrics_file": "playlists/acappella-hommes/lyrics/01.txt",
+      "language": "en"
+    },
+    {
+      "id": "2",
+      "name": "02 - Mountain Echo",
+      "prompt": "a cappella male choir, no instruments, rich male harmonies, bass baritone tenor, deep slow harmonies, resonant and spacious, mountain echo mood",
+      "duration": 80,
+      "type": "vocal",
+      "lyrics_file": "playlists/acappella-hommes/lyrics/02.txt",
+      "language": "en"
+    },
+    {
+      "id": "3",
+      "name": "03 - Harvest Gathering",
+      "prompt": "a cappella male choir, no instruments, rich male harmonies, bass baritone tenor, warm rustic harmonies, rolling rhythm, work song, joyful",
+      "duration": 135,
+      "type": "vocal",
+      "lyrics_file": "playlists/acappella-hommes/lyrics/03.txt",
+      "language": "en"
+    },
+    {
+      "id": "4",
+      "name": "04 - Long Road Home",
+      "prompt": "a cappella male choir, no instruments, rich male harmonies, bass baritone tenor, slow emotional harmonies, wistful, deep bass line vocalised, tender",
+      "duration": 115,
+      "type": "vocal",
+      "lyrics_file": "playlists/acappella-hommes/lyrics/04.txt",
+      "language": "en"
+    },
+    {
+      "id": "5",
+      "name": "05 - Brothers by the Fire",
+      "prompt": "a cappella male choir, no instruments, rich male harmonies, bass baritone tenor, friendly barbershop quartet style, tight chords, warm and playful",
+      "duration": 120,
+      "type": "vocal",
+      "lyrics_file": "playlists/acappella-hommes/lyrics/05.txt",
+      "language": "en"
+    },
+    {
+      "id": "6",
+      "name": "06 - Chant des marins",
+      "prompt": "a cappella male choir, no instruments, rich male harmonies, bass baritone tenor, French sea shanty, rhythmic call and response, powerful",
+      "duration": 90,
+      "type": "vocal",
+      "lyrics_file": "playlists/acappella-hommes/lyrics/06.txt",
+      "language": "fr"
+    },
+    {
+      "id": "7",
+      "name": "07 - Les hommes du village",
+      "prompt": "a cappella male choir, no instruments, rich male harmonies, bass baritone tenor, French village polyphony, warm and rustic harmonies, mid tempo",
+      "duration": 65,
+      "type": "vocal",
+      "lyrics_file": "playlists/acappella-hommes/lyrics/07.txt",
+      "language": "fr"
+    },
+    {
+      "id": "8",
+      "name": "08 - La veillée",
+      "prompt": "a cappella male choir, no instruments, rich male harmonies, bass baritone tenor, French evening gathering, soft slow harmonies, intimate",
+      "duration": 80,
+      "type": "vocal",
+      "lyrics_file": "playlists/acappella-hommes/lyrics/08.txt",
+      "language": "fr"
+    },
+    {
+      "id": "9",
+      "name": "09 - Le grand départ",
+      "prompt": "a cappella male choir, no instruments, rich male harmonies, bass baritone tenor, French epic farewell, building harmonies, powerful and emotional",
+      "duration": 80,
+      "type": "vocal",
+      "lyrics_file": "playlists/acappella-hommes/lyrics/09.txt",
+      "language": "fr"
+    },
+    {
+      "id": "10",
+      "name": "10 - Au pied de la montagne",
+      "prompt": "a cappella male choir, no instruments, rich male harmonies, bass baritone tenor, French mountain song, deep resonant harmonies, echoing, majestic",
+      "duration": 100,
+      "type": "vocal",
+      "lyrics_file": "playlists/acappella-hommes/lyrics/10.txt",
+      "language": "fr"
+    }
+  ]
+}

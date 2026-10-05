@@ -1,0 +1,117 @@
+{
+  "playlist_name": "Playlist Poésie française",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./playlists/poesie-fr/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "01 - Verlaine - Chanson d'automne",
+      "prompt": "French spoken word poetry, recited softly in a melancholic voice, slow ambient piano, cello, autumn mood",
+      "type": "vocal",
+      "duration": 100,
+      "lyrics_file": "playlists/poesie-fr/lyrics/01.txt",
+      "language": "fr",
+      "fit_lyrics": false,
+      "duration_fixed": true
+    },
+    {
+      "id": "2",
+      "name": "02 - Hugo - Demain, dès l'aube",
+      "prompt": "French poetry, deep male voice reciting slowly, solemn piano and strings, grave and tender, slow tempo",
+      "type": "vocal",
+      "duration": 65,
+      "lyrics_file": "playlists/poesie-fr/lyrics/02.txt",
+      "language": "fr",
+      "fit_lyrics": false,
+      "duration_fixed": true
+    },
+    {
+      "id": "3",
+      "name": "03 - Apollinaire - Le Pont Mirabeau",
+      "prompt": "French poetry sung and spoken, gentle female voice, accordion and soft piano, melancholic waltz feeling",
+      "type": "vocal",
+      "duration": 100,
+      "lyrics_file": "playlists/poesie-fr/lyrics/03.txt",
+      "language": "fr",
+      "fit_lyrics": false,
+      "duration_fixed": true
+    },
+    {
+      "id": "4",
+      "name": "04 - Ronsard - Mignonne, allons voir si la rose",
+      "prompt": "French Renaissance poetry, light recitation with lute and harpsichord, delicate, gentle, slow tempo",
+      "type": "vocal",
+      "duration": 100,
+      "lyrics_file": "playlists/poesie-fr/lyrics/04.txt",
+      "language": "fr",
+      "fit_lyrics": false,
+      "duration_fixed": true
+    },
+    {
+      "id": "5",
+      "name": "05 - Du Bellay - Heureux qui, comme Ulysse",
+      "prompt": "French poetry, warm male voice reciting, classical guitar and light strings, nostalgic and calm",
+      "type": "vocal",
+      "duration": 75,
+      "lyrics_file": "playlists/poesie-fr/lyrics/05.txt",
+      "language": "fr",
+      "fit_lyrics": false,
+      "duration_fixed": true
+    },
+    {
+      "id": "6",
+      "name": "06 - Rimbaud - Le Dormeur du val",
+      "prompt": "French poetry, hushed whispered recitation, sparse piano, soft strings and nature textures, quiet and tragic",
+      "type": "vocal",
+      "duration": 75,
+      "lyrics_file": "playlists/poesie-fr/lyrics/06.txt",
+      "language": "fr",
+      "fit_lyrics": false,
+      "duration_fixed": true
+    },
+    {
+      "id": "7",
+      "name": "07 - Baudelaire - L'Invitation au voyage",
+      "prompt": "French poetry, sensual spoken word, slow downtempo beat, warm pads and cello, dreamy atmosphere",
+      "type": "vocal",
+      "duration": 120,
+      "lyrics_file": "playlists/poesie-fr/lyrics/07.txt",
+      "language": "fr",
+      "fit_lyrics": false,
+      "duration_fixed": true
+    },
+    {
+      "id": "8",
+      "name": "08 - Desbordes-Valmore - Les Roses de Saadi",
+      "prompt": "French romantic poetry, tender female voice reciting, harp and soft piano, delicate and wistful",
+      "type": "vocal",
+      "duration": 50,
+      "lyrics_file": "playlists/poesie-fr/lyrics/08.txt",
+      "language": "fr",
+      "fit_lyrics": false,
+      "duration_fixed": true
+    },
+    {
+      "id": "9",
+      "name": "09 - Nerval - Fantaisie",
+      "prompt": "French poetry, dreamy recitation, harpsichord and soft strings, old-fashioned and mysterious, slow",
+      "type": "vocal",
+      "duration": 90,
+      "lyrics_file": "playlists/poesie-fr/lyrics/09.txt",
+      "language": "fr",
+      "fit_lyrics": false,
+      "duration_fixed": true
+    },
+    {
+      "id": "10",
+      "name": "10 - Rimbaud - Ma Bohème",
+      "prompt": "French poetry, lively youthful recitation, acoustic guitar and light percussion, free and playful, walking tempo",
+      "type": "vocal",
+      "duration": 75,
+      "lyrics_file": "playlists/poesie-fr/lyrics/10.txt",
+      "language": "fr",
+      "fit_lyrics": false,
+      "duration_fixed": true
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "playlist_name": "Playlist Rap français mélodique",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./playlists/rap-fr-melodique/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "01 - Soleil sur le béton",
+      "prompt": "French melodic rap, autotuned catchy vocal, trap beat with deep 808 bass, shimmering synth melody with a Mediterranean touch, 140 bpm half-time, sunny and upbeat",
+      "type": "vocal",
+      "duration": 45,
+      "lyrics_file": "playlists/rap-fr-melodique/lyrics/01.txt",
+      "language": "fr"
+    },
+    {
+      "id": "2",
+      "name": "02 - Dans la vieille voiture",
+      "prompt": "French melodic rap, autotuned catchy vocal, trap beat with deep 808 bass, shimmering synth melody with a Mediterranean touch, 138 bpm, driving nocturnal mood",
+      "type": "vocal",
+      "duration": 105,
+      "lyrics_file": "playlists/rap-fr-melodique/lyrics/02.txt",
+      "language": "fr"
+    },
+    {
+      "id": "3",
+      "name": "03 - Tout pour la famille",
+      "prompt": "French melodic rap, autotuned catchy vocal, trap beat with deep 808 bass, shimmering synth melody with a Mediterranean touch, 136 bpm, emotional and warm",
+      "type": "vocal",
+      "duration": 80,
+      "lyrics_file": "playlists/rap-fr-melodique/lyrics/03.txt",
+      "language": "fr"
+    },
+    {
+      "id": "4",
+      "name": "04 - Marseille au petit matin",
+      "prompt": "French melodic rap, autotuned catchy vocal, trap beat with deep 808 bass, shimmering synth melody with a Mediterranean touch, 142 bpm, breezy and seaside atmosphere",
+      "type": "vocal",
+      "duration": 85,
+      "lyrics_file": "playlists/rap-fr-melodique/lyrics/04.txt",
+      "language": "fr"
+    },
+    {
+      "id": "5",
+      "name": "05 - Le son dans les écouteurs",
+      "prompt": "French melodic rap, autotuned catchy vocal, trap beat with deep 808 bass, shimmering synth melody with a Mediterranean touch, 144 bpm, energetic and introspective",
+      "type": "vocal",
+      "duration": 50,
+      "lyrics_file": "playlists/rap-fr-melodique/lyrics/05.txt",
+      "language": "fr"
+    },
+    {
+      "id": "6",
+      "name": "06 - Ballon et bitume",
+      "prompt": "French melodic rap, autotuned catchy vocal, trap beat with deep 808 bass, shimmering synth melody with a Mediterranean touch, 140 bpm, playful and rhythmic",
+      "type": "vocal",
+      "duration": 100,
+      "lyrics_file": "playlists/rap-fr-melodique/lyrics/06.txt",
+      "language": "fr"
+    },
+    {
+      "id": "7",
+      "name": "07 - On y croit encore",
+      "prompt": "French melodic rap, autotuned catchy vocal, trap beat with deep 808 bass, shimmering synth melody with a Mediterranean touch, 138 bpm, hopeful and uplifting",
+      "type": "vocal",
+      "duration": 115,
+      "lyrics_file": "playlists/rap-fr-melodique/lyrics/07.txt",
+      "language": "fr"
+    },
+    {
+      "id": "8",
+      "name": "08 - Mes potes, mon quartier",
+      "prompt": "French melodic rap, autotuned catchy vocal, trap beat with deep 808 bass, shimmering synth melody with a Mediterranean touch, 141 bpm, friendly and nostalgic",
+      "type": "vocal",
+      "duration": 90,
+      "lyrics_file": "playlists/rap-fr-melodique/lyrics/08.txt",
+      "language": "fr"
+    },
+    {
+      "id": "9",
+      "name": "09 - Un dernier tour de ville",
+      "prompt": "French melodic rap, autotuned catchy vocal, trap beat with deep 808 bass, shimmering synth melody with a Mediterranean touch, 136 bpm, nocturnal and calm",
+      "type": "vocal",
+      "duration": 65,
+      "lyrics_file": "playlists/rap-fr-melodique/lyrics/09.txt",
+      "language": "fr"
+    },
+    {
+      "id": "10",
+      "name": "10 - Mer et horizon",
+      "prompt": "French melodic rap, autotuned catchy vocal, trap beat with deep 808 bass, shimmering synth melody with a Mediterranean touch, 139 bpm, wide and cinematic with ocean ambience",
+      "type": "vocal",
+      "duration": 65,
+      "lyrics_file": "playlists/rap-fr-melodique/lyrics/10.txt",
+      "language": "fr"
+    }
+  ]
+}

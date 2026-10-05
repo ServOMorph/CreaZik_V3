@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#1e1e2e">
+    <title>CreaZik - Gestion WebRadio</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { -webkit-text-size-adjust: 100%; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1e1e2e 0%, #2d2d44 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            padding: 12px;
+            padding-left: max(12px, env(safe-area-inset-left));
+            padding-right: max(12px, env(safe-area-inset-right));
+            padding-bottom: max(24px, env(safe-area-inset-bottom));
+        }
+
+        .container { max-width: 900px; margin: 0 auto; }
+
+        .top {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .top h1 {
+            flex: 1;
+            font-size: 1.3em;
+            background: linear-gradient(135deg, #ff6b9d, #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        a.back, .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 44px;
+            padding: 8px 14px;
+            border-radius: 8px;
+            border: 1px solid #ff6b9d;
+            background: rgba(255, 107, 157, 0.2);
+            color: #ff6b9d;
+            text-decoration: none;
+            font-size: 0.9em;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .saved {
+            font-size: 0.8em;
+            color: #4caf50;
+            min-height: 1.2em;
+            margin-bottom: 8px;
+        }
+
+        .saved.err { color: #f44336; }
+
+        .fold {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 107, 157, 0.3);
+            border-radius: 10px;
+            margin-bottom: 12px;
+        }
+
+        .fold > summary {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-height: 48px;
+            padding: 0 12px;
+            cursor: pointer;
+            list-style: none;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .fold > summary::-webkit-details-marker { display: none; }
+
+        .fold > summary::after {
+            content: "";
+            flex: none;
+            width: 9px;
+            height: 9px;
+            margin-left: auto;
+            border-right: 2px solid #999;
+            border-bottom: 2px solid #999;
+            transform: rotate(-45deg);
+            transition: transform 0.2s;
+        }
+
+        .fold[open] > summary::after { transform: rotate(45deg); }
+
+        .fold > summary:focus-visible { outline: 2px solid #6496ff; outline-offset: -2px; border-radius: 10px; }
+
+        .fold > summary h2 {
+            flex: 1;
+            font-size: 1em;
+            color: #ff6b9d;
+        }
+
+        .fold-body { padding: 0 12px 12px; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .fold > summary::after, .playlist .chev { transition: none; }
+        }
+
+        .row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 8px 0;
+            border-top: 1px solid rgba(255, 107, 157, 0.15);
+            font-size: 0.9em;
+        }
+
+        .row:first-of-type { border-top: none; }
+
+        .row .hint { color: #888; font-size: 0.8em; display: block; }
+
+        .stepper { display: flex; align-items: center; gap: 6px; }
+
+        .stepper button {
+            width: 44px;
+            height: 44px;
+            border-radius: 8px;
+            border: 1px solid #ff6b9d;
+            background: rgba(255, 107, 157, 0.2);
+            color: #ff6b9d;
+            font-size: 1.3em;
+            cursor: pointer;
+        }
+
+        .stepper .val {
+            min-width: 36px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .switch {
+            position: relative;
+            width: 52px;
+            height: 30px;
+            flex: 0 0 auto;
+        }
+
+        .switch input { opacity: 0; width: 100%; height: 100%; position: absolute; margin: 0; cursor: pointer; z-index: 1; }
+
+        .switch .slider {
+            position: absolute;
+            inset: 0;
+            background: #555;
+            border-radius: 30px;
+            transition: background 0.2s;
+        }
+
+        .switch .slider::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            left: 3px;
+            top: 3px;
+            border-radius: 50%;
+            background: #fff;
+            transition: transform 0.2s;
+        }
+
+        .switch input:checked + .slider { background: #ff6b9d; }
+        .switch input:checked + .slider::after { transform: translateX(22px); }
+
+        .playlist {
+            border-top: 1px solid rgba(255, 107, 157, 0.15);
+            padding: 8px 0;
+        }
+
+        .playlist:first-of-type { border-top: none; }
+
+        .playlist-head {
+            display: grid;
+            grid-template-columns: 1fr 110px 28px;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9em;
+        }
+
+        .playlist-name { cursor: pointer; min-width: 0; }
+        .playlist-name .count { color: #888; font-size: 0.8em; }
+        .playlist-name .chev { color: #999; margin-left: 4px; display: inline-block; transition: transform 0.2s; }
+        .playlist.open .chev { transform: rotate(180deg); }
+
+        input[type=range] {
+            width: 100%;
+            min-height: 32px;
+            accent-color: #ff6b9d;
+        }
+
+        .w-val { text-align: right; color: #ff6b9d; font-weight: bold; }
+
+        .tracks { display: none; padding: 6px 0 2px 8px; }
+        .playlist.open .tracks { display: block; }
+
+        .track {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-height: 40px;
+            font-size: 0.85em;
+        }
+
+        .track input { width: 22px; height: 22px; accent-color: #ff6b9d; flex: 0 0 auto; }
+        .track .tname { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .track .star { color: #ffd54f; }
+        .track.off .tname { color: #777; text-decoration: line-through; }
+
+        .mini-actions { display: flex; gap: 8px; margin: 4px 0 6px; flex-wrap: wrap; }
+        .mini-actions button {
+            padding: 6px 10px;
+            min-height: 36px;
+            border-radius: 6px;
+            border: 1px solid #6496ff;
+            background: rgba(100, 150, 255, 0.15);
+            color: #6496ff;
+            font-size: 0.8em;
+            cursor: pointer;
+        }
+
+        .info { color: #888; font-size: 0.8em; margin-top: 6px; line-height: 1.4; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="top">
+            <a class="back" href="/listen.html">&larr; Écoute</a>
+            <h1>Gestion WebRadio</h1>
+            <button class="btn" onclick="resetAll()">Réinitialiser</button>
+        </div>
+        <div class="saved" id="saved"></div>
+
+        <details class="fold" id="secAccount" data-fold="account" open>
+            <summary><h2>Compte admin</h2></summary>
+            <div class="fold-body">
+            <div class="info" id="pwWarn" style="display:none;color:#ffc107;margin:0 0 8px">Mot de passe par défaut (admin). Change-le avant d'exposer la radio via le tunnel.</div>
+            <div class="row">
+                <span>Mot de passe<span class="hint">8 caractères minimum</span></span>
+            </div>
+            <form onsubmit="changePassword(event)">
+                <input type="password" id="pwOld" placeholder="Mot de passe actuel" autocomplete="current-password" style="width:100%;min-height:44px;margin-bottom:8px;padding:8px;border-radius:8px;border:1px solid #555;background:#2d2d44;color:#fff;font-size:16px">
+                <input type="password" id="pwNew" placeholder="Nouveau mot de passe" autocomplete="new-password" style="width:100%;min-height:44px;margin-bottom:8px;padding:8px;border-radius:8px;border:1px solid #555;background:#2d2d44;color:#fff;font-size:16px">
+                <div style="display:flex;gap:8px;align-items:center">
+                    <button class="btn" type="submit">Changer</button>
+                    <a class="back" href="/logout">Déconnexion</a>
+                    <span class="info" id="pwMsg" style="margin:0"></span>
+                </div>
+            </form>
+            </div>
+        </details>
+
+        <details class="fold" id="secPlay" data-fold="play" open>
+            <summary><h2>Lecture en boucle</h2></summary>
+            <div class="fold-body">
+            <div class="row">
+                <span>Pondération par défaut<span class="hint">Pour les playlists sans réglage (0 à 10)</span></span>
+                <div class="stepper"><button onclick="step('default_weight', -1, 0, 10)">&minus;</button><span class="val" id="v_default_weight"></span><button onclick="step('default_weight', 1, 0, 10)">+</button></div>
+            </div>
+            <div class="row">
+                <span>Favoris uniquement<span class="hint">Ne joue que les morceaux marqués ★</span></span>
+                <label class="switch"><input type="checkbox" id="favorites_only" onchange="setBool('favorites_only', this.checked)"><span class="slider"></span></label>
+            </div>
+            <div class="row">
+                <span>Poids des pouces<span class="hint">Chaque clic compte, sans limite. Le poids du morceau vaut exp(pas x (haut moins bas)), entre presque 0 et x20. 0 = pouces ignorés</span></span>
+                <div class="stepper"><button onclick="step('thumb_strength', -0.05, 0, 1)">&minus;</button><span class="val" id="v_thumb_strength"></span><button onclick="step('thumb_strength', 0.05, 0, 1)">+</button></div>
+            </div>
+            <div class="row">
+                <span>Anti-répétition<span class="hint">Nombre de morceaux avant qu'un même morceau puisse revenir</span></span>
+                <div class="stepper"><button onclick="step('no_repeat', -1, 0, 50)">&minus;</button><span class="val" id="v_no_repeat"></span><button onclick="step('no_repeat', 1, 0, 50)">+</button></div>
+            </div>
+            </div>
+        </details>
+
+        <details class="fold" id="secTrans" data-fold="trans" open>
+            <summary><h2>Transitions entre morceaux</h2></summary>
+            <div class="fold-body">
+            <div class="row">
+                <span>Préréglage actif<span class="hint">Appliqué entre deux morceaux</span></span>
+                <select id="trActive" onchange="setTrans('active', this.value)"></select>
+            </div>
+            <div class="row">
+                <span>Autour des jingles<span class="hint">Préréglage avant et après un jingle</span></span>
+                <select id="trJingle" onchange="setTrans('jingle_preset', this.value)"></select>
+            </div>
+            <div id="presetList"></div>
+            <div class="mini-actions"><button onclick="addPreset()">Ajouter un préréglage</button></div>
+            <div class="info">Crossfade : le morceau suivant démarre avant la fin du précédent. Fondu : baisse et montée du volume. Pause : silence entre deux morceaux. Les fondus et crossfades reposent sur le réglage du volume par le navigateur : sur iPhone Safari, il n'est pas modifiable (à vérifier), seule la pause s'applique.</div>
+            </div>
+        </details>
+
+        <details class="fold" id="secVisuals" data-fold="visuals" open>
+            <summary><h2>Visuels et publicités</h2></summary>
+            <div class="fold-body">
+            <div class="row">
+                <span>Publicité du site<span class="hint">Motion design qui présente le site, joué à intervalle régulier</span></span>
+                <label class="switch"><input type="checkbox" id="ads_enabled" onchange="setBool('ads_enabled', this.checked)"><span class="slider"></span></label>
+            </div>
+            <div class="row">
+                <span>Une publicité tous les<span class="hint">morceaux (hors jingles)</span></span>
+                <div class="stepper"><button onclick="step('ads_every', -1, 1, 50)">&minus;</button><span class="val" id="v_ads_every"></span><button onclick="step('ads_every', 1, 1, 50)">+</button></div>
+            </div>
+            <div class="row">
+                <span>Durée de la publicité<span class="hint">secondes</span></span>
+                <div class="stepper"><button onclick="step('ad_seconds', -1, 5, 20)">&minus;</button><span class="val" id="v_ad_seconds"></span><button onclick="step('ad_seconds', 1, 5, 20)">+</button></div>
+            </div>
+            <div class="row">
+                <span>Délai avant la publicité<span class="hint">secondes après le début du morceau</span></span>
+                <div class="stepper"><button onclick="step('ad_offset_s', -1, 2, 60)">&minus;</button><span class="val" id="v_ad_offset_s"></span><button onclick="step('ad_offset_s', 1, 2, 60)">+</button></div>
+            </div>
+            <div class="row">
+                <span>Durée des transitions de visuel<span class="hint">secondes entre deux playlists</span></span>
+                <div class="stepper"><button onclick="step('visual_transition_s', -1, 3, 10)">&minus;</button><span class="val" id="v_visual_transition_s"></span><button onclick="step('visual_transition_s', 1, 3, 10)">+</button></div>
+            </div>
+            <div class="info" style="margin-top:10px">Textes des jingles et des publicités (JSON). Les messages sur l'IA locale et l'écologie doivent rester vérifiables.</div>
+            <textarea id="contentJson" spellcheck="false" style="width:100%;min-height:220px;margin-top:8px;padding:10px;border-radius:8px;border:1px solid #555;background:#2d2d44;color:#fff;font:13px/1.4 monospace"></textarea>
+            <div style="display:flex;gap:8px;align-items:center;margin-top:8px">
+                <button class="btn" onclick="saveContent()">Enregistrer les textes</button>
+                <span class="info" id="contentMsg" style="margin:0"></span>
+            </div>
+            </div>
+        </details>
+
+        <details class="fold" id="secJingle" data-fold="jingle" open>
+            <summary><h2>Jingles</h2></summary>
+            <div class="fold-body">
+            <div class="row">
+                <span>Jingles activés</span>
+                <label class="switch"><input type="checkbox" id="jingles_enabled" onchange="setBool('jingles_enabled', this.checked)"><span class="slider"></span></label>
+            </div>
+            <div class="row">
+                <span>Un jingle tous les<span class="hint">morceaux (0 = jamais)</span></span>
+                <div class="stepper"><button onclick="step('jingle_every', -1, 0, 50)">&minus;</button><span class="val" id="v_jingle_every"></span><button onclick="step('jingle_every', 1, 0, 50)">+</button></div>
+            </div>
+            <div id="jingleList"></div>
+            </div>
+        </details>
+
+        <details class="fold" id="secWeights" data-fold="weights" open>
+            <summary><h2>Pondération par playlist</h2></summary>
+            <div class="fold-body">
+            <div class="info" style="margin:0 0 8px">10 = joué plus souvent que 1, 0 = exclu. Déplie une playlist pour exclure des morceaux individuellement.</div>
+            <div id="playlistList"></div>
+            </div>
+        </details>
+    </div>
+
+    <script>
+        const DEFAULTS = {default_weight: 5, weights: {}, jingle_every: 5, jingles_enabled: true,
+                          favorites_only: false, no_repeat: 3, excluded: [], thumb_strength: 0.15,
+                          ads_enabled: true, ads_every: 5, ad_seconds: 9, ad_offset_s: 10, visual_transition_s: 5,
+                          transitions: {
+                              active: 'fondu',
+                              jingle_preset: 'net',
+                              presets: [
+                                  {id: 'net', name: 'Enchaînement net', crossfade_s: 0, fade_in_s: 0, fade_out_s: 0, gap_s: 0},
+                                  {id: 'fondu', name: 'Fondu doux', crossfade_s: 0, fade_in_s: 2, fade_out_s: 2, gap_s: 0.3},
+                                  {id: 'crossfade', name: 'Crossfade 4 s', crossfade_s: 4, fade_in_s: 0, fade_out_s: 0, gap_s: 0},
+                                  {id: 'radio', name: 'Radio (crossfade 2,5 s)', crossfade_s: 2.5, fade_in_s: 0, fade_out_s: 0, gap_s: 0},
+                                  {id: 'respiration', name: 'Respiration', crossfade_s: 0, fade_in_s: 3, fade_out_s: 3, gap_s: 2}
+                              ]
+                          }};
+        let settings = JSON.parse(JSON.stringify(DEFAULTS));
+        let playlists = [];
+        let results = {};
+        let favs = new Set();
+        let votes = {};
+        let openPlaylists = new Set();
+        let saveTimer = null;
+
+        function esc(v) {
+            return String(v == null ? '' : v).replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+        }
+
+        async function getJSON(url, fallback) {
+            try {
+                const r = await fetch(url + '?t=' + Date.now());
+                if (r.ok) return await r.json();
+            } catch (e) {}
+            return fallback;
+        }
+
+        async function init() {
+            playlists = await getJSON('./playlists.json', []);
+            settings = JSON.parse(JSON.stringify(Object.assign({}, DEFAULTS, await getJSON('./radio_settings.json', {}))));
+            favs = new Set(await getJSON('./favorites.json', []));
+            votes = (await getJSON('/api/votes', {tracks: {}})).tracks || {};
+            for (const b of playlists) {
+                const d = await getJSON('./' + b.results, null);
+                results[b.id] = d ? (d.generations || []).filter(t => t.status === 'generated') : [];
+            }
+            render();
+        }
+
+        function save() {
+            const el = document.getElementById('saved');
+            el.className = 'saved';
+            el.textContent = 'Enregistrement...';
+            clearTimeout(saveTimer);
+            saveTimer = setTimeout(async () => {
+                try {
+                    const r = await fetch('/api/radio', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(settings)});
+                    if (!r.ok) throw new Error(r.status);
+                    el.textContent = 'Enregistré - pris en compte au prochain morceau';
+                } catch (e) {
+                    el.className = 'saved err';
+                    el.textContent = 'Échec de l\'enregistrement';
+                }
+            }, 300);
+        }
+
+        function step(key, delta, min, max) {
+            settings[key] = Math.round(Math.min(max, Math.max(min, (parseFloat(settings[key]) || 0) + delta)) * 100) / 100;
+            document.getElementById('v_' + key).textContent = settings[key];
+            save();
+        }
+
+        function setBool(key, v) {
+            settings[key] = v;
+            save();
+        }
+
+        function setWeight(id, v, input) {
+            settings.weights[id] = parseInt(v, 10);
+            input.closest('.playlist-head').querySelector('.w-val').textContent = v;
+            save();
+        }
+
+        function keyOf(b, t) { return b.id + ':' + t.test_case_id; }
+
+        function toggleTrack(k, on, row) {
+            const i = settings.excluded.indexOf(k);
+            if (on && i >= 0) settings.excluded.splice(i, 1);
+            if (!on && i < 0) settings.excluded.push(k);
+            row.classList.toggle('off', !on);
+            refreshCounts();
+            save();
+        }
+
+        function bulk(id, on) {
+            const b = playlists.find(x => x.id === id);
+            results[id].forEach(t => {
+                const k = keyOf(b, t);
+                const i = settings.excluded.indexOf(k);
+                if (on && i >= 0) settings.excluded.splice(i, 1);
+                if (!on && i < 0) settings.excluded.push(k);
+            });
+            renderLists();
+            save();
+        }
+
+        function toggleOpen(id) {
+            if (openPlaylists.has(id)) openPlaylists.delete(id); else openPlaylists.add(id);
+            const el = document.getElementById('playlist-' + id);
+            if (el) el.classList.toggle('open', openPlaylists.has(id));
+        }
+
+        function refreshCounts() {
+            playlists.forEach(b => {
+                const el = document.getElementById('count-' + b.id);
+                if (!el) return;
+                const n = results[b.id].filter(t => !settings.excluded.includes(keyOf(b, t))).length;
+                el.textContent = '(' + n + '/' + results[b.id].length + ' actifs)';
+            });
+        }
+
+        function voteLabel(k) {
+            const v = votes[k];
+            if (!v) return '';
+            const score = (v.up || 0) - (v.down || 0);
+            const strength = Number(settings.thumb_strength);
+            const mult = Math.max(1e-6, Math.min(20, Math.exp((isFinite(strength) ? strength : 0.15) * score)));
+            const shown = mult < 0.001 ? '~0' : (mult >= 1 ? Math.round(mult * 100) / 100 : Math.round(mult * 1000) / 1000);
+            return '<span class="hint" style="display:inline">+' + (v.up || 0) + ' / -' + (v.down || 0) + ' (x' + shown + ')</span>'
+                + '<button class="vote-reset" onclick="event.preventDefault(); resetVotes(\'' + k + '\')" title="Remettre les pouces à zéro" '
+                + 'style="min-width:44px;min-height:32px;margin-left:6px;border-radius:6px;border:1px solid #6496ff;background:transparent;color:#6496ff;font-size:0.8em">RAZ</button>';
+        }
+
+        async function resetVotes(key) {
+            if (!confirm('Remettre à zéro les pouces de ce morceau ?')) return;
+            try {
+                await fetch('/api/votes/reset', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({key})});
+            } catch (e) {}
+            votes[key] = {up: 0, down: 0};
+            renderLists();
+        }
+
+        function trackRow(b, t) {
+            const k = keyOf(b, t);
+            const on = !settings.excluded.includes(k);
+            return `<label class="track ${on ? '' : 'off'}">
+                <input type="checkbox" ${on ? 'checked' : ''} onchange="toggleTrack('${k}', this.checked, this.parentElement)">
+                <span class="tname">${esc(t.name)}</span>
+                ${voteLabel(k)}
+                ${favs.has(k) ? '<span class="star">&#9733;</span>' : ''}
+            </label>`;
+        }
+
+        function renderLists() {
+            const jb = playlists.find(b => b.role === 'jingle');
+            document.getElementById('jingleList').innerHTML = jb ? `
+                <div class="info">Jingles disponibles : ${results[jb.id].length}${results[jb.id].length ? '' : ' (aucun généré pour l\'instant)'}</div>
+                <div class="tracks" style="display:block">${results[jb.id].map(t => trackRow(jb, t)).join('')}</div>` : '<div class="info">Aucune playlist de jingles déclarée.</div>';
+
+            document.getElementById('playlistList').innerHTML = playlists.filter(b => b.role !== 'jingle').map(b => {
+                const w = settings.weights[b.id] === undefined ? settings.default_weight : settings.weights[b.id];
+                return `<div class="playlist ${openPlaylists.has(b.id) ? 'open' : ''}" id="playlist-${b.id}">
+                    <div class="playlist-head">
+                        <span class="playlist-name" onclick="toggleOpen('${b.id}')">${esc(b.label)} <span class="count" id="count-${b.id}"></span><span class="chev">&#9662;</span></span>
+                        <input type="range" min="0" max="10" step="1" value="${w}" oninput="setWeight('${b.id}', this.value, this)">
+                        <span class="w-val">${w}</span>
+                    </div>
+                    <div class="tracks">
+                        <div class="mini-actions">
+                            <button onclick="bulk('${b.id}', true)">Tout activer</button>
+                            <button onclick="bulk('${b.id}', false)">Tout désactiver</button>
+                        </div>
+                        ${results[b.id].length ? results[b.id].map(t => trackRow(b, t)).join('') : '<div class="info">Aucun morceau généré.</div>'}
+                    </div>
+                </div>`;
+            }).join('');
+            refreshCounts();
+        }
+
+        function render() {
+            ['default_weight', 'no_repeat', 'jingle_every', 'thumb_strength', 'ads_every', 'ad_seconds', 'ad_offset_s', 'visual_transition_s'].forEach(k => document.getElementById('v_' + k).textContent = settings[k]);
+            document.getElementById('favorites_only').checked = !!settings.favorites_only;
+            document.getElementById('jingles_enabled').checked = !!settings.jingles_enabled;
+            document.getElementById('ads_enabled').checked = !!settings.ads_enabled;
+            renderTransitions();
+            renderLists();
+        }
+
+        async function checkMe() {
+            try {
+                const r = await fetch('/api/me');
+                const me = await r.json();
+                if (!me.admin) { location.href = '/login?next=/radio.html'; return; }
+                document.getElementById('pwWarn').style.display = me.default_password ? 'block' : 'none';
+            } catch (e) {}
+        }
+
+        async function changePassword(ev) {
+            ev.preventDefault();
+            const msg = document.getElementById('pwMsg');
+            msg.textContent = '';
+            try {
+                const r = await fetch('/api/admin/password', {method: 'POST', headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({old: document.getElementById('pwOld').value, new: document.getElementById('pwNew').value})});
+                if (r.ok) {
+                    msg.textContent = 'Mot de passe modifié';
+                    document.getElementById('pwOld').value = '';
+                    document.getElementById('pwNew').value = '';
+                    document.getElementById('pwWarn').style.display = 'none';
+                } else {
+                    const e = await r.json().catch(() => ({}));
+                    msg.textContent = e.error || 'Échec';
+                }
+            } catch (e) {
+                msg.textContent = 'Échec';
+            }
+        }
+
+        const TR_FIELDS = [
+            ['crossfade_s', 'Crossfade (s)', 0, 15],
+            ['fade_out_s', 'Fondu de sortie (s)', 0, 10],
+            ['fade_in_s', 'Fondu d\'entrée (s)', 0, 10],
+            ['gap_s', 'Pause entre morceaux (s)', 0, 10]
+        ];
+
+        function setTrans(key, value) {
+            settings.transitions[key] = value;
+            save();
+        }
+
+        function presetStep(id, key, delta, min, max) {
+            const p = settings.transitions.presets.find(x => x.id === id);
+            if (!p) return;
+            p[key] = Math.round(Math.min(max, Math.max(min, (Number(p[key]) || 0) + delta)) * 10) / 10;
+            const el = document.getElementById('pv_' + id + '_' + key);
+            if (el) el.textContent = p[key];
+            save();
+        }
+
+        function presetName(id, value) {
+            const p = settings.transitions.presets.find(x => x.id === id);
+            if (!p) return;
+            p.name = value.slice(0, 40) || 'Sans nom';
+            fillTransSelects();
+            save();
+        }
+
+        function addPreset() {
+            settings.transitions.presets.push({id: 'p' + Date.now().toString(36), name: 'Nouveau préréglage',
+                crossfade_s: 0, fade_in_s: 1, fade_out_s: 1, gap_s: 0});
+            renderTransitions();
+            save();
+        }
+
+        function delPreset(id) {
+            const tr = settings.transitions;
+            if (tr.presets.length <= 1) return;
+            tr.presets = tr.presets.filter(x => x.id !== id);
+            if (tr.active === id) tr.active = tr.presets[0].id;
+            if (tr.jingle_preset === id) tr.jingle_preset = tr.presets[0].id;
+            renderTransitions();
+            save();
+        }
+
+        function fillTransSelects() {
+            const tr = settings.transitions;
+            const opts = tr.presets.map(p => `<option value="${esc(p.id)}">${esc(p.name)}</option>`).join('');
+            const a = document.getElementById('trActive');
+            const j = document.getElementById('trJingle');
+            a.innerHTML = opts;
+            j.innerHTML = '<option value="same">Identique au préréglage actif</option>' + opts;
+            a.value = tr.active;
+            j.value = tr.jingle_preset || 'same';
+        }
+
+        function renderTransitions() {
+            fillTransSelects();
+            document.getElementById('presetList').innerHTML = settings.transitions.presets.map(p => `
+                <div class="playlist open" style="padding:8px 0">
+                    <div class="playlist-head" style="grid-template-columns:1fr auto">
+                        <input type="text" value="${esc(p.name)}" maxlength="40" onchange="presetName('${esc(p.id)}', this.value)"
+                               style="width:100%;min-height:44px;padding:8px;border-radius:8px;border:1px solid #555;background:#2d2d44;color:#fff;font-size:16px">
+                        <button class="btn" onclick="delPreset('${esc(p.id)}')" style="min-height:44px">Supprimer</button>
+                    </div>
+                    ${TR_FIELDS.map(([k, label, min, max]) => `
+                    <div class="row">
+                        <span>${label}</span>
+                        <div class="stepper">
+                            <button onclick="presetStep('${esc(p.id)}', '${k}', -0.5, ${min}, ${max})">&minus;</button>
+                            <span class="val" id="pv_${esc(p.id)}_${k}">${p[k]}</span>
+                            <button onclick="presetStep('${esc(p.id)}', '${k}', 0.5, ${min}, ${max})">+</button>
+                        </div>
+                    </div>`).join('')}
+                </div>`).join('');
+        }
+
+        function initFolds() {
+            const defaults = {account: false, play: true, trans: false, visuals: false, jingle: false, weights: true};
+            let saved = {};
+            try { saved = JSON.parse(localStorage.getItem('radioFolds') || '{}'); } catch (e) {}
+            document.querySelectorAll('details[data-fold]').forEach(d => {
+                const k = d.dataset.fold;
+                d.open = k in saved ? !!saved[k] : (k in defaults ? defaults[k] : true);
+                d.addEventListener('toggle', () => {
+                    saved[k] = d.open;
+                    try { localStorage.setItem('radioFolds', JSON.stringify(saved)); } catch (e) {}
+                });
+            });
+        }
+
+        async function loadContent() {
+            const data = await getJSON('./radio_content.json', {});
+            document.getElementById('contentJson').value = JSON.stringify(data, null, 2);
+        }
+
+        async function saveContent() {
+            const msg = document.getElementById('contentMsg');
+            let parsed;
+            try {
+                parsed = JSON.parse(document.getElementById('contentJson').value);
+            } catch (e) {
+                msg.textContent = 'JSON invalide : ' + e.message;
+                return;
+            }
+            try {
+                const r = await fetch('/api/content', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(parsed)});
+                msg.textContent = r.ok ? 'Textes enregistrés' : 'Échec de l\'enregistrement';
+            } catch (e) {
+                msg.textContent = 'Échec de l\'enregistrement';
+            }
+        }
+
+        function resetAll() {
+            if (!confirm('Réinitialiser tous les réglages de la radio ?')) return;
+            settings = JSON.parse(JSON.stringify(DEFAULTS));
+            render();
+            save();
+        }
+
+        window.addEventListener('load', () => { initFolds(); checkMe(); init(); loadContent(); });
+    </script>
+</body>
+</html>

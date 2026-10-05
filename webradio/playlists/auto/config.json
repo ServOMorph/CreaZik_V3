@@ -1,0 +1,92 @@
+{
+  "playlist_name": "Playlist Auto - 10 styles",
+  "ace_step_path": "D:\\ServOMorph\\ACE-Step-1.5",
+  "output_dir": "./playlists/auto/outputs",
+  "models": [
+    {
+      "id": "ace-step-1.5",
+      "type": "instrumental",
+      "name": "ACE-Step 1.5 - Instrumental"
+    }
+  ],
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "Electronic - Upbeat",
+      "prompt": "upbeat electronic dance music, 128 bpm, synth-heavy",
+      "type": "instrumental",
+      "duration": 90
+    },
+    {
+      "id": "2",
+      "name": "Hip-Hop - Rap",
+      "prompt": "male rapper, French hip-hop beat, 90 bpm, deep bass, punchy drums",
+      "type": "vocal",
+      "duration": 90,
+      "language": "fr",
+      "lyrics_file": "playlists/auto/lyrics/02.txt"
+    },
+    {
+      "id": "3",
+      "name": "Ambient - Relaxing",
+      "prompt": "ambient relaxing music, slow tempo, ethereal pads",
+      "type": "instrumental",
+      "duration": 90
+    },
+    {
+      "id": "4",
+      "name": "Jazz - Vocal",
+      "prompt": "smooth jazz ballad, female vocal, piano, upright bass, brushed drums, 80 bpm",
+      "type": "vocal",
+      "duration": 90,
+      "language": "fr",
+      "lyrics_file": "playlists/auto/lyrics/04.txt"
+    },
+    {
+      "id": "5",
+      "name": "Rock - Heavy",
+      "prompt": "heavy rock, electric guitar, drums, 120 bpm",
+      "type": "instrumental",
+      "duration": 90
+    },
+    {
+      "id": "6",
+      "name": "Classical - Piano",
+      "prompt": "classical piano piece, orchestral, emotional",
+      "type": "instrumental",
+      "duration": 90
+    },
+    {
+      "id": "7",
+      "name": "Techno - Dark",
+      "prompt": "dark techno, industrial, 140 bpm, atmospheric",
+      "type": "instrumental",
+      "duration": 90
+    },
+    {
+      "id": "8",
+      "name": "Lo-Fi - Chill",
+      "prompt": "lo-fi hip-hop, chill beat, vinyl crackle, 85 bpm",
+      "type": "instrumental",
+      "duration": 90
+    },
+    {
+      "id": "9",
+      "name": "Synthwave - Vocal",
+      "prompt": "80s synthwave, female vocal, bright analog synths, driving beat, 110 bpm",
+      "type": "vocal",
+      "duration": 90,
+      "language": "fr",
+      "lyrics_file": "playlists/auto/lyrics/09.txt"
+    },
+    {
+      "id": "10",
+      "name": "Folk - Vocal",
+      "prompt": "acoustic folk, male vocal, warm fingerpicked guitar, mellow, storytelling",
+      "type": "vocal",
+      "duration": 90,
+      "language": "fr",
+      "lyrics_file": "playlists/auto/lyrics/10.txt"
+    }
+  ]
+}

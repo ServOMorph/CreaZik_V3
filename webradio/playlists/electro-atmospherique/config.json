@@ -1,0 +1,87 @@
+{
+  "playlist_name": "Playlist Electro atmosphérique",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./playlists/electro-atmospherique/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "01 - Aurora Drift",
+      "prompt": "atmospheric electronica, downtempo breakbeat, melancholic piano chords, warm analog pads, 90 bpm, cinematic",
+      "duration": 50,
+      "type": "instrumental"
+    },
+    {
+      "id": "2",
+      "name": "02 - Glass Ocean",
+      "prompt": "ambient electronica, slow evolving synth pads, soft hi-hats, deep sub bass, piano motif, 80 bpm",
+      "duration": 90,
+      "type": "instrumental"
+    },
+    {
+      "id": "3",
+      "name": "03 - Last Train Home",
+      "prompt": "downtempo electronic, dusty drum loop, mournful strings, piano arpeggio, 95 bpm",
+      "duration": 90,
+      "type": "instrumental"
+    },
+    {
+      "id": "4",
+      "name": "04 - Neon Rain",
+      "prompt": "chill electronica, crisp beat, shimmering synths, atmospheric textures, 100 bpm",
+      "duration": 90,
+      "type": "instrumental"
+    },
+    {
+      "id": "5",
+      "name": "05 - Slow Horizon",
+      "prompt": "uplifting atmospheric electronica, building pads, rolling drums, piano chords, 110 bpm",
+      "duration": 135,
+      "type": "instrumental"
+    },
+    {
+      "id": "6",
+      "name": "06 - Hold the Light",
+      "prompt": "electronica with gospel-style female vocal, piano chords, downtempo beat, soulful, warm pads, 92 bpm",
+      "duration": 55,
+      "type": "vocal",
+      "lyrics_file": "playlists/electro-atmospherique/lyrics/06.txt",
+      "language": "en"
+    },
+    {
+      "id": "7",
+      "name": "07 - Waiting for the Sun",
+      "prompt": "downtempo electronica, male vocal, deep bass, soft drum machine, atmospheric pads, 98 bpm",
+      "duration": 70,
+      "type": "vocal",
+      "lyrics_file": "playlists/electro-atmospherique/lyrics/07.txt",
+      "language": "en"
+    },
+    {
+      "id": "8",
+      "name": "08 - Run Through the Fields",
+      "prompt": "uplifting electronica, duet vocal, driving beat, bright synth arpeggios, piano, 112 bpm",
+      "duration": 95,
+      "type": "vocal",
+      "lyrics_file": "playlists/electro-atmospherique/lyrics/08.txt",
+      "language": "en"
+    },
+    {
+      "id": "9",
+      "name": "09 - Soft Machines",
+      "prompt": "dreamy electronica, whispered female vocal, glitchy beat, warm pads, 90 bpm",
+      "duration": 45,
+      "type": "vocal",
+      "lyrics_file": "playlists/electro-atmospherique/lyrics/09.txt",
+      "language": "en"
+    },
+    {
+      "id": "10",
+      "name": "10 - Home Is a Feeling",
+      "prompt": "emotional electronica, male vocal, piano, strings, steady beat, 96 bpm",
+      "duration": 120,
+      "type": "vocal",
+      "lyrics_file": "playlists/electro-atmospherique/lyrics/10.txt",
+      "language": "en"
+    }
+  ]
+}

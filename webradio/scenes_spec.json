@@ -1,0 +1,284 @@
+{
+  "motifs": [
+    "rings",
+    "bars",
+    "wave",
+    "particles",
+    "aurora",
+    "grid",
+    "spokes",
+    "bokeh",
+    "strings",
+    "stars",
+    "mosaic",
+    "smoke"
+  ],
+  "playlists": {
+    "test": {
+      "motif": "rings",
+      "hue": 200,
+      "hue2": 260,
+      "speed": 0.8,
+      "density": 0.5
+    },
+    "auto": {
+      "motif": "bars",
+      "hue": 330,
+      "hue2": 200,
+      "speed": 1.0,
+      "density": 0.6
+    },
+    "perso": {
+      "motif": "wave",
+      "hue": 20,
+      "hue2": 340,
+      "speed": 0.9,
+      "density": 0.6
+    },
+    "perso-electro": {
+      "motif": "grid",
+      "hue": 280,
+      "hue2": 190,
+      "speed": 1.3,
+      "density": 0.7
+    },
+    "perso-folk": {
+      "motif": "strings",
+      "hue": 35,
+      "hue2": 90,
+      "speed": 0.7,
+      "density": 0.5
+    },
+    "perso-rock": {
+      "motif": "spokes",
+      "hue": 0,
+      "hue2": 25,
+      "speed": 1.4,
+      "density": 0.8
+    },
+    "perso-classique": {
+      "motif": "aurora",
+      "hue": 220,
+      "hue2": 45,
+      "speed": 0.6,
+      "density": 0.5
+    },
+    "perso-gregorien": {
+      "motif": "bokeh",
+      "hue": 40,
+      "hue2": 20,
+      "speed": 0.4,
+      "density": 0.4
+    },
+    "perso-chorale": {
+      "motif": "rings",
+      "hue": 160,
+      "hue2": 190,
+      "speed": 0.6,
+      "density": 0.7
+    },
+    "instrumental": {
+      "motif": "particles",
+      "hue": 150,
+      "hue2": 200,
+      "speed": 0.9,
+      "density": 0.7
+    },
+    "disco-en": {
+      "motif": "mosaic",
+      "hue": 310,
+      "hue2": 50,
+      "speed": 1.2,
+      "density": 0.8
+    },
+    "groove-en": {
+      "motif": "wave",
+      "hue": 25,
+      "hue2": 300,
+      "speed": 1.0,
+      "density": 0.7
+    },
+    "electro-atmospherique": {
+      "motif": "aurora",
+      "hue": 170,
+      "hue2": 260,
+      "speed": 0.5,
+      "density": 0.6
+    },
+    "electro-pop-fr": {
+      "motif": "bars",
+      "hue": 15,
+      "hue2": 200,
+      "speed": 1.2,
+      "density": 0.7
+    },
+    "annees-50": {
+      "motif": "bokeh",
+      "hue": 350,
+      "hue2": 185,
+      "speed": 0.8,
+      "density": 0.6
+    },
+    "futuriste-2046": {
+      "motif": "stars",
+      "hue": 195,
+      "hue2": 285,
+      "speed": 1.1,
+      "density": 0.8
+    },
+    "poesie-fr": {
+      "motif": "smoke",
+      "hue": 230,
+      "hue2": 330,
+      "speed": 0.4,
+      "density": 0.5
+    },
+    "poesie-en": {
+      "motif": "smoke",
+      "hue": 120,
+      "hue2": 40,
+      "speed": 0.4,
+      "density": 0.5
+    },
+    "percussion-amerique-sud": {
+      "motif": "rings",
+      "hue": 20,
+      "hue2": 125,
+      "speed": 1.3,
+      "density": 0.8
+    },
+    "percussion-afrique": {
+      "motif": "mosaic",
+      "hue": 30,
+      "hue2": 5,
+      "speed": 1.0,
+      "density": 0.7
+    },
+    "rap-fr-melodique": {
+      "motif": "bars",
+      "hue": 270,
+      "hue2": 40,
+      "speed": 1.1,
+      "density": 0.6
+    },
+    "jingles": {
+      "motif": "rings",
+      "hue": 330,
+      "hue2": 200,
+      "speed": 1.0,
+      "density": 0.5
+    },
+    "tribal": {
+      "motif": "spokes",
+      "hue": 10,
+      "hue2": 40,
+      "speed": 1.1,
+      "density": 0.7
+    },
+    "acappella-hommes": {
+      "motif": "strings",
+      "hue": 215,
+      "hue2": 195,
+      "speed": 0.6,
+      "density": 0.6
+    },
+    "acappella-femmes": {
+      "motif": "aurora",
+      "hue": 330,
+      "hue2": 280,
+      "speed": 0.6,
+      "density": 0.6
+    },
+    "guitare-seule": {
+      "motif": "wave",
+      "hue": 45,
+      "hue2": 15,
+      "speed": 0.8,
+      "density": 0.5
+    },
+    "harpe-seule": {
+      "motif": "strings",
+      "hue": 175,
+      "hue2": 140,
+      "speed": 0.7,
+      "density": 0.7
+    },
+    "piano-seul": {
+      "motif": "rings",
+      "hue": 250,
+      "hue2": 210,
+      "speed": 0.6,
+      "density": 0.5
+    },
+    "chant-mongol": {
+      "motif": "smoke",
+      "hue": 190,
+      "hue2": 25,
+      "speed": 0.5,
+      "density": 0.6
+    },
+    "didgeridoo": {
+      "motif": "particles",
+      "hue": 20,
+      "hue2": 355,
+      "speed": 0.7,
+      "density": 0.6
+    },
+    "electro-spatiale": {
+      "motif": "spokes",
+      "hue": 270,
+      "hue2": 180,
+      "speed": 0.9,
+      "density": 0.7
+    },
+    "synthes-epiques": {
+      "motif": "rings",
+      "hue": 45,
+      "hue2": 215,
+      "speed": 0.5,
+      "density": 0.6
+    },
+    "rock-progressif-instrumental": {
+      "motif": "wave",
+      "hue": 130,
+      "hue2": 60,
+      "speed": 0.8,
+      "density": 0.7
+    },
+    "funk-saxophone": {
+      "motif": "bars",
+      "hue": 35,
+      "hue2": 300,
+      "speed": 1.0,
+      "density": 0.7
+    },
+    "tech": {
+      "motif": "mosaic",
+      "hue": 165,
+      "hue2": 215,
+      "speed": 1.2,
+      "density": 0.7
+    },
+    "hard-tech": {
+      "motif": "spokes",
+      "hue": 350,
+      "hue2": 285,
+      "speed": 1.5,
+      "density": 0.9
+    },
+    "jeux-video": {
+      "motif": "grid",
+      "hue": 120,
+      "hue2": 300,
+      "speed": 1.1,
+      "density": 0.8
+    },
+    "hard-rock": {
+      "motif": "bars",
+      "hue": 5,
+      "hue2": 50,
+      "speed": 1.2,
+      "density": 0.8
+    }
+  }
+}

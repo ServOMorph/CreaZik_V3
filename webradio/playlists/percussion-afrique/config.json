@@ -1,0 +1,77 @@
+{
+  "playlist_name": "Playlist Percussions africaines",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./playlists/percussion-afrique/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "01 - Djembe d'Afrique de l'Ouest",
+      "prompt": "West African djembe ensemble, dundun bass drums, bells, call and response, polyrhythm, instrumental, 110 bpm",
+      "type": "instrumental",
+      "duration": 50
+    },
+    {
+      "id": "2",
+      "name": "02 - Talking drum",
+      "prompt": "Yoruba talking drum, shekere, agogo bell, fast polyrhythm, instrumental",
+      "type": "instrumental",
+      "duration": 65
+    },
+    {
+      "id": "3",
+      "name": "03 - Gnawa",
+      "prompt": "Moroccan gnawa percussion, krakebs metal castanets, hand drums, hypnotic trance groove, instrumental",
+      "type": "instrumental",
+      "duration": 70
+    },
+    {
+      "id": "4",
+      "name": "04 - Hosho et tambours",
+      "prompt": "Zimbabwean style rhythms, hosho shakers, hand drums, light polyrhythm, instrumental",
+      "type": "instrumental",
+      "duration": 65
+    },
+    {
+      "id": "5",
+      "name": "05 - Kpanlogo",
+      "prompt": "Ghanaian kpanlogo drums, gankogui bell, lively highlife dance rhythm, instrumental",
+      "type": "instrumental",
+      "duration": 85
+    },
+    {
+      "id": "6",
+      "name": "06 - Ngoma",
+      "prompt": "East African ngoma drums, deep ceremonial rhythm, slow and powerful, instrumental",
+      "type": "instrumental",
+      "duration": 70
+    },
+    {
+      "id": "7",
+      "name": "07 - Ballet mande",
+      "prompt": "Guinean djembe ballet, fast solo djembe over dundun accompaniment, instrumental",
+      "type": "instrumental",
+      "duration": 70
+    },
+    {
+      "id": "8",
+      "name": "08 - Tambours d'eau",
+      "prompt": "water drumming, calabash percussion, rain textures, meditative, instrumental",
+      "type": "instrumental",
+      "duration": 115
+    },
+    {
+      "id": "9",
+      "name": "09 - Afrobeat percussion",
+      "prompt": "Afrobeat percussion groove, congas, shekere, cowbell, tight and funky, instrumental",
+      "type": "instrumental",
+      "duration": 60
+    },
+    {
+      "id": "10",
+      "name": "10 - Sabar",
+      "prompt": "Senegalese sabar drums, tama talking drum, explosive rhythm, instrumental",
+      "type": "instrumental",
+      "duration": 120
+    }
+  ]
+}

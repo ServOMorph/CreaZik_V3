@@ -1,0 +1,16 @@
+{
+  "playlist_name": "Playlist Test - Validation",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./playlists/test/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "TEST - Je prends mon temps",
+      "prompt": "French chanson, gypsy jazz (jazz manouche), swing and pop, lively and playful",
+      "type": "vocal",
+      "duration": 90,
+      "lyrics_file": "playlists/perso/lyrics/01.txt",
+      "language": "fr"
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "playlist_name": "Playlist Années 50",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./playlists/annees-50/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "01 - Milkshake Moon",
+      "prompt": "1950s doo-wop, tight vocal harmonies, finger snaps, upright bass, soft drums, vintage tape sound, English vocal",
+      "duration": 115,
+      "type": "vocal",
+      "lyrics_file": "playlists/annees-50/lyrics/01.txt",
+      "language": "en"
+    },
+    {
+      "id": "2",
+      "name": "02 - Cadillac Sunday",
+      "prompt": "1950s rockabilly, slap upright bass, twangy electric guitar, snare shuffle, vintage mono recording, male English vocal",
+      "duration": 70,
+      "type": "vocal",
+      "lyrics_file": "playlists/annees-50/lyrics/02.txt",
+      "language": "en"
+    },
+    {
+      "id": "3",
+      "name": "03 - Soda Fountain Sweetheart",
+      "prompt": "1950s crooner ballad, warm brass, soft strings, brushed drums, vintage studio sound, smooth male English vocal",
+      "duration": 120,
+      "type": "vocal",
+      "lyrics_file": "playlists/annees-50/lyrics/03.txt",
+      "language": "en"
+    },
+    {
+      "id": "4",
+      "name": "04 - Jukebox Heart",
+      "prompt": "1950s rock and roll, boogie piano, saxophone solo, driving drums, vintage recording, energetic male English vocal",
+      "duration": 70,
+      "type": "vocal",
+      "lyrics_file": "playlists/annees-50/lyrics/04.txt",
+      "language": "en"
+    },
+    {
+      "id": "5",
+      "name": "05 - Twist at the Diner",
+      "prompt": "early 1960s twist, bright guitar, handclaps, honking sax, bouncy bass, vintage sound, playful female English vocal",
+      "duration": 130,
+      "type": "vocal",
+      "lyrics_file": "playlists/annees-50/lyrics/05.txt",
+      "language": "en"
+    },
+    {
+      "id": "6",
+      "name": "06 - Le bal du samedi",
+      "prompt": "1950s French musette waltz, accordion, acoustic guitar, upright bass, vintage recording, French vocal",
+      "duration": 110,
+      "type": "vocal",
+      "lyrics_file": "playlists/annees-50/lyrics/06.txt",
+      "language": "fr"
+    },
+    {
+      "id": "7",
+      "name": "07 - Petite robe à pois",
+      "prompt": "1950s French chanson swing, clarinet, upright bass, brushed drums, vintage recording, charming French vocal",
+      "duration": 65,
+      "type": "vocal",
+      "lyrics_file": "playlists/annees-50/lyrics/07.txt",
+      "language": "fr"
+    },
+    {
+      "id": "8",
+      "name": "08 - Un soir à Saint-Germain",
+      "prompt": "1950s French jazz club, smoky piano trio, soft brushed drums, muted trumpet, vintage mono recording, smooth French vocal",
+      "duration": 95,
+      "type": "vocal",
+      "lyrics_file": "playlists/annees-50/lyrics/08.txt",
+      "language": "fr"
+    },
+    {
+      "id": "9",
+      "name": "09 - Les amoureux du quai",
+      "prompt": "1950s French waltz, accordion, violin, gentle upright bass, vintage recording, romantic French vocal",
+      "duration": 80,
+      "type": "vocal",
+      "lyrics_file": "playlists/annees-50/lyrics/09.txt",
+      "language": "fr"
+    },
+    {
+      "id": "10",
+      "name": "10 - Rock à la guinguette",
+      "prompt": "1950s French rock and roll, boogie piano, twangy guitar, driving drums, vintage recording, energetic French vocal",
+      "duration": 85,
+      "type": "vocal",
+      "lyrics_file": "playlists/annees-50/lyrics/10.txt",
+      "language": "fr"
+    }
+  ]
+}

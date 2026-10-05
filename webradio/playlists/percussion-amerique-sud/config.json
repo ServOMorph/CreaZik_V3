@@ -1,0 +1,77 @@
+{
+  "playlist_name": "Playlist Percussions d'Amérique du Sud",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./playlists/percussion-amerique-sud/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "01 - Samba batucada",
+      "prompt": "Brazilian samba batucada, surdo, tamborim, pandeiro, agogo, cuica, energetic carnival percussion ensemble, instrumental, 100 bpm",
+      "type": "instrumental",
+      "duration": 130
+    },
+    {
+      "id": "2",
+      "name": "02 - Candomble",
+      "prompt": "Afro-Brazilian candomble atabaque drums, call and response percussion, ritual groove, instrumental, mid tempo",
+      "type": "instrumental",
+      "duration": 135
+    },
+    {
+      "id": "3",
+      "name": "03 - Capoeira",
+      "prompt": "capoeira berimbau, pandeiro, atabaque, caxixi, rhythmic circle percussion, instrumental",
+      "type": "instrumental",
+      "duration": 105
+    },
+    {
+      "id": "4",
+      "name": "04 - Cumbia",
+      "prompt": "Colombian cumbia percussion, guacharaca, tambor alegre, llamador, shakers, rolling groove, instrumental",
+      "type": "instrumental",
+      "duration": 45
+    },
+    {
+      "id": "5",
+      "name": "05 - Candombe",
+      "prompt": "Uruguayan candombe drums, chico piano and repique, street parade rhythm, instrumental",
+      "type": "instrumental",
+      "duration": 80
+    },
+    {
+      "id": "6",
+      "name": "06 - Andes",
+      "prompt": "Andean percussion, bombo legüero, cajon peruano, folk rhythm, minimal textures, instrumental",
+      "type": "instrumental",
+      "duration": 115
+    },
+    {
+      "id": "7",
+      "name": "07 - Bossa percussion",
+      "prompt": "bossa nova percussion, light shaker, cabasa, rimshot, soft pandeiro, relaxed groove, instrumental",
+      "type": "instrumental",
+      "duration": 135
+    },
+    {
+      "id": "8",
+      "name": "08 - Maracatu",
+      "prompt": "Brazilian maracatu, alfaia drums, gongue bell, heavy processional rhythm, instrumental",
+      "type": "instrumental",
+      "duration": 45
+    },
+    {
+      "id": "9",
+      "name": "09 - Salsa timbales",
+      "prompt": "Latin salsa percussion, timbales, congas, bongos, cowbell, clave, fast rhythm, instrumental",
+      "type": "instrumental",
+      "duration": 110
+    },
+    {
+      "id": "10",
+      "name": "10 - Festejo",
+      "prompt": "Afro-Peruvian festejo, cajon, cajita, quijada, lively dance rhythm, instrumental",
+      "type": "instrumental",
+      "duration": 85
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "playlist_name": "Playlist Groove - Vocal anglais",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./playlists/groove-en/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "01 - Slow Burn",
+      "prompt": "groove, soul funk, tight drums, deep bass, warm Rhodes piano, 92 bpm, smooth male English vocal",
+      "type": "vocal",
+      "duration": 80,
+      "lyrics_file": "playlists/groove-en/lyrics/01.txt",
+      "language": "en"
+    },
+    {
+      "id": "2",
+      "name": "02 - Keep It Smooth",
+      "prompt": "smooth groove, clean funky guitar, mellow bass, brushed drums, 96 bpm, female English vocal, laid back",
+      "type": "vocal",
+      "duration": 105,
+      "lyrics_file": "playlists/groove-en/lyrics/02.txt",
+      "language": "en"
+    },
+    {
+      "id": "3",
+      "name": "03 - Sunday in the Pocket",
+      "prompt": "funk groove, slap bass, crisp snare, rhythm guitar, brass hits, 102 bpm, male English vocal",
+      "type": "vocal",
+      "duration": 110,
+      "lyrics_file": "playlists/groove-en/lyrics/03.txt",
+      "language": "en"
+    },
+    {
+      "id": "4",
+      "name": "04 - Velvet Groove",
+      "prompt": "neo soul groove, warm bass, Rhodes, soft drums, 90 bpm, female English vocal, silky",
+      "type": "vocal",
+      "duration": 135,
+      "lyrics_file": "playlists/groove-en/lyrics/04.txt",
+      "language": "en"
+    },
+    {
+      "id": "5",
+      "name": "05 - Bass in My Bones",
+      "prompt": "heavy funk groove, deep slap bass, tight drums, clavinet, 104 bpm, male English vocal, gritty",
+      "type": "vocal",
+      "duration": 135,
+      "lyrics_file": "playlists/groove-en/lyrics/05.txt",
+      "language": "en"
+    },
+    {
+      "id": "6",
+      "name": "06 - Rhythm in the Rain",
+      "prompt": "groovy soul, wet guitar chords, light percussion, warm bass, 94 bpm, duet English vocal",
+      "type": "vocal",
+      "duration": 125,
+      "lyrics_file": "playlists/groove-en/lyrics/06.txt",
+      "language": "en"
+    },
+    {
+      "id": "7",
+      "name": "07 - Funky Morning",
+      "prompt": "funk, wah guitar, punchy horns, slap bass, tight drums, 108 bpm, male English vocal, upbeat",
+      "type": "vocal",
+      "duration": 80,
+      "lyrics_file": "playlists/groove-en/lyrics/07.txt",
+      "language": "en"
+    },
+    {
+      "id": "8",
+      "name": "08 - Take Your Time",
+      "prompt": "soul groove, mellow bass, brushed drums, warm organ, 88 bpm, female English vocal, gentle",
+      "type": "vocal",
+      "duration": 65,
+      "lyrics_file": "playlists/groove-en/lyrics/08.txt",
+      "language": "en"
+    },
+    {
+      "id": "9",
+      "name": "09 - Sweet Syncopation",
+      "prompt": "jazzy groove, syncopated drums, walking bass, electric piano, 100 bpm, female English vocal, playful",
+      "type": "vocal",
+      "duration": 55,
+      "lyrics_file": "playlists/groove-en/lyrics/09.txt",
+      "language": "en"
+    },
+    {
+      "id": "10",
+      "name": "10 - Midnight Pocket",
+      "prompt": "deep groove, subtle funk guitar, round bass, tight snare, 91 bpm, male English vocal, late night",
+      "type": "vocal",
+      "duration": 45,
+      "lyrics_file": "playlists/groove-en/lyrics/10.txt",
+      "language": "en"
+    }
+  ]
+}

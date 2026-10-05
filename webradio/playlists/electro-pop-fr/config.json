@@ -1,0 +1,97 @@
+{
+  "playlist_name": "Playlist Electro-pop française",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./playlists/electro-pop-fr/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "01 - Mon téléphone et moi",
+      "prompt": "French electropop, minimal synth bass, afro-house percussion, danceable, spoken-sung male vocal, ironic, 118 bpm",
+      "duration": 130,
+      "type": "vocal",
+      "lyrics_file": "playlists/electro-pop-fr/lyrics/01.txt",
+      "language": "fr"
+    },
+    {
+      "id": "2",
+      "name": "02 - Le dernier métro",
+      "prompt": "French electropop, pulsing bass, pizzicato strings, club beat, male vocal, melancholic yet danceable, 120 bpm",
+      "duration": 45,
+      "type": "vocal",
+      "lyrics_file": "playlists/electro-pop-fr/lyrics/02.txt",
+      "language": "fr"
+    },
+    {
+      "id": "3",
+      "name": "03 - Ça va, ça va pas",
+      "prompt": "French electropop, dry kick, syncopated synth, deep bass, ironic male vocal, 116 bpm",
+      "duration": 120,
+      "type": "vocal",
+      "lyrics_file": "playlists/electro-pop-fr/lyrics/03.txt",
+      "language": "fr"
+    },
+    {
+      "id": "4",
+      "name": "04 - Cuisine de nuit",
+      "prompt": "French electropop, warm bass, marimba and kalimba, soft club beat, male vocal, playful, 108 bpm",
+      "duration": 65,
+      "type": "vocal",
+      "lyrics_file": "playlists/electro-pop-fr/lyrics/04.txt",
+      "language": "fr"
+    },
+    {
+      "id": "5",
+      "name": "05 - Ligne douze",
+      "prompt": "French electropop, driving four-on-the-floor, cello stabs, synth bass, spoken-sung male vocal, 122 bpm",
+      "duration": 90,
+      "type": "vocal",
+      "lyrics_file": "playlists/electro-pop-fr/lyrics/05.txt",
+      "language": "fr"
+    },
+    {
+      "id": "6",
+      "name": "06 - Les mots qu'on oublie",
+      "prompt": "French electropop, tender synth pads, soft kick, afro-latin percussion, male vocal, 104 bpm",
+      "duration": 115,
+      "type": "vocal",
+      "lyrics_file": "playlists/electro-pop-fr/lyrics/06.txt",
+      "language": "fr"
+    },
+    {
+      "id": "7",
+      "name": "07 - Danse avec le lundi",
+      "prompt": "French dance-pop, punchy kick, bouncy bass, brass stabs, male vocal, humorous, 124 bpm",
+      "duration": 130,
+      "type": "vocal",
+      "lyrics_file": "playlists/electro-pop-fr/lyrics/07.txt",
+      "language": "fr"
+    },
+    {
+      "id": "8",
+      "name": "08 - Fatigué de courir",
+      "prompt": "French electropop, slow tempo, heavy synth bass, minimal beat, introspective male vocal, 100 bpm",
+      "duration": 55,
+      "type": "vocal",
+      "lyrics_file": "playlists/electro-pop-fr/lyrics/08.txt",
+      "language": "fr"
+    },
+    {
+      "id": "9",
+      "name": "09 - Le robot du coin",
+      "prompt": "French electropop, quirky synth lead, bouncy rhythm, robotic vocal effects, male vocal, 118 bpm",
+      "duration": 65,
+      "type": "vocal",
+      "lyrics_file": "playlists/electro-pop-fr/lyrics/09.txt",
+      "language": "fr"
+    },
+    {
+      "id": "10",
+      "name": "10 - Ombres et néons",
+      "prompt": "French electropop, nocturnal synth bass, shimmering synths, steady beat, male vocal, cinematic, 114 bpm",
+      "duration": 45,
+      "type": "vocal",
+      "lyrics_file": "playlists/electro-pop-fr/lyrics/10.txt",
+      "language": "fr"
+    }
+  ]
+}

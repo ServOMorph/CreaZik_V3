@@ -1,0 +1,106 @@
+{
+  "playlist_name": "Playlist Hard rock",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./playlists/hard-rock/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "01 - Highway Thunder",
+      "prompt": "hard rock, bluesy crunchy riff guitars, driving four-four drums, thumping bass, raspy powerful male vocal, anthemic gang vocals in the chorus, 118 bpm, road trip energy",
+      "type": "vocal",
+      "duration": 55,
+      "lyrics_file": "playlists/hard-rock/lyrics/01.txt",
+      "language": "en"
+    },
+    {
+      "id": "2",
+      "name": "02 - Turn It Up Loud",
+      "prompt": "hard rock, bluesy crunchy riff guitars, driving four-four drums, thumping bass, raspy powerful male vocal, anthemic gang vocals in the chorus, 125 bpm, party anthem",
+      "type": "vocal",
+      "duration": 70,
+      "lyrics_file": "playlists/hard-rock/lyrics/02.txt",
+      "language": "en"
+    },
+    {
+      "id": "3",
+      "name": "03 - Electric Heart",
+      "prompt": "hard rock, bluesy crunchy riff guitars, driving four-four drums, thumping bass, raspy powerful male vocal, anthemic gang vocals in the chorus, 110 bpm, mid tempo groove",
+      "type": "vocal",
+      "duration": 120,
+      "lyrics_file": "playlists/hard-rock/lyrics/03.txt",
+      "language": "en"
+    },
+    {
+      "id": "4",
+      "name": "04 - Steel Strings and Thunder",
+      "prompt": "hard rock, bluesy crunchy riff guitars, driving four-four drums, thumping bass, raspy powerful male vocal, anthemic gang vocals in the chorus, 122 bpm, driving riff",
+      "type": "vocal",
+      "duration": 75,
+      "lyrics_file": "playlists/hard-rock/lyrics/04.txt",
+      "language": "en"
+    },
+    {
+      "id": "5",
+      "name": "05 - Rolling Down the Valley",
+      "prompt": "hard rock, bluesy crunchy riff guitars, driving four-four drums, thumping bass, raspy powerful male vocal, anthemic gang vocals in the chorus, 108 bpm, swaggering blues rock shuffle",
+      "type": "vocal",
+      "duration": 80,
+      "lyrics_file": "playlists/hard-rock/lyrics/05.txt",
+      "language": "en"
+    },
+    {
+      "id": "6",
+      "name": "06 - Amp on Fire",
+      "prompt": "hard rock, bluesy crunchy riff guitars, driving four-four drums, thumping bass, raspy powerful male vocal, anthemic gang vocals in the chorus, 130 bpm, fast and aggressive",
+      "type": "vocal",
+      "duration": 95,
+      "lyrics_file": "playlists/hard-rock/lyrics/06.txt",
+      "language": "en"
+    },
+    {
+      "id": "7",
+      "name": "07 - Midnight Rebel",
+      "prompt": "hard rock, bluesy crunchy riff guitars, driving four-four drums, thumping bass, raspy powerful male vocal, anthemic gang vocals in the chorus, 115 bpm, gritty and confident",
+      "type": "vocal",
+      "duration": 95,
+      "lyrics_file": "playlists/hard-rock/lyrics/07.txt",
+      "language": "en"
+    },
+    {
+      "id": "8",
+      "name": "08 - Stage Lights",
+      "prompt": "hard rock, bluesy crunchy riff guitars, driving four-four drums, thumping bass, raspy powerful male vocal, anthemic gang vocals in the chorus, 120 bpm, big stadium feeling",
+      "type": "vocal",
+      "duration": 120,
+      "lyrics_file": "playlists/hard-rock/lyrics/08.txt",
+      "language": "en"
+    },
+    {
+      "id": "9",
+      "name": "09 - Rock Till Sunrise",
+      "prompt": "hard rock, bluesy crunchy riff guitars, driving four-four drums, thumping bass, raspy powerful male vocal, anthemic gang vocals in the chorus, 126 bpm, fast party rock",
+      "type": "vocal",
+      "duration": 95,
+      "lyrics_file": "playlists/hard-rock/lyrics/09.txt",
+      "language": "en"
+    },
+    {
+      "id": "10",
+      "name": "10 - Gang of the Night",
+      "prompt": "hard rock, bluesy crunchy riff guitars, driving four-four drums, thumping bass, raspy powerful male vocal, anthemic gang vocals in the chorus, 112 bpm, stomping anthem",
+      "type": "vocal",
+      "duration": 135,
+      "lyrics_file": "playlists/hard-rock/lyrics/10.txt",
+      "language": "en"
+    },
+    {
+      "id": "11",
+      "name": "11 - Born to Rock",
+      "prompt": "hard rock, bluesy crunchy riff guitars, driving four-four drums, thumping bass, raspy powerful male vocal, anthemic gang vocals in the chorus, 124 bpm, classic hard rock groove",
+      "type": "vocal",
+      "duration": 110,
+      "lyrics_file": "playlists/hard-rock/lyrics/11.txt",
+      "language": "en"
+    }
+  ]
+}
