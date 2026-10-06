@@ -1,11 +1,11 @@
 {
   "playlist_name": "Playlist Perso - Classique",
   "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
-  "output_dir": "./playlists/perso-classique/outputs",
+  "output_dir": "./playlists/francais_tests-classique/outputs",
   "test_cases": [
     {
       "id": "1",
-      "name": "01 - Je prends mon temps - Classique",
+      "name": "Je prends mon temps - Classique",
       "prompt": "classical music, orchestral strings, piano, art song, lyrical operatic vocal",
       "type": "vocal",
       "duration": 45,
@@ -14,7 +14,7 @@
     },
     {
       "id": "2",
-      "name": "02 - Les quais la nuit - Classique",
+      "name": "Les quais la nuit - Classique",
       "prompt": "classical music, orchestral strings, piano, art song, lyrical operatic vocal",
       "type": "vocal",
       "duration": 110,
@@ -23,7 +23,7 @@
     },
     {
       "id": "3",
-      "name": "03 - Demain, on change - Classique",
+      "name": "Demain, on change - Classique",
       "prompt": "classical music, orchestral strings, piano, art song, lyrical operatic vocal",
       "type": "vocal",
       "duration": 75,
@@ -32,7 +32,7 @@
     },
     {
       "id": "4",
-      "name": "04 - Minuit sur l'autoroute - Classique",
+      "name": "Minuit sur l'autoroute - Classique",
       "prompt": "classical music, orchestral strings, piano, art song, lyrical operatic vocal",
       "type": "vocal",
       "duration": 50,
@@ -41,7 +41,7 @@
     },
     {
       "id": "5",
-      "name": "05 - Mon voisin est un hérisson - Classique",
+      "name": "Mon voisin est un hérisson - Classique",
       "prompt": "classical music, orchestral strings, piano, art song, lyrical operatic vocal",
       "type": "vocal",
       "duration": 65,
@@ -50,7 +50,7 @@
     },
     {
       "id": "6",
-      "name": "06 - Le bateau du matin - Classique",
+      "name": "Le bateau du matin - Classique",
       "prompt": "classical music, orchestral strings, piano, art song, lyrical operatic vocal",
       "type": "vocal",
       "duration": 130,
@@ -59,7 +59,7 @@
     },
     {
       "id": "7",
-      "name": "07 - Les souliers de ma grand-mère - Classique",
+      "name": "Les souliers de ma grand-mère - Classique",
       "prompt": "classical music, orchestral strings, piano, art song, lyrical operatic vocal",
       "type": "vocal",
       "duration": 90,
@@ -68,7 +68,7 @@
     },
     {
       "id": "8",
-      "name": "08 - Elle danse seule - Classique",
+      "name": "Elle danse seule - Classique",
       "prompt": "classical music, orchestral strings, piano, art song, lyrical operatic vocal",
       "type": "vocal",
       "duration": 90,
@@ -77,7 +77,7 @@
     },
     {
       "id": "9",
-      "name": "09 - Une route en été - Classique",
+      "name": "Une route en été - Classique",
       "prompt": "classical music, orchestral strings, piano, art song, lyrical operatic vocal",
       "type": "vocal",
       "duration": 60,
@@ -86,7 +86,7 @@
     },
     {
       "id": "10",
-      "name": "10 - Le facteur et la fleuriste - Classique",
+      "name": "Le facteur et la fleuriste - Classique",
       "prompt": "classical music, orchestral strings, piano, art song, lyrical operatic vocal",
       "type": "vocal",
       "duration": 125,
@@ -95,7 +95,7 @@
     },
     {
       "id": "11",
-      "name": "11 - Chemin de montagne - Classique",
+      "name": "Chemin de montagne - Classique",
       "prompt": "classical music, orchestral strings, piano, art song, lyrical operatic vocal",
       "type": "vocal",
       "duration": 75,
@@ -104,7 +104,7 @@
     },
     {
       "id": "12",
-      "name": "12 - Là où brille la mer - Classique",
+      "name": "Là où brille la mer - Classique",
       "prompt": "classical music, orchestral strings, piano, art song, lyrical operatic vocal",
       "type": "vocal",
       "duration": 75,
@@ -113,7 +113,7 @@
     },
     {
       "id": "13",
-      "name": "13 - Blues du lundi - Classique",
+      "name": "Blues du lundi - Classique",
       "prompt": "classical music, orchestral strings, piano, art song, lyrical operatic vocal",
       "type": "vocal",
       "duration": 135,
@@ -122,7 +122,7 @@
     },
     {
       "id": "14",
-      "name": "14 - Le vent et le large - Classique",
+      "name": "Le vent et le large - Classique",
       "prompt": "classical music, orchestral strings, piano, art song, lyrical operatic vocal",
       "type": "vocal",
       "duration": 55,
@@ -131,7 +131,7 @@
     },
     {
       "id": "15",
-      "name": "15 - La dernière nuit - Classique",
+      "name": "La dernière nuit - Classique",
       "prompt": "classical music, orchestral strings, piano, art song, lyrical operatic vocal",
       "type": "vocal",
       "duration": 50,
@@ -140,7 +140,7 @@
     },
     {
       "id": "16",
-      "name": "16 - Une carte postale - Classique",
+      "name": "Une carte postale - Classique",
       "prompt": "classical music, orchestral strings, piano, art song, lyrical operatic vocal",
       "type": "vocal",
       "duration": 90,
@@ -149,7 +149,7 @@
     },
     {
       "id": "17",
-      "name": "17 - Les gars de la côte - Classique",
+      "name": "Les gars de la côte - Classique",
       "prompt": "classical music, orchestral strings, piano, art song, lyrical operatic vocal",
       "type": "vocal",
       "duration": 100,
@@ -158,7 +158,7 @@
     },
     {
       "id": "18",
-      "name": "18 - La maison au bout du chemin - Classique",
+      "name": "La maison au bout du chemin - Classique",
       "prompt": "classical music, orchestral strings, piano, art song, lyrical operatic vocal",
       "type": "vocal",
       "duration": 55,
@@ -167,7 +167,7 @@
     },
     {
       "id": "19",
-      "name": "19 - Les amis du port - Classique",
+      "name": "Les amis du port - Classique",
       "prompt": "classical music, orchestral strings, piano, art song, lyrical operatic vocal",
       "type": "vocal",
       "duration": 90,
@@ -176,7 +176,7 @@
     },
     {
       "id": "20",
-      "name": "20 - Chantons la vie - Classique",
+      "name": "Chantons la vie - Classique",
       "prompt": "classical music, orchestral strings, piano, art song, lyrical operatic vocal",
       "type": "vocal",
       "duration": 65,
@@ -185,7 +185,7 @@
     },
     {
       "id": "21",
-      "name": "21 - Le bar du coin - Classique",
+      "name": "Le bar du coin - Classique",
       "prompt": "classical music, orchestral strings, piano, art song, lyrical operatic vocal",
       "type": "vocal",
       "duration": 60,

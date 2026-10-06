@@ -5,70 +5,70 @@
   "test_cases": [
     {
       "id": "1",
-      "name": "01 - Course sur la plage",
+      "name": "Course sur la plage",
       "prompt": "instrumental, epic analog synthesizer, Yamaha CS-80 style brass pads, lush reverb, cinematic electronic, majestic melody, instrumental, slow heroic theme, piano and synth, triumphant",
       "type": "instrumental",
       "duration": 130
     },
     {
       "id": "2",
-      "name": "02 - Pluie de néons",
+      "name": "Pluie de néons",
       "prompt": "instrumental, epic analog synthesizer, Yamaha CS-80 style brass pads, lush reverb, cinematic electronic, majestic melody, instrumental, dark futuristic city, saxophone, noir ambient",
       "type": "instrumental",
       "duration": 130
     },
     {
       "id": "3",
-      "name": "03 - Conquête du ciel",
+      "name": "Conquête du ciel",
       "prompt": "instrumental, epic analog synthesizer, Yamaha CS-80 style brass pads, lush reverb, cinematic electronic, majestic melody, instrumental, choir and synth brass, grand, building",
       "type": "instrumental",
       "duration": 75
     },
     {
       "id": "4",
-      "name": "04 - Océan intérieur",
+      "name": "Océan intérieur",
       "prompt": "instrumental, epic analog synthesizer, Yamaha CS-80 style brass pads, lush reverb, cinematic electronic, majestic melody, instrumental, ambient pads, slow evolving, meditative",
       "type": "instrumental",
       "duration": 80
     },
     {
       "id": "5",
-      "name": "05 - Les dieux de l'Olympe",
+      "name": "Les dieux de l'Olympe",
       "prompt": "instrumental, epic analog synthesizer, Yamaha CS-80 style brass pads, lush reverb, cinematic electronic, majestic melody, instrumental, orchestral synths, timpani, epic",
       "type": "instrumental",
       "duration": 130
     },
     {
       "id": "6",
-      "name": "06 - Horizon d'Antarctique",
+      "name": "Horizon d'Antarctique",
       "prompt": "instrumental, epic analog synthesizer, Yamaha CS-80 style brass pads, lush reverb, cinematic electronic, majestic melody, instrumental, cold glassy pads, sparse, vast",
       "type": "instrumental",
       "duration": 45
     },
     {
       "id": "7",
-      "name": "07 - Le voyage de la sonde",
+      "name": "Le voyage de la sonde",
       "prompt": "instrumental, epic analog synthesizer, Yamaha CS-80 style brass pads, lush reverb, cinematic electronic, majestic melody, instrumental, cosmic arpeggio, sequencer, space",
       "type": "instrumental",
       "duration": 45
     },
     {
       "id": "8",
-      "name": "08 - Hymne des larmes",
+      "name": "Hymne des larmes",
       "prompt": "instrumental, epic analog synthesizer, Yamaha CS-80 style brass pads, lush reverb, cinematic electronic, majestic melody, instrumental, emotional slow melody, strings and synth",
       "type": "instrumental",
       "duration": 120
     },
     {
       "id": "9",
-      "name": "09 - Mythe de Prométhée",
+      "name": "Mythe de Prométhée",
       "prompt": "instrumental, epic analog synthesizer, Yamaha CS-80 style brass pads, lush reverb, cinematic electronic, majestic melody, instrumental, percussive, tribal drums, synth fanfare",
       "type": "instrumental",
       "duration": 50
     },
     {
       "id": "10",
-      "name": "10 - Aube sur la mer Égée",
+      "name": "Aube sur la mer Égée",
       "prompt": "instrumental, epic analog synthesizer, Yamaha CS-80 style brass pads, lush reverb, cinematic electronic, majestic melody, instrumental, final, gentle sunrise, bells and pads",
       "type": "instrumental",
       "duration": 120

@@ -5,70 +5,70 @@
   "test_cases": [
     {
       "id": "1",
-      "name": "01 - Louange joyeuse",
+      "name": "Louange joyeuse",
       "prompt": "gospel, church organ, piano, handclaps, wordless choir, joyful praise, instrumental",
       "type": "instrumental",
       "duration": 45
     },
     {
       "id": "2",
-      "name": "02 - Spiritual lent",
+      "name": "Spiritual lent",
       "prompt": "gospel, church organ, piano, handclaps, wordless choir, slow spiritual, instrumental",
       "type": "instrumental",
       "duration": 125
     },
     {
       "id": "3",
-      "name": "03 - Gospel rapide",
+      "name": "Gospel rapide",
       "prompt": "gospel, church organ, piano, handclaps, wordless choir, uptempo gospel, instrumental",
       "type": "instrumental",
       "duration": 55
     },
     {
       "id": "4",
-      "name": "04 - Orgue du dimanche",
+      "name": "Orgue du dimanche",
       "prompt": "gospel, church organ, piano, handclaps, wordless choir, Sunday organ, instrumental",
       "type": "instrumental",
       "duration": 115
     },
     {
       "id": "5",
-      "name": "05 - Chœur en élévation",
+      "name": "Chœur en élévation",
       "prompt": "gospel, church organ, piano, handclaps, wordless choir, rising choir, instrumental",
       "type": "instrumental",
       "duration": 90
     },
     {
       "id": "6",
-      "name": "06 - Marche de la foi",
+      "name": "Marche de la foi",
       "prompt": "gospel, church organ, piano, handclaps, wordless choir, marching gospel, instrumental",
       "type": "instrumental",
       "duration": 65
     },
     {
       "id": "7",
-      "name": "07 - Bénédiction",
+      "name": "Bénédiction",
       "prompt": "gospel, church organ, piano, handclaps, wordless choir, benediction, instrumental",
       "type": "instrumental",
       "duration": 55
     },
     {
       "id": "8",
-      "name": "08 - Gospel et blues",
+      "name": "Gospel et blues",
       "prompt": "gospel, church organ, piano, handclaps, wordless choir, gospel blues, instrumental",
       "type": "instrumental",
       "duration": 95
     },
     {
       "id": "9",
-      "name": "09 - Célébration",
+      "name": "Célébration",
       "prompt": "gospel, church organ, piano, handclaps, wordless choir, celebration, instrumental",
       "type": "instrumental",
       "duration": 90
     },
     {
       "id": "10",
-      "name": "10 - Prière du soir",
+      "name": "Prière du soir",
       "prompt": "gospel, church organ, piano, handclaps, wordless choir, evening prayer, instrumental",
       "type": "instrumental",
       "duration": 130

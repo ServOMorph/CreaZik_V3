@@ -69,8 +69,10 @@ results_path = os.path.join(OUT, "playlist_results.json")
 
 
 def save():
-    with open(results_path, "w", encoding="utf-8") as f:
+    temporary_path = results_path + ".tmp"
+    with open(temporary_path, "w", encoding="utf-8") as f:
         json.dump(results, f, indent=2, ensure_ascii=False)
+    os.replace(temporary_path, results_path)
 
 
 SECTION_SECONDS = 14.5

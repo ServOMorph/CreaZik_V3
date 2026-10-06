@@ -5,70 +5,70 @@
   "test_cases": [
     {
       "id": "1",
-      "name": "01 - Fingerstyle du matin",
+      "name": "Fingerstyle du matin",
       "prompt": "solo acoustic guitar, fingerstyle, warm nylon strings, gentle morning melody, no other instruments",
       "duration": 45,
       "type": "instrumental"
     },
     {
       "id": "2",
-      "name": "02 - Flamenco en solo",
+      "name": "Flamenco en solo",
       "prompt": "solo flamenco guitar, rasgueado, fast picado runs, passionate, no other instruments",
       "duration": 75,
       "type": "instrumental"
     },
     {
       "id": "3",
-      "name": "03 - Blues sur la véranda",
+      "name": "Blues sur la véranda",
       "prompt": "solo acoustic blues guitar, slide, slow shuffle, dusty and warm, no other instruments",
       "duration": 55,
       "type": "instrumental"
     },
     {
       "id": "4",
-      "name": "04 - Classique romantique",
+      "name": "Classique romantique",
       "prompt": "solo classical guitar, romantic arpeggios, nylon strings, expressive rubato, no other instruments",
       "duration": 135,
       "type": "instrumental"
     },
     {
       "id": "5",
-      "name": "05 - Jazz de minuit",
+      "name": "Jazz de minuit",
       "prompt": "solo jazz guitar, chord melody, smooth warm tone, late night, no other instruments",
       "duration": 75,
       "type": "instrumental"
     },
     {
       "id": "6",
-      "name": "06 - Folk des collines",
+      "name": "Folk des collines",
       "prompt": "solo steel-string guitar, folk picking, open tunings, pastoral, no other instruments",
       "duration": 95,
       "type": "instrumental"
     },
     {
       "id": "7",
-      "name": "07 - Bossa solitaire",
+      "name": "Bossa solitaire",
       "prompt": "solo nylon guitar bossa nova, syncopated chords, gentle bass line, breezy, no other instruments",
       "duration": 100,
       "type": "instrumental"
     },
     {
       "id": "8",
-      "name": "08 - Ambiance électrique",
+      "name": "Ambiance électrique",
       "prompt": "solo clean electric guitar, ambient swells, delay and reverb, spacious, no other instruments",
       "duration": 95,
       "type": "instrumental"
     },
     {
       "id": "9",
-      "name": "09 - Valse sur cordes",
+      "name": "Valse sur cordes",
       "prompt": "solo acoustic guitar waltz, flowing arpeggios, tender, no other instruments",
       "duration": 80,
       "type": "instrumental"
     },
     {
       "id": "10",
-      "name": "10 - Tapping lumineux",
+      "name": "Tapping lumineux",
       "prompt": "solo acoustic guitar, percussive tapping and harmonics, bright and rhythmic, no other instruments",
       "duration": 65,
       "type": "instrumental"

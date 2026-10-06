@@ -5,70 +5,70 @@
   "test_cases": [
     {
       "id": "1",
-      "name": "01 - Plage au coucher du soleil",
+      "name": "Plage au coucher du soleil",
       "prompt": "Hawaiian and Polynesian, ukulele, slack key guitar, steel guitar, drums, sunset beach, instrumental",
       "type": "instrumental",
       "duration": 115
     },
     {
       "id": "2",
-      "name": "02 - Rythme de hula",
+      "name": "Rythme de hula",
       "prompt": "Hawaiian and Polynesian, ukulele, slack key guitar, steel guitar, drums, hula rhythm, instrumental",
       "type": "instrumental",
       "duration": 125
     },
     {
       "id": "3",
-      "name": "03 - Berceuse",
+      "name": "Berceuse",
       "prompt": "Hawaiian and Polynesian, ukulele, slack key guitar, steel guitar, drums, lullaby, instrumental",
       "type": "instrumental",
       "duration": 110
     },
     {
       "id": "4",
-      "name": "04 - Fête sur l'île",
+      "name": "Fête sur l'île",
       "prompt": "Hawaiian and Polynesian, ukulele, slack key guitar, steel guitar, drums, island party, instrumental",
       "type": "instrumental",
       "duration": 110
     },
     {
       "id": "5",
-      "name": "05 - Vagues de l'océan",
+      "name": "Vagues de l'océan",
       "prompt": "Hawaiian and Polynesian, ukulele, slack key guitar, steel guitar, drums, ocean waves, instrumental",
       "type": "instrumental",
       "duration": 120
     },
     {
       "id": "6",
-      "name": "06 - Luau",
+      "name": "Luau",
       "prompt": "Hawaiian and Polynesian, ukulele, slack key guitar, steel guitar, drums, luau, instrumental",
       "type": "instrumental",
       "duration": 55
     },
     {
       "id": "7",
-      "name": "07 - Nuit romantique",
+      "name": "Nuit romantique",
       "prompt": "Hawaiian and Polynesian, ukulele, slack key guitar, steel guitar, drums, romantic night, instrumental",
       "type": "instrumental",
       "duration": 70
     },
     {
       "id": "8",
-      "name": "08 - Tambours tahitiens",
+      "name": "Tambours tahitiens",
       "prompt": "Hawaiian and Polynesian, ukulele, slack key guitar, steel guitar, drums, tahitian drums, instrumental",
       "type": "instrumental",
       "duration": 60
     },
     {
       "id": "9",
-      "name": "09 - Matin paisible",
+      "name": "Matin paisible",
       "prompt": "Hawaiian and Polynesian, ukulele, slack key guitar, steel guitar, drums, peaceful morning, instrumental",
       "type": "instrumental",
       "duration": 90
     },
     {
       "id": "10",
-      "name": "10 - Festival",
+      "name": "Festival",
       "prompt": "Hawaiian and Polynesian, ukulele, slack key guitar, steel guitar, drums, festival, instrumental",
       "type": "instrumental",
       "duration": 85

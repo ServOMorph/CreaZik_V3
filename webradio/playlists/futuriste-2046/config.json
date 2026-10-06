@@ -5,70 +5,70 @@
   "test_cases": [
     {
       "id": "1",
-      "name": "01 - Orbital Garden",
+      "name": "Orbital Garden",
       "prompt": "futuristic ambient, granular synth textures, spatial pads, slow pulsing sub bass, glass chimes, serene, 70 bpm",
       "duration": 85,
       "type": "instrumental"
     },
     {
       "id": "2",
-      "name": "02 - Neural Bloom",
+      "name": "Neural Bloom",
       "prompt": "futuristic electronic, generative arpeggios, shifting harmonies, evolving rhythm, shimmering textures, 110 bpm",
       "duration": 110,
       "type": "instrumental"
     },
     {
       "id": "3",
-      "name": "03 - Quantum Lullaby",
+      "name": "Quantum Lullaby",
       "prompt": "futuristic lullaby, soft glitch percussion, warm synth pads, music box tones, gentle bass, 75 bpm",
       "duration": 50,
       "type": "instrumental"
     },
     {
       "id": "4",
-      "name": "04 - Glass City Pulse",
+      "name": "Glass City Pulse",
       "prompt": "futuristic electro, crystalline synth lead, deep bass pulse, tight digital drums, neon atmosphere, 124 bpm",
       "duration": 90,
       "type": "instrumental"
     },
     {
       "id": "5",
-      "name": "05 - Zero-G Dance",
+      "name": "Zero-G Dance",
       "prompt": "weightless electronic dance, floating pads, syncopated rhythm, airy vocal chops without words, bright bass, 118 bpm",
       "duration": 75,
       "type": "instrumental"
     },
     {
       "id": "6",
-      "name": "06 - Memory Weather",
+      "name": "Memory Weather",
       "prompt": "cinematic futuristic ambient, hybrid orchestral and electronic, slow swelling strings, digital rain textures, 80 bpm",
       "duration": 90,
       "type": "instrumental"
     },
     {
       "id": "7",
-      "name": "07 - Synthetic Dawn",
+      "name": "Synthetic Dawn",
       "prompt": "futuristic uplifting electronic, rising pads, warm sub bass, crisp percussion, hopeful melody, 105 bpm",
       "duration": 55,
       "type": "instrumental"
     },
     {
       "id": "8",
-      "name": "08 - Holographic Rain",
+      "name": "Holographic Rain",
       "prompt": "futuristic downtempo, glitch textures, soft kick, wide stereo synths, melancholic melody, 88 bpm",
       "duration": 80,
       "type": "instrumental"
     },
     {
       "id": "9",
-      "name": "09 - Tidal Algorithm",
+      "name": "Tidal Algorithm",
       "prompt": "futuristic bass music, rolling sub bass, intricate hi-hats, morphing synth textures, minimal melody, 130 bpm",
       "duration": 75,
       "type": "instrumental"
     },
     {
       "id": "10",
-      "name": "10 - Starport Lounge",
+      "name": "Starport Lounge",
       "prompt": "futuristic lounge, smooth electric piano, soft synth strings, relaxed beat, spacey atmosphere, 95 bpm",
       "duration": 85,
       "type": "instrumental"

@@ -5,70 +5,70 @@
   "test_cases": [
     {
       "id": "1",
-      "name": "01 - House classique",
+      "name": "House classique",
       "prompt": "electronic dance, four-on-the-floor kick, arpeggios, pads, classic house, piano chords, 124 bpm, instrumental",
       "type": "instrumental",
       "duration": 110
     },
     {
       "id": "2",
-      "name": "02 - Deep house",
+      "name": "Deep house",
       "prompt": "electronic dance, four-on-the-floor kick, arpeggios, pads, deep house, warm bass, 120 bpm, instrumental",
       "type": "instrumental",
       "duration": 90
     },
     {
       "id": "3",
-      "name": "03 - Progressive house",
+      "name": "Progressive house",
       "prompt": "electronic dance, four-on-the-floor kick, arpeggios, pads, progressive house, building, 126 bpm, instrumental",
       "type": "instrumental",
       "duration": 60
     },
     {
       "id": "4",
-      "name": "04 - Trance épique",
+      "name": "Trance épique",
       "prompt": "electronic dance, four-on-the-floor kick, arpeggios, pads, epic trance, supersaw lead, 138 bpm, instrumental",
       "type": "instrumental",
       "duration": 130
     },
     {
       "id": "5",
-      "name": "05 - Trance psychédélique",
+      "name": "Trance psychédélique",
       "prompt": "electronic dance, four-on-the-floor kick, arpeggios, pads, psytrance, rolling bass, 145 bpm, instrumental",
       "type": "instrumental",
       "duration": 100
     },
     {
       "id": "6",
-      "name": "06 - Disco house",
+      "name": "Disco house",
       "prompt": "electronic dance, four-on-the-floor kick, arpeggios, pads, disco house, funky samples feel, 122 bpm, instrumental",
       "type": "instrumental",
       "duration": 75
     },
     {
       "id": "7",
-      "name": "07 - House afro",
+      "name": "House afro",
       "prompt": "electronic dance, four-on-the-floor kick, arpeggios, pads, afro house, percussion, 120 bpm, instrumental",
       "type": "instrumental",
       "duration": 90
     },
     {
       "id": "8",
-      "name": "08 - Trance mélodique",
+      "name": "Trance mélodique",
       "prompt": "electronic dance, four-on-the-floor kick, arpeggios, pads, uplifting trance, emotional, 136 bpm, instrumental",
       "type": "instrumental",
       "duration": 75
     },
     {
       "id": "9",
-      "name": "09 - Électro house",
+      "name": "Électro house",
       "prompt": "electronic dance, four-on-the-floor kick, arpeggios, pads, electro house, big drop, 128 bpm, instrumental",
       "type": "instrumental",
       "duration": 70
     },
     {
       "id": "10",
-      "name": "10 - House au lever du jour",
+      "name": "House au lever du jour",
       "prompt": "electronic dance, four-on-the-floor kick, arpeggios, pads, sunrise house, hopeful, 118 bpm, instrumental",
       "type": "instrumental",
       "duration": 55

@@ -5,7 +5,7 @@
   "test_cases": [
     {
       "id": "1",
-      "name": "01 - Silver Moon",
+      "name": "Silver Moon",
       "prompt": "a cappella female choir, no instruments, luminous female harmonies, soprano alto, ethereal slow harmonies, moonlit mood, floating",
       "duration": 95,
       "type": "vocal",
@@ -14,7 +14,7 @@
     },
     {
       "id": "2",
-      "name": "02 - Garden Song",
+      "name": "Garden Song",
       "prompt": "a cappella female choir, no instruments, luminous female harmonies, soprano alto, bright joyful harmonies, folk feeling, light rhythmic vocal percussion",
       "duration": 130,
       "type": "vocal",
@@ -23,7 +23,7 @@
     },
     {
       "id": "3",
-      "name": "03 - Lullaby for the Sea",
+      "name": "Lullaby for the Sea",
       "prompt": "a cappella female choir, no instruments, luminous female harmonies, soprano alto, tender lullaby harmonies, soft and slow, ocean calm",
       "duration": 55,
       "type": "vocal",
@@ -32,7 +32,7 @@
     },
     {
       "id": "4",
-      "name": "04 - Morning Market",
+      "name": "Morning Market",
       "prompt": "a cappella female choir, no instruments, luminous female harmonies, soprano alto, lively rhythmic harmonies, playful call and response, vocal percussion",
       "duration": 130,
       "type": "vocal",
@@ -41,7 +41,7 @@
     },
     {
       "id": "5",
-      "name": "05 - Rain Chorus",
+      "name": "Rain Chorus",
       "prompt": "a cappella female choir, no instruments, luminous female harmonies, soprano alto, gentle layered harmonies, rhythmic like falling rain, soothing",
       "duration": 80,
       "type": "vocal",
@@ -50,7 +50,7 @@
     },
     {
       "id": "6",
-      "name": "06 - Berceuse du soir",
+      "name": "Berceuse du soir",
       "prompt": "a cappella female choir, no instruments, luminous female harmonies, soprano alto, French lullaby harmonies, soft and slow, tender",
       "duration": 75,
       "type": "vocal",
@@ -59,7 +59,7 @@
     },
     {
       "id": "7",
-      "name": "07 - La fontaine",
+      "name": "La fontaine",
       "prompt": "a cappella female choir, no instruments, luminous female harmonies, soprano alto, French folk harmonies, bright and flowing, water imagery",
       "duration": 110,
       "type": "vocal",
@@ -68,7 +68,7 @@
     },
     {
       "id": "8",
-      "name": "08 - Chanson de la rivière",
+      "name": "Chanson de la rivière",
       "prompt": "a cappella female choir, no instruments, luminous female harmonies, soprano alto, French flowing harmonies, gentle and expansive, nature",
       "duration": 135,
       "type": "vocal",
@@ -77,7 +77,7 @@
     },
     {
       "id": "9",
-      "name": "09 - Les voix du matin",
+      "name": "Les voix du matin",
       "prompt": "a cappella female choir, no instruments, luminous female harmonies, soprano alto, French dawn harmonies, rising and luminous, joyful",
       "duration": 55,
       "type": "vocal",
@@ -86,7 +86,7 @@
     },
     {
       "id": "10",
-      "name": "10 - Le jardin secret",
+      "name": "Le jardin secret",
       "prompt": "a cappella female choir, no instruments, luminous female harmonies, soprano alto, French mysterious harmonies, soft and intimate, secret garden mood",
       "duration": 65,
       "type": "vocal",

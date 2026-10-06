@@ -5,70 +5,70 @@
   "test_cases": [
     {
       "id": "1",
-      "name": "01 - Salsa classique",
+      "name": "Salsa classique",
       "prompt": "salsa, piano montuno, congas, timbales, trumpets, classic NYC salsa, instrumental",
       "type": "instrumental",
       "duration": 125
     },
     {
       "id": "2",
-      "name": "02 - Salsa romantique",
+      "name": "Salsa romantique",
       "prompt": "salsa, piano montuno, congas, timbales, trumpets, salsa romantica, instrumental",
       "type": "instrumental",
       "duration": 130
     },
     {
       "id": "3",
-      "name": "03 - Mambo rapide",
+      "name": "Mambo rapide",
       "prompt": "salsa, piano montuno, congas, timbales, trumpets, mambo fast, instrumental",
       "type": "instrumental",
       "duration": 80
     },
     {
       "id": "4",
-      "name": "04 - Cha-cha-cha",
+      "name": "Cha-cha-cha",
       "prompt": "salsa, piano montuno, congas, timbales, trumpets, cha-cha-cha, instrumental",
       "type": "instrumental",
       "duration": 85
     },
     {
       "id": "5",
-      "name": "05 - Son cubain",
+      "name": "Son cubain",
       "prompt": "salsa, piano montuno, congas, timbales, trumpets, son cubano, instrumental",
       "type": "instrumental",
       "duration": 95
     },
     {
       "id": "6",
-      "name": "06 - Charanga",
+      "name": "Charanga",
       "prompt": "salsa, piano montuno, congas, timbales, trumpets, charanga, instrumental",
       "type": "instrumental",
       "duration": 105
     },
     {
       "id": "7",
-      "name": "07 - Descarga",
+      "name": "Descarga",
       "prompt": "salsa, piano montuno, congas, timbales, trumpets, descarga jam, instrumental",
       "type": "instrumental",
       "duration": 110
     },
     {
       "id": "8",
-      "name": "08 - Boléro-son",
+      "name": "Boléro-son",
       "prompt": "salsa, piano montuno, congas, timbales, trumpets, bolero-son, instrumental",
       "type": "instrumental",
       "duration": 65
     },
     {
       "id": "9",
-      "name": "09 - Boogaloo",
+      "name": "Boogaloo",
       "prompt": "salsa, piano montuno, congas, timbales, trumpets, boogaloo, instrumental",
       "type": "instrumental",
       "duration": 110
     },
     {
       "id": "10",
-      "name": "10 - Latin jazz",
+      "name": "Latin jazz",
       "prompt": "salsa, piano montuno, congas, timbales, trumpets, latin jazz, instrumental",
       "type": "instrumental",
       "duration": 45

@@ -1,5 +1,16 @@
 # Changelog
 
+## v1.0 — 2026-10-06
+
+### Ajouté / modifié
+- Interfaces auditeur et administration séparées ; programmation admin restaurée avec recherche par morceau et playlist.
+- Libellés visibles harmonisés : préfixe « Playlist » retiré et anciennes playlists « Perso » renommées de façon descriptive.
+- Processus de génération des pochettes reprenable ; état mis à jour après son interruption à la demande de l'utilisateur.
+- Noms d'artistes conservés pendant le développement et à remplacer par des descriptions de genres avant déploiement.
+
+### Décision
+- La commande `/replace_downvoted_tracks` créée pendant la session a été supprimée à la demande de l'utilisateur ; elle ne fait pas partie des commandes du projet.
+
 ## v0.3 — 2026-10-06
 
 ### Ajouté

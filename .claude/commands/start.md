@@ -35,6 +35,7 @@ Lire `.claude/zones.md` pour obtenir la table des alias → dossiers réels.
    1. `_contexte/signals.md` — actions ouvertes, blocages, dernière session (priorité absolue)
    2. `_contexte/contexte.md` — contexte stable
    3. `roadmap*.md` — si un fichier correspondant existe dans `<dossier>`, le charger
+   4. `AMELIORATIONS.md` à la racine du projet — améliorations encore ouvertes, s'il existe
 
    > **Économie tokens :** si `signals.md` suffit à répondre à la question immédiate,
    > `contexte.md` peut être chargé à la demande plutôt que systématiquement.
@@ -53,7 +54,7 @@ Lire `.claude/zones.md` pour obtenir la table des alias → dossiers réels.
     lire la référence en priorité plutôt que de demander des précisions.
 
     Ajouter ensuite, à partir des autres fichiers chargés : la phase en cours si roadmap active,
-    et le point d'attention immédiat.
+    les améliorations ouvertes de `AMELIORATIONS.md`, et le point d'attention immédiat.
 
 5. Afficher en fin de réponse : 🎉🎉🎉
 

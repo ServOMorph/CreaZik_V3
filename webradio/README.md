@@ -11,9 +11,9 @@ Radio en direct dont tous les morceaux sont générés en local par IA (ACE-Step
 .\services.ps1 stop              # pensez à relancer ensuite avec start
 ```
 
-Services : `serveur` (page et moteur de radio, port 5000, écoute locale), `generation` (rotation ACE-Step), `analyse` (profils sonores pour l'animation), `compression` (MP3 pour le web). Le moteur reprend le morceau en cours après un redémarrage du serveur.
+Services : `serveur` (moteur de radio, écoute auditeur sur le port 5000 et administration locale sur le port 5001), `generation` (rotation ACE-Step), `analyse` (profils sonores pour l'animation), `compression` (MP3 pour le web). Le moteur reprend le morceau en cours après un redémarrage du serveur.
 
-Pages : `/` écoute (auditeurs et admin), `/radio.html` gestion (admin, connexion sur `/login`), `/ui.html` explorateur de playlists.
+Commandes : `python ..\\run.py` ouvre l'écoute auditeur sur `http://localhost:5000/`. `python ..\\run_admin.py` ouvre l'administration sur `http://localhost:5001/radio.html` ; l'explorateur admin est sur `http://localhost:5001/ui.html`.
 
 ## Organisation
 

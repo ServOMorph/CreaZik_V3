@@ -5,70 +5,70 @@
   "test_cases": [
     {
       "id": "1",
-      "name": "01 - Nappes lentes",
+      "name": "Nappes lentes",
       "prompt": "ambient chill, soft pads, gentle textures, relaxing, slow evolving pads, instrumental",
       "type": "instrumental",
       "duration": 75
     },
     {
       "id": "2",
-      "name": "02 - Lo-fi studieux",
+      "name": "Lo-fi studieux",
       "prompt": "ambient chill, soft pads, gentle textures, relaxing, lo-fi study beat, vinyl crackle, instrumental",
       "type": "instrumental",
       "duration": 85
     },
     {
       "id": "3",
-      "name": "03 - Chillout de plage",
+      "name": "Chillout de plage",
       "prompt": "ambient chill, soft pads, gentle textures, relaxing, beach chillout, soft guitar, instrumental",
       "type": "instrumental",
       "duration": 120
     },
     {
       "id": "4",
-      "name": "04 - Drone méditatif",
+      "name": "Drone méditatif",
       "prompt": "ambient chill, soft pads, gentle textures, relaxing, meditative drone, instrumental",
       "type": "instrumental",
       "duration": 125
     },
     {
       "id": "5",
-      "name": "05 - Pluie et piano",
+      "name": "Pluie et piano",
       "prompt": "ambient chill, soft pads, gentle textures, relaxing, rain ambience and piano, instrumental",
       "type": "instrumental",
       "duration": 135
     },
     {
       "id": "6",
-      "name": "06 - Forêt la nuit",
+      "name": "Forêt la nuit",
       "prompt": "ambient chill, soft pads, gentle textures, relaxing, night forest ambient, instrumental",
       "type": "instrumental",
       "duration": 45
     },
     {
       "id": "7",
-      "name": "07 - Électronique douce",
+      "name": "Électronique douce",
       "prompt": "ambient chill, soft pads, gentle textures, relaxing, gentle electronica, instrumental",
       "type": "instrumental",
       "duration": 110
     },
     {
       "id": "8",
-      "name": "08 - Brume matinale",
+      "name": "Brume matinale",
       "prompt": "ambient chill, soft pads, gentle textures, relaxing, morning mist ambient, instrumental",
       "type": "instrumental",
       "duration": 130
     },
     {
       "id": "9",
-      "name": "09 - Voyage spatial",
+      "name": "Voyage spatial",
       "prompt": "ambient chill, soft pads, gentle textures, relaxing, spacious cosmic ambient, instrumental",
       "type": "instrumental",
       "duration": 125
     },
     {
       "id": "10",
-      "name": "10 - Sommeil",
+      "name": "Sommeil",
       "prompt": "ambient chill, soft pads, gentle textures, relaxing, sleep music, very slow, instrumental",
       "type": "instrumental",
       "duration": 70

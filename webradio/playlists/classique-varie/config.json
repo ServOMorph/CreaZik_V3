@@ -5,70 +5,70 @@
   "test_cases": [
     {
       "id": "1",
-      "name": "01 - Baroque",
+      "name": "Baroque",
       "prompt": "classical music, acoustic instruments, baroque, harpsichord and strings, instrumental",
       "type": "instrumental",
       "duration": 60
     },
     {
       "id": "2",
-      "name": "02 - Quatuor",
+      "name": "Quatuor",
       "prompt": "classical music, acoustic instruments, string quartet, intimate, instrumental",
       "type": "instrumental",
       "duration": 130
     },
     {
       "id": "3",
-      "name": "03 - Romantique",
+      "name": "Romantique",
       "prompt": "classical music, acoustic instruments, romantic orchestra, sweeping melody, instrumental",
       "type": "instrumental",
       "duration": 130
     },
     {
       "id": "4",
-      "name": "04 - Concerto de piano",
+      "name": "Concerto de piano",
       "prompt": "classical music, acoustic instruments, piano concerto feel, dramatic, instrumental",
       "type": "instrumental",
       "duration": 90
     },
     {
       "id": "5",
-      "name": "05 - Minimalisme",
+      "name": "Minimalisme",
       "prompt": "classical music, acoustic instruments, minimalist classical, repeating patterns, instrumental",
       "type": "instrumental",
       "duration": 130
     },
     {
       "id": "6",
-      "name": "06 - Musique de chambre",
+      "name": "Musique de chambre",
       "prompt": "classical music, acoustic instruments, chamber ensemble, woodwinds, instrumental",
       "type": "instrumental",
       "duration": 125
     },
     {
       "id": "7",
-      "name": "07 - Marche solennelle",
+      "name": "Marche solennelle",
       "prompt": "classical music, acoustic instruments, solemn march, brass and timpani, instrumental",
       "type": "instrumental",
       "duration": 55
     },
     {
       "id": "8",
-      "name": "08 - Valse viennoise",
+      "name": "Valse viennoise",
       "prompt": "classical music, acoustic instruments, Viennese waltz, elegant, instrumental",
       "type": "instrumental",
       "duration": 60
     },
     {
       "id": "9",
-      "name": "09 - Aube pastorale",
+      "name": "Aube pastorale",
       "prompt": "classical music, acoustic instruments, pastoral morning, flute and strings, instrumental",
       "type": "instrumental",
       "duration": 55
     },
     {
       "id": "10",
-      "name": "10 - Final symphonique",
+      "name": "Final symphonique",
       "prompt": "classical music, acoustic instruments, symphonic finale, triumphant, instrumental",
       "type": "instrumental",
       "duration": 105

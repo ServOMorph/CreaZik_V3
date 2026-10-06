@@ -5,7 +5,7 @@
   "test_cases": [
     {
       "id": "1",
-      "name": "01 - Dickinson - Hope is the thing with feathers",
+      "name": "Dickinson - Hope is the thing with feathers",
       "prompt": "English spoken word poetry, soft female voice reciting, gentle piano and light strings, hopeful, slow",
       "type": "vocal",
       "duration": 65,
@@ -16,7 +16,7 @@
     },
     {
       "id": "2",
-      "name": "02 - Blake - The Tyger",
+      "name": "Blake - The Tyger",
       "prompt": "English poetry, intense male voice reciting, dark percussion, low drones and anvil hits, dramatic, mid tempo",
       "type": "vocal",
       "duration": 130,
@@ -27,7 +27,7 @@
     },
     {
       "id": "3",
-      "name": "03 - Wordsworth - I wandered lonely as a cloud",
+      "name": "Wordsworth - I wandered lonely as a cloud",
       "prompt": "English poetry, warm recitation, acoustic guitar and flute, pastoral and joyful, walking tempo",
       "type": "vocal",
       "duration": 130,
@@ -38,7 +38,7 @@
     },
     {
       "id": "4",
-      "name": "04 - Keats - Bright star",
+      "name": "Keats - Bright star",
       "prompt": "English romantic poetry, tender male voice reciting, slow piano and soft strings, starry night atmosphere",
       "type": "vocal",
       "duration": 75,
@@ -49,7 +49,7 @@
     },
     {
       "id": "5",
-      "name": "05 - Yeats - When You Are Old",
+      "name": "Yeats - When You Are Old",
       "prompt": "English poetry, intimate female voice reciting, fingerpicked guitar and cello, wistful, slow fireside mood",
       "type": "vocal",
       "duration": 65,
@@ -60,7 +60,7 @@
     },
     {
       "id": "6",
-      "name": "06 - Rossetti - Remember",
+      "name": "Rossetti - Remember",
       "prompt": "English poetry, quiet whispered recitation, sparse piano, soft pads, tender and sorrowful, very slow",
       "type": "vocal",
       "duration": 75,
@@ -71,7 +71,7 @@
     },
     {
       "id": "7",
-      "name": "07 - Poe - A Dream Within a Dream",
+      "name": "Poe - A Dream Within a Dream",
       "prompt": "English gothic poetry, haunting male voice reciting, reverb piano, drone and distant waves, eerie and slow",
       "type": "vocal",
       "duration": 130,
@@ -82,7 +82,7 @@
     },
     {
       "id": "8",
-      "name": "08 - Tennyson - Crossing the Bar",
+      "name": "Tennyson - Crossing the Bar",
       "prompt": "English poetry, solemn male voice reciting, slow strings and organ, sea ambience, peaceful farewell mood",
       "type": "vocal",
       "duration": 90,
@@ -93,7 +93,7 @@
     },
     {
       "id": "9",
-      "name": "09 - Shelley - Ozymandias",
+      "name": "Shelley - Ozymandias",
       "prompt": "English poetry, dramatic male voice reciting, desert drones, slow percussion and brass swells, epic and desolate",
       "type": "vocal",
       "duration": 75,
@@ -104,7 +104,7 @@
     },
     {
       "id": "10",
-      "name": "10 - Burns - A Red, Red Rose",
+      "name": "Burns - A Red, Red Rose",
       "prompt": "Scottish folk poetry sung and spoken, warm voice, fiddle and acoustic guitar, tender and lilting, slow waltz",
       "type": "vocal",
       "duration": 90,

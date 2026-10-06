@@ -5,70 +5,70 @@
   "test_cases": [
     {
       "id": "1",
-      "name": "01 - Riff de saxophone",
+      "name": "Riff de saxophone",
       "prompt": "classic 1970s funk, tenor saxophone lead riffs, tight rhythm section, horn section stabs, 108 bpm, instrumental",
       "type": "instrumental",
       "duration": 45
     },
     {
       "id": "2",
-      "name": "02 - Second line du dimanche",
+      "name": "Second line du dimanche",
       "prompt": "New Orleans second line funk, saxophone, brass band groove, snare rolls, joyful, instrumental",
       "type": "instrumental",
       "duration": 75
     },
     {
       "id": "3",
-      "name": "03 - Cuivres de minuit",
+      "name": "Cuivres de minuit",
       "prompt": "funk groove, alto saxophone solo, horn section, wah guitar, 100 bpm, instrumental",
       "type": "instrumental",
       "duration": 105
     },
     {
       "id": "4",
-      "name": "04 - Groove en poche",
+      "name": "Groove en poche",
       "prompt": "deep funk pocket, slap bass, tight drums, saxophone riff, 96 bpm, instrumental",
       "type": "instrumental",
       "duration": 55
     },
     {
       "id": "5",
-      "name": "05 - Soul du matin",
+      "name": "Soul du matin",
       "prompt": "soul jazz funk, saxophone melody, electric piano, warm bass, laid back, 90 bpm, instrumental",
       "type": "instrumental",
       "duration": 135
     },
     {
       "id": "6",
-      "name": "06 - Fête des cuivres",
+      "name": "Fête des cuivres",
       "prompt": "high energy funk, horn section, saxophone shouts, fast, 118 bpm, instrumental",
       "type": "instrumental",
       "duration": 110
     },
     {
       "id": "7",
-      "name": "07 - Shuffle du samedi",
+      "name": "Shuffle du samedi",
       "prompt": "funky shuffle, saxophone, organ, tight drums, 110 bpm, instrumental",
       "type": "instrumental",
       "duration": 70
     },
     {
       "id": "8",
-      "name": "08 - Le break",
+      "name": "Le break",
       "prompt": "funk breakbeat, saxophone stabs, percussive guitar, drum break, 104 bpm, instrumental",
       "type": "instrumental",
       "duration": 95
     },
     {
       "id": "9",
-      "name": "09 - Ballade funky",
+      "name": "Ballade funky",
       "prompt": "slow funk ballad, expressive saxophone, electric piano, 78 bpm, instrumental",
       "type": "instrumental",
       "duration": 70
     },
     {
       "id": "10",
-      "name": "10 - Soirée sur le bayou",
+      "name": "Soirée sur le bayou",
       "prompt": "funk with swampy groove, saxophone, clavinet, congas, 100 bpm, instrumental",
       "type": "instrumental",
       "duration": 100

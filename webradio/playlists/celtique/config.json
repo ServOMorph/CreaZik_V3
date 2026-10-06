@@ -5,70 +5,70 @@
   "test_cases": [
     {
       "id": "1",
-      "name": "01 - Gigue",
+      "name": "Gigue",
       "prompt": "Irish and Celtic folk, fiddle, tin whistle, bodhran, uilleann pipes, jig 6/8, instrumental",
       "type": "instrumental",
       "duration": 65
     },
     {
       "id": "2",
-      "name": "02 - Reel rapide",
+      "name": "Reel rapide",
       "prompt": "Irish and Celtic folk, fiddle, tin whistle, bodhran, uilleann pipes, reel fast, instrumental",
       "type": "instrumental",
       "duration": 45
     },
     {
       "id": "3",
-      "name": "03 - Air lent",
+      "name": "Air lent",
       "prompt": "Irish and Celtic folk, fiddle, tin whistle, bodhran, uilleann pipes, slow air, instrumental",
       "type": "instrumental",
       "duration": 95
     },
     {
       "id": "4",
-      "name": "04 - Hornpipe",
+      "name": "Hornpipe",
       "prompt": "Irish and Celtic folk, fiddle, tin whistle, bodhran, uilleann pipes, hornpipe, instrumental",
       "type": "instrumental",
       "duration": 120
     },
     {
       "id": "5",
-      "name": "05 - Session au pub",
+      "name": "Session au pub",
       "prompt": "Irish and Celtic folk, fiddle, tin whistle, bodhran, uilleann pipes, session tune, instrumental",
       "type": "instrumental",
       "duration": 100
     },
     {
       "id": "6",
-      "name": "06 - Valse celtique",
+      "name": "Valse celtique",
       "prompt": "Irish and Celtic folk, fiddle, tin whistle, bodhran, uilleann pipes, waltz, instrumental",
       "type": "instrumental",
       "duration": 65
     },
     {
       "id": "7",
-      "name": "07 - Polka",
+      "name": "Polka",
       "prompt": "Irish and Celtic folk, fiddle, tin whistle, bodhran, uilleann pipes, polka, instrumental",
       "type": "instrumental",
       "duration": 125
     },
     {
       "id": "8",
-      "name": "08 - Air de fées",
+      "name": "Air de fées",
       "prompt": "Irish and Celtic folk, fiddle, tin whistle, bodhran, uilleann pipes, fairy tune, instrumental",
       "type": "instrumental",
       "duration": 110
     },
     {
       "id": "9",
-      "name": "09 - Ballade instrumentale",
+      "name": "Ballade instrumentale",
       "prompt": "Irish and Celtic folk, fiddle, tin whistle, bodhran, uilleann pipes, ballad instrumental, instrumental",
       "type": "instrumental",
       "duration": 90
     },
     {
       "id": "10",
-      "name": "10 - Set de fête",
+      "name": "Set de fête",
       "prompt": "Irish and Celtic folk, fiddle, tin whistle, bodhran, uilleann pipes, festive set, instrumental",
       "type": "instrumental",
       "duration": 45

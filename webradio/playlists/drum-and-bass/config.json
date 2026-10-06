@@ -5,70 +5,70 @@
   "test_cases": [
     {
       "id": "1",
-      "name": "01 - Liquid",
+      "name": "Liquid",
       "prompt": "drum and bass, fast breakbeats, deep sub bass, 174 bpm, liquid drum and bass, melodic and smooth, instrumental",
       "type": "instrumental",
       "duration": 75
     },
     {
       "id": "2",
-      "name": "02 - Jump up",
+      "name": "Jump up",
       "prompt": "drum and bass, fast breakbeats, deep sub bass, 174 bpm, jump up, energetic, instrumental",
       "type": "instrumental",
       "duration": 65
     },
     {
       "id": "3",
-      "name": "03 - Neurofunk",
+      "name": "Neurofunk",
       "prompt": "drum and bass, fast breakbeats, deep sub bass, 174 bpm, neurofunk, dark and technical, instrumental",
       "type": "instrumental",
       "duration": 105
     },
     {
       "id": "4",
-      "name": "04 - Jungle",
+      "name": "Jungle",
       "prompt": "drum and bass, fast breakbeats, deep sub bass, 174 bpm, jungle, chopped breaks, instrumental",
       "type": "instrumental",
       "duration": 95
     },
     {
       "id": "5",
-      "name": "05 - Roller",
+      "name": "Roller",
       "prompt": "drum and bass, fast breakbeats, deep sub bass, 174 bpm, rolling bassline, hypnotic, instrumental",
       "type": "instrumental",
       "duration": 100
     },
     {
       "id": "6",
-      "name": "06 - Atmosphérique",
+      "name": "Atmosphérique",
       "prompt": "drum and bass, fast breakbeats, deep sub bass, 174 bpm, atmospheric drum and bass, pads, instrumental",
       "type": "instrumental",
       "duration": 70
     },
     {
       "id": "7",
-      "name": "07 - Jazzstep",
+      "name": "Jazzstep",
       "prompt": "drum and bass, fast breakbeats, deep sub bass, 174 bpm, jazzy drum and bass, piano, instrumental",
       "type": "instrumental",
       "duration": 100
     },
     {
       "id": "8",
-      "name": "08 - Minimal",
+      "name": "Minimal",
       "prompt": "drum and bass, fast breakbeats, deep sub bass, 174 bpm, minimal drum and bass, instrumental",
       "type": "instrumental",
       "duration": 110
     },
     {
       "id": "9",
-      "name": "09 - Hymne",
+      "name": "Hymne",
       "prompt": "drum and bass, fast breakbeats, deep sub bass, 174 bpm, anthemic drum and bass, uplifting, instrumental",
       "type": "instrumental",
       "duration": 110
     },
     {
       "id": "10",
-      "name": "10 - Crépuscule",
+      "name": "Crépuscule",
       "prompt": "drum and bass, fast breakbeats, deep sub bass, 174 bpm, twilight drum and bass, emotional, instrumental",
       "type": "instrumental",
       "duration": 80

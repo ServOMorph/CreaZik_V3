@@ -5,7 +5,7 @@
   "test_cases": [
     {
       "id": "1",
-      "name": "01 - La complainte du marin",
+      "name": "La complainte du marin",
       "prompt": "Breton celtic folk rock, bombarde, bagpipes, fiddle, bouzouki, celtic harp, bodhran, rock drums, hearty male group vocals and choir, French lyrics, slow, sea shanty, harp intro",
       "type": "vocal",
       "duration": 60,
@@ -14,7 +14,7 @@
     },
     {
       "id": "2",
-      "name": "02 - La danse de Plougastel",
+      "name": "La danse de Plougastel",
       "prompt": "Breton celtic folk rock, bombarde, bagpipes, fiddle, bouzouki, celtic harp, bodhran, rock drums, hearty male group vocals and choir, French lyrics, fast dance, gavotte rhythm, bombarde",
       "type": "vocal",
       "duration": 110,
@@ -23,7 +23,7 @@
     },
     {
       "id": "3",
-      "name": "03 - Le loup de la lande",
+      "name": "Le loup de la lande",
       "prompt": "Breton celtic folk rock, bombarde, bagpipes, fiddle, bouzouki, celtic harp, bodhran, rock drums, hearty male group vocals and choir, French lyrics, dark, minor, epic build",
       "type": "vocal",
       "duration": 65,
@@ -32,7 +32,7 @@
     },
     {
       "id": "4",
-      "name": "04 - Les filles de Quimper",
+      "name": "Les filles de Quimper",
       "prompt": "Breton celtic folk rock, bombarde, bagpipes, fiddle, bouzouki, celtic harp, bodhran, rock drums, hearty male group vocals and choir, French lyrics, uptempo folk rock, fiddle",
       "type": "vocal",
       "duration": 75,
@@ -41,7 +41,7 @@
     },
     {
       "id": "5",
-      "name": "05 - Le roi de la forêt",
+      "name": "Le roi de la forêt",
       "prompt": "Breton celtic folk rock, bombarde, bagpipes, fiddle, bouzouki, celtic harp, bodhran, rock drums, hearty male group vocals and choir, French lyrics, medieval ballad, harp and flute",
       "type": "vocal",
       "duration": 110,
@@ -50,7 +50,7 @@
     },
     {
       "id": "6",
-      "name": "06 - Pêcheurs d'Islande",
+      "name": "Pêcheurs d'Islande",
       "prompt": "Breton celtic folk rock, bombarde, bagpipes, fiddle, bouzouki, celtic harp, bodhran, rock drums, hearty male group vocals and choir, French lyrics, slow, sea, male choir",
       "type": "vocal",
       "duration": 125,
@@ -59,7 +59,7 @@
     },
     {
       "id": "7",
-      "name": "07 - La gavotte du cidre",
+      "name": "La gavotte du cidre",
       "prompt": "Breton celtic folk rock, bombarde, bagpipes, fiddle, bouzouki, celtic harp, bodhran, rock drums, hearty male group vocals and choir, French lyrics, fast, festive, bagpipes",
       "type": "vocal",
       "duration": 135,
@@ -68,7 +68,7 @@
     },
     {
       "id": "8",
-      "name": "08 - Les menhirs",
+      "name": "Les menhirs",
       "prompt": "Breton celtic folk rock, bombarde, bagpipes, fiddle, bouzouki, celtic harp, bodhran, rock drums, hearty male group vocals and choir, French lyrics, mystical, slow, drone, choir",
       "type": "vocal",
       "duration": 100,
@@ -77,7 +77,7 @@
     },
     {
       "id": "9",
-      "name": "09 - Le retour au pays",
+      "name": "Le retour au pays",
       "prompt": "Breton celtic folk rock, bombarde, bagpipes, fiddle, bouzouki, celtic harp, bodhran, rock drums, hearty male group vocals and choir, French lyrics, mid-tempo anthem, rock drums",
       "type": "vocal",
       "duration": 130,
@@ -86,7 +86,7 @@
     },
     {
       "id": "10",
-      "name": "10 - Kenavo",
+      "name": "Kenavo",
       "prompt": "Breton celtic folk rock, bombarde, bagpipes, fiddle, bouzouki, celtic harp, bodhran, rock drums, hearty male group vocals and choir, French lyrics, final, festive, all instruments",
       "type": "vocal",
       "duration": 105,

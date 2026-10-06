@@ -35,42 +35,42 @@
       "speed": 0.9,
       "density": 0.6
     },
-    "perso-electro": {
+    "francais_tests-electro": {
       "motif": "grid",
       "hue": 280,
       "hue2": 190,
       "speed": 1.3,
       "density": 0.7
     },
-    "perso-folk": {
+    "francais_tests-folk": {
       "motif": "strings",
       "hue": 35,
       "hue2": 90,
       "speed": 0.7,
       "density": 0.5
     },
-    "perso-rock": {
+    "francais_tests-rock": {
       "motif": "spokes",
       "hue": 0,
       "hue2": 25,
       "speed": 1.4,
       "density": 0.8
     },
-    "perso-classique": {
+    "francais_tests-classique": {
       "motif": "aurora",
       "hue": 220,
       "hue2": 45,
       "speed": 0.6,
       "density": 0.5
     },
-    "perso-gregorien": {
+    "francais_tests-gregorien": {
       "motif": "bokeh",
       "hue": 40,
       "hue2": 20,
       "speed": 0.4,
       "density": 0.4
     },
-    "perso-chorale": {
+    "francais_tests-chorale": {
       "motif": "rings",
       "hue": 160,
       "hue2": 190,
@@ -215,13 +215,6 @@
       "hue": 190,
       "hue2": 25,
       "speed": 0.5,
-      "density": 0.6
-    },
-    "didgeridoo": {
-      "motif": "particles",
-      "hue": 20,
-      "hue2": 355,
-      "speed": 0.7,
       "density": 0.6
     },
     "electro-spatiale": {

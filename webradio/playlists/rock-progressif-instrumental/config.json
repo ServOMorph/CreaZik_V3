@@ -5,70 +5,70 @@
   "test_cases": [
     {
       "id": "1",
-      "name": "01 - Cloches tubulaires",
+      "name": "Cloches tubulaires",
       "prompt": "progressive instrumental rock, repeating piano and glockenspiel motif, tubular bells, layers building up",
       "type": "instrumental",
       "duration": 55
     },
     {
       "id": "2",
-      "name": "02 - Guitares celtiques",
+      "name": "Guitares celtiques",
       "prompt": "instrumental progressive folk, layered electric and acoustic guitars, celtic melody, building",
       "type": "instrumental",
       "duration": 100
     },
     {
       "id": "3",
-      "name": "03 - Crescendo du matin",
+      "name": "Crescendo du matin",
       "prompt": "progressive instrumental, gradual crescendo, bass, guitars, drums entering, 105 bpm",
       "type": "instrumental",
       "duration": 125
     },
     {
       "id": "4",
-      "name": "04 - Chants de la lande",
+      "name": "Chants de la lande",
       "prompt": "celtic-flavored instrumental, flutes, mandolin, guitar, pastoral, mid tempo",
       "type": "instrumental",
       "duration": 65
     },
     {
       "id": "5",
-      "name": "05 - Voyage hypnotique",
+      "name": "Voyage hypnotique",
       "prompt": "hypnotic progressive instrumental, interlocking guitar patterns, steady rhythm, 120 bpm",
       "type": "instrumental",
       "duration": 115
     },
     {
       "id": "6",
-      "name": "06 - Danse des îles",
+      "name": "Danse des îles",
       "prompt": "instrumental celtic dance, fiddle-like guitar lead, driving drums, joyful, 130 bpm",
       "type": "instrumental",
       "duration": 110
     },
     {
       "id": "7",
-      "name": "07 - Le grand thème",
+      "name": "Le grand thème",
       "prompt": "epic progressive rock instrumental, soaring electric guitar theme, strings, 95 bpm",
       "type": "instrumental",
       "duration": 105
     },
     {
       "id": "8",
-      "name": "08 - Clair de lande",
+      "name": "Clair de lande",
       "prompt": "gentle acoustic guitar layers, flute, soft bass, serene, 80 bpm",
       "type": "instrumental",
       "duration": 120
     },
     {
       "id": "9",
-      "name": "09 - Spirale infinie",
+      "name": "Spirale infinie",
       "prompt": "progressive instrumental, repeating motif with evolving meter, many layered instruments, 110 bpm",
       "type": "instrumental",
       "duration": 95
     },
     {
       "id": "10",
-      "name": "10 - Finale en cloches",
+      "name": "Finale en cloches",
       "prompt": "triumphant progressive finale, tubular bells, driving guitar, full band, 115 bpm",
       "type": "instrumental",
       "duration": 110

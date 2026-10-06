@@ -5,70 +5,70 @@
   "test_cases": [
     {
       "id": "1",
-      "name": "01 - Valse de Montmartre",
+      "name": "Valse de Montmartre",
       "prompt": "instrumental, French minimalist piano, accordion, violin, toy piano, glockenspiel, whimsical and melancholic, cinematic, Parisian, instrumental, accordion waltz, 3/4, lively",
       "type": "instrumental",
       "duration": 90
     },
     {
       "id": "2",
-      "name": "02 - Comptine du matin",
+      "name": "Comptine du matin",
       "prompt": "instrumental, French minimalist piano, accordion, violin, toy piano, glockenspiel, whimsical and melancholic, cinematic, Parisian, instrumental, solo piano, repetitive arpeggio, tender",
       "type": "instrumental",
       "duration": 115
     },
     {
       "id": "3",
-      "name": "03 - La dame aux chats",
+      "name": "La dame aux chats",
       "prompt": "instrumental, French minimalist piano, accordion, violin, toy piano, glockenspiel, whimsical and melancholic, cinematic, Parisian, instrumental, toy piano and glockenspiel, playful",
       "type": "instrumental",
       "duration": 80
     },
     {
       "id": "4",
-      "name": "04 - Pluie sur Ouessant",
+      "name": "Pluie sur Ouessant",
       "prompt": "instrumental, French minimalist piano, accordion, violin, toy piano, glockenspiel, whimsical and melancholic, cinematic, Parisian, instrumental, piano and violin, melancholic, slow",
       "type": "instrumental",
       "duration": 50
     },
     {
       "id": "5",
-      "name": "05 - Le vélo bleu",
+      "name": "Le vélo bleu",
       "prompt": "instrumental, French minimalist piano, accordion, violin, toy piano, glockenspiel, whimsical and melancholic, cinematic, Parisian, instrumental, accordion and mandolin, upbeat, bouncing",
       "type": "instrumental",
       "duration": 105
     },
     {
       "id": "6",
-      "name": "06 - Phare de nuit",
+      "name": "Phare de nuit",
       "prompt": "instrumental, French minimalist piano, accordion, violin, toy piano, glockenspiel, whimsical and melancholic, cinematic, Parisian, instrumental, piano, cello, building intensity, minimal",
       "type": "instrumental",
       "duration": 100
     },
     {
       "id": "7",
-      "name": "07 - Les escaliers du canal",
+      "name": "Les escaliers du canal",
       "prompt": "instrumental, French minimalist piano, accordion, violin, toy piano, glockenspiel, whimsical and melancholic, cinematic, Parisian, instrumental, violin and piano, pizzicato, curious",
       "type": "instrumental",
       "duration": 60
     },
     {
       "id": "8",
-      "name": "08 - Fête foraine abandonnée",
+      "name": "Fête foraine abandonnée",
       "prompt": "instrumental, French minimalist piano, accordion, violin, toy piano, glockenspiel, whimsical and melancholic, cinematic, Parisian, instrumental, out-of-tune piano, harmonium, nostalgic",
       "type": "instrumental",
       "duration": 130
     },
     {
       "id": "9",
-      "name": "09 - Le vent d'Ouest",
+      "name": "Le vent d'Ouest",
       "prompt": "instrumental, French minimalist piano, accordion, violin, toy piano, glockenspiel, whimsical and melancholic, cinematic, Parisian, instrumental, violin solo with strings, fast ostinato, frantic",
       "type": "instrumental",
       "duration": 80
     },
     {
       "id": "10",
-      "name": "10 - Dernière lettre",
+      "name": "Dernière lettre",
       "prompt": "instrumental, French minimalist piano, accordion, violin, toy piano, glockenspiel, whimsical and melancholic, cinematic, Parisian, instrumental, solo piano, very slow, intimate",
       "type": "instrumental",
       "duration": 105

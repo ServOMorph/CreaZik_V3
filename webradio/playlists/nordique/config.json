@@ -5,70 +5,70 @@
   "test_cases": [
     {
       "id": "1",
-      "name": "01 - Hiver lent",
+      "name": "Hiver lent",
       "prompt": "Nordic folk, nyckelharpa, fiddle, deep drums, drone, ancient, slow winter, instrumental",
       "type": "instrumental",
       "duration": 105
     },
     {
       "id": "2",
-      "name": "02 - Marche des drakkars",
+      "name": "Marche des drakkars",
       "prompt": "Nordic folk, nyckelharpa, fiddle, deep drums, drone, ancient, viking march, instrumental",
       "type": "instrumental",
       "duration": 60
     },
     {
       "id": "3",
-      "name": "03 - Danse de printemps",
+      "name": "Danse de printemps",
       "prompt": "Nordic folk, nyckelharpa, fiddle, deep drums, drone, ancient, spring dance, instrumental",
       "type": "instrumental",
       "duration": 75
     },
     {
       "id": "4",
-      "name": "04 - Mystère de la forêt",
+      "name": "Mystère de la forêt",
       "prompt": "Nordic folk, nyckelharpa, fiddle, deep drums, drone, ancient, forest mystery, instrumental",
       "type": "instrumental",
       "duration": 85
     },
     {
       "id": "5",
-      "name": "05 - Berceuse du nord",
+      "name": "Berceuse du nord",
       "prompt": "Nordic folk, nyckelharpa, fiddle, deep drums, drone, ancient, lullaby, instrumental",
       "type": "instrumental",
       "duration": 100
     },
     {
       "id": "6",
-      "name": "06 - Polska",
+      "name": "Polska",
       "prompt": "Nordic folk, nyckelharpa, fiddle, deep drums, drone, ancient, polska dance, instrumental",
       "type": "instrumental",
       "duration": 70
     },
     {
       "id": "7",
-      "name": "07 - Rituel",
+      "name": "Rituel",
       "prompt": "Nordic folk, nyckelharpa, fiddle, deep drums, drone, ancient, ritual, instrumental",
       "type": "instrumental",
       "duration": 90
     },
     {
       "id": "8",
-      "name": "08 - Aurore boréale",
+      "name": "Aurore boréale",
       "prompt": "Nordic folk, nyckelharpa, fiddle, deep drums, drone, ancient, aurora mood, instrumental",
       "type": "instrumental",
       "duration": 125
     },
     {
       "id": "9",
-      "name": "09 - Chant du port",
+      "name": "Chant du port",
       "prompt": "Nordic folk, nyckelharpa, fiddle, deep drums, drone, ancient, harbor tune, instrumental",
       "type": "instrumental",
       "duration": 65
     },
     {
       "id": "10",
-      "name": "10 - Nuit de la Saint-Jean",
+      "name": "Nuit de la Saint-Jean",
       "prompt": "Nordic folk, nyckelharpa, fiddle, deep drums, drone, ancient, midsummer, instrumental",
       "type": "instrumental",
       "duration": 130

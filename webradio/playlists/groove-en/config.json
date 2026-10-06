@@ -5,7 +5,7 @@
   "test_cases": [
     {
       "id": "1",
-      "name": "01 - Slow Burn",
+      "name": "Slow Burn",
       "prompt": "groove, soul funk, tight drums, deep bass, warm Rhodes piano, 92 bpm, smooth male English vocal",
       "type": "vocal",
       "duration": 80,
@@ -14,7 +14,7 @@
     },
     {
       "id": "2",
-      "name": "02 - Keep It Smooth",
+      "name": "Keep It Smooth",
       "prompt": "smooth groove, clean funky guitar, mellow bass, brushed drums, 96 bpm, female English vocal, laid back",
       "type": "vocal",
       "duration": 105,
@@ -23,7 +23,7 @@
     },
     {
       "id": "3",
-      "name": "03 - Sunday in the Pocket",
+      "name": "Sunday in the Pocket",
       "prompt": "funk groove, slap bass, crisp snare, rhythm guitar, brass hits, 102 bpm, male English vocal",
       "type": "vocal",
       "duration": 110,
@@ -32,7 +32,7 @@
     },
     {
       "id": "4",
-      "name": "04 - Velvet Groove",
+      "name": "Velvet Groove",
       "prompt": "neo soul groove, warm bass, Rhodes, soft drums, 90 bpm, female English vocal, silky",
       "type": "vocal",
       "duration": 135,
@@ -41,7 +41,7 @@
     },
     {
       "id": "5",
-      "name": "05 - Bass in My Bones",
+      "name": "Bass in My Bones",
       "prompt": "heavy funk groove, deep slap bass, tight drums, clavinet, 104 bpm, male English vocal, gritty",
       "type": "vocal",
       "duration": 135,
@@ -50,7 +50,7 @@
     },
     {
       "id": "6",
-      "name": "06 - Rhythm in the Rain",
+      "name": "Rhythm in the Rain",
       "prompt": "groovy soul, wet guitar chords, light percussion, warm bass, 94 bpm, duet English vocal",
       "type": "vocal",
       "duration": 125,
@@ -59,7 +59,7 @@
     },
     {
       "id": "7",
-      "name": "07 - Funky Morning",
+      "name": "Funky Morning",
       "prompt": "funk, wah guitar, punchy horns, slap bass, tight drums, 108 bpm, male English vocal, upbeat",
       "type": "vocal",
       "duration": 80,
@@ -68,7 +68,7 @@
     },
     {
       "id": "8",
-      "name": "08 - Take Your Time",
+      "name": "Take Your Time",
       "prompt": "soul groove, mellow bass, brushed drums, warm organ, 88 bpm, female English vocal, gentle",
       "type": "vocal",
       "duration": 65,
@@ -77,7 +77,7 @@
     },
     {
       "id": "9",
-      "name": "09 - Sweet Syncopation",
+      "name": "Sweet Syncopation",
       "prompt": "jazzy groove, syncopated drums, walking bass, electric piano, 100 bpm, female English vocal, playful",
       "type": "vocal",
       "duration": 55,
@@ -86,7 +86,7 @@
     },
     {
       "id": "10",
-      "name": "10 - Midnight Pocket",
+      "name": "Midnight Pocket",
       "prompt": "deep groove, subtle funk guitar, round bass, tight snare, 91 bpm, male English vocal, late night",
       "type": "vocal",
       "duration": 45,

@@ -17,37 +17,37 @@
     "palette": "rose poudré, ocre, crème",
     "typographie": "écriture manuscrite élégante"
   },
-  "perso-electro": {
+  "francais_tests-electro": {
     "sujet": "une plume qui se transforme en ondes lumineuses",
     "technique": "néon synthwave",
     "palette": "magenta, cyan, noir",
     "typographie": "sans empattement fin futuriste"
   },
-  "perso-folk": {
+  "francais_tests-folk": {
     "sujet": "une plume posée sur une guitare acoustique et des feuilles",
     "technique": "gravure sur bois colorée",
     "palette": "brun, vert mousse, crème",
     "typographie": "serif rustique"
   },
-  "perso-rock": {
+  "francais_tests-rock": {
     "sujet": "une plume enflammée devant un ampli",
     "technique": "affiche de concert sérigraphiée",
     "palette": "rouge, noir, jaune",
     "typographie": "sans empattement condensé gras"
   },
-  "perso-classique": {
+  "francais_tests-classique": {
     "sujet": "une plume et une partition ancienne",
     "technique": "gravure dorée sur papier ancien",
     "palette": "bordeaux, or, ivoire",
     "typographie": "serif classique à empattements fins"
   },
-  "perso-gregorien": {
+  "francais_tests-gregorien": {
     "sujet": "un parchemin avec neumes et lettrine enluminée",
     "technique": "enluminure médiévale",
     "palette": "or, bleu lapis-lazuli, rouge sombre",
     "typographie": "onciale gothique"
   },
-  "perso-chorale": {
+  "francais_tests-chorale": {
     "sujet": "des silhouettes de choristes en demi-cercle sous une lumière chaude",
     "technique": "illustration lumineuse douce",
     "palette": "or chaud, bordeaux, bleu nuit",
@@ -166,12 +166,6 @@
     "technique": "peinture de paysage large",
     "palette": "bleu ciel, vert steppe, ocre",
     "typographie": "sans empattement aux traits calligraphiques"
-  },
-  "didgeridoo": {
-    "sujet": "un didgeridoo et des points colorés d'un désert australien",
-    "technique": "peinture à points aborigène",
-    "palette": "ocre rouge, terre, jaune, noir",
-    "typographie": "lettres rugueuses arrondies"
   },
   "electro-spatiale": {
     "sujet": "des synthétiseurs analogiques vintage sous un ciel étoilé",

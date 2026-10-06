@@ -12,6 +12,7 @@
     const $ = id => document.getElementById(id);
     const canvas = $('vizCanvas');
     const ctx2d = canvas.getContext('2d');
+    const trackCover = $('trackCover');
 
     const slots = [$('audio'), new Audio(), new Audio()].map(el => {
         el.preload = 'auto';
@@ -65,6 +66,10 @@
 
     function esc(v) {
         return String(v == null ? '' : v).replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+    }
+
+    function trackTitle(it) {
+        return String(it && it.name || '').replace(/^\d+\s*-\s*/, '');
     }
 
     function fmtTime(s) {
@@ -337,7 +342,7 @@
             parts.push('Jingle généré par une IA tournant en local');
         } else {
             if (it.playlist_description) parts.push(it.playlist_description);
-            parts.push('Morceau : ' + it.name);
+            parts.push('Morceau : ' + trackTitle(it));
             if (it.prompt) parts.push('Style demandé à l\'IA : ' + it.prompt);
             const date = fmtDate(it.generated_at);
             if (it.model || date) parts.push('Généré' + (date ? ' le ' + date : '') + (it.model ? ' avec ' + it.model : ''));
@@ -372,7 +377,8 @@
     }
 
     function showMeta(it) {
-        $('nowTitle').textContent = it.jingle ? 'Jingle' : it.name;
+        showTrackCover(it);
+        $('nowTitle').textContent = it.jingle ? 'Jingle' : trackTitle(it);
         $('nowSub').textContent = it.jingle ? 'CréaZik IA WebRadio' : plName(it.playlist_label);
         setTicker(buildTicker(it));
         loadViz(it);
@@ -380,15 +386,32 @@
         updateThumbs();
         renderProgram();
         const area = $('comText');
-        if (area) area.placeholder = it.jingle ? 'Ton commentaire sur la radio...' : 'Ton commentaire sur « ' + it.name + ' »...';
+        if (area) area.placeholder = it.jingle ? 'Ton commentaire sur la radio...' : 'Ton commentaire sur « ' + trackTitle(it) + ' »...';
         featuredId = null;
         loadComments();
+    }
+
+    function showTrackCover(it) {
+        trackCover.hidden = true;
+        trackCover.removeAttribute('src');
+        canvas.hidden = false;
+        if (!it || it.jingle || !it.file) return;
+        const match = it.file.match(/^(playlists\/[\w-]+\/outputs\/.+)\.(?:wav|mp3|flac|ogg)$/i);
+        if (!match) return;
+        trackCover.onload = () => {
+            if (current === it) {
+                trackCover.hidden = false;
+                canvas.hidden = true;
+            }
+        };
+        trackCover.onerror = () => { canvas.hidden = false; };
+        trackCover.src = './' + match[1] + '.cover.png?v=' + encodeURIComponent(it.generated_at || '');
     }
 
     function applyMediaSession() {
         if (!('mediaSession' in navigator) || !current) return;
         navigator.mediaSession.metadata = new MediaMetadata({
-            title: current.jingle ? 'Jingle' : current.name,
+            title: current.jingle ? 'Jingle' : trackTitle(current),
             artist: current.jingle ? 'CréaZik IA WebRadio' : plName(current.playlist_label),
             album: 'CréaZik IA WebRadio'
         });
@@ -669,7 +692,7 @@
         const removable = src === 'queue' && !(extra.auto && isJ);
         return `<div class="prog-item${isJ ? ' is-jingle' : ''}${extra.explicit ? ' is-explicit' : ''}${extra.cls || ''}" ${attrs}>
             <button type="button" class="prog-main" data-act="next" ${attrs}>
-                <span class="prog-title">${esc(it.name)}</span>
+                <span class="prog-title">${esc(trackTitle(it))}</span>
                 <span class="prog-sub">${esc(sub)}${extra.time ? ' - ' + esc(extra.time) : ''}</span>
                 ${badge}
             </button>
@@ -692,7 +715,7 @@
             : empty('Rien de joué avant ce morceau.'));
         setHtml('progNow', current
             ? `<div class="prog-item is-now${current.jingle ? ' is-jingle' : ''}"><div class="prog-main">
-                   <span class="prog-title">${esc(current.jingle ? 'Jingle - ' + current.name : current.name)}</span>
+                   <span class="prog-title">${esc(current.jingle ? 'Jingle - ' + trackTitle(current) : trackTitle(current))}</span>
                    <span class="prog-sub">${esc(current.jingle ? 'CréaZik IA WebRadio' : plName(current.playlist_label))}</span>
                    <span class="prog-badge">En direct</span></div></div>`
             : empty('Aucun morceau en cours.'));
@@ -822,7 +845,7 @@
     function onModeIcon() {
         if (!isAdmin) {
             try { sessionStorage.setItem('autoplayAdmin', '1'); } catch (e) {}
-            location.href = '/login?next=/listen.html';
+            location.href = 'http://localhost:5001/login?next=/radio.html';
             return;
         }
         setViewAsUser(!viewAsUser);
@@ -902,7 +925,7 @@
         const text = $('comText').value;
         hint.textContent = '';
         hint.classList.remove('error', 'ok');
-        const track = current ? ((current.jingle ? 'Jingle' : current.name) + ' - ' + $('nowSub').textContent) : '';
+        const track = current ? ((current.jingle ? 'Jingle' : trackTitle(current)) + ' - ' + $('nowSub').textContent) : '';
         try {
             const r = await fetch('/api/comments', {method: 'POST', headers: {'Content-Type': 'application/json'},
                                                     body: JSON.stringify({name, text, track, key: current && !current.jingle ? current.key : ''})});

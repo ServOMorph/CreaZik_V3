@@ -5,7 +5,7 @@
   "test_cases": [
     {
       "id": "1",
-      "name": "01 - Palla a specchi",
+      "name": "Palla a specchi",
       "prompt": "disco, four-on-the-floor kick, funky rhythm guitar, lush strings, brass stabs, groovy bass, 118 bpm, female vocal",
       "type": "vocal",
       "duration": 60,
@@ -14,7 +14,7 @@
     },
     {
       "id": "2",
-      "name": "02 - Ballare fino al sole",
+      "name": "Ballare fino al sole",
       "prompt": "disco, driving bassline, hand claps, shimmering strings, bright brass, 120 bpm, male vocal",
       "type": "vocal",
       "duration": 75,
@@ -23,7 +23,7 @@
     },
     {
       "id": "3",
-      "name": "03 - Pavimento di velluto",
+      "name": "Pavimento di velluto",
       "prompt": "smooth disco, warm bass, wah guitar, soft strings, 112 bpm, duet vocal, romantic",
       "type": "vocal",
       "duration": 130,
@@ -32,7 +32,7 @@
     },
     {
       "id": "4",
-      "name": "04 - Luce negli occhi",
+      "name": "Luce negli occhi",
       "prompt": "disco pop, sparkling synths, tight drums, funky guitar, 122 bpm, female vocal, joyful",
       "type": "vocal",
       "duration": 95,
@@ -41,7 +41,7 @@
     },
     {
       "id": "5",
-      "name": "05 - Boogie sul viale",
+      "name": "Boogie sul viale",
       "prompt": "disco funk, slap bass, brass section, congas, 116 bpm, male vocal, playful",
       "type": "vocal",
       "duration": 80,
@@ -50,7 +50,7 @@
     },
     {
       "id": "6",
-      "name": "06 - Sogno del sabato",
+      "name": "Sogno del sabato",
       "prompt": "classic disco, orchestral strings, rhythmic guitar, pounding kick, 124 bpm, female vocal",
       "type": "vocal",
       "duration": 125,
@@ -59,7 +59,7 @@
     },
     {
       "id": "7",
-      "name": "07 - Amore in pista",
+      "name": "Amore in pista",
       "prompt": "disco, pulsing bass, shimmering hi-hats, string stabs, 120 bpm, duet vocal",
       "type": "vocal",
       "duration": 85,
@@ -68,7 +68,7 @@
     },
     {
       "id": "8",
-      "name": "08 - Scuoti la notte",
+      "name": "Scuoti la notte",
       "prompt": "funky disco, rhythm guitar chops, handclaps, bright brass, 119 bpm, male vocal, energetic",
       "type": "vocal",
       "duration": 45,
@@ -77,7 +77,7 @@
     },
     {
       "id": "9",
-      "name": "09 - Tacchi alti",
+      "name": "Tacchi alti",
       "prompt": "retro disco, fat bass, string swells, funky drums, 117 bpm, female vocal, confident",
       "type": "vocal",
       "duration": 45,
@@ -86,7 +86,7 @@
     },
     {
       "id": "10",
-      "name": "10 - L'ultima canzone",
+      "name": "L'ultima canzone",
       "prompt": "disco ballad, warm strings, mellow bass, soft claps, 108 bpm, duet vocal, nostalgic",
       "type": "vocal",
       "duration": 100,

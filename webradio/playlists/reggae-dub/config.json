@@ -5,70 +5,70 @@
   "test_cases": [
     {
       "id": "1",
-      "name": "01 - Racines chaudes",
+      "name": "Racines chaudes",
       "prompt": "reggae, offbeat guitar skank, deep bass, one drop drums, organ, roots reggae, warm, instrumental",
       "type": "instrumental",
       "duration": 95
     },
     {
       "id": "2",
-      "name": "02 - Lovers rock",
+      "name": "Lovers rock",
       "prompt": "reggae, offbeat guitar skank, deep bass, one drop drums, organ, lovers rock, smooth, instrumental",
       "type": "instrumental",
       "duration": 110
     },
     {
       "id": "3",
-      "name": "03 - Dub et échos",
+      "name": "Dub et échos",
       "prompt": "reggae, offbeat guitar skank, deep bass, one drop drums, organ, dub reggae with heavy echo, instrumental",
       "type": "instrumental",
       "duration": 135
     },
     {
       "id": "4",
-      "name": "04 - Ska léger",
+      "name": "Ska léger",
       "prompt": "reggae, offbeat guitar skank, deep bass, one drop drums, organ, ska-influenced, upbeat, instrumental",
       "type": "instrumental",
       "duration": 110
     },
     {
       "id": "5",
-      "name": "05 - Rocksteady lent",
+      "name": "Rocksteady lent",
       "prompt": "reggae, offbeat guitar skank, deep bass, one drop drums, organ, slow rocksteady, instrumental",
       "type": "instrumental",
       "duration": 65
     },
     {
       "id": "6",
-      "name": "06 - Reggae et cuivres",
+      "name": "Reggae et cuivres",
       "prompt": "reggae, offbeat guitar skank, deep bass, one drop drums, organ, reggae with horns, instrumental",
       "type": "instrumental",
       "duration": 70
     },
     {
       "id": "7",
-      "name": "07 - Dub spatial",
+      "name": "Dub spatial",
       "prompt": "reggae, offbeat guitar skank, deep bass, one drop drums, organ, dub reggae, spacey, instrumental",
       "type": "instrumental",
       "duration": 105
     },
     {
       "id": "8",
-      "name": "08 - Reggae au piano",
+      "name": "Reggae au piano",
       "prompt": "reggae, offbeat guitar skank, deep bass, one drop drums, organ, reggae fusion with piano, instrumental",
       "type": "instrumental",
       "duration": 135
     },
     {
       "id": "9",
-      "name": "09 - Soleil de plage",
+      "name": "Soleil de plage",
       "prompt": "reggae, offbeat guitar skank, deep bass, one drop drums, organ, sunshine reggae, joyful, instrumental",
       "type": "instrumental",
       "duration": 85
     },
     {
       "id": "10",
-      "name": "10 - Roots sérieux",
+      "name": "Roots sérieux",
       "prompt": "reggae, offbeat guitar skank, deep bass, one drop drums, organ, heavy roots reggae, serious, instrumental",
       "type": "instrumental",
       "duration": 90

@@ -5,70 +5,70 @@
   "test_cases": [
     {
       "id": "1",
-      "name": "01 - Ranchera lente",
+      "name": "Ranchera lente",
       "prompt": "mariachi, trumpets, violins, guitarron, vihuela, ranchera slow, instrumental",
       "type": "instrumental",
       "duration": 120
     },
     {
       "id": "2",
-      "name": "02 - Huapango rapide",
+      "name": "Huapango rapide",
       "prompt": "mariachi, trumpets, violins, guitarron, vihuela, huapango fast, instrumental",
       "type": "instrumental",
       "duration": 100
     },
     {
       "id": "3",
-      "name": "03 - Sérénade",
+      "name": "Sérénade",
       "prompt": "mariachi, trumpets, violins, guitarron, vihuela, serenade, instrumental",
       "type": "instrumental",
       "duration": 120
     },
     {
       "id": "4",
-      "name": "04 - Fiesta",
+      "name": "Fiesta",
       "prompt": "mariachi, trumpets, violins, guitarron, vihuela, fiesta, instrumental",
       "type": "instrumental",
       "duration": 115
     },
     {
       "id": "5",
-      "name": "05 - Boléro",
+      "name": "Boléro",
       "prompt": "mariachi, trumpets, violins, guitarron, vihuela, bolero ballad, instrumental",
       "type": "instrumental",
       "duration": 110
     },
     {
       "id": "6",
-      "name": "06 - Sones de Jalisco",
+      "name": "Sones de Jalisco",
       "prompt": "mariachi, trumpets, violins, guitarron, vihuela, sones jaliscienses, instrumental",
       "type": "instrumental",
       "duration": 50
     },
     {
       "id": "7",
-      "name": "07 - Romantique",
+      "name": "Romantique",
       "prompt": "mariachi, trumpets, violins, guitarron, vihuela, romantic, instrumental",
       "type": "instrumental",
       "duration": 90
     },
     {
       "id": "8",
-      "name": "08 - Joyeux",
+      "name": "Joyeux",
       "prompt": "mariachi, trumpets, violins, guitarron, vihuela, joyful, instrumental",
       "type": "instrumental",
       "duration": 65
     },
     {
       "id": "9",
-      "name": "09 - Dramatique",
+      "name": "Dramatique",
       "prompt": "mariachi, trumpets, violins, guitarron, vihuela, dramatic, instrumental",
       "type": "instrumental",
       "duration": 105
     },
     {
       "id": "10",
-      "name": "10 - Mariage",
+      "name": "Mariage",
       "prompt": "mariachi, trumpets, violins, guitarron, vihuela, wedding, instrumental",
       "type": "instrumental",
       "duration": 115

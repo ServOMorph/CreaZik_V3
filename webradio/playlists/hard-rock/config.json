@@ -5,7 +5,7 @@
   "test_cases": [
     {
       "id": "1",
-      "name": "01 - Highway Thunder",
+      "name": "Highway Thunder",
       "prompt": "hard rock, bluesy crunchy riff guitars, driving four-four drums, thumping bass, raspy powerful male vocal, anthemic gang vocals in the chorus, 118 bpm, road trip energy",
       "type": "vocal",
       "duration": 55,
@@ -14,7 +14,7 @@
     },
     {
       "id": "2",
-      "name": "02 - Turn It Up Loud",
+      "name": "Turn It Up Loud",
       "prompt": "hard rock, bluesy crunchy riff guitars, driving four-four drums, thumping bass, raspy powerful male vocal, anthemic gang vocals in the chorus, 125 bpm, party anthem",
       "type": "vocal",
       "duration": 70,
@@ -23,7 +23,7 @@
     },
     {
       "id": "3",
-      "name": "03 - Electric Heart",
+      "name": "Electric Heart",
       "prompt": "hard rock, bluesy crunchy riff guitars, driving four-four drums, thumping bass, raspy powerful male vocal, anthemic gang vocals in the chorus, 110 bpm, mid tempo groove",
       "type": "vocal",
       "duration": 120,
@@ -32,7 +32,7 @@
     },
     {
       "id": "4",
-      "name": "04 - Steel Strings and Thunder",
+      "name": "Steel Strings and Thunder",
       "prompt": "hard rock, bluesy crunchy riff guitars, driving four-four drums, thumping bass, raspy powerful male vocal, anthemic gang vocals in the chorus, 122 bpm, driving riff",
       "type": "vocal",
       "duration": 75,
@@ -41,7 +41,7 @@
     },
     {
       "id": "5",
-      "name": "05 - Rolling Down the Valley",
+      "name": "Rolling Down the Valley",
       "prompt": "hard rock, bluesy crunchy riff guitars, driving four-four drums, thumping bass, raspy powerful male vocal, anthemic gang vocals in the chorus, 108 bpm, swaggering blues rock shuffle",
       "type": "vocal",
       "duration": 80,
@@ -50,7 +50,7 @@
     },
     {
       "id": "6",
-      "name": "06 - Amp on Fire",
+      "name": "Amp on Fire",
       "prompt": "hard rock, bluesy crunchy riff guitars, driving four-four drums, thumping bass, raspy powerful male vocal, anthemic gang vocals in the chorus, 130 bpm, fast and aggressive",
       "type": "vocal",
       "duration": 95,
@@ -59,7 +59,7 @@
     },
     {
       "id": "7",
-      "name": "07 - Midnight Rebel",
+      "name": "Midnight Rebel",
       "prompt": "hard rock, bluesy crunchy riff guitars, driving four-four drums, thumping bass, raspy powerful male vocal, anthemic gang vocals in the chorus, 115 bpm, gritty and confident",
       "type": "vocal",
       "duration": 95,
@@ -68,7 +68,7 @@
     },
     {
       "id": "8",
-      "name": "08 - Stage Lights",
+      "name": "Stage Lights",
       "prompt": "hard rock, bluesy crunchy riff guitars, driving four-four drums, thumping bass, raspy powerful male vocal, anthemic gang vocals in the chorus, 120 bpm, big stadium feeling",
       "type": "vocal",
       "duration": 120,
@@ -77,7 +77,7 @@
     },
     {
       "id": "9",
-      "name": "09 - Rock Till Sunrise",
+      "name": "Rock Till Sunrise",
       "prompt": "hard rock, bluesy crunchy riff guitars, driving four-four drums, thumping bass, raspy powerful male vocal, anthemic gang vocals in the chorus, 126 bpm, fast party rock",
       "type": "vocal",
       "duration": 95,
@@ -86,7 +86,7 @@
     },
     {
       "id": "10",
-      "name": "10 - Gang of the Night",
+      "name": "Gang of the Night",
       "prompt": "hard rock, bluesy crunchy riff guitars, driving four-four drums, thumping bass, raspy powerful male vocal, anthemic gang vocals in the chorus, 112 bpm, stomping anthem",
       "type": "vocal",
       "duration": 135,
@@ -95,7 +95,7 @@
     },
     {
       "id": "11",
-      "name": "11 - Born to Rock",
+      "name": "Born to Rock",
       "prompt": "hard rock, bluesy crunchy riff guitars, driving four-four drums, thumping bass, raspy powerful male vocal, anthemic gang vocals in the chorus, 124 bpm, classic hard rock groove",
       "type": "vocal",
       "duration": 110,

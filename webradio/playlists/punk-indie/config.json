@@ -5,70 +5,70 @@
   "test_cases": [
     {
       "id": "1",
-      "name": "01 - Punk rapide",
+      "name": "Punk rapide",
       "prompt": "punk and indie rock instrumental, energetic guitars, live drums, fast punk, three chords, instrumental",
       "type": "instrumental",
       "duration": 50
     },
     {
       "id": "2",
-      "name": "02 - Pop punk",
+      "name": "Pop punk",
       "prompt": "punk and indie rock instrumental, energetic guitars, live drums, pop punk, bright and catchy, instrumental",
       "type": "instrumental",
       "duration": 55
     },
     {
       "id": "3",
-      "name": "03 - Indie jangle",
+      "name": "Indie jangle",
       "prompt": "punk and indie rock instrumental, energetic guitars, live drums, indie jangle pop guitars, instrumental",
       "type": "instrumental",
       "duration": 75
     },
     {
       "id": "4",
-      "name": "04 - Garage rock",
+      "name": "Garage rock",
       "prompt": "punk and indie rock instrumental, energetic guitars, live drums, garage rock, fuzzy, instrumental",
       "type": "instrumental",
       "duration": 65
     },
     {
       "id": "5",
-      "name": "05 - Post-punk",
+      "name": "Post-punk",
       "prompt": "punk and indie rock instrumental, energetic guitars, live drums, post-punk, angular bass, instrumental",
       "type": "instrumental",
       "duration": 125
     },
     {
       "id": "6",
-      "name": "06 - Shoegaze",
+      "name": "Shoegaze",
       "prompt": "punk and indie rock instrumental, energetic guitars, live drums, shoegaze, wall of reverb guitars, instrumental",
       "type": "instrumental",
       "duration": 90
     },
     {
       "id": "7",
-      "name": "07 - Krautrock",
+      "name": "Krautrock",
       "prompt": "punk and indie rock instrumental, energetic guitars, live drums, krautrock, motorik drums, instrumental",
       "type": "instrumental",
       "duration": 75
     },
     {
       "id": "8",
-      "name": "08 - Grunge",
+      "name": "Grunge",
       "prompt": "punk and indie rock instrumental, energetic guitars, live drums, grunge, heavy and sludgy, instrumental",
       "type": "instrumental",
       "duration": 55
     },
     {
       "id": "9",
-      "name": "09 - Rock de cave",
+      "name": "Rock de cave",
       "prompt": "punk and indie rock instrumental, energetic guitars, live drums, basement rock, raw, instrumental",
       "type": "instrumental",
       "duration": 105
     },
     {
       "id": "10",
-      "name": "10 - Indie rêveur",
+      "name": "Indie rêveur",
       "prompt": "punk and indie rock instrumental, energetic guitars, live drums, dreamy indie, soft and spacious, instrumental",
       "type": "instrumental",
       "duration": 45

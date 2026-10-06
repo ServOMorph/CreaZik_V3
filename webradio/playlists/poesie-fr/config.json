@@ -5,7 +5,7 @@
   "test_cases": [
     {
       "id": "1",
-      "name": "01 - Verlaine - Chanson d'automne",
+      "name": "Verlaine - Chanson d'automne",
       "prompt": "French spoken word poetry, recited softly in a melancholic voice, slow ambient piano, cello, autumn mood",
       "type": "vocal",
       "duration": 100,
@@ -16,7 +16,7 @@
     },
     {
       "id": "2",
-      "name": "02 - Hugo - Demain, dès l'aube",
+      "name": "Hugo - Demain, dès l'aube",
       "prompt": "French poetry, deep male voice reciting slowly, solemn piano and strings, grave and tender, slow tempo",
       "type": "vocal",
       "duration": 65,
@@ -27,7 +27,7 @@
     },
     {
       "id": "3",
-      "name": "03 - Apollinaire - Le Pont Mirabeau",
+      "name": "Apollinaire - Le Pont Mirabeau",
       "prompt": "French poetry sung and spoken, gentle female voice, accordion and soft piano, melancholic waltz feeling",
       "type": "vocal",
       "duration": 100,
@@ -38,7 +38,7 @@
     },
     {
       "id": "4",
-      "name": "04 - Ronsard - Mignonne, allons voir si la rose",
+      "name": "Ronsard - Mignonne, allons voir si la rose",
       "prompt": "French Renaissance poetry, light recitation with lute and harpsichord, delicate, gentle, slow tempo",
       "type": "vocal",
       "duration": 100,
@@ -49,7 +49,7 @@
     },
     {
       "id": "5",
-      "name": "05 - Du Bellay - Heureux qui, comme Ulysse",
+      "name": "Du Bellay - Heureux qui, comme Ulysse",
       "prompt": "French poetry, warm male voice reciting, classical guitar and light strings, nostalgic and calm",
       "type": "vocal",
       "duration": 75,
@@ -60,7 +60,7 @@
     },
     {
       "id": "6",
-      "name": "06 - Rimbaud - Le Dormeur du val",
+      "name": "Rimbaud - Le Dormeur du val",
       "prompt": "French poetry, hushed whispered recitation, sparse piano, soft strings and nature textures, quiet and tragic",
       "type": "vocal",
       "duration": 75,
@@ -71,7 +71,7 @@
     },
     {
       "id": "7",
-      "name": "07 - Baudelaire - L'Invitation au voyage",
+      "name": "Baudelaire - L'Invitation au voyage",
       "prompt": "French poetry, sensual spoken word, slow downtempo beat, warm pads and cello, dreamy atmosphere",
       "type": "vocal",
       "duration": 120,
@@ -82,7 +82,7 @@
     },
     {
       "id": "8",
-      "name": "08 - Desbordes-Valmore - Les Roses de Saadi",
+      "name": "Desbordes-Valmore - Les Roses de Saadi",
       "prompt": "French romantic poetry, tender female voice reciting, harp and soft piano, delicate and wistful",
       "type": "vocal",
       "duration": 50,
@@ -93,7 +93,7 @@
     },
     {
       "id": "9",
-      "name": "09 - Nerval - Fantaisie",
+      "name": "Nerval - Fantaisie",
       "prompt": "French poetry, dreamy recitation, harpsichord and soft strings, old-fashioned and mysterious, slow",
       "type": "vocal",
       "duration": 90,
@@ -104,7 +104,7 @@
     },
     {
       "id": "10",
-      "name": "10 - Rimbaud - Ma Bohème",
+      "name": "Rimbaud - Ma Bohème",
       "prompt": "French poetry, lively youthful recitation, acoustic guitar and light percussion, free and playful, walking tempo",
       "type": "vocal",
       "duration": 75,

@@ -5,7 +5,7 @@
   "test_cases": [
     {
       "id": "1",
-      "name": "01 - Midnight Mirrorball",
+      "name": "Midnight Mirrorball",
       "prompt": "disco, four-on-the-floor kick, funky rhythm guitar, lush strings, brass stabs, groovy bass, 118 bpm, female English vocal",
       "type": "vocal",
       "duration": 90,
@@ -14,7 +14,7 @@
     },
     {
       "id": "2",
-      "name": "02 - Dance Till the Sun",
+      "name": "Dance Till the Sun",
       "prompt": "disco, driving bassline, hand claps, shimmering strings, bright brass, 120 bpm, male English vocal",
       "type": "vocal",
       "duration": 120,
@@ -23,7 +23,7 @@
     },
     {
       "id": "3",
-      "name": "03 - Velvet Floor",
+      "name": "Velvet Floor",
       "prompt": "smooth disco, warm bass, wah guitar, soft strings, 112 bpm, duet English vocal, romantic",
       "type": "vocal",
       "duration": 90,
@@ -32,7 +32,7 @@
     },
     {
       "id": "4",
-      "name": "04 - Glitter in My Eyes",
+      "name": "Glitter in My Eyes",
       "prompt": "disco pop, sparkling synths, tight drums, funky guitar, 122 bpm, female English vocal, joyful",
       "type": "vocal",
       "duration": 90,
@@ -41,7 +41,7 @@
     },
     {
       "id": "5",
-      "name": "05 - Boogie on the Boulevard",
+      "name": "Boogie on the Boulevard",
       "prompt": "disco funk, slap bass, brass section, congas, 116 bpm, male English vocal, playful",
       "type": "vocal",
       "duration": 60,
@@ -50,7 +50,7 @@
     },
     {
       "id": "6",
-      "name": "06 - Saturday Night Dream",
+      "name": "Saturday Night Dream",
       "prompt": "classic disco, orchestral strings, rhythmic guitar, pounding kick, 124 bpm, female English vocal",
       "type": "vocal",
       "duration": 80,
@@ -59,7 +59,7 @@
     },
     {
       "id": "7",
-      "name": "07 - Love on the Dancefloor",
+      "name": "Love on the Dancefloor",
       "prompt": "disco, pulsing bass, shimmering hi-hats, string stabs, 120 bpm, duet English vocal",
       "type": "vocal",
       "duration": 100,
@@ -68,7 +68,7 @@
     },
     {
       "id": "8",
-      "name": "08 - Shake the Night",
+      "name": "Shake the Night",
       "prompt": "funky disco, rhythm guitar chops, handclaps, bright brass, 119 bpm, male English vocal, energetic",
       "type": "vocal",
       "duration": 100,
@@ -77,7 +77,7 @@
     },
     {
       "id": "9",
-      "name": "09 - Platform Heels",
+      "name": "Platform Heels",
       "prompt": "retro disco, fat bass, string swells, funky drums, 117 bpm, female English vocal, confident",
       "type": "vocal",
       "duration": 125,
@@ -86,7 +86,7 @@
     },
     {
       "id": "10",
-      "name": "10 - Last Song at the Club",
+      "name": "Last Song at the Club",
       "prompt": "disco ballad, warm strings, mellow bass, soft claps, 108 bpm, duet English vocal, nostalgic",
       "type": "vocal",
       "duration": 120,

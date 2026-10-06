@@ -5,70 +5,70 @@
   "test_cases": [
     {
       "id": "1",
-      "name": "01 - Harpe celtique",
+      "name": "Harpe celtique",
       "prompt": "solo celtic harp, gentle ornaments, lilting melody, no other instruments",
       "duration": 95,
       "type": "instrumental"
     },
     {
       "id": "2",
-      "name": "02 - Glissandos de rosée",
+      "name": "Glissandos de rosée",
       "prompt": "solo concert harp, shimmering glissandos, delicate arpeggios, dreamy, no other instruments",
       "duration": 60,
       "type": "instrumental"
     },
     {
       "id": "3",
-      "name": "03 - Berceuse de harpe",
+      "name": "Berceuse de harpe",
       "prompt": "solo harp lullaby, slow soft arpeggios, tender and peaceful, no other instruments",
       "duration": 115,
       "type": "instrumental"
     },
     {
       "id": "4",
-      "name": "04 - Harpe médiévale",
+      "name": "Harpe médiévale",
       "prompt": "solo medieval harp, modal melody, simple drone, ancient mood, no other instruments",
       "duration": 45,
       "type": "instrumental"
     },
     {
       "id": "5",
-      "name": "05 - Cascade de cordes",
+      "name": "Cascade de cordes",
       "prompt": "solo harp, fast flowing arpeggios like a waterfall, bright, no other instruments",
       "duration": 75,
       "type": "instrumental"
     },
     {
       "id": "6",
-      "name": "06 - Harpe de minuit",
+      "name": "Harpe de minuit",
       "prompt": "solo harp, slow resonant low notes, mysterious night atmosphere, no other instruments",
       "duration": 50,
       "type": "instrumental"
     },
     {
       "id": "7",
-      "name": "07 - Danse des fées",
+      "name": "Danse des fées",
       "prompt": "solo harp, light playful staccato notes, fairy dance, no other instruments",
       "duration": 125,
       "type": "instrumental"
     },
     {
       "id": "8",
-      "name": "08 - Harpe romantique",
+      "name": "Harpe romantique",
       "prompt": "solo harp, expressive romantic melody, rich chords, no other instruments",
       "duration": 110,
       "type": "instrumental"
     },
     {
       "id": "9",
-      "name": "09 - Prairie en harpe",
+      "name": "Prairie en harpe",
       "prompt": "solo harp, pastoral folk melody, open and airy, no other instruments",
       "duration": 125,
       "type": "instrumental"
     },
     {
       "id": "10",
-      "name": "10 - Harpe cristalline",
+      "name": "Harpe cristalline",
       "prompt": "solo harp, harmonics and high crystalline notes, delicate and spacious, no other instruments",
       "duration": 60,
       "type": "instrumental"

@@ -5,70 +5,70 @@
   "test_cases": [
     {
       "id": "1",
-      "name": "01 - Bebop rapide",
+      "name": "Bebop rapide",
       "prompt": "jazz instrumental, acoustic, bebop, fast, saxophone and trumpet, instrumental",
       "type": "instrumental",
       "duration": 110
     },
     {
       "id": "2",
-      "name": "02 - Cool jazz",
+      "name": "Cool jazz",
       "prompt": "jazz instrumental, acoustic, cool jazz, relaxed, muted trumpet, instrumental",
       "type": "instrumental",
       "duration": 60
     },
     {
       "id": "3",
-      "name": "03 - Jazz modal",
+      "name": "Jazz modal",
       "prompt": "jazz instrumental, acoustic, modal jazz, spacious, piano trio, instrumental",
       "type": "instrumental",
       "duration": 135
     },
     {
       "id": "4",
-      "name": "04 - Hard bop",
+      "name": "Hard bop",
       "prompt": "jazz instrumental, acoustic, hard bop, energetic, instrumental",
       "type": "instrumental",
       "duration": 100
     },
     {
       "id": "5",
-      "name": "05 - Big band swing",
+      "name": "Big band swing",
       "prompt": "jazz instrumental, acoustic, big band swing, brass section, instrumental",
       "type": "instrumental",
       "duration": 45
     },
     {
       "id": "6",
-      "name": "06 - Bossa jazz",
+      "name": "Bossa jazz",
       "prompt": "jazz instrumental, acoustic, bossa jazz, gentle, instrumental",
       "type": "instrumental",
       "duration": 45
     },
     {
       "id": "7",
-      "name": "07 - Ballade jazz",
+      "name": "Ballade jazz",
       "prompt": "jazz instrumental, acoustic, jazz ballad, piano and saxophone, instrumental",
       "type": "instrumental",
       "duration": 110
     },
     {
       "id": "8",
-      "name": "08 - Fusion",
+      "name": "Fusion",
       "prompt": "jazz instrumental, acoustic, jazz fusion, electric bass and keyboards, instrumental",
       "type": "instrumental",
       "duration": 115
     },
     {
       "id": "9",
-      "name": "09 - Soul jazz",
+      "name": "Soul jazz",
       "prompt": "jazz instrumental, acoustic, soul jazz, organ trio, instrumental",
       "type": "instrumental",
       "duration": 100
     },
     {
       "id": "10",
-      "name": "10 - Jazz de club",
+      "name": "Jazz de club",
       "prompt": "jazz instrumental, acoustic, smoky club jazz, double bass, instrumental",
       "type": "instrumental",
       "duration": 60

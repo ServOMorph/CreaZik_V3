@@ -5,70 +5,70 @@
   "test_cases": [
     {
       "id": "1",
-      "name": "01 - Kolo rapide",
+      "name": "Kolo rapide",
       "prompt": "Balkan brass band, trumpets, tuba, snare drum, frantic, kolo dance, fast, instrumental",
       "type": "instrumental",
       "duration": 70
     },
     {
       "id": "2",
-      "name": "02 - Ballade lente",
+      "name": "Ballade lente",
       "prompt": "Balkan brass band, trumpets, tuba, snare drum, frantic, slow ballad, instrumental",
       "type": "instrumental",
       "duration": 50
     },
     {
       "id": "3",
-      "name": "03 - Mesure impaire",
+      "name": "Mesure impaire",
       "prompt": "Balkan brass band, trumpets, tuba, snare drum, frantic, odd meter 7/8, instrumental",
       "type": "instrumental",
       "duration": 45
     },
     {
       "id": "4",
-      "name": "04 - Cortège de mariage",
+      "name": "Cortège de mariage",
       "prompt": "Balkan brass band, trumpets, tuba, snare drum, frantic, wedding procession, instrumental",
       "type": "instrumental",
       "duration": 100
     },
     {
       "id": "5",
-      "name": "05 - Balkan jazzy",
+      "name": "Balkan jazzy",
       "prompt": "Balkan brass band, trumpets, tuba, snare drum, frantic, jazzy Balkan, instrumental",
       "type": "instrumental",
       "duration": 75
     },
     {
       "id": "6",
-      "name": "06 - Swing tzigane",
+      "name": "Swing tzigane",
       "prompt": "Balkan brass band, trumpets, tuba, snare drum, frantic, gypsy swing, instrumental",
       "type": "instrumental",
       "duration": 105
     },
     {
       "id": "7",
-      "name": "07 - Balkan de cinéma",
+      "name": "Balkan de cinéma",
       "prompt": "Balkan brass band, trumpets, tuba, snare drum, frantic, cinematic Balkan, instrumental",
       "type": "instrumental",
       "duration": 125
     },
     {
       "id": "8",
-      "name": "08 - Marche de fête",
+      "name": "Marche de fête",
       "prompt": "Balkan brass band, trumpets, tuba, snare drum, frantic, party march, instrumental",
       "type": "instrumental",
       "duration": 50
     },
     {
       "id": "9",
-      "name": "09 - Mélancolie",
+      "name": "Mélancolie",
       "prompt": "Balkan brass band, trumpets, tuba, snare drum, frantic, melancholic, instrumental",
       "type": "instrumental",
       "duration": 50
     },
     {
       "id": "10",
-      "name": "10 - Festival",
+      "name": "Festival",
       "prompt": "Balkan brass band, trumpets, tuba, snare drum, frantic, festival, instrumental",
       "type": "instrumental",
       "duration": 60

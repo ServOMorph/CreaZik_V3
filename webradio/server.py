@@ -34,11 +34,12 @@ ADMIN_POST_TARGETS = {
     "/api/content": (HERE / "radio_content.json", "dict"),
 }
 
-STATIC_FILES = {"/listen.html", "/silence.wav", "/listen.css", "/listen.js", "/visuals.js",
+STATIC_FILES = {"/listen.html", "/silence.wav", "/listen.css", "/listen.js", "/visuals.js", "/cover-placeholder.png",
                 "/traveling-sound.png", "/scenes.js", "/transitions.js", "/motion.js", "/scenes_spec.json", "/radio_content.json",
                 "/playlists.json", "/favorites.json", "/radio_settings.json"}
 STATIC_PATTERNS = [
     re.compile(r"^/playlists/[\w\-]+/outputs/playlist_results\.json$"),
+    re.compile(r"^/playlists/[\w\-]+/outputs/[^/]+\.cover\.png$"),
     re.compile(r"^/playlists/[\w\-]+/outputs/[^/]+\.(?:wav|mp3|flac|ogg)$"),
     re.compile(r"^/playlists/[\w\-]+/outputs/[^/]+\.(?:wav|mp3|flac|ogg)\.viz\.json$"),
     re.compile(r"^/[\w\-]+/(?:outputs/)?[^/]+\.(?:wav|mp3|flac|ogg)\.viz\.json$"),
@@ -246,6 +247,9 @@ class Handler(SimpleHTTPRequestHandler):
                 return True
         return False
 
+    def _is_user_interface(self):
+        return getattr(self.server, "interface", "user") == "user"
+
     def _send_text(self, code, body, ctype="text/html; charset=utf-8"):
         data = body.encode("utf-8")
         self.send_response(code)
@@ -308,6 +312,9 @@ class Handler(SimpleHTTPRequestHandler):
         if "\x00" in path or ".." in path.split("/"):
             self.send_error(400)
             return
+        if self._is_user_interface() and (path in ADMIN_PAGES or path in ("/login", "/logout")):
+            self.send_error(404)
+            return
         if path == "/login":
             nxt = parse_qs(parts.query).get("next", ["/radio.html"])[0]
             self._login_page(nxt=nxt if nxt in LOGIN_NEXT else "/radio.html")
@@ -320,11 +327,11 @@ class Handler(SimpleHTTPRequestHandler):
             self.end_headers()
             return
         if path == "/api/me":
-            admin = self._is_admin()
+            admin = self._is_admin() and not self._is_user_interface()
             self._send_json(200, {"admin": admin, "default_password": bool(admin and STATE.cred.get("default"))})
             return
         if path == "/api/radio/state":
-            self._send_json(200, ENGINE.snapshot(admin=self._is_admin()))
+            self._send_json(200, ENGINE.snapshot(admin=self._is_admin() and not self._is_user_interface()))
             return
         if path == "/api/radio/dynamics":
             self._send_json(200, ENGINE.dynamics_info())
@@ -367,7 +374,13 @@ class Handler(SimpleHTTPRequestHandler):
             self._serve(head)
             return
         if path in ("/", "/index.html"):
-            path = "/listen.html"
+            if self._is_user_interface():
+                path = "/listen.html"
+            else:
+                self._redirect("/radio.html")
+                return
+        path = re.sub(r"^/playlists/perso-(electro|folk|rock|classique|gregorien|chorale)/",
+                      r"/playlists/francais_tests-\1/", path)
         if not self._allowed_static(path):
             self.send_error(404)
             return
@@ -379,6 +392,9 @@ class Handler(SimpleHTTPRequestHandler):
 
     def do_POST(self):
         path = urlsplit(self.path).path
+        if self._is_user_interface() and path not in ("/api/comments", "/api/vote"):
+            self.send_error(404)
+            return
         if path == "/login":
             self._login()
             return
@@ -587,6 +603,7 @@ if __name__ == "__main__":
     p = argparse.ArgumentParser()
     p.add_argument("--host", default="127.0.0.1", help="127.0.0.1 par défaut (tunnel local) ; 0.0.0.0 pour le réseau local")
     p.add_argument("--port", type=int, default=5000)
+    p.add_argument("--admin-port", type=int, default=5001)
     p.add_argument("--no-browser", action="store_true")
     a = p.parse_args()
 
@@ -594,13 +611,23 @@ if __name__ == "__main__":
     threading.Thread(target=ENGINE.run, daemon=True).start()
     httpd = ThreadingHTTPServer((a.host, a.port), Handler)
     httpd.daemon_threads = True
-    url = f"http://localhost:{a.port}/ui.html"
-    print(f"Serveur : {url} (écoute sur {a.host})")
+    httpd.interface = "user"
+    admin_httpd = ThreadingHTTPServer((a.host, a.admin_port), Handler)
+    admin_httpd.daemon_threads = True
+    admin_httpd.interface = "admin"
+    url = f"http://localhost:{a.port}/"
+    admin_url = f"http://localhost:{a.admin_port}/radio.html"
+    print(f"Interface auditeur : {url} (écoute sur {a.host})")
+    print(f"Interface admin : {admin_url} (locale uniquement)")
     if STATE.cred.get("default"):
         print("ATTENTION : mot de passe admin par défaut (admin/admin). Change-le dans la page Gestion WebRadio.")
     if not a.no_browser:
         threading.Timer(1, lambda: webbrowser.open(url)).start()
+    threading.Thread(target=admin_httpd.serve_forever, daemon=True).start()
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:
         httpd.server_close()
+    finally:
+        admin_httpd.shutdown()
+        admin_httpd.server_close()

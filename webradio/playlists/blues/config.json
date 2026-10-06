@@ -5,70 +5,70 @@
   "test_cases": [
     {
       "id": "1",
-      "name": "01 - Delta acoustique",
+      "name": "Delta acoustique",
       "prompt": "blues, electric guitar, harmonica, shuffle rhythm, Delta acoustic, instrumental",
       "type": "instrumental",
       "duration": 80
     },
     {
       "id": "2",
-      "name": "02 - Chicago électrique",
+      "name": "Chicago électrique",
       "prompt": "blues, electric guitar, harmonica, shuffle rhythm, Chicago electric, instrumental",
       "type": "instrumental",
       "duration": 125
     },
     {
       "id": "3",
-      "name": "03 - Douze mesures lentes",
+      "name": "Douze mesures lentes",
       "prompt": "blues, electric guitar, harmonica, shuffle rhythm, slow 12-bar, instrumental",
       "type": "instrumental",
       "duration": 105
     },
     {
       "id": "4",
-      "name": "04 - Shuffle texan",
+      "name": "Shuffle texan",
       "prompt": "blues, electric guitar, harmonica, shuffle rhythm, texas shuffle, instrumental",
       "type": "instrumental",
       "duration": 110
     },
     {
       "id": "5",
-      "name": "05 - Jump blues",
+      "name": "Jump blues",
       "prompt": "blues, electric guitar, harmonica, shuffle rhythm, jump blues, instrumental",
       "type": "instrumental",
       "duration": 50
     },
     {
       "id": "6",
-      "name": "06 - Boogie",
+      "name": "Boogie",
       "prompt": "blues, electric guitar, harmonica, shuffle rhythm, boogie, instrumental",
       "type": "instrumental",
       "duration": 85
     },
     {
       "id": "7",
-      "name": "07 - Marais",
+      "name": "Marais",
       "prompt": "blues, electric guitar, harmonica, shuffle rhythm, swamp blues, instrumental",
       "type": "instrumental",
       "duration": 45
     },
     {
       "id": "8",
-      "name": "08 - Fin de nuit",
+      "name": "Fin de nuit",
       "prompt": "blues, electric guitar, harmonica, shuffle rhythm, late night blues, instrumental",
       "type": "instrumental",
       "duration": 105
     },
     {
       "id": "9",
-      "name": "09 - Rugueux",
+      "name": "Rugueux",
       "prompt": "blues, electric guitar, harmonica, shuffle rhythm, gritty blues, instrumental",
       "type": "instrumental",
       "duration": 135
     },
     {
       "id": "10",
-      "name": "10 - Rapide",
+      "name": "Rapide",
       "prompt": "blues, electric guitar, harmonica, shuffle rhythm, uptempo blues, instrumental",
       "type": "instrumental",
       "duration": 75

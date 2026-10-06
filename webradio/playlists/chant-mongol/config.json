@@ -5,7 +5,7 @@
   "test_cases": [
     {
       "id": "1",
-      "name": "01 - Khöömii des steppes",
+      "name": "Khöömii des steppes",
       "prompt": "Mongolian throat singing khoomei, deep overtone drone with whistling harmonics, steppe atmosphere, wordless",
       "duration": 110,
       "type": "vocal",
@@ -14,7 +14,7 @@
     },
     {
       "id": "2",
-      "name": "02 - Chant long de la plaine",
+      "name": "Chant long de la plaine",
       "prompt": "Mongolian long song urtiin duu, wide ornamented vocal, slow, vast landscape, wordless",
       "duration": 85,
       "type": "vocal",
@@ -23,7 +23,7 @@
     },
     {
       "id": "3",
-      "name": "03 - Cavaliers du vent",
+      "name": "Cavaliers du vent",
       "prompt": "Mongolian morin khuur horsehead fiddle with throat singing, galloping rhythm, wordless",
       "duration": 90,
       "type": "vocal",
@@ -32,7 +32,7 @@
     },
     {
       "id": "4",
-      "name": "04 - Lune sur le désert de Gobi",
+      "name": "Lune sur le désert de Gobi",
       "prompt": "Mongolian throat singing and slow morin khuur, night desert mood, wordless",
       "duration": 75,
       "type": "vocal",
@@ -41,7 +41,7 @@
     },
     {
       "id": "5",
-      "name": "05 - Fête du Naadam",
+      "name": "Fête du Naadam",
       "prompt": "Mongolian festive music, throat singing, fiddle and drums, energetic, wordless",
       "duration": 120,
       "type": "vocal",
@@ -50,7 +50,7 @@
     },
     {
       "id": "6",
-      "name": "06 - Aigle des montagnes",
+      "name": "Aigle des montagnes",
       "prompt": "Mongolian overtone singing, soaring high harmonics, mountain eagle, wordless",
       "duration": 50,
       "type": "vocal",
@@ -59,7 +59,7 @@
     },
     {
       "id": "7",
-      "name": "07 - Yourte au crépuscule",
+      "name": "Yourte au crépuscule",
       "prompt": "Mongolian soft vocal drone and fiddle, intimate yurt evening, wordless",
       "duration": 65,
       "type": "vocal",
@@ -68,7 +68,7 @@
     },
     {
       "id": "8",
-      "name": "08 - Caravane lente",
+      "name": "Caravane lente",
       "prompt": "Mongolian slow rhythmic vocal drone, camel caravan pace, wordless",
       "duration": 45,
       "type": "vocal",
@@ -77,7 +77,7 @@
     },
     {
       "id": "9",
-      "name": "09 - Souffle de la steppe",
+      "name": "Souffle de la steppe",
       "prompt": "Mongolian throat singing with wind textures, minimal, meditative, wordless",
       "duration": 125,
       "type": "vocal",
@@ -86,7 +86,7 @@
     },
     {
       "id": "10",
-      "name": "10 - Rivière Orkhon",
+      "name": "Rivière Orkhon",
       "prompt": "Mongolian long song with flowing fiddle, river landscape, wordless",
       "duration": 130,
       "type": "vocal",

@@ -5,70 +5,70 @@
   "test_cases": [
     {
       "id": "1",
-      "name": "01 - Alap lent",
+      "name": "Alap lent",
       "prompt": "Indian classical, sitar, tabla, tanpura drone, bansuri flute, alap slow, instrumental",
       "type": "instrumental",
       "duration": 120
     },
     {
       "id": "2",
-      "name": "02 - Raga du matin",
+      "name": "Raga du matin",
       "prompt": "Indian classical, sitar, tabla, tanpura drone, bansuri flute, raga morning mood, instrumental",
       "type": "instrumental",
       "duration": 45
     },
     {
       "id": "3",
-      "name": "03 - Raga du soir",
+      "name": "Raga du soir",
       "prompt": "Indian classical, sitar, tabla, tanpura drone, bansuri flute, raga evening mood, instrumental",
       "type": "instrumental",
       "duration": 80
     },
     {
       "id": "4",
-      "name": "04 - Jhala rapide",
+      "name": "Jhala rapide",
       "prompt": "Indian classical, sitar, tabla, tanpura drone, bansuri flute, fast jhala, instrumental",
       "type": "instrumental",
       "duration": 95
     },
     {
       "id": "5",
-      "name": "05 - Teental",
+      "name": "Teental",
       "prompt": "Indian classical, sitar, tabla, tanpura drone, bansuri flute, teental rhythm, instrumental",
       "type": "instrumental",
       "duration": 55
     },
     {
       "id": "6",
-      "name": "06 - Méditation",
+      "name": "Méditation",
       "prompt": "Indian classical, sitar, tabla, tanpura drone, bansuri flute, meditative, instrumental",
       "type": "instrumental",
       "duration": 75
     },
     {
       "id": "7",
-      "name": "07 - Fusion avec cordes",
+      "name": "Fusion avec cordes",
       "prompt": "Indian classical, sitar, tabla, tanpura drone, bansuri flute, fusion with strings, instrumental",
       "type": "instrumental",
       "duration": 130
     },
     {
       "id": "8",
-      "name": "08 - Inspiration populaire",
+      "name": "Inspiration populaire",
       "prompt": "Indian classical, sitar, tabla, tanpura drone, bansuri flute, folk-inspired, instrumental",
       "type": "instrumental",
       "duration": 90
     },
     {
       "id": "9",
-      "name": "09 - Fête",
+      "name": "Fête",
       "prompt": "Indian classical, sitar, tabla, tanpura drone, bansuri flute, festive, instrumental",
       "type": "instrumental",
       "duration": 90
     },
     {
       "id": "10",
-      "name": "10 - Dévotion",
+      "name": "Dévotion",
       "prompt": "Indian classical, sitar, tabla, tanpura drone, bansuri flute, devotional, instrumental",
       "type": "instrumental",
       "duration": 60

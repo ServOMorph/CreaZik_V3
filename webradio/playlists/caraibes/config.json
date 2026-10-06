@@ -5,70 +5,70 @@
   "test_cases": [
     {
       "id": "1",
-      "name": "01 - Calypso",
+      "name": "Calypso",
       "prompt": "Caribbean, steel drums, calypso, soca, zouk, calypso lilt, instrumental",
       "type": "instrumental",
       "duration": 105
     },
     {
       "id": "2",
-      "name": "02 - Soca de fête",
+      "name": "Soca de fête",
       "prompt": "Caribbean, steel drums, calypso, soca, zouk, soca party, instrumental",
       "type": "instrumental",
       "duration": 130
     },
     {
       "id": "3",
-      "name": "03 - Zouk lent",
+      "name": "Zouk lent",
       "prompt": "Caribbean, steel drums, calypso, soca, zouk, zouk slow, instrumental",
       "type": "instrumental",
       "duration": 125
     },
     {
       "id": "4",
-      "name": "04 - Kompa",
+      "name": "Kompa",
       "prompt": "Caribbean, steel drums, calypso, soca, zouk, kompa, instrumental",
       "type": "instrumental",
       "duration": 60
     },
     {
       "id": "5",
-      "name": "05 - Mélodie de steel pan",
+      "name": "Mélodie de steel pan",
       "prompt": "Caribbean, steel drums, calypso, soca, zouk, steel pan melody, instrumental",
       "type": "instrumental",
       "duration": 65
     },
     {
       "id": "6",
-      "name": "06 - Plage",
+      "name": "Plage",
       "prompt": "Caribbean, steel drums, calypso, soca, zouk, beach, instrumental",
       "type": "instrumental",
       "duration": 50
     },
     {
       "id": "7",
-      "name": "07 - Carnaval",
+      "name": "Carnaval",
       "prompt": "Caribbean, steel drums, calypso, soca, zouk, carnival, instrumental",
       "type": "instrumental",
       "duration": 80
     },
     {
       "id": "8",
-      "name": "08 - Soleil couchant",
+      "name": "Soleil couchant",
       "prompt": "Caribbean, steel drums, calypso, soca, zouk, sunset, instrumental",
       "type": "instrumental",
       "duration": 45
     },
     {
       "id": "9",
-      "name": "09 - Berceuse des îles",
+      "name": "Berceuse des îles",
       "prompt": "Caribbean, steel drums, calypso, soca, zouk, island lullaby, instrumental",
       "type": "instrumental",
       "duration": 100
     },
     {
       "id": "10",
-      "name": "10 - Ambiance de port",
+      "name": "Ambiance de port",
       "prompt": "Caribbean, steel drums, calypso, soca, zouk, harbor groove, instrumental",
       "type": "instrumental",
       "duration": 50

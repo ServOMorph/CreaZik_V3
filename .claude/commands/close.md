@@ -65,6 +65,12 @@ Lire `.claude/zones.md` pour obtenir la table des alias → dossiers réels.
      - `réf: <fichier(s) ou contexte clé>` — où trouver le contexte nécessaire
      Si le contexte est introuvable dans la session, écrire `réf: [à préciser]` plutôt qu'omettre le champ.
 
+4-bis. Mettre à jour `AMELIORATIONS.md` à la racine du projet :
+   - Lire la liste existante et la comparer aux décisions, demandes et améliorations encore ouvertes de la session.
+   - Ajouter les améliorations demandées ou explicitement identifiées pendant la session si elles ne sont pas déjà listées ; décrire chaque entrée comme une action concrète.
+   - Retirer de « À faire » uniquement les améliorations effectivement terminées pendant la session. Ne pas confondre un contrôle manuel en attente avec une amélioration : le conserver dans `tests_manuels.md`.
+   - Si aucune amélioration n'a été ajoutée, terminée ou reformulée, laisser le fichier inchangé.
+
 5. Mettre à jour `<dossier>/_contexte/contexte.md` :
    - Réécrire intégralement la section "État actuel" (5 lignes max).
    - Ajouter les décisions actées à "Décisions structurantes" (append only, 5 lignes max par entrée — le détail va dans `archive_decisions.md` ou le commit).

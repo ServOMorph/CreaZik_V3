@@ -5,147 +5,147 @@
   "test_cases": [
     {
       "id": "1",
-      "name": "01 - Musique de film",
+      "name": "Musique de film",
       "prompt": "cinematic film score, sweeping orchestral strings, emotional, dramatic crescendo",
       "type": "instrumental",
       "duration": 130
     },
     {
       "id": "2",
-      "name": "02 - Musique romantique",
+      "name": "Musique romantique",
       "prompt": "romantic instrumental music, lush strings and soft piano, tender, slow",
       "type": "instrumental",
       "duration": 130
     },
     {
       "id": "3",
-      "name": "03 - Piano solo triste",
+      "name": "Piano solo triste",
       "prompt": "solo piano, sad, melancholic, slow tempo, minor key, intimate",
       "type": "instrumental",
       "duration": 135
     },
     {
       "id": "4",
-      "name": "04 - Piano solo romantique",
+      "name": "Piano solo romantique",
       "prompt": "solo piano, romantic, gentle, flowing arpeggios, warm",
       "type": "instrumental",
       "duration": 115
     },
     {
       "id": "5",
-      "name": "05 - Piano solo voyage",
+      "name": "Piano solo voyage",
       "prompt": "solo piano, travel, journey, hopeful, wide open, cinematic flowing",
       "type": "instrumental",
       "duration": 100
     },
     {
       "id": "6",
-      "name": "06 - Musique du monde",
+      "name": "Musique du monde",
       "prompt": "world music, ethnic instruments, flute, strings and hand drums, warm and organic",
       "type": "instrumental",
       "duration": 80
     },
     {
       "id": "7",
-      "name": "07 - Percussions",
+      "name": "Percussions",
       "prompt": "percussion ensemble, djembe, congas, taiko, tribal rhythm, energetic, no melody",
       "type": "instrumental",
       "duration": 130
     },
     {
       "id": "8",
-      "name": "08 - Originale",
+      "name": "Originale",
       "prompt": "original experimental instrumental, unusual textures, inventive, genre-defying",
       "type": "instrumental",
       "duration": 110
     },
     {
       "id": "9",
-      "name": "09 - Electro 80",
+      "name": "Electro 80",
       "prompt": "1980s electro, analog synthesizers, drum machine, retro, 120 bpm",
       "type": "instrumental",
       "duration": 65
     },
     {
       "id": "10",
-      "name": "10 - Electro 90",
+      "name": "Electro 90",
       "prompt": "1990s electronic dance, house and techno influences, driving beat, 125 bpm",
       "type": "instrumental",
       "duration": 60
     },
     {
       "id": "11",
-      "name": "11 - Trance Goa",
+      "name": "Trance Goa",
       "prompt": "Goa trance, psychedelic, rolling bassline, hypnotic arpeggios, 145 bpm",
       "type": "instrumental",
       "duration": 95
     },
     {
       "id": "12",
-      "name": "12 - Jazz lounge",
+      "name": "Jazz lounge",
       "prompt": "smooth lounge jazz, upright bass, brushed drums, piano, relaxed late-night",
       "type": "instrumental",
       "duration": 125
     },
     {
       "id": "13",
-      "name": "13 - Bossa nova",
+      "name": "Bossa nova",
       "prompt": "bossa nova, nylon guitar, soft percussion, breezy, 95 bpm",
       "type": "instrumental",
       "duration": 65
     },
     {
       "id": "14",
-      "name": "14 - Ambient drone",
+      "name": "Ambient drone",
       "prompt": "ambient drone, evolving pads, deep atmosphere, slow, meditative",
       "type": "instrumental",
       "duration": 85
     },
     {
       "id": "15",
-      "name": "15 - Epic trailer",
+      "name": "Epic trailer",
       "prompt": "epic orchestral trailer music, huge drums, brass, choir pads, powerful",
       "type": "instrumental",
       "duration": 50
     },
     {
       "id": "16",
-      "name": "16 - Lo-fi hip-hop",
+      "name": "Lo-fi hip-hop",
       "prompt": "lo-fi hip-hop, dusty drums, mellow keys, vinyl crackle, 80 bpm",
       "type": "instrumental",
       "duration": 80
     },
     {
       "id": "17",
-      "name": "17 - Flamenco",
+      "name": "Flamenco",
       "prompt": "flamenco guitar, rasgueado, palmas, passionate, fast",
       "type": "instrumental",
       "duration": 60
     },
     {
       "id": "18",
-      "name": "18 - Blues guitar",
+      "name": "Blues guitar",
       "prompt": "slow electric blues guitar, expressive bends, shuffle drums, organ",
       "type": "instrumental",
       "duration": 80
     },
     {
       "id": "19",
-      "name": "19 - Funk groove",
+      "name": "Funk groove",
       "prompt": "funk groove, slap bass, tight drums, wah guitar, horns, 105 bpm",
       "type": "instrumental",
       "duration": 70
     },
     {
       "id": "20",
-      "name": "20 - Celtic folk",
+      "name": "Celtic folk",
       "prompt": "celtic folk instrumental, tin whistle, fiddle, bodhran, lively jig",
       "type": "instrumental",
       "duration": 85
     },
     {
       "id": "21",
-      "name": "21 - Synthwave",
+      "name": "Synthwave",
       "prompt": "synthwave, retro analog synths, driving bass, neon night drive, 110 bpm",
       "type": "instrumental",
       "duration": 95

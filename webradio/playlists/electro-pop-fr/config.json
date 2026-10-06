@@ -5,7 +5,7 @@
   "test_cases": [
     {
       "id": "1",
-      "name": "01 - Mon téléphone et moi",
+      "name": "Mon téléphone et moi",
       "prompt": "French electropop, minimal synth bass, afro-house percussion, danceable, spoken-sung male vocal, ironic, 118 bpm",
       "duration": 130,
       "type": "vocal",
@@ -14,7 +14,7 @@
     },
     {
       "id": "2",
-      "name": "02 - Le dernier métro",
+      "name": "Le dernier métro",
       "prompt": "French electropop, pulsing bass, pizzicato strings, club beat, male vocal, melancholic yet danceable, 120 bpm",
       "duration": 45,
       "type": "vocal",
@@ -23,7 +23,7 @@
     },
     {
       "id": "3",
-      "name": "03 - Ça va, ça va pas",
+      "name": "Ça va, ça va pas",
       "prompt": "French electropop, dry kick, syncopated synth, deep bass, ironic male vocal, 116 bpm",
       "duration": 120,
       "type": "vocal",
@@ -32,7 +32,7 @@
     },
     {
       "id": "4",
-      "name": "04 - Cuisine de nuit",
+      "name": "Cuisine de nuit",
       "prompt": "French electropop, warm bass, marimba and kalimba, soft club beat, male vocal, playful, 108 bpm",
       "duration": 65,
       "type": "vocal",
@@ -41,7 +41,7 @@
     },
     {
       "id": "5",
-      "name": "05 - Ligne douze",
+      "name": "Ligne douze",
       "prompt": "French electropop, driving four-on-the-floor, cello stabs, synth bass, spoken-sung male vocal, 122 bpm",
       "duration": 90,
       "type": "vocal",
@@ -50,7 +50,7 @@
     },
     {
       "id": "6",
-      "name": "06 - Les mots qu'on oublie",
+      "name": "Les mots qu'on oublie",
       "prompt": "French electropop, tender synth pads, soft kick, afro-latin percussion, male vocal, 104 bpm",
       "duration": 115,
       "type": "vocal",
@@ -59,7 +59,7 @@
     },
     {
       "id": "7",
-      "name": "07 - Danse avec le lundi",
+      "name": "Danse avec le lundi",
       "prompt": "French dance-pop, punchy kick, bouncy bass, brass stabs, male vocal, humorous, 124 bpm",
       "duration": 130,
       "type": "vocal",
@@ -68,7 +68,7 @@
     },
     {
       "id": "8",
-      "name": "08 - Fatigué de courir",
+      "name": "Fatigué de courir",
       "prompt": "French electropop, slow tempo, heavy synth bass, minimal beat, introspective male vocal, 100 bpm",
       "duration": 55,
       "type": "vocal",
@@ -77,7 +77,7 @@
     },
     {
       "id": "9",
-      "name": "09 - Le robot du coin",
+      "name": "Le robot du coin",
       "prompt": "French electropop, quirky synth lead, bouncy rhythm, robotic vocal effects, male vocal, 118 bpm",
       "duration": 65,
       "type": "vocal",
@@ -86,7 +86,7 @@
     },
     {
       "id": "10",
-      "name": "10 - Ombres et néons",
+      "name": "Ombres et néons",
       "prompt": "French electropop, nocturnal synth bass, shimmering synths, steady beat, male vocal, cinematic, 114 bpm",
       "duration": 45,
       "type": "vocal",

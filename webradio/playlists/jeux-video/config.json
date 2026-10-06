@@ -5,70 +5,70 @@
   "test_cases": [
     {
       "id": "1",
-      "name": "01 - Plaine de départ",
+      "name": "Plaine de départ",
       "prompt": "video game overworld theme, cheerful orchestral adventure, bright melody, 16-bit style, instrumental",
       "type": "instrumental",
       "duration": 45
     },
     {
       "id": "2",
-      "name": "02 - Niveau chiptune",
+      "name": "Niveau chiptune",
       "prompt": "chiptune platformer music, square wave lead, bouncy bass, fast, 8-bit style, instrumental",
       "type": "instrumental",
       "duration": 100
     },
     {
       "id": "3",
-      "name": "03 - Combat de boss",
+      "name": "Combat de boss",
       "prompt": "epic video game boss battle, driving orchestral rock, intense choir stabs, fast, instrumental",
       "type": "instrumental",
       "duration": 135
     },
     {
       "id": "4",
-      "name": "04 - Donjon humide",
+      "name": "Donjon humide",
       "prompt": "video game dungeon ambient, dripping echoes, low drones, tension, slow, instrumental",
       "type": "instrumental",
       "duration": 45
     },
     {
       "id": "5",
-      "name": "05 - Course néon",
+      "name": "Course néon",
       "prompt": "arcade racing game music, synthwave bass, fast drums, driving, retro, instrumental",
       "type": "instrumental",
       "duration": 120
     },
     {
       "id": "6",
-      "name": "06 - Menu principal",
+      "name": "Menu principal",
       "prompt": "video game main menu theme, soft piano and strings, nostalgic and inviting, instrumental",
       "type": "instrumental",
       "duration": 55
     },
     {
       "id": "7",
-      "name": "07 - Victoire",
+      "name": "Victoire",
       "prompt": "video game victory fanfare, triumphant brass and drums, short and joyful, instrumental",
       "type": "instrumental",
       "duration": 70
     },
     {
       "id": "8",
-      "name": "08 - Village paisible",
+      "name": "Village paisible",
       "prompt": "video game peaceful village theme, acoustic guitar, flute, gentle rhythm, instrumental",
       "type": "instrumental",
       "duration": 95
     },
     {
       "id": "9",
-      "name": "09 - Station spatiale",
+      "name": "Station spatiale",
       "prompt": "sci-fi video game soundtrack, pulsing synths, cold pads, shooter mood, mid-fast, instrumental",
       "type": "instrumental",
       "duration": 100
     },
     {
       "id": "10",
-      "name": "10 - Forêt hantée",
+      "name": "Forêt hantée",
       "prompt": "video game haunted forest theme, eerie music box, strings, mysterious and slow, instrumental",
       "type": "instrumental",
       "duration": 70

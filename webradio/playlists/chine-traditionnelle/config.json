@@ -5,70 +5,70 @@
   "test_cases": [
     {
       "id": "1",
-      "name": "01 - Paysage de rivière",
+      "name": "Paysage de rivière",
       "prompt": "traditional Chinese, guzheng, erhu, pipa, dizi flute, gentle, river landscape, instrumental",
       "type": "instrumental",
       "duration": 85
     },
     {
       "id": "2",
-      "name": "02 - Brume de montagne",
+      "name": "Brume de montagne",
       "prompt": "traditional Chinese, guzheng, erhu, pipa, dizi flute, gentle, mountain mist, instrumental",
       "type": "instrumental",
       "duration": 105
     },
     {
       "id": "3",
-      "name": "03 - Tambours de fête",
+      "name": "Tambours de fête",
       "prompt": "traditional Chinese, guzheng, erhu, pipa, dizi flute, gentle, festival drums, instrumental",
       "type": "instrumental",
       "duration": 70
     },
     {
       "id": "4",
-      "name": "04 - Maison de thé",
+      "name": "Maison de thé",
       "prompt": "traditional Chinese, guzheng, erhu, pipa, dizi flute, gentle, tea house, instrumental",
       "type": "instrumental",
       "duration": 125
     },
     {
       "id": "5",
-      "name": "05 - Palais ancien",
+      "name": "Palais ancien",
       "prompt": "traditional Chinese, guzheng, erhu, pipa, dizi flute, gentle, ancient palace, instrumental",
       "type": "instrumental",
       "duration": 50
     },
     {
       "id": "6",
-      "name": "06 - Lac au clair de lune",
+      "name": "Lac au clair de lune",
       "prompt": "traditional Chinese, guzheng, erhu, pipa, dizi flute, gentle, moonlit lake, instrumental",
       "type": "instrumental",
       "duration": 100
     },
     {
       "id": "7",
-      "name": "07 - Fleurs de printemps",
+      "name": "Fleurs de printemps",
       "prompt": "traditional Chinese, guzheng, erhu, pipa, dizi flute, gentle, spring blossoms, instrumental",
       "type": "instrumental",
       "duration": 115
     },
     {
       "id": "8",
-      "name": "08 - Récit de guerrier",
+      "name": "Récit de guerrier",
       "prompt": "traditional Chinese, guzheng, erhu, pipa, dizi flute, gentle, warrior tale, instrumental",
       "type": "instrumental",
       "duration": 85
     },
     {
       "id": "9",
-      "name": "09 - Berceuse du soir",
+      "name": "Berceuse du soir",
       "prompt": "traditional Chinese, guzheng, erhu, pipa, dizi flute, gentle, evening lullaby, instrumental",
       "type": "instrumental",
       "duration": 110
     },
     {
       "id": "10",
-      "name": "10 - Danse du dragon",
+      "name": "Danse du dragon",
       "prompt": "traditional Chinese, guzheng, erhu, pipa, dizi flute, gentle, dragon dance, instrumental",
       "type": "instrumental",
       "duration": 95

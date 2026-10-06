@@ -13,6 +13,8 @@ webradio/radio_settings.json
 webradio/*.tmp
 webradio/logs/
 webradio/playlists/*/outputs/
+webradio/_archive_playlists/
+webradio/_archive_regeneration/
 webradio/**/*.wav
 !webradio/silence.wav
 webradio/playlists/perso/lyrics_originales_pdf/

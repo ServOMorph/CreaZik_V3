@@ -5,93 +5,93 @@
   "test_cases": [
     {
       "id": "1",
-      "name": "01 - La route sans fin",
-      "prompt": "1960s folk rock, acoustic guitar strumming, harmonica, storytelling raspy nasal male vocal, French lyrics, slow ballad",
+      "name": "La route sans fin",
+      "prompt": "1960s folk rock, acoustic guitar strumming, harmonica, storytelling raspy nasal male vocal, English lyrics, slow ballad",
       "type": "vocal",
       "duration": 95,
-      "lyrics_file": "playlists/esprit-dylan/lyrics/01.txt",
-      "language": "fr"
+      "lyrics_file": "playlists/esprit-dylan/lyrics_en/01.txt",
+      "language": "en"
     },
     {
       "id": "2",
-      "name": "02 - Les cloches de la ville",
-      "prompt": "1960s folk rock, acoustic guitar strumming, harmonica, storytelling raspy nasal male vocal, French lyrics, mid-tempo, electric band",
+      "name": "Les cloches de la ville",
+      "prompt": "1960s folk rock, acoustic guitar strumming, harmonica, storytelling raspy nasal male vocal, English lyrics, mid-tempo, electric band",
       "type": "vocal",
       "duration": 80,
-      "lyrics_file": "playlists/esprit-dylan/lyrics/02.txt",
-      "language": "fr"
+      "lyrics_file": "playlists/esprit-dylan/lyrics_en/02.txt",
+      "language": "en"
     },
     {
       "id": "3",
-      "name": "03 - Chanson pour Marie",
-      "prompt": "1960s folk rock, acoustic guitar strumming, harmonica, storytelling raspy nasal male vocal, French lyrics, tender, fingerpicking",
+      "name": "Chanson pour Marie",
+      "prompt": "1960s folk rock, acoustic guitar strumming, harmonica, storytelling raspy nasal male vocal, English lyrics, tender, fingerpicking",
       "type": "vocal",
       "duration": 115,
-      "lyrics_file": "playlists/esprit-dylan/lyrics/03.txt",
-      "language": "fr"
+      "lyrics_file": "playlists/esprit-dylan/lyrics_en/03.txt",
+      "language": "en"
     },
     {
       "id": "4",
-      "name": "04 - Le temps tourne",
-      "prompt": "1960s folk rock, acoustic guitar strumming, harmonica, storytelling raspy nasal male vocal, French lyrics, upbeat, protest song",
+      "name": "Le temps tourne",
+      "prompt": "1960s folk rock, acoustic guitar strumming, harmonica, storytelling raspy nasal male vocal, English lyrics, upbeat, protest song",
       "type": "vocal",
       "duration": 110,
-      "lyrics_file": "playlists/esprit-dylan/lyrics/04.txt",
-      "language": "fr"
+      "lyrics_file": "playlists/esprit-dylan/lyrics_en/04.txt",
+      "language": "en"
     },
     {
       "id": "5",
-      "name": "05 - Hôtel du désert",
-      "prompt": "1960s folk rock, acoustic guitar strumming, harmonica, storytelling raspy nasal male vocal, French lyrics, slow, dusty, electric slide",
+      "name": "Hôtel du désert",
+      "prompt": "1960s folk rock, acoustic guitar strumming, harmonica, storytelling raspy nasal male vocal, English lyrics, slow, dusty, electric slide",
       "type": "vocal",
       "duration": 110,
-      "lyrics_file": "playlists/esprit-dylan/lyrics/05.txt",
-      "language": "fr"
+      "lyrics_file": "playlists/esprit-dylan/lyrics_en/05.txt",
+      "language": "en"
     },
     {
       "id": "6",
-      "name": "06 - Pluie sur la frontière",
-      "prompt": "1960s folk rock, acoustic guitar strumming, harmonica, storytelling raspy nasal male vocal, French lyrics, melancholic waltz",
+      "name": "Pluie sur la frontière",
+      "prompt": "1960s folk rock, acoustic guitar strumming, harmonica, storytelling raspy nasal male vocal, English lyrics, melancholic waltz",
       "type": "vocal",
       "duration": 55,
-      "lyrics_file": "playlists/esprit-dylan/lyrics/06.txt",
-      "language": "fr"
+      "lyrics_file": "playlists/esprit-dylan/lyrics_en/06.txt",
+      "language": "en"
     },
     {
       "id": "7",
-      "name": "07 - Le colporteur",
-      "prompt": "1960s folk rock, acoustic guitar strumming, harmonica, storytelling raspy nasal male vocal, French lyrics, fast, talking blues",
+      "name": "Le colporteur",
+      "prompt": "1960s folk rock, acoustic guitar strumming, harmonica, storytelling raspy nasal male vocal, English lyrics, fast, talking blues",
       "type": "vocal",
       "duration": 120,
-      "lyrics_file": "playlists/esprit-dylan/lyrics/07.txt",
-      "language": "fr"
+      "lyrics_file": "playlists/esprit-dylan/lyrics_en/07.txt",
+      "language": "en"
     },
     {
       "id": "8",
-      "name": "08 - Le vent répondra",
-      "prompt": "1960s folk rock, acoustic guitar strumming, harmonica, storytelling raspy nasal male vocal, French lyrics, gentle, harmonica intro",
+      "name": "Le vent répondra",
+      "prompt": "1960s folk rock, acoustic guitar strumming, harmonica, storytelling raspy nasal male vocal, English lyrics, gentle, harmonica intro",
       "type": "vocal",
       "duration": 95,
-      "lyrics_file": "playlists/esprit-dylan/lyrics/08.txt",
-      "language": "fr"
+      "lyrics_file": "playlists/esprit-dylan/lyrics_en/08.txt",
+      "language": "en"
     },
     {
       "id": "9",
-      "name": "09 - Train de nuit",
-      "prompt": "1960s folk rock, acoustic guitar strumming, harmonica, storytelling raspy nasal male vocal, French lyrics, chugging rhythm, harmonica solo",
+      "name": "Train de nuit",
+      "prompt": "1960s folk rock, acoustic guitar strumming, harmonica, storytelling raspy nasal male vocal, English lyrics, chugging rhythm, harmonica solo",
       "type": "vocal",
       "duration": 45,
-      "lyrics_file": "playlists/esprit-dylan/lyrics/09.txt",
-      "language": "fr"
+      "lyrics_file": "playlists/esprit-dylan/lyrics_en/09.txt",
+      "language": "en"
     },
     {
       "id": "10",
-      "name": "10 - Adieu Paris",
-      "prompt": "1960s folk rock, acoustic guitar strumming, harmonica, storytelling raspy nasal male vocal, French lyrics, final ballad, slow",
+      "name": "Adieu Paris",
+      "prompt": "1960s folk rock, acoustic guitar strumming, harmonica, storytelling raspy nasal male vocal, English lyrics, final ballad, slow",
       "type": "vocal",
       "duration": 135,
-      "lyrics_file": "playlists/esprit-dylan/lyrics/10.txt",
-      "language": "fr"
+      "lyrics_file": "playlists/esprit-dylan/lyrics_en/10.txt",
+      "language": "en"
     }
   ]
 }

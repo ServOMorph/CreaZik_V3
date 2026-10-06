@@ -5,70 +5,70 @@
   "test_cases": [
     {
       "id": "1",
-      "name": "01 - Freylekh",
+      "name": "Freylekh",
       "prompt": "klezmer, clarinet, accordion, violin, tuba, lively, freylekh dance, instrumental",
       "type": "instrumental",
       "duration": 55
     },
     {
       "id": "2",
-      "name": "02 - Doïna lente",
+      "name": "Doïna lente",
       "prompt": "klezmer, clarinet, accordion, violin, tuba, lively, slow doina, instrumental",
       "type": "instrumental",
       "duration": 50
     },
     {
       "id": "3",
-      "name": "03 - Danse de noces",
+      "name": "Danse de noces",
       "prompt": "klezmer, clarinet, accordion, violin, tuba, lively, wedding dance, instrumental",
       "type": "instrumental",
       "duration": 60
     },
     {
       "id": "4",
-      "name": "04 - Bulgar",
+      "name": "Bulgar",
       "prompt": "klezmer, clarinet, accordion, violin, tuba, lively, bulgar, instrumental",
       "type": "instrumental",
       "duration": 55
     },
     {
       "id": "5",
-      "name": "05 - Sher",
+      "name": "Sher",
       "prompt": "klezmer, clarinet, accordion, violin, tuba, lively, sher, instrumental",
       "type": "instrumental",
       "duration": 75
     },
     {
       "id": "6",
-      "name": "06 - Niggun mélancolique",
+      "name": "Niggun mélancolique",
       "prompt": "klezmer, clarinet, accordion, violin, tuba, lively, mournful niggun, instrumental",
       "type": "instrumental",
       "duration": 45
     },
     {
       "id": "7",
-      "name": "07 - Hora rapide",
+      "name": "Hora rapide",
       "prompt": "klezmer, clarinet, accordion, violin, tuba, lively, fast hora, instrumental",
       "type": "instrumental",
       "duration": 45
     },
     {
       "id": "8",
-      "name": "08 - Klezmer jazzy",
+      "name": "Klezmer jazzy",
       "prompt": "klezmer, clarinet, accordion, violin, tuba, lively, jazzy klezmer, instrumental",
       "type": "instrumental",
       "duration": 90
     },
     {
       "id": "9",
-      "name": "09 - Fanfare du village",
+      "name": "Fanfare du village",
       "prompt": "klezmer, clarinet, accordion, violin, tuba, lively, village band, instrumental",
       "type": "instrumental",
       "duration": 45
     },
     {
       "id": "10",
-      "name": "10 - Finale festif",
+      "name": "Finale festif",
       "prompt": "klezmer, clarinet, accordion, violin, tuba, lively, festive finale, instrumental",
       "type": "instrumental",
       "duration": 135

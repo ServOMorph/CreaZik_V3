@@ -5,70 +5,70 @@
   "test_cases": [
     {
       "id": "1",
-      "name": "01 - Samba de roda",
+      "name": "Samba de roda",
       "prompt": "Brazilian samba and MPB, nylon guitar, cavaquinho, percussion, samba de roda, instrumental",
       "type": "instrumental",
       "duration": 110
     },
     {
       "id": "2",
-      "name": "02 - Bossa",
+      "name": "Bossa",
       "prompt": "Brazilian samba and MPB, nylon guitar, cavaquinho, percussion, bossa nova, instrumental",
       "type": "instrumental",
       "duration": 110
     },
     {
       "id": "3",
-      "name": "03 - Samba-canção",
+      "name": "Samba-canção",
       "prompt": "Brazilian samba and MPB, nylon guitar, cavaquinho, percussion, samba-cancao, instrumental",
       "type": "instrumental",
       "duration": 90
     },
     {
       "id": "4",
-      "name": "04 - Pagode",
+      "name": "Pagode",
       "prompt": "Brazilian samba and MPB, nylon guitar, cavaquinho, percussion, pagode, instrumental",
       "type": "instrumental",
       "duration": 55
     },
     {
       "id": "5",
-      "name": "05 - Choro",
+      "name": "Choro",
       "prompt": "Brazilian samba and MPB, nylon guitar, cavaquinho, percussion, choro, instrumental",
       "type": "instrumental",
       "duration": 60
     },
     {
       "id": "6",
-      "name": "06 - Baião",
+      "name": "Baião",
       "prompt": "Brazilian samba and MPB, nylon guitar, cavaquinho, percussion, baiao, instrumental",
       "type": "instrumental",
       "duration": 80
     },
     {
       "id": "7",
-      "name": "07 - Frevo",
+      "name": "Frevo",
       "prompt": "Brazilian samba and MPB, nylon guitar, cavaquinho, percussion, frevo, instrumental",
       "type": "instrumental",
       "duration": 95
     },
     {
       "id": "8",
-      "name": "08 - Forró",
+      "name": "Forró",
       "prompt": "Brazilian samba and MPB, nylon guitar, cavaquinho, percussion, forro, instrumental",
       "type": "instrumental",
       "duration": 115
     },
     {
       "id": "9",
-      "name": "09 - Carnaval",
+      "name": "Carnaval",
       "prompt": "Brazilian samba and MPB, nylon guitar, cavaquinho, percussion, carnival, instrumental",
       "type": "instrumental",
       "duration": 105
     },
     {
       "id": "10",
-      "name": "10 - Tropicália",
+      "name": "Tropicália",
       "prompt": "Brazilian samba and MPB, nylon guitar, cavaquinho, percussion, tropicalia mood, instrumental",
       "type": "instrumental",
       "duration": 50

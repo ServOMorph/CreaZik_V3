@@ -5,7 +5,7 @@
   "test_cases": [
     {
       "id": "1",
-      "name": "01 - Bola de espelhos",
+      "name": "Bola de espelhos",
       "prompt": "disco, four-on-the-floor kick, funky rhythm guitar, lush strings, brass stabs, groovy bass, 118 bpm, female vocal",
       "type": "vocal",
       "duration": 135,
@@ -14,7 +14,7 @@
     },
     {
       "id": "2",
-      "name": "02 - Dançar até o sol",
+      "name": "Dançar até o sol",
       "prompt": "disco, driving bassline, hand claps, shimmering strings, bright brass, 120 bpm, male vocal",
       "type": "vocal",
       "duration": 75,
@@ -23,7 +23,7 @@
     },
     {
       "id": "3",
-      "name": "03 - Chão de veludo",
+      "name": "Chão de veludo",
       "prompt": "smooth disco, warm bass, wah guitar, soft strings, 112 bpm, duet vocal, romantic",
       "type": "vocal",
       "duration": 75,
@@ -32,7 +32,7 @@
     },
     {
       "id": "4",
-      "name": "04 - Brilho nos olhos",
+      "name": "Brilho nos olhos",
       "prompt": "disco pop, sparkling synths, tight drums, funky guitar, 122 bpm, female vocal, joyful",
       "type": "vocal",
       "duration": 115,
@@ -41,7 +41,7 @@
     },
     {
       "id": "5",
-      "name": "05 - Boogie na avenida",
+      "name": "Boogie na avenida",
       "prompt": "disco funk, slap bass, brass section, congas, 116 bpm, male vocal, playful",
       "type": "vocal",
       "duration": 135,
@@ -50,7 +50,7 @@
     },
     {
       "id": "6",
-      "name": "06 - Sonho de sábado",
+      "name": "Sonho de sábado",
       "prompt": "classic disco, orchestral strings, rhythmic guitar, pounding kick, 124 bpm, female vocal",
       "type": "vocal",
       "duration": 135,
@@ -59,7 +59,7 @@
     },
     {
       "id": "7",
-      "name": "07 - Amor na pista",
+      "name": "Amor na pista",
       "prompt": "disco, pulsing bass, shimmering hi-hats, string stabs, 120 bpm, duet vocal",
       "type": "vocal",
       "duration": 100,
@@ -68,7 +68,7 @@
     },
     {
       "id": "8",
-      "name": "08 - Sacode a noite",
+      "name": "Sacode a noite",
       "prompt": "funky disco, rhythm guitar chops, handclaps, bright brass, 119 bpm, male vocal, energetic",
       "type": "vocal",
       "duration": 70,
@@ -77,7 +77,7 @@
     },
     {
       "id": "9",
-      "name": "09 - Salto alto",
+      "name": "Salto alto",
       "prompt": "retro disco, fat bass, string swells, funky drums, 117 bpm, female vocal, confident",
       "type": "vocal",
       "duration": 60,
@@ -86,7 +86,7 @@
     },
     {
       "id": "10",
-      "name": "10 - A última canção",
+      "name": "A última canção",
       "prompt": "disco ballad, warm strings, mellow bass, soft claps, 108 bpm, duet vocal, nostalgic",
       "type": "vocal",
       "duration": 105,

@@ -1,11 +1,11 @@
 {
   "playlist_name": "Playlist Perso - Folk",
   "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
-  "output_dir": "./playlists/perso-folk/outputs",
+  "output_dir": "./playlists/francais_tests-folk/outputs",
   "test_cases": [
     {
       "id": "1",
-      "name": "01 - Je prends mon temps - Folk",
+      "name": "Je prends mon temps - Folk",
       "prompt": "acoustic folk, fingerpicked acoustic guitar, warm natural vocal, mellow, storytelling",
       "type": "vocal",
       "duration": 90,
@@ -14,7 +14,7 @@
     },
     {
       "id": "2",
-      "name": "02 - Les quais la nuit - Folk",
+      "name": "Les quais la nuit - Folk",
       "prompt": "acoustic folk, fingerpicked acoustic guitar, warm natural vocal, mellow, storytelling",
       "type": "vocal",
       "duration": 135,
@@ -23,7 +23,7 @@
     },
     {
       "id": "3",
-      "name": "03 - Demain, on change - Folk",
+      "name": "Demain, on change - Folk",
       "prompt": "acoustic folk, fingerpicked acoustic guitar, warm natural vocal, mellow, storytelling",
       "type": "vocal",
       "duration": 120,
@@ -32,7 +32,7 @@
     },
     {
       "id": "4",
-      "name": "04 - Minuit sur l'autoroute - Folk",
+      "name": "Minuit sur l'autoroute - Folk",
       "prompt": "acoustic folk, fingerpicked acoustic guitar, warm natural vocal, mellow, storytelling",
       "type": "vocal",
       "duration": 90,
@@ -41,7 +41,7 @@
     },
     {
       "id": "5",
-      "name": "05 - Mon voisin est un hérisson - Folk",
+      "name": "Mon voisin est un hérisson - Folk",
       "prompt": "acoustic folk, fingerpicked acoustic guitar, warm natural vocal, mellow, storytelling",
       "type": "vocal",
       "duration": 95,
@@ -50,7 +50,7 @@
     },
     {
       "id": "6",
-      "name": "06 - Le bateau du matin - Folk",
+      "name": "Le bateau du matin - Folk",
       "prompt": "acoustic folk, fingerpicked acoustic guitar, warm natural vocal, mellow, storytelling",
       "type": "vocal",
       "duration": 90,
@@ -59,7 +59,7 @@
     },
     {
       "id": "7",
-      "name": "07 - Les souliers de ma grand-mère - Folk",
+      "name": "Les souliers de ma grand-mère - Folk",
       "prompt": "acoustic folk, fingerpicked acoustic guitar, warm natural vocal, mellow, storytelling",
       "type": "vocal",
       "duration": 105,
@@ -68,7 +68,7 @@
     },
     {
       "id": "8",
-      "name": "08 - Elle danse seule - Folk",
+      "name": "Elle danse seule - Folk",
       "prompt": "acoustic folk, fingerpicked acoustic guitar, warm natural vocal, mellow, storytelling",
       "type": "vocal",
       "duration": 90,
@@ -77,7 +77,7 @@
     },
     {
       "id": "9",
-      "name": "09 - Une route en été - Folk",
+      "name": "Une route en été - Folk",
       "prompt": "acoustic folk, fingerpicked acoustic guitar, warm natural vocal, mellow, storytelling",
       "type": "vocal",
       "duration": 70,
@@ -86,7 +86,7 @@
     },
     {
       "id": "10",
-      "name": "10 - Le facteur et la fleuriste - Folk",
+      "name": "Le facteur et la fleuriste - Folk",
       "prompt": "acoustic folk, fingerpicked acoustic guitar, warm natural vocal, mellow, storytelling",
       "type": "vocal",
       "duration": 135,
@@ -95,7 +95,7 @@
     },
     {
       "id": "11",
-      "name": "11 - Chemin de montagne - Folk",
+      "name": "Chemin de montagne - Folk",
       "prompt": "acoustic folk, fingerpicked acoustic guitar, warm natural vocal, mellow, storytelling",
       "type": "vocal",
       "duration": 75,
@@ -104,7 +104,7 @@
     },
     {
       "id": "12",
-      "name": "12 - Là où brille la mer - Folk",
+      "name": "Là où brille la mer - Folk",
       "prompt": "acoustic folk, fingerpicked acoustic guitar, warm natural vocal, mellow, storytelling",
       "type": "vocal",
       "duration": 120,
@@ -113,7 +113,7 @@
     },
     {
       "id": "13",
-      "name": "13 - Blues du lundi - Folk",
+      "name": "Blues du lundi - Folk",
       "prompt": "acoustic folk, fingerpicked acoustic guitar, warm natural vocal, mellow, storytelling",
       "type": "vocal",
       "duration": 60,
@@ -122,7 +122,7 @@
     },
     {
       "id": "14",
-      "name": "14 - Le vent et le large - Folk",
+      "name": "Le vent et le large - Folk",
       "prompt": "acoustic folk, fingerpicked acoustic guitar, warm natural vocal, mellow, storytelling",
       "type": "vocal",
       "duration": 85,
@@ -131,7 +131,7 @@
     },
     {
       "id": "15",
-      "name": "15 - La dernière nuit - Folk",
+      "name": "La dernière nuit - Folk",
       "prompt": "acoustic folk, fingerpicked acoustic guitar, warm natural vocal, mellow, storytelling",
       "type": "vocal",
       "duration": 105,
@@ -140,7 +140,7 @@
     },
     {
       "id": "16",
-      "name": "16 - Une carte postale - Folk",
+      "name": "Une carte postale - Folk",
       "prompt": "acoustic folk, fingerpicked acoustic guitar, warm natural vocal, mellow, storytelling",
       "type": "vocal",
       "duration": 90,
@@ -149,7 +149,7 @@
     },
     {
       "id": "17",
-      "name": "17 - Les gars de la côte - Folk",
+      "name": "Les gars de la côte - Folk",
       "prompt": "acoustic folk, fingerpicked acoustic guitar, warm natural vocal, mellow, storytelling",
       "type": "vocal",
       "duration": 90,
@@ -158,7 +158,7 @@
     },
     {
       "id": "18",
-      "name": "18 - La maison au bout du chemin - Folk",
+      "name": "La maison au bout du chemin - Folk",
       "prompt": "acoustic folk, fingerpicked acoustic guitar, warm natural vocal, mellow, storytelling",
       "type": "vocal",
       "duration": 90,
@@ -167,7 +167,7 @@
     },
     {
       "id": "19",
-      "name": "19 - Les amis du port - Folk",
+      "name": "Les amis du port - Folk",
       "prompt": "acoustic folk, fingerpicked acoustic guitar, warm natural vocal, mellow, storytelling",
       "type": "vocal",
       "duration": 125,
@@ -176,7 +176,7 @@
     },
     {
       "id": "20",
-      "name": "20 - Chantons la vie - Folk",
+      "name": "Chantons la vie - Folk",
       "prompt": "acoustic folk, fingerpicked acoustic guitar, warm natural vocal, mellow, storytelling",
       "type": "vocal",
       "duration": 50,
@@ -185,7 +185,7 @@
     },
     {
       "id": "21",
-      "name": "21 - Le bar du coin - Folk",
+      "name": "Le bar du coin - Folk",
       "prompt": "acoustic folk, fingerpicked acoustic guitar, warm natural vocal, mellow, storytelling",
       "type": "vocal",
       "duration": 85,

@@ -380,7 +380,49 @@
 
         .mini-actions button:active { transform: scale(0.96); background: var(--a2-a); }
 
+        .transition-preset {
+            border-top: 1px solid var(--stroke);
+        }
+
+        .transition-preset summary {
+            display: flex;
+            align-items: center;
+            min-height: 52px;
+            cursor: pointer;
+            list-style: none;
+            font-weight: 700;
+        }
+
+        .transition-preset summary::-webkit-details-marker { display: none; }
+
+        .transition-preset summary::after {
+            content: "";
+            width: 8px;
+            height: 8px;
+            margin-left: auto;
+            border-right: 2px solid var(--muted);
+            border-bottom: 2px solid var(--muted);
+            transform: rotate(-45deg);
+            transition: transform 0.2s ease;
+        }
+
+        .transition-preset[open] summary::after { transform: rotate(45deg); }
+
+        .transition-preset-body { padding-bottom: 8px; }
+
         .info { color: var(--muted); font-size: 0.8125rem; margin-top: 8px; line-height: 1.45; }
+
+        .program-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; }
+        .program-box { border: 1px solid #41415b; border-radius: 10px; padding: 12px; min-width: 0; }
+        .program-box h3 { margin: 0 0 8px; font-size: 1rem; }
+        .program-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; border-top: 1px solid #35354b; padding: 8px 0; }
+        .program-row:first-child { border-top: 0; }
+        .program-name { min-width: 0; overflow-wrap: anywhere; }
+        .program-sub { display: block; color: var(--muted); font-size: .8rem; margin-top: 2px; }
+        .program-row button { flex: 0 0 auto; }
+        #programLibrary { max-height: 520px; overflow: auto; }
+        #programSearch { box-sizing: border-box; width: 100%; min-height: 42px; margin: 0 0 8px; padding: 9px 11px; border: 1px solid #555; border-radius: 8px; background: #2d2d44; color: #fff; font: inherit; }
+        @media (max-width: 700px) { .program-grid { grid-template-columns: 1fr; } }
 
         @media (prefers-reduced-motion: reduce) {
             a.back, .btn, .stepper button, .mini-actions button, .switch .slider, .switch .slider::after,
@@ -397,12 +439,32 @@
 <body>
     <div class="container">
         <div class="top">
-            <a class="back" href="/listen.html">&larr; Écoute</a>
+            <a class="back" href="http://localhost:5000/">&larr; Écoute</a>
             <a class="back" href="/ui.html">Explorateur</a>
             <h1>Gestion WebRadio</h1>
             <button class="btn" onclick="resetAll()">Réinitialiser</button>
         </div>
         <div class="saved" id="saved"></div>
+
+        <details class="fold" id="secProgram" data-fold="program" open>
+            <summary><h2>Programmer après le morceau en cours</h2></summary>
+            <div class="fold-body">
+                <div class="program-grid">
+                    <div class="program-box">
+                        <h3>En cours et file d’attente</h3>
+                        <div id="programCurrent" class="info">Chargement…</div>
+                        <div id="programQueue"></div>
+                    </div>
+                    <div class="program-box">
+                        <h3>Ajouter un morceau ou une playlist</h3>
+                        <input id="programSearch" type="search" placeholder="Rechercher un morceau ou une playlist…" aria-label="Rechercher un morceau ou une playlist" oninput="renderProgramLibrary()">
+                        <div id="programLibrary" class="info">Chargement du catalogue…</div>
+                    </div>
+                </div>
+                <div class="info">Les ajouts sont placés après les éléments déjà programmés. Utilisez « Ajouter la playlist » pour mettre tous ses morceaux dans la file.</div>
+                <div id="programMessage" class="info" role="status" aria-live="polite"></div>
+            </div>
+        </details>
 
         <details class="fold" id="secAccount" data-fold="account" open>
             <summary><h2>Compte admin</h2></summary>
@@ -589,6 +651,10 @@
         let statsTimer = null;
         let openPlaylists = new Set();
         let saveTimer = null;
+        let programLibrary = [];
+        let programState = null;
+        let programTimer = null;
+        let programSearch = '';
 
         function esc(v) {
             return String(v == null ? '' : v).replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
@@ -613,7 +679,88 @@
             }
             await loadStats();
             render();
+            await loadProgramLibrary();
+            await refreshProgram();
+            programTimer = setInterval(refreshProgram, 5000);
         }
+
+        function programEscape(v) {
+            return String(v == null ? '' : v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+        }
+
+        function programTitle(item) {
+            return String(item.name || item.key || '').replace(/^\d+\s*-\s*/, '');
+        }
+
+        async function loadProgramLibrary() {
+            try {
+                const r = await fetch('/api/radio/library');
+                if (!r.ok) throw new Error(r.status);
+                programLibrary = await r.json();
+                renderProgramLibrary();
+            } catch (e) {
+                document.getElementById('programLibrary').textContent = 'Impossible de charger le catalogue.';
+            }
+        }
+
+        async function refreshProgram() {
+            try {
+                const r = await fetch('/api/radio/state?t=' + Date.now());
+                if (!r.ok) throw new Error(r.status);
+                programState = await r.json();
+                renderProgramState();
+            } catch (e) {
+                document.getElementById('programCurrent').textContent = 'État de la radio indisponible.';
+            }
+        }
+
+        function renderProgramLibrary() {
+            const root = document.getElementById('programLibrary');
+            root.className = '';
+            programSearch = document.getElementById('programSearch').value.trim().toLocaleLowerCase();
+            const matches = programLibrary.map(pl => {
+                const playlistMatch = pl.label.toLocaleLowerCase().includes(programSearch);
+                const tracks = playlistMatch || !programSearch ? pl.tracks : pl.tracks.filter(t => programTitle(t).toLocaleLowerCase().includes(programSearch));
+                return tracks.length || playlistMatch ? { ...pl, visibleTracks: tracks } : null;
+            }).filter(Boolean);
+            root.innerHTML = matches.length ? matches.map(pl => `
+                <div class="program-row">
+                    <span class="program-name">${programEscape(pl.label)}<span class="program-sub">${pl.tracks.length} morceau(x)</span></span>
+                    <button class="btn" type="button" onclick="addProgramPlaylist('${programEscape(pl.id)}')">Ajouter la playlist</button>
+                </div>
+                ${pl.visibleTracks.map(t => `<div class="program-row">
+                    <span class="program-name">${programEscape(programTitle(t))}<span class="program-sub">${programEscape(pl.label)}</span></span>
+                    <button class="btn" type="button" onclick="addProgramTrack('${programEscape(t.key)}')">Ajouter</button>
+                </div>`).join('')}
+            `).join('') : `<div class="info">${programLibrary.length ? 'Aucun résultat.' : 'Aucun morceau disponible.'}</div>`;
+        }
+
+        function renderProgramState() {
+            const active = (programState && programState.active || []).find(x => x.start <= programState.server_time && x.end > programState.server_time);
+            const current = document.getElementById('programCurrent');
+            current.className = active ? 'program-row' : 'info';
+            current.innerHTML = active ? `<span class="program-name">${programEscape(programTitle(active))}<span class="program-sub">${programEscape(active.playlist_label || (active.jingle ? 'Jingle' : ''))} · en cours</span></span>` : 'Aucun morceau en cours.';
+            const queue = document.getElementById('programQueue');
+            const items = programState && programState.upcoming || [];
+            queue.innerHTML = items.length ? items.map((it, i) => `<div class="program-row">
+                <span class="program-name">${i + 1}. ${programEscape(programTitle(it))}<span class="program-sub">${programEscape(it.playlist_label || (it.jingle ? 'Jingle' : ''))}${it.explicit ? ' · programmé' : ''}</span></span>
+            </div>`).join('') : '<div class="info">La file est vide.</div>';
+        }
+
+        async function addProgram(action, data) {
+            const msg = document.getElementById('programMessage');
+            msg.textContent = 'Ajout en cours…';
+            try {
+                const r = await fetch('/api/radio/action', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({action, ...data})});
+                if (!r.ok) throw new Error(r.status);
+                programState = await r.json();
+                renderProgramState();
+                msg.textContent = 'Ajouté à la file après les éléments déjà programmés.';
+            } catch (e) { msg.textContent = 'Échec de l’ajout à la file.'; }
+        }
+
+        function addProgramTrack(key) { addProgram('next', {key}); }
+        function addProgramPlaylist(id) { addProgram('playlist_next', {id}); }
 
         async function loadStats() {
             const st = await getJSON('/api/radio/stats', []);
@@ -731,7 +878,7 @@
             const on = !settings.excluded.includes(k);
             return `<label class="track ${on ? '' : 'off'}">
                 <input type="checkbox" ${on ? 'checked' : ''} onchange="toggleTrack('${k}', this.checked, this.parentElement)">
-                <span class="tname">${esc(t.name)}</span>
+                <span class="tname">${esc(String(t.name || '').replace(/^\d+\s*-\s*/, ''))}</span>
                 ${voteLabel(k)}${shareLabel(k)}
                 ${favs.has(k) ? '<span class="star">&#9733;</span>' : ''}
             </label>`;
@@ -828,6 +975,8 @@
             const p = settings.transitions.presets.find(x => x.id === id);
             if (!p) return;
             p.name = value.slice(0, 40) || 'Sans nom';
+            const title = document.getElementById('preset_title_' + id);
+            if (title) title.textContent = p.name;
             fillTransSelects();
             save();
         }
@@ -863,7 +1012,9 @@
         function renderTransitions() {
             fillTransSelects();
             document.getElementById('presetList').innerHTML = settings.transitions.presets.map(p => `
-                <div class="playlist open" style="padding:8px 0">
+                <details class="transition-preset"${p.id === settings.transitions.active ? ' open' : ''}>
+                    <summary id="preset_title_${esc(p.id)}">${esc(p.name)}</summary>
+                    <div class="transition-preset-body">
                     <div class="playlist-head" style="grid-template-columns:1fr auto">
                         <input type="text" value="${esc(p.name)}" maxlength="40" onchange="presetName('${esc(p.id)}', this.value)"
                                style="width:100%;min-height:44px;padding:8px;border-radius:8px;border:1px solid #555;background:#2d2d44;color:#fff;font-size:16px">
@@ -878,7 +1029,8 @@
                             <button onclick="presetStep('${esc(p.id)}', '${k}', 0.5, ${min}, ${max})">+</button>
                         </div>
                     </div>`).join('')}
-                </div>`).join('');
+                    </div>
+                </details>`).join('');
         }
 
         function initFolds() {

@@ -19,6 +19,7 @@ Document établi à partir des décisions prises au fil des conversations. Chaqu
 
 ### 2.2 Paroles
 - Morceaux vocaux : paroles en français, inventées si nécessaire. Exceptions : playlists dans une autre langue (disco anglais, groove anglais, poésie anglaise, disco en espagnol, portugais, italien, allemand).
+- Lorsqu'une playlist est demandée en s'inspirant d'un chanteur, utiliser sa langue d'origine pour les paroles chantées (par exemple : anglais pour Michael Jackson).
 - Les paroles importées par l'utilisateur (PDF « Paroles Meuniers Éveillés ») sont rangées dans les playlists « perso » ; les PDF source ne sont pas versionnés.
 - Les playlists « perso » déclinent les mêmes morceaux en plusieurs styles (electro, folk, rock, classique, grégorien, chorale) et partagent un `song_group` pour ne pas se suivre de près.
 
@@ -26,7 +27,7 @@ Document établi à partir des décisions prises au fil des conversations. Chaqu
 - Génération en rotation : un morceau par playlist, à tour de rôle (`run_rotation.py`), et non playlist par playlist.
 - `series.txt` est relu à chaque tour, avec fins de ligne LF uniquement.
 - Chaque piste est tentée 3 fois ; un délai maximal de `max(90 s, 3 x durée)` ; après 3 échecs, la piste est abandonnée et signalée dans les logs.
-- Le superviseur relance automatiquement un plantage de la génération.
+- Les statuts par piste dans `playlist_results.json` font foi : au redémarrage, les pistes déjà générées sont ignorées. La rotation n'est pas relancée par un superviseur permanent ; utiliser `/start_generation` et `/stop_generation` pour la gérer indépendamment des interfaces.
 - Toute playlist doit être tentée dans toutes les catégories prévues ; l'objectif est que tout soit généré et accessible sur le téléphone.
 - Chaque nouvelle playlist reçoit une configuration (`config.json`, paroles) et une entrée dans `scenes_spec.json` (motif visuel, teintes, vitesse, densité).
 - Les playlists sont éclectiques et couvrent les styles musicaux du monde.
@@ -41,6 +42,8 @@ Document établi à partir des décisions prises au fil des conversations. Chaqu
 - La consommation de la carte est une estimation (`energy_wh_est`), car `nvidia-smi` ne donne pas la puissance ; elle est présentée comme telle.
 - Les pochettes sont générées avec une IA locale (ComfyUI-Qwen, Qwen-Image 2.1) et uniquement lorsque la file de génération musicale est vide.
 - Pochette : le texte (titre du morceau, nom de la playlist, date de création en plus petit) est généré dans l'image par le modèle, jamais incrusté après coup. Une charte graphique par playlist est dans `webradio/covers_charte.json` (`tools/make_charte.py`), appliquée par `tools/cover_gen.py`.
+- La génération en lot se lance avec `/generate_covers`, attend que la génération musicale soit inactive et reprend en ignorant les pochettes PNG déjà créées. `/stop_covers` arrête uniquement ce lot et ComfyUI-Qwen ; sans pochette disponible, l'interface conserve l'animation visuelle.
+- Priorité des pochettes : relire les votes avant chaque image, générer d'abord les morceaux au solde positif, puis ceux sans vote, puis les soldes équilibrés ; exclure les soldes négatifs. Si le solde devient négatif pendant la génération, ne pas conserver l'image.
 
 ## 3. Règles de la radio (moteur)
 
@@ -89,8 +92,8 @@ Document établi à partir des décisions prises au fil des conversations. Chaqu
 - Écrire les scripts à plusieurs lignes avec l'outil d'écriture de fichiers plutôt qu'avec des heredocs (problèmes de guillemets et d'antislash).
 
 ### 5.2 Services
-- Après avoir arrêté un service, toujours le relancer (`.\services.ps1 restart -Only serveur|analyse|compression|generation`) ; un 502 chez l'utilisateur vient d'un serveur arrêté.
-- `services.ps1 stop` arrête aussi `run_rotation.py` ; `/stop` libère toute la VRAM, `python run.py` relance les services (le tunnel Cloudflare reste manuel). Sans arrêt de la rotation, les pochettes ComfyUI se disputent la VRAM et plantent.
+- Après avoir arrêté un service radio (serveur, analyse ou compression), le relancer si nécessaire (`.\services.ps1 restart -Only serveur|analyse|compression`). Un arrêt volontaire de la génération musicale peut rester en place jusqu'à la prochaine session ; `/start_generation` la reprend.
+- `services.ps1 stop -Only generation` arrête aussi `run_rotation.py` et ses workers sans supprimer les pistes déjà marquées `generated`. Ne pas faire tourner la génération musicale en même temps que ComfyUI pour les pochettes : ils se disputent le GPU.
 - Ne pas redémarrer le serveur inutilement : cela coupe le morceau en cours des auditeurs.
 
 ### 5.3 Tests et livraison
@@ -104,6 +107,10 @@ Document établi à partir des décisions prises au fil des conversations. Chaqu
 - Liste blanche de fichiers statiques ; en-têtes de sécurité stricts (CSP) ; limitation de débit (connexion, commentaires, votes).
 - Écritures admin : type JSON obligatoire et cookie SameSite=Strict.
 - Les commentaires, votes, favoris, états et réglages utilisateur ne sont pas versionnés.
+
+### 5.5 Noms d'artistes dans les titres publics
+- Ne pas présenter l'usage d'un nom ou pseudonyme célèbre dans un titre de playlist comme garanti sans risque. Le contexte peut créer une impression d'affiliation ou d'association ; des droits de la personnalité et des droits de marque peuvent entrer en jeu.
+- Pour les titres publics, préférer une formulation descriptive des genres, instruments ou périodes musicales, sans nom, photographie ni logo d'artiste. Si un nom d'artiste doit être conservé pour un usage public ou commercial, faire vérifier le cas précis par un conseil en propriété intellectuelle ; la mention « esprit de » ou « inspiré par » ne constitue pas à elle seule une garantie juridique.
 
 ## 6. Points non tranchés ou à valider
 

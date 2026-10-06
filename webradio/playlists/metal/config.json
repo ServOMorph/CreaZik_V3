@@ -5,70 +5,70 @@
   "test_cases": [
     {
       "id": "1",
-      "name": "01 - Thrash rapide",
+      "name": "Thrash rapide",
       "prompt": "instrumental metal, heavy distorted guitars, double bass drums, powerful, thrash metal, fast riffs, instrumental",
       "type": "instrumental",
       "duration": 110
     },
     {
       "id": "2",
-      "name": "02 - Doom lent",
+      "name": "Doom lent",
       "prompt": "instrumental metal, heavy distorted guitars, double bass drums, powerful, doom metal, slow and heavy, instrumental",
       "type": "instrumental",
       "duration": 115
     },
     {
       "id": "3",
-      "name": "03 - Power metal",
+      "name": "Power metal",
       "prompt": "instrumental metal, heavy distorted guitars, double bass drums, powerful, power metal, melodic and epic, instrumental",
       "type": "instrumental",
       "duration": 85
     },
     {
       "id": "4",
-      "name": "04 - Metal progressif",
+      "name": "Metal progressif",
       "prompt": "instrumental metal, heavy distorted guitars, double bass drums, powerful, progressive metal, complex rhythms, instrumental",
       "type": "instrumental",
       "duration": 70
     },
     {
       "id": "5",
-      "name": "05 - Metal symphonique",
+      "name": "Metal symphonique",
       "prompt": "instrumental metal, heavy distorted guitars, double bass drums, powerful, symphonic metal, orchestra, instrumental",
       "type": "instrumental",
       "duration": 75
     },
     {
       "id": "6",
-      "name": "06 - Metal groove",
+      "name": "Metal groove",
       "prompt": "instrumental metal, heavy distorted guitars, double bass drums, powerful, groove metal, mid tempo, instrumental",
       "type": "instrumental",
       "duration": 130
     },
     {
       "id": "7",
-      "name": "07 - Metal mélodique",
+      "name": "Metal mélodique",
       "prompt": "instrumental metal, heavy distorted guitars, double bass drums, powerful, melodic metal, twin guitars, instrumental",
       "type": "instrumental",
       "duration": 65
     },
     {
       "id": "8",
-      "name": "08 - Metal industriel",
+      "name": "Metal industriel",
       "prompt": "instrumental metal, heavy distorted guitars, double bass drums, powerful, industrial metal, machine rhythm, instrumental",
       "type": "instrumental",
       "duration": 45
     },
     {
       "id": "9",
-      "name": "09 - Metal épique",
+      "name": "Metal épique",
       "prompt": "instrumental metal, heavy distorted guitars, double bass drums, powerful, epic metal, cinematic, instrumental",
       "type": "instrumental",
       "duration": 65
     },
     {
       "id": "10",
-      "name": "10 - Solo de guitare",
+      "name": "Solo de guitare",
       "prompt": "instrumental metal, heavy distorted guitars, double bass drums, powerful, guitar hero metal, shredding solos, instrumental",
       "type": "instrumental",
       "duration": 120

@@ -1,523 +1,517 @@
 [
   {
     "id": "test",
-    "label": "Playlist Test - Validation",
+    "label": "Test - Validation",
     "results": "playlists/test/outputs/playlist_results.json",
     "description": "Morceau de validation des paroles françaises et de la durée de 1 min 30."
   },
   {
     "id": "auto",
-    "label": "Playlist Auto - 10 styles",
+    "label": "Auto - 10 styles",
     "results": "playlists/auto/outputs/playlist_results.json",
     "description": "Playlist de départ : 10 styles (electro, rap, ambient, jazz, rock, classique, techno, lo-fi, synthwave, folk), générés automatiquement pour tester l'IA ACE-Step 1.5."
   },
   {
     "id": "perso",
-    "label": "Playlist Perso - 21 chansons",
+    "label": "Chansons françaises — 21 titres",
     "results": "playlists/perso/outputs/playlist_results.json",
     "description": "Playlist Perso : 21 chansons aux paroles inventées en français, dans des styles inspirés de la chanson française, générées en local."
   },
   {
-    "id": "perso-electro",
-    "label": "Playlist Perso - Electro",
-    "results": "playlists/perso-electro/outputs/playlist_results.json",
+    "id": "francais_tests-electro",
+    "label": "Chanson française électro",
+    "results": "playlists/francais_tests-electro/outputs/playlist_results.json",
     "description": "Les 21 chansons de la playlist Perso réinterprétées en version electro."
   },
   {
-    "id": "perso-folk",
-    "label": "Playlist Perso - Folk",
-    "results": "playlists/perso-folk/outputs/playlist_results.json",
+    "id": "francais_tests-folk",
+    "label": "Chanson française folk",
+    "results": "playlists/francais_tests-folk/outputs/playlist_results.json",
     "description": "Les 21 chansons de la playlist Perso réinterprétées en version folk acoustique."
   },
   {
-    "id": "perso-rock",
-    "label": "Playlist Perso - Rock",
-    "results": "playlists/perso-rock/outputs/playlist_results.json",
+    "id": "francais_tests-rock",
+    "label": "Chanson française rock",
+    "results": "playlists/francais_tests-rock/outputs/playlist_results.json",
     "description": "Les 21 chansons de la playlist Perso réinterprétées en version rock."
   },
   {
-    "id": "perso-classique",
-    "label": "Playlist Perso - Classique",
-    "results": "playlists/perso-classique/outputs/playlist_results.json",
+    "id": "francais_tests-classique",
+    "label": "Chanson française classique",
+    "results": "playlists/francais_tests-classique/outputs/playlist_results.json",
     "description": "Les 21 chansons de la playlist Perso réinterprétées en version classique."
   },
   {
-    "id": "perso-gregorien",
-    "label": "Playlist Perso - Chant grégorien",
-    "results": "playlists/perso-gregorien/outputs/playlist_results.json",
+    "id": "francais_tests-gregorien",
+    "label": "Chanson française grégorienne",
+    "results": "playlists/francais_tests-gregorien/outputs/playlist_results.json",
     "description": "Les 21 chansons de la playlist Perso réinterprétées en chant grégorien."
   },
   {
-    "id": "perso-chorale",
-    "label": "Playlist Perso - Chant de chorale",
-    "results": "playlists/perso-chorale/outputs/playlist_results.json",
+    "id": "francais_tests-chorale",
+    "label": "Chanson française en chorale",
+    "results": "playlists/francais_tests-chorale/outputs/playlist_results.json",
     "description": "Les 21 chansons de la playlist Perso réinterprétées en chant de chorale."
   },
   {
     "id": "instrumental",
-    "label": "Playlist Instrumental",
+    "label": "Instrumental",
     "results": "playlists/instrumental/outputs/playlist_results.json",
     "description": "Playlist de 21 morceaux instrumentaux (musique de film, piano solo, electro, trance Goa, musique du monde...)."
   },
   {
     "id": "disco-en",
-    "label": "Playlist Disco - Vocal anglais",
+    "label": "Disco - Vocal anglais",
     "results": "playlists/disco-en/outputs/playlist_results.json",
     "description": "Playlist de 10 morceaux disco chantés en anglais, aux paroles inventées, générés en local."
   },
   {
     "id": "groove-en",
-    "label": "Playlist Groove - Vocal anglais",
+    "label": "Groove - Vocal anglais",
     "results": "playlists/groove-en/outputs/playlist_results.json",
     "description": "Playlist de 10 morceaux groove (funk et soul) chantés en anglais, aux paroles inventées, générés en local."
   },
   {
     "id": "electro-atmospherique",
-    "label": "Playlist Electro atmosphérique",
+    "label": "Electro atmosphérique",
     "results": "playlists/electro-atmospherique/outputs/playlist_results.json",
     "description": "10 morceaux d'electronica atmosphérique : pianos mélancoliques, rythmes downtempo, nappes, avec quelques voix chantées en anglais."
   },
   {
     "id": "electro-pop-fr",
-    "label": "Playlist Electro-pop française",
+    "label": "Electro-pop française",
     "results": "playlists/electro-pop-fr/outputs/playlist_results.json",
     "description": "10 morceaux d'electro-pop chantés en français, aux paroles inventées, mêlant humour, percussions et basses synthétiques."
   },
   {
     "id": "annees-50",
-    "label": "Playlist Années 50",
+    "label": "Années 50",
     "results": "playlists/annees-50/outputs/playlist_results.json",
     "description": "10 morceaux dans l'esprit des années 1950 (doo-wop, rockabilly, crooner, musette, jazz de cave), chantés en anglais et en français, paroles inventées."
   },
   {
     "id": "futuriste-2046",
-    "label": "Playlist Futuriste - dans 20 ans",
+    "label": "Futuriste - dans 20 ans",
     "results": "playlists/futuriste-2046/outputs/playlist_results.json",
     "description": "10 morceaux instrumentaux imaginant la musique que l'on pourrait entendre dans 20 ans, générés en local."
   },
   {
     "id": "poesie-fr",
-    "label": "Playlist Poésie française",
+    "label": "Poésie française",
     "results": "playlists/poesie-fr/outputs/playlist_results.json",
     "description": "10 poèmes français du domaine public (Verlaine, Hugo, Apollinaire, Ronsard, Du Bellay, Rimbaud, Baudelaire, Desbordes-Valmore et Nerval), récités et chantés en IA locale."
   },
   {
     "id": "poesie-en",
-    "label": "Playlist Poésie anglaise",
+    "label": "Poésie anglaise",
     "results": "playlists/poesie-en/outputs/playlist_results.json",
     "description": "10 poèmes anglais du domaine public (Dickinson, Blake, Wordsworth, Keats, Yeats, Rossetti, Poe, Tennyson, Shelley, Burns), récités et chantés en IA locale."
   },
   {
     "id": "percussion-amerique-sud",
-    "label": "Playlist Percussions d'Amérique du Sud",
+    "label": "Percussions d'Amérique du Sud",
     "results": "playlists/percussion-amerique-sud/outputs/playlist_results.json",
     "description": "10 morceaux de percussions inspirées d'Amérique du Sud (samba, candomblé, capoeira, cumbia, candombe, Andes, bossa, maracatu, salsa, festejo), instrumentaux, générés en local."
   },
   {
     "id": "percussion-afrique",
-    "label": "Playlist Percussions africaines",
+    "label": "Percussions africaines",
     "results": "playlists/percussion-afrique/outputs/playlist_results.json",
     "description": "10 morceaux de percussions inspirées d'Afrique (djembé, talking drum, gnawa, kpanlogo, ngoma, sabar, afrobeat...), instrumentaux, générés en local."
   },
   {
     "id": "rap-fr-melodique",
-    "label": "Playlist Rap français mélodique",
+    "label": "Rap français mélodique",
     "results": "playlists/rap-fr-melodique/outputs/playlist_results.json",
     "description": "10 morceaux de rap français mélodique (voix autotunée, beats trap, synthés aux accents méditerranéens), aux paroles inventées sur le quotidien, la famille, le soleil et l'ambition."
   },
   {
     "id": "tribal",
-    "label": "Playlist Tribal",
+    "label": "Tribal",
     "results": "playlists/tribal/outputs/playlist_results.json",
     "description": "10 morceaux tribaux : tambours rituels, chants graves et danses, instrumentaux, générés en local."
   },
   {
     "id": "acappella-hommes",
-    "label": "Playlist A cappella voix d'hommes",
+    "label": "A cappella voix d'hommes",
     "results": "playlists/acappella-hommes/outputs/playlist_results.json",
     "description": "10 morceaux a cappella pour voix d'hommes (chants de marins, de montagne, de veillée), en anglais et en français, paroles inventées."
   },
   {
     "id": "acappella-femmes",
-    "label": "Playlist A cappella voix de femmes",
+    "label": "A cappella voix de femmes",
     "results": "playlists/acappella-femmes/outputs/playlist_results.json",
     "description": "10 morceaux a cappella pour voix de femmes (berceuses, chants de jardin, de rivière, de matin), en anglais et en français, paroles inventées."
   },
   {
     "id": "guitare-seule",
-    "label": "Playlist Guitare seule",
+    "label": "Guitare seule",
     "results": "playlists/guitare-seule/outputs/playlist_results.json",
     "description": "10 morceaux pour guitare seule (fingerstyle, flamenco, blues, classique, jazz...), instrumentaux."
   },
   {
     "id": "harpe-seule",
-    "label": "Playlist Harpe seule",
+    "label": "Harpe seule",
     "results": "playlists/harpe-seule/outputs/playlist_results.json",
     "description": "10 morceaux pour harpe seule (celtique, concert, médiévale, glissandos...), instrumentaux."
   },
   {
     "id": "piano-seul",
-    "label": "Playlist Piano seul",
+    "label": "Piano seul",
     "results": "playlists/piano-seul/outputs/playlist_results.json",
     "description": "10 morceaux pour piano seul (nocturne, jazz, minimalisme, ragtime, blues...), instrumentaux."
   },
   {
     "id": "chant-mongol",
-    "label": "Playlist Chant mongol",
+    "label": "Chant mongol",
     "results": "playlists/chant-mongol/outputs/playlist_results.json",
     "description": "10 morceaux inspirés des chants et des musiques de Mongolie (chant diphonique, chant long, vièle morin khuur), voix sans paroles, générés en local."
   },
   {
-    "id": "didgeridoo",
-    "label": "Playlist Didgeridoo",
-    "results": "playlists/didgeridoo/outputs/playlist_results.json",
-    "description": "10 morceaux de didgeridoo (bourdons, respiration circulaire, bâtons, ambiances), instrumentaux."
-  },
-  {
     "id": "electro-spatiale",
-    "label": "Playlist Electro spatiale analogique",
+    "label": "Electro spatiale analogique",
     "results": "playlists/electro-spatiale/outputs/playlist_results.json",
     "description": "10 morceaux d'electro analogique aux accents spatiaux : séquenceurs, arpèges, nappes de synthétiseurs, instrumentaux."
   },
   {
     "id": "synthes-epiques",
-    "label": "Playlist Synthés épiques et cinématiques",
+    "label": "Synthés épiques et cinématiques",
     "results": "playlists/synthes-epiques/outputs/playlist_results.json",
     "description": "10 morceaux de synthétiseurs épiques : thèmes héroïques, nappes de cinéma, piano et ambiances oniriques, instrumentaux."
   },
   {
     "id": "rock-progressif-instrumental",
-    "label": "Playlist Rock progressif instrumental",
+    "label": "Rock progressif instrumental",
     "results": "playlists/rock-progressif-instrumental/outputs/playlist_results.json",
     "description": "10 morceaux de rock progressif instrumental : guitares superposées, thèmes celtiques, crescendos et cloches, instrumentaux."
   },
   {
     "id": "funk-saxophone",
-    "label": "Playlist Funk saxophone",
+    "label": "Funk saxophone",
     "results": "playlists/funk-saxophone/outputs/playlist_results.json",
     "description": "10 morceaux de funk au saxophone : riffs, cuivres, grooves serrés et ambiances second line, instrumentaux."
   },
   {
     "id": "tech",
-    "label": "Playlist Tech",
+    "label": "Tech",
     "results": "playlists/tech/outputs/playlist_results.json",
     "description": "10 morceaux de tech house et tech minimale : grooves serrés, basses roulantes, ambiances nocturnes, instrumentaux."
   },
   {
     "id": "hard-tech",
-    "label": "Playlist Hard tech",
+    "label": "Hard tech",
     "results": "playlists/hard-tech/outputs/playlist_results.json",
     "description": "10 morceaux de hard techno : kicks puissants, acid, rythmes industriels et énergie brute, instrumentaux."
   },
   {
     "id": "jeux-video",
-    "label": "Playlist Jeux vidéo",
+    "label": "Jeux vidéo",
     "results": "playlists/jeux-video/outputs/playlist_results.json",
     "description": "10 morceaux dans l'esprit des musiques de jeux vidéo : chiptune, aventure orchestrale, combat de boss, donjons et menus, instrumentaux."
   },
   {
     "id": "hard-rock",
-    "label": "Playlist Hard rock",
+    "label": "Hard rock",
     "results": "playlists/hard-rock/outputs/playlist_results.json",
     "description": "9 morceaux de hard rock en anglais : riffs bluesy, voix rauque et refrains en chœur, paroles inventées, générés en local."
   },
   {
     "id": "disco-es",
-    "label": "Playlist Disco - Vocal espagnol",
+    "label": "Disco - Vocal espagnol",
     "results": "playlists/disco-es/outputs/playlist_results.json",
     "description": "10 morceaux disco chantés en espagnol, aux paroles inventées, générés en local."
   },
   {
     "id": "disco-pt",
-    "label": "Playlist Disco - Vocal portugais",
+    "label": "Disco - Vocal portugais",
     "results": "playlists/disco-pt/outputs/playlist_results.json",
     "description": "10 morceaux disco chantés en portugais, aux paroles inventées, générés en local."
   },
   {
     "id": "disco-it",
-    "label": "Playlist Disco - Vocal italien",
+    "label": "Disco - Vocal italien",
     "results": "playlists/disco-it/outputs/playlist_results.json",
     "description": "10 morceaux disco chantés en italien, aux paroles inventées, générés en local."
   },
   {
     "id": "disco-de",
-    "label": "Playlist Disco - Vocal allemand",
+    "label": "Disco - Vocal allemand",
     "results": "playlists/disco-de/outputs/playlist_results.json",
     "description": "10 morceaux disco chantés en allemand, aux paroles inventées, générés en local."
   },
   {
     "id": "flamenco",
-    "label": "Playlist Flamenco",
+    "label": "Flamenco",
     "results": "playlists/flamenco/outputs/playlist_results.json",
     "description": "10 morceaux de flamenco instrumental : guitare, palmas et cajón, des palos les plus lents aux plus festifs."
   },
   {
     "id": "tango",
-    "label": "Playlist Tango",
+    "label": "Tango",
     "results": "playlists/tango/outputs/playlist_results.json",
     "description": "10 morceaux de tango argentin instrumental : bandonéon, violon, piano et contrebasse."
   },
   {
     "id": "reggae-dub",
-    "label": "Playlist Reggae et dub",
+    "label": "Reggae et dub",
     "results": "playlists/reggae-dub/outputs/playlist_results.json",
     "description": "10 morceaux de reggae et de dub instrumentaux : contretemps de guitare, basse profonde et échos."
   },
   {
     "id": "afrobeats",
-    "label": "Playlist Afrobeats",
+    "label": "Afrobeats",
     "results": "playlists/afrobeats/outputs/playlist_results.json",
     "description": "10 morceaux d'afrobeats instrumentaux : percussions syncopées, guitares brillantes et basses rondes."
   },
   {
     "id": "maghreb",
-    "label": "Playlist Musiques du Maghreb",
+    "label": "Musiques du Maghreb",
     "results": "playlists/maghreb/outputs/playlist_results.json",
     "description": "10 morceaux inspirés des musiques d'Afrique du Nord : oud, darbouka, qanûn et violon, instrumentaux."
   },
   {
     "id": "klezmer",
-    "label": "Playlist Klezmer",
+    "label": "Klezmer",
     "results": "playlists/klezmer/outputs/playlist_results.json",
     "description": "10 morceaux de klezmer instrumental : clarinette, accordéon, violon et tuba."
   },
   {
     "id": "balkans",
-    "label": "Playlist Fanfares des Balkans",
+    "label": "Fanfares des Balkans",
     "results": "playlists/balkans/outputs/playlist_results.json",
     "description": "10 morceaux de fanfares balkaniques instrumentales : trompettes, tuba et caisse claire."
   },
   {
     "id": "celtique",
-    "label": "Playlist Musique celtique",
+    "label": "Musique celtique",
     "results": "playlists/celtique/outputs/playlist_results.json",
     "description": "10 morceaux de musique celtique instrumentale : violon, tin whistle, bodhrán et cornemuse."
   },
   {
     "id": "nordique",
-    "label": "Playlist Folk nordique",
+    "label": "Folk nordique",
     "results": "playlists/nordique/outputs/playlist_results.json",
     "description": "10 morceaux de folk nordique instrumental : nyckelharpa, violon, tambours profonds et bourdons."
   },
   {
     "id": "gamelan",
-    "label": "Playlist Gamelan",
+    "label": "Gamelan",
     "results": "playlists/gamelan/outputs/playlist_results.json",
     "description": "10 morceaux inspirés du gamelan javanais et balinais : métallophones, gongs et tambours kendang."
   },
   {
     "id": "inde-classique",
-    "label": "Playlist Musique classique indienne",
+    "label": "Musique classique indienne",
     "results": "playlists/inde-classique/outputs/playlist_results.json",
     "description": "10 morceaux inspirés de la musique classique indienne : sitar, tabla, tanpura et bansuri."
   },
   {
     "id": "bollywood",
-    "label": "Playlist Bollywood",
+    "label": "Bollywood",
     "results": "playlists/bollywood/outputs/playlist_results.json",
     "description": "10 morceaux instrumentaux dans l'esprit des musiques de films indiens : dholak, tabla, cordes et sitar."
   },
   {
     "id": "japon-traditionnel",
-    "label": "Playlist Japon traditionnel",
+    "label": "Japon traditionnel",
     "results": "playlists/japon-traditionnel/outputs/playlist_results.json",
     "description": "10 morceaux inspirés des musiques traditionnelles japonaises : koto, shakuhachi, taiko et shamisen."
   },
   {
     "id": "chine-traditionnelle",
-    "label": "Playlist Chine traditionnelle",
+    "label": "Chine traditionnelle",
     "results": "playlists/chine-traditionnelle/outputs/playlist_results.json",
     "description": "10 morceaux inspirés des musiques traditionnelles chinoises : guzheng, erhu, pipa et flûte dizi."
   },
   {
     "id": "polynesie",
-    "label": "Playlist Hawaï et Polynésie",
+    "label": "Hawaï et Polynésie",
     "results": "playlists/polynesie/outputs/playlist_results.json",
     "description": "10 morceaux inspirés d'Hawaï et de la Polynésie : ukulélé, guitare slack key, guitare steel et tambours."
   },
   {
     "id": "mariachi",
-    "label": "Playlist Mariachi",
+    "label": "Mariachi",
     "results": "playlists/mariachi/outputs/playlist_results.json",
     "description": "10 morceaux de mariachi instrumental : trompettes, violons, guitarrón et vihuela."
   },
   {
     "id": "salsa-latine",
-    "label": "Playlist Salsa et musiques latines",
+    "label": "Salsa et musiques latines",
     "results": "playlists/salsa-latine/outputs/playlist_results.json",
     "description": "10 morceaux de salsa et de musiques latines instrumentales : piano montuno, congas, timbales et trompettes."
   },
   {
     "id": "bachata-merengue",
-    "label": "Playlist Bachata et merengue",
+    "label": "Bachata et merengue",
     "results": "playlists/bachata-merengue/outputs/playlist_results.json",
     "description": "10 morceaux de bachata et de merengue instrumentaux : guitare, bongos et güira."
   },
   {
     "id": "bresil",
-    "label": "Playlist Brésil : samba et MPB",
+    "label": "Brésil : samba et MPB",
     "results": "playlists/bresil/outputs/playlist_results.json",
     "description": "10 morceaux de samba et de MPB instrumentaux : guitare nylon, cavaquinho et percussions."
   },
   {
     "id": "caraibes",
-    "label": "Playlist Caraïbes",
+    "label": "Caraïbes",
     "results": "playlists/caraibes/outputs/playlist_results.json",
     "description": "10 morceaux des Caraïbes instrumentaux : steel drums, calypso, soca et zouk."
   },
   {
     "id": "gospel",
-    "label": "Playlist Gospel instrumental",
+    "label": "Gospel instrumental",
     "results": "playlists/gospel/outputs/playlist_results.json",
     "description": "10 morceaux de gospel instrumental : orgue, piano, claquements de mains et chœur sans paroles."
   },
   {
     "id": "blues",
-    "label": "Playlist Blues",
+    "label": "Blues",
     "results": "playlists/blues/outputs/playlist_results.json",
     "description": "10 morceaux de blues instrumental : guitare électrique, harmonica et shuffle."
   },
   {
     "id": "jazz-varie",
-    "label": "Playlist Jazz varié",
+    "label": "Jazz varié",
     "results": "playlists/jazz-varie/outputs/playlist_results.json",
     "description": "10 morceaux de jazz instrumental dans des styles variés : bebop, cool, modal, big band et fusion."
   },
   {
     "id": "soul-motown",
-    "label": "Playlist Soul et Motown",
+    "label": "Soul et Motown",
     "results": "playlists/soul-motown/outputs/playlist_results.json",
     "description": "10 morceaux de soul instrumentale dans l'esprit Motown : tambourin, cuivres et cordes."
   },
   {
     "id": "hip-hop-beats",
-    "label": "Playlist Beats hip-hop",
+    "label": "Beats hip-hop",
     "results": "playlists/hip-hop-beats/outputs/playlist_results.json",
     "description": "10 instrumentaux hip-hop : boom bap, basses profondes et samples poussiéreux, sans voix."
   },
   {
     "id": "drum-and-bass",
-    "label": "Playlist Drum and bass",
+    "label": "Drum and bass",
     "results": "playlists/drum-and-bass/outputs/playlist_results.json",
     "description": "10 morceaux de drum and bass instrumentaux : breakbeats rapides et basses profondes."
   },
   {
     "id": "house-trance",
-    "label": "Playlist House et trance",
+    "label": "House et trance",
     "results": "playlists/house-trance/outputs/playlist_results.json",
     "description": "10 morceaux de house et de trance instrumentaux : kick régulier, arpèges et nappes."
   },
   {
     "id": "ambient-chill",
-    "label": "Playlist Ambient et chill",
+    "label": "Ambient et chill",
     "results": "playlists/ambient-chill/outputs/playlist_results.json",
     "description": "10 morceaux ambient, lo-fi et chillout instrumentaux pour se détendre."
   },
   {
     "id": "metal",
-    "label": "Playlist Metal instrumental",
+    "label": "Metal instrumental",
     "results": "playlists/metal/outputs/playlist_results.json",
     "description": "10 morceaux de metal instrumental : riffs lourds, doubles pédales et solos."
   },
   {
     "id": "punk-indie",
-    "label": "Playlist Punk et indie rock",
+    "label": "Punk et indie rock",
     "results": "playlists/punk-indie/outputs/playlist_results.json",
     "description": "10 morceaux de punk et d'indie rock instrumentaux : guitares directes et énergie brute."
   },
   {
     "id": "classique-varie",
-    "label": "Playlist Classique varié",
+    "label": "Classique varié",
     "results": "playlists/classique-varie/outputs/playlist_results.json",
     "description": "10 morceaux de musique classique instrumentale : baroque, romantique, chambre et minimalisme."
   },
   {
     "id": "country-bluegrass",
-    "label": "Playlist Country et bluegrass",
+    "label": "Country et bluegrass",
     "results": "playlists/country-bluegrass/outputs/playlist_results.json",
     "description": "10 morceaux de country et de bluegrass instrumentaux : banjo, violon, guitare steel et mandoline."
   },
   {
     "id": "ska-rocksteady",
-    "label": "Playlist Ska",
+    "label": "Ska",
     "results": "playlists/ska-rocksteady/outputs/playlist_results.json",
     "description": "10 morceaux de ska et de rocksteady instrumentaux : cuivres, contretemps et basse marchante."
   },
   {
     "id": "valse-musette",
-    "label": "Playlist Valse musette et bal",
+    "label": "Valse musette et bal",
     "results": "playlists/valse-musette/outputs/playlist_results.json",
     "description": "10 morceaux de bal populaire : valse musette, java et polka à l'accordéon."
   },
   {
     "id": "medieval-renaissance",
-    "label": "Playlist Médiéval et Renaissance",
+    "label": "Médiéval et Renaissance",
     "results": "playlists/medieval-renaissance/outputs/playlist_results.json",
     "description": "10 morceaux de musique médiévale et Renaissance instrumentale : luth, flûte, vièle et tambourin."
   },
   {
     "id": "esprit-dylan",
-    "label": "Playlist Esprit Bob Dylan",
+    "label": "Esprit Bob Dylan",
     "results": "playlists/esprit-dylan/outputs/playlist_results.json",
-    "description": "10 chansons originales en français dans l'esprit folk-rock de Bob Dylan : guitare acoustique, harmonica, voix conteuse."
+    "description": "10 chansons originales en anglais dans une ambiance folk rock des années 1960 : guitare acoustique, harmonica et récits."
   },
   {
     "id": "esprit-jackson",
-    "label": "Playlist Esprit Michael Jackson",
+    "label": "Esprit Michael Jackson",
     "results": "playlists/esprit-jackson/outputs/playlist_results.json",
-    "description": "10 chansons originales en français dans l'esprit pop-funk de Michael Jackson : basse funky, cuivres, voix aiguë rythmique."
+    "description": "10 chansons originales en anglais dans une ambiance dance-pop et funk des années 1980 : basse précise, batterie nette et synthés lumineux."
   },
   {
     "id": "esprit-hallyday",
-    "label": "Playlist Esprit Johnny Hallyday",
+    "label": "Esprit Johnny Hallyday",
     "results": "playlists/esprit-hallyday/outputs/playlist_results.json",
     "description": "10 chansons originales en français dans l'esprit rock de Johnny Hallyday : guitares électriques, ballades puissantes, voix rauque."
   },
   {
     "id": "esprit-goldman",
-    "label": "Playlist Esprit Jean-Jacques Goldman",
+    "label": "Esprit Jean-Jacques Goldman",
     "results": "playlists/esprit-goldman/outputs/playlist_results.json",
     "description": "10 chansons originales en français dans l'esprit pop-rock de Jean-Jacques Goldman : guitares, synthés années 80, voix claire de ténor."
   },
   {
     "id": "esprit-tiersen",
-    "label": "Playlist Esprit Yann Tiersen",
+    "label": "Esprit Yann Tiersen",
     "results": "playlists/esprit-tiersen/outputs/playlist_results.json",
     "description": "10 pièces instrumentales originales dans l'esprit de Yann Tiersen : piano, accordéon, violon, toy piano, ambiance poétique."
   },
   {
     "id": "blues-vocal",
-    "label": "Playlist Blues vocal",
+    "label": "Blues vocal",
     "results": "playlists/blues-vocal/outputs/playlist_results.json",
     "description": "10 blues chantés en français : guitare, harmonica, piano, voix grave et habitée."
   },
   {
     "id": "blues-instrumental",
-    "label": "Playlist Blues instrumental",
+    "label": "Blues instrumental",
     "results": "playlists/blues-instrumental/outputs/playlist_results.json",
     "description": "10 blues instrumentaux : slide, piano boogie, orgue, saxophone, du Delta acoustique au blues-rock."
   },
   {
     "id": "esprit-madness",
-    "label": "Playlist Esprit Madness",
+    "label": "Esprit Madness",
     "results": "playlists/esprit-madness/outputs/playlist_results.json",
-    "description": "10 chansons originales en français dans l'esprit ska anglais de Madness : piano bondissant, saxophone, contretemps, refrains à reprendre."
+    "description": "10 chansons originales en anglais dans une ambiance ska britannique : piano bondissant, saxophone, contretemps et refrains à reprendre."
   },
   {
     "id": "esprit-lapointe",
-    "label": "Playlist Esprit Boby Lapointe",
+    "label": "Esprit Boby Lapointe",
     "results": "playlists/esprit-lapointe/outputs/playlist_results.json",
     "description": "10 chansons originales en français dans l'esprit de Boby Lapointe : chanson fantaisiste, jeux de mots, débit rapide, guitare et contrebasse."
   },
   {
     "id": "esprit-tri-yann",
-    "label": "Playlist Esprit Tri Yann",
+    "label": "Esprit Tri Yann",
     "results": "playlists/esprit-tri-yann/outputs/playlist_results.json",
     "description": "10 chansons originales en français dans l'esprit folk-rock breton de Tri Yann : bombarde, cornemuse, violon, chœurs d'hommes."
   },
   {
     "id": "esprit-vangelis",
-    "label": "Playlist Esprit Vangelis",
+    "label": "Esprit Vangelis",
     "results": "playlists/esprit-vangelis/outputs/playlist_results.json",
     "description": "10 pièces instrumentales originales dans l'esprit de Vangelis : synthés majestueux, nappes cosmiques, thèmes épiques."
   },

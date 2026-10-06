@@ -235,7 +235,9 @@ button:disabled { opacity: 0.45; cursor: default; }
 .player > *:not(.viz-wrap) { margin-left: var(--sp-2); margin-right: var(--sp-2); }
 
 .viz-wrap {
+  position: relative;
   width: 100%;
+  aspect-ratio: 1;
   border-radius: calc(var(--r-l) - 8px);
   overflow: hidden;
   background: #0d0d18;
@@ -243,10 +245,14 @@ button:disabled { opacity: 0.45; cursor: default; }
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.4);
 }
 
-#vizCanvas {
-  display: block;
+.viz-wrap canvas { display: block; width: 100%; height: 100%; }
+
+.track-cover {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: 280px;
+  height: 100%;
+  object-fit: cover;
 }
 
 .now { text-align: center; min-width: 0; }
@@ -865,7 +871,7 @@ input:focus, textarea:focus {
 .foot a:hover { text-decoration: underline; }
 
 @media (min-width: 600px) {
-  #vizCanvas { height: 320px; }
+  .viz-wrap { max-width: 560px; margin-inline: auto; }
 }
 
 @media (max-width: 360px) {

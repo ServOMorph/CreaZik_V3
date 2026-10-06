@@ -5,7 +5,7 @@
   "test_cases": [
     {
       "id": "1",
-      "name": "01 - Encore un matin",
+      "name": "Encore un matin",
       "prompt": "1980s French pop rock, clear high male tenor vocal, acoustic and electric guitars, warm synthesizers, punchy drums, heartfelt, French lyrics, uptempo pop rock, 120 bpm",
       "type": "vocal",
       "duration": 70,
@@ -14,7 +14,7 @@
     },
     {
       "id": "2",
-      "name": "02 - Là-bas, de l'autre côté",
+      "name": "Là-bas, de l'autre côté",
       "prompt": "1980s French pop rock, clear high male tenor vocal, acoustic and electric guitars, warm synthesizers, punchy drums, heartfelt, French lyrics, duet feel, slow build",
       "type": "vocal",
       "duration": 115,
@@ -23,7 +23,7 @@
     },
     {
       "id": "3",
-      "name": "03 - Pas toi",
+      "name": "Pas toi",
       "prompt": "1980s French pop rock, clear high male tenor vocal, acoustic and electric guitars, warm synthesizers, punchy drums, heartfelt, French lyrics, ballad, piano and guitar",
       "type": "vocal",
       "duration": 75,
@@ -32,7 +32,7 @@
     },
     {
       "id": "4",
-      "name": "04 - Envole-moi",
+      "name": "Envole-moi",
       "prompt": "1980s French pop rock, clear high male tenor vocal, acoustic and electric guitars, warm synthesizers, punchy drums, heartfelt, French lyrics, energetic, 128 bpm, synth riff",
       "type": "vocal",
       "duration": 85,
@@ -41,7 +41,7 @@
     },
     {
       "id": "5",
-      "name": "05 - Comme toi",
+      "name": "Comme toi",
       "prompt": "1980s French pop rock, clear high male tenor vocal, acoustic and electric guitars, warm synthesizers, punchy drums, heartfelt, French lyrics, gentle, waltz-like, acoustic",
       "type": "vocal",
       "duration": 65,
@@ -50,7 +50,7 @@
     },
     {
       "id": "6",
-      "name": "06 - Je te donne",
+      "name": "Je te donne",
       "prompt": "1980s French pop rock, clear high male tenor vocal, acoustic and electric guitars, warm synthesizers, punchy drums, heartfelt, French lyrics, pop rock, 116 bpm, bright guitars",
       "type": "vocal",
       "duration": 45,
@@ -59,7 +59,7 @@
     },
     {
       "id": "7",
-      "name": "07 - Il suffira d'un signe",
+      "name": "Il suffira d'un signe",
       "prompt": "1980s French pop rock, clear high male tenor vocal, acoustic and electric guitars, warm synthesizers, punchy drums, heartfelt, French lyrics, dramatic rock, 112 bpm",
       "type": "vocal",
       "duration": 50,
@@ -68,7 +68,7 @@
     },
     {
       "id": "8",
-      "name": "08 - Puisque tu pars",
+      "name": "Puisque tu pars",
       "prompt": "1980s French pop rock, clear high male tenor vocal, acoustic and electric guitars, warm synthesizers, punchy drums, heartfelt, French lyrics, slow ballad, strings swell",
       "type": "vocal",
       "duration": 130,
@@ -77,7 +77,7 @@
     },
     {
       "id": "9",
-      "name": "09 - Né en dix-sept",
+      "name": "Né en dix-sept",
       "prompt": "1980s French pop rock, clear high male tenor vocal, acoustic and electric guitars, warm synthesizers, punchy drums, heartfelt, French lyrics, storytelling, mid-tempo, guitar arpeggio",
       "type": "vocal",
       "duration": 65,
@@ -86,7 +86,7 @@
     },
     {
       "id": "10",
-      "name": "10 - On ira",
+      "name": "On ira",
       "prompt": "1980s French pop rock, clear high male tenor vocal, acoustic and electric guitars, warm synthesizers, punchy drums, heartfelt, French lyrics, final anthem, 124 bpm, crowd chorus",
       "type": "vocal",
       "duration": 45,

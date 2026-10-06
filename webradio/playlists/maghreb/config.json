@@ -5,70 +5,70 @@
   "test_cases": [
     {
       "id": "1",
-      "name": "01 - Rythme raï",
+      "name": "Rythme raï",
       "prompt": "North African music, oud, darbuka, qanun, violin, mizmar, rai rhythm, instrumental",
       "type": "instrumental",
       "duration": 45
     },
     {
       "id": "2",
-      "name": "02 - Groove chaâbi",
+      "name": "Groove chaâbi",
       "prompt": "North African music, oud, darbuka, qanun, violin, mizmar, chaabi groove, instrumental",
       "type": "instrumental",
       "duration": 100
     },
     {
       "id": "3",
-      "name": "03 - Andalou classique",
+      "name": "Andalou classique",
       "prompt": "North African music, oud, darbuka, qanun, violin, mizmar, andalusian classical, instrumental",
       "type": "instrumental",
       "duration": 65
     },
     {
       "id": "4",
-      "name": "04 - Blues du désert",
+      "name": "Blues du désert",
       "prompt": "North African music, oud, darbuka, qanun, violin, mizmar, desert blues, instrumental",
       "type": "instrumental",
       "duration": 80
     },
     {
       "id": "5",
-      "name": "05 - Danse du ventre",
+      "name": "Danse du ventre",
       "prompt": "North African music, oud, darbuka, qanun, violin, mizmar, belly dance rhythm, instrumental",
       "type": "instrumental",
       "duration": 110
     },
     {
       "id": "6",
-      "name": "06 - Taqsim à l'oud",
+      "name": "Taqsim à l'oud",
       "prompt": "North African music, oud, darbuka, qanun, violin, mizmar, slow oud taqsim, instrumental",
       "type": "instrumental",
       "duration": 75
     },
     {
       "id": "7",
-      "name": "07 - Noces en fête",
+      "name": "Noces en fête",
       "prompt": "North African music, oud, darbuka, qanun, violin, mizmar, festive wedding rhythm, instrumental",
       "type": "instrumental",
       "duration": 45
     },
     {
       "id": "8",
-      "name": "08 - Nocturne",
+      "name": "Nocturne",
       "prompt": "North African music, oud, darbuka, qanun, violin, mizmar, nocturnal, instrumental",
       "type": "instrumental",
       "duration": 65
     },
     {
       "id": "9",
-      "name": "09 - Bruits du souk",
+      "name": "Bruits du souk",
       "prompt": "North African music, oud, darbuka, qanun, violin, mizmar, market bustle, instrumental",
       "type": "instrumental",
       "duration": 70
     },
     {
       "id": "10",
-      "name": "10 - Procession",
+      "name": "Procession",
       "prompt": "North African music, oud, darbuka, qanun, violin, mizmar, processional rhythm, instrumental",
       "type": "instrumental",
       "duration": 55

@@ -5,7 +5,7 @@
   "test_cases": [
     {
       "id": "1",
-      "name": "01 - Le blues du lundi",
+      "name": "Le blues du lundi",
       "prompt": "blues, soulful gritty male vocal, electric guitar licks, harmonica, piano, slow 12-bar blues feel, French lyrics, slow 12-bar, 70 bpm",
       "type": "vocal",
       "duration": 110,
@@ -14,7 +14,7 @@
     },
     {
       "id": "2",
-      "name": "02 - Train de la Louisiane",
+      "name": "Train de la Louisiane",
       "prompt": "blues, soulful gritty male vocal, electric guitar licks, harmonica, piano, slow 12-bar blues feel, French lyrics, shuffle, 95 bpm, harmonica",
       "type": "vocal",
       "duration": 135,
@@ -23,7 +23,7 @@
     },
     {
       "id": "3",
-      "name": "03 - La croisée des chemins",
+      "name": "La croisée des chemins",
       "prompt": "blues, soulful gritty male vocal, electric guitar licks, harmonica, piano, slow 12-bar blues feel, French lyrics, acoustic Delta, slide guitar",
       "type": "vocal",
       "duration": 100,
@@ -32,7 +32,7 @@
     },
     {
       "id": "4",
-      "name": "04 - Whisky et pluie",
+      "name": "Whisky et pluie",
       "prompt": "blues, soulful gritty male vocal, electric guitar licks, harmonica, piano, slow 12-bar blues feel, French lyrics, slow minor blues, piano",
       "type": "vocal",
       "duration": 120,
@@ -41,7 +41,7 @@
     },
     {
       "id": "5",
-      "name": "05 - Je suis né sous une mauvaise étoile",
+      "name": "Je suis né sous une mauvaise étoile",
       "prompt": "blues, soulful gritty male vocal, electric guitar licks, harmonica, piano, slow 12-bar blues feel, French lyrics, slow, heavy, electric",
       "type": "vocal",
       "duration": 90,
@@ -50,7 +50,7 @@
     },
     {
       "id": "6",
-      "name": "06 - Rivière boueuse",
+      "name": "Rivière boueuse",
       "prompt": "blues, soulful gritty male vocal, electric guitar licks, harmonica, piano, slow 12-bar blues feel, French lyrics, Chicago blues, band, 100 bpm",
       "type": "vocal",
       "duration": 105,
@@ -59,7 +59,7 @@
     },
     {
       "id": "7",
-      "name": "07 - Le blues de la cuisine",
+      "name": "Le blues de la cuisine",
       "prompt": "blues, soulful gritty male vocal, electric guitar licks, harmonica, piano, slow 12-bar blues feel, French lyrics, boogie-woogie piano, upbeat",
       "type": "vocal",
       "duration": 130,
@@ -68,7 +68,7 @@
     },
     {
       "id": "8",
-      "name": "08 - Trois heures du matin",
+      "name": "Trois heures du matin",
       "prompt": "blues, soulful gritty male vocal, electric guitar licks, harmonica, piano, slow 12-bar blues feel, French lyrics, slow, intimate, guitar and voice",
       "type": "vocal",
       "duration": 100,
@@ -77,7 +77,7 @@
     },
     {
       "id": "9",
-      "name": "09 - Les mains du travailleur",
+      "name": "Les mains du travailleur",
       "prompt": "blues, soulful gritty male vocal, electric guitar licks, harmonica, piano, slow 12-bar blues feel, French lyrics, work song feel, stomp, call and response",
       "type": "vocal",
       "duration": 50,
@@ -86,7 +86,7 @@
     },
     {
       "id": "10",
-      "name": "10 - Dernier verre au Delta",
+      "name": "Dernier verre au Delta",
       "prompt": "blues, soulful gritty male vocal, electric guitar licks, harmonica, piano, slow 12-bar blues feel, French lyrics, closing slow blues, long guitar solo",
       "type": "vocal",
       "duration": 75,

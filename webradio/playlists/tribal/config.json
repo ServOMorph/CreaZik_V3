@@ -5,70 +5,70 @@
   "test_cases": [
     {
       "id": "1",
-      "name": "01 - Rituel du feu",
+      "name": "Rituel du feu",
       "prompt": "tribal ritual drums, deep frame drums, rattles, low chanting vocalise, fire ceremony, hypnotic, instrumental feel",
       "duration": 125,
       "type": "instrumental"
     },
     {
       "id": "2",
-      "name": "02 - Danse de la pluie",
+      "name": "Danse de la pluie",
       "prompt": "tribal rain dance, fast hand drums, shakers, foot stomps, rhythmic chants, energetic",
       "duration": 135,
       "type": "instrumental"
     },
     {
       "id": "3",
-      "name": "03 - Chasse au lever du jour",
+      "name": "Chasse au lever du jour",
       "prompt": "tribal hunt rhythm, urgent war drums, bone flutes, driving percussion, dramatic",
       "duration": 100,
       "type": "instrumental"
     },
     {
       "id": "4",
-      "name": "04 - Cercle des anciens",
+      "name": "Cercle des anciens",
       "prompt": "tribal elders circle, slow heavy drums, deep chant drones, ceremonial, grave",
       "duration": 75,
       "type": "instrumental"
     },
     {
       "id": "5",
-      "name": "05 - Pas de la savane",
+      "name": "Pas de la savane",
       "prompt": "tribal savanna groove, polyrhythmic drums, bells, clapping, joyful procession",
       "duration": 130,
       "type": "instrumental"
     },
     {
       "id": "6",
-      "name": "06 - Voix des ancêtres",
+      "name": "Voix des ancêtres",
       "prompt": "tribal spirit call, low throat chants, resonant drums, rattles, mysterious and trance-like",
       "duration": 75,
       "type": "instrumental"
     },
     {
       "id": "7",
-      "name": "07 - Marche des guerriers",
+      "name": "Marche des guerriers",
       "prompt": "tribal warrior march, powerful drum ensemble, stomping, shouts without words, intense",
       "duration": 60,
       "type": "instrumental"
     },
     {
       "id": "8",
-      "name": "08 - Nuit de la tribu",
+      "name": "Nuit de la tribu",
       "prompt": "tribal night gathering, soft hand drums, layered chants, crackling fire atmosphere, warm",
       "duration": 55,
       "type": "instrumental"
     },
     {
       "id": "9",
-      "name": "09 - Danse de la récolte",
+      "name": "Danse de la récolte",
       "prompt": "tribal harvest dance, bright drums, shakers, call and response chants, festive",
       "duration": 110,
       "type": "instrumental"
     },
     {
       "id": "10",
-      "name": "10 - Transe du tambour",
+      "name": "Transe du tambour",
       "prompt": "tribal trance, relentless drum circle, evolving polyrhythms, meditative and intense",
       "duration": 130,
       "type": "instrumental"
