@@ -28,6 +28,7 @@ Suivi de toutes les demandes de la conversation. Statuts : FAIT (livré et contr
 | 2.5 | Motion design pendant les jingles : nom de la radio et message IA locale | FAIT non vu : 3 variantes, textes éditables dans la gestion |
 | 2.6 | Motion design régulier (tous les 5 morceaux) pour serenia-tech.fr, 10 designs | FAIT non vu : 10 designs, textes tirés du contenu du site |
 | 2.7 | Texte défilant, contact, animation liée à la musique | FAIT |
+| 2.9 | Les visuels doivent plus évoluer sur la durée du morceau, avec de l'aléatoire mais aussi un fil conducteur, comme une histoire qui rompt la monotonie | A FAIRE (agent design : arcs narratifs par morceau pilotés par la progression, avec variations aléatoires) |
 | 2.8 | L'agent design doit proposer un design plus moderne et plus stylisé | FAIT pour la page d'écoute, la gestion et l'explorateur (couleurs qui suivent la playlist, verre dépoli) ; l'explorateur est réservé à l'admin |
 
 ## 3. Voix et jingles
@@ -43,6 +44,7 @@ Suivi de toutes les demandes de la conversation. Statuts : FAIT (livré et contr
 | 4.1 | Génération en tournante (un morceau par playlist à tour de rôle) | FAIT (en cours d'exécution) |
 | 4.2 | Durée des morceaux 1 min 30 plus ou moins 45 s | FAIT (paroles adaptées à la durée) |
 | 4.3 | Morceaux « pas terminés à 1 min 30 » à déboguer | FAIT pour les fichiers : 89 sur 89 ont la durée prévue, fins sans coupure sèche ; transcription des paroles impossible (bibliothèque audio manquante) |
+| 4.3c | Bug urgent : un morceau aimé repasse deux fois d'affilée | FAIT : cause = playlist à un seul morceau choisie juste après lui-même ; corrigé, testé, déployé |
 | 4.3b | Vérifier que certains morceaux ne sont pas entiers, juste avant le morceau en cours | FAIT : cause probable = coupures du direct (essais « suivant » et redémarrages du serveur) ; le moteur reprend maintenant le morceau en cours après un redémarrage ; à confirmer à l'écoute |
 | 4.4 | Relance systématique après arrêt, relance automatique des plantages | FAIT (services.ps1, superviseur) |
 | 4.5 | Playlists demandées : Perso et ses 6 versions, instrumental, disco EN, groove EN, electro atmosphérique, electro-pop FR, années 50, futuriste, poésie FR et EN, percussions Amérique du Sud et Afrique, rap FR mélodique, tribal, a cappella hommes et femmes, guitare, harpe, piano seuls, chant mongol, didgeridoo, electro spatiale, synthés épiques, rock progressif instrumental, funk saxophone, tech, hard tech, jeux vidéo, hard rock | FAIT : 78 playlists configurées, en génération |
@@ -70,10 +72,10 @@ Suivi de toutes les demandes de la conversation. Statuts : FAIT (livré et contr
 | # | Demande | Statut |
 |---|---|---|
 | 8.1 | Analyser sur le web les habitudes d'écoute et les horaires pour caler la dynamique | FAIT : Médiamétrie (radio en France) et études d'écoute en streaming ; limites notées dans l'architecture |
-| 8.2 | Mesurer tempo et énergie de chaque morceau à partir de l'audio | A FAIRE |
-| 8.3 | Harmoniser les enchaînements selon les tempos | A FAIRE |
-| 8.4 | Dynamique sinusoïdale calée sur les horaires français (doux le matin, plus pêchu vers 17 h) | A FAIRE |
-| 8.5 | Réglages et courbe visibles dans la gestion, tests automatiques | A FAIRE |
+| 8.2 | Mesurer tempo et énergie de chaque morceau à partir de l'audio | FAIT : 177 morceaux sur 180 analysés ; tempo vérifié sur 6 pistes synthétiques (5 justes, 1 à l'octave, toléré) ; à comparer aux tempos annoncés dans les prompts |
+| 8.3 | Harmoniser les enchaînements selon les tempos | FAIT : moteur (octaves tolérées) + test de lissage de tempo |
+| 8.4 | Dynamique sinusoïdale calée sur les horaires français (doux le matin, plus pêchu vers 17 h) | FAIT dans le moteur (heure de Paris, week-end décalé d'une heure) |
+| 8.5 | Réglages et courbe visibles dans la gestion, tests automatiques | FAIT : section « Dynamique de la journée » dans radio.html (vérifiée dans le navigateur), 17 tests passent |
 
 ## 7. Qualité
 | # | Demande | Statut |

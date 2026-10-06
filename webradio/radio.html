@@ -466,6 +466,47 @@
             </div>
         </details>
 
+        <details class="fold" id="secDynamics" data-fold="dynamics" open>
+            <summary><h2>Dynamique de la journée</h2></summary>
+            <div class="fold-body">
+            <div class="row">
+                <span>Dynamique activée<span class="hint">Doux le matin, plus rythmé vers 17 h, très calme la nuit, selon l'heure de Paris</span></span>
+                <label class="switch"><input type="checkbox" id="dynamics_enabled" onchange="setBool('dynamics_enabled', this.checked); setTimeout(loadDynamics, 800)"><span class="slider"></span></label>
+            </div>
+            <svg id="dynChart" viewBox="0 0 300 130" role="img" aria-label="Courbe d'énergie visée sur 24 heures" style="width:100%;height:auto;margin:6px 0 4px"></svg>
+            <div class="info" id="dynInfo" style="margin:0 0 8px"></div>
+            <div class="row">
+                <span>Force de la dynamique<span class="hint">0 = ignorée, 1 = normale, 2 = très marquée</span></span>
+                <div class="stepper"><button onclick="step('dynamics_strength', -0.1, 0, 2); loadDynamicsSoon()">&minus;</button><span class="val" id="v_dynamics_strength"></span><button onclick="step('dynamics_strength', 0.1, 0, 2); loadDynamicsSoon()">+</button></div>
+            </div>
+            <div class="row">
+                <span>Énergie moyenne<span class="hint">Niveau de base de la journée (0 à 1)</span></span>
+                <div class="stepper"><button onclick="step('dyn_base', -0.05, 0, 1); loadDynamicsSoon()">&minus;</button><span class="val" id="v_dyn_base"></span><button onclick="step('dyn_base', 0.05, 0, 1); loadDynamicsSoon()">+</button></div>
+            </div>
+            <div class="row">
+                <span>Amplitude<span class="hint">Écart entre la nuit et le pic (0 à 0,5)</span></span>
+                <div class="stepper"><button onclick="step('dyn_amp', -0.05, 0, 0.5); loadDynamicsSoon()">&minus;</button><span class="val" id="v_dyn_amp"></span><button onclick="step('dyn_amp', 0.05, 0, 0.5); loadDynamicsSoon()">+</button></div>
+            </div>
+            <div class="row">
+                <span>Heure du pic<span class="hint">Heure où la radio est la plus rythmée</span></span>
+                <div class="stepper"><button onclick="step('dyn_peak_hour', -0.5, 0, 24); loadDynamicsSoon()">&minus;</button><span class="val" id="v_dyn_peak_hour"></span><button onclick="step('dyn_peak_hour', 0.5, 0, 24); loadDynamicsSoon()">+</button></div>
+            </div>
+            <div class="row">
+                <span>Décalage du week-end<span class="hint">Heures de retard du pic le samedi et le dimanche</span></span>
+                <div class="stepper"><button onclick="step('dyn_weekend_shift_h', -0.5, 0, 4); loadDynamicsSoon()">&minus;</button><span class="val" id="v_dyn_weekend_shift_h"></span><button onclick="step('dyn_weekend_shift_h', 0.5, 0, 4); loadDynamicsSoon()">+</button></div>
+            </div>
+            <div class="row">
+                <span>Tolérance d'énergie<span class="hint">Plus c'est petit, plus les morceaux collent à l'énergie visée</span></span>
+                <div class="stepper"><button onclick="step('dyn_energy_sigma', -0.05, 0.1, 0.6)">&minus;</button><span class="val" id="v_dyn_energy_sigma"></span><button onclick="step('dyn_energy_sigma', 0.05, 0.1, 0.6)">+</button></div>
+            </div>
+            <div class="row">
+                <span>Tolérance de tempo<span class="hint">Plus c'est petit, plus les tempos se suivent de près (octaves tolérées)</span></span>
+                <div class="stepper"><button onclick="step('dyn_tempo_tolerance', -0.05, 0.1, 0.6)">&minus;</button><span class="val" id="v_dyn_tempo_tolerance"></span><button onclick="step('dyn_tempo_tolerance', 0.05, 0.1, 0.6)">+</button></div>
+            </div>
+            <div class="info">L'énergie de chaque morceau est mesurée sur l'audio (rythme, brillance, niveau, tempo) puis classée par rapport au reste du catalogue. Les repères viennent d'études d'écoute : plus d'énergie en journée, calme tard le soir, et en France une écoute radio dominée par le créneau 7 h à 9 h puis un second palier en fin d'après-midi.</div>
+            </div>
+        </details>
+
         <details class="fold" id="secVisuals" data-fold="visuals" open>
             <summary><h2>Visuels et publicités</h2></summary>
             <div class="fold-body">
@@ -526,6 +567,7 @@
         const DEFAULTS = {default_weight: 5, weights: {}, jingle_every: 5, jingles_enabled: true,
                           favorites_only: false, no_repeat: 3, no_repeat_songs: 15, excluded: [], thumb_strength: 0.15,
                           ads_enabled: true, ads_every: 5, ad_seconds: 9, ad_offset_s: 10, visual_transition_s: 5,
+                          dynamics_enabled: true, dynamics_strength: 1, dyn_base: 0.5, dyn_amp: 0.33, dyn_peak_hour: 17.5, dyn_weekend_shift_h: 1, dyn_energy_sigma: 0.25, dyn_tempo_tolerance: 0.25,
                           transitions: {
                               active: 'fondu',
                               jingle_preset: 'net',
@@ -594,6 +636,7 @@
                     if (!r.ok) throw new Error(r.status);
                     el.textContent = 'Enregistré - pris en compte au prochain morceau';
                     loadStats().then(refreshCounts);
+                    loadDynamics();
                 } catch (e) {
                     el.className = 'saved err';
                     el.textContent = 'Échec de l\'enregistrement';
@@ -721,10 +764,11 @@
         }
 
         function render() {
-            ['default_weight', 'no_repeat', 'no_repeat_songs', 'jingle_every', 'thumb_strength', 'ads_every', 'ad_seconds', 'ad_offset_s', 'visual_transition_s'].forEach(k => document.getElementById('v_' + k).textContent = settings[k]);
+            ['default_weight', 'no_repeat', 'no_repeat_songs', 'jingle_every', 'thumb_strength', 'ads_every', 'ad_seconds', 'ad_offset_s', 'visual_transition_s', 'dynamics_strength', 'dyn_base', 'dyn_amp', 'dyn_peak_hour', 'dyn_weekend_shift_h', 'dyn_energy_sigma', 'dyn_tempo_tolerance'].forEach(k => document.getElementById('v_' + k).textContent = settings[k]);
             document.getElementById('favorites_only').checked = !!settings.favorites_only;
             document.getElementById('jingles_enabled').checked = !!settings.jingles_enabled;
             document.getElementById('ads_enabled').checked = !!settings.ads_enabled;
+            document.getElementById('dynamics_enabled').checked = !!settings.dynamics_enabled;
             renderTransitions();
             renderLists();
         }
@@ -838,7 +882,7 @@
         }
 
         function initFolds() {
-            const defaults = {account: false, play: true, trans: false, visuals: false, jingle: false, weights: true};
+            const defaults = {account: false, play: true, dynamics: true, trans: false, visuals: false, jingle: false, weights: true};
             let saved = {};
             try { saved = JSON.parse(localStorage.getItem('radioFolds') || '{}'); } catch (e) {}
             document.querySelectorAll('details[data-fold]').forEach(d => {
@@ -873,6 +917,36 @@
             }
         }
 
+        let dynTimer = null;
+
+        function loadDynamicsSoon() {
+            clearTimeout(dynTimer);
+            dynTimer = setTimeout(loadDynamics, 1200);
+        }
+
+        async function loadDynamics() {
+            const d = await getJSON('/api/radio/dynamics', null);
+            if (!d) return;
+            const svg = document.getElementById('dynChart');
+            const x = h => 10 + (h / 24) * 280;
+            const y = e => 115 - e * 100;
+            const pts = d.curve.map(p => x(p.h).toFixed(1) + ',' + y(p.e).toFixed(1)).join(' ');
+            let grid = '';
+            for (let h = 0; h <= 24; h += 6) {
+                grid += '<line x1="' + x(h) + '" y1="12" x2="' + x(h) + '" y2="118" stroke="rgba(255,255,255,0.12)"/>'
+                    + '<text x="' + x(h) + '" y="128" fill="#999" font-size="9" text-anchor="middle">' + h + ' h</text>';
+            }
+            const nowX = x(d.hour);
+            svg.innerHTML = grid
+                + '<polyline points="' + pts + '" fill="none" stroke="#ff6b9d" stroke-width="2.5" stroke-linejoin="round"/>'
+                + '<line x1="' + nowX + '" y1="12" x2="' + nowX + '" y2="118" stroke="#6496ff" stroke-width="1.5" stroke-dasharray="3 3"/>'
+                + '<circle cx="' + nowX + '" cy="' + y(d.target_now) + '" r="4.5" fill="#6496ff"/>';
+            const hh = Math.floor(d.hour);
+            const mm = String(Math.round((d.hour - hh) * 60)).padStart(2, '0');
+            document.getElementById('dynInfo').textContent = 'Maintenant ' + hh + ' h ' + mm + ' : énergie visée ' + d.target_now
+                + ' (' + d.tracks_with_features + ' morceaux sur ' + d.tracks_total + ' analysés)' + (d.enabled ? '' : ' - dynamique désactivée');
+        }
+
         function resetAll() {
             if (!confirm('Réinitialiser tous les réglages de la radio ?')) return;
             settings = JSON.parse(JSON.stringify(DEFAULTS));
@@ -880,7 +954,7 @@
             save();
         }
 
-        window.addEventListener('load', () => { initFolds(); checkMe(); init(); loadContent(); });
+        window.addEventListener('load', () => { initFolds(); checkMe(); init(); loadContent(); loadDynamics(); });
     </script>
 </body>
 </html>

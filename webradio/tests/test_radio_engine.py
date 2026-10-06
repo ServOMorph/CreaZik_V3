@@ -293,6 +293,59 @@ def test_no_consecutive_repeat_with_single_track_playlists():
             assert a["key"] != b["key"], [q["key"] for q in snap]
 
 
+def write_features(root, pid, count, **feat):
+    for i in range(1, count + 1):
+        rel = root / "playlists" / pid / "outputs" / f"{i:02d}.wav.feat.json"
+        rel.write_text(json.dumps(feat), encoding="utf-8")
+
+
+def paris_epoch(hour, minute=0):
+    from datetime import datetime
+    from zoneinfo import ZoneInfo
+    return datetime(2026, 10, 5, hour, minute, tzinfo=ZoneInfo("Europe/Paris")).timestamp()
+
+
+def test_dynamics_follow_time_of_day():
+    shares = {}
+    for label, hour in (("matin", 5), ("soir", 17)):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            build(root, {"calme": (12, 10, False), "pechu": (12, 10, False)})
+            write_features(root, "calme", 12, onset=1.0, centroid_hz=500.0, rms_db=-30.0, bpm=80.0)
+            write_features(root, "pechu", 12, onset=10.0, centroid_hz=5000.0, rms_db=-10.0, bpm=80.0)
+            (root / "radio_settings.json").write_text(json.dumps(
+                {"jingles_enabled": False, "no_repeat": 0, "no_repeat_songs": 0, "dynamics_enabled": True,
+                 "dynamics_strength": 1.0, "transitions": preset()}), encoding="utf-8")
+            clock = Clock()
+            clock.t = paris_epoch(hour, 30)
+            eng = RadioEngine(root, time_fn=clock, rng=random.Random(2))
+            seq = run(eng, clock, 3000, step=1.0)
+            n = len(seq)
+            shares[label] = sum(1 for _, k, _ in seq if k.startswith("pechu")) / n
+    assert shares["matin"] < 0.3, shares
+    assert shares["soir"] > 0.7, shares
+
+
+def test_tempo_smoothing_reduces_jumps():
+    results = {}
+    for enabled in (False, True):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            build(root, {"lent": (12, 10, False), "rapide": (12, 10, False)})
+            write_features(root, "lent", 12, onset=5.0, centroid_hz=2000.0, rms_db=-20.0, bpm=80.0)
+            write_features(root, "rapide", 12, onset=5.0, centroid_hz=2000.0, rms_db=-20.0, bpm=115.0)
+            (root / "radio_settings.json").write_text(json.dumps(
+                {"jingles_enabled": False, "no_repeat": 0, "no_repeat_songs": 0, "dynamics_enabled": enabled,
+                 "dynamics_strength": 1.0, "dyn_amp": 0.0, "transitions": preset()}), encoding="utf-8")
+            clock = Clock()
+            clock.t = paris_epoch(12)
+            eng = RadioEngine(root, time_fn=clock, rng=random.Random(4))
+            seq = run(eng, clock, 3000, step=1.0)
+            kinds = [k.split(":")[0] for _, k, _ in seq]
+            results[enabled] = sum(1 for a, b in zip(kinds, kinds[1:]) if a != b) / max(1, len(kinds) - 1)
+    assert results[True] < results[False] * 0.5, results
+
+
 def test_stats_sum_to_100():
     with tempfile.TemporaryDirectory() as tmp:
         eng, clock = make(tmp, {"a": (4, 10, False), "b": (8, 10, False)}, {"weights": {"a": 5, "b": 5}, "transitions": preset()})

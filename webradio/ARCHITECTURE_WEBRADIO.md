@@ -96,6 +96,15 @@ Page `radio.html` à faire évoluer : arbre catégories, playlists avec curseurs
 ### 5.3 Flux unique (proposition)
 Un lecteur serveur (Liquidsoap, qui se pilote par script) lit playlists et jingles et pousse un flux vers Icecast ; les auditeurs ouvrent une seule URL de flux. Avantages : même contenu pour tous, reprise après coupure, métadonnées "en cours de lecture", compatible lecteurs et applis radio. Inconvénient : deux composants à installer et à sécuriser. À valider.
 
+### 5.4 Dynamique de la journée
+Le moteur (`radio_engine.py`) pondère le tirage de chaque morceau par un facteur de dynamique :
+- Énergie visée selon l'heure de Paris : sinusoïde `dyn_base + dyn_amp * cos(2π (h - pic) / 24)`, pic à 17 h 30 (décalé d'une heure le week-end), creux la nuit. Réglable dans la page de gestion (section « Dynamique de la journée », avec courbe et énergie visée à l'instant).
+- Énergie de chaque morceau : rang en percentile du catalogue sur rythme (onsets), brillance (centroïde), niveau (RMS) et tempo, mesurés par `analyze_viz.py` (`.feat.json`).
+- Enchaînement des tempos : écart au morceau précédent, octaves tolérées (x2, /2).
+- Chaque créneau de la file utilise l'heure à laquelle il sera joué.
+Repères : Médiamétrie (écoute radio en France dominée par 6 h-9 h, second palier en fin d'après-midi) et études d'écoute en streaming (énergie en journée, calme tard le soir). Ces études montrent des écarts modestes : la courbe est une approximation réglable, pas une mesure.
+Limites : le tempo estimé par autocorrélation est correct à 5 % pour 30 morceaux sur 45 (33 à l'octave près) ; ACE-Step ne suit pas toujours le tempo demandé.
+
 ## 6. Sobriété énergétique
 - **Estimer** : le GPU de la machine n'expose pas sa puissance (`nvidia-smi` renvoie « N/A »). L'énergie par morceau est donc estimée d'après le taux d'utilisation et la puissance maximale de 115 W (champ `energy_wh_est`, `GET /api/energy`). Une vraie mesure demanderait une prise connectée. Aucun chiffre n'est annoncé tant qu'il n'est pas validé.
 - **Réduire** : réutiliser le catalogue plutôt que générer en continu, utiliser les modèles et réglages légers (ACE-Step turbo, 8 pas), limiter la file, générer en heures creuses ou à la demande.
