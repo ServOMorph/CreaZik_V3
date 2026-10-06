@@ -66,5 +66,8 @@ Lire `.claude/zones.md` pour obtenir la table des alias → dossiers réels.
 <!-- Convention : toute règle liée à une étape précise de la Procédure ci-dessus doit la
      référencer explicitement par son numéro (ex: "Étape 3 : ..."), plutôt que compter sur la
      position physique de cette zone (toujours en fin de fichier). -->
+
+Étape 3 : charger aussi `webradio/REGLES_GENERATION_DEV.md` (règles de génération et de
+développement actées pour la WebRadio) et les appliquer pendant toute la session.
 <!-- SPECIFICITES PROJET : FIN -->
 

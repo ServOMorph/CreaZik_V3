@@ -171,5 +171,10 @@ Lire `.claude/zones.md` pour obtenir la table des alias → dossiers réels.
 <!-- Convention : toute règle liée à une étape précise de la Procédure ci-dessus doit la
      référencer explicitement par son numéro (ex: "Étape 6 : ..."), plutôt que compter sur la
      position physique de cette zone (toujours en fin de fichier). -->
+
+Étape 6 : mettre aussi à jour `webradio/REGLES_GENERATION_DEV.md` : y ajouter les règles de
+génération ou de développement actées pendant la session, corriger ou retirer celles
+invalidées, et mettre à jour la section « Points non tranchés ». Si rien n'a changé : ne pas
+toucher au fichier. Si le fichier est modifié, l'inclure au commit de l'étape 13.
 <!-- SPECIFICITES PROJET : FIN -->
 

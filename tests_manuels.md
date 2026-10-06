@@ -1,6 +1,6 @@
 # Tests manuels en attente
 
-- iPhone Safari via tunnel : lecture d'un morceau généré (WAV 90 s), avance et recul dans le morceau (requêtes Range).
+- iPhone Safari via tunnel : lecture d'un morceau généré (MP3 d'environ 90 s), avance et recul dans le morceau (requêtes Range).
 - iPhone Safari : bouton play du mix en haut, enchaînement automatique des morceaux, jingle tous les N morceaux, écran verrouillé.
 - iPhone Safari : pliage et dépliage des morceaux, favoris, section commentaires (envoi, affichage).
 - Connexion admin sur /login, accès à la page Gestion WebRadio, changement du mot de passe admin, déconnexion.

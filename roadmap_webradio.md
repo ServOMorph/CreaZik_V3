@@ -3,7 +3,7 @@
 Référence : `webradio/ARCHITECTURE_WEBRADIO.md`. Statuts mis à jour par `/close` uniquement.
 
 ## Phase 1 - Base playlists et serveur sécurisé [EN COURS]
-- Génération des 178 morceaux + 8 jingles, relance automatique.
+- Génération en rotation de toutes les playlists (78 configurées) + jingles, relance automatique.
 - Serveur sécurisé, rôles admin / auditeurs, commentaires.
 - Validation de l'écoute sur iPhone (tests manuels).
 
@@ -47,7 +47,7 @@ Attendre sa réponse écrite. Ne pas commencer la phase suivante sans confirmati
 Attendre sa réponse écrite. Ne pas commencer la phase suivante sans confirmation.
 
 ## Phase 7 - Couvertures des morceaux [TODO]
-- Générer une couverture par morceau avec une IA locale d'image (nom de l'IA à fournir par l'utilisateur), à lancer quand la file de génération musicale est vide.
+- Générer une couverture par morceau avec ComfyUI-Qwen (Qwen-Image 2.1, `D:\ServOMorph\ComfyUI-Qwen`, port 8189), à lancer quand la file de génération musicale est vide. Test réalisé, style à valider avant le lot.
 - Afficher la couverture sur la page d'écoute et dans l'explorateur ; champ `cover` dans le catalogue.
 
 **⏸ Checkpoint** — Demander à l'utilisateur de faire `/compact` avant de continuer.
