@@ -21,7 +21,8 @@
   - réf: `PLAN_WEBRADIO.md` section 4.5
 
 ## Contexte chaud
-- À la demande de l'utilisateur, tous les services WebRadio sont arrêtés. État final contrôlé : serveur, analyse, compression et génération à l'arrêt ; ComfyUI n'écoute plus sur 8189 ; GPU à 1714 MiB utilisés sur 8188 MiB. `ollama ps` ne liste aucun modèle chargé ; l'application Ollama n'a pas été arrêtée. Le tunnel Cloudflare manuel n'a pas été touché.
+- Après la clôture précédente, la génération musicale a été mise en pause (`/stop_generation`) pour tester le texte des pochettes ; ComfyUI-Qwen tourne (port 8189) et occupe la VRAM jusqu'à `/stop_covers` ou `/stop`. Voir aussi l'état ci-dessous (à relire : il date d'avant ce test).
+- (Ancien état) À la demande de l'utilisateur, tous les services WebRadio sont arrêtés. État final contrôlé : serveur, analyse, compression et génération à l'arrêt ; ComfyUI n'écoute plus sur 8189 ; GPU à 1714 MiB utilisés sur 8188 MiB. `ollama ps` ne liste aucun modèle chargé ; l'application Ollama n'a pas été arrêtée. Le tunnel Cloudflare manuel n'a pas été touché.
 - Reprise radio : `python run.py`. Reprise pochettes : `/generate_covers` ; le batch avait 107 images terminées, 804 manquantes au dernier statut, 26 pistes exclues pour score négatif. L'image temporaire en cours sera ignorée/nettoyée par le batch à la reprise.
 - Les interfaces user/admin sont séparées (ports 5000/5001). L'admin permet de programmer morceaux et playlists et de rechercher par titre de morceau ou nom de playlist.
 - Fichiers non suivis laissés à part : `liste_musiques_queue.md`, `_archive_docs/`, `webradio/silence.wav.viz.json`, `06-10-2026`, `matin` ; ne pas intégrer sans vérification.
@@ -35,6 +36,7 @@
 - À la demande de l'utilisateur, arrêter tous les services et processus WebRadio et ComfyUI ; laisser le tunnel Cloudflare et les applications d'autres projets intacts.
 
 ## Livrables produits ou modifiés
+- `webradio/tools/cover_gen.py` : prompt de pochette en trois lignes + négatifs renforcés (commité à la clôture).
 - `webradio/radio.html` : programmation admin restaurée avec ajout de morceaux/playlists et recherche.
 - `webradio/playlists.json` : 88 libellés harmonisés, sans préfixe « Playlist » ni « Perso ».
 - `webradio/REGLES_GENERATION_DEV.md`, `AMELIORATIONS.md` : précaution juridique et remplacement des noms d'artistes prévu avant déploiement.
@@ -42,6 +44,7 @@
 - `.claude/commands/replace_downvoted_tracks.md` créé puis supprimé à la demande de l'utilisateur ; il ne reste pas dans le dépôt.
 
 ## Hypothèses validées / invalidées
+- VALIDE : prompt de pochette en trois lignes explicites (titre, playlist, date) : texte correct sur 2 essais (flamenco, médiéval) ; seulement 2 essais, à surveiller sur d'autres titres.
 - VALIDE : services WebRadio à l'arrêt, port ComfyUI 8189 fermé, 1714 MiB de VRAM utilisés (applications Windows).
 - EN ATTENTE : reprise des pochettes ; contrôles manuels iPhone et jingles ; renommage des titres d'artistes avant le déploiement.
 

@@ -7,16 +7,19 @@ from pathlib import Path
 
 URL = "http://127.0.0.1:8189"
 HERE = Path(__file__).resolve().parent.parent
-NEGATIVE = "faute d'orthographe, lettres deformees, texte illisible, filigrane, logo, flou, deformation"
+NEGATIVE = "faute d'orthographe, lettres deformees, texte illisible, texte répété, mots coupés, lignes de texte mélangées, texte manquant, filigrane, logo, flou, deformation"
 
 
 def build_prompt(charte, title, playlist_label, date):
     return (
         f"Pochette d'album carrée. Sujet : {charte['sujet']}. Technique : {charte['technique']}. "
         f"Palette : {charte['palette']}. "
-        f"Texte écrit sur la pochette en bas à gauche, police {charte['typographie']}, nette et très lisible : "
-        f"le titre « {title} » en grand, juste dessous « {playlist_label} » en plus petit, "
-        f"puis « {date} » en tout petit."
+        f"En bas à gauche, trois lignes de texte alignées à gauche, police {charte['typographie']}, "
+        f"nettes, lisibles, sur un fond calme. Le texte est écrit exactement une seule fois, dans cet ordre, "
+        f"chaque ligne complète sur une seule ligne :\n"
+        f"Ligne 1 (grande) : « {title} »\n"
+        f"Ligne 2 (moyenne) : « {playlist_label} »\n"
+        f"Ligne 3 (très petite) : « {date} »"
     )
 
 

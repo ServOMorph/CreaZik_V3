@@ -41,7 +41,7 @@ Document établi à partir des décisions prises au fil des conversations. Chaqu
 ### 2.5 Mesures et énergie
 - La consommation de la carte est une estimation (`energy_wh_est`), car `nvidia-smi` ne donne pas la puissance ; elle est présentée comme telle.
 - Les pochettes sont générées avec une IA locale (ComfyUI-Qwen, Qwen-Image 2.1) et uniquement lorsque la file de génération musicale est vide.
-- Pochette : le texte (titre du morceau, nom de la playlist, date de création en plus petit) est généré dans l'image par le modèle, jamais incrusté après coup. Une charte graphique par playlist est dans `webradio/covers_charte.json` (`tools/make_charte.py`), appliquée par `tools/cover_gen.py`.
+- Pochette : le texte (titre du morceau, nom de la playlist, date de création en plus petit) est généré dans l'image par le modèle, jamais incrusté après coup ; le prompt impose trois lignes explicites (titre, playlist, date), car une phrase unique fait mélanger les lignes au modèle. Une charte graphique par playlist est dans `webradio/covers_charte.json` (`tools/make_charte.py`), appliquée par `tools/cover_gen.py`.
 - La génération en lot se lance avec `/generate_covers`, attend que la génération musicale soit inactive et reprend en ignorant les pochettes PNG déjà créées. `/stop_covers` arrête uniquement ce lot et ComfyUI-Qwen ; sans pochette disponible, l'interface conserve l'animation visuelle.
 - Priorité des pochettes : relire les votes avant chaque image, générer d'abord les morceaux au solde positif, puis ceux sans vote, puis les soldes équilibrés ; exclure les soldes négatifs. Si le solde devient négatif pendant la génération, ne pas conserver l'image.
 
@@ -116,5 +116,5 @@ Document établi à partir des décisions prises au fil des conversations. Chaqu
 
 - Validation par l'utilisateur des textes des jingles parlés.
 - Changement du mot de passe admin par défaut.
-- Rythme de génération du lot de pochettes (style avec texte validé) ; 3 exemples de charte graphique (flamenco, hard tech, médiéval) à générer et faire valider.
+- Rythme de génération du lot de pochettes ; fiabilité du texte des pochettes (prompt en trois lignes testé sur 2 essais seulement).
 - Comportements iPhone non vérifiés : fondus audio, lecture automatique après connexion, écran verrouillé.

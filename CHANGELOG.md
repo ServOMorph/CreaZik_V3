@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.1 — 2026-10-06
+
+### Corrigé
+- Pochettes : prompt en trois lignes explicites (titre, playlist, date) pour éviter le texte mélangé ou coupé.
+
 ## v1.0 — 2026-10-06
 
 ### Ajouté / modifié
