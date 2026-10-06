@@ -901,3 +901,28 @@ input:focus, textarea:focus {
   .thumb:active, .btn-play:active, .btn-next:active, .btn-send:active, .mode-icon:active { transform: none; }
   .featured-text, .featured-author { transition: none; }
 }
+
+.human { margin-top: var(--sp-5); text-align: center; }
+.human-text { margin: 0 0 var(--sp-3); color: var(--muted); font-size: var(--fs-s); line-height: 1.5; }
+.human-link {
+  display: block;
+  overflow: hidden;
+  border-radius: var(--r-m);
+  border: 1px solid var(--stroke-2);
+  box-shadow: var(--shadow);
+  text-decoration: none;
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+.human-link:hover, .human-link:focus-visible { transform: translateY(-2px); border-color: var(--a1); }
+.human-banner { display: block; width: 100%; height: auto; }
+.human-fallback {
+  display: block;
+  padding: var(--sp-5) var(--sp-4);
+  background: linear-gradient(135deg, #2f5a2b, #c9742a);
+  color: #fff;
+  font-weight: 800;
+  font-size: 1.6rem;
+  letter-spacing: 0.02em;
+}
+.human-fallback[hidden] { display: none; }
+.human-fallback small { font-size: 0.6em; font-weight: 600; opacity: 0.9; }

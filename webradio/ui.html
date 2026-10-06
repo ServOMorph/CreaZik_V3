@@ -880,7 +880,7 @@
                         ${track.status === 'generated' ? `
                             <div class="player-wrapper">
                                 <audio controls preload="none">
-                                    <source src="${esc(track.output_file)}?v=${esc(track.generated_at || '')}" type="audio/wav">
+                                    <source src="${esc(track.output_file.replace(/\.wav$/i, ".mp3"))}?v=${esc(track.generated_at || '')}" type="audio/mpeg">
                                 </audio>
                             </div>
                         ` : ''}
@@ -975,8 +975,8 @@
             const t = trackIndex[k];
             if (!t) return;
             const a = document.createElement('a');
-            a.href = t.output_file;
-            a.download = t.name.replace(/\s+/g, '_') + '.wav';
+            a.href = t.output_file.replace(/\.wav$/i, ".mp3");
+            a.download = t.name.replace(/\s+/g, '_') + '.mp3';
             a.click();
         }
 

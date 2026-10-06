@@ -17,6 +17,7 @@ Suivi de toutes les demandes de la conversation. Statuts : FAIT (livré et contr
 | 1.10 | Favoris | FAIT non vérifié |
 | 1.11 | Commentaires, un commentaire au hasard toutes les 5 s | FAIT non vérifié |
 | 1.12 | Les commentaires sont associés aux morceaux (affichage des commentaires du morceau en cours) | FAIT : serveur (filtre par morceau) et lecteur ; non vu sur iPhone |
+| 1.x | BUG (à faire plus tard) : en mode admin, cliquer sur un morceau pour l'envoyer le joue tout de suite en coupant le morceau actuel, au lieu de le programmer juste après | A FAIRE : vérifier l'action envoyée par le clic (play_index / now au lieu de front) |
 
 ## 2. Visuels et motion design
 | # | Demande | Statut |
@@ -49,7 +50,8 @@ Suivi de toutes les demandes de la conversation. Statuts : FAIT (livré et contr
 | 4.4 | Relance systématique après arrêt, relance automatique des plantages | FAIT (services.ps1, superviseur) |
 | 4.5 | Playlists demandées : Perso et ses 6 versions, instrumental, disco EN, groove EN, electro atmosphérique, electro-pop FR, années 50, futuriste, poésie FR et EN, percussions Amérique du Sud et Afrique, rap FR mélodique, tribal, a cappella hommes et femmes, guitare, harpe, piano seuls, chant mongol, didgeridoo, electro spatiale, synthés épiques, rock progressif instrumental, funk saxophone, tech, hard tech, jeux vidéo, hard rock | FAIT : 78 playlists configurées, en génération |
 | 4.6 | Disco en espagnol, portugais, italien, allemand (accord donné) | FAIT : 4 playlists configurées (paroles inventées) |
-| 4.7 | Couvertures de morceaux avec une IA locale (nom de l'IA à fournir) | EN ATTENTE du nom ; à lancer quand la file est vide |
+| 4.7 | Couvertures de morceaux avec une IA locale | IA fournie : ComfyUI-Qwen (D:\ServOMorph\ComfyUI-Qwen, Qwen-Image 2.1 GGUF Q4, port 8189) ; test d'une couverture en cours, puis lot à lancer quand la file est vide |
+| 4.9 | Supprimer tous les WAV, ne garder et ne diffuser que les MP3 ; à chaque génération ne garder que le MP3 | FAIT : 887 WAV supprimés (24 Go libérés environ, playlists 29 Go -> 1,8 Go), moteur et explorateur lisent le MP3 (durée via analyse ou taille), compress_audio supprime le WAV après conversion, durée contrôlée et analyse faite ; seul silence.wav est conservé (déverrouillage iOS) |
 | 4.8 | Compléter la radio : playlists éclectiques, tous les styles du monde | EN COURS : 35 playlists de styles du monde ajoutées (flamenco, tango, reggae, afrobeats, Maghreb, klezmer, Balkans, celtique, nordique, gamelan, Inde, Bollywood, Japon, Chine, Polynésie, mariachi, salsa, bachata, Brésil, Caraïbes, gospel, blues, jazz, soul, hip-hop, drum and bass, house et trance, ambient, metal, punk et indie, classique, country, ska, valse musette, médiéval) ; à poursuivre |
 
 ## 5. Pondération

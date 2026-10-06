@@ -1,4 +1,5 @@
 import argparse
+import struct
 import subprocess
 import time
 from pathlib import Path
@@ -13,6 +14,45 @@ def targets():
         if any(p.startswith("_") for p in wav.relative_to(HERE).parts):
             continue
         yield wav
+
+
+def wav_seconds(path):
+    with open(path, "rb") as f:
+        head = f.read(65536)
+    pos = 12
+    byte_rate = None
+    while pos + 8 <= len(head):
+        cid = head[pos:pos + 4]
+        size = struct.unpack("<I", head[pos + 4:pos + 8])[0]
+        if cid == b"fmt ":
+            byte_rate = struct.unpack("<I", head[pos + 16:pos + 20])[0]
+        elif cid == b"data" and byte_rate:
+            return (path.stat().st_size - (pos + 8)) / byte_rate
+        pos += 8 + size + (size & 1)
+    return None
+
+
+def purge(wav):
+    mp3 = wav.with_suffix(".mp3")
+    if not mp3.exists() or mp3.stat().st_mtime < wav.stat().st_mtime:
+        return False
+    if time.time() - wav.stat().st_mtime < 60:
+        return False
+    for suffix in (".viz.json", ".feat.json"):
+        side = wav.with_name(wav.name + suffix)
+        if not side.exists() or side.stat().st_mtime < wav.stat().st_mtime:
+            return False
+    expected = wav_seconds(wav)
+    actual = mp3.stat().st_size * 8 / (int(BITRATE[:-1]) * 1000)
+    if not expected or abs(actual - expected) > max(1.5, expected * 0.03):
+        print(f"conservé {wav.name} : durée mp3 incohérente ({actual:.1f} s pour {expected} s)", flush=True)
+        return False
+    try:
+        wav.unlink()
+    except PermissionError:
+        return False
+    print(f"wav supprimé {wav.relative_to(HERE)}", flush=True)
+    return True
 
 
 def convert(wav):
@@ -35,7 +75,13 @@ def convert(wav):
 
 
 def run_once():
-    return sum(1 for wav in targets() if convert(wav))
+    done = 0
+    for wav in list(targets()):
+        if convert(wav):
+            done += 1
+        if purge(wav):
+            done += 1
+    return done
 
 
 if __name__ == "__main__":

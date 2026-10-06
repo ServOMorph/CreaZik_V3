@@ -35,7 +35,7 @@ ADMIN_POST_TARGETS = {
 }
 
 STATIC_FILES = {"/listen.html", "/silence.wav", "/listen.css", "/listen.js", "/visuals.js",
-                "/scenes.js", "/transitions.js", "/motion.js", "/scenes_spec.json", "/radio_content.json",
+                "/traveling-sound.png", "/scenes.js", "/transitions.js", "/motion.js", "/scenes_spec.json", "/radio_content.json",
                 "/playlists.json", "/favorites.json", "/radio_settings.json"}
 STATIC_PATTERNS = [
     re.compile(r"^/playlists/[\w\-]+/outputs/playlist_results\.json$"),

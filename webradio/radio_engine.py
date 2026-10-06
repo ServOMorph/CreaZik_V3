@@ -15,6 +15,7 @@ SKIP_FADE_OUT = 1.5
 SKIP_FADE_IN = 1.0
 MAX_CF_RATIO = 0.4
 REFRESH_EVERY_S = 5.0
+MP3_BITRATE = 192000
 LOCAL_TZ = ZoneInfo("Europe/Paris")
 ENERGY_WEIGHTS = {"onset": 0.35, "centroid_hz": 0.25, "rms_db": 0.2, "bpm": 0.2}
 
@@ -112,10 +113,19 @@ class Catalog:
             return 0
 
     def _duration(self, rel):
-        path = self.root / rel
-        key = (rel, self._mtime(path))
+        wav = self.root / rel
+        mp3 = wav.with_suffix(".mp3")
+        src = wav if wav.exists() else mp3
+        key = (rel, self._mtime(src))
         if key not in self._durations:
-            self._durations[key] = wav_duration(path)
+            if src == wav:
+                dur = wav_duration(wav)
+            else:
+                feat = read_json(self.root / (rel + ".feat.json"), None) or {}
+                dur = float(feat.get("duration_s") or 0)
+                if not dur and mp3.exists():
+                    dur = os.path.getsize(mp3) * 8 / MP3_BITRATE
+            self._durations[key] = dur
         return self._durations[key]
 
     def _load_features(self, rel):

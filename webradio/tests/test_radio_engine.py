@@ -346,6 +346,21 @@ def test_tempo_smoothing_reduces_jumps():
     assert results[True] < results[False] * 0.5, results
 
 
+def test_catalog_works_with_mp3_only():
+    with tempfile.TemporaryDirectory() as tmp:
+        root = Path(tmp)
+        build(root, {"a": (3, 20, False), "b": (3, 20, False)})
+        for wav in list(root.glob("playlists/*/outputs/*.wav")):
+            size = wav.stat().st_size
+            (wav.with_suffix(".mp3")).write_bytes(b"\x00" * int(20 * 192000 / 8))
+            wav.unlink()
+        clock = Clock()
+        eng = RadioEngine(root, time_fn=clock, rng=random.Random(3))
+        seq = run(eng, clock, 300, step=1.0)
+        assert len(seq) >= 10
+        assert all(abs(t["duration"] - 20) < 0.5 for t in eng.cat.tracks.values())
+
+
 def test_stats_sum_to_100():
     with tempfile.TemporaryDirectory() as tmp:
         eng, clock = make(tmp, {"a": (4, 10, False), "b": (8, 10, False)}, {"weights": {"a": 5, "b": 5}, "transitions": preset()})

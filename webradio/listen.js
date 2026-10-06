@@ -552,6 +552,18 @@
         data.hue = (base + progress * 140 + sm.level * 50) % 360;
     }
 
+    function initHumanBanner() {
+        const img = $('humanBanner');
+        const fb = $('humanFallback');
+        if (!img || !fb) return;
+        const fail = () => {
+            img.hidden = true;
+            fb.hidden = false;
+        };
+        img.addEventListener('error', fail);
+        if (img.complete && img.naturalWidth === 0) fail();
+    }
+
     function resizeCanvas() {
         const dpr = Math.min(window.devicePixelRatio || 1, 2);
         const w = canvas.clientWidth;
@@ -785,6 +797,7 @@
         setHidden('adminBar', !adm);
         setHidden('progPanel', !adm);
         setHidden('viewAsBanner', !(isAdmin && viewAsUser));
+        setHidden('humanRadio', adm);
         const icon = $('modeIcon');
         if (icon) {
             const mode = !isAdmin ? 'login' : (viewAsUser ? 'user' : 'admin');
@@ -927,6 +940,7 @@
         content = Object.assign({jingle_messages: [], ads: []}, await getJSON('./radio_content.json', {}));
         try { $('comName').value = localStorage.getItem('comName') || ''; } catch (e) {}
         initFolds();
+        initHumanBanner();
         applyMode();
         setPlayLabel();
         setTicker('CreaZik Radio : musiques générées par intelligence artificielle, en local   |   Contact : sereniatech33@gmail.com   |   serenia-tech.fr');
