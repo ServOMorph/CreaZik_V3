@@ -16,3 +16,4 @@
 - Visuels : un décor différent par playlist, transition douce au changement de playlist, motion design pendant un jingle, publicité du site tous les 5 morceaux (9 s), lisibilité à 375 px.
 - Commentaires associés au morceau : écrire un commentaire sur un morceau, vérifier qu'il s'affiche seulement sur ce morceau.
 - Fins de morceaux : écouter la fin de plusieurs morceaux pour confirmer qu'aucun n'est coupé (cause probable corrigée : essais « suivant » et redémarrages du serveur).
+- Arc visuel d'un morceau : suivre un morceau en entier et vérifier que le décor évolue (teinte, zoom, second motif au milieu, ondes) sans à-coup ni saccade sur iPhone.

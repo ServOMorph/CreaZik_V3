@@ -28,7 +28,7 @@ Suivi de toutes les demandes de la conversation. Statuts : FAIT (livré et contr
 | 2.5 | Motion design pendant les jingles : nom de la radio et message IA locale | FAIT non vu : 3 variantes, textes éditables dans la gestion |
 | 2.6 | Motion design régulier (tous les 5 morceaux) pour serenia-tech.fr, 10 designs | FAIT non vu : 10 designs, textes tirés du contenu du site |
 | 2.7 | Texte défilant, contact, animation liée à la musique | FAIT |
-| 2.9 | Les visuels doivent plus évoluer sur la durée du morceau, avec de l'aléatoire mais aussi un fil conducteur, comme une histoire qui rompt la monotonie | A FAIRE (agent design : arcs narratifs par morceau pilotés par la progression, avec variations aléatoires) |
+| 2.9 | Les visuels doivent plus évoluer sur la durée du morceau, avec de l'aléatoire mais aussi un fil conducteur | FAIT : arc narratif par morceau (graine = clé du morceau) : intensité en 5 temps avec pic aléatoire, dérive de teinte dans un sens unique, zoom et rotation lente, second motif en fondu au milieu, 3 ondes ponctuelles ; 0,07 ms par image, sans erreur ; rendu à valider sur téléphone |
 | 2.8 | L'agent design doit proposer un design plus moderne et plus stylisé | FAIT pour la page d'écoute, la gestion et l'explorateur (couleurs qui suivent la playlist, verre dépoli) ; l'explorateur est réservé à l'admin |
 
 ## 3. Voix et jingles

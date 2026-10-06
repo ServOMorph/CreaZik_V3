@@ -603,6 +603,93 @@
     };
   };
 
+  function rng(seed) {
+    var x = seed >>> 0;
+    return function () {
+      x = (x + 0x6D2B79F5) >>> 0;
+      var t = x;
+      t = Math.imul(t ^ (t >>> 15), t | 1);
+      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+
+  function smooth(x) {
+    x = x < 0 ? 0 : (x > 1 ? 1 : x);
+    return x * x * (3 - 2 * x);
+  }
+
+  function lerpKeys(keys, p) {
+    if (p <= keys[0][0]) return keys[0][1];
+    for (var i = 1; i < keys.length; i++) {
+      if (p <= keys[i][0]) {
+        var k0 = keys[i - 1];
+        var k1 = keys[i];
+        return k0[1] + (k1[1] - k0[1]) * smooth((p - k0[0]) / (k1[0] - k0[0]));
+      }
+    }
+    return keys[keys.length - 1][1];
+  }
+
+  function makeArc(key, primary) {
+    var r = rng(hash('arc#' + key));
+    var dir = r() < 0.5 ? -1 : 1;
+    var b1 = 0.2 + r() * 0.08;
+    var b2 = 0.42 + r() * 0.1;
+    var climax = 0.62 + r() * 0.16;
+    var hueStep = 18 + r() * 22;
+    var other = MOTIFS.filter(function (m) { return m !== primary; });
+    return {
+      key: key,
+      intensity: [[0, 0.55], [b1, 0.75], [b2, 0.95], [climax, 1.3], [0.9, 0.7], [1, 0.5]],
+      hue: [[0, 0], [b1, dir * hueStep * 0.5], [b2, dir * hueStep], [climax, dir * hueStep * 2.1], [1, dir * hueStep * 1.2]],
+      zoom: [[0, 1 + r() * 0.05], [b2, 1.04 + r() * 0.08], [climax, 1.1 + r() * 0.1], [1, 1.02 + r() * 0.04]],
+      rot: (r() - 0.5) * 0.5,
+      second: other[Math.floor(r() * other.length)],
+      secondStart: b1 + r() * 0.05,
+      secondEnd: Math.min(0.92, climax + 0.1 + r() * 0.08),
+      secondShift: 90 + r() * 120,
+      pulses: [b2 + (r() - 0.5) * 0.05, climax + (r() - 0.5) * 0.04, 0.12 + r() * 0.5].map(function (v) { return Math.max(0.05, Math.min(0.95, v)); })
+    };
+  }
+
+  function newState(sp) {
+    return {
+      ph: 0, e: 0.1, b: 0.08, m: 0.08, t: 0.08, calm: 1, dt: 0.016,
+      h1: sp.hue, h2: sp.hue2, dh: 0, sp: sp.speed, d: sp.density,
+      fs: new Float32Array(64), data: null,
+      mh: function (f) { return this.h1 + this.dh * f; }
+    };
+  }
+
+  function updateState(S, data, dt, hueBase, hue2Base) {
+    S.dt = dt;
+    S.data = data;
+    var target = data.playing ? 0 : 1;
+    S.calm += (target - S.calm) * Math.min(1, dt * 3);
+    var c = S.calm;
+    S.ph += dt * S.sp * (1 - 0.6 * c);
+    var up = Math.min(1, dt * 18);
+    var dn = Math.min(1, dt * 6);
+    var ph = S.ph;
+    var t;
+    t = data.level * (1 - c) + (0.1 + 0.05 * Math.sin(ph * 0.7)) * c;
+    S.e += (t - S.e) * (t > S.e ? up : dn);
+    t = data.bass * (1 - c) + (0.08 + 0.04 * Math.sin(ph * 0.9)) * c;
+    S.b += (t - S.b) * (t > S.b ? up : dn);
+    t = data.mid * (1 - c) + (0.08 + 0.04 * Math.sin(ph * 0.8 + 1)) * c;
+    S.m += (t - S.m) * (t > S.m ? up : dn);
+    t = data.treble * (1 - c) + (0.08 + 0.04 * Math.sin(ph * 1.1 + 2)) * c;
+    S.t += (t - S.t) * (t > S.t ? up : dn);
+    var freq = data.freq;
+    for (var i = 0; i < 64; i++) {
+      t = (freq[i] / 255) * (1 - c) + (0.06 + 0.04 * Math.sin(ph * 1.2 + i * 0.35)) * c;
+      S.fs[i] += (t - S.fs[i]) * (t > S.fs[i] ? up : dn);
+    }
+    S.h1 = hueBase;
+    S.dh = ((((hue2Base - hueBase) % 360) + 540) % 360) - 180;
+  }
+
   function create(playlistId, spec) {
     var auto = autoSpec(playlistId);
     var sp = {};
@@ -613,51 +700,101 @@
     sp.speed = typeof s.speed === 'number' && s.speed > 0 ? s.speed : auto.speed;
     sp.density = typeof s.density === 'number' ? Math.max(0, Math.min(1, s.density)) : auto.density;
 
-    var S = {
-      ph: 0, e: 0.1, b: 0.08, m: 0.08, t: 0.08, calm: 1, dt: 0.016,
-      h1: sp.hue, h2: sp.hue2, dh: 0, sp: sp.speed, d: sp.density,
-      fs: new Float32Array(64), data: null,
-      mh: function (f) { return this.h1 + this.dh * f; }
-    };
+    var S = newState(sp);
     var fn = builders[sp.motif](S);
+    var S2 = null;
+    var fn2 = null;
+    var sp2 = null;
+    var off = null;
+    var offCtx = null;
+    var arc = null;
     var last = -1;
+
+    function ensureSecond() {
+      if (S2 && sp2.motif === arc.second) return;
+      sp2 = { motif: arc.second, hue: sp.hue, hue2: sp.hue2, speed: sp.speed * 0.8, density: sp.density * 0.7 };
+      S2 = newState(sp2);
+      fn2 = builders[arc.second](S2);
+    }
+
+    function drawSecond(ctx, w, h, data, dt, intensity, p, hueOff) {
+      var span = arc.secondEnd - arc.secondStart;
+      if (p <= arc.secondStart || p >= arc.secondEnd || span <= 0) return;
+      var env = Math.sin(((p - arc.secondStart) / span) * PI);
+      var alpha = 0.5 * smooth(env * 1.6);
+      if (alpha < 0.02) return;
+      ensureSecond();
+      var ow = Math.max(2, Math.round(w / 2));
+      var oh = Math.max(2, Math.round(h / 2));
+      if (!off) {
+        off = document.createElement('canvas');
+        offCtx = off.getContext('2d');
+      }
+      if (off.width !== ow || off.height !== oh) {
+        off.width = ow;
+        off.height = oh;
+      }
+      S2.sp = sp2.speed * (0.8 + 0.4 * intensity);
+      S2.d = Math.max(0, Math.min(1, sp2.density * (0.6 + 0.5 * intensity)));
+      updateState(S2, data, dt, sp.hue + hueOff + arc.secondShift, sp.hue2 + hueOff + arc.secondShift);
+      offCtx.setTransform(1, 0, 0, 1, 0, 0);
+      offCtx.globalAlpha = 1;
+      offCtx.globalCompositeOperation = 'source-over';
+      offCtx.clearRect(0, 0, ow, oh);
+      fn2(offCtx, ow, oh);
+      offCtx.globalAlpha = 1;
+      offCtx.globalCompositeOperation = 'source-over';
+      ctx.globalCompositeOperation = 'lighter';
+      ctx.globalAlpha = alpha;
+      ctx.drawImage(off, 0, 0, w, h);
+      ctx.globalAlpha = 1;
+      ctx.globalCompositeOperation = 'source-over';
+    }
+
+    function drawPulses(ctx, w, h, p, hueOff, intensity) {
+      for (var i = 0; i < arc.pulses.length; i++) {
+        var d = p - arc.pulses[i];
+        if (d < 0 || d > 0.035) continue;
+        var u = d / 0.035;
+        ctx.globalCompositeOperation = 'lighter';
+        ctx.lineWidth = 2 + 6 * (1 - u);
+        ctx.strokeStyle = col(sp.hue + hueOff + 30 * i, 80, 62, 0.35 * (1 - u) * Math.min(1, intensity));
+        ctx.beginPath();
+        ctx.arc(w / 2, h / 2, Math.min(w, h) * (0.15 + 0.7 * u), 0, TAU);
+        ctx.stroke();
+        ctx.globalCompositeOperation = 'source-over';
+      }
+    }
 
     function draw(ctx, w, h, data, nowSec) {
       var now = typeof nowSec === 'number' ? nowSec : performance.now() / 1000;
       var dt = last < 0 ? 0.016 : Math.min(0.1, Math.max(0, now - last));
       last = now;
-      S.dt = dt;
-      S.data = data;
-      var target = data.playing ? 0 : 1;
-      S.calm += (target - S.calm) * Math.min(1, dt * 3);
-      var c = S.calm;
-      S.ph += dt * S.sp * (1 - 0.6 * c);
-      var up = Math.min(1, dt * 18);
-      var dn = Math.min(1, dt * 6);
-      var ph = S.ph;
-      var t;
-      t = data.level * (1 - c) + (0.1 + 0.05 * Math.sin(ph * 0.7)) * c;
-      S.e += (t - S.e) * (t > S.e ? up : dn);
-      t = data.bass * (1 - c) + (0.08 + 0.04 * Math.sin(ph * 0.9)) * c;
-      S.b += (t - S.b) * (t > S.b ? up : dn);
-      t = data.mid * (1 - c) + (0.08 + 0.04 * Math.sin(ph * 0.8 + 1)) * c;
-      S.m += (t - S.m) * (t > S.m ? up : dn);
-      t = data.treble * (1 - c) + (0.08 + 0.04 * Math.sin(ph * 1.1 + 2)) * c;
-      S.t += (t - S.t) * (t > S.t ? up : dn);
-      var freq = data.freq;
-      for (var i = 0; i < 64; i++) {
-        t = (freq[i] / 255) * (1 - c) + (0.06 + 0.04 * Math.sin(ph * 1.2 + i * 0.35)) * c;
-        S.fs[i] += (t - S.fs[i]) * (t > S.fs[i] ? up : dn);
-      }
-      var drift = (data.progress * 2 - 1) * 15;
-      S.h1 = sp.hue + drift;
-      var d2 = ((((sp.hue2 - sp.hue) % 360) + 540) % 360) - 180;
-      S.dh = d2 - 2 * drift;
+      var key = String(data.key || data.playlist || playlistId);
+      if (!arc || arc.key !== key) arc = makeArc(key, sp.motif);
+      var p = Math.max(0, Math.min(1, data.progress || 0));
+      var intensity = lerpKeys(arc.intensity, p);
+      var hueOff = lerpKeys(arc.hue, p);
+      var zoom = lerpKeys(arc.zoom, p);
+      S.sp = sp.speed * (0.7 + 0.6 * intensity);
+      S.d = Math.max(0, Math.min(1, sp.density * (0.6 + 0.5 * intensity)));
+      var drift = (p * 2 - 1) * 10;
+      updateState(S, data, dt, sp.hue + drift + hueOff, sp.hue2 - drift + hueOff);
       ctx.globalAlpha = 1;
       ctx.globalCompositeOperation = 'source-over';
       ctx.fillStyle = col(S.h1, 35, 6, 1);
       ctx.fillRect(0, 0, w, h);
+      ctx.save();
+      ctx.translate(w / 2, h / 2);
+      ctx.rotate(arc.rot * (p - 0.5));
+      ctx.scale(zoom, zoom);
+      ctx.translate(-w / 2, -h / 2);
       fn(ctx, w, h);
+      ctx.globalAlpha = 1;
+      ctx.globalCompositeOperation = 'source-over';
+      drawSecond(ctx, w, h, data, dt, intensity, p, hueOff);
+      drawPulses(ctx, w, h, p, hueOff, intensity);
+      ctx.restore();
       ctx.globalAlpha = 1;
       ctx.globalCompositeOperation = 'source-over';
     }

@@ -547,6 +547,7 @@
         data.t = t;
         data.playing = playing;
         data.playlist = current ? current.playlist : '';
+        data.key = current ? (current.key || '') : '';
         const base = current ? hueFor(current.key || '') : 200;
         data.hue = (base + progress * 140 + sm.level * 50) % 360;
     }
