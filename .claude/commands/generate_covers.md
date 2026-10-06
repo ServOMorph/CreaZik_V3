@@ -9,7 +9,7 @@ Génère les couvertures des morceaux disponibles à partir de leur charte graph
 ## Procédure
 
 1. Lire `webradio/REGLES_GENERATION_DEV.md` et vérifier `python webradio/tools/cover_batch.py --status`.
-2. Vérifier que les playlists ont une entrée distincte dans `webradio/covers_charte.json`. Le batch s'arrête si une charte manque.
+2. Exclure les playlists dont l'identifiant commence par `esprit-` ou dont le libellé commence par « Esprit ». Vérifier que les autres playlists musicales ont une entrée distincte dans `webradio/covers_charte.json`. Le batch s'arrête si une charte manque.
 3. Lancer `python webradio/tools/cover_batch.py`. Ne pas lancer en parallèle une seconde génération. Le script attend automatiquement la fin des processus de génération musicale, démarre ComfyUI-Qwen si nécessaire, puis génère les pochettes une par une.
 4. Avant chaque génération, le script relit `webradio/votes.json` : il traite d'abord les morceaux au solde de pouces positif, puis ceux sans aucun vote, puis les soldes équilibrés. Les soldes négatifs sont exclus. La priorité est recalculée avant chaque morceau afin de prendre en compte les votes qui évoluent. Si un morceau devient négatif pendant la génération, son image temporaire n'est pas conservée.
 5. Chaque couverture est enregistrée dans le dossier `outputs` sous le nom du morceau avec le suffixe `.cover.png`. Les fichiers déjà valides sont ignorés ; après interruption ou changement de conversation, relancer cette commande pour reprendre.

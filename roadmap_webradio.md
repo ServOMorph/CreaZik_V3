@@ -3,8 +3,8 @@
 Référence : `webradio/ARCHITECTURE_WEBRADIO.md`. Statuts mis à jour par `/close` uniquement.
 
 ## Phase 1 - Base playlists et serveur sécurisé [EN COURS]
-- Génération en rotation du catalogue actuel (86 playlists musicales en rotation, plus 2 entrées de catalogue) + jingles ; reprise via `/start_generation`.
-- Serveur sécurisé, rôles admin / auditeurs, commentaires.
+- Génération en rotation du catalogue actuel (86 playlists musicales, 921 morceaux, 85 identifiants dans `series.txt`) + 20 jingles vocaux ; reprise via `/start_generation`.
+- Serveur sécurisé, rôles admin / auditeurs, commentaires ; base `radio.db`, avis « sans avis » et dynamique, statistiques admin, catalogue éditable (faits, contrôles iPhone en attente).
 - Validation de l'écoute sur iPhone (tests manuels).
 
 **⏸ Checkpoint** — Demander à l'utilisateur de faire `/compact` avant de continuer.
@@ -47,8 +47,8 @@ Attendre sa réponse écrite. Ne pas commencer la phase suivante sans confirmati
 Attendre sa réponse écrite. Ne pas commencer la phase suivante sans confirmation.
 
 ## Phase 7 - Couvertures des morceaux [TODO]
-- Générer les couvertures éligibles avec ComfyUI-Qwen (Qwen-Image 2.1, `D:\ServOMorph\ComfyUI-Qwen`, port 8189), après la file musicale et selon les votes. Lot interrompu proprement : 107/950 couvertures terminées ; reprise via `/generate_covers` (804 restent actuellement à générer, les votes doivent être revérifiés avant reprise).
-- Affichage intégré à la page d'écoute avec visuel de remplacement ; validation visuelle et champ `cover` dans le catalogue restent à finaliser.
+- Générer les couvertures éligibles avec ComfyUI-Qwen (Qwen-Image 2.1, `D:\ServOMorph\ComfyUI-Qwen`, port 8189), après la file musicale et selon les votes. Lot en cours : 699 couvertures à générer au dernier statut (746 tâches, 26 exclues pour score négatif) ; reprise via `/generate_covers`, les votes sont relus avant chaque image.
+- Affichage intégré à la page d'écoute : pochette ou, sans pochette, titre et style sur le visuel ; validation visuelle sur iPhone et champ `cover` dans le catalogue restent à finaliser.
 
 **⏸ Checkpoint** — Demander à l'utilisateur de faire `/compact` avant de continuer.
 Attendre sa réponse écrite. Ne pas commencer la phase suivante sans confirmation.

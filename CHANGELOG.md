@@ -1,5 +1,21 @@
 # Changelog
 
+## v1.2 — 2026-10-06
+
+### Ajouté
+- Base SQLite `radio.db` (diffusions, « sans avis », avis Slow/Medium/High à un ou deux niveaux) et section Statistiques admin avec exports JSON et CSV.
+- Catalogue admin fusionné avec l'explorateur : recherche, filtres, fiches, favoris, lecture, renommage, suppression avec archive d'apprentissage (`learning/morceaux_rejetes.jsonl`), commentaires ; tri des playlists par score, nom ou pondération ; score cumulé.
+- UI auditeur : bouton « sans avis », dynamique Slow/Medium/High, carré de publicité cliquable avec mascotte à 20 styles, légende titre/style sans pochette, bouton Suivant public (phase de test).
+- Fondu du morceau sous le jingle puis montée au maximum.
+
+### Modifié
+- Les morceaux à score négatif ne sont plus diffusés automatiquement.
+- Jingles instrumentaux supprimés (20 jingles vocaux conservés) ; pochettes : titre et style plus grands, sans numéro.
+- UI admin réorganisée (agent design), sections fermées par défaut avec état mémorisé ; bouton Explorateur retiré.
+
+### Corrigé
+- Bouton de dynamique qui ne restait pas allumé (serveur non redémarré) ; texte des boutons de pub qui dépassait.
+
 ## v1.1 — 2026-10-06
 
 ### Corrigé

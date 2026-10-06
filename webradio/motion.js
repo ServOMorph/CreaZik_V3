@@ -96,10 +96,14 @@
       H = fit(ctx, head, maxW, 3, Math.min(w * 0.1, 46) * scale, 16, '700');
       S = fit(ctx, sub, maxW, 3, Math.min(w * 0.048, 22) * scale, 12, '400');
       cs = Math.max(14, Math.min(w * 0.045, 19));
+      setFont(ctx, '600', cs);
+      while (cs > 8 && ctx.measureText(cta).width + cs * 2.6 > maxW) {
+        cs -= 0.5;
+        setFont(ctx, '600', cs);
+      }
       hlh = H.size * 1.2;
       slh = S.size * 1.38;
       ctaH = cs * 2.5;
-      setFont(ctx, '600', cs);
       ctaW = Math.min(maxW, ctx.measureText(cta).width + cs * 2.6);
       g1 = H.size * 0.55;
       g2 = cs * 1.1;
@@ -549,7 +553,9 @@
     var hp = eo((t - 0.4) / 0.9);
     setFont(ctx, '700', L.H.size);
     ctx.fillStyle = rgba(WHITE, E * hp);
-    drawLines(ctx, L.H.lines, cx, h * 0.34 - ((n - 1) * L.hlh) / 2 + (1 - hp) * 12, L.hlh);
+    var blockH = n * L.hlh;
+    var yc = Math.max(blockH / 2 + 6, Math.min(h * 0.34, (h * 0.72 - 32) / 2));
+    drawLines(ctx, L.H.lines, cx, yc - ((n - 1) * L.hlh) / 2 + (1 - hp) * 12, L.hlh);
     var bp = eo((t - 0.3) / 0.8);
     var bh = 40;
     var by = h * 0.72 + (1 - bp) * (h * 0.4);

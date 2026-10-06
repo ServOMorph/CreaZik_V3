@@ -118,6 +118,11 @@
         let g = 1;
         if (it.fade_in > 0) g = Math.min(g, ease((T - it.start) / it.fade_in));
         if (it.fade_out > 0) g = Math.min(g, ease((it.end - T) / it.fade_out));
+        if (it.duck) {
+            const d = it.duck;
+            if (T < d.until) g = Math.min(g, d.level * ease((T - it.start) / Math.max(0.5, d.until - it.start)));
+            else g = Math.min(g, d.level + (1 - d.level) * ease((T - d.until) / Math.max(0.5, d.rise)));
+        }
         return g;
     }
 
@@ -391,10 +396,22 @@
         loadComments();
     }
 
+    function setCaption(it, show) {
+        const box = $('vizCaption');
+        if (!box) return;
+        const on = show && it && !it.jingle;
+        box.hidden = !on;
+        if (on) {
+            $('capTitle').textContent = trackTitle(it);
+            $('capStyle').textContent = plName(it.playlist_label);
+        }
+    }
+
     function showTrackCover(it) {
         trackCover.hidden = true;
         trackCover.removeAttribute('src');
         canvas.hidden = false;
+        setCaption(it, true);
         if (!it || it.jingle || !it.file) return;
         const match = it.file.match(/^(playlists\/[\w-]+\/outputs\/.+)\.(?:wav|mp3|flac|ogg)$/i);
         if (!match) return;
@@ -402,9 +419,10 @@
             if (current === it) {
                 trackCover.hidden = false;
                 canvas.hidden = true;
+                setCaption(it, false);
             }
         };
-        trackCover.onerror = () => { canvas.hidden = false; };
+        trackCover.onerror = () => { canvas.hidden = false; setCaption(it, true); };
         trackCover.src = './' + match[1] + '.cover.png?v=' + encodeURIComponent(it.generated_at || '');
     }
 
@@ -418,7 +436,7 @@
         navigator.mediaSession.setActionHandler('play', startListening);
         navigator.mediaSession.setActionHandler('pause', stopListening);
         try {
-            navigator.mediaSession.setActionHandler('nexttrack', effectiveAdmin() ? skip : null);
+            navigator.mediaSession.setActionHandler('nexttrack', skip);
         } catch (e) {}
     }
 
@@ -445,6 +463,8 @@
         if (!box) return;
         const show = !!current && !current.jingle;
         box.hidden = !show;
+        const dbx = $('dynBox');
+        if (dbx) dbx.hidden = !show;
         if (!show) return;
         const v = votes.tracks[current.key] || {up: 0, down: 0};
         const mine = votes.mine[current.key] || {up: 0, down: 0};
@@ -454,6 +474,22 @@
         };
         set('thumbUpCount', v.up || 0);
         set('thumbDownCount', v.down || 0);
+        const db = $('dynBox');
+        if (db) {
+            db.hidden = false;
+            const lvls = String((votes.dynamics || {})[current.key] || '').split('+');
+            db.querySelectorAll('.dyn-btn').forEach(b => {
+                const on = lvls.includes(b.dataset.level);
+                b.classList.toggle('active', on);
+                b.setAttribute('aria-pressed', on ? 'true' : 'false');
+            });
+        }
+        const nb = $('thumbNeutral');
+        if (nb) {
+            const on = (votes.neutral || []).includes(current.key);
+            nb.classList.toggle('active', on);
+            nb.setAttribute('aria-pressed', on ? 'true' : 'false');
+        }
         [['thumbUp', 'up'], ['thumbDown', 'down']].forEach(([id, kind]) => {
             const b = $(id);
             if (!b) return;
@@ -475,10 +511,53 @@
         const mine = Object.assign({up: 0, down: 0}, votes.mine[key]);
         mine[kind] += 1;
         votes.mine[key] = mine;
+        votes.neutral = (votes.neutral || []).filter(k => k !== key);
         const bucket = pendingVotes[key] || (pendingVotes[key] = {up: 0, down: 0});
         bucket[kind] += 1;
         updateThumbs();
         if (!voteTimer) voteTimer = setTimeout(flushVotes, 400);
+    }
+
+    async function setDynamics(level) {
+        if (!current || current.jingle) return;
+        const key = current.key;
+        const prev = (votes.dynamics || {})[key];
+        const order = ['slow', 'medium', 'high'];
+        const sel = prev ? prev.split('+') : [];
+        let nextSel;
+        if (sel.includes(level)) nextSel = sel.filter(l => l !== level);
+        else if (sel.length >= 2) nextSel = [level];
+        else nextSel = sel.concat(level);
+        nextSel.sort((a, b) => order.indexOf(a) - order.indexOf(b));
+        const next = nextSel.length ? nextSel.join('+') : 'none';
+        votes.dynamics = Object.assign({}, votes.dynamics);
+        if (next === 'none') delete votes.dynamics[key]; else votes.dynamics[key] = next;
+        updateThumbs();
+        try {
+            const r = await fetch('/api/dynamics', {method: 'POST', headers: {'Content-Type': 'application/json'},
+                                                    body: JSON.stringify({key, level: next})});
+            if (!r.ok) throw new Error(r.status);
+        } catch (e) {
+            if (prev) votes.dynamics[key] = prev; else delete votes.dynamics[key];
+            updateThumbs();
+        }
+    }
+
+    async function toggleNeutral() {
+        if (!current || current.jingle) return;
+        const key = current.key;
+        const list = votes.neutral || [];
+        const on = !list.includes(key);
+        votes.neutral = on ? list.concat(key) : list.filter(k => k !== key);
+        updateThumbs();
+        try {
+            const r = await fetch('/api/neutral', {method: 'POST', headers: {'Content-Type': 'application/json'},
+                                                   body: JSON.stringify({key, on})});
+            if (!r.ok) throw new Error(r.status);
+        } catch (e) {
+            votes.neutral = on ? (votes.neutral || []).filter(k => k !== key) : (votes.neutral || []).concat(key);
+            updateThumbs();
+        }
     }
 
     async function flushVotes() {
@@ -620,30 +699,6 @@
         return Math.max(3, Math.min(10, Number(s) || 5)) * 1000;
     }
 
-    function drawOverlay(w, h, T, nowSec) {
-        if (!window.CreaMotion || !current || !current.overlay) return;
-        const ov = current.overlay;
-        if (T < ov.start || T >= ov.end) return;
-        const t = T - ov.start;
-        const dur = ov.end - ov.start;
-        const alpha = window.CreaMotion.envelope(t, dur, 0.8);
-        if (alpha <= 0.001) return;
-        ctx2d.save();
-        ctx2d.globalAlpha = alpha;
-        try {
-            if (ov.type === 'jingle') {
-                const list = content.jingle_messages.length ? content.jingle_messages : [{title: 'CréaZik IA WebRadio', lines: []}];
-                const msg = list[ov.n % list.length];
-                window.CreaMotion.jingle.draw(ctx2d, w, h, t, dur, msg, ov.n % window.CreaMotion.jingle.variants, data);
-            } else if (content.ads.length) {
-                const designs = window.CreaMotion.ads;
-                designs[ov.n % designs.length].draw(ctx2d, w, h, t, dur, content.ads[ov.n % content.ads.length], data);
-            }
-        } finally {
-            ctx2d.restore();
-        }
-    }
-
     function drawVisual(w, h, now) {
         if (!window.CreaScenes) {
             if (window.CreaVisuals) window.CreaVisuals.draw(1, ctx2d, w, h, data);
@@ -670,12 +725,176 @@
         } else {
             getScene(sceneKey).draw(ctx2d, w, h, data, nowSec);
         }
-        drawOverlay(w, h, serverNow(), nowSec);
+    }
+
+    const AD_SLOT_S = 9;
+    const MASCOT_S = 5;
+    const AD_TR_S = 1.1;
+    const adCanvas = $('adCanvas');
+    const adCtx = adCanvas ? adCanvas.getContext('2d') : null;
+    const adState = {i: 0, start: null};
+
+    let panelAdsSrc = null;
+    let panelAdsList = [];
+
+    function panelAds() {
+        if (panelAdsSrc !== content) {
+            panelAdsSrc = content;
+            const radio = (content.jingle_messages || []).map(m => ({
+                headline: (m.lines && m.lines[0]) || m.title || '',
+                sub: (m.lines && m.lines.slice(1).join(' - ')) || '',
+                cta: m.title || 'CréaZik IA WebRadio'
+            }));
+            const ads = content.ads || [];
+            const out = [];
+            for (let k = 0; k < Math.max(ads.length, radio.length); k++) {
+                if (k < ads.length) out.push(ads[k]);
+                if (k < radio.length) out.push(radio[k]);
+            }
+            panelAdsList = out;
+        }
+        return panelAdsList;
+    }
+
+    function adItemDur(i) { return i % 2 === 0 ? AD_SLOT_S : MASCOT_S; }
+
+    function easeInOut(x) { return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; }
+
+    function drawAdBackground(w, h, t, local, n) {
+        const hue = (200 + n * 47 + local * 5) % 360;
+        const g = adCtx.createLinearGradient(0, 0, w, h);
+        g.addColorStop(0, `hsl(${hue} 55% 14%)`);
+        g.addColorStop(1, `hsl(${(hue + 60) % 360} 60% 8%)`);
+        adCtx.fillStyle = g;
+        adCtx.fillRect(0, 0, w, h);
+        for (let k = 0; k < 2; k++) {
+            const a = t * (0.25 + k * 0.13) + k * 2.1;
+            const cx = w * (0.5 + 0.35 * Math.cos(a));
+            const cy = h * (0.5 + 0.35 * Math.sin(a * 1.2));
+            const r = Math.max(w, h) * 0.55;
+            const rg = adCtx.createRadialGradient(cx, cy, 0, cx, cy, r);
+            rg.addColorStop(0, `hsla(${(hue + 40 * k) % 360} 80% 55% / 0.28)`);
+            rg.addColorStop(1, `hsla(${(hue + 40 * k) % 360} 80% 55% / 0)`);
+            adCtx.fillStyle = rg;
+            adCtx.fillRect(0, 0, w, h);
+        }
+    }
+
+    function drawAdItem(i, w, h, t, local) {
+        const designs = window.CreaMotion.ads;
+        const n = Math.floor(i / 2);
+        adCtx.save();
+        try {
+            if (i % 2 === 1 && window.CreaMascot) {
+                const bpm = current && current.bpm ? current.bpm : 120;
+                window.CreaMascot.draw(adCtx, w, h, local, MASCOT_S, data, bpm, (200 + n * 47) % 360, current);
+            } else {
+                drawAdBackground(w, h, t, local, n);
+                designs[n % designs.length].draw(adCtx, w, h, local, AD_SLOT_S, panelAds()[n % panelAds().length], data);
+            }
+        } finally {
+            adCtx.restore();
+        }
+    }
+
+    function revealPath(style, w, h, e) {
+        adCtx.beginPath();
+        if (style === 0) {
+            adCtx.arc(w / 2, h / 2, e * Math.hypot(w, h) * 0.53, 0, Math.PI * 2);
+        } else if (style === 1) {
+            const E = e * (w + h);
+            adCtx.moveTo(0, 0);
+            adCtx.lineTo(E, 0);
+            adCtx.lineTo(0, E);
+            adCtx.closePath();
+        } else {
+            const bands = 6;
+            for (let k = 0; k < bands; k++) {
+                const bh = h / bands;
+                adCtx.rect(0, k * bh + bh * (1 - e) / 2, w, bh * e);
+            }
+        }
+    }
+
+    function drawRevealAccent(style, w, h, e, p, hue, t) {
+        if (style === 2) return;
+        adCtx.save();
+        adCtx.globalAlpha = Math.sin(Math.PI * Math.min(1, p));
+        adCtx.strokeStyle = `hsl(${hue} 95% 75%)`;
+        adCtx.shadowColor = `hsl(${hue} 95% 65%)`;
+        adCtx.shadowBlur = 14;
+        adCtx.lineWidth = 3;
+        adCtx.beginPath();
+        let cx = 0;
+        let cy = 0;
+        if (style === 0) {
+            const r = e * Math.hypot(w, h) * 0.53;
+            adCtx.arc(w / 2, h / 2, r, 0, Math.PI * 2);
+        } else {
+            const E = e * (w + h);
+            adCtx.moveTo(E, 0);
+            adCtx.lineTo(0, E);
+        }
+        adCtx.stroke();
+        adCtx.shadowBlur = 0;
+        adCtx.fillStyle = `hsl(${(hue + 40) % 360} 95% 85%)`;
+        for (let k = 0; k < 12; k++) {
+            const u = (k + 0.5) / 12;
+            if (style === 0) {
+                const a = u * Math.PI * 2 + t * 0.8;
+                const r = e * Math.hypot(w, h) * 0.53;
+                cx = w / 2 + Math.cos(a) * r;
+                cy = h / 2 + Math.sin(a) * r;
+            } else {
+                const E = e * (w + h);
+                cx = E * (1 - u);
+                cy = E * u;
+            }
+            const sz = (1.2 + 1.6 * Math.abs(Math.sin(t * 6 + k * 1.7))) * (w / 150);
+            adCtx.fillRect(cx - sz / 2, cy - sz / 2, sz, sz);
+        }
+        adCtx.restore();
+    }
+
+    function drawAds(now) {
+        if (!adCtx || !window.CreaMotion || !window.CreaMotion.ads || !panelAds().length) return;
+        const w = adCanvas.clientWidth;
+        const h = adCanvas.clientHeight;
+        if (!w || !h) return;
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        if (adCanvas.width !== Math.round(w * dpr) || adCanvas.height !== Math.round(h * dpr)) {
+            adCanvas.width = Math.round(w * dpr);
+            adCanvas.height = Math.round(h * dpr);
+        }
+        adCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        const t = now / 1000;
+        if (adState.start === null) adState.start = t;
+        let guard = 0;
+        while (t - adState.start >= adItemDur(adState.i) && guard++ < 8) {
+            adState.start += adItemDur(adState.i) - AD_TR_S;
+            adState.i += 1;
+        }
+        const i = adState.i;
+        const d = adItemDur(i);
+        const local = t - adState.start;
+        drawAdItem(i, w, h, t, local);
+        if (local >= d - AD_TR_S) {
+            const p = Math.min(1, (local - (d - AD_TR_S)) / AD_TR_S);
+            const e = easeInOut(p);
+            const style = i % 3;
+            adCtx.save();
+            revealPath(style, w, h, e);
+            adCtx.clip();
+            drawAdItem(i + 1, w, h, t, local - (d - AD_TR_S));
+            adCtx.restore();
+            drawRevealAccent(style, w, h, e, p, (200 + Math.floor((i + 1) / 2) * 47) % 360, t);
+        }
     }
 
     function frame(now) {
         requestAnimationFrame(frame);
         if (document.hidden) return;
+        drawAds(now);
         resizeCanvas();
         updateData(now / 1000);
         const w = canvas.clientWidth;
@@ -772,8 +991,20 @@
         } catch (e) {}
     }
 
-    function skip() {
-        radioAction({action: 'skip'});
+    async function skip() {
+        if (effectiveAdmin()) {
+            radioAction({action: 'skip'});
+            return;
+        }
+        try {
+            await fetch('/api/skip', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: '{}'});
+            const r = await fetch('/api/radio/state?t=' + Date.now());
+            const st = await r.json().catch(() => null);
+            if (st && st.active) {
+                clockOffset = st.server_time - Date.now() / 1000;
+                live = st;
+            }
+        } catch (e) {}
     }
 
     function onProgramClick(ev) {
@@ -819,7 +1050,7 @@
             const el = $(id);
             if (el) el.hidden = hidden;
         };
-        setHidden('nextBtn', !adm);
+        setHidden('nextBtn', false);
         setHidden('adminBar', !adm);
         setHidden('progPanel', !adm);
         setHidden('humanRadio', adm);
@@ -959,6 +1190,9 @@
         const td = $('thumbDown');
         if (tu) tu.addEventListener('click', () => sendVote('up'));
         if (td) td.addEventListener('click', () => sendVote('down'));
+        document.querySelectorAll('.dyn-btn').forEach(b => b.addEventListener('click', () => { setDynamics(b.dataset.level); b.blur(); }));
+        const tn = $('thumbNeutral');
+        if (tn) tn.addEventListener('click', toggleNeutral);
         slots.forEach(s => s.el.addEventListener('error', () => onSlotError(s)));
         $('comForm').addEventListener('submit', postComment);
         specs = await getJSON('./scenes_spec.json', {playlists: {}});

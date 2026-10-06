@@ -87,8 +87,30 @@ def test_continuity_and_jingles():
                 run_len = 0
             else:
                 run_len += 1
-        for (t0, _, _), (t1, k, _) in zip(seq, seq[1:]):
-            assert 4 <= t1 - t0 <= 21, (t1 - t0)
+        for (t0, _, j0), (t1, k, _) in zip(seq, seq[1:]):
+            if j0:
+                assert 0 <= t1 - t0 <= 2, (t1 - t0)
+            else:
+                assert 4 <= t1 - t0 <= 21, (t1 - t0)
+
+
+def test_track_fades_in_under_jingle():
+    with tempfile.TemporaryDirectory() as tmp:
+        eng, clock = make(tmp, {"a": (6, 20, False), "j": (3, 8, True)},
+                          {"jingle_every": 2, "no_repeat": 2, "transitions": preset()})
+        found = False
+        end = clock.t + 400
+        while clock.t < end and not found:
+            eng.tick()
+            cur = eng.current
+            if cur and not cur["jingle"] and cur.get("duck"):
+                prev = eng.played[-1]
+                assert prev["jingle"] and abs(cur["start"] - prev["start"]) < 1.0
+                assert cur["duck"]["until"] == prev["end"]
+                assert len([a for a in eng.snapshot()["active"]]) <= 2
+                found = True
+            clock.t += 0.25
+        assert found
 
 
 def test_crossfade_overlap_and_two_active_max():
@@ -146,12 +168,12 @@ def test_thumbs_raise_probability():
         eng, clock = make(tmp, {"a": (4, 10, False)},
                           {"jingles_enabled": False, "no_repeat": 0, "thumb_strength": 0.5, "transitions": preset()})
         (Path(tmp) / "votes.json").write_text(json.dumps({"tracks": {"a:1": {"up": 4, "down": 0},
-                                                                     "a:2": {"up": 0, "down": 3}}}), encoding="utf-8")
+                                                                     "a:2": {"up": 1, "down": 0}}}), encoding="utf-8")
         seq = run(eng, clock, 10 * 3000, step=1.0)
         counts = {}
         for _, key, _ in seq:
             counts[key] = counts.get(key, 0) + 1
-        assert counts["a:1"] > counts["a:3"] > counts["a:2"], counts
+        assert counts["a:1"] > counts["a:2"] > counts["a:3"], counts
 
 
 def test_skip_now_and_queue_actions():
@@ -184,7 +206,7 @@ def test_skip_now_and_queue_actions():
         assert not eng.action("now", {"key": "zzz:1"})
 
 
-def test_many_thumbs_down_removes_track():
+def test_negative_score_track_never_broadcast():
     with tempfile.TemporaryDirectory() as tmp:
         eng, clock = make(tmp, {"a": (4, 10, False)},
                           {"jingles_enabled": False, "no_repeat": 0, "thumb_strength": 0.15, "transitions": preset()})
@@ -193,7 +215,7 @@ def test_many_thumbs_down_removes_track():
         counts = {}
         for _, key, _ in seq:
             counts[key] = counts.get(key, 0) + 1
-        assert counts.get("a:1", 0) <= 30, counts
+        assert counts.get("a:1", 0) == 0, counts
         assert min(counts.get("a:2", 0), counts.get("a:3", 0), counts.get("a:4", 0)) > 200, counts
 
 
@@ -442,3 +464,97 @@ if __name__ == "__main__":
                 traceback.print_exc()
                 print("FAIL", name, exc)
     sys.exit(1 if failed else 0)
+
+
+def make_persist(tmp, playlists, settings=None):
+    root = Path(tmp)
+    build(root, playlists, settings)
+    clock = Clock()
+    return RadioEngine(root, time_fn=clock, rng=random.Random(1), persist=True), clock
+
+
+def test_plays_logged_and_analytics():
+    with tempfile.TemporaryDirectory() as tmp:
+        eng, clock = make_persist(tmp, {"a": (4, 20, False), "j": (2, 5, True)},
+                                  {"jingle_every": 3, "transitions": preset()})
+        run(eng, clock, 300)
+        plays = eng.db.plays()
+        assert len(plays) >= 10
+        assert all(not p["key"].startswith("j:") for p in plays)
+        done = [p for p in plays if p["skipped"] is not None]
+        assert done and all(p["skipped"] == 0 for p in done)
+        an = eng.analytics()
+        assert an["kpis"]["total_plays"] == len(plays)
+        assert an["kpis"]["distinct_tracks_played"] == 4
+        assert sum(h["plays"] for h in an["by_hour"]) == len(plays)
+        assert an["by_playlist"][0]["share_actual_pct"] == 100.0
+        eng.action("skip", {})
+        assert [p for p in eng.db.plays() if p["skipped"] == 1]
+
+
+def test_neutral_marker_and_vote_clears_it():
+    with tempfile.TemporaryDirectory() as tmp:
+        eng, clock = make_persist(tmp, {"a": (3, 20, False)})
+        eng.db.set_neutral("v1", "a:1", True)
+        eng.db.set_neutral("v2", "a:1", True)
+        assert eng.db.neutral_of("v1") == ["a:1"]
+        assert eng.db.neutral_counts() == {"a:1": 2}
+        eng.db.clear_neutral("v1", "a:1")
+        assert eng.db.neutral_counts() == {"a:1": 1}
+        eng.db.set_neutral("v2", "a:1", False)
+        assert eng.db.neutral_counts() == {}
+
+
+def test_rename_and_delete_with_learning_archive():
+    with tempfile.TemporaryDirectory() as tmp:
+        eng, clock = make_persist(tmp, {"a": (3, 20, False), "b": (2, 20, False)})
+        root = Path(tmp)
+        eng.cat.refresh()
+        assert eng.edit_catalog("rename_track", {"key": "a:1", "name": "Nouveau titre"})[0]
+        assert eng.cat.tracks["a:1"]["name"] == "Nouveau titre"
+        assert eng.edit_catalog("rename_playlist", {"id": "a", "name": "Playlist A"})[0]
+        assert eng.cat.tracks["a:2"]["playlist_label"] == "Playlist A"
+        assert not eng.edit_catalog("rename_track", {"key": "zzz:1", "name": "x"})[0]
+        wav = root / "playlists/a/outputs/03.wav"
+        assert wav.exists()
+        assert eng.edit_catalog("delete_track", {"key": "a:3", "reason": "voix criarde"})[0]
+        assert not wav.exists() and "a:3" not in eng.cat.tracks
+        lines = (root / "learning" / "morceaux_rejetes.jsonl").read_text(encoding="utf-8").strip().splitlines()
+        rec = json.loads(lines[0])
+        assert rec["key"] == "a:3" and rec["reason"] == "voix criarde" and rec["prompt"] == "x"
+        assert eng.edit_catalog("delete_playlist", {"id": "b", "reason": "hors sujet"})[0]
+        assert not any(k.startswith("b:") for k in eng.cat.tracks)
+        assert not (root / "playlists/b/outputs/01.wav").exists()
+        assert len((root / "learning" / "morceaux_rejetes.jsonl").read_text(encoding="utf-8").strip().splitlines()) == 3
+
+
+def test_delete_refused_while_playing():
+    with tempfile.TemporaryDirectory() as tmp:
+        eng, clock = make_persist(tmp, {"a": (3, 60, False)}, {"jingles_enabled": False})
+        run(eng, clock, 5)
+        ok, msg = eng.edit_catalog("delete_track", {"key": eng.current["key"]})
+        assert not ok and msg
+
+
+def test_dynamics_two_levels_and_effective_energy():
+    from stats_db import level_value, parse_level
+    assert parse_level("high+slow") == ("slow", "high")
+    assert parse_level("slow+slow") is None and parse_level("a") is None and parse_level("slow+medium+high") is None
+    assert abs(level_value("slow+medium") - 0.325) < 1e-9
+    with tempfile.TemporaryDirectory() as tmp:
+        eng, clock = make_persist(tmp, {"a": (3, 20, False)}, {"dyn_user_weight": 1.0})
+        eng.cat.refresh()
+        eng.db.set_dynamics("v1", "a:1", "medium+slow")
+        eng.db.set_dynamics("v2", "a:1", "slow")
+        assert eng.db.dynamics_of("v1") == {"a:1": "slow+medium"}
+        counts = eng.db.dynamics_counts()["a:1"]
+        assert counts == {"slow+medium": 1, "slow": 1}
+        eng.db.set_dynamics("v3", "a:1", "bidon")
+        assert "v3" not in str(eng.db.dynamics_of("v3"))
+        tr = dict(eng.cat.tracks["a:1"], energy=0.9)
+        eng._user_dyn = (0.0, {})
+        e = eng.effective_energy(tr)
+        assert 0.15 < e < 0.9
+        an = eng.analytics()
+        row = next(r for r in an["by_track"] if r["key"] == "a:1")
+        assert row["dyn_slow"] == 2 and row["dyn_medium"] == 1 and row["dyn_high"] == 0

@@ -13,5 +13,6 @@ WebRadio IA locale : musique générée en local avec ACE-Step 1.5, diffusée en
 - `tests_manuels.md` : contrôles manuels en attente.
 
 ## État actuel
-88 entrées au catalogue, dont 86 identifiants en rotation. Les interfaces auditeur/admin sont séparées (5000/5001) ; l'admin permet de programmer une piste ou une playlist et de les rechercher. Les titres affichés ne comportent plus « Playlist » ni « Perso » ; les noms d'artistes seront remplacés avant le déploiement.
-19 tests du moteur passent. Le lot de pochettes est interrompu et reprenable : 107 créées sur 950 tâches initiales, 804 encore manquantes et 26 exclues pour score négatif au dernier statut. Relancer avec `/generate_covers`. Les services sont actuellement arrêtés à la demande de l'utilisateur ; `python run.py` les relance. Contrôles iPhone et écoute des jingles en attente.
+86 playlists musicales (921 morceaux) et 20 jingles vocaux. Interfaces auditeur/admin séparées (5000/5001) ; l'admin programme, trie, renomme et supprime morceaux et playlists, et dispose d'une section Statistiques (base `radio.db`, exports JSON/CSV). Les morceaux à score négatif ne sont plus diffusés.
+L'UI auditeur propose pouces, « sans avis », dynamique Slow/Medium/High, un carré de publicité cliquable avec une mascotte à 20 styles, et le morceau démarre en fondu sous le jingle. 25 tests du moteur passent.
+Le lot de pochettes tourne (699 à générer au dernier statut, 26 exclues pour score négatif) ; `/generate_covers` le reprend. `python run.py` relance les services. Contrôles iPhone en attente ; noms d'artistes et bouton Suivant public à retirer avant le déploiement.

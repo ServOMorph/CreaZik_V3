@@ -51,6 +51,12 @@ def valid_png(path):
         return False
 
 
+def is_esprit_playlist(playlist):
+    playlist_id = str(playlist.get("id", "")).casefold()
+    label = str(playlist.get("label", "")).strip().casefold()
+    return playlist_id.startswith("esprit-") or label.startswith("esprit ")
+
+
 def vote_counts(votes, job):
     tracks = votes.get("tracks", {})
     keys = [job["key"]]
@@ -129,7 +135,7 @@ def acquire_lock():
 def load_jobs(playlist_filter=None):
     playlists = read_json(HERE / "playlists.json", [])
     charters = read_json(HERE / "covers_charte.json", {})
-    ids = {p["id"] for p in playlists if p.get("role") != "jingle"}
+    ids = {p["id"] for p in playlists if p.get("role") != "jingle" and not is_esprit_playlist(p)}
     unknown = sorted((playlist_filter or set()) - ids)
     if unknown:
         raise RuntimeError("Identifiant de playlist inconnu : " + ", ".join(unknown))
@@ -146,7 +152,7 @@ def load_jobs(playlist_filter=None):
     entries = []
     for playlist in playlists:
         pid = playlist["id"]
-        if playlist.get("role") == "jingle" or (playlist_filter and pid not in playlist_filter):
+        if playlist.get("role") == "jingle" or is_esprit_playlist(playlist) or (playlist_filter and pid not in playlist_filter):
             continue
         result_path = HERE / playlist["results"]
         data = read_json(result_path, {})

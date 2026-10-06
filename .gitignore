@@ -19,3 +19,6 @@ webradio/**/*.wav
 !webradio/silence.wav
 webradio/playlists/perso/lyrics_originales_pdf/
 radio_state.json
+webradio/radio.db
+webradio/radio.db-*
+webradio/catalog_overrides.json

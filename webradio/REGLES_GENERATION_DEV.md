@@ -41,7 +41,8 @@ Document établi à partir des décisions prises au fil des conversations. Chaqu
 ### 2.5 Mesures et énergie
 - La consommation de la carte est une estimation (`energy_wh_est`), car `nvidia-smi` ne donne pas la puissance ; elle est présentée comme telle.
 - Les pochettes sont générées avec une IA locale (ComfyUI-Qwen, Qwen-Image 2.1) et uniquement lorsque la file de génération musicale est vide.
-- Pochette : le texte (titre du morceau, nom de la playlist, date de création en plus petit) est généré dans l'image par le modèle, jamais incrusté après coup ; le prompt impose trois lignes explicites (titre, playlist, date), car une phrase unique fait mélanger les lignes au modèle. Une charte graphique par playlist est dans `webradio/covers_charte.json` (`tools/make_charte.py`), appliquée par `tools/cover_gen.py`.
+- Pochette : le texte (titre du morceau, nom de la playlist, date de création en plus petit) est généré dans l'image par le modèle, jamais incrusté après coup ; le prompt impose trois lignes explicites (titre très grand sans numéro devant, playlist en grand, date très petite), car une phrase unique fait mélanger les lignes au modèle. Une charte graphique par playlist est dans `webradio/covers_charte.json` (`tools/make_charte.py`), appliquée par `tools/cover_gen.py`.
+- Les playlists dont l'identifiant commence par `esprit-` ou dont le libellé commence par « Esprit » sont exclues de la génération des pochettes jusqu'au remplacement de ces références par des styles descriptifs.
 - La génération en lot se lance avec `/generate_covers`, attend que la génération musicale soit inactive et reprend en ignorant les pochettes PNG déjà créées. `/stop_covers` arrête uniquement ce lot et ComfyUI-Qwen ; sans pochette disponible, l'interface conserve l'animation visuelle.
 - Priorité des pochettes : relire les votes avant chaque image, générer d'abord les morceaux au solde positif, puis ceux sans vote, puis les soldes équilibrés ; exclure les soldes négatifs. Si le solde devient négatif pendant la génération, ne pas conserver l'image.
 
@@ -53,6 +54,8 @@ Document établi à partir des décisions prises au fil des conversations. Chaqu
 - Aucun test de type « suivant » ou « lire maintenant » sur la radio en production.
 
 ### 3.2 Enchaînements
+- Jingle vers morceau : le morceau démarre en même temps que le jingle, en fondu à volume bas (22 % au plus) pendant la voix, puis le volume monte jusqu'au maximum sur 3 s après la fin du jingle (`DUCK_LEVEL`, `DUCK_RISE_S`).
+- Seuls les jingles vocaux (« Jingles parlés ») sont conservés ; les jingles instrumentaux ont été supprimés.
 - Transitions réglables par préréglages en mode admin : fondu enchaîné, fondu, silence ; les fondus sont très doux.
 - Jingle tous les N morceaux (valeur modifiable dans l'interface).
 - Jamais deux fois le même morceau d'affilée ; un délai de 15 morceaux avant de rejouer une même chanson (`no_repeat_songs`).
@@ -61,7 +64,7 @@ Document établi à partir des décisions prises au fil des conversations. Chaqu
 
 ### 3.3 Pondération et votes
 - Chaque playlist a un poids : un poids 10 passe plus souvent qu'un poids 1.
-- Les pouces haut et bas peuvent être cliqués autant de fois que souhaité ; chaque clic modifie le poids (environ 100 pouces bas pour qu'un morceau disparaisse).
+- Les pouces haut et bas peuvent être cliqués autant de fois que souhaité ; chaque clic modifie le poids ; un morceau dont le score (haut moins bas) est négatif n'est plus diffusé automatiquement (il reste programmable à la main par l'admin).
 - Commentaires associés au morceau en cours ; un commentaire au hasard est mis en avant toutes les 5 s.
 - Favoris disponibles ; la réinitialisation des votes est dans la page de gestion.
 
@@ -76,11 +79,18 @@ Document établi à partir des décisions prises au fil des conversations. Chaqu
 - Mode admin : programmation (lire à suivre, jouer maintenant, jingles, playlists) ; bascule par une icône en haut à droite, sans boutons dédiés ; passer en admin lance l'écoute de la radio.
 - La page de gestion (`/radio.html`) et l'explorateur (`/ui.html`) sont réservés à l'admin ; les sections sont repliables.
 
+### 3.6 Base de données, avis et suppression
+- `radio.db` (SQLite, non versionnée) enregistre chaque diffusion de morceau (horodatage, durée écoutée, passage forcé), les marqueurs « écouté, sans avis », les avis de dynamique Slow / Medium / High et l'historique des votes. Le bouton « sans avis » se trouve entre les pouces ; un pouce retire le marqueur.
+- Les avis Slow/Medium/High (0,15 / 0,5 / 0,85) sont fusionnés avec l'énergie mesurée dans la dynamique de la journée ; poids réglable (`dyn_user_weight`), croissant avec le nombre d'avis.
+- La section admin « Statistiques » expose les indicateurs, constats automatiques, tableaux triables et exports JSON (avec dictionnaire des champs) et CSV pour analyse humaine et IA.
+- Suppression d'un morceau ou d'une playlist : le MP3, la pochette et les fichiers dérivés sont effacés, l'entrée est masquée via `catalog_overrides.json` (le statut « generated » est conservé pour que la rotation ne le régénère pas) et les données de création (prompt, paroles, modèle, caractéristiques, votes, motif) sont ajoutées à `learning/morceaux_rejetes.jsonl`, corpus de ce qu'il ne faut pas reproduire. Refusé si le morceau est en cours de diffusion. Le renommage passe aussi par `catalog_overrides.json`.
+- Phase de test : le bouton « Suivant » est public (`PUBLIC_SKIP`) ; à retirer avant le déploiement (voir `AMELIORATIONS.md`).
+
 ## 4. Règles visuelles et sonores
 
 - Un décor par playlist (plus de choix de style) ; transitions visuelles très douces entre playlists.
 - Les visuels évoluent sur la durée du morceau (arc narratif : intensité en 5 temps, dérive de teinte, second motif, ondes ponctuelles), avec de l'aléatoire stable par morceau.
-- Motion design pendant les jingles (nom de la radio et message sur l'IA locale) ; 10 designs de promotion du site, tirés du contenu de serenia-tech.fr.
+- Aucune publicité ni message de jingle n'est dessiné sur le visuel. Le panneau carré à droite du visuel diffuse en continu les publicités du site (10 designs, contenu de serenia-tech.fr) et les messages de la radio sur l'IA locale, en alternance, avec un intermède de 5 s où une mascotte danse sur la musique (`mascot.js`) et des transitions animées.
 - Jingles parlés sur l'IA locale comme alternative éthique et écoresponsable : voix Kokoro-82M (français), table de prononciation ; chaque jingle prononce le nom « Créa Zik IA WebRadio », contrôle d'intelligibilité par transcription.
 - Design moderne et stylisé, lisible à 375 px, conçu pour le téléphone.
 
@@ -94,11 +104,11 @@ Document établi à partir des décisions prises au fil des conversations. Chaqu
 ### 5.2 Services
 - Après avoir arrêté un service radio (serveur, analyse ou compression), le relancer si nécessaire (`.\services.ps1 restart -Only serveur|analyse|compression`). Un arrêt volontaire de la génération musicale peut rester en place jusqu'à la prochaine session ; `/start_generation` la reprend.
 - `services.ps1 stop -Only generation` arrête aussi `run_rotation.py` et ses workers sans supprimer les pistes déjà marquées `generated`. Ne pas faire tourner la génération musicale en même temps que ComfyUI pour les pochettes : ils se disputent le GPU.
-- Ne pas redémarrer le serveur inutilement : cela coupe le morceau en cours des auditeurs.
+- Ne pas redémarrer le serveur inutilement : cela coupe le morceau en cours des auditeurs. Une modification de code Python (serveur, moteur, base) n'est prise en compte qu'après `.\services.ps1 restart -Only serveur` : sans cela, les nouvelles routes répondent 404 et l'UI annule l'action.
 
 ### 5.3 Tests et livraison
 - Chaque phase de développement inclut la création et l'exécution des tests pertinents avant d'être marquée faite.
-- Les tests automatiques sont dans `tests/test_radio_engine.py` (18 tests) ; ils portent sur la continuité, les fondus, les poids, les votes, les répétitions, la dynamique, les statistiques, la reprise et le catalogue MP3.
+- Les tests automatiques sont dans `tests/test_radio_engine.py` (25 tests) ; ils portent sur la continuité, les fondus (dont le fondu sous jingle), les poids, les votes et le score négatif, les répétitions, la dynamique (dont les avis Slow/Medium/High), les statistiques et la base `radio.db`, le catalogue éditable, la reprise et le catalogue MP3.
 - Un commit et un push après chaque phase de codage, message en français ; fichiers sensibles ou volumineux exclus.
 - Les contrôles visuels se font dans le navigateur de test, puis sont à confirmer sur iPhone.
 
@@ -116,5 +126,8 @@ Document établi à partir des décisions prises au fil des conversations. Chaqu
 
 - Validation par l'utilisateur des textes des jingles parlés.
 - Changement du mot de passe admin par défaut.
-- Rythme de génération du lot de pochettes ; fiabilité du texte des pochettes (prompt en trois lignes testé sur 2 essais seulement).
-- Comportements iPhone non vérifiés : fondus audio, lecture automatique après connexion, écran verrouillé.
+- Rythme de génération du lot de pochettes ; fiabilité du texte des pochettes (prompt en trois lignes, titre et style plus grands, non testé sur un lot).
+- Comportements iPhone non vérifiés : fondus audio dont le fondu sous jingle, lecture automatique après connexion, écran verrouillé, mascotte et transitions de pubs.
+- Bouton « Suivant » public et exposition des boutons Renommer/Supprimer : à retirer ou verrouiller avant le déploiement.
+- Réorganisation de l'UI admin : propositions de l'agent design (barre d'accès rapide, onglets) en attente de choix ; sort de `ui.html`.
+- Les suppressions de playlists ne retirent pas leurs identifiants de `series.txt` : la rotation peut les régénérer.

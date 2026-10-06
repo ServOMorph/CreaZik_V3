@@ -17,9 +17,10 @@ def build_prompt(charte, title, playlist_label, date):
         f"En bas à gauche, trois lignes de texte alignées à gauche, police {charte['typographie']}, "
         f"nettes, lisibles, sur un fond calme. Le texte est écrit exactement une seule fois, dans cet ordre, "
         f"chaque ligne complète sur une seule ligne :\n"
-        f"Ligne 1 (grande) : « {title} »\n"
-        f"Ligne 2 (moyenne) : « {playlist_label} »\n"
-        f"Ligne 3 (très petite) : « {date} »"
+        f"Ligne 1 (très grande, en gras, occupant presque toute la largeur) : « {title} »\n"
+        f"Ligne 2 (grande, en majuscules espacées) : « {playlist_label} »\n"
+        f"Ligne 3 (très petite) : « {date} »\n"
+        f"Aucun numéro ni chiffre devant le titre ; aucun autre texte que ces trois lignes."
     )
 
 

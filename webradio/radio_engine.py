@@ -9,6 +9,8 @@ from datetime import datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
+from stats_db import StatsDB, build_analytics, dynamics_mean
+
 QUEUE_LEN = 8
 PLAYED_LEN = 8
 SKIP_FADE_OUT = 1.5
@@ -16,6 +18,13 @@ SKIP_FADE_IN = 1.0
 MAX_CF_RATIO = 0.4
 REFRESH_EVERY_S = 5.0
 MP3_BITRATE = 192000
+OVERRIDES_FILE = "catalog_overrides.json"
+NAME_MAX = 120
+USER_DYN_REFRESH_S = 15.0
+DUCK_LEVEL = 0.22
+DUCK_RISE_S = 3.0
+LEARNING_DIR = "learning"
+LEARNING_FILE = "morceaux_rejetes.jsonl"
 LOCAL_TZ = ZoneInfo("Europe/Paris")
 ENERGY_WEIGHTS = {"onset": 0.35, "centroid_hz": 0.25, "rms_db": 0.2, "bpm": 0.2}
 
@@ -50,6 +59,7 @@ DEFAULT_RADIO = {
     "dyn_weekend_shift_h": 1.0,
     "dyn_energy_sigma": 0.25,
     "dyn_tempo_tolerance": 0.25,
+    "dyn_user_weight": 0.5,
     "transitions": DEFAULT_TRANSITIONS,
 }
 
@@ -93,8 +103,14 @@ class Catalog:
         self._durations = {}
         self._features = {}
 
+    def overrides(self):
+        data = read_json(self.root / OVERRIDES_FILE, {})
+        data.setdefault("playlists", {})
+        data.setdefault("tracks", {})
+        return data
+
     def _signature(self, registry):
-        parts = [self._mtime(self.root / "playlists.json")]
+        parts = [self._mtime(self.root / "playlists.json"), self._mtime(self.root / OVERRIDES_FILE)]
         for p in registry:
             parts.append(self._mtime(self.root / p["results"]))
         return tuple(parts)
@@ -168,7 +184,12 @@ class Catalog:
             return False
         tracks = {}
         playlists = []
+        ov = self.overrides()
         for p in registry:
+            pov = ov["playlists"].get(p["id"], {})
+            if pov.get("deleted"):
+                continue
+            p = dict(p, label=pov.get("label") or p.get("label", p["id"]))
             data = read_json(self.root / p["results"], {})
             cfg = read_json(self.root / "playlists" / p["id"] / "config.json", {})
             group = cfg.get("song_group")
@@ -182,6 +203,10 @@ class Catalog:
                 if not dur:
                     continue
                 key = f"{p['id']}:{g['test_case_id']}"
+                tov = ov["tracks"].get(key, {})
+                if tov.get("deleted"):
+                    continue
+                g = dict(g, name=tov.get("name") or g.get("name", key))
                 tracks[key] = {
                     "key": key, "song": f"{group}:{g['test_case_id']}" if group else key, "playlist": p["id"], "playlist_label": p.get("label", p["id"]),
                     "playlist_description": p.get("description", ""), "jingle": is_jingle,
@@ -225,8 +250,10 @@ class RadioEngine:
         self._last_refresh = 0.0
         self._settings = (None, dict(DEFAULT_RADIO))
         self._votes = (None, {})
+        self._user_dyn = (0.0, {})
         self._favs = (None, set())
         self.persist = persist
+        self.db = StatsDB(self.root / "radio.db") if persist else None
         if persist:
             self._load_state()
 
@@ -304,6 +331,8 @@ class RadioEngine:
         return by_id.get(pid) or presets[0]
 
     def _transition(self, prev, next_dur, next_jingle):
+        if prev["jingle"] and not next_jingle:
+            return prev["start"], 0.0, 0.0
         pr = self._preset(prev["jingle"], next_jingle)
         cf = float(pr.get("crossfade_s") or 0)
         if cf > 0:
@@ -315,9 +344,12 @@ class RadioEngine:
         fin = min(float(pr.get("fade_in_s") or 0), next_dur / 2)
         return prev["end"] + gap, fout, fin
 
-    def _multiplier(self, key):
+    def _score(self, key):
         v = self.votes().get(key) or {}
-        score = (v.get("up") or 0) - (v.get("down") or 0)
+        return (v.get("up") or 0) - (v.get("down") or 0)
+
+    def _multiplier(self, key):
+        score = self._score(key)
         try:
             k = float(self.settings().get("thumb_strength", 0.15))
         except (TypeError, ValueError):
@@ -337,7 +369,7 @@ class RadioEngine:
         for pl in self.cat.playlists:
             if pl["jingle"] or self._weight(pl["id"]) <= 0:
                 continue
-            keys = [k for k in pl["keys"] if k not in excluded and (favs is None or k in favs)]
+            keys = [k for k in pl["keys"] if k not in excluded and (favs is None or k in favs) and self._score(k) >= 0]
             if keys:
                 groups.append((pl, keys))
         return groups
@@ -369,9 +401,10 @@ class RadioEngine:
         if tr is None:
             return 1.0
         f = 1.0
-        if tr.get("energy") is not None:
+        energy = self.effective_energy(tr)
+        if energy is not None:
             sigma = max(0.05, float(st.get("dyn_energy_sigma", 0.25)))
-            f *= math.exp(-0.5 * ((tr["energy"] - self.dyn_target(slot_time)) / sigma) ** 2)
+            f *= math.exp(-0.5 * ((energy - self.dyn_target(slot_time)) / sigma) ** 2)
         prev = self.cat.tracks.get(prev_key) if prev_key else None
         if prev and prev.get("bpm") and tr.get("bpm"):
             tol = max(0.05, float(st.get("dyn_tempo_tolerance", 0.25)))
@@ -379,6 +412,30 @@ class RadioEngine:
             d = min(abs(math.log2(r)), abs(math.log2(2 * r)), abs(math.log2(r / 2)))
             f *= math.exp(-0.5 * (d / tol) ** 2)
         return max(1e-3, f) ** strength
+
+    def _user_dynamics(self):
+        if self.db is None:
+            return {}
+        ts, data = self._user_dyn
+        now = time.time()
+        if now - ts > USER_DYN_REFRESH_S:
+            try:
+                data = self.db.dynamics_counts()
+            except Exception:
+                pass
+            self._user_dyn = (now, data)
+        return data
+
+    def effective_energy(self, tr):
+        measured = tr.get("energy")
+        mean, n = dynamics_mean(self._user_dynamics().get(tr["key"]))
+        if mean is None:
+            return measured
+        if measured is None:
+            return mean
+        w = float(self.settings().get("dyn_user_weight", 0.5) or 0)
+        w = max(0.0, min(1.0, w)) * n / (n + 2.0)
+        return (1 - w) * measured + w * mean
 
     def dynamics_info(self):
         with self.lock:
@@ -546,6 +603,7 @@ class RadioEngine:
             self._compose()
             return False
         tr = self.cat.tracks[entry["key"]]
+        duck = None
         if self.current is None:
             start, fade_in = t, 0.0
         elif forced:
@@ -555,10 +613,16 @@ class RadioEngine:
         else:
             start, fout, fade_in = self._transition(self.current, tr["duration"], entry["jingle"])
             self.current["fade_out"] = fout
+            if self.current["jingle"] and not entry["jingle"]:
+                start = max(start, t)
+                duck = {"until": self.current["end"], "level": DUCK_LEVEL, "rise": DUCK_RISE_S}
         item = self._item(entry, start, fade_in)
+        if duck:
+            item["duck"] = duck
         self._attach_overlay(item)
         self._consume(entry)
         self._commit(entry)
+        self._record_play(item, start, forced)
         self.active.append(item)
         if self.current is not None:
             self.played.append(self.current)
@@ -569,6 +633,30 @@ class RadioEngine:
         if self.persist:
             self._save_state()
         return True
+
+    def _record_play(self, item, start, forced):
+        if self.db is None:
+            return
+        try:
+            cur = self.current
+            if cur is not None and cur.get("play_id"):
+                self.db.finish_play(cur["play_id"], min(cur["duration"], start - cur["start"]), forced)
+            if not item["jingle"]:
+                item["play_id"] = self.db.log_play(start, item, item.get("explicit"), forced)
+        except Exception:
+            pass
+
+    def analytics(self):
+        if self.db is None:
+            return None
+        with self.lock:
+            self.cat.refresh()
+            st = self.settings()
+            weights = {pl["id"]: self._weight(pl["id"]) for pl in self.cat.playlists}
+            expected = {s["id"]: s["share"] for s in self.stats()}
+            votes = self.votes()
+            return build_analytics(self.db.plays(), self.db.neutral_counts(), votes, self.cat.tracks, self.cat.playlists,
+                                   expected, weights, self.db.since(), self.now(), self.db.dynamics_counts())
 
     def _attach_overlay(self, item):
         st = self.settings()
@@ -681,6 +769,93 @@ class RadioEngine:
                     "wh_per_track_avg": round(total / len(measured), 3) if measured else None,
                     "kind": "estimation",
                     "scope": "estimation de l'énergie du GPU pendant la génération, d'après son taux d'utilisation et sa puissance maximale (115 W) ; hors processeur, ventilation et diffusion ; le GPU n'expose pas sa puissance réelle"}
+
+    def _track_files(self, rel):
+        base = self.root / rel
+        return [base, base.with_suffix(".mp3"), base.with_name(base.name + ".feat.json"),
+                base.with_name(base.name + ".viz.json"), base.with_name(base.name + ".mp3.viz.json"),
+                base.with_suffix("").with_name(base.with_suffix("").name + ".cover.png")]
+
+    def _learning_record(self, key, reason):
+        tr = self.cat.tracks[key]
+        pid = tr["playlist"]
+        cfg = read_json(self.root / "playlists" / pid / "config.json", {})
+        case = next((c for c in cfg.get("test_cases", []) if f"{pid}:{c.get('id')}" == key), {})
+        lyrics = ""
+        if case.get("lyrics_file"):
+            try:
+                lyrics = (self.root / case["lyrics_file"]).read_text(encoding="utf-8")
+            except OSError:
+                pass
+        v = self.votes().get(key) or {}
+        plays = [p for p in (self.db.plays() if self.db else []) if p["key"] == key]
+        return {
+            "deleted_at": datetime.fromtimestamp(self.now(), LOCAL_TZ).isoformat(timespec="seconds"),
+            "reason": reason, "key": key, "playlist_id": pid, "playlist": tr["playlist_label"],
+            "playlist_description": tr.get("playlist_description", ""), "name": tr["name"], "type": tr.get("type", ""),
+            "prompt": case.get("prompt") or tr.get("prompt", ""), "language": case.get("language"),
+            "requested_duration_s": case.get("duration"), "lyrics": lyrics, "model": tr.get("model", ""),
+            "generated_at": tr.get("generated_at", ""), "duration_s": round(tr["duration"], 1),
+            "energy_wh_est": tr.get("energy_wh_est"), "features": tr.get("feat"),
+            "up": int(v.get("up", 0)), "down": int(v.get("down", 0)), "plays": len(plays),
+            "skipped": sum(1 for p in plays if p["skipped"]),
+        }
+
+    def _purge_track(self, key, reason):
+        record = self._learning_record(key, reason)
+        folder = self.root / LEARNING_DIR
+        folder.mkdir(exist_ok=True)
+        with open(folder / LEARNING_FILE, "a", encoding="utf-8") as f:
+            f.write(json.dumps(record, ensure_ascii=False) + "\n")
+        for p in self._track_files(self.cat.tracks[key]["file"]):
+            try:
+                p.unlink()
+            except FileNotFoundError:
+                pass
+
+    def edit_catalog(self, action, params):
+        with self.lock:
+            self.cat.refresh()
+            ov = self.cat.overrides()
+            registry = {p["id"] for p in read_json(self.root / "playlists.json", [])}
+            kind = "playlists" if action.endswith("playlist") else "tracks"
+            ident = str(params.get("id") or params.get("key") or "")
+            reason = " ".join(str(params.get("reason", "")).split())[:500]
+            if action in ("rename_track", "delete_track"):
+                if ":" not in ident or ident.split(":")[0] not in registry:
+                    return False, "morceau inconnu"
+            elif action in ("rename_playlist", "delete_playlist"):
+                if ident not in registry:
+                    return False, "playlist inconnue"
+            else:
+                return False, "action inconnue"
+            if action.startswith("delete"):
+                keys = [ident] if kind == "tracks" else [k for k, t in self.cat.tracks.items() if t["playlist"] == ident]
+                if kind == "tracks" and ident not in self.cat.tracks:
+                    return False, "morceau absent du catalogue"
+                live = {it["key"] for it in self.active if it["end"] > self.now()}
+                if live & set(keys):
+                    return False, "un morceau de cette sélection est en cours de diffusion : réessaie après son passage"
+                for k in keys:
+                    self._purge_track(k, reason)
+                    ov["tracks"].setdefault(k, {})["deleted"] = True
+                if kind == "playlists":
+                    ov["playlists"].setdefault(ident, {})["deleted"] = True
+            else:
+                name = " ".join(str(params.get("name", "")).split())[:NAME_MAX]
+                if not name or any(ord(c) < 32 for c in name):
+                    return False, "nom invalide"
+                ov[kind].setdefault(ident, {})["label" if kind == "playlists" else "name"] = name
+            path = self.root / OVERRIDES_FILE
+            tmp = path.with_suffix(".tmp")
+            tmp.write_text(json.dumps(ov, ensure_ascii=False, indent=1), encoding="utf-8")
+            os.replace(tmp, path)
+            self.cat.refresh()
+            self._compose()
+            self.rev += 1
+            if self.persist:
+                self._save_state()
+            return True, ""
 
     def library(self):
         with self.lock:

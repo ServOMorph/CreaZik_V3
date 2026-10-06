@@ -1,19 +1,22 @@
 # Signals — CreaZik_V3   (MAJ 2026-10-06)
 
 ## Actions ouvertes
-- [P1|ouvert] Reprendre et terminer la génération des pochettes éligibles
-  - fait quand: toutes les pochettes éligibles sont générées ou les échecs restants sont listés, les scores négatifs restant exclus
-  - réf: `webradio/logs/cover_generation_state.json`, `python webradio/tools/cover_batch.py --status`, `.claude/commands/generate_covers.md` ; état à la clôture : interrompu, 107 créées sur 950 tâches initiales, 804 encore manquantes au dernier contrôle, 26 exclues pour score négatif
-- [P2|ouvert] Réécouter les 20 jingles « Créa Zik IA WebRadio » et effectuer les contrôles iPhone, y compris la recherche dans la programmation admin
-  - fait quand: jingles validés et section correspondante de `tests_manuels.md` vidée par contrôles réels
-  - réf: `webradio/voice_jingles.json`, `tests_manuels.md`, `webradio/radio.html`
+- [P1|ouvert] Contrôles manuels iPhone des nouveautés (UI auditeur, jingle vers morceau, mascotte, admin) et réécoute des 20 jingles vocaux
+  - fait quand: les sections correspondantes de `tests_manuels.md` sont vidées par contrôles réels (fondu sous jingle, mascotte, carré de pub cliquable, boutons sans avis / Slow-Medium-High, Suivant, section Statistiques, catalogue admin)
+  - réf: `tests_manuels.md`, `webradio/listen.js`, `webradio/mascot.js`, `webradio/radio.html`, `webradio/voice_jingles.json`
+- [P1|ouvert] Terminer la génération des pochettes éligibles (batch en cours, nouveau prompt : titre très grand sans numéro, playlist en grand, date très petite)
+  - fait quand: toutes les pochettes éligibles sont générées ou les échecs restants sont listés, scores négatifs exclus
+  - réf: `python webradio/tools/cover_batch.py --status` (au dernier statut : 746 tâches, 699 à générer, 26 exclues pour score négatif), `webradio/logs/cover_generation_state.json`, `.claude/commands/generate_covers.md`
 - [P2|ouvert] Changer le mot de passe admin par défaut
   - fait quand: mot de passe admin changé et accès confirmé
   - réf: `webradio/REGLES_GENERATION_DEV.md` section 6, `tests_manuels.md`
-- [P2|ouvert] Avant le déploiement, remplacer les noms d'artistes des titres de playlists par des descriptions de genres
-  - fait quand: aucun nom d'artiste ne figure dans les titres publics avant mise en production
-  - réf: `AMELIORATIONS.md`, `webradio/REGLES_GENERATION_DEV.md` section 5.5, `webradio/playlists.json`
-- [P3|ouvert] Poursuivre la génération musicale en rotation (88 entrées au catalogue, 86 identifiants dans `series.txt`, dont 11 playlists « Esprit ») et retirer de « idée de playlist.md » chaque entrée une fois sa playlist complète
+- [P2|ouvert] Avant le déploiement : retirer le bouton « Suivant » public (`PUBLIC_SKIP` dans `server.py`, `applyMode` dans `listen.js`), remplacer les noms d'artistes des titres de playlists par des genres, et trancher l'exposition des boutons Renommer/Supprimer
+  - fait quand: aucun saut public possible, aucun nom d'artiste dans les titres publics
+  - réf: `AMELIORATIONS.md`, `webradio/REGLES_GENERATION_DEV.md` sections 3.6 et 5.5, `webradio/playlists.json`
+- [P2|ouvert] Choisir parmi les propositions de réaménagement de l'UI admin (barre d'accès rapide, onglets Direct/Réglages/Catalogue/Analyse, tableau de bord Direct, réglages simples/avancés) et décider du sort de `ui.html` (explorateur devenu redondant)
+  - fait quand: l'utilisateur a tranché et les choix retenus sont appliqués
+  - réf: `webradio/radio.html`, `webradio/ui.html`
+- [P3|ouvert] Poursuivre la génération musicale en rotation (86 playlists musicales, 921 morceaux, 85 identifiants dans `series.txt`) et retirer de « idée de playlist.md » chaque entrée une fois sa playlist complète
   - fait quand: toutes les pistes prévues sont générées et les entrées terminées sont retirées de la liste d'idées
   - réf: `webradio/run_rotation.py`, `webradio/series.txt`, `idée de playlist.md` (restent : Rap Français autotuné, Hight Light Tribe, non traités)
 - [P3|ouvert] Confirmer l'interprétation « Mike Fields = Mike Oldfield »
@@ -21,35 +24,34 @@
   - réf: `PLAN_WEBRADIO.md` section 4.5
 
 ## Contexte chaud
-- Après la clôture précédente, la génération musicale a été mise en pause (`/stop_generation`) pour tester le texte des pochettes ; ComfyUI-Qwen tourne (port 8189) et occupe la VRAM jusqu'à `/stop_covers` ou `/stop`. Voir aussi l'état ci-dessous (à relire : il date d'avant ce test).
-- (Ancien état) À la demande de l'utilisateur, tous les services WebRadio sont arrêtés. État final contrôlé : serveur, analyse, compression et génération à l'arrêt ; ComfyUI n'écoute plus sur 8189 ; GPU à 1714 MiB utilisés sur 8188 MiB. `ollama ps` ne liste aucun modèle chargé ; l'application Ollama n'a pas été arrêtée. Le tunnel Cloudflare manuel n'a pas été touché.
-- Reprise radio : `python run.py`. Reprise pochettes : `/generate_covers` ; le batch avait 107 images terminées, 804 manquantes au dernier statut, 26 pistes exclues pour score négatif. L'image temporaire en cours sera ignorée/nettoyée par le batch à la reprise.
-- Les interfaces user/admin sont séparées (ports 5000/5001). L'admin permet de programmer morceaux et playlists et de rechercher par titre de morceau ou nom de playlist.
-- Fichiers non suivis laissés à part : `liste_musiques_queue.md`, `_archive_docs/`, `webradio/silence.wav.viz.json`, `06-10-2026`, `matin` ; ne pas intégrer sans vérification.
+- Le serveur radio (5000/5001), l'analyse, la compression, le batch de pochettes et ComfyUI-Qwen tournaient en fin de session ; la génération musicale n'a pas été relancée (voir `/start_generation`). Le serveur a été redémarré plusieurs fois pour prendre en compte les nouvelles routes ; en cas de nouvelle modification Python, il faut le redémarrer (`services.ps1 restart -Only serveur`).
+- `radio.db` (SQLite, non versionnée) enregistre diffusions, « sans avis » et avis de dynamique depuis le 2026-10-06 ; `catalog_overrides.json` porte renommages et suppressions ; `webradio/learning/morceaux_rejetes.jsonl` (versionné) contient une première suppression réelle faite par l'utilisateur.
+- Les 8 jingles instrumentaux ont été supprimés ; il reste 20 jingles vocaux. Les agents design ont appliqué la nouvelle organisation de `radio.html` et le layout de `listen.html` sans test sur iPhone.
+- Fichiers non suivis laissés à part : `liste_musiques_queue.md`, `_archive_docs/`, `webradio/silence.wav.viz.json`.
 
 ## Dernière session (2026-10-06)
 # Session du 2026-10-06
 
 ## Décisions prises
-- Garder les noms d'artistes pendant le développement ; les remplacer par des genres descriptifs avant le déploiement.
-- Retirer « Playlist » des titres affichés et remplacer les libellés « Perso » par des intitulés descriptifs.
-- À la demande de l'utilisateur, arrêter tous les services et processus WebRadio et ComfyUI ; laisser le tunnel Cloudflare et les applications d'autres projets intacts.
+- Base SQLite `radio.db` (diffusions, « sans avis », avis Slow/Medium/High à un ou deux boutons) ; section Statistiques admin avec exports JSON (dictionnaire de champs) et CSV.
+- Suppression d'un morceau ou d'une playlist : MP3 et pochette effacés, données de création archivées dans `learning/morceaux_rejetes.jsonl` ; renommage via `catalog_overrides.json` ; score négatif = plus diffusé.
+- UI auditeur : visuel réduit à gauche, carré de pub cliquable à droite (pubs du site + messages de la radio, mascotte de 5 s avec 20 chorégraphies selon le style) ; légende titre/style sur les visuels sans pochette ; bouton Suivant public pendant les tests.
+- Jingles : instrumentaux supprimés ; le morceau démarre en fondu sous le jingle puis monte au maximum.
 
 ## Livrables produits ou modifiés
-- `webradio/tools/cover_gen.py` : prompt de pochette en trois lignes + négatifs renforcés (commité à la clôture).
-- `webradio/radio.html` : programmation admin restaurée avec ajout de morceaux/playlists et recherche.
-- `webradio/playlists.json` : 88 libellés harmonisés, sans préfixe « Playlist » ni « Perso ».
-- `webradio/REGLES_GENERATION_DEV.md`, `AMELIORATIONS.md` : précaution juridique et remplacement des noms d'artistes prévu avant déploiement.
-- Génération des pochettes interrompue proprement dans son état de reprise : 107 images créées, 804 manquantes au dernier statut ; `cover_generation_state.json` marqué `interrupted`.
-- `.claude/commands/replace_downvoted_tracks.md` créé puis supprimé à la demande de l'utilisateur ; il ne reste pas dans le dépôt.
+- `webradio/stats_db.py`, `radio_engine.py`, `server.py` : base, analytics, catalogue éditable, fondu sous jingle, route de saut, validation de dynamique.
+- `webradio/radio.html` : catalogue fusionné avec l'explorateur, tri par score/nom/poids, statistiques, sections fermées par défaut, réorganisation par l'agent design ; bouton Explorateur supprimé.
+- `webradio/listen.html`, `listen.css`, `listen.js`, `mascot.js`, `motion.js` : UI auditeur, panneau de pub, mascotte, bouton de texte des pubs ajusté.
+- `webradio/tools/cover_gen.py` : titre et style plus grands, sans numéro ; `tests/test_radio_engine.py` : 25 tests, tous passent.
+- `REGLES_GENERATION_DEV.md`, `AMELIORATIONS.md`, `tests_manuels.md` : mis à jour.
 
 ## Hypothèses validées / invalidées
-- VALIDE : prompt de pochette en trois lignes explicites (titre, playlist, date) : texte correct sur 2 essais (flamenco, médiéval) ; seulement 2 essais, à surveiller sur d'autres titres.
-- VALIDE : services WebRadio à l'arrêt, port ComfyUI 8189 fermé, 1714 MiB de VRAM utilisés (applications Windows).
-- EN ATTENTE : reprise des pochettes ; contrôles manuels iPhone et jingles ; renommage des titres d'artistes avant le déploiement.
+- VALIDE : 25 tests passent ; rendu navigateur (serveur statique) du catalogue admin, de la planche des 20 mascottes et des transitions de pubs ; endpoints dynamique (un ou deux niveaux) répondent sur le serveur redémarré.
+- INVALIDE : le bouton de dynamique « ne reste pas allumé » venait d'un serveur non redémarré, pas du code client.
+- EN ATTENTE : tous les contrôles iPhone ; interprétation des messages dictés (deux boutons = niveaux intermédiaires ; « numéro devant » = titre sans numéro) non confirmée ; fondu sous jingle à écouter.
 
 ## Prochaine étape exacte
-Relancer `/generate_covers` pour reprendre les pochettes manquantes. Les services radio restent arrêtés jusqu'à une demande de redémarrage.
+Faire les contrôles manuels listés dans `tests_manuels.md` (iPhone), puis choisir les propositions de réaménagement admin et le sort de `ui.html`.
 
 ## Question bloquante pour la session suivante
 Aucune

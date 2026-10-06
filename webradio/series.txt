@@ -1,4 +1,3 @@
-jingles
 auto
 perso
 francais_tests-electro

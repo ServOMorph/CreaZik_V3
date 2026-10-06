@@ -728,6 +728,7 @@
         let playlistModel = '';
         let favs = new Set();
         let isAdmin = false;
+        let catalogOv = {playlists: {}, tracks: {}};
         let expanded = new Set();
         let trackIndex = {};
         try { expanded = new Set(JSON.parse(localStorage.getItem('expanded') || '[]')); } catch (e) {}
@@ -739,11 +740,19 @@
                 const r = await fetch('./playlists.json');
                 if (r.ok) playlists = await r.json();
             } catch (e) {}
-            currentPlaylist = playlists[0];
             try {
                 const me = await fetch('/api/me');
                 if (me.ok) isAdmin = (await me.json()).admin;
             } catch (e) {}
+            if (isAdmin) {
+                try {
+                    const o = await fetch('/api/catalog/overrides');
+                    if (o.ok) catalogOv = await o.json();
+                } catch (e) {}
+                playlists = playlists.filter(b => !(catalogOv.playlists[b.id] || {}).deleted)
+                    .map(b => Object.assign({}, b, {label: (catalogOv.playlists[b.id] || {}).label || b.label}));
+            }
+            currentPlaylist = playlists[0];
             await loadFavs();
             loadComments();
             const sel = document.getElementById('playlistSelect');
@@ -771,11 +780,14 @@
         }
 
         function tagTracks(data, playlist) {
-            return (data.generations || []).map(t => Object.assign({}, t, {
-                _key: playlist.id + ':' + t.test_case_id,
-                _playlist: playlist.label,
-                _model: t.model || data.model || ''
-            }));
+            return (data.generations || [])
+                .filter(t => !(catalogOv.tracks[playlist.id + ':' + t.test_case_id] || {}).deleted)
+                .map(t => Object.assign({}, t, {
+                    name: (catalogOv.tracks[playlist.id + ':' + t.test_case_id] || {}).name || t.name,
+                    _key: playlist.id + ':' + t.test_case_id,
+                    _playlist: playlist.label,
+                    _model: t.model || data.model || ''
+                }));
         }
 
         async function loadData() {

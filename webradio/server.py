@@ -15,11 +15,13 @@ from pathlib import Path
 from urllib.parse import parse_qs, unquote, urlsplit
 
 from radio_engine import RadioEngine
+from stats_db import parse_level
 
 HERE = Path(__file__).parent.resolve()
 CRED_FILE = HERE / "admin_credentials.json"
 COMMENTS_FILE = HERE / "comments.json"
 COOKIE = "creazik_admin"
+PUBLIC_SKIP = True
 MAX_BODY = 256 * 1024
 PBKDF2_ROUNDS = 200_000
 LOGIN_WINDOW_S = 60
@@ -34,7 +36,7 @@ ADMIN_POST_TARGETS = {
     "/api/content": (HERE / "radio_content.json", "dict"),
 }
 
-STATIC_FILES = {"/listen.html", "/silence.wav", "/listen.css", "/listen.js", "/visuals.js", "/cover-placeholder.png",
+STATIC_FILES = {"/listen.html", "/silence.wav", "/listen.css", "/listen.js", "/mascot.js", "/visuals.js", "/cover-placeholder.png",
                 "/traveling-sound.png", "/scenes.js", "/transitions.js", "/motion.js", "/scenes_spec.json", "/radio_content.json",
                 "/playlists.json", "/favorites.json", "/radio_settings.json"}
 STATIC_PATTERNS = [
@@ -196,7 +198,13 @@ def apply_vote(voter, key, vote, count=1):
         mine_all[key] = mine
         entry["score"] = entry["up"] - entry["down"]
         write_json_atomic(VOTES_FILE, data)
-        return entry, mine
+    if ENGINE.db is not None:
+        try:
+            ENGINE.db.log_vote(voter, key, vote, count)
+            ENGINE.db.clear_neutral(voter, key)
+        except Exception:
+            pass
+    return entry, mine
 
 
 def reset_votes(key):
@@ -206,6 +214,12 @@ def reset_votes(key):
         for mine in data["voters"].values():
             mine.pop(key, None)
         write_json_atomic(VOTES_FILE, data)
+    if ENGINE.db is not None:
+        try:
+            ENGINE.db.clear_neutral_key(key)
+            ENGINE.db.clear_dynamics_key(key)
+        except Exception:
+            pass
 
 
 def read_comments():
@@ -364,7 +378,21 @@ class Handler(SimpleHTTPRequestHandler):
             with VOTES_LOCK:
                 data = read_votes()
             mine = {k: _mine_counts(v) for k, v in data["voters"].get(voter[0], {}).items()}
-            self._send_json(200, {"tracks": data["tracks"], "mine": mine}, cookie=voter[1])
+            neutral = ENGINE.db.neutral_of(voter[0]) if ENGINE.db is not None else []
+            dyn = ENGINE.db.dynamics_of(voter[0]) if ENGINE.db is not None else {}
+            self._send_json(200, {"tracks": data["tracks"], "mine": mine, "neutral": neutral, "dynamics": dyn}, cookie=voter[1])
+            return
+        if path == "/api/catalog/overrides":
+            if not self._is_admin() or self._is_user_interface():
+                self.send_error(401)
+                return
+            self._send_json(200, ENGINE.cat.overrides())
+            return
+        if path == "/api/radio/analytics":
+            if not self._is_admin() or self._is_user_interface():
+                self.send_error(401)
+                return
+            self._send_json(200, ENGINE.analytics() or {})
             return
         if path in ADMIN_PAGES:
             if not self._is_admin():
@@ -392,7 +420,7 @@ class Handler(SimpleHTTPRequestHandler):
 
     def do_POST(self):
         path = urlsplit(self.path).path
-        if self._is_user_interface() and path not in ("/api/comments", "/api/vote"):
+        if self._is_user_interface() and path not in ("/api/comments", "/api/vote", "/api/neutral", "/api/dynamics", "/api/skip"):
             self.send_error(404)
             return
         if path == "/login":
@@ -403,6 +431,19 @@ class Handler(SimpleHTTPRequestHandler):
             return
         if path == "/api/vote":
             self._post_vote()
+            return
+        if path == "/api/neutral":
+            self._post_neutral()
+            return
+        if path == "/api/dynamics":
+            self._post_dynamics()
+            return
+        if path == "/api/skip":
+            if not PUBLIC_SKIP or not vote_allowed(self._client_ip(), 20):
+                self.send_error(403)
+                return
+            ENGINE.action("skip", {})
+            self._send_json(200, {"ok": True})
             return
         if not self._is_admin():
             self.send_error(401)
@@ -425,6 +466,10 @@ class Handler(SimpleHTTPRequestHandler):
                 body = self._read_json_body(4096)
                 ok = ENGINE.action(str(body.get("action", "")), body)
                 self._send_json(200 if ok else 400, ENGINE.snapshot(admin=True))
+            elif path == "/api/catalog":
+                body = self._read_json_body(4096)
+                ok, msg = ENGINE.edit_catalog(str(body.get("action", "")), body)
+                self._send_json(200 if ok else 400, {"ok": ok, "error": msg})
             elif path == "/api/votes/reset":
                 key = str(self._read_json_body(2048).get("key", ""))
                 if not VOTE_KEY_RE.match(key):
@@ -488,6 +533,43 @@ class Handler(SimpleHTTPRequestHandler):
         entry, mine = apply_vote(voter, key, vote, count)
         self._send_json(200, {"key": key, "up": entry["up"], "down": entry["down"], "score": entry["score"],
                               "mine": mine}, cookie=cookie)
+
+    def _post_neutral(self):
+        try:
+            body = self._read_json_body(2048)
+            key = str(body.get("key", ""))
+            on = bool(body.get("on", True))
+        except Exception:
+            self.send_error(400)
+            return
+        if not VOTE_KEY_RE.match(key) or key not in ENGINE.cat.tracks or ENGINE.db is None:
+            self._send_json(400, {"error": "morceau inconnu"})
+            return
+        if not vote_allowed(self._client_ip(), 1):
+            self._send_json(429, {"error": "trop d'actions, réessaie dans une minute"})
+            return
+        voter, cookie = self._voter_id()
+        ENGINE.db.set_neutral(voter, key, on)
+        self._send_json(200, {"key": key, "on": on}, cookie=cookie)
+
+    def _post_dynamics(self):
+        try:
+            body = self._read_json_body(2048)
+            key = str(body.get("key", ""))
+            level = str(body.get("level", ""))
+        except Exception:
+            self.send_error(400)
+            return
+        if (not VOTE_KEY_RE.match(key) or key not in ENGINE.cat.tracks or ENGINE.db is None
+                or (level != "none" and parse_level(level) is None)):
+            self._send_json(400, {"error": "requête invalide"})
+            return
+        if not vote_allowed(self._client_ip(), 1):
+            self._send_json(429, {"error": "trop d'actions, réessaie dans une minute"})
+            return
+        voter, cookie = self._voter_id()
+        ENGINE.db.set_dynamics(voter, key, level)
+        self._send_json(200, {"key": key, "level": level}, cookie=cookie)
 
     def _post_comment(self):
         ip = self._client_ip()

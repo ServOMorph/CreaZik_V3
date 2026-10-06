@@ -24,6 +24,8 @@
             --stroke-2: rgba(255, 255, 255, 0.18);
             --err: #ff8f8f;
             --ok: #82e8ae;
+            --warn: #f0b34a;
+            --field-bg: rgba(0, 0, 0, 0.32);
             --r-s: 12px;
             --r-m: 18px;
             --r-l: 24px;
@@ -108,15 +110,61 @@
 
         a.back:active, .btn:active { transform: scale(0.96); background: var(--a1-a); border-color: var(--a1); }
 
+        .top { flex-wrap: wrap; }
+
+        .btn-danger { color: var(--err); border-color: rgba(255, 143, 143, 0.4); background: transparent; }
+        .btn-danger:active { background: rgba(255, 143, 143, 0.16); border-color: var(--err); }
+
         .saved {
+            position: sticky;
+            top: env(safe-area-inset-top, 0px);
+            z-index: 10;
             font-size: 0.8125rem;
             font-weight: 600;
             color: var(--ok);
             min-height: 1.3em;
-            margin-bottom: 10px;
+            padding: 6px 0;
+            margin-bottom: 8px;
+            background: rgba(11, 11, 20, 0.85);
+            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(8px);
         }
 
-        .saved.err { color: var(--err); }
+        .saved.err { color: var(--err); font-weight: 800; }
+
+        .group-label {
+            margin: 22px 4px 8px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        .group-label:first-of-type { margin-top: 6px; }
+
+        .fold-sub {
+            display: block;
+            margin-top: 1px;
+            font-size: 0.75rem;
+            font-weight: 400;
+            letter-spacing: 0;
+            color: var(--muted);
+            line-height: 1.3;
+        }
+
+        .field {
+            display: block;
+            width: 100%;
+            min-height: 44px;
+            margin-bottom: 8px;
+            padding: 8px 12px;
+        }
+
+        textarea.field { min-height: 220px; font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 13px; line-height: 1.4; }
+
+        .actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 8px; }
+        .actions .info { margin: 0; flex: 1 1 140px; }
 
         .fold {
             background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03));
@@ -162,6 +210,10 @@
         }
 
         .fold[open] > summary::after { transform: rotate(45deg); }
+        .fold[open] { border-color: var(--stroke-2); }
+        .fold[open] > summary { border-bottom: 1px solid var(--stroke); margin-bottom: 4px; }
+        .fold > summary:active { background: var(--glass); border-radius: var(--r-l); }
+        .fold > summary { padding-top: 8px; padding-bottom: 8px; }
 
         .fold > summary h2 {
             flex: 1;
@@ -185,6 +237,7 @@
         }
 
         .row:first-of-type { border-top: none; }
+        .row > span:first-child { flex: 1 1 140px; min-width: 0; }
 
         .row .hint {
             color: var(--muted);
@@ -266,7 +319,7 @@
             font-size: 16px;
         }
 
-        input[type=text], input[type=password], textarea {
+        input[type=text], input[type=password], input[type=search], textarea {
             border: 1px solid var(--stroke-2) !important;
             border-radius: var(--r-s) !important;
             background: rgba(0, 0, 0, 0.32) !important;
@@ -275,7 +328,7 @@
             transition: border-color 0.2s ease, box-shadow 0.2s ease;
         }
 
-        input[type=text]:focus, input[type=password]:focus, textarea:focus {
+        input[type=text]:focus, input[type=password]:focus, input[type=search]:focus, textarea:focus {
             border-color: var(--a1) !important;
             box-shadow: 0 0 0 3px var(--a1-a);
             outline: none;
@@ -346,6 +399,84 @@
             box-shadow: 0 0 14px -1px var(--a1);
         }
 
+        .kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 8px; margin-bottom: 12px; }
+        .kpi { border: 1px solid var(--stroke); border-radius: 12px; padding: 10px; background: rgba(255,255,255,0.04); }
+        .kpi b { display: block; font-size: 1.35rem; font-weight: 800; color: var(--a1); font-variant-numeric: tabular-nums; }
+        .kpi span { font-size: 0.75rem; color: var(--muted); }
+        .insight { border-left: 3px solid var(--a2); padding: 6px 10px; margin: 6px 0; font-size: 0.875rem; background: rgba(255,255,255,0.04); border-radius: 0 8px 8px 0; }
+        .insight.warn { border-left-color: #f0b34a; }
+        .stats-h { font-size: 0.9375rem; font-weight: 800; margin: 16px 0 8px; }
+        .hours { display: grid; grid-template-columns: repeat(24, 1fr); gap: 2px; align-items: end; height: 90px; }
+        .hours div { background: var(--grad); border-radius: 3px 3px 0 0; min-height: 2px; }
+        .hours-axis { display: grid; grid-template-columns: repeat(24, 1fr); gap: 2px; font-size: 0.625rem; color: var(--muted); text-align: center; }
+        .stats-tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 8px; }
+        .stats-tools select, .stats-tools input { min-height: 44px; border-radius: 8px; background: transparent; color: inherit; border: 1px solid var(--stroke); padding: 0 10px; font-size: 0.875rem; }
+        .stats-tools select option { background: #1c1c2a; color: #fff; }
+        .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        .table-wrap table { border-collapse: collapse; width: 100%; font-size: 0.8125rem; font-variant-numeric: tabular-nums; }
+        .table-wrap th, .table-wrap td { padding: 8px 8px; text-align: right; border-top: 1px solid var(--stroke); white-space: nowrap; }
+        .table-wrap th:first-child, .table-wrap td:first-child { text-align: left; white-space: normal; min-width: 150px; }
+        .table-wrap th { cursor: pointer; color: var(--muted); font-weight: 700; user-select: none; }
+        .table-wrap th.sorted { color: var(--a1); }
+
+        .catalog-tools input[type=search] { flex: 1 1 200px; }
+        .track-card { border-top: 1px solid var(--stroke); }
+        .track-card.off .tname { color: var(--faint); text-decoration: line-through; }
+        .card-head { display: flex; align-items: center; gap: 10px; min-height: 48px; font-size: 0.875rem; }
+        .card-head input { width: 22px; height: 22px; accent-color: hsl(330 92% 68%); flex: 0 0 auto; }
+        .card-head .tname { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 600; cursor: pointer; padding: 12px 0; }
+        .card-head .status-dot { width: 9px; height: 9px; border-radius: 50%; flex: 0 0 auto; background: var(--muted); }
+        .card-head .status-dot.pending, .card-head .status-dot.running { background: #f0b34a; }
+        .card-head .status-dot.failed { background: var(--err); }
+        .card-head .status-dot.generated { background: var(--ok); }
+        .fav-btn { min-width: 44px; min-height: 44px; border: 0; background: transparent; color: var(--muted); font-size: 1.25rem; cursor: pointer; }
+        .fav-btn.on { color: #ffd76a; }
+        .card-chev { color: var(--muted); display: inline-block; transition: transform 0.2s ease; cursor: pointer; padding: 12px 6px; }
+        .track-card.open .card-chev { transform: rotate(180deg); }
+        .card-body { display: none; padding: 0 0 12px 32px; font-size: 0.8125rem; }
+        .track-card.open .card-body { display: block; }
+        .card-prompt { color: var(--muted); font-style: italic; margin-bottom: 8px; overflow-wrap: anywhere; }
+        .card-body audio { width: 100%; margin: 4px 0 8px; }
+        .card-meta { color: var(--muted); display: flex; flex-wrap: wrap; gap: 4px 14px; margin-bottom: 8px; }
+        .card-actions { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+        .card-actions .track-act { min-height: 44px; }
+        .com-row { border-top: 1px solid var(--stroke); padding: 8px 0; font-size: 0.8125rem; overflow-wrap: anywhere; }
+        .com-row b { color: var(--a1); }
+        .com-row .meta { color: var(--muted); font-size: 0.75rem; }
+
+        .track-act {
+            flex: 0 0 auto;
+            min-height: 44px;
+            min-width: 44px;
+            padding: 0 12px;
+            border-radius: 8px;
+            border: 1px solid var(--stroke-2);
+            background: transparent;
+            color: var(--muted);
+            font-size: 0.75rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .track-act.del { color: var(--err); }
+
+        #playlistSort option { background: #1c1c2a; color: #fff; }
+
+        .score-badge {
+            display: inline-block;
+            min-width: 2.2em;
+            padding: 1px 8px;
+            margin-left: 6px;
+            border-radius: 999px;
+            font-size: 0.8125rem;
+            font-weight: 800;
+            text-align: center;
+            font-variant-numeric: tabular-nums;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.18);
+        }
+        .score-badge.pos { background: #1f9d55; }
+        .score-badge.neg { background: #d64545; }
+
         .w-val { text-align: right; color: var(--a1); font-weight: 800; font-variant-numeric: tabular-nums; }
 
         .tracks { display: none; padding: 6px 0 2px 6px; }
@@ -353,14 +484,19 @@
 
         .track {
             display: flex;
+            flex-wrap: wrap;
             align-items: center;
-            gap: 12px;
+            gap: 4px 10px;
             min-height: 44px;
+            padding: 6px 0;
             font-size: 0.875rem;
+            border-top: 1px solid var(--stroke);
         }
 
         .track input { width: 22px; height: 22px; accent-color: hsl(330 92% 68%); flex: 0 0 auto; }
-        .track .tname { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .track .tname { flex: 1 1 calc(100% - 40px); min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 600; }
+        .track > *:nth-child(n+3) { margin-left: 0; }
+        .track > .score-badge:nth-child(3) { margin-left: 32px; }
         .track .star { color: #ffd76a; }
         .track.off .tname { color: var(--faint); text-decoration: line-through; }
 
@@ -413,21 +549,29 @@
         .info { color: var(--muted); font-size: 0.8125rem; margin-top: 8px; line-height: 1.45; }
 
         .program-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; }
-        .program-box { border: 1px solid #41415b; border-radius: 10px; padding: 12px; min-width: 0; }
-        .program-box h3 { margin: 0 0 8px; font-size: 1rem; }
-        .program-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; border-top: 1px solid #35354b; padding: 8px 0; }
+        .program-box { border: 1px solid var(--stroke); border-radius: var(--r-m); padding: 12px; min-width: 0; background: rgba(255, 255, 255, 0.03); }
+        .program-box h3 { margin: 0 0 8px; font-size: 0.8125rem; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; color: var(--a2); }
+        .program-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; border-top: 1px solid var(--stroke); padding: 8px 0; }
         .program-row:first-child { border-top: 0; }
         .program-name { min-width: 0; overflow-wrap: anywhere; }
         .program-sub { display: block; color: var(--muted); font-size: .8rem; margin-top: 2px; }
-        .program-row button { flex: 0 0 auto; }
-        #programLibrary { max-height: 520px; overflow: auto; }
-        #programSearch { box-sizing: border-box; width: 100%; min-height: 42px; margin: 0 0 8px; padding: 9px 11px; border: 1px solid #555; border-radius: 8px; background: #2d2d44; color: #fff; font: inherit; }
-        @media (max-width: 700px) { .program-grid { grid-template-columns: 1fr; } }
+        .program-row button { flex: 0 0 auto; min-width: 44px; padding: 8px 14px; color: var(--a2); font-size: 0.8125rem; }
+        #programCurrent.program-row { border-left: 3px solid var(--a1); padding-left: 10px; margin-bottom: 4px; }
+        #programLibrary { max-height: 520px; overflow: auto; -webkit-overflow-scrolling: touch; }
+        #programSearch { box-sizing: border-box; width: 100%; min-height: 44px; margin: 0 0 8px; padding: 9px 12px; font-size: 16px; }
+        @media (max-width: 700px) { .program-grid { grid-template-columns: 1fr; } #programLibrary { max-height: 60vh; } }
 
         @media (prefers-reduced-motion: reduce) {
             a.back, .btn, .stepper button, .mini-actions button, .switch .slider, .switch .slider::after,
             .fold > summary::after, .playlist .chev, input, textarea { transition: none; }
             a.back:active, .btn:active, .stepper button:active, .mini-actions button:active { transform: none; }
+        }
+
+        @media (max-width: 520px) {
+            .top h1 { order: -1; flex: 1 0 100%; font-size: 1.35rem; }
+            .top a.back { flex: 1 1 0; padding: 8px 10px; }
+            .top .btn { flex: 0 0 auto; }
+            .stats-tools select, .stats-tools input { flex: 1 1 140px; min-width: 0; }
         }
 
         @media (max-width: 400px) {
@@ -440,14 +584,14 @@
     <div class="container">
         <div class="top">
             <a class="back" href="http://localhost:5000/">&larr; Écoute</a>
-            <a class="back" href="/ui.html">Explorateur</a>
             <h1>Gestion WebRadio</h1>
-            <button class="btn" onclick="resetAll()">Réinitialiser</button>
+            <button class="btn btn-danger" onclick="resetAll()">Réinitialiser</button>
         </div>
-        <div class="saved" id="saved"></div>
+        <div class="saved" id="saved" role="status" aria-live="polite"></div>
 
-        <details class="fold" id="secProgram" data-fold="program" open>
-            <summary><h2>Programmer après le morceau en cours</h2></summary>
+        <div class="group-label">Radio en direct</div>
+        <details class="fold" id="secProgram" data-fold="program">
+            <summary><h2>File d'attente et programmation<span class="fold-sub">Voir ce qui passe et ajouter des morceaux</span></h2></summary>
             <div class="fold-body">
                 <div class="program-grid">
                     <div class="program-box">
@@ -456,7 +600,7 @@
                         <div id="programQueue"></div>
                     </div>
                     <div class="program-box">
-                        <h3>Ajouter un morceau ou une playlist</h3>
+                        <h3>Ajouter à la file</h3>
                         <input id="programSearch" type="search" placeholder="Rechercher un morceau ou une playlist…" aria-label="Rechercher un morceau ou une playlist" oninput="renderProgramLibrary()">
                         <div id="programLibrary" class="info">Chargement du catalogue…</div>
                     </div>
@@ -466,27 +610,9 @@
             </div>
         </details>
 
-        <details class="fold" id="secAccount" data-fold="account" open>
-            <summary><h2>Compte admin</h2></summary>
-            <div class="fold-body">
-            <div class="info" id="pwWarn" style="display:none;color:#ffc107;margin:0 0 8px">Mot de passe par défaut (admin). Change-le avant d'exposer la radio via le tunnel.</div>
-            <div class="row">
-                <span>Mot de passe<span class="hint">8 caractères minimum</span></span>
-            </div>
-            <form onsubmit="changePassword(event)">
-                <input type="password" id="pwOld" placeholder="Mot de passe actuel" autocomplete="current-password" style="width:100%;min-height:44px;margin-bottom:8px;padding:8px;border-radius:8px;border:1px solid #555;background:#2d2d44;color:#fff;font-size:16px">
-                <input type="password" id="pwNew" placeholder="Nouveau mot de passe" autocomplete="new-password" style="width:100%;min-height:44px;margin-bottom:8px;padding:8px;border-radius:8px;border:1px solid #555;background:#2d2d44;color:#fff;font-size:16px">
-                <div style="display:flex;gap:8px;align-items:center">
-                    <button class="btn" type="submit">Changer</button>
-                    <a class="back" href="/logout">Déconnexion</a>
-                    <span class="info" id="pwMsg" style="margin:0"></span>
-                </div>
-            </form>
-            </div>
-        </details>
-
-        <details class="fold" id="secPlay" data-fold="play" open>
-            <summary><h2>Lecture en boucle</h2></summary>
+        <div class="group-label">Réglages de diffusion</div>
+        <details class="fold" id="secPlay" data-fold="play">
+            <summary><h2>Choix des morceaux<span class="fold-sub">Favoris, pouces, anti-répétition</span></h2></summary>
             <div class="fold-body">
             <div class="row">
                 <span>Pondération par défaut<span class="hint">Pour les playlists sans réglage (0 à 10)</span></span>
@@ -497,7 +623,7 @@
                 <label class="switch"><input type="checkbox" id="favorites_only" onchange="setBool('favorites_only', this.checked)"><span class="slider"></span></label>
             </div>
             <div class="row">
-                <span>Poids des pouces<span class="hint">Chaque clic compte, sans limite. Le poids du morceau vaut exp(pas x (haut moins bas)), entre presque 0 et x20. 0 = pouces ignorés</span></span>
+                <span>Poids des pouces<span class="hint">Chaque clic compte, sans limite. Le poids du morceau vaut exp(pas x (haut moins bas)), jusqu'à x20. Un morceau dont le score est négatif n'est plus diffusé. 0 = pouces ignorés</span></span>
                 <div class="stepper"><button onclick="step('thumb_strength', -0.05, 0, 1)">&minus;</button><span class="val" id="v_thumb_strength"></span><button onclick="step('thumb_strength', 0.05, 0, 1)">+</button></div>
             </div>
             <div class="row">
@@ -511,8 +637,8 @@
             </div>
         </details>
 
-        <details class="fold" id="secTrans" data-fold="trans" open>
-            <summary><h2>Transitions entre morceaux</h2></summary>
+        <details class="fold" id="secTrans" data-fold="trans">
+            <summary><h2>Transitions entre morceaux<span class="fold-sub">Fondus, crossfade, pauses</span></h2></summary>
             <div class="fold-body">
             <div class="row">
                 <span>Préréglage actif<span class="hint">Appliqué entre deux morceaux</span></span>
@@ -528,8 +654,8 @@
             </div>
         </details>
 
-        <details class="fold" id="secDynamics" data-fold="dynamics" open>
-            <summary><h2>Dynamique de la journée</h2></summary>
+        <details class="fold" id="secDynamics" data-fold="dynamics">
+            <summary><h2>Dynamique de la journée<span class="fold-sub">Énergie des morceaux selon l'heure</span></h2></summary>
             <div class="fold-body">
             <div class="row">
                 <span>Dynamique activée<span class="hint">Doux le matin, plus rythmé vers 17 h, très calme la nuit, selon l'heure de Paris</span></span>
@@ -565,12 +691,31 @@
                 <span>Tolérance de tempo<span class="hint">Plus c'est petit, plus les tempos se suivent de près (octaves tolérées)</span></span>
                 <div class="stepper"><button onclick="step('dyn_tempo_tolerance', -0.05, 0.1, 0.6)">&minus;</button><span class="val" id="v_dyn_tempo_tolerance"></span><button onclick="step('dyn_tempo_tolerance', 0.05, 0.1, 0.6)">+</button></div>
             </div>
+            <div class="row">
+                <span>Poids de l'avis des auditeurs<span class="hint">0 = énergie mesurée seule, 1 = avis Slow / Medium / High dominant (selon le nombre d'avis)</span></span>
+                <div class="stepper"><button onclick="step('dyn_user_weight', -0.1, 0, 1)">&minus;</button><span class="val" id="v_dyn_user_weight"></span><button onclick="step('dyn_user_weight', 0.1, 0, 1)">+</button></div>
+            </div>
             <div class="info">L'énergie de chaque morceau est mesurée sur l'audio (rythme, brillance, niveau, tempo) puis classée par rapport au reste du catalogue. Les repères viennent d'études d'écoute : plus d'énergie en journée, calme tard le soir, et en France une écoute radio dominée par le créneau 7 h à 9 h puis un second palier en fin d'après-midi.</div>
             </div>
         </details>
 
-        <details class="fold" id="secVisuals" data-fold="visuals" open>
-            <summary><h2>Visuels et publicités</h2></summary>
+        <details class="fold" id="secJingle" data-fold="jingle">
+            <summary><h2>Jingles<span class="fold-sub">Fréquence et liste des jingles</span></h2></summary>
+            <div class="fold-body">
+            <div class="row">
+                <span>Jingles activés</span>
+                <label class="switch"><input type="checkbox" id="jingles_enabled" onchange="setBool('jingles_enabled', this.checked)"><span class="slider"></span></label>
+            </div>
+            <div class="row">
+                <span>Un jingle tous les<span class="hint">morceaux (0 = jamais)</span></span>
+                <div class="stepper"><button onclick="step('jingle_every', -1, 0, 50)">&minus;</button><span class="val" id="v_jingle_every"></span><button onclick="step('jingle_every', 1, 0, 50)">+</button></div>
+            </div>
+            <div id="jingleList"></div>
+            </div>
+        </details>
+
+        <details class="fold" id="secVisuals" data-fold="visuals">
+            <summary><h2>Visuels et publicités<span class="fold-sub">Publicité du site, textes des jingles</span></h2></summary>
             <div class="fold-body">
             <div class="row">
                 <span>Publicité du site<span class="hint">Motion design qui présente le site, joué à intervalle régulier</span></span>
@@ -593,34 +738,102 @@
                 <div class="stepper"><button onclick="step('visual_transition_s', -1, 3, 10)">&minus;</button><span class="val" id="v_visual_transition_s"></span><button onclick="step('visual_transition_s', 1, 3, 10)">+</button></div>
             </div>
             <div class="info" style="margin-top:10px">Textes des jingles et des publicités (JSON). Les messages sur l'IA locale et l'écologie doivent rester vérifiables.</div>
-            <textarea id="contentJson" spellcheck="false" style="width:100%;min-height:220px;margin-top:8px;padding:10px;border-radius:8px;border:1px solid #555;background:#2d2d44;color:#fff;font:13px/1.4 monospace"></textarea>
-            <div style="display:flex;gap:8px;align-items:center;margin-top:8px">
+            <textarea id="contentJson" class="field" spellcheck="false" style="margin-top:8px"></textarea>
+            <div class="actions">
                 <button class="btn" onclick="saveContent()">Enregistrer les textes</button>
-                <span class="info" id="contentMsg" style="margin:0"></span>
+                <span class="info" id="contentMsg"></span>
             </div>
             </div>
         </details>
 
-        <details class="fold" id="secJingle" data-fold="jingle" open>
-            <summary><h2>Jingles</h2></summary>
+        <div class="group-label">Catalogue</div>
+        <details class="fold" id="secWeights" data-fold="weights">
+            <summary><h2>Playlists et morceaux<span class="fold-sub">Pondération, exclusions, renommer, supprimer</span></h2></summary>
             <div class="fold-body">
-            <div class="row">
-                <span>Jingles activés</span>
-                <label class="switch"><input type="checkbox" id="jingles_enabled" onchange="setBool('jingles_enabled', this.checked)"><span class="slider"></span></label>
+            <div class="info" style="margin:0 0 8px">10 = joué plus souvent que 1, 0 = exclu. Déplie une playlist, puis un morceau pour l'écouter, voir sa fiche, le mettre en favori, le renommer ou le supprimer.</div>
+            <div class="stats-tools catalog-tools">
+                <input type="search" id="catSearch" placeholder="Rechercher un morceau ou une playlist" oninput="setCatSearch(this.value)">
+                <select id="catFilter" onchange="setCatFilter(this.value)">
+                    <option value="all">Tous les morceaux</option>
+                    <option value="fav">Favoris</option>
+                    <option value="pos">Score positif</option>
+                    <option value="neg">Score négatif</option>
+                    <option value="off">Désactivés</option>
+                    <option value="never">Jamais diffusés</option>
+                    <option value="sans_avis">Écoutés sans avis</option>
+                    <option value="pending">En attente de génération</option>
+                    <option value="failed">Échecs de génération</option>
+                </select>
+                <button class="btn" type="button" id="catFoldBtn" onclick="toggleAllCards()">Tout déplier</button>
             </div>
             <div class="row">
-                <span>Un jingle tous les<span class="hint">morceaux (0 = jamais)</span></span>
-                <div class="stepper"><button onclick="step('jingle_every', -1, 0, 50)">&minus;</button><span class="val" id="v_jingle_every"></span><button onclick="step('jingle_every', 1, 0, 50)">+</button></div>
+                <span>Trier par</span>
+                <select id="playlistSort" onchange="setPlaylistSort(this.value)">
+                    <option value="name">Nom (A-Z)</option>
+                    <option value="score_desc">Score cumulé (décroissant)</option>
+                    <option value="score_asc">Score cumulé (croissant)</option>
+                    <option value="weight_desc">Pondération (décroissante)</option>
+                    <option value="weight_asc">Pondération (croissante)</option>
+                </select>
             </div>
-            <div id="jingleList"></div>
-            </div>
-        </details>
-
-        <details class="fold" id="secWeights" data-fold="weights" open>
-            <summary><h2>Pondération par playlist</h2></summary>
-            <div class="fold-body">
-            <div class="info" style="margin:0 0 8px">10 = joué plus souvent que 1, 0 = exclu. Déplie une playlist pour exclure des morceaux individuellement.</div>
             <div id="playlistList"></div>
+            <h3 class="stats-h">Commentaires des auditeurs</h3>
+            <div id="comList" class="info">Chargement...</div>
+            </div>
+        </details>
+
+        <div class="group-label">Analyse</div>
+        <details class="fold" id="secStats" data-fold="stats">
+            <summary><h2>Statistiques de la webradio<span class="fold-sub">Diffusions, avis, constats, exports</span></h2></summary>
+            <div class="fold-body">
+            <div class="info" id="statsSince" style="margin:0 0 10px">Chargement...</div>
+            <div class="kpi-grid" id="statsKpis"></div>
+            <div id="statsInsights"></div>
+            <h3 class="stats-h">Diffusions par heure (Paris)</h3>
+            <div class="hours" id="statsHours"></div>
+            <h3 class="stats-h">Détail</h3>
+            <div class="stats-tools">
+                <select id="statsView" onchange="setStatsView(this.value)">
+                    <option value="playlists">Par playlist</option>
+                    <option value="tracks">Par morceau</option>
+                </select>
+                <select id="statsFilter" onchange="renderStatsTable()">
+                    <option value="all">Tous les morceaux</option>
+                    <option value="sans_avis">Écoutés sans avis (marqués)</option>
+                    <option value="non_evalue">Diffusés sans aucune réaction</option>
+                    <option value="jamais_diffuse">Jamais diffusés</option>
+                    <option value="negatif">Score négatif</option>
+                    <option value="positif">Score positif</option>
+                    <option value="skipped">Souvent sautés</option>
+                </select>
+                <input type="search" id="statsSearch" placeholder="Rechercher" oninput="renderStatsTable()">
+            </div>
+            <div class="table-wrap" id="statsTable"></div>
+            <div class="stats-tools" style="margin-top:12px">
+                <button class="btn" type="button" onclick="exportAnalytics('json')">Exporter JSON (analyse IA)</button>
+                <button class="btn" type="button" onclick="exportAnalytics('csv')">Exporter CSV (morceaux)</button>
+                <button class="btn" type="button" onclick="loadAnalytics()">Actualiser</button>
+            </div>
+            </div>
+        </details>
+
+        <div class="group-label">Administration</div>
+        <details class="fold" id="secAccount" data-fold="account">
+            <summary><h2>Compte administrateur<span class="fold-sub">Mot de passe et déconnexion</span></h2></summary>
+            <div class="fold-body">
+            <div class="info" id="pwWarn" style="display:none;color:var(--warn);margin:0 0 8px">Mot de passe par défaut (admin). Change-le avant d'exposer la radio via le tunnel.</div>
+            <div class="row">
+                <span>Mot de passe<span class="hint">8 caractères minimum</span></span>
+            </div>
+            <form onsubmit="changePassword(event)">
+                <input type="password" id="pwOld" class="field" placeholder="Mot de passe actuel" autocomplete="current-password">
+                <input type="password" id="pwNew" class="field" placeholder="Nouveau mot de passe" autocomplete="new-password">
+                <div class="actions">
+                    <button class="btn" type="submit">Changer</button>
+                    <a class="back" href="/logout">Déconnexion</a>
+                    <span class="info" id="pwMsg"></span>
+                </div>
+            </form>
             </div>
         </details>
     </div>
@@ -629,7 +842,7 @@
         const DEFAULTS = {default_weight: 5, weights: {}, jingle_every: 5, jingles_enabled: true,
                           favorites_only: false, no_repeat: 3, no_repeat_songs: 15, excluded: [], thumb_strength: 0.15,
                           ads_enabled: true, ads_every: 5, ad_seconds: 9, ad_offset_s: 10, visual_transition_s: 5,
-                          dynamics_enabled: true, dynamics_strength: 1, dyn_base: 0.5, dyn_amp: 0.33, dyn_peak_hour: 17.5, dyn_weekend_shift_h: 1, dyn_energy_sigma: 0.25, dyn_tempo_tolerance: 0.25,
+                          dynamics_enabled: true, dynamics_strength: 1, dyn_base: 0.5, dyn_amp: 0.33, dyn_peak_hour: 17.5, dyn_weekend_shift_h: 1, dyn_energy_sigma: 0.25, dyn_tempo_tolerance: 0.25, dyn_user_weight: 0.5,
                           transitions: {
                               active: 'fondu',
                               jingle_preset: 'net',
@@ -643,6 +856,14 @@
                           }};
         let settings = JSON.parse(JSON.stringify(DEFAULTS));
         let playlists = [];
+        let allPlaylists = [];
+        let rawResults = {};
+        let rawAll = {};
+        let catSearch = '';
+        let catFilter = 'all';
+        let openCards = new Set();
+        try { openCards = new Set(JSON.parse(localStorage.getItem('openCards') || '[]')); } catch (e) {}
+        let catalogOv = {playlists: {}, tracks: {}};
         let results = {};
         let favs = new Set();
         let votes = {};
@@ -655,6 +876,8 @@
         let programState = null;
         let programTimer = null;
         let programSearch = '';
+        let playlistSort = 'name';
+        try { playlistSort = localStorage.getItem('playlistSort') || 'name'; } catch (e) {}
 
         function esc(v) {
             return String(v == null ? '' : v).replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
@@ -669,19 +892,179 @@
         }
 
         async function init() {
-            playlists = await getJSON('./playlists.json', []);
+            allPlaylists = await getJSON('./playlists.json', []);
             settings = JSON.parse(JSON.stringify(Object.assign({}, DEFAULTS, await getJSON('./radio_settings.json', {}))));
             favs = new Set(await getJSON('./favorites.json', []));
             votes = (await getJSON('/api/votes', {tracks: {}})).tracks || {};
-            for (const b of playlists) {
+            for (const b of allPlaylists) {
                 const d = await getJSON('./' + b.results, null);
-                results[b.id] = d ? (d.generations || []).filter(t => t.status === 'generated') : [];
+                const gens = d ? (d.generations || []).map(t => Object.assign({}, t, {_model: t.model || d.model || ''})) : [];
+                rawAll[b.id] = gens;
+                rawResults[b.id] = gens.filter(t => t.status === 'generated');
             }
+            await applyOverrides();
             await loadStats();
             render();
             await loadProgramLibrary();
             await refreshProgram();
             programTimer = setInterval(refreshProgram, 5000);
+        }
+
+        async function applyOverrides() {
+            catalogOv = await getJSON('/api/catalog/overrides', {playlists: {}, tracks: {}});
+            playlists = allPlaylists.filter(b => !(catalogOv.playlists[b.id] || {}).deleted)
+                .map(b => Object.assign({}, b, {label: (catalogOv.playlists[b.id] || {}).label || b.label}));
+            results = {};
+            for (const b of playlists) {
+                results[b.id] = rawResults[b.id]
+                    .filter(t => !(catalogOv.tracks[keyOf(b, t)] || {}).deleted)
+                    .map(t => Object.assign({}, t, {name: (catalogOv.tracks[keyOf(b, t)] || {}).name || t.name}));
+            }
+        }
+
+        async function catalogAction(body) {
+            try {
+                const r = await fetch('/api/catalog', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(body)});
+                if (!r.ok) throw new Error(r.status);
+            } catch (e) {
+                alert('Échec de l\'opération.');
+                return;
+            }
+            await applyOverrides();
+            renderLists();
+            loadProgramLibrary();
+            if (typeof loadAnalytics === 'function') loadAnalytics();
+        }
+
+        function renameTrack(k, current) {
+            const name = prompt('Nouveau nom du morceau :', current);
+            if (name && name.trim() && name.trim() !== current) catalogAction({action: 'rename_track', key: k, name: name.trim()});
+        }
+
+        function deleteTrack(k, name) {
+            if (!confirm('Supprimer définitivement « ' + name + ' » ? Le MP3 et la pochette sont effacés ; les données de création sont archivées dans learning/morceaux_rejetes.jsonl.')) return;
+            const reason = prompt('Pourquoi ce morceau est-il rejeté ? (facultatif, sert à l\'apprentissage)', '');
+            if (reason === null) return;
+            catalogAction({action: 'delete_track', key: k, reason});
+        }
+
+        function renamePlaylist(id) {
+            const b = playlists.find(x => x.id === id);
+            const name = prompt('Nouveau nom de la playlist :', b.label);
+            if (name && name.trim() && name.trim() !== b.label) catalogAction({action: 'rename_playlist', id, name: name.trim()});
+        }
+
+        function deletePlaylist(id) {
+            const b = playlists.find(x => x.id === id);
+            if (!confirm('Supprimer définitivement la playlist « ' + b.label + ' » et ses ' + results[id].length + ' morceau(x) ? Les MP3 et pochettes sont effacés ; les données de création sont archivées dans learning/morceaux_rejetes.jsonl.')) return;
+            const reason = prompt('Pourquoi cette playlist est-elle rejetée ? (facultatif, sert à l\'apprentissage)', '');
+            if (reason === null) return;
+            catalogAction({action: 'delete_playlist', id, reason});
+        }
+
+
+        let analytics = null;
+        let statsView = 'playlists';
+        let statsSort = {playlists: ['plays', -1], tracks: ['plays', -1]};
+        const STATUS_LABELS = {positif: 'positif', negatif: 'négatif', sans_avis: 'sans avis', equilibre: 'équilibré', non_evalue: 'non évalué', jamais_diffuse: 'jamais diffusé'};
+
+        async function loadAnalytics() {
+            analytics = await getJSON('/api/radio/analytics', null);
+            renderAnalytics();
+        }
+
+        function pct(v) { return v === null || v === undefined ? '-' : Math.round(v * 100) + ' %'; }
+
+        function renderAnalytics() {
+            const since = document.getElementById('statsSince');
+            if (!analytics || !analytics.kpis) { since.textContent = 'Statistiques indisponibles.'; return; }
+            const k = analytics.kpis;
+            since.textContent = 'Enregistrement depuis le ' + analytics.db_since.replace('T', ' ') + ' (heure de Paris). Les pouces comptent tout l\'historique.';
+            const cards = [
+                [k.total_plays, 'diffusions'], [k.plays_24h, 'sur 24 h'], [k.plays_7d, 'sur 7 jours'],
+                [k.distinct_tracks_played + '/' + k.catalogue_tracks, 'morceaux diffusés'], [k.coverage_pct === null ? '-' : k.coverage_pct + ' %', 'couverture du catalogue'],
+                [pct(k.skip_rate), 'passages forcés'], [pct(k.avg_listen_ratio), 'part écoutée en moyenne'],
+                ['+' + k.total_up + ' / -' + k.total_down, 'pouces'], [k.neutral_marks, 'marqués sans avis'], [k.played_without_opinion, 'diffusés sans réaction']
+            ];
+            document.getElementById('statsKpis').innerHTML = cards.map(c => `<div class="kpi"><b>${esc(c[0])}</b><span>${esc(c[1])}</span></div>`).join('');
+            document.getElementById('statsInsights').innerHTML = analytics.insights.map(i => `<div class="insight ${i.level === 'warn' ? 'warn' : ''}">${esc(i.text)}</div>`).join('');
+            const max = Math.max(1, ...analytics.by_hour.map(h => h.plays));
+            document.getElementById('statsHours').innerHTML = analytics.by_hour.map(h => `<div style="height:${Math.max(2, h.plays / max * 100)}%" title="${h.hour} h : ${h.plays} diffusion(s)"></div>`).join('');
+            if (!document.getElementById('statsHoursAxis')) {
+                const el = document.createElement('div');
+                el.className = 'hours-axis';
+                el.id = 'statsHoursAxis';
+                el.innerHTML = analytics.by_hour.map(h => `<span>${h.hour % 6 === 0 ? h.hour : ''}</span>`).join('');
+                document.getElementById('statsHours').after(el);
+            }
+            renderStatsTable();
+        }
+
+        function setStatsView(v) { statsView = v; renderStatsTable(); }
+
+        function setStatsSort(col) {
+            const cur = statsSort[statsView];
+            statsSort[statsView] = [col, cur[0] === col ? -cur[1] : (col === 'name' || col === 'label' ? 1 : -1)];
+            renderStatsTable();
+        }
+
+        function statsColumns() {
+            return statsView === 'playlists' ? [
+                ['label', 'Playlist', r => esc(r.label)], ['plays', 'Diff.', r => r.plays], ['distinct_tracks', 'Morc.', r => r.distinct_tracks + '/' + r.tracks_total],
+                ['score', 'Score', r => scoreBadge(r.score)], ['neutral', 'Sans avis', r => r.neutral], ['skip_rate', 'Sautés', r => pct(r.skip_rate)],
+                ['avg_listen_ratio', 'Écoute', r => pct(r.avg_listen_ratio)], ['weight', 'Poids', r => r.weight === null ? '-' : r.weight],
+                ['share_expected_pct', 'Attendu %', r => r.share_expected_pct === null ? '-' : r.share_expected_pct],
+                ['share_actual_pct', 'Réel %', r => r.share_actual_pct === null ? '-' : r.share_actual_pct], ['share_gap_pct', 'Écart', r => r.share_gap_pct === null ? '-' : (r.share_gap_pct > 0 ? '+' : '') + r.share_gap_pct]
+            ] : [
+                ['name', 'Morceau', r => esc(String(r.name).replace(/^\d+\s*-\s*/, '')) + '<br><span class="hint" style="display:inline">' + esc(r.playlist) + '</span>'],
+                ['plays', 'Diff.', r => r.plays], ['score', 'Score', r => scoreBadge(r.score)], ['neutral', 'Sans avis', r => r.neutral],
+                ['status', 'État', r => STATUS_LABELS[r.status] || r.status], ['skip_rate', 'Sautés', r => pct(r.skip_rate)],
+                ['avg_listen_ratio', 'Écoute', r => pct(r.avg_listen_ratio)], ['last_played', 'Dernière', r => r.last_played ? r.last_played.slice(5, 16).replace('T', ' ') : '-']
+            ];
+        }
+
+        function renderStatsTable() {
+            const root = document.getElementById('statsTable');
+            if (!analytics || !analytics.by_track) { root.innerHTML = ''; return; }
+            document.getElementById('statsFilter').style.display = statsView === 'tracks' ? '' : 'none';
+            const q = document.getElementById('statsSearch').value.trim().toLocaleLowerCase();
+            const f = document.getElementById('statsFilter').value;
+            let rows = statsView === 'playlists' ? analytics.by_playlist.slice() : analytics.by_track.slice();
+            if (q) rows = rows.filter(r => String(r.label || r.name).toLocaleLowerCase().includes(q) || String(r.playlist || '').toLocaleLowerCase().includes(q));
+            if (statsView === 'tracks' && f !== 'all') {
+                rows = rows.filter(r => f === 'skipped' ? (r.skip_rate || 0) >= 0.5 && r.plays >= 2 : f === 'negatif' ? r.score < 0 : f === 'positif' ? r.score > 0 : r.status === f);
+            }
+            const [col, dir] = statsSort[statsView];
+            rows.sort((a, b) => {
+                const x = a[col], y = b[col];
+                if (x === null || x === undefined) return 1;
+                if (y === null || y === undefined) return -1;
+                return (typeof x === 'string' ? x.localeCompare(y, 'fr') : x - y) * dir;
+            });
+            const cols = statsColumns();
+            root.innerHTML = '<table><thead><tr>' + cols.map(c => `<th class="${c[0] === col ? 'sorted' : ''}" onclick="setStatsSort('${c[0]}')">${c[1]}${c[0] === col ? (dir > 0 ? ' &#9650;' : ' &#9660;') : ''}</th>`).join('') + '</tr></thead><tbody>'
+                + (rows.length ? rows.map(r => '<tr>' + cols.map(c => `<td>${c[2](r)}</td>`).join('') + '</tr>').join('') : `<tr><td colspan="${cols.length}">Aucun résultat.</td></tr>`) + '</tbody></table>';
+        }
+
+        function download(name, type, text) {
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(new Blob([text], {type}));
+            a.download = name;
+            a.click();
+            setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+        }
+
+        function exportAnalytics(kind) {
+            if (!analytics || !analytics.kpis) return;
+            const stamp = new Date().toISOString().slice(0, 10);
+            if (kind === 'json') {
+                download('creazik_stats_' + stamp + '.json', 'application/json', JSON.stringify(analytics, null, 1));
+                return;
+            }
+            const cols = ['key', 'name', 'playlist', 'plays', 'last_played', 'up', 'down', 'score', 'neutral', 'status', 'skipped', 'skip_rate', 'avg_listen_ratio', 'duration_s', 'energy', 'bpm', 'dyn_slow', 'dyn_medium', 'dyn_high', 'dyn_user'];
+            const cell = v => { const t = v === null || v === undefined ? '' : String(v); return /[";\n]/.test(t) ? '"' + t.replace(/"/g, '""') + '"' : t; };
+            const csv = [cols.join(';')].concat(analytics.by_track.map(r => cols.map(c => cell(r[c])).join(';'))).join('\n');
+            download('creazik_morceaux_' + stamp + '.csv', 'text/csv;charset=utf-8', '\ufeff' + csv);
         }
 
         function programEscape(v) {
@@ -879,9 +1262,214 @@
             return `<label class="track ${on ? '' : 'off'}">
                 <input type="checkbox" ${on ? 'checked' : ''} onchange="toggleTrack('${k}', this.checked, this.parentElement)">
                 <span class="tname">${esc(String(t.name || '').replace(/^\d+\s*-\s*/, ''))}</span>
-                ${voteLabel(k)}${shareLabel(k)}
+                ${scoreBadge(votes[k] ? (votes[k].up || 0) - (votes[k].down || 0) : 0)}${voteLabel(k)}${shareLabel(k)}
                 ${favs.has(k) ? '<span class="star">&#9733;</span>' : ''}
+                <button class="track-act" onclick="event.preventDefault(); renameTrack('${k}', this.dataset.name)" data-name="${esc(t.name || '')}" title="Renommer">Renommer</button>
+                <button class="track-act del" onclick="event.preventDefault(); deleteTrack('${k}', this.dataset.name)" data-name="${esc(String(t.name || '').replace(/^\d+\s*-\s*/, ''))}" title="Supprimer">Suppr.</button>
             </label>`;
+        }
+
+
+        function flash(msg) {
+            const el = document.getElementById('saved');
+            if (!el) return;
+            el.className = 'saved';
+            el.textContent = msg;
+        }
+
+        function cardId(k) { return 'tc-' + k.replace(/[^a-z0-9]/gi, '_'); }
+
+        function saveOpenCards() {
+            try { localStorage.setItem('openCards', JSON.stringify([...openCards])); } catch (e) {}
+        }
+
+        function toggleCard(k) {
+            const el = document.getElementById(cardId(k));
+            if (!el) return;
+            if (el.classList.toggle('open')) { openCards.add(k); fillAudio(el); } else openCards.delete(k);
+            saveOpenCards();
+            updateCatFoldBtn();
+        }
+
+        function fillAudio(card) {
+            const slot = card.querySelector('.audio-slot');
+            if (!slot || slot.firstChild) return;
+            const a = document.createElement('audio');
+            a.controls = true;
+            a.preload = 'none';
+            a.src = slot.dataset.src;
+            slot.appendChild(a);
+        }
+
+        function fillOpenAudio() {
+            document.querySelectorAll('#playlistList .track-card.open').forEach(fillAudio);
+        }
+
+        function updateCatFoldBtn() {
+            const cards = [...document.querySelectorAll('#playlistList .track-card')];
+            const allOpen = cards.length > 0 && cards.every(c => c.classList.contains('open'));
+            const btn = document.getElementById('catFoldBtn');
+            if (btn) btn.textContent = allOpen ? 'Tout replier' : 'Tout déplier';
+        }
+
+        function toggleAllCards() {
+            const cards = [...document.querySelectorAll('#playlistList .track-card')];
+            const allOpen = cards.length > 0 && cards.every(c => c.classList.contains('open'));
+            cards.forEach(c => {
+                c.classList.toggle('open', !allOpen);
+                const k = c.dataset.key;
+                if (allOpen) openCards.delete(k); else openCards.add(k);
+            });
+            fillOpenAudio();
+            saveOpenCards();
+            updateCatFoldBtn();
+        }
+
+        async function toggleFav(k) {
+            if (favs.has(k)) favs.delete(k); else favs.add(k);
+            document.querySelectorAll('[data-fav="' + k + '"]').forEach(btn => {
+                btn.classList.toggle('on', favs.has(k));
+                btn.innerHTML = favs.has(k) ? '&#9733;' : '&#9734;';
+            });
+            try {
+                await fetch('/api/favorites', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify([...favs])});
+            } catch (e) { flash('Échec de l\'enregistrement des favoris'); }
+            if (catFilter === 'fav') renderLists();
+        }
+
+        function mp3Of(t) { return String(t.output_file || '').replace(/\.wav$/i, '.mp3'); }
+
+        function downloadTrack(k) {
+            const t = findTrack(k);
+            if (!t) return;
+            const a = document.createElement('a');
+            a.href = mp3Of(t);
+            a.download = String(t.name || 'morceau').replace(/\s+/g, '_') + '.mp3';
+            a.click();
+        }
+
+        function copyPrompt(k) {
+            const t = findTrack(k);
+            if (!t) return;
+            navigator.clipboard.writeText(t.prompt || '').then(() => flash('Prompt copié'), () => flash('Copie impossible'));
+        }
+
+        function findTrack(k) {
+            const [pid] = k.split(':');
+            return (rawAll[pid] || []).find(t => pid + ':' + t.test_case_id === k) || null;
+        }
+
+        function exportPlaylist(id) {
+            const b = playlists.find(x => x.id === id);
+            const blob = new Blob([JSON.stringify(rawAll[id] || [], null, 2)], {type: 'application/json'});
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = (b ? b.id : 'playlist') + '_results.json';
+            a.click();
+            setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+        }
+
+        function setCatSearch(v) { catSearch = v.trim().toLocaleLowerCase(); renderLists(); }
+        function setCatFilter(v) { catFilter = v; renderLists(); }
+
+        function fmtDate(iso) {
+            if (!iso) return '';
+            const d = new Date(iso);
+            return isNaN(d) ? '' : d.toLocaleString('fr-FR', {dateStyle: 'short', timeStyle: 'short'});
+        }
+
+        function statusOfTrack(k) {
+            const r = analytics && analytics.by_track ? analytics.by_track.find(x => x.key === k) : null;
+            return r ? r.status : null;
+        }
+
+        function catalogMatches(b, t) {
+            const k = keyOf(b, t);
+            const name = String(t.name || '').toLocaleLowerCase();
+            if (catSearch && !name.includes(catSearch) && !b.label.toLocaleLowerCase().includes(catSearch)) return false;
+            const sc = votes[k] ? (votes[k].up || 0) - (votes[k].down || 0) : 0;
+            switch (catFilter) {
+                case 'fav': return favs.has(k);
+                case 'pos': return sc > 0;
+                case 'neg': return sc < 0;
+                case 'off': return settings.excluded.includes(k);
+                case 'never': return statusOfTrack(k) === 'jamais_diffuse';
+                case 'sans_avis': return statusOfTrack(k) === 'sans_avis';
+                default: return true;
+            }
+        }
+
+        function trackCard(b, t) {
+            const k = keyOf(b, t);
+            const gen = t.status === 'generated';
+            const on = !settings.excluded.includes(k);
+            const open = openCards.has(k);
+            const shown = String(t.name || '').replace(/^\d+\s*-\s*/, '');
+            const dur = Number(t.duration) || 0;
+            const date = fmtDate(t.generated_at);
+            const labels = {pending: 'En attente', running: 'En cours', generated: 'Généré', failed: 'Échec'};
+            const sc = votes[k] ? (votes[k].up || 0) - (votes[k].down || 0) : 0;
+            return `<div class="track-card ${on ? '' : 'off'} ${open ? 'open' : ''}" id="${cardId(k)}" data-key="${esc(k)}">
+                <div class="card-head">
+                    ${gen ? `<input type="checkbox" ${on ? 'checked' : ''} onchange="toggleTrack('${k}', this.checked, this.closest('.track-card'))" aria-label="Actif dans la rotation">` : `<span class="status-dot ${esc(t.status)}"></span>`}
+                    <span class="tname" onclick="toggleCard('${k}')">${esc(shown)}</span>
+                    ${gen ? scoreBadge(sc) : `<span class="hint" style="display:inline">${labels[t.status] || esc(t.status)}</span>`}
+                    <button class="fav-btn ${favs.has(k) ? 'on' : ''}" data-fav="${k}" onclick="toggleFav('${k}')" aria-label="Favori">${favs.has(k) ? '&#9733;' : '&#9734;'}</button>
+                    <span class="card-chev" onclick="toggleCard('${k}')">&#9662;</span>
+                </div>
+                <div class="card-body">
+                    <div class="card-prompt">&laquo; ${esc(t.prompt || '')} &raquo;</div>
+                    ${gen ? `<div class="audio-slot" data-src="${esc(mp3Of(t))}?v=${esc(t.generated_at || '')}"></div>` : ''}
+                    <div class="card-meta">
+                        ${dur ? `<span>${dur} s</span>` : ''}${t.type ? `<span>${esc(t.type)}</span>` : ''}
+                        ${t._model ? `<span>${esc(t._model)}</span>` : ''}${date ? `<span>Généré le ${esc(date)}</span>` : ''}
+                        ${t.elapsed_s ? `<span>Calcul ${esc(t.elapsed_s)} s</span>` : ''}
+                        ${gen ? `<span>${voteLabel(k)}${shareLabel(k)}</span>` : ''}
+                    </div>
+                    ${t.error ? `<div style="color:var(--err);margin-bottom:6px">${esc(t.error)}</div>` : ''}
+                    <div class="card-actions">
+                        ${gen ? `<button class="track-act" onclick="downloadTrack('${k}')">Télécharger</button>` : ''}
+                        <button class="track-act" onclick="copyPrompt('${k}')">Copier le prompt</button>
+                        ${gen ? `<button class="track-act" onclick="renameTrack('${k}', this.dataset.name)" data-name="${esc(t.name || '')}">Renommer</button>
+                        <button class="track-act del" onclick="deleteTrack('${k}', this.dataset.name)" data-name="${esc(shown)}">Supprimer</button>` : ''}
+                    </div>
+                </div>
+            </div>`;
+        }
+
+        async function loadCatalogComments() {
+            const box = document.getElementById('comList');
+            const items = await getJSON('/api/comments', []);
+            box.className = '';
+            box.innerHTML = items.length ? items.slice(0, 50).map(c => `<div class="com-row">
+                <b>${esc(c.name)}</b> <span class="meta">${esc(String(c.ts || '').replace('T', ' '))}${c.track ? ' &middot; ' + esc(c.track) : ''}</span>
+                <button class="track-act del" style="float:right" onclick="deleteComment('${esc(c.id)}')">Supprimer</button>
+                <div>${esc(c.text)}</div></div>`).join('') : '<div class="info">Aucun commentaire.</div>';
+        }
+
+        async function deleteComment(id) {
+            if (!confirm('Supprimer ce commentaire ?')) return;
+            try {
+                await fetch('/api/comments/delete', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({id})});
+            } catch (e) {}
+            loadCatalogComments();
+        }
+
+        function scoreBadge(s) {
+            return '<span class="score-badge ' + (s > 0 ? 'pos' : s < 0 ? 'neg' : '') + '" title="Score cumulé">' + (s > 0 ? '+' : '') + s + '</span>';
+        }
+
+        function playlistScore(b) {
+            return (results[b.id] || []).reduce((acc, t) => {
+                const v = votes[keyOf(b, t)];
+                return acc + (v ? (v.up || 0) - (v.down || 0) : 0);
+            }, 0);
+        }
+
+        function setPlaylistSort(v) {
+            playlistSort = v;
+            try { localStorage.setItem('playlistSort', v); } catch (e) {}
+            renderLists();
         }
 
         function renderLists() {
@@ -890,32 +1478,64 @@
                 <div class="info">Jingles disponibles : ${results[jb.id].length}${results[jb.id].length ? '' : ' (aucun généré pour l\'instant)'}</div>
                 <div class="tracks" style="display:block">${results[jb.id].map(t => trackRow(jb, t)).join('')}</div>` : '<div class="info">Aucune playlist de jingles déclarée.</div>';
 
-            document.getElementById('playlistList').innerHTML = playlists.filter(b => b.role !== 'jingle').map(b => {
-                const w = settings.weights[b.id] === undefined ? settings.default_weight : settings.weights[b.id];
-                return `<div class="playlist ${openPlaylists.has(b.id) ? 'open' : ''}" id="playlist-${b.id}">
+            const weightOfPl = b => settings.weights[b.id] === undefined ? settings.default_weight : settings.weights[b.id];
+            const byName = (a, b) => a.label.localeCompare(b.label, 'fr', {numeric: true, sensitivity: 'base'});
+            const sorters = {
+                name: byName,
+                score_desc: (a, b) => playlistScore(b) - playlistScore(a) || byName(a, b),
+                score_asc: (a, b) => playlistScore(a) - playlistScore(b) || byName(a, b),
+                weight_desc: (a, b) => weightOfPl(b) - weightOfPl(a) || byName(a, b),
+                weight_asc: (a, b) => weightOfPl(a) - weightOfPl(b) || byName(a, b)
+            };
+            const filtering = !!catSearch || catFilter !== 'all';
+            const listFor = b => {
+                const base = catFilter === 'pending' ? (rawAll[b.id] || []).filter(t => t.status === 'pending' || t.status === 'running')
+                    : catFilter === 'failed' ? (rawAll[b.id] || []).filter(t => t.status === 'failed')
+                    : results[b.id];
+                return base.filter(t => catalogMatches(b, t));
+            };
+            const sorted = playlists.filter(b => b.role !== 'jingle').sort(sorters[playlistSort] || byName)
+                .map(b => ({b, list: listFor(b)}))
+                .filter(x => !filtering || x.list.length || (catSearch && x.b.label.toLocaleLowerCase().includes(catSearch) && catFilter === 'all'));
+            document.getElementById('playlistList').innerHTML = sorted.length ? sorted.map(({b, list}) => {
+                const w = weightOfPl(b);
+                const sc = playlistScore(b);
+                const all = rawAll[b.id] || [];
+                const pend = all.filter(t => t.status === 'pending' || t.status === 'running').length;
+                const fail = all.filter(t => t.status === 'failed').length;
+                const mins = Math.ceil(results[b.id].reduce((a, t) => a + (Number(t.duration) || 0), 0) / 60);
+                const isOpen = openPlaylists.has(b.id) || (filtering && list.length > 0);
+                return `<div class="playlist ${isOpen ? 'open' : ''}" id="playlist-${b.id}">
                     <div class="playlist-head">
-                        <span class="playlist-name" onclick="toggleOpen('${b.id}')">${esc(b.label)} <span class="count" id="count-${b.id}"></span><span class="chev">&#9662;</span></span>
+                        <span class="playlist-name" onclick="toggleOpen('${b.id}')">${esc(b.label)} <span class="count" id="count-${b.id}"></span>${scoreBadge(sc)}<span class="chev">&#9662;</span></span>
                         <input type="range" min="0" max="10" step="1" value="${w}" oninput="setWeight('${b.id}', this.value, this)">
                         <span class="w-val">${w}</span>
                     </div>
+                    <div class="hint" style="margin:-4px 0 4px">${results[b.id].length} généré(s), ${mins} min${pend ? ', ' + pend + ' en attente' : ''}${fail ? ', ' + fail + ' en échec' : ''}</div>
                     <div class="tracks">
                         <div class="mini-actions">
                             <button onclick="bulk('${b.id}', true)">Tout activer</button>
                             <button onclick="bulk('${b.id}', false)">Tout désactiver</button>
+                            <button onclick="exportPlaylist('${b.id}')">Exporter JSON</button>
+                            <button onclick="renamePlaylist('${b.id}')">Renommer la playlist</button>
+                            <button onclick="deletePlaylist('${b.id}')" style="color:var(--err)">Supprimer la playlist</button>
                         </div>
-                        ${results[b.id].length ? results[b.id].map(t => trackRow(b, t)).join('') : '<div class="info">Aucun morceau généré.</div>'}
+                        ${list.length ? list.map(t => trackCard(b, t)).join('') : `<div class="info">${filtering ? 'Aucun morceau pour ce filtre.' : 'Aucun morceau généré.'}</div>`}
                     </div>
                 </div>`;
-            }).join('');
+            }).join('') : '<div class="info">Aucun résultat.</div>';
             refreshCounts();
+            fillOpenAudio();
+            updateCatFoldBtn();
         }
 
         function render() {
-            ['default_weight', 'no_repeat', 'no_repeat_songs', 'jingle_every', 'thumb_strength', 'ads_every', 'ad_seconds', 'ad_offset_s', 'visual_transition_s', 'dynamics_strength', 'dyn_base', 'dyn_amp', 'dyn_peak_hour', 'dyn_weekend_shift_h', 'dyn_energy_sigma', 'dyn_tempo_tolerance'].forEach(k => document.getElementById('v_' + k).textContent = settings[k]);
+            ['default_weight', 'no_repeat', 'no_repeat_songs', 'jingle_every', 'thumb_strength', 'ads_every', 'ad_seconds', 'ad_offset_s', 'visual_transition_s', 'dynamics_strength', 'dyn_base', 'dyn_amp', 'dyn_peak_hour', 'dyn_weekend_shift_h', 'dyn_energy_sigma', 'dyn_tempo_tolerance', 'dyn_user_weight'].forEach(k => document.getElementById('v_' + k).textContent = settings[k]);
             document.getElementById('favorites_only').checked = !!settings.favorites_only;
             document.getElementById('jingles_enabled').checked = !!settings.jingles_enabled;
             document.getElementById('ads_enabled').checked = !!settings.ads_enabled;
             document.getElementById('dynamics_enabled').checked = !!settings.dynamics_enabled;
+            document.getElementById('playlistSort').value = playlistSort;
             renderTransitions();
             renderLists();
         }
@@ -1034,12 +1654,11 @@
         }
 
         function initFolds() {
-            const defaults = {account: false, play: true, dynamics: true, trans: false, visuals: false, jingle: false, weights: true};
             let saved = {};
             try { saved = JSON.parse(localStorage.getItem('radioFolds') || '{}'); } catch (e) {}
             document.querySelectorAll('details[data-fold]').forEach(d => {
                 const k = d.dataset.fold;
-                d.open = k in saved ? !!saved[k] : (k in defaults ? defaults[k] : true);
+                d.open = k in saved ? !!saved[k] : false;
                 d.addEventListener('toggle', () => {
                     saved[k] = d.open;
                     try { localStorage.setItem('radioFolds', JSON.stringify(saved)); } catch (e) {}
@@ -1106,7 +1725,7 @@
             save();
         }
 
-        window.addEventListener('load', () => { initFolds(); checkMe(); init(); loadContent(); loadDynamics(); });
+        window.addEventListener('load', () => { initFolds(); checkMe(); init(); loadContent(); loadDynamics(); loadAnalytics(); loadCatalogComments(); setInterval(loadAnalytics, 60000); });
     </script>
 </body>
 </html>
