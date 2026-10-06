@@ -90,7 +90,7 @@ Document établi à partir des décisions prises au fil des conversations. Chaqu
 
 ### 5.2 Services
 - Après avoir arrêté un service, toujours le relancer (`.\services.ps1 restart -Only serveur|analyse|compression|generation`) ; un 502 chez l'utilisateur vient d'un serveur arrêté.
-- Arrêter la génération musicale exige aussi d'arrêter `run_rotation.py` (`services.ps1 stop -Only generation` ne le fait pas) ; sinon les pochettes ComfyUI se disputent la VRAM et plantent.
+- `services.ps1 stop` arrête aussi `run_rotation.py` ; `/stop` libère toute la VRAM, `python run.py` relance les services (le tunnel Cloudflare reste manuel). Sans arrêt de la rotation, les pochettes ComfyUI se disputent la VRAM et plantent.
 - Ne pas redémarrer le serveur inutilement : cela coupe le morceau en cours des auditeurs.
 
 ### 5.3 Tests et livraison

@@ -28,7 +28,7 @@ function Stop-Services {
     }
     if (-not $Only -or $Only -eq 'generation') {
         Get-CimInstance Win32_Process | Where-Object {
-            $_.Name -match 'python' -and $_.CommandLine -match 'run_queue\.py|ace_worker\.py|generate\.py'
+            $_.Name -match 'python' -and $_.CommandLine -match 'run_rotation\.py|run_queue\.py|ace_worker\.py|generate\.py'
         } | ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue }
     }
 }

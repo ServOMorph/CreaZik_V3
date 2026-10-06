@@ -12,7 +12,7 @@ expérimentation de création de musique avec IA instrumental et vocal, avec mod
 ## État actuel (réécrit intégralement à chaque /close)
 WebRadio IA locale en direct « CréaZik IA WebRadio » (89 playlists configurées dont 11 « Esprit », génération en rotation).
 Bug du clic admin corrigé (confirmé), 19 tests passent ; jingles vocaux régénérés avec le nom de la radio.
-Pochettes : style avec texte validé, charte graphique par playlist écrite, 3 exemples à générer. Contrôles iPhone en attente.
+Tout arrêté (/stop) ; relance par run.py. Pochettes : style avec texte validé, charte graphique par playlist écrite, 3 exemples à générer. Contrôles iPhone en attente.
 
 ## Décisions structurantes (append only — 10 entrées max, 5 lignes max/entrée, archiver au-delà)
 - 2026-10-05 : Initialisation du protocole vibecoding.

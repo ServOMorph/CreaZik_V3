@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.3 — 2026-10-06
+
+### Ajouté
+- `run.py` (lance serveur, analyse, compression, génération et ouvre l'UI) et commande `/stop` (arrêt de tout, VRAM libérée).
+
+### Corrigé
+- `services.ps1 stop` arrête aussi `run_rotation.py`.
+
 ## v0.2 — 2026-10-06
 
 ### Ajouté

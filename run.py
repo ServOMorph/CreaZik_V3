@@ -1,12 +1,10 @@
 import socket
 import subprocess
-import sys
 import time
 import webbrowser
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent
-WEBRADIO = ROOT / "webradio"
+WEBRADIO = Path(__file__).resolve().parent / "webradio"
 PORT = 5000
 URL = f"http://localhost:{PORT}/ui.html"
 
@@ -18,22 +16,24 @@ def port_open():
 
 
 def main():
-    if port_open():
-        print(f"Serveur deja actif : {URL}")
-        webbrowser.open(URL)
-        return
-    proc = subprocess.Popen([sys.executable, "server.py", "--port", str(PORT), "--no-browser"], cwd=WEBRADIO)
-    for _ in range(40):
+    subprocess.run(
+        ["powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(WEBRADIO / "services.ps1"), "start"],
+        cwd=WEBRADIO,
+        check=False,
+    )
+    for _ in range(60):
         if port_open():
             break
-        if proc.poll() is not None:
-            sys.exit(proc.returncode)
-        time.sleep(0.25)
+        time.sleep(0.5)
+    else:
+        print("Le serveur ne repond pas sur le port", PORT)
+        return
+    subprocess.run(
+        ["powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(WEBRADIO / "services.ps1"), "status"],
+        cwd=WEBRADIO,
+        check=False,
+    )
     webbrowser.open(URL)
-    try:
-        proc.wait()
-    except KeyboardInterrupt:
-        proc.terminate()
 
 
 if __name__ == "__main__":

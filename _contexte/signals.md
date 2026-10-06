@@ -3,11 +3,8 @@
 ## Actions ouvertes
 - [P1|ouvert] Générer 3 images d'exemple de pochettes avec charte graphique par playlist, les faire valider, puis lancer le lot quand la file de génération musicale est vide
   - fait quand: l'utilisateur valide les 3 exemples (flamenco "Rumba du matin", hard-tech "Rave souterraine", medieval-renaissance "Danse médiévale") et le lot est lancé ou planifié
-  - réf: webradio/covers_charte.json (87 playlists), webradio/tools/cover_gen.py, tools/make_charte.py ; avant : tuer run_rotation.py, generate.py, ace_worker.py, lancer ComfyUI-Qwen (lancer.bat, port 8189), puis relancer la génération
-- [P1|ouvert] Corriger `services.ps1 stop -Only generation` : il n'arrête pas run_rotation.py (la rotation continue et plante ComfyUI par manque de VRAM)
-  - fait quand: `services.ps1 stop -Only generation` arrête run_rotation.py, generate.py et ace_worker.py
-  - réf: webradio/services.ps1, webradio/run_rotation.py
-- [P2|ouvert] Réécouter les 20 jingles « Créa Zik IA WebRadio » (voix, prononciation « Ouèbe Radio ») et tester run.py à la racine
+  - réf: webradio/covers_charte.json (87 playlists), webradio/tools/cover_gen.py, tools/make_charte.py ; avant : /stop, lancer ComfyUI-Qwen (lancer.bat, port 8189) ; après : python run.py pour tout relancer (le tunnel Cloudflare reste manuel)
+- [P2|ouvert] Réécouter les 20 jingles « Créa Zik IA WebRadio » (voix, prononciation « Ouèbe Radio ») et tester run.py (lance les 4 services puis ouvre ui.html ; lancer depuis un état arrêté, sinon doublon de rotation)
   - fait quand: prononciation validée par l'utilisateur, run.py lance le serveur et ouvre l'UI
   - réf: webradio/voice_jingles.json, run.py
 - [P2|ouvert] Exécuter les contrôles manuels sur iPhone (clic ▶ / Lire sans couper, Programmation lisible, noms de playlists sans « Playlist », fondus, écran verrouillé, arc visuel, bandeau Traveling Sound)
@@ -24,7 +21,7 @@
   - réf: PLAN_WEBRADIO.md section 4.5
 
 ## Contexte chaud
-- La rotation de génération tourne (run_rotation.py) ; ComfyUI-Qwen est arrêté (plantage VRAM).
+- Tout est arrêté (commande /stop testée) ; relancer par `python run.py`. Ollama tourne sans modèle chargé. Des run.py d'autres projets (SerenIATech, TableauDeBord, Orga) tournent : ne pas les arrêter.
 - Services : `.\services.ps1 restart -Only serveur|analyse|compression|generation` ; toujours relancer après un arrêt.
 - Fichiers non suivis laissés à part : `liste_musiques_queue.md`, `_archive_docs/`, `webradio/silence.wav.viz.json`.
 
@@ -32,24 +29,20 @@
 # Session du 2026-10-06
 
 ## Décisions prises
-- Clic ▶ et « Lire » : mise en tête de file sans couper le morceau en cours (confirmé par l'utilisateur).
-- Nom de la radio : « CréaZik IA WebRadio » dans toutes les UI et dans les jingles vocaux.
-- Pochettes : texte (titre, playlist, date) généré dans l'image ; une charte graphique par playlist.
-- Aperçu auditeur et mot « Playlist » retirés des affichages auditeur.
+- run.py à la racine lance les 4 services puis ouvre l'UI ; commande /stop arrête tout et libère la VRAM.
+- Nom de la radio « CréaZik IA WebRadio » (UI et jingles) ; pochettes avec texte généré par le modèle, charte par playlist.
 
 ## Livrables produits ou modifiés
-- webradio/listen.js, listen.css, listen.html, radio.html, ui.html, server.py : correctifs et renommage.
-- webradio/radio_engine.py, tests : action playlist_front, 19 tests passent.
-- webradio/playlists/ (11 « Esprit » et blues), playlists.json, scenes_spec.json, series.txt : playlists créées.
-- webradio/voice_jingles.json : 20 jingles régénérés ; run.py, covers_charte.json, tools/cover_gen.py, make_charte.py : créés.
+- run.py, .claude/commands/stop.md : créés, /stop testée.
+- webradio/services.ps1 : stop arrête aussi run_rotation.py.
+- webradio/covers_charte.json, tools/cover_gen.py : créés (3 exemples non générés).
 
 ## Hypothèses validées / invalidées
-- VALIDE : style de pochette avec texte généré par le modèle (lisible, orthographe correcte).
-- INVALIDE : `services.ps1 stop -Only generation` arrête la génération -> run_rotation.py reste actif.
-- EN ATTENTE : rendu des 3 exemples de charte, jingles réécoutés, iPhone.
+- VALIDE : /stop arrête les 4 services ; VRAM à 1,5 Go (applications Windows).
+- EN ATTENTE : run.py non testé (risque de doublon si une rotation tourne), 3 exemples de pochette, jingles à réécouter.
 
 ## Prochaine étape exacte
-Arrêter réellement la génération, relancer ComfyUI-Qwen, générer les 3 exemples de pochette, puis relancer la génération.
+Lancer python run.py, puis arrêter la génération (/stop), lancer ComfyUI-Qwen et générer les 3 exemples de pochette.
 
 ## Question bloquante pour la session suivante
 Aucune
