@@ -18,5 +18,5 @@
 - Fins de morceaux : écouter la fin de plusieurs morceaux pour confirmer qu'aucun n'est coupé (cause probable corrigée : essais « suivant » et redémarrages du serveur).
 - Arc visuel d'un morceau : suivre un morceau en entier et vérifier que le décor évolue (teinte, zoom, second motif au milieu, ondes) sans à-coup ni saccade sur iPhone.
 - Pochette de test (Qwen-Image via ComfyUI-Qwen) : valider le rendu sur la playlist électro spatiale.
-- Bandeau Traveling Sound en mode auditeur : déposer l'image du bandeau dans webradio/traveling-sound.png (sans elle, un bandeau de repli en texte s'affiche) et vérifier le lien sur téléphone.
+- Bandeau Traveling Sound en mode auditeur : vérifier le lien sur téléphone.
 - Bug admin à corriger plus tard : un clic sur un morceau doit le programmer après le morceau en cours, sans couper le morceau actuel.
