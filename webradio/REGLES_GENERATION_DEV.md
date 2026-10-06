@@ -10,7 +10,6 @@ Document établi à partir des décisions prises au fil des conversations. Chaqu
 - Les textes ou poèmes utilisés doivent être de vrais textes du domaine public ; ne jamais en inventer en les attribuant à un auteur.
 - Le plan d'exécution est `PLAN_WEBRADIO.md`. La mise à jour des statuts de roadmap est faite par `/close`, pas en cours de session.
 - Tout ce qui reste à contrôler à la main va dans `tests_manuels.md` ; la section est supprimée une fois le test validé.
-- Ce document est lu par `/start` et mis à jour par `/close`.
 
 ## 2. Règles de génération musicale
 
@@ -40,7 +39,8 @@ Document établi à partir des décisions prises au fil des conversations. Chaqu
 
 ### 2.5 Mesures et énergie
 - La consommation de la carte est une estimation (`energy_wh_est`), car `nvidia-smi` ne donne pas la puissance ; elle est présentée comme telle.
-- Les pochettes sont générées avec une IA locale (ComfyUI-Qwen dans `D:\ServOMorph\ComfyUI-Qwen`, Qwen-Image 2.1 GGUF Q4, lancée par `lancer.bat` sur le port 8189) et uniquement lorsque la file de génération musicale est vide. Un test (`tools/cover_test.py`) a pris environ 21 minutes avec le chargement des modèles : le style doit être validé avant le lot.
+- Les pochettes sont générées avec une IA locale (ComfyUI-Qwen, Qwen-Image 2.1) et uniquement lorsque la file de génération musicale est vide.
+- Pochette : le texte (titre du morceau, nom de la playlist, date de création en plus petit) est généré dans l'image par le modèle, jamais incrusté après coup. Une charte graphique par playlist est dans `webradio/covers_charte.json` (`tools/make_charte.py`), appliquée par `tools/cover_gen.py`.
 
 ## 3. Règles de la radio (moteur)
 
@@ -69,7 +69,7 @@ Document établi à partir des décisions prises au fil des conversations. Chaqu
 - C'est une approximation réglable (Médiamétrie et études d'écoute en streaming) ; les limites sont documentées.
 
 ### 3.5 Modes
-- Mode auditeur : aucun changement de morceau possible ; texte d'invitation vers Traveling Sound Web Radio (musique faite par des humains), lien vers son site Google Sites et bandeau (`webradio/traveling-sound.png`) visibles ; masqués en mode admin.
+- Mode auditeur : aucun changement de morceau possible ; bandeau Traveling Sound visible.
 - Mode admin : programmation (lire à suivre, jouer maintenant, jingles, playlists) ; bascule par une icône en haut à droite, sans boutons dédiés ; passer en admin lance l'écoute de la radio.
 - La page de gestion (`/radio.html`) et l'explorateur (`/ui.html`) sont réservés à l'admin ; les sections sont repliables.
 
@@ -78,7 +78,7 @@ Document établi à partir des décisions prises au fil des conversations. Chaqu
 - Un décor par playlist (plus de choix de style) ; transitions visuelles très douces entre playlists.
 - Les visuels évoluent sur la durée du morceau (arc narratif : intensité en 5 temps, dérive de teinte, second motif, ondes ponctuelles), avec de l'aléatoire stable par morceau.
 - Motion design pendant les jingles (nom de la radio et message sur l'IA locale) ; 10 designs de promotion du site, tirés du contenu de serenia-tech.fr.
-- Jingles parlés sur l'IA locale comme alternative éthique et écoresponsable : voix Kokoro-82M (français), table de prononciation (CreaZik, IA), contrôle d'intelligibilité par transcription.
+- Jingles parlés sur l'IA locale comme alternative éthique et écoresponsable : voix Kokoro-82M (français), table de prononciation ; chaque jingle prononce le nom « Créa Zik IA WebRadio », contrôle d'intelligibilité par transcription.
 - Design moderne et stylisé, lisible à 375 px, conçu pour le téléphone.
 
 ## 5. Règles de développement
@@ -90,6 +90,7 @@ Document établi à partir des décisions prises au fil des conversations. Chaqu
 
 ### 5.2 Services
 - Après avoir arrêté un service, toujours le relancer (`.\services.ps1 restart -Only serveur|analyse|compression|generation`) ; un 502 chez l'utilisateur vient d'un serveur arrêté.
+- Arrêter la génération musicale exige aussi d'arrêter `run_rotation.py` (`services.ps1 stop -Only generation` ne le fait pas) ; sinon les pochettes ComfyUI se disputent la VRAM et plantent.
 - Ne pas redémarrer le serveur inutilement : cela coupe le morceau en cours des auditeurs.
 
 ### 5.3 Tests et livraison
@@ -108,7 +109,5 @@ Document établi à partir des décisions prises au fil des conversations. Chaqu
 
 - Validation par l'utilisateur des textes des jingles parlés.
 - Changement du mot de passe admin par défaut.
-- « Mike Fields » interprété comme Mike Oldfield (à confirmer).
-- Style et rythme de génération des pochettes (lot complet à lancer après validation du test).
-- Bug connu à corriger : en mode admin, le clic sur un morceau le joue tout de suite au lieu de le programmer après le morceau en cours.
+- Rythme de génération du lot de pochettes (style avec texte validé) ; 3 exemples de charte graphique (flamenco, hard tech, médiéval) à générer et faire valider.
 - Comportements iPhone non vérifiés : fondus audio, lecture automatique après connexion, écran verrouillé.

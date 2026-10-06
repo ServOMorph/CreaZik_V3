@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.2 — 2026-10-06
+
+### Ajouté
+- 11 playlists « Esprit » et blues (génération en rotation), `run.py` à la racine.
+- Charte graphique par playlist (`webradio/covers_charte.json`, `tools/cover_gen.py`).
+
+### Modifié
+- Nom de la radio « CréaZik IA WebRadio » (UI et jingles vocaux, régénérés).
+- Mise en queue sans couper (▶, « Lire »), Programmation lisible, noms de playlists sans « Playlist », bandeau « Aperçu auditeur » retiré.
+
 ## v0.1 — 2026-10-06
 
 ### Ajouté

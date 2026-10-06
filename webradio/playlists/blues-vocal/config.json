@@ -1,0 +1,97 @@
+{
+  "playlist_name": "Playlist Blues vocal",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./playlists/blues-vocal/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "01 - Le blues du lundi",
+      "prompt": "blues, soulful gritty male vocal, electric guitar licks, harmonica, piano, slow 12-bar blues feel, French lyrics, slow 12-bar, 70 bpm",
+      "type": "vocal",
+      "duration": 110,
+      "lyrics_file": "playlists/blues-vocal/lyrics/01.txt",
+      "language": "fr"
+    },
+    {
+      "id": "2",
+      "name": "02 - Train de la Louisiane",
+      "prompt": "blues, soulful gritty male vocal, electric guitar licks, harmonica, piano, slow 12-bar blues feel, French lyrics, shuffle, 95 bpm, harmonica",
+      "type": "vocal",
+      "duration": 135,
+      "lyrics_file": "playlists/blues-vocal/lyrics/02.txt",
+      "language": "fr"
+    },
+    {
+      "id": "3",
+      "name": "03 - La croisée des chemins",
+      "prompt": "blues, soulful gritty male vocal, electric guitar licks, harmonica, piano, slow 12-bar blues feel, French lyrics, acoustic Delta, slide guitar",
+      "type": "vocal",
+      "duration": 100,
+      "lyrics_file": "playlists/blues-vocal/lyrics/03.txt",
+      "language": "fr"
+    },
+    {
+      "id": "4",
+      "name": "04 - Whisky et pluie",
+      "prompt": "blues, soulful gritty male vocal, electric guitar licks, harmonica, piano, slow 12-bar blues feel, French lyrics, slow minor blues, piano",
+      "type": "vocal",
+      "duration": 120,
+      "lyrics_file": "playlists/blues-vocal/lyrics/04.txt",
+      "language": "fr"
+    },
+    {
+      "id": "5",
+      "name": "05 - Je suis né sous une mauvaise étoile",
+      "prompt": "blues, soulful gritty male vocal, electric guitar licks, harmonica, piano, slow 12-bar blues feel, French lyrics, slow, heavy, electric",
+      "type": "vocal",
+      "duration": 90,
+      "lyrics_file": "playlists/blues-vocal/lyrics/05.txt",
+      "language": "fr"
+    },
+    {
+      "id": "6",
+      "name": "06 - Rivière boueuse",
+      "prompt": "blues, soulful gritty male vocal, electric guitar licks, harmonica, piano, slow 12-bar blues feel, French lyrics, Chicago blues, band, 100 bpm",
+      "type": "vocal",
+      "duration": 105,
+      "lyrics_file": "playlists/blues-vocal/lyrics/06.txt",
+      "language": "fr"
+    },
+    {
+      "id": "7",
+      "name": "07 - Le blues de la cuisine",
+      "prompt": "blues, soulful gritty male vocal, electric guitar licks, harmonica, piano, slow 12-bar blues feel, French lyrics, boogie-woogie piano, upbeat",
+      "type": "vocal",
+      "duration": 130,
+      "lyrics_file": "playlists/blues-vocal/lyrics/07.txt",
+      "language": "fr"
+    },
+    {
+      "id": "8",
+      "name": "08 - Trois heures du matin",
+      "prompt": "blues, soulful gritty male vocal, electric guitar licks, harmonica, piano, slow 12-bar blues feel, French lyrics, slow, intimate, guitar and voice",
+      "type": "vocal",
+      "duration": 100,
+      "lyrics_file": "playlists/blues-vocal/lyrics/08.txt",
+      "language": "fr"
+    },
+    {
+      "id": "9",
+      "name": "09 - Les mains du travailleur",
+      "prompt": "blues, soulful gritty male vocal, electric guitar licks, harmonica, piano, slow 12-bar blues feel, French lyrics, work song feel, stomp, call and response",
+      "type": "vocal",
+      "duration": 50,
+      "lyrics_file": "playlists/blues-vocal/lyrics/09.txt",
+      "language": "fr"
+    },
+    {
+      "id": "10",
+      "name": "10 - Dernier verre au Delta",
+      "prompt": "blues, soulful gritty male vocal, electric guitar licks, harmonica, piano, slow 12-bar blues feel, French lyrics, closing slow blues, long guitar solo",
+      "type": "vocal",
+      "duration": 75,
+      "lyrics_file": "playlists/blues-vocal/lyrics/10.txt",
+      "language": "fr"
+    }
+  ]
+}

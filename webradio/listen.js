@@ -373,7 +373,7 @@
 
     function showMeta(it) {
         $('nowTitle').textContent = it.jingle ? 'Jingle' : it.name;
-        $('nowSub').textContent = it.jingle ? 'CreaZik Radio' : it.playlist_label;
+        $('nowSub').textContent = it.jingle ? 'CréaZik IA WebRadio' : plName(it.playlist_label);
         setTicker(buildTicker(it));
         loadViz(it);
         applyMediaSession();
@@ -389,8 +389,8 @@
         if (!('mediaSession' in navigator) || !current) return;
         navigator.mediaSession.metadata = new MediaMetadata({
             title: current.jingle ? 'Jingle' : current.name,
-            artist: current.jingle ? 'CreaZik Radio' : current.playlist_label,
-            album: 'CreaZik Radio'
+            artist: current.jingle ? 'CréaZik IA WebRadio' : plName(current.playlist_label),
+            album: 'CréaZik IA WebRadio'
         });
         navigator.mediaSession.setActionHandler('play', startListening);
         navigator.mediaSession.setActionHandler('pause', stopListening);
@@ -609,7 +609,7 @@
         ctx2d.globalAlpha = alpha;
         try {
             if (ov.type === 'jingle') {
-                const list = content.jingle_messages.length ? content.jingle_messages : [{title: 'CreaZik Radio', lines: []}];
+                const list = content.jingle_messages.length ? content.jingle_messages : [{title: 'CréaZik IA WebRadio', lines: []}];
                 const msg = list[ov.n % list.length];
                 window.CreaMotion.jingle.draw(ctx2d, w, h, t, dur, msg, ov.n % window.CreaMotion.jingle.variants, data);
             } else if (content.ads.length) {
@@ -662,7 +662,7 @@
 
     function rowHtml(it, src, extra) {
         const isJ = !!it.jingle;
-        const sub = (isJ ? 'Jingle' : it.playlist_label) + (it.duration ? ' - ' + fmtTime(it.duration) : '');
+        const sub = (isJ ? 'Jingle' : plName(it.playlist_label)) + (it.duration ? ' - ' + fmtTime(it.duration) : '');
         const badge = extra.explicit ? '<span class="prog-badge">Choisi</span>'
             : (extra.auto && isJ ? '<span class="prog-badge">Jingle auto</span>' : '');
         const attrs = `data-src="${src}" data-key="${esc(it.key)}"` + (extra.qi !== undefined ? ` data-qi="${extra.qi}"` : '');
@@ -673,7 +673,7 @@
                 <span class="prog-sub">${esc(sub)}${extra.time ? ' - ' + esc(extra.time) : ''}</span>
                 ${badge}
             </button>
-            <button type="button" class="prog-act" data-act="now" ${attrs} aria-label="Lire maintenant" title="Lire maintenant">&#9654;</button>
+            <button type="button" class="prog-act" data-act="now" ${attrs} aria-label="Lire juste après" title="Lire juste après">&#9654;</button>
             ${removable ? `<button type="button" class="prog-act" data-act="remove" ${attrs} aria-label="Retirer de la file" title="Retirer de la file">&times;</button>` : ''}
         </div>`;
     }
@@ -693,7 +693,7 @@
         setHtml('progNow', current
             ? `<div class="prog-item is-now${current.jingle ? ' is-jingle' : ''}"><div class="prog-main">
                    <span class="prog-title">${esc(current.jingle ? 'Jingle - ' + current.name : current.name)}</span>
-                   <span class="prog-sub">${esc(current.jingle ? 'CreaZik Radio' : current.playlist_label)}</span>
+                   <span class="prog-sub">${esc(current.jingle ? 'CréaZik IA WebRadio' : plName(current.playlist_label))}</span>
                    <span class="prog-badge">En direct</span></div></div>`
             : empty('Aucun morceau en cours.'));
         const queue = live.queue || [];
@@ -710,7 +710,7 @@
             return `<div class="prog-playlist${open ? ' open' : ''}" data-playlist="${b}">
                 <div class="prog-pl-head">
                     <button type="button" class="prog-expand" data-act="toggle" data-playlist="${b}" aria-expanded="${open}">
-                        <span class="prog-pl-name">${esc(pl.label)}</span>
+                        <span class="prog-pl-name">${esc(plName(pl.label))}</span>
                         <span class="prog-pl-count">${pl.tracks.length}</span>
                     </button>
                     <button type="button" class="prog-pl-act" data-act="pl-next" data-playlist="${b}">Ensuite</button>
@@ -719,6 +719,10 @@
                 <div class="prog-pl-tracks">${open ? pl.tracks.map(t => rowHtml(t, 'library', {})).join('') : ''}</div>
             </div>`;
         }).join('') : empty('Aucune playlist disponible.'));
+    }
+
+    function plName(label) {
+        return String(label || '').replace(/^playlist\s+/i, '');
     }
 
     async function loadLibrary() {
@@ -762,15 +766,14 @@
             return;
         }
         if (act === 'pl-next') { radioAction({action: 'playlist_next', id: playlistId}); return; }
-        if (act === 'pl-now') { radioAction({action: 'playlist_now', id: playlistId}); return; }
+        if (act === 'pl-now') { radioAction({action: 'playlist_front', id: playlistId}); return; }
         if (src === 'queue') {
             const index = parseInt(btn.dataset.qi, 10);
             if (act === 'remove') radioAction({action: 'remove', index});
-            else if (act === 'next') radioAction({action: 'move_front', index});
-            else if (act === 'now') radioAction({action: 'play_index', index});
+            else if (act === 'next' || act === 'now') radioAction({action: 'move_front', index});
             return;
         }
-        if (act === 'now') radioAction({action: 'now', key});
+        if (act === 'now') radioAction({action: 'front', key});
         else radioAction({action: 'next', key});
     }
 
@@ -796,7 +799,6 @@
         setHidden('nextBtn', !adm);
         setHidden('adminBar', !adm);
         setHidden('progPanel', !adm);
-        setHidden('viewAsBanner', !(isAdmin && viewAsUser));
         setHidden('humanRadio', adm);
         const icon = $('modeIcon');
         if (icon) {
@@ -943,7 +945,7 @@
         initHumanBanner();
         applyMode();
         setPlayLabel();
-        setTicker('CreaZik Radio : musiques générées par intelligence artificielle, en local   |   Contact : sereniatech33@gmail.com   |   serenia-tech.fr');
+        setTicker('CréaZik IA WebRadio : musiques générées par intelligence artificielle, en local   |   Contact : sereniatech33@gmail.com   |   serenia-tech.fr');
         await refreshLive();
         await Promise.all([loadComments(), loadVotes()]);
         setInterval(rotateFeatured, 5000);

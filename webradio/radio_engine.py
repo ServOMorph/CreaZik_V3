@@ -724,7 +724,7 @@ class RadioEngine:
                 self._compose()
                 if name == "play_index":
                     self._promote(t, forced=True)
-            elif name in ("playlist_next", "playlist_now"):
+            elif name in ("playlist_next", "playlist_front", "playlist_now"):
                 pl = next((p for p in self.cat.playlists if p["id"] == params.get("id")), None)
                 if pl is None:
                     return False

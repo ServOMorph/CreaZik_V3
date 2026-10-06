@@ -552,6 +552,83 @@
       "hue2": 21,
       "speed": 1.4,
       "density": 0.85
+    },
+    "esprit-dylan": {
+      "motif": "smoke",
+      "hue": 35,
+      "hue2": 200,
+      "speed": 0.45,
+      "density": 0.5
+    },
+    "esprit-jackson": {
+      "motif": "grid",
+      "hue": 300,
+      "hue2": 50,
+      "speed": 0.8,
+      "density": 0.7
+    },
+    "esprit-hallyday": {
+      "motif": "spokes",
+      "hue": 10,
+      "hue2": 45,
+      "speed": 0.7,
+      "density": 0.65
+    },
+    "esprit-goldman": {
+      "motif": "aurora",
+      "hue": 205,
+      "hue2": 25,
+      "speed": 0.55,
+      "density": 0.55
+    },
+    "esprit-tiersen": {
+      "motif": "bokeh",
+      "hue": 40,
+      "hue2": 140,
+      "speed": 0.4,
+      "density": 0.45
+    },
+    "blues-vocal": {
+      "motif": "smoke",
+      "hue": 220,
+      "hue2": 30,
+      "speed": 0.35,
+      "density": 0.5
+    },
+    "blues-instrumental": {
+      "motif": "wave",
+      "hue": 230,
+      "hue2": 15,
+      "speed": 0.45,
+      "density": 0.55
+    },
+    "esprit-madness": {
+      "motif": "mosaic",
+      "hue": 0,
+      "hue2": 0,
+      "speed": 0.8,
+      "density": 0.7
+    },
+    "esprit-lapointe": {
+      "motif": "particles",
+      "hue": 50,
+      "hue2": 330,
+      "speed": 0.75,
+      "density": 0.6
+    },
+    "esprit-tri-yann": {
+      "motif": "strings",
+      "hue": 160,
+      "hue2": 40,
+      "speed": 0.6,
+      "density": 0.6
+    },
+    "esprit-vangelis": {
+      "motif": "stars",
+      "hue": 250,
+      "hue2": 190,
+      "speed": 0.35,
+      "density": 0.5
     }
   }
 }

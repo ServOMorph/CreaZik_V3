@@ -1,0 +1,97 @@
+{
+  "playlist_name": "Playlist Esprit Madness",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./playlists/esprit-madness/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "01 - Notre maison",
+      "prompt": "2 tone ska, nutty sound, bouncy upbeat piano, saxophone, offbeat guitar skank, walking bass, cheerful male vocal with group backing vocals, French lyrics, 160 bpm, cheerful",
+      "type": "vocal",
+      "duration": 90,
+      "lyrics_file": "playlists/esprit-madness/lyrics/01.txt",
+      "language": "fr"
+    },
+    {
+      "id": "2",
+      "name": "02 - Un pas de côté",
+      "prompt": "2 tone ska, nutty sound, bouncy upbeat piano, saxophone, offbeat guitar skank, walking bass, cheerful male vocal with group backing vocals, French lyrics, fast ska, 170 bpm, sax riff",
+      "type": "vocal",
+      "duration": 100,
+      "lyrics_file": "playlists/esprit-madness/lyrics/02.txt",
+      "language": "fr"
+    },
+    {
+      "id": "3",
+      "name": "03 - Le bus de nuit",
+      "prompt": "2 tone ska, nutty sound, bouncy upbeat piano, saxophone, offbeat guitar skank, walking bass, cheerful male vocal with group backing vocals, French lyrics, mid-tempo ska, organ",
+      "type": "vocal",
+      "duration": 120,
+      "lyrics_file": "playlists/esprit-madness/lyrics/03.txt",
+      "language": "fr"
+    },
+    {
+      "id": "4",
+      "name": "04 - Monsieur Machin",
+      "prompt": "2 tone ska, nutty sound, bouncy upbeat piano, saxophone, offbeat guitar skank, walking bass, cheerful male vocal with group backing vocals, French lyrics, comic, bouncy piano",
+      "type": "vocal",
+      "duration": 85,
+      "lyrics_file": "playlists/esprit-madness/lyrics/04.txt",
+      "language": "fr"
+    },
+    {
+      "id": "5",
+      "name": "05 - Samedi soir au dancing",
+      "prompt": "2 tone ska, nutty sound, bouncy upbeat piano, saxophone, offbeat guitar skank, walking bass, cheerful male vocal with group backing vocals, French lyrics, upbeat, brass section, 165 bpm",
+      "type": "vocal",
+      "duration": 120,
+      "lyrics_file": "playlists/esprit-madness/lyrics/05.txt",
+      "language": "fr"
+    },
+    {
+      "id": "6",
+      "name": "06 - Le grand nettoyage",
+      "prompt": "2 tone ska, nutty sound, bouncy upbeat piano, saxophone, offbeat guitar skank, walking bass, cheerful male vocal with group backing vocals, French lyrics, rocksteady, slower, 140 bpm",
+      "type": "vocal",
+      "duration": 125,
+      "lyrics_file": "playlists/esprit-madness/lyrics/06.txt",
+      "language": "fr"
+    },
+    {
+      "id": "7",
+      "name": "07 - Les gars du quartier",
+      "prompt": "2 tone ska, nutty sound, bouncy upbeat piano, saxophone, offbeat guitar skank, walking bass, cheerful male vocal with group backing vocals, French lyrics, terrace chant, gang vocals, 160 bpm",
+      "type": "vocal",
+      "duration": 115,
+      "lyrics_file": "playlists/esprit-madness/lyrics/07.txt",
+      "language": "fr"
+    },
+    {
+      "id": "8",
+      "name": "08 - Cuisine anglaise",
+      "prompt": "2 tone ska, nutty sound, bouncy upbeat piano, saxophone, offbeat guitar skank, walking bass, cheerful male vocal with group backing vocals, French lyrics, comic, fast, piano and sax",
+      "type": "vocal",
+      "duration": 65,
+      "lyrics_file": "playlists/esprit-madness/lyrics/08.txt",
+      "language": "fr"
+    },
+    {
+      "id": "9",
+      "name": "09 - Il pleut sur le marché",
+      "prompt": "2 tone ska, nutty sound, bouncy upbeat piano, saxophone, offbeat guitar skank, walking bass, cheerful male vocal with group backing vocals, French lyrics, mid-tempo, melancholic ska",
+      "type": "vocal",
+      "duration": 130,
+      "lyrics_file": "playlists/esprit-madness/lyrics/09.txt",
+      "language": "fr"
+    },
+    {
+      "id": "10",
+      "name": "10 - La fin de la fête",
+      "prompt": "2 tone ska, nutty sound, bouncy upbeat piano, saxophone, offbeat guitar skank, walking bass, cheerful male vocal with group backing vocals, French lyrics, closing, big brass, singalong",
+      "type": "vocal",
+      "duration": 135,
+      "lyrics_file": "playlists/esprit-madness/lyrics/10.txt",
+      "language": "fr"
+    }
+  ]
+}

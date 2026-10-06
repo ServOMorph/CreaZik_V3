@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#0b0b14">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <title>CreaZik - Explorateur de playlists</title>
+    <title>CréaZik IA WebRadio - Explorateur de playlists</title>
     <style>
         :root {
             --ink: #0b0b14;
@@ -643,7 +643,7 @@
             <audio id="mixAudio" preload="auto"></audio>
         </div>
         <div class="header">
-            <h1>🎵 CreaZik Playlists</h1>
+            <h1>🎵 CréaZik IA WebRadio Playlists</h1>
             <p>Explorateur des playlists générées par IA locale</p>
             <select id="playlistSelect" onchange="switchPlaylist(this.value)"></select>
         </div>
@@ -707,7 +707,7 @@
     <div class="modal" id="helpModal">
         <div class="modal-content">
             <h2>À propos des playlists</h2>
-            <p><strong>CreaZik Playlists</strong> regroupe les morceaux générés en local par ACE-Step 1.5, par style et par langue.</p>
+            <p><strong>CréaZik IA WebRadio Playlists</strong> regroupe les morceaux générés en local par ACE-Step 1.5, par style et par langue.</p>
             <p>Each track generation includes:</p>
             <ul style="color: #ccc; margin: 10px 0 15px 20px;">
                 <li>Text prompt for generation</li>
@@ -1151,7 +1151,7 @@
             }
             mixSetButton();
             if ('mediaSession' in navigator) {
-                navigator.mediaSession.metadata = new MediaMetadata({title: t.name, artist: isJingle ? 'Jingle' : t._playlist, album: 'CreaZik Radio'});
+                navigator.mediaSession.metadata = new MediaMetadata({title: t.name, artist: isJingle ? 'Jingle' : t._playlist, album: 'CréaZik IA WebRadio'});
                 navigator.mediaSession.setActionHandler('play', () => mixToggle());
                 navigator.mediaSession.setActionHandler('pause', () => mixToggle());
                 navigator.mediaSession.setActionHandler('nexttrack', () => mixNext());

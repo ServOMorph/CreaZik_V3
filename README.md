@@ -13,4 +13,4 @@ WebRadio IA locale : musique générée en local avec ACE-Step 1.5, diffusée en
 - `tests_manuels.md` : contrôles manuels en attente.
 
 ## État actuel
-78 playlists configurées, génération en rotation. Dynamique horaire, arc visuel par morceau et mode auditeur (bandeau Traveling Sound) livrés ; 18 tests automatiques passent. Test de pochette réalisé, bug du clic admin et contrôles iPhone en attente.
+89 playlists configurées, génération en rotation. Dynamique horaire, arc visuel par morceau et mode auditeur (bandeau Traveling Sound) livrés ; 19 tests automatiques passent. Bug du clic admin corrigé. Pochettes : style avec texte validé, charte par playlist écrite, 3 exemples à générer ; contrôles iPhone en attente.

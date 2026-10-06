@@ -17,6 +17,7 @@
 - Commentaires associés au morceau : écrire un commentaire sur un morceau, vérifier qu'il s'affiche seulement sur ce morceau.
 - Fins de morceaux : écouter la fin de plusieurs morceaux pour confirmer qu'aucun n'est coupé (cause probable corrigée : essais « suivant » et redémarrages du serveur).
 - Arc visuel d'un morceau : suivre un morceau en entier et vérifier que le décor évolue (teinte, zoom, second motif au milieu, ondes) sans à-coup ni saccade sur iPhone.
-- Pochette de test (Qwen-Image via ComfyUI-Qwen) : valider le rendu sur la playlist électro spatiale.
 - Bandeau Traveling Sound en mode auditeur : vérifier le lien sur téléphone.
-- Bug admin à corriger plus tard : un clic sur un morceau doit le programmer après le morceau en cours, sans couper le morceau actuel.
+- iPhone : panneau Programmation lisible (lignes non écrasées), noms de playlists affichés sans « Playlist » et sur plusieurs lignes, bandeau « Aperçu auditeur » absent en mode auditeur.
+- Jingles vocaux : réécouter les 20 jingles, « Créa Zik IA WebRadio » bien prononcé.
+- run.py à la racine : lance le serveur et ouvre l'UI dans le navigateur.

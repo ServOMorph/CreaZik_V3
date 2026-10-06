@@ -74,3 +74,14 @@ country-bluegrass
 ska-rocksteady
 valse-musette
 medieval-renaissance
+esprit-dylan
+esprit-jackson
+esprit-hallyday
+esprit-goldman
+esprit-tiersen
+blues-vocal
+blues-instrumental
+esprit-madness
+esprit-lapointe
+esprit-tri-yann
+esprit-vangelis

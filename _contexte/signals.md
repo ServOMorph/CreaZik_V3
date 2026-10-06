@@ -1,27 +1,30 @@
 # Signals — CreaZik_V3   (MAJ 2026-10-06)
 
 ## Actions ouvertes
-- [P1|ouvert] Valider la pochette de test (Qwen-Image via ComfyUI-Qwen) puis lancer le lot de pochettes quand la file de génération musicale est vide
-  - fait quand: l'utilisateur valide le style de `creazik_cover_00001_.png` et le lot est lancé ou planifié
-  - réf: webradio/tools/cover_test.py, D:\ServOMorph\ComfyUI-Qwen\output\creazik_cover_00001_.png, roadmap_webradio.md phase 7
-- [P1|ouvert] Corriger le bug admin : un clic sur un morceau le joue tout de suite au lieu de le programmer après le morceau en cours
-  - fait quand: en mode admin, un clic sur un morceau l'ajoute juste après le morceau courant sans le couper (test automatique + essai manuel)
-  - réf: PLAN_WEBRADIO.md ligne 1.x, webradio/listen.js (actions front / play_index / now), webradio/radio_engine.py
-- [P2|ouvert] Exécuter les contrôles manuels sur iPhone (fondus, lecture automatique, écran verrouillé, arc visuel, bandeau Traveling Sound, fins de morceaux)
+- [P1|ouvert] Générer 3 images d'exemple de pochettes avec charte graphique par playlist, les faire valider, puis lancer le lot quand la file de génération musicale est vide
+  - fait quand: l'utilisateur valide les 3 exemples (flamenco "Rumba du matin", hard-tech "Rave souterraine", medieval-renaissance "Danse médiévale") et le lot est lancé ou planifié
+  - réf: webradio/covers_charte.json (87 playlists), webradio/tools/cover_gen.py, tools/make_charte.py ; avant : tuer run_rotation.py, generate.py, ace_worker.py, lancer ComfyUI-Qwen (lancer.bat, port 8189), puis relancer la génération
+- [P1|ouvert] Corriger `services.ps1 stop -Only generation` : il n'arrête pas run_rotation.py (la rotation continue et plante ComfyUI par manque de VRAM)
+  - fait quand: `services.ps1 stop -Only generation` arrête run_rotation.py, generate.py et ace_worker.py
+  - réf: webradio/services.ps1, webradio/run_rotation.py
+- [P2|ouvert] Réécouter les 20 jingles « Créa Zik IA WebRadio » (voix, prononciation « Ouèbe Radio ») et tester run.py à la racine
+  - fait quand: prononciation validée par l'utilisateur, run.py lance le serveur et ouvre l'UI
+  - réf: webradio/voice_jingles.json, run.py
+- [P2|ouvert] Exécuter les contrôles manuels sur iPhone (clic ▶ / Lire sans couper, Programmation lisible, noms de playlists sans « Playlist », fondus, écran verrouillé, arc visuel, bandeau Traveling Sound)
   - fait quand: la section correspondante de tests_manuels.md est vide
   - réf: tests_manuels.md
-- [P2|ouvert] Faire valider les textes des jingles parlés et changer le mot de passe admin par défaut
-  - fait quand: textes validés dans webradio/voice_jingles.json et mot de passe admin changé
-  - réf: webradio/voice_jingles.json, webradio/REGLES_GENERATION_DEV.md section 6
-- [P3|ouvert] Poursuivre la génération en rotation (série en cours) et compléter les playlists éclectiques
-  - fait quand: toutes les pistes de series.txt sont générées (ou abandonnées et listées)
-  - réf: webradio/run_rotation.py, webradio/series.txt, PLAN_WEBRADIO.md 4.1 et 4.8
+- [P2|ouvert] Changer le mot de passe admin par défaut
+  - fait quand: mot de passe admin changé
+  - réf: webradio/REGLES_GENERATION_DEV.md section 6
+- [P3|ouvert] Poursuivre la génération en rotation (89 playlists dont 11 « Esprit ») et retirer de « idée de playlist.md » chaque entrée une fois sa playlist complète (10 morceaux)
+  - fait quand: toutes les pistes de series.txt sont générées et les 11 entrées retirées de la liste
+  - réf: webradio/run_rotation.py, webradio/series.txt, idée de playlist.md (restent : Rap Français autotuné, Hight Light Tribe, non traités)
 - [P3|ouvert] Confirmer l'interprétation « Mike Fields = Mike Oldfield »
   - fait quand: l'utilisateur confirme ou corrige
   - réf: PLAN_WEBRADIO.md section 4.5
 
 ## Contexte chaud
-- ComfyUI-Qwen tourne sur le port 8189 (lancé pour le test de pochette, peut être arrêté si la VRAM est nécessaire à la génération).
+- La rotation de génération tourne (run_rotation.py) ; ComfyUI-Qwen est arrêté (plantage VRAM).
 - Services : `.\services.ps1 restart -Only serveur|analyse|compression|generation` ; toujours relancer après un arrêt.
 - Fichiers non suivis laissés à part : `liste_musiques_queue.md`, `_archive_docs/`, `webradio/silence.wav.viz.json`.
 
@@ -29,25 +32,24 @@
 # Session du 2026-10-06
 
 ## Décisions prises
-- Dynamique de la journée : réglages et courbe dans la page de gestion, documentation en 5.4 de l'architecture.
-- Visuels : arc narratif propre à chaque morceau (graine = clé du morceau).
-- MP3 seul : tous les WAV supprimés (sauf silence.wav), le WAV est supprimé après conversion à chaque génération.
-- Pochettes : IA locale ComfyUI-Qwen (Qwen-Image 2.1 GGUF), un test réalisé.
-- Mode auditeur : bandeau et lien Traveling Sound Web Radio.
-- Règles de génération et de développement consignées dans webradio/REGLES_GENERATION_DEV.md, lu par /start et mis à jour par /close.
+- Clic ▶ et « Lire » : mise en tête de file sans couper le morceau en cours (confirmé par l'utilisateur).
+- Nom de la radio : « CréaZik IA WebRadio » dans toutes les UI et dans les jingles vocaux.
+- Pochettes : texte (titre, playlist, date) généré dans l'image ; une charte graphique par playlist.
+- Aperçu auditeur et mot « Playlist » retirés des affichages auditeur.
 
 ## Livrables produits ou modifiés
-- webradio/scenes.js, listen.js, listen.html, listen.css, traveling-sound.png : arc visuel et bandeau.
-- webradio/radio_engine.py, compress_audio.py, ui.html, server.py, tests : MP3 seul, 18 tests passent.
-- webradio/radio.html, ARCHITECTURE_WEBRADIO.md : dynamique de la journée.
-- webradio/REGLES_GENERATION_DEV.md, .claude/commands/start.md, close.md : règles et branchements.
+- webradio/listen.js, listen.css, listen.html, radio.html, ui.html, server.py : correctifs et renommage.
+- webradio/radio_engine.py, tests : action playlist_front, 19 tests passent.
+- webradio/playlists/ (11 « Esprit » et blues), playlists.json, scenes_spec.json, series.txt : playlists créées.
+- webradio/voice_jingles.json : 20 jingles régénérés ; run.py, covers_charte.json, tools/cover_gen.py, make_charte.py : créés.
 
 ## Hypothèses validées / invalidées
-- VALIDE : 868 WAV avaient un MP3 cohérent (durée, analyse) avant suppression.
-- EN ATTENTE : rendu des pochettes à grande échelle (21 min pour une image, chargement des modèles inclus) ; comportements iPhone.
+- VALIDE : style de pochette avec texte généré par le modèle (lisible, orthographe correcte).
+- INVALIDE : `services.ps1 stop -Only generation` arrête la génération -> run_rotation.py reste actif.
+- EN ATTENTE : rendu des 3 exemples de charte, jingles réécoutés, iPhone.
 
 ## Prochaine étape exacte
-Faire valider le style de la pochette, puis corriger le bug du clic admin (programmer après le morceau en cours).
+Arrêter réellement la génération, relancer ComfyUI-Qwen, générer les 3 exemples de pochette, puis relancer la génération.
 
 ## Question bloquante pour la session suivante
-La pochette de test convient-elle (style, couleurs, absence de texte) ?
+Aucune

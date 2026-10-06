@@ -244,6 +244,34 @@ def test_move_front_and_play_index():
         assert [q["key"] for q in eng.snapshot(admin=True)["queue"]].count(pick) <= 1
 
 
+def test_next_and_move_front_do_not_cut_current():
+    tr = {"active": "radio", "jingle_preset": "fondu", "presets": [
+        {"id": "fondu", "name": "Fondu", "crossfade_s": 3, "fade_in_s": 3, "fade_out_s": 3, "gap_s": 0},
+        {"id": "radio", "name": "Radio", "crossfade_s": 2.5, "fade_in_s": 0, "fade_out_s": 0, "gap_s": 0}]}
+    with tempfile.TemporaryDirectory() as tmp:
+        eng, clock = make(tmp, {"a": (8, 60, False), "b": (4, 60, False), "j": (3, 5, True)},
+                          {"jingle_every": 5, "transitions": tr})
+        run(eng, clock, 10)
+        cur = eng.current["uid"]
+        end = eng.current["end"]
+        assert eng.action("next", {"key": "b:3"})
+        assert eng.action("next", {"key": "j:1"})
+        assert eng.action("move_front", {"index": 3})
+        assert eng.current["uid"] == cur and eng.current["end"] == end
+        run(eng, clock, 20)
+        assert eng.current["uid"] == cur and eng.current["end"] == end
+        queue = [q["key"] for q in eng.snapshot(admin=True)["queue"]]
+        assert queue[1:3] == ["b:3", "j:1"], queue
+        assert eng.action("front", {"key": "a:2"})
+        queue = [q["key"] for q in eng.snapshot(admin=True)["queue"] if not q["auto"]]
+        assert queue[0] == "a:2", queue
+        assert eng.action("playlist_front", {"id": "b"})
+        queue = [q["key"] for q in eng.snapshot(admin=True)["queue"] if not q["auto"]]
+        assert queue[:5] == ["b:1", "b:2", "b:3", "b:4", "a:2"], queue
+        run(eng, clock, 20)
+        assert eng.current["uid"] == cur and eng.current["end"] == end
+
+
 def test_settings_change_revalidates_queue():
     with tempfile.TemporaryDirectory() as tmp:
         eng, clock = make(tmp, {"a": (5, 20, False), "b": (5, 20, False)},

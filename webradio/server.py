@@ -57,7 +57,7 @@ CSP = ("default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 
 LOGIN_PAGE = """<!DOCTYPE html>
 <html lang="fr"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CreaZik - Connexion admin</title>
+<title>CréaZik IA WebRadio - Connexion admin</title>
 <style>
 body{font-family:-apple-system,Segoe UI,sans-serif;background:#1e1e2e;color:#e0e0e0;display:flex;
 min-height:100vh;align-items:center;justify-content:center;margin:0;padding:16px}
@@ -70,7 +70,7 @@ a{color:#6496ff;font-size:.85em}
 .err{color:#f44336;font-size:.85em;margin-bottom:10px}
 </style></head><body>
 <form method="post" action="/login">
-<h1>CreaZik - Espace admin</h1>
+<h1>CréaZik IA WebRadio - Espace admin</h1>
 __ERR__
 <input type="hidden" name="next" value="__NEXT__">
 <input type="text" name="user" placeholder="Identifiant" autocomplete="username" autocapitalize="none" autofocus>

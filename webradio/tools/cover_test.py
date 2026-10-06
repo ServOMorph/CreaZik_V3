@@ -12,12 +12,12 @@ wf = {
     "2": {"class_type": "CLIPLoader", "inputs": {"clip_name": "qwen3vl_8b_bf16.safetensors", "type": "qwen_image", "device": "cpu"}},
     "3": {"class_type": "VAELoader", "inputs": {"vae_name": "qwen_image_2.1_vae_bf16.safetensors"}},
     "4": {"class_type": "CLIPTextEncode", "inputs": {"text": prompt_text, "clip": ["2", 0]}},
-    "5": {"class_type": "CLIPTextEncode", "inputs": {"text": "texte, lettres, logo, filigrane, flou, deformation", "clip": ["2", 0]}},
+    "5": {"class_type": "CLIPTextEncode", "inputs": {"text": "faute d'orthographe, lettres deformees, filigrane, logo, flou, deformation", "clip": ["2", 0]}},
     "6": {"class_type": "EmptySD3LatentImage", "inputs": {"width": 768, "height": 768, "batch_size": 1}},
     "7": {"class_type": "KSampler", "inputs": {"model": ["1", 0], "positive": ["4", 0], "negative": ["5", 0], "latent_image": ["6", 0],
                                                 "seed": 7, "steps": 20, "cfg": 4.0, "sampler_name": "euler", "scheduler": "simple", "denoise": 1.0}},
     "8": {"class_type": "VAEDecode", "inputs": {"samples": ["7", 0], "vae": ["3", 0]}},
-    "9": {"class_type": "SaveImage", "inputs": {"images": ["8", 0], "filename_prefix": "creazik_cover"}},
+    "9": {"class_type": "SaveImage", "inputs": {"images": ["8", 0], "filename_prefix": "creazik_cover_texte"}},
 }
 
 req = urllib.request.Request(URL + "/prompt", data=json.dumps({"prompt": wf}).encode(), headers={"Content-Type": "application/json"})

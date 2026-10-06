@@ -1,0 +1,77 @@
+{
+  "playlist_name": "Playlist Blues instrumental",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./playlists/blues-instrumental/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "01 - Slide du bayou",
+      "prompt": "instrumental blues, expressive lead guitar, 12-bar blues, warm vintage tone, instrumental, acoustic slide guitar, Delta, solo",
+      "type": "instrumental",
+      "duration": 65
+    },
+    {
+      "id": "2",
+      "name": "02 - Boogie du samedi",
+      "prompt": "instrumental blues, expressive lead guitar, 12-bar blues, warm vintage tone, instrumental, boogie-woogie piano, walking bass, upbeat",
+      "type": "instrumental",
+      "duration": 125
+    },
+    {
+      "id": "3",
+      "name": "03 - Orgue de minuit",
+      "prompt": "instrumental blues, expressive lead guitar, 12-bar blues, warm vintage tone, instrumental, Hammond organ, slow blues, brushed drums",
+      "type": "instrumental",
+      "duration": 45
+    },
+    {
+      "id": "4",
+      "name": "04 - Saxophone dans la ruelle",
+      "prompt": "instrumental blues, expressive lead guitar, 12-bar blues, warm vintage tone, instrumental, tenor saxophone, slow minor blues, upright bass",
+      "type": "instrumental",
+      "duration": 115
+    },
+    {
+      "id": "5",
+      "name": "05 - Shuffle de Chicago",
+      "prompt": "instrumental blues, expressive lead guitar, 12-bar blues, warm vintage tone, instrumental, electric guitar, harmonica, shuffle, full band",
+      "type": "instrumental",
+      "duration": 55
+    },
+    {
+      "id": "6",
+      "name": "06 - Blues-rock du désert",
+      "prompt": "instrumental blues, expressive lead guitar, 12-bar blues, warm vintage tone, instrumental, overdriven guitar, heavy drums, blues rock",
+      "type": "instrumental",
+      "duration": 125
+    },
+    {
+      "id": "7",
+      "name": "07 - Lamentation",
+      "prompt": "instrumental blues, expressive lead guitar, 12-bar blues, warm vintage tone, instrumental, very slow, clean guitar, emotional bends",
+      "type": "instrumental",
+      "duration": 90
+    },
+    {
+      "id": "8",
+      "name": "08 - Harmonica du Mississippi",
+      "prompt": "instrumental blues, expressive lead guitar, 12-bar blues, warm vintage tone, instrumental, harmonica solo with acoustic guitar, train rhythm",
+      "type": "instrumental",
+      "duration": 100
+    },
+    {
+      "id": "9",
+      "name": "09 - Jump blues",
+      "prompt": "instrumental blues, expressive lead guitar, 12-bar blues, warm vintage tone, instrumental, big band horns, swing, fast",
+      "type": "instrumental",
+      "duration": 125
+    },
+    {
+      "id": "10",
+      "name": "10 - Fin de nuit au club",
+      "prompt": "instrumental blues, expressive lead guitar, 12-bar blues, warm vintage tone, instrumental, jazz blues, guitar trio, relaxed",
+      "type": "instrumental",
+      "duration": 135
+    }
+  ]
+}

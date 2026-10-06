@@ -1,0 +1,97 @@
+{
+  "playlist_name": "Playlist Esprit Boby Lapointe",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./playlists/esprit-lapointe/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "01 - Ta Katie s'est tue",
+      "prompt": "1960s French chanson, humorous fantaisiste, fast wordplay vocal, playful male voice, acoustic guitar, upright bass, light jazz swing, French lyrics, fast swing",
+      "type": "vocal",
+      "duration": 115,
+      "lyrics_file": "playlists/esprit-lapointe/lyrics/01.txt",
+      "language": "fr"
+    },
+    {
+      "id": "2",
+      "name": "02 - Le hareng saur et la sardine",
+      "prompt": "1960s French chanson, humorous fantaisiste, fast wordplay vocal, playful male voice, acoustic guitar, upright bass, light jazz swing, French lyrics, waltz, comic",
+      "type": "vocal",
+      "duration": 90,
+      "lyrics_file": "playlists/esprit-lapointe/lyrics/02.txt",
+      "language": "fr"
+    },
+    {
+      "id": "3",
+      "name": "03 - Avanie et framboise",
+      "prompt": "1960s French chanson, humorous fantaisiste, fast wordplay vocal, playful male voice, acoustic guitar, upright bass, light jazz swing, French lyrics, very fast patter song",
+      "type": "vocal",
+      "duration": 85,
+      "lyrics_file": "playlists/esprit-lapointe/lyrics/03.txt",
+      "language": "fr"
+    },
+    {
+      "id": "4",
+      "name": "04 - Le bossu du métro",
+      "prompt": "1960s French chanson, humorous fantaisiste, fast wordplay vocal, playful male voice, acoustic guitar, upright bass, light jazz swing, French lyrics, swing, guitar",
+      "type": "vocal",
+      "duration": 75,
+      "lyrics_file": "playlists/esprit-lapointe/lyrics/04.txt",
+      "language": "fr"
+    },
+    {
+      "id": "5",
+      "name": "05 - La maman des poissons",
+      "prompt": "1960s French chanson, humorous fantaisiste, fast wordplay vocal, playful male voice, acoustic guitar, upright bass, light jazz swing, French lyrics, gentle, tender, comic",
+      "type": "vocal",
+      "duration": 120,
+      "lyrics_file": "playlists/esprit-lapointe/lyrics/05.txt",
+      "language": "fr"
+    },
+    {
+      "id": "6",
+      "name": "06 - Aragon et Castille",
+      "prompt": "1960s French chanson, humorous fantaisiste, fast wordplay vocal, playful male voice, acoustic guitar, upright bass, light jazz swing, French lyrics, fast flamenco-tinged chanson",
+      "type": "vocal",
+      "duration": 60,
+      "lyrics_file": "playlists/esprit-lapointe/lyrics/06.txt",
+      "language": "fr"
+    },
+    {
+      "id": "7",
+      "name": "07 - Comprend qui peut",
+      "prompt": "1960s French chanson, humorous fantaisiste, fast wordplay vocal, playful male voice, acoustic guitar, upright bass, light jazz swing, French lyrics, rapid wordplay, bouncy",
+      "type": "vocal",
+      "duration": 115,
+      "lyrics_file": "playlists/esprit-lapointe/lyrics/07.txt",
+      "language": "fr"
+    },
+    {
+      "id": "8",
+      "name": "08 - Méli-mélodie",
+      "prompt": "1960s French chanson, humorous fantaisiste, fast wordplay vocal, playful male voice, acoustic guitar, upright bass, light jazz swing, French lyrics, swing, scat, playful",
+      "type": "vocal",
+      "duration": 75,
+      "lyrics_file": "playlists/esprit-lapointe/lyrics/08.txt",
+      "language": "fr"
+    },
+    {
+      "id": "9",
+      "name": "09 - Le tube de toilette",
+      "prompt": "1960s French chanson, humorous fantaisiste, fast wordplay vocal, playful male voice, acoustic guitar, upright bass, light jazz swing, French lyrics, comic, fast, double meaning",
+      "type": "vocal",
+      "duration": 120,
+      "lyrics_file": "playlists/esprit-lapointe/lyrics/09.txt",
+      "language": "fr"
+    },
+    {
+      "id": "10",
+      "name": "10 - Saucisson de cheval",
+      "prompt": "1960s French chanson, humorous fantaisiste, fast wordplay vocal, playful male voice, acoustic guitar, upright bass, light jazz swing, French lyrics, final, fast swing, singalong",
+      "type": "vocal",
+      "duration": 130,
+      "lyrics_file": "playlists/esprit-lapointe/lyrics/10.txt",
+      "language": "fr"
+    }
+  ]
+}

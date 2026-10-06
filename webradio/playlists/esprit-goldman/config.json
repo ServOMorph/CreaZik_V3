@@ -1,0 +1,97 @@
+{
+  "playlist_name": "Playlist Esprit Jean-Jacques Goldman",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./playlists/esprit-goldman/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "01 - Encore un matin",
+      "prompt": "1980s French pop rock, clear high male tenor vocal, acoustic and electric guitars, warm synthesizers, punchy drums, heartfelt, French lyrics, uptempo pop rock, 120 bpm",
+      "type": "vocal",
+      "duration": 70,
+      "lyrics_file": "playlists/esprit-goldman/lyrics/01.txt",
+      "language": "fr"
+    },
+    {
+      "id": "2",
+      "name": "02 - Là-bas, de l'autre côté",
+      "prompt": "1980s French pop rock, clear high male tenor vocal, acoustic and electric guitars, warm synthesizers, punchy drums, heartfelt, French lyrics, duet feel, slow build",
+      "type": "vocal",
+      "duration": 115,
+      "lyrics_file": "playlists/esprit-goldman/lyrics/02.txt",
+      "language": "fr"
+    },
+    {
+      "id": "3",
+      "name": "03 - Pas toi",
+      "prompt": "1980s French pop rock, clear high male tenor vocal, acoustic and electric guitars, warm synthesizers, punchy drums, heartfelt, French lyrics, ballad, piano and guitar",
+      "type": "vocal",
+      "duration": 75,
+      "lyrics_file": "playlists/esprit-goldman/lyrics/03.txt",
+      "language": "fr"
+    },
+    {
+      "id": "4",
+      "name": "04 - Envole-moi",
+      "prompt": "1980s French pop rock, clear high male tenor vocal, acoustic and electric guitars, warm synthesizers, punchy drums, heartfelt, French lyrics, energetic, 128 bpm, synth riff",
+      "type": "vocal",
+      "duration": 85,
+      "lyrics_file": "playlists/esprit-goldman/lyrics/04.txt",
+      "language": "fr"
+    },
+    {
+      "id": "5",
+      "name": "05 - Comme toi",
+      "prompt": "1980s French pop rock, clear high male tenor vocal, acoustic and electric guitars, warm synthesizers, punchy drums, heartfelt, French lyrics, gentle, waltz-like, acoustic",
+      "type": "vocal",
+      "duration": 65,
+      "lyrics_file": "playlists/esprit-goldman/lyrics/05.txt",
+      "language": "fr"
+    },
+    {
+      "id": "6",
+      "name": "06 - Je te donne",
+      "prompt": "1980s French pop rock, clear high male tenor vocal, acoustic and electric guitars, warm synthesizers, punchy drums, heartfelt, French lyrics, pop rock, 116 bpm, bright guitars",
+      "type": "vocal",
+      "duration": 45,
+      "lyrics_file": "playlists/esprit-goldman/lyrics/06.txt",
+      "language": "fr"
+    },
+    {
+      "id": "7",
+      "name": "07 - Il suffira d'un signe",
+      "prompt": "1980s French pop rock, clear high male tenor vocal, acoustic and electric guitars, warm synthesizers, punchy drums, heartfelt, French lyrics, dramatic rock, 112 bpm",
+      "type": "vocal",
+      "duration": 50,
+      "lyrics_file": "playlists/esprit-goldman/lyrics/07.txt",
+      "language": "fr"
+    },
+    {
+      "id": "8",
+      "name": "08 - Puisque tu pars",
+      "prompt": "1980s French pop rock, clear high male tenor vocal, acoustic and electric guitars, warm synthesizers, punchy drums, heartfelt, French lyrics, slow ballad, strings swell",
+      "type": "vocal",
+      "duration": 130,
+      "lyrics_file": "playlists/esprit-goldman/lyrics/08.txt",
+      "language": "fr"
+    },
+    {
+      "id": "9",
+      "name": "09 - Né en dix-sept",
+      "prompt": "1980s French pop rock, clear high male tenor vocal, acoustic and electric guitars, warm synthesizers, punchy drums, heartfelt, French lyrics, storytelling, mid-tempo, guitar arpeggio",
+      "type": "vocal",
+      "duration": 65,
+      "lyrics_file": "playlists/esprit-goldman/lyrics/09.txt",
+      "language": "fr"
+    },
+    {
+      "id": "10",
+      "name": "10 - On ira",
+      "prompt": "1980s French pop rock, clear high male tenor vocal, acoustic and electric guitars, warm synthesizers, punchy drums, heartfelt, French lyrics, final anthem, 124 bpm, crowd chorus",
+      "type": "vocal",
+      "duration": 45,
+      "lyrics_file": "playlists/esprit-goldman/lyrics/10.txt",
+      "language": "fr"
+    }
+  ]
+}

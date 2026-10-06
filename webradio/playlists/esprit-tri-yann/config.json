@@ -1,0 +1,97 @@
+{
+  "playlist_name": "Playlist Esprit Tri Yann",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./playlists/esprit-tri-yann/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "01 - La complainte du marin",
+      "prompt": "Breton celtic folk rock, bombarde, bagpipes, fiddle, bouzouki, celtic harp, bodhran, rock drums, hearty male group vocals and choir, French lyrics, slow, sea shanty, harp intro",
+      "type": "vocal",
+      "duration": 60,
+      "lyrics_file": "playlists/esprit-tri-yann/lyrics/01.txt",
+      "language": "fr"
+    },
+    {
+      "id": "2",
+      "name": "02 - La danse de Plougastel",
+      "prompt": "Breton celtic folk rock, bombarde, bagpipes, fiddle, bouzouki, celtic harp, bodhran, rock drums, hearty male group vocals and choir, French lyrics, fast dance, gavotte rhythm, bombarde",
+      "type": "vocal",
+      "duration": 110,
+      "lyrics_file": "playlists/esprit-tri-yann/lyrics/02.txt",
+      "language": "fr"
+    },
+    {
+      "id": "3",
+      "name": "03 - Le loup de la lande",
+      "prompt": "Breton celtic folk rock, bombarde, bagpipes, fiddle, bouzouki, celtic harp, bodhran, rock drums, hearty male group vocals and choir, French lyrics, dark, minor, epic build",
+      "type": "vocal",
+      "duration": 65,
+      "lyrics_file": "playlists/esprit-tri-yann/lyrics/03.txt",
+      "language": "fr"
+    },
+    {
+      "id": "4",
+      "name": "04 - Les filles de Quimper",
+      "prompt": "Breton celtic folk rock, bombarde, bagpipes, fiddle, bouzouki, celtic harp, bodhran, rock drums, hearty male group vocals and choir, French lyrics, uptempo folk rock, fiddle",
+      "type": "vocal",
+      "duration": 75,
+      "lyrics_file": "playlists/esprit-tri-yann/lyrics/04.txt",
+      "language": "fr"
+    },
+    {
+      "id": "5",
+      "name": "05 - Le roi de la forêt",
+      "prompt": "Breton celtic folk rock, bombarde, bagpipes, fiddle, bouzouki, celtic harp, bodhran, rock drums, hearty male group vocals and choir, French lyrics, medieval ballad, harp and flute",
+      "type": "vocal",
+      "duration": 110,
+      "lyrics_file": "playlists/esprit-tri-yann/lyrics/05.txt",
+      "language": "fr"
+    },
+    {
+      "id": "6",
+      "name": "06 - Pêcheurs d'Islande",
+      "prompt": "Breton celtic folk rock, bombarde, bagpipes, fiddle, bouzouki, celtic harp, bodhran, rock drums, hearty male group vocals and choir, French lyrics, slow, sea, male choir",
+      "type": "vocal",
+      "duration": 125,
+      "lyrics_file": "playlists/esprit-tri-yann/lyrics/06.txt",
+      "language": "fr"
+    },
+    {
+      "id": "7",
+      "name": "07 - La gavotte du cidre",
+      "prompt": "Breton celtic folk rock, bombarde, bagpipes, fiddle, bouzouki, celtic harp, bodhran, rock drums, hearty male group vocals and choir, French lyrics, fast, festive, bagpipes",
+      "type": "vocal",
+      "duration": 135,
+      "lyrics_file": "playlists/esprit-tri-yann/lyrics/07.txt",
+      "language": "fr"
+    },
+    {
+      "id": "8",
+      "name": "08 - Les menhirs",
+      "prompt": "Breton celtic folk rock, bombarde, bagpipes, fiddle, bouzouki, celtic harp, bodhran, rock drums, hearty male group vocals and choir, French lyrics, mystical, slow, drone, choir",
+      "type": "vocal",
+      "duration": 100,
+      "lyrics_file": "playlists/esprit-tri-yann/lyrics/08.txt",
+      "language": "fr"
+    },
+    {
+      "id": "9",
+      "name": "09 - Le retour au pays",
+      "prompt": "Breton celtic folk rock, bombarde, bagpipes, fiddle, bouzouki, celtic harp, bodhran, rock drums, hearty male group vocals and choir, French lyrics, mid-tempo anthem, rock drums",
+      "type": "vocal",
+      "duration": 130,
+      "lyrics_file": "playlists/esprit-tri-yann/lyrics/09.txt",
+      "language": "fr"
+    },
+    {
+      "id": "10",
+      "name": "10 - Kenavo",
+      "prompt": "Breton celtic folk rock, bombarde, bagpipes, fiddle, bouzouki, celtic harp, bodhran, rock drums, hearty male group vocals and choir, French lyrics, final, festive, all instruments",
+      "type": "vocal",
+      "duration": 105,
+      "lyrics_file": "playlists/esprit-tri-yann/lyrics/10.txt",
+      "language": "fr"
+    }
+  ]
+}

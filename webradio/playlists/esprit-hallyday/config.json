@@ -1,0 +1,97 @@
+{
+  "playlist_name": "Playlist Esprit Johnny Hallyday",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./playlists/esprit-hallyday/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "01 - Allumer la nuit",
+      "prompt": "French rock, powerful raspy male baritone vocal, electric guitars, Hammond organ, big drums, stadium rock, French lyrics, uptempo rock, 130 bpm",
+      "type": "vocal",
+      "duration": 115,
+      "lyrics_file": "playlists/esprit-hallyday/lyrics/01.txt",
+      "language": "fr"
+    },
+    {
+      "id": "2",
+      "name": "02 - Que je t'aime encore",
+      "prompt": "French rock, powerful raspy male baritone vocal, electric guitars, Hammond organ, big drums, stadium rock, French lyrics, power ballad, slow build",
+      "type": "vocal",
+      "duration": 60,
+      "lyrics_file": "playlists/esprit-hallyday/lyrics/02.txt",
+      "language": "fr"
+    },
+    {
+      "id": "3",
+      "name": "03 - Le pénitencier des rêves",
+      "prompt": "French rock, powerful raspy male baritone vocal, electric guitars, Hammond organ, big drums, stadium rock, French lyrics, slow, dark blues rock",
+      "type": "vocal",
+      "duration": 85,
+      "lyrics_file": "playlists/esprit-hallyday/lyrics/03.txt",
+      "language": "fr"
+    },
+    {
+      "id": "4",
+      "name": "04 - Moto sur la nationale",
+      "prompt": "French rock, powerful raspy male baritone vocal, electric guitars, Hammond organ, big drums, stadium rock, French lyrics, fast rock'n'roll, 140 bpm",
+      "type": "vocal",
+      "duration": 85,
+      "lyrics_file": "playlists/esprit-hallyday/lyrics/04.txt",
+      "language": "fr"
+    },
+    {
+      "id": "5",
+      "name": "05 - L'envie de vivre",
+      "prompt": "French rock, powerful raspy male baritone vocal, electric guitars, Hammond organ, big drums, stadium rock, French lyrics, anthem, mid-tempo, huge chorus",
+      "type": "vocal",
+      "duration": 105,
+      "lyrics_file": "playlists/esprit-hallyday/lyrics/05.txt",
+      "language": "fr"
+    },
+    {
+      "id": "6",
+      "name": "06 - Gabrielle",
+      "prompt": "French rock, powerful raspy male baritone vocal, electric guitars, Hammond organ, big drums, stadium rock, French lyrics, rock'n'roll shuffle, 135 bpm",
+      "type": "vocal",
+      "duration": 55,
+      "lyrics_file": "playlists/esprit-hallyday/lyrics/06.txt",
+      "language": "fr"
+    },
+    {
+      "id": "7",
+      "name": "07 - Né dans la rue",
+      "prompt": "French rock, powerful raspy male baritone vocal, electric guitars, Hammond organ, big drums, stadium rock, French lyrics, gritty rock, 125 bpm",
+      "type": "vocal",
+      "duration": 50,
+      "lyrics_file": "playlists/esprit-hallyday/lyrics/07.txt",
+      "language": "fr"
+    },
+    {
+      "id": "8",
+      "name": "08 - Requiem pour un fou",
+      "prompt": "French rock, powerful raspy male baritone vocal, electric guitars, Hammond organ, big drums, stadium rock, French lyrics, dramatic ballad, slow, strings",
+      "type": "vocal",
+      "duration": 65,
+      "lyrics_file": "playlists/esprit-hallyday/lyrics/08.txt",
+      "language": "fr"
+    },
+    {
+      "id": "9",
+      "name": "09 - Le blues du bord de mer",
+      "prompt": "French rock, powerful raspy male baritone vocal, electric guitars, Hammond organ, big drums, stadium rock, French lyrics, slow blues rock, harmonica",
+      "type": "vocal",
+      "duration": 85,
+      "lyrics_file": "playlists/esprit-hallyday/lyrics/09.txt",
+      "language": "fr"
+    },
+    {
+      "id": "10",
+      "name": "10 - Debout jusqu'au bout",
+      "prompt": "French rock, powerful raspy male baritone vocal, electric guitars, Hammond organ, big drums, stadium rock, French lyrics, final stadium rock, 128 bpm",
+      "type": "vocal",
+      "duration": 80,
+      "lyrics_file": "playlists/esprit-hallyday/lyrics/10.txt",
+      "language": "fr"
+    }
+  ]
+}

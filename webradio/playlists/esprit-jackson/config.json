@@ -1,0 +1,97 @@
+{
+  "playlist_name": "Playlist Esprit Michael Jackson",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./playlists/esprit-jackson/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "01 - Danse dans la lumière",
+      "prompt": "1980s pop funk, dance groove, slap bass, tight drum machine, synth stabs, brass section, high energetic male tenor vocal with falsetto, French lyrics, 120 bpm, disco funk",
+      "type": "vocal",
+      "duration": 70,
+      "lyrics_file": "playlists/esprit-jackson/lyrics/01.txt",
+      "language": "fr"
+    },
+    {
+      "id": "2",
+      "name": "02 - Regarde dans le miroir",
+      "prompt": "1980s pop funk, dance groove, slap bass, tight drum machine, synth stabs, brass section, high energetic male tenor vocal with falsetto, French lyrics, mid-tempo, soulful pop",
+      "type": "vocal",
+      "duration": 60,
+      "lyrics_file": "playlists/esprit-jackson/lyrics/02.txt",
+      "language": "fr"
+    },
+    {
+      "id": "3",
+      "name": "03 - Ombre de minuit",
+      "prompt": "1980s pop funk, dance groove, slap bass, tight drum machine, synth stabs, brass section, high energetic male tenor vocal with falsetto, French lyrics, dark funk, 115 bpm, eerie synth",
+      "type": "vocal",
+      "duration": 135,
+      "lyrics_file": "playlists/esprit-jackson/lyrics/03.txt",
+      "language": "fr"
+    },
+    {
+      "id": "4",
+      "name": "04 - Billie a dit non",
+      "prompt": "1980s pop funk, dance groove, slap bass, tight drum machine, synth stabs, brass section, high energetic male tenor vocal with falsetto, French lyrics, tense groove, 117 bpm, bass ostinato",
+      "type": "vocal",
+      "duration": 80,
+      "lyrics_file": "playlists/esprit-jackson/lyrics/04.txt",
+      "language": "fr"
+    },
+    {
+      "id": "5",
+      "name": "05 - Ne t'arrête pas",
+      "prompt": "1980s pop funk, dance groove, slap bass, tight drum machine, synth stabs, brass section, high energetic male tenor vocal with falsetto, French lyrics, fast, 125 bpm, party funk",
+      "type": "vocal",
+      "duration": 85,
+      "lyrics_file": "playlists/esprit-jackson/lyrics/05.txt",
+      "language": "fr"
+    },
+    {
+      "id": "6",
+      "name": "06 - Terre en colère",
+      "prompt": "1980s pop funk, dance groove, slap bass, tight drum machine, synth stabs, brass section, high energetic male tenor vocal with falsetto, French lyrics, anthem, choir, building",
+      "type": "vocal",
+      "duration": 80,
+      "lyrics_file": "playlists/esprit-jackson/lyrics/06.txt",
+      "language": "fr"
+    },
+    {
+      "id": "7",
+      "name": "07 - Le grand frisson",
+      "prompt": "1980s pop funk, dance groove, slap bass, tight drum machine, synth stabs, brass section, high energetic male tenor vocal with falsetto, French lyrics, uptempo, 122 bpm, brass hits",
+      "type": "vocal",
+      "duration": 45,
+      "lyrics_file": "playlists/esprit-jackson/lyrics/07.txt",
+      "language": "fr"
+    },
+    {
+      "id": "8",
+      "name": "08 - Main dans la main",
+      "prompt": "1980s pop funk, dance groove, slap bass, tight drum machine, synth stabs, brass section, high energetic male tenor vocal with falsetto, French lyrics, ballad, soft piano and strings",
+      "type": "vocal",
+      "duration": 80,
+      "lyrics_file": "playlists/esprit-jackson/lyrics/08.txt",
+      "language": "fr"
+    },
+    {
+      "id": "9",
+      "name": "09 - Glisse sur la lune",
+      "prompt": "1980s pop funk, dance groove, slap bass, tight drum machine, synth stabs, brass section, high energetic male tenor vocal with falsetto, French lyrics, smooth groove, 110 bpm, finger snaps",
+      "type": "vocal",
+      "duration": 50,
+      "lyrics_file": "playlists/esprit-jackson/lyrics/09.txt",
+      "language": "fr"
+    },
+    {
+      "id": "10",
+      "name": "10 - Rien ne nous arrête",
+      "prompt": "1980s pop funk, dance groove, slap bass, tight drum machine, synth stabs, brass section, high energetic male tenor vocal with falsetto, French lyrics, final, big chorus, 124 bpm",
+      "type": "vocal",
+      "duration": 55,
+      "lyrics_file": "playlists/esprit-jackson/lyrics/10.txt",
+      "language": "fr"
+    }
+  ]
+}

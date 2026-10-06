@@ -456,6 +456,72 @@
     "description": "10 morceaux de musique médiévale et Renaissance instrumentale : luth, flûte, vièle et tambourin."
   },
   {
+    "id": "esprit-dylan",
+    "label": "Playlist Esprit Bob Dylan",
+    "results": "playlists/esprit-dylan/outputs/playlist_results.json",
+    "description": "10 chansons originales en français dans l'esprit folk-rock de Bob Dylan : guitare acoustique, harmonica, voix conteuse."
+  },
+  {
+    "id": "esprit-jackson",
+    "label": "Playlist Esprit Michael Jackson",
+    "results": "playlists/esprit-jackson/outputs/playlist_results.json",
+    "description": "10 chansons originales en français dans l'esprit pop-funk de Michael Jackson : basse funky, cuivres, voix aiguë rythmique."
+  },
+  {
+    "id": "esprit-hallyday",
+    "label": "Playlist Esprit Johnny Hallyday",
+    "results": "playlists/esprit-hallyday/outputs/playlist_results.json",
+    "description": "10 chansons originales en français dans l'esprit rock de Johnny Hallyday : guitares électriques, ballades puissantes, voix rauque."
+  },
+  {
+    "id": "esprit-goldman",
+    "label": "Playlist Esprit Jean-Jacques Goldman",
+    "results": "playlists/esprit-goldman/outputs/playlist_results.json",
+    "description": "10 chansons originales en français dans l'esprit pop-rock de Jean-Jacques Goldman : guitares, synthés années 80, voix claire de ténor."
+  },
+  {
+    "id": "esprit-tiersen",
+    "label": "Playlist Esprit Yann Tiersen",
+    "results": "playlists/esprit-tiersen/outputs/playlist_results.json",
+    "description": "10 pièces instrumentales originales dans l'esprit de Yann Tiersen : piano, accordéon, violon, toy piano, ambiance poétique."
+  },
+  {
+    "id": "blues-vocal",
+    "label": "Playlist Blues vocal",
+    "results": "playlists/blues-vocal/outputs/playlist_results.json",
+    "description": "10 blues chantés en français : guitare, harmonica, piano, voix grave et habitée."
+  },
+  {
+    "id": "blues-instrumental",
+    "label": "Playlist Blues instrumental",
+    "results": "playlists/blues-instrumental/outputs/playlist_results.json",
+    "description": "10 blues instrumentaux : slide, piano boogie, orgue, saxophone, du Delta acoustique au blues-rock."
+  },
+  {
+    "id": "esprit-madness",
+    "label": "Playlist Esprit Madness",
+    "results": "playlists/esprit-madness/outputs/playlist_results.json",
+    "description": "10 chansons originales en français dans l'esprit ska anglais de Madness : piano bondissant, saxophone, contretemps, refrains à reprendre."
+  },
+  {
+    "id": "esprit-lapointe",
+    "label": "Playlist Esprit Boby Lapointe",
+    "results": "playlists/esprit-lapointe/outputs/playlist_results.json",
+    "description": "10 chansons originales en français dans l'esprit de Boby Lapointe : chanson fantaisiste, jeux de mots, débit rapide, guitare et contrebasse."
+  },
+  {
+    "id": "esprit-tri-yann",
+    "label": "Playlist Esprit Tri Yann",
+    "results": "playlists/esprit-tri-yann/outputs/playlist_results.json",
+    "description": "10 chansons originales en français dans l'esprit folk-rock breton de Tri Yann : bombarde, cornemuse, violon, chœurs d'hommes."
+  },
+  {
+    "id": "esprit-vangelis",
+    "label": "Playlist Esprit Vangelis",
+    "results": "playlists/esprit-vangelis/outputs/playlist_results.json",
+    "description": "10 pièces instrumentales originales dans l'esprit de Vangelis : synthés majestueux, nappes cosmiques, thèmes épiques."
+  },
+  {
     "id": "jingles",
     "label": "Jingles (5 s)",
     "results": "playlists/jingles/outputs/playlist_results.json",
