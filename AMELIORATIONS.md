@@ -12,5 +12,5 @@ Cette liste centrale recense les améliorations encore ouvertes. Garder chaque e
 - [ ] Retirer de `series.txt` les playlists supprimées via l'admin, sinon la rotation les régénère ; ajouter un contrôle automatique à la suppression d'une playlist.
 - [ ] Faire utiliser les noms modifiés dans `catalog_overrides.json` par `cover_gen.py` / `cover_batch.py` (ils lisent encore `playlists.json`).
 - [ ] Régénérer les 14 jingles WebRadio restants avec « IA » prononcé, une fois la prononciation validée à l'écoute (scripts dans `D:\ServOMorph\TTS_Local\`).
-- [ ] Décider avant le déploiement si les boutons Slow/Medium/High restent réservés au développeur (actuellement admin seul, poids 1 dans la dynamique).
+- [ ] Décider avant le déploiement si les boutons Slow/Medium/High restent réservés au développeur (actuellement ouverts à tous dans l'UI dev, `/api/dynamics` sans contrôle admin, poids 1 dans la dynamique). Créer une UI auditeur séparée de l'UI dev.
 - [ ] Avant le déploiement : retirer le bouton « Test » public de l'UI auditeur (listen.html, listen.js `toggleTest`) et le dossier `webradio/playlists/tests-ace/`.

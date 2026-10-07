@@ -553,9 +553,6 @@ class Handler(SimpleHTTPRequestHandler):
         self._send_json(200, {"key": key, "on": on}, cookie=cookie)
 
     def _post_dynamics(self):
-        if not self._is_admin():
-            self.send_error(403)
-            return
         try:
             body = self._read_json_body(2048)
             key = str(body.get("key", ""))

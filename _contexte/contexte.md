@@ -13,7 +13,7 @@ expérimentation de création de musique avec IA instrumental et vocal, avec mod
 WebRadio IA locale « CréaZik IA WebRadio » : 86 playlists musicales (921 morceaux) et 29 jingles vocaux dans `webradio/jingles/` ; interfaces auditeur/admin séparées (5000/5001) ; 25 tests du moteur passent.
 Série de tests de voix ACE-Step « Marie » en cours (`webradio/tests_ace/marie/`, v1 à v9) : autotune net obtenu par caption, timbre de voix encore instable ; écoute via le bouton « Test » de l'UI auditeur.
 Worker ACE des v7 à v9 probablement figé (arrêt à valider) ; prononciation « IA » des jingles à valider ; ComfyUI et génération en rotation arrêtés ; batch de pochettes à reprendre.
-Contrôles iPhone en attente ; noms d'artistes, boutons Suivant et Test publics à retirer avant le déploiement.
+Contrôles iPhone en attente ; l'UI du port 5000 est l'UI dev (Suivant, Test et dynamique ouverts) : à remplacer par une UI auditeur avant le déploiement.
 
 ## Décisions structurantes (append only — 10 entrées max, 5 lignes max/entrée, archiver au-delà)
 - 2026-10-06 : MP3 seul, WAV supprimé après conversion, analyse et contrôle de durée.
@@ -27,3 +27,4 @@ Contrôles iPhone en attente ; noms d'artistes, boutons Suivant et Test publics 
 - 2026-10-07 : Jingles rangés dans `webradio/jingles/<catégorie>/`, mélangés, 1 s de silence en tête, voix féminine Chatterbox.
 - 2026-10-07 : Dynamique : seul l'admin saisit Slow/Medium/High et son choix remplace l'énergie mesurée ; mode dev à un seul utilisateur.
 - 2026-10-07 : Tests de voix ACE hors catalogue (`playlists/tests-ace/`, bouton Test) ; BPM/tonalité en paramètres du worker ; un seul changement par version de test.
+- 2026-10-07 : L'UI du port 5000 devient l'UI dev ; boutons Slow/Medium/High rouverts à tous (`/api/dynamics` sans contrôle admin), à refermer avec l'UI auditeur future.

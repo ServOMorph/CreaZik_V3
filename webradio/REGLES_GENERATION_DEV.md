@@ -83,6 +83,7 @@ Document établi à partir des décisions prises au fil des conversations. Chaqu
 
 ### 3.6 Base de données, avis et suppression
 - `radio.db` (SQLite, non versionnée) enregistre chaque diffusion de morceau (horodatage, durée écoutée, passage forcé), les marqueurs « écouté, sans avis », les avis de dynamique Slow / Medium / High et l'historique des votes. Le bouton « sans avis » se trouve entre les pouces ; un pouce retire le marqueur.
+- L'UI du port 5000 est l'UI dev : Suivant, Test et Slow/Medium/High y sont ouverts à tous ; `/api/dynamics` n'exige plus l'admin. Une UI auditeur sera créée plus tard et devra refermer ces accès.
 - Les avis Slow/Medium/High (0,15 / 0,5 / 0,85) sont fusionnés avec l'énergie mesurée dans la dynamique de la journée ; poids réglable (`dyn_user_weight`), croissant avec le nombre d'avis.
 - La section admin « Statistiques » expose les indicateurs, constats automatiques, tableaux triables et exports JSON (avec dictionnaire des champs) et CSV pour analyse humaine et IA.
 - Suppression d'un morceau ou d'une playlist : le MP3, la pochette et les fichiers dérivés sont effacés, l'entrée est masquée via `catalog_overrides.json` (le statut « generated » est conservé pour que la rotation ne le régénère pas) et les données de création (prompt, paroles, modèle, caractéristiques, votes, motif) sont ajoutées à `learning/morceaux_rejetes.jsonl`, corpus de ce qu'il ne faut pas reproduire. Refusé si le morceau est en cours de diffusion. Le renommage passe aussi par `catalog_overrides.json`.

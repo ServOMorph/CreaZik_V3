@@ -22,8 +22,8 @@
 - [P2|ouvert] Changer le mot de passe admin par défaut
   - fait quand: mot de passe admin changé et accès confirmé
   - réf: `webradio/REGLES_GENERATION_DEV.md` section 6, `tests_manuels.md`
-- [P2|ouvert] Avant le déploiement : retirer le bouton « Suivant » public (`PUBLIC_SKIP` dans `server.py`, `applyMode` dans `listen.js`), remplacer les noms d'artistes des titres de playlists par des genres, trancher l'exposition des boutons Renommer/Supprimer, et décider si les boutons Slow/Medium/High restent réservés au développeur
-  - fait quand: aucun saut public possible, aucun nom d'artiste dans les titres publics, choix sur la dynamique tranché
+- [P2|ouvert] Avant le déploiement : retirer le bouton « Suivant » public (`PUBLIC_SKIP` dans `server.py`, `applyMode` dans `listen.js`), remplacer les noms d'artistes des titres de playlists par des genres, trancher l'exposition des boutons Renommer/Supprimer, et refermer `/api/dynamics` (contrôle admin) avec la création d'une UI auditeur séparée de l'UI dev
+  - fait quand: aucun saut public possible, aucun nom d'artiste dans les titres publics, dynamique et Test refermés dans l'UI auditeur
   - réf: `AMELIORATIONS.md`, `webradio/REGLES_GENERATION_DEV.md` sections 3.4, 3.6 et 5.5, `webradio/playlists.json`
 - [P2|ouvert] Choisir parmi les propositions de réaménagement de l'UI admin et décider du sort de `ui.html`
   - fait quand: l'utilisateur a tranché et les choix retenus sont appliqués
@@ -53,10 +53,11 @@
 - Série de tests de voix avec ACE-Step sur `TEXTES/Marie-1_ace.md`, un seul changement par version, sorties dans `webradio/tests_ace/marie/`, écoute via le bouton « Test » de l'UI auditeur (playlist hors catalogue `playlists/tests-ace/`).
 - BPM, tonalité et signature passés en paramètres du worker (`ace_worker.py`), plus dans le caption ; skill `generation-morceaux` créé.
 - Boutons « Mettre en file » (playlist, morceau) dans le catalogue admin.
+- L'UI du port 5000 est l'UI dev (une UI auditeur sera créée plus tard) : boutons Slow/Medium/High rouverts à tous, `/api/dynamics` sans contrôle admin (autorisé explicitement par l'utilisateur), serveur redémarré.
 
 ## Livrables produits ou modifiés
 - `webradio/ace_worker.py`, `webradio/tests_ace/marie/` (config v1 à v9, extrait du couplet 1), `.claude/skills/generation-morceaux/SKILL.md` : en place.
-- `webradio/listen.html`, `listen.css`, `listen.js` (bouton Test), `webradio/radio.html` (Mettre en file) : en place, non commités avant cette clôture.
+- `webradio/listen.html`, `listen.css`, `listen.js` (bouton Test, dynamique ouverte), `webradio/server.py` (`_post_dynamics`), `webradio/radio.html` (Mettre en file) : en place.
 
 ## Hypothèses validées / invalidées
 - VALIDE : caption « heavy hard-tuned autotune vocals, T-Pain and Future style, pitch-snapped robotic vocal effect » + rap trap donne un autotune net (v3) ; piano seul et voix féminine tenus sur 40 s (v6).

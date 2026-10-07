@@ -504,7 +504,7 @@
         const show = !!current && !current.jingle;
         box.hidden = !show;
         const dbx = $('dynBox');
-        if (dbx) dbx.hidden = !show || !effectiveAdmin();
+        if (dbx) dbx.hidden = !show;
         if (!show) return;
         const v = votes.tracks[current.key] || {up: 0, down: 0};
         const mine = votes.mine[current.key] || {up: 0, down: 0};
@@ -515,7 +515,7 @@
         set('thumbUpCount', v.up || 0);
         set('thumbDownCount', v.down || 0);
         const db = $('dynBox');
-        if (db && effectiveAdmin()) {
+        if (db) {
             db.hidden = false;
             const lvls = String((votes.dynamics || {})[current.key] || '').split('+');
             db.querySelectorAll('.dyn-btn').forEach(b => {

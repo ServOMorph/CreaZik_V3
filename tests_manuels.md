@@ -28,4 +28,4 @@
 - UI auditeur sur iPhone 375 px : cadre visuel centré, cycle pochette / animations / pub (9 s) / animations / pochette de 5 s par phase, transitions animées fluides sans saccade, pochette plein cadre sans visuel visible derrière.
 - Pubs : clic sur la pub SérénIA Tech ouvre serenia-tech.fr, clic sur une pub Traveling Sound ouvre son site, pub CréaZik sans clic ; lisibilité de la charte Traveling Sound.
 - Jingles : écouter les jingles 1 à 5 WebRadio (« CréaZik IA WebRadio » prononcé « I A »), les 5 jingles SérénIA Tech et les 5 Traveling Sound ; vérifier la seconde de silence en tête et le début non coupé.
-- Admin : section Jingles avec catégories repliables (état mémorisé), bouton lecture et texte de chaque jingle ; boutons Slow/Medium/High visibles en admin seulement, absents en aperçu auditeur.
+- Admin : section Jingles avec catégories repliables (état mémorisé), bouton lecture et texte de chaque jingle ; boutons Slow/Medium/High visibles pour tous dans l'UI du port 5000 (vote enregistré sans session admin).
