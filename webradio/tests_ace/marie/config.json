@@ -1,0 +1,110 @@
+{
+  "playlist_name": "Test ACE Marie",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./tests_ace/marie/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "v1_rap_melodique_masculin_autotune",
+      "prompt": "French melodic rap, male autotuned vocal, melodic trap beat with deep 808 bass, emotional and introspective",
+      "bpm": 130,
+      "type": "vocal",
+      "duration": 120,
+      "lyrics_file": "../TEXTES/Marie-1_ace.md",
+      "fit_lyrics": false,
+      "language": "fr",
+      "seed": 42
+    },
+    {
+      "id": "2",
+      "name": "v2_chant_francais_autotune_marque",
+      "prompt": "French pop, sung male vocal with heavy auto-tune pitch correction, robotic vocal effect, synth pads, soft 808 bass, melancholic",
+      "bpm": 130,
+      "type": "vocal",
+      "duration": 120,
+      "lyrics_file": "../TEXTES/Marie-1_ace.md",
+      "fit_lyrics": false,
+      "language": "fr",
+      "seed": 42
+    },
+    {
+      "id": "3",
+      "name": "v3_rap_melodique_hard_autotune",
+      "prompt": "French melodic trap rap, heavy hard-tuned autotune vocals, T-Pain and Future style, pitch-snapped robotic vocal effect, deep 808 bass, dark atmospheric synths",
+      "bpm": 130,
+      "type": "vocal",
+      "duration": 120,
+      "lyrics_file": "../TEXTES/Marie-1_ace.md",
+      "fit_lyrics": false,
+      "language": "fr",
+      "seed": 42
+    },
+    {
+      "id": "4",
+      "name": "v4_rap_hard_autotune_voix_unique",
+      "prompt": "French melodic trap rap, single male vocalist, heavy hard-tuned autotune vocals, T-Pain and Future style, pitch-snapped robotic vocal effect, deep 808 bass, dark atmospheric synths",
+      "bpm": 130,
+      "type": "vocal",
+      "duration": 120,
+      "lyrics_file": "../TEXTES/Marie-1_ace.md",
+      "fit_lyrics": false,
+      "language": "fr",
+      "seed": 42
+    },
+    {
+      "id": "5",
+      "name": "v5_slam_feminin_piano_seul",
+      "prompt": "French slam poetry, spoken word, female voice, solo piano only, intimate, minimalist, emotional, no drums",
+      "type": "vocal",
+      "duration": 120,
+      "lyrics_file": "../TEXTES/Marie-1_ace.md",
+      "fit_lyrics": false,
+      "language": "fr",
+      "seed": 42
+    },
+    {
+      "id": "6",
+      "name": "v6_slam_feminin_piano_seul_court",
+      "prompt": "French slam poetry, spoken word, female voice, solo piano only, intimate, minimalist, emotional, no drums",
+      "type": "vocal",
+      "duration": 40,
+      "lyrics_file": "tests_ace/marie/extrait_couplet1.md",
+      "fit_lyrics": false,
+      "language": "fr",
+      "seed": 42
+    },
+    {
+      "id": "7",
+      "name": "v7_slam_feminin_piano_seed1",
+      "prompt": "French slam poetry, spoken word, female voice, solo piano only, intimate, minimalist, emotional, no drums",
+      "type": "vocal",
+      "duration": 40,
+      "lyrics_file": "tests_ace/marie/extrait_couplet1.md",
+      "fit_lyrics": false,
+      "language": "fr",
+      "seed": 1
+    },
+    {
+      "id": "8",
+      "name": "v8_slam_feminin_piano_seed7",
+      "prompt": "French slam poetry, spoken word, female voice, solo piano only, intimate, minimalist, emotional, no drums",
+      "type": "vocal",
+      "duration": 40,
+      "lyrics_file": "tests_ace/marie/extrait_couplet1.md",
+      "fit_lyrics": false,
+      "language": "fr",
+      "seed": 7
+    },
+    {
+      "id": "9",
+      "name": "v9_slam_feminin_piano_seed123",
+      "prompt": "French slam poetry, spoken word, female voice, solo piano only, intimate, minimalist, emotional, no drums",
+      "type": "vocal",
+      "duration": 40,
+      "lyrics_file": "tests_ace/marie/extrait_couplet1.md",
+      "fit_lyrics": false,
+      "language": "fr",
+      "seed": 123
+    }
+  ]
+}

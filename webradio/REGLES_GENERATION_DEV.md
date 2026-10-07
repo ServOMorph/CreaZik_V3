@@ -134,3 +134,5 @@ Document établi à partir des décisions prises au fil des conversations. Chaqu
 - Bouton « Suivant » public et exposition des boutons Renommer/Supprimer : à retirer ou verrouiller avant le déploiement.
 - Réorganisation de l'UI admin : propositions de l'agent design (barre d'accès rapide, onglets) en attente de choix ; sort de `ui.html`.
 - Les suppressions de playlists ne retirent pas leurs identifiants de `series.txt` : la rotation peut les régénérer.
+- Génération ACE : le timbre de voix n'est pas constant sur un morceau (même sur 40 s) ; effet de la seed à trancher (tests v7 à v9) ; une génération à 120 s peut figer en décodage VAE.
+

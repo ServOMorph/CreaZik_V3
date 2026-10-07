@@ -20,3 +20,30 @@
 
 ## Prochaine étape exacte
 Relancer `/generate_covers` pour reprendre les pochettes manquantes.
+
+---
+
+# Session du 2026-10-07
+
+## Décisions prises
+- Jingles : voix féminine Chatterbox (timbre synthétique), 1 s de silence en tête, rangés dans `webradio/jingles/` par catégorie (WebRadio, Traveling Sound, SérénIA Tech), mélangés, un tous les 5 morceaux.
+- UI auditeur : cadre visuel unique centré, cycle de phases de 5 s (pochette, animations, pub 9 s, animations, pochette) avec transitions animées ; mascotte masquée ; pubs SérénIA Tech et Traveling Sound cliquables, charte Traveling Sound.
+- Dynamique : boutons Slow/Medium/High réservés à l'admin ; le choix du développeur remplace l'énergie mesurée (poids 1).
+- Nom affiché « CréaZik IA WebRadio » partout ; la voix dit « IA » (test sur 5 jingles).
+
+## Livrables produits ou modifiés
+- `webradio/jingles/`, `playlists.json`, `radio_engine.py`, `server.py` : jingles hors playlists, catégories, route statique `/jingles/`, dynamique admin.
+- `webradio/radio.html` : jingles par catégories repliables, lecture et texte des jingles, libellé du poids de dynamique.
+- `webradio/listen.html`, `listen.css`, `listen.js`, `motion.js`, `radio_content.json` : cycle visuel, transitions, pubs et charte.
+- `TEXTES/`, `.claude/memory.md` : dossier de textes de test ; mémoire « mode dev ».
+
+## Hypothèses validées / invalidées
+- VALIDE : 25 tests du moteur passent ; serveur redémarré, mp3 des 3 catégories servis (HTTP 200) ; catalogue de 29 jingles chargé ; rendu des pubs Traveling Sound validé par l'utilisateur.
+- INVALIDE : la transcription Whisper n'a pas pu confirmer « IA » (elle écrit « il y a ») : à trancher à l'écoute.
+- EN ATTENTE : écoute des jingles 1 à 5 « IA » et des jingles SérénIA Tech ; contrôles iPhone ; affichage réel des catégories repliables dans l'admin.
+
+## Prochaine étape exacte
+Écouter les jingles 1 à 5 dans l'admin, trancher la prononciation de « IA », puis régénérer les 14 autres si elle convient.
+
+## Question bloquante pour la session suivante
+La prononciation « I A » des jingles WebRadio convient-elle ?

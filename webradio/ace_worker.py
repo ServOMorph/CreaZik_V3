@@ -196,6 +196,12 @@ for i, (case, entry) in enumerate(zip(cases, entries), 1):
         guidance_scale=1.0,
         seed=case.get("seed", -1),
     )
+    if case.get("bpm"):
+        params.bpm = int(case["bpm"])
+    if case.get("keyscale"):
+        params.keyscale = str(case["keyscale"])
+    if case.get("timesignature"):
+        params.timesignature = str(case["timesignature"])
     t0 = time.time()
     meter = GpuPowerMeter()
     meter.start()

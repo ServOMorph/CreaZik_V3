@@ -1145,6 +1145,19 @@
             } catch (e) { msg.textContent = 'Échec de l’ajout à la file.'; }
         }
 
+        async function queueFromCatalog(action, data, btn) {
+            const label = btn.textContent;
+            btn.disabled = true;
+            try {
+                const r = await fetch('/api/radio/action', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({action, ...data})});
+                if (!r.ok) throw new Error(r.status);
+                programState = await r.json();
+                renderProgramState();
+                btn.textContent = 'En file';
+            } catch (e) { btn.textContent = 'Échec'; }
+            setTimeout(() => { btn.textContent = label; btn.disabled = false; }, 1500);
+        }
+
         function addProgramTrack(key) { addProgram('next', {key}); }
         function addProgramPlaylist(id) { addProgram('playlist_next', {id}); }
 
@@ -1455,6 +1468,7 @@
                     </div>
                     ${t.error ? `<div style="color:var(--err);margin-bottom:6px">${esc(t.error)}</div>` : ''}
                     <div class="card-actions">
+                        ${gen ? `<button class="track-act" onclick="queueFromCatalog('next', {key: '${k}'}, this)">Mettre en file</button>` : ''}
                         ${gen ? `<button class="track-act" onclick="downloadTrack('${k}')">Télécharger</button>` : ''}
                         <button class="track-act" onclick="copyPrompt('${k}')">Copier le prompt</button>
                         ${gen ? `<button class="track-act" onclick="renameTrack('${k}', this.dataset.name)" data-name="${esc(t.name || '')}">Renommer</button>
@@ -1559,6 +1573,7 @@
                     <div class="hint" style="margin:-4px 0 4px">${results[b.id].length} généré(s), ${mins} min${pend ? ', ' + pend + ' en attente' : ''}${fail ? ', ' + fail + ' en échec' : ''}</div>
                     <div class="tracks">
                         <div class="mini-actions">
+                            <button onclick="queueFromCatalog('playlist_next', {id: '${b.id}'}, this)">Mettre en file</button>
                             <button onclick="bulk('${b.id}', true)">Tout activer</button>
                             <button onclick="bulk('${b.id}', false)">Tout désactiver</button>
                             <button onclick="exportPlaylist('${b.id}')">Exporter JSON</button>

@@ -1,5 +1,13 @@
 # Changelog
 
+## v1.4 — 2026-10-07
+
+### Ajouté
+- Série de tests de voix ACE-Step sur `TEXTES/Marie-1_ace.md` (`webradio/tests_ace/marie/`, v1 à v9) ; skill `generation-morceaux` ; bouton « Test » dans l'UI auditeur (playlist `tests-ace` hors catalogue) ; boutons « Mettre en file » dans le catalogue admin.
+
+### Modifié
+- `ace_worker.py` : `bpm`, `keyscale` et `timesignature` pris en paramètres de génération.
+
 ## v1.3 — 2026-10-07
 
 ### Ajouté

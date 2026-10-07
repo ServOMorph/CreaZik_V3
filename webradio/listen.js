@@ -247,7 +247,46 @@
     }
 
     function toggle() {
+        if (testing) stopTest();
         if (listening) stopListening(); else startListening();
+    }
+
+    const testAudio = new Audio();
+    let testing = false;
+
+    function setTestLabel(text) {
+        const b = $('testBtn');
+        b.textContent = text || (testing ? 'Arrêter' : 'Test');
+        b.setAttribute('aria-pressed', testing ? 'true' : 'false');
+    }
+
+    function stopTest() {
+        testing = false;
+        testAudio.pause();
+        setTestLabel();
+    }
+
+    async function toggleTest() {
+        if (testing) { stopTest(); return; }
+        const b = $('testBtn');
+        b.disabled = true;
+        try {
+            const r = await fetch('/playlists/tests-ace/outputs/playlist_results.json?t=' + Date.now());
+            if (!r.ok) throw new Error(r.status);
+            const gens = ((await r.json()).generations || []).filter(g => g.status === 'generated');
+            const g = gens[gens.length - 1];
+            if (!g) throw new Error('aucun test');
+            if (listening) stopListening();
+            testAudio.src = '/' + g.output_file.replace(/\.wav$/, '.mp3') + '?v=' + encodeURIComponent(g.generated_at || '');
+            await testAudio.play();
+            testing = true;
+            setTestLabel();
+        } catch (e) {
+            testing = false;
+            setTestLabel('Indisponible');
+            setTimeout(() => setTestLabel(), 2000);
+        }
+        b.disabled = false;
     }
 
     async function refreshLive() {
@@ -1309,6 +1348,8 @@
         isAdmin = !!me.admin;
         $('playBtn').addEventListener('click', toggle);
         $('nextBtn').addEventListener('click', skip);
+        $('testBtn').addEventListener('click', toggleTest);
+        testAudio.addEventListener('ended', stopTest);
         const mi = $('modeIcon');
         if (mi) mi.addEventListener('click', onModeIcon);
         const panel = $('progPanel');

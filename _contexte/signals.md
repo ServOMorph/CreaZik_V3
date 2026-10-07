@@ -1,6 +1,12 @@
 # Signals — CreaZik_V3   (MAJ 2026-10-07)
 
 ## Actions ouvertes
+- [P1|ouvert] Tests ACE « Marie » (voix) : écouter les v7 (seed 1) et, si générées, v8 (seed 7) et v9 (seed 123), même caption slam féminin piano seul sur le couplet 1 (40 s), et trancher si une seed garde un timbre de voix constant
+  - fait quand: au moins une seed donne une voix féminine au timbre constant, ou la piste « seed » est écartée et une autre (extrait plus court, caption) est choisie
+  - réf: `webradio/tests_ace/marie/config.json`, `webradio/tests_ace/marie/outputs/`, `webradio/playlists/tests-ace/outputs/playlist_results.json` (bouton Test de l'UI auditeur), `.claude/skills/generation-morceaux/SKILL.md`
+- [P1|ouvert] Worker ACE des v7 à v9 probablement bloqué en décodage VAE (dernier log à 20:00, v7 seule générée) : à arrêter avec accord de l'utilisateur avant toute autre génération ; relancer v8 et v9 avec `generate.py tests_ace/marie/config.json --only 8,9`
+  - fait quand: process `ace_worker.py` arrêté, v8 et v9 générées
+  - réf: `webradio/tests_ace/marie/gen_v789.log`
 - [P1|ouvert] Écouter les jingles 1 à 5 de la catégorie WebRadio régénérés avec « IA » (Whisper entend « il y a ») et décider : valider puis régénérer les 14 autres (environ 17 min), ou changer la graphie
   - fait quand: prononciation validée et les 19 jingles WebRadio disent « CréaZik IA WebRadio » (ou graphie retenue appliquée)
   - réf: `D:\ServOMorph\TTS_Local\jingles_ia_batch.py`, `D:\ServOMorph\TTS_Local\jingles_ia_wav\`, `D:\ServOMorph\TTS_Local\jingles_old_mp3\` (anciens mp3 1 à 5), `webradio/jingles/webradio/outputs/`
@@ -37,30 +43,28 @@
 - Au dernier statut, le serveur radio, l'analyse et la compression tournaient ; la génération musicale était arrêtée, ComfyUI aussi. Après toute modification Python, redémarrer avec `services.ps1 restart -Only serveur`.
 - Hors dépôt : `D:\ServOMorph\TTS_Local\` contient les scripts Chatterbox et les WAV sources des jingles.
 - 29 jingles actifs : 19 WebRadio (le 20 supprimé par l'utilisateur), 5 Traveling Sound, 5 SérénIA Tech ; un jingle tous les 5 morceaux.
+- Tests ACE : le bouton « Test » (UI auditeur, public comme « Suivant », à retirer avant déploiement) lit la dernière génération de `webradio/playlists/tests-ace/` (hors catalogue, non diffusé). Série Marie : v1 à v9 dans `webradio/tests_ace/marie/` (v6 à v9 : couplet 1, 40 s).
 - Fichiers non suivis laissés à part : `liste_musiques_queue.md`, `_archive_docs/`, `webradio/silence.wav.viz.json`, `TEXTES/` (textes de test pour la génération musicale, ex. `Marie-1_ace.md` au format ACE-Step).
 
 ## Dernière session (2026-10-07)
-# Session du 2026-10-07
+# Session du 2026-10-07 (tests ACE)
 
 ## Décisions prises
-- Jingles : voix féminine Chatterbox (timbre synthétique), 1 s de silence en tête, rangés dans `webradio/jingles/` par catégorie (WebRadio, Traveling Sound, SérénIA Tech), mélangés, un tous les 5 morceaux.
-- UI auditeur : cadre visuel unique centré, cycle de phases de 5 s (pochette, animations, pub 9 s, animations, pochette) avec transitions animées ; mascotte masquée ; pubs SérénIA Tech et Traveling Sound cliquables, charte Traveling Sound.
-- Dynamique : boutons Slow/Medium/High réservés à l'admin ; le choix du développeur remplace l'énergie mesurée (poids 1).
-- Nom affiché « CréaZik IA WebRadio » partout ; la voix dit « IA » (test sur 5 jingles).
+- Série de tests de voix avec ACE-Step sur `TEXTES/Marie-1_ace.md`, un seul changement par version, sorties dans `webradio/tests_ace/marie/`, écoute via le bouton « Test » de l'UI auditeur (playlist hors catalogue `playlists/tests-ace/`).
+- BPM, tonalité et signature passés en paramètres du worker (`ace_worker.py`), plus dans le caption ; skill `generation-morceaux` créé.
+- Boutons « Mettre en file » (playlist, morceau) dans le catalogue admin.
 
 ## Livrables produits ou modifiés
-- `webradio/jingles/`, `playlists.json`, `radio_engine.py`, `server.py` : jingles hors playlists, catégories, route statique `/jingles/`, dynamique admin.
-- `webradio/radio.html` : jingles par catégories repliables, lecture et texte des jingles, libellé du poids de dynamique.
-- `webradio/listen.html`, `listen.css`, `listen.js`, `motion.js`, `radio_content.json` : cycle visuel, transitions, pubs et charte.
-- `TEXTES/`, `.claude/memory.md` : dossier de textes de test ; mémoire « mode dev ».
+- `webradio/ace_worker.py`, `webradio/tests_ace/marie/` (config v1 à v9, extrait du couplet 1), `.claude/skills/generation-morceaux/SKILL.md` : en place.
+- `webradio/listen.html`, `listen.css`, `listen.js` (bouton Test), `webradio/radio.html` (Mettre en file) : en place, non commités avant cette clôture.
 
 ## Hypothèses validées / invalidées
-- VALIDE : 25 tests du moteur passent ; serveur redémarré, mp3 des 3 catégories servis (HTTP 200) ; catalogue de 29 jingles chargé ; rendu des pubs Traveling Sound validé par l'utilisateur.
-- INVALIDE : la transcription Whisper n'a pas pu confirmer « IA » (elle écrit « il y a ») : à trancher à l'écoute.
-- EN ATTENTE : écoute des jingles 1 à 5 « IA » et des jingles SérénIA Tech ; contrôles iPhone ; affichage réel des catégories repliables dans l'admin.
+- VALIDE : caption « heavy hard-tuned autotune vocals, T-Pain and Future style, pitch-snapped robotic vocal effect » + rap trap donne un autotune net (v3) ; piano seul et voix féminine tenus sur 40 s (v6).
+- INVALIDE : « single male vocalist » ne stabilise pas le timbre (v4) ; voix féminine demandée en caption sur 120 s donne une voix qui passe de femme à homme et d'autres instruments entrent (v5) ; réduire la longueur à 40 s ne suffit pas pour un timbre constant (v6).
+- EN ATTENTE : effet de la seed sur la constance du timbre (v7 à v9) ; un décodage VAE à 120 s s'est figé 12 min (v4) puis est passé en 47 s ; v8 probablement figée.
 
 ## Prochaine étape exacte
-Écouter les jingles 1 à 5 dans l'admin, trancher la prononciation de « IA », puis régénérer les 14 autres si elle convient.
+Arrêter le worker figé (avec accord), générer v8 et v9, écouter v7 à v9 via « Test » et choisir la piste suivante (seed, extrait plus court ou caption).
 
 ## Question bloquante pour la session suivante
-La prononciation « I A » des jingles WebRadio convient-elle ?
+Autoriser l'arrêt du worker ACE figé ?

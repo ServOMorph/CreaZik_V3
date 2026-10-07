@@ -10,10 +10,10 @@ expérimentation de création de musique avec IA instrumental et vocal, avec mod
 - Audio diffusé : MP3 192 kbit/s uniquement. Règles détaillées : `webradio/REGLES_GENERATION_DEV.md`.
 
 ## État actuel (réécrit intégralement à chaque /close)
-WebRadio IA locale « CréaZik IA WebRadio » : 86 playlists musicales (921 morceaux) et 29 jingles vocaux (WebRadio, Traveling Sound, SérénIA Tech) dans `webradio/jingles/` ; interfaces auditeur/admin séparées (5000/5001) ; 25 tests du moteur passent.
-UI auditeur : cadre visuel unique centré en cycle de phases de 5 s (pochette, animations, pub, animations, pochette), pubs cliquables (SérénIA Tech, Traveling Sound), mascotte masquée ; boutons Slow/Medium/High réservés à l'admin et pris en compte à 100 % dans la dynamique.
-Mode dev, un seul utilisateur ; prononciation « IA » des jingles à valider (5 régénérés sur 19) ; génération musicale et ComfyUI arrêtés ; batch de pochettes à reprendre.
-Contrôles iPhone en attente ; noms d'artistes et saut public à retirer avant déploiement.
+WebRadio IA locale « CréaZik IA WebRadio » : 86 playlists musicales (921 morceaux) et 29 jingles vocaux dans `webradio/jingles/` ; interfaces auditeur/admin séparées (5000/5001) ; 25 tests du moteur passent.
+Série de tests de voix ACE-Step « Marie » en cours (`webradio/tests_ace/marie/`, v1 à v9) : autotune net obtenu par caption, timbre de voix encore instable ; écoute via le bouton « Test » de l'UI auditeur.
+Worker ACE des v7 à v9 probablement figé (arrêt à valider) ; prononciation « IA » des jingles à valider ; ComfyUI et génération en rotation arrêtés ; batch de pochettes à reprendre.
+Contrôles iPhone en attente ; noms d'artistes, boutons Suivant et Test publics à retirer avant le déploiement.
 
 ## Décisions structurantes (append only — 10 entrées max, 5 lignes max/entrée, archiver au-delà)
 - 2026-10-06 : MP3 seul, WAV supprimé après conversion, analyse et contrôle de durée.
@@ -26,3 +26,4 @@ Contrôles iPhone en attente ; noms d'artistes et saut public à retirer avant d
 - 2026-10-06 : Panneau de pub carré cliquable avec mascotte (20 styles) ; jingles instrumentaux supprimés ; morceau en fondu sous le jingle.
 - 2026-10-07 : Jingles rangés dans `webradio/jingles/<catégorie>/`, mélangés, 1 s de silence en tête, voix féminine Chatterbox.
 - 2026-10-07 : Dynamique : seul l'admin saisit Slow/Medium/High et son choix remplace l'énergie mesurée ; mode dev à un seul utilisateur.
+- 2026-10-07 : Tests de voix ACE hors catalogue (`playlists/tests-ace/`, bouton Test) ; BPM/tonalité en paramètres du worker ; un seul changement par version de test.

@@ -545,6 +545,9 @@ button:disabled { opacity: 0.45; cursor: default; }
 
 .btn-next:active { transform: scale(0.95); background: var(--a1-a); border-color: var(--a1); }
 
+.btn-test { padding: 0 18px; }
+.btn-test[aria-pressed="true"] { background: var(--a1-a); border-color: var(--a1); }
+
 .ticker {
   width: auto;
   overflow: hidden;
