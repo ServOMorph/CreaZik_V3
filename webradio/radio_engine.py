@@ -59,7 +59,7 @@ DEFAULT_RADIO = {
     "dyn_weekend_shift_h": 1.0,
     "dyn_energy_sigma": 0.25,
     "dyn_tempo_tolerance": 0.25,
-    "dyn_user_weight": 0.5,
+    "dyn_user_weight": 1.0,
     "transitions": DEFAULT_TRANSITIONS,
 }
 
@@ -117,7 +117,7 @@ class Catalog:
 
     def _feature_count(self):
         try:
-            return sum(1 for _ in self.root.glob("playlists/*/outputs/*.feat.json"))
+            return sum(1 for pat in ("playlists/*/outputs/*.feat.json", "jingles/*/outputs/*.feat.json") for _ in self.root.glob(pat))
         except OSError:
             return 0
 
@@ -191,7 +191,7 @@ class Catalog:
                 continue
             p = dict(p, label=pov.get("label") or p.get("label", p["id"]))
             data = read_json(self.root / p["results"], {})
-            cfg = read_json(self.root / "playlists" / p["id"] / "config.json", {})
+            cfg = read_json(self.root / Path(p["results"]).parent.parent / "config.json", {})
             group = cfg.get("song_group")
             is_jingle = p.get("role") == "jingle"
             keys = []
@@ -209,7 +209,7 @@ class Catalog:
                 g = dict(g, name=tov.get("name") or g.get("name", key))
                 tracks[key] = {
                     "key": key, "song": f"{group}:{g['test_case_id']}" if group else key, "playlist": p["id"], "playlist_label": p.get("label", p["id"]),
-                    "playlist_description": p.get("description", ""), "jingle": is_jingle,
+                    "playlist_description": p.get("description", ""), "jingle": is_jingle, "category": p.get("category", ""),
                     "name": g.get("name", key), "prompt": g.get("prompt", ""), "type": g.get("type", ""),
                     "generated_at": g.get("generated_at", ""), "model": g.get("model") or data.get("model", ""),
                     "file": rel, "duration": dur, "energy_wh_est": g.get("energy_wh_est"),
@@ -433,8 +433,7 @@ class RadioEngine:
             return measured
         if measured is None:
             return mean
-        w = float(self.settings().get("dyn_user_weight", 0.5) or 0)
-        w = max(0.0, min(1.0, w)) * n / (n + 2.0)
+        w = max(0.0, min(1.0, float(self.settings().get("dyn_user_weight", 1.0) or 0)))
         return (1 - w) * measured + w * mean
 
     def dynamics_info(self):
@@ -779,7 +778,7 @@ class RadioEngine:
     def _learning_record(self, key, reason):
         tr = self.cat.tracks[key]
         pid = tr["playlist"]
-        cfg = read_json(self.root / "playlists" / pid / "config.json", {})
+        cfg = read_json(self.root / Path(tr["file"]).parent.parent / "config.json", {})
         case = next((c for c in cfg.get("test_cases", []) if f"{pid}:{c.get('id')}" == key), {})
         lyrics = ""
         if case.get("lyrics_file"):

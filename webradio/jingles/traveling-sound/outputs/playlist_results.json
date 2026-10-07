@@ -1,0 +1,61 @@
+{
+  "playlist": "Jingles Traveling Sound",
+  "model": "Chatterbox multilingue (voix locale, timbre féminin)",
+  "generations": [
+    {
+      "test_case_id": "1",
+      "name": "Jingle Traveling Sound 01",
+      "prompt": "Envie d'écouter de la musique faite par des humains ? Rendez-vous sur Traveling Sound Web Radio : le lien est en bas de cette page.",
+      "type": "voice",
+      "duration": 8.0,
+      "output_file": "jingles/traveling-sound/outputs/01_voix.wav",
+      "status": "generated",
+      "generated_at": "2026-10-07T13:15:30.788403",
+      "model": "Chatterbox multilingue (voix locale, timbre féminin)"
+    },
+    {
+      "test_case_id": "2",
+      "name": "Jingle Traveling Sound 02",
+      "prompt": "Ici, la musique est générée par une intelligence artificielle. Pour entendre des artistes humains, découvrez Traveling Sound Web Radio.",
+      "type": "voice",
+      "duration": 8.8,
+      "output_file": "jingles/traveling-sound/outputs/02_voix.wav",
+      "status": "generated",
+      "generated_at": "2026-10-07T13:15:31.086655",
+      "model": "Chatterbox multilingue (voix locale, timbre féminin)"
+    },
+    {
+      "test_case_id": "3",
+      "name": "Jingle Traveling Sound 03",
+      "prompt": "Après nos morceaux d'intelligence artificielle, place aux musiciens en chair et en os : Traveling Sound Web Radio vous attend.",
+      "type": "voice",
+      "duration": 9.2,
+      "output_file": "jingles/traveling-sound/outputs/03_voix.wav",
+      "status": "generated",
+      "generated_at": "2026-10-07T13:15:31.394345",
+      "model": "Chatterbox multilingue (voix locale, timbre féminin)"
+    },
+    {
+      "test_case_id": "4",
+      "name": "Jingle Traveling Sound 04",
+      "prompt": "Curieux d'entendre des voix et des instruments joués par des humains ? Traveling Sound Web Radio est faite pour vous.",
+      "type": "voice",
+      "duration": 8.6,
+      "output_file": "jingles/traveling-sound/outputs/04_voix.wav",
+      "status": "generated",
+      "generated_at": "2026-10-07T13:15:31.684685",
+      "model": "Chatterbox multilingue (voix locale, timbre féminin)"
+    },
+    {
+      "test_case_id": "5",
+      "name": "Jingle Traveling Sound 05",
+      "prompt": "Une pause humaine ? Écoutez Traveling Sound Web Radio, la web radio de musique faite par des humains.",
+      "type": "voice",
+      "duration": 8.4,
+      "output_file": "jingles/traveling-sound/outputs/05_voix.wav",
+      "status": "generated",
+      "generated_at": "2026-10-07T13:15:32.161541",
+      "model": "Chatterbox multilingue (voix locale, timbre féminin)"
+    }
+  ]
+}

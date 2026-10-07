@@ -55,9 +55,10 @@ Document établi à partir des décisions prises au fil des conversations. Chaqu
 
 ### 3.2 Enchaînements
 - Jingle vers morceau : le morceau démarre en même temps que le jingle, en fondu à volume bas (22 % au plus) pendant la voix, puis le volume monte jusqu'au maximum sur 3 s après la fin du jingle (`DUCK_LEVEL`, `DUCK_RISE_S`).
-- Seuls les jingles vocaux (« Jingles parlés ») sont conservés ; les jingles instrumentaux ont été supprimés.
+- Seuls les jingles vocaux sont conservés ; ils sont rangés hors des playlists, dans `webradio/jingles/<catégorie>/` (`webradio` : CréaZik IA WebRadio, `traveling-sound`, `serenia-tech`), déclarés dans `playlists.json` avec `role: jingle` et `category`. Toutes les catégories sont mélangées dans la même rotation ; l'admin les trie par catégorie (blocs repliables).
+- Chaque jingle commence par 1 s de silence (le début était coupé) et reçoit le même traitement de volume (compression, loudnorm -11 LUFS).
 - Transitions réglables par préréglages en mode admin : fondu enchaîné, fondu, silence ; les fondus sont très doux.
-- Jingle tous les N morceaux (valeur modifiable dans l'interface).
+- Jingle tous les N morceaux (valeur modifiable dans l'interface ; réglée à 5).
 - Jamais deux fois le même morceau d'affilée ; un délai de 15 morceaux avant de rejouer une même chanson (`no_repeat_songs`).
 - Une playlist dont le seul morceau jouable vient de passer n'est pas choisie.
 - Publicité du site tous les 5 morceaux (motion design de 9 s).
@@ -72,6 +73,7 @@ Document établi à partir des décisions prises au fil des conversations. Chaqu
 - Énergie visée selon l'heure de Paris : sinusoïde, doux le matin, plus rythmé vers 17 h 30, décalage d'une heure le week-end, très calme la nuit.
 - Énergie de chaque morceau mesurée sur l'audio (rythme, brillance, niveau, tempo) et classée par rapport au catalogue.
 - Enchaînements harmonisés par tempo (octaves tolérées).
+- En mode développement (un seul utilisateur : le développeur), seul l'admin voit et peut envoyer les boutons Slow / Medium / High (le serveur refuse les autres avec 403) ; son choix remplace entièrement l'énergie mesurée du morceau (`dyn_user_weight` = 1 par défaut, sans dilution selon le nombre d'avis).
 - C'est une approximation réglable (Médiamétrie et études d'écoute en streaming) ; les limites sont documentées.
 
 ### 3.5 Modes
@@ -90,8 +92,9 @@ Document établi à partir des décisions prises au fil des conversations. Chaqu
 
 - Un décor par playlist (plus de choix de style) ; transitions visuelles très douces entre playlists.
 - Les visuels évoluent sur la durée du morceau (arc narratif : intensité en 5 temps, dérive de teinte, second motif, ondes ponctuelles), avec de l'aléatoire stable par morceau.
-- Aucune publicité ni message de jingle n'est dessiné sur le visuel. Le panneau carré à droite du visuel diffuse en continu les publicités du site (10 designs, contenu de serenia-tech.fr) et les messages de la radio sur l'IA locale, en alternance, avec un intermède de 5 s où une mascotte danse sur la musique (`mascot.js`) et des transitions animées.
-- Jingles parlés sur l'IA locale comme alternative éthique et écoresponsable : voix Kokoro-82M (français), table de prononciation ; chaque jingle prononce le nom « Créa Zik IA WebRadio », contrôle d'intelligibilité par transcription.
+- Le cadre visuel est unique et centré ; il enchaîne des phases de 5 s : pochette (si disponible), animations visuelles, publicité (9 s), animations visuelles, pochette, avec huit transitions animées (`PHASE_FX` dans `listen.js`). La mascotte (`mascot.js`) est conservée mais masquée.
+- Publicités (`radio_content.json`) : SérénIA Tech (clic vers serenia-tech.fr), Traveling Sound (5 pubs tirées des textes des jingles, charte du site : fond sombre, vert jungle et orange, crème, police machine à écrire, clic vers son site), messages CréaZik IA WebRadio (sans clic) ; rotation par groupes.
+- Jingles parlés : voix féminine suave et lente générée par Chatterbox multilingue (CPU) avec un timbre de référence synthétique (Kokoro `ff_siwis`), `exaggeration` 0,4 et `cfg_weight` 0,1 ; le nom s'affiche « CréaZik IA WebRadio » et se prononce avec « IA » (« Créa Zique, I A, Ouèbe Radio ») ; « Traveling Sound Ouèbe Radio » et « Sérénia Tèk » pour les pubs ; contrôle d'intelligibilité par transcription (Whisper-small).
 - Design moderne et stylisé, lisible à 375 px, conçu pour le téléphone.
 
 ## 5. Règles de développement
@@ -124,10 +127,10 @@ Document établi à partir des décisions prises au fil des conversations. Chaqu
 
 ## 6. Points non tranchés ou à valider
 
-- Validation par l'utilisateur des textes des jingles parlés.
+- Validation à l'écoute de la prononciation de « IA » dans les jingles 1 à 5 de la catégorie WebRadio (Whisper entend « il y a ») ; si validée, régénérer les 14 autres ; textes des jingles SérénIA Tech non validés.
 - Changement du mot de passe admin par défaut.
 - Rythme de génération du lot de pochettes ; fiabilité du texte des pochettes (prompt en trois lignes, titre et style plus grands, non testé sur un lot).
-- Comportements iPhone non vérifiés : fondus audio dont le fondu sous jingle, lecture automatique après connexion, écran verrouillé, mascotte et transitions de pubs.
+- Comportements iPhone non vérifiés : fondus audio dont le fondu sous jingle, lecture automatique après connexion, écran verrouillé, cycle visuel, transitions et clics sur les pubs.
 - Bouton « Suivant » public et exposition des boutons Renommer/Supprimer : à retirer ou verrouiller avant le déploiement.
 - Réorganisation de l'UI admin : propositions de l'agent design (barre d'accès rapide, onglets) en attente de choix ; sort de `ui.html`.
 - Les suppressions de playlists ne retirent pas leurs identifiants de `series.txt` : la rotation peut les régénérer.

@@ -516,17 +516,27 @@
     "description": "10 pièces instrumentales originales dans l'esprit de Vangelis : synthés majestueux, nappes cosmiques, thèmes épiques."
   },
   {
-    "id": "jingles",
-    "label": "Jingles (5 s)",
-    "results": "playlists/jingles/outputs/playlist_results.json",
-    "description": "Jingles musicaux de 5 secondes générés en local.",
-    "role": "jingle"
+    "id": "jingles-voix-femme",
+    "label": "Jingles CréaZik IA WebRadio",
+    "results": "jingles/webradio/outputs/playlist_results.json",
+    "role": "jingle",
+    "description": "Jingles parlés en français (voix féminine de synthèse locale) présentant la démarche d'IA locale de la radio.",
+    "category": "webradio"
   },
   {
-    "id": "jingles-voix",
-    "label": "Jingles parlés",
-    "results": "playlists/jingles-voix/outputs/playlist_results.json",
+    "id": "jingles-traveling-sound",
+    "label": "Jingles Traveling Sound",
+    "results": "jingles/traveling-sound/outputs/playlist_results.json",
     "role": "jingle",
-    "description": "Jingles parlés en français (voix de synthèse locale) présentant la démarche d'IA locale de la radio."
+    "category": "traveling-sound",
+    "description": "Jingles publicitaires pour Traveling Sound Web Radio."
+  },
+  {
+    "id": "jingles-serenia-tech",
+    "label": "Jingles SérénIA Tech",
+    "results": "jingles/serenia-tech/outputs/playlist_results.json",
+    "role": "jingle",
+    "category": "serenia-tech",
+    "description": "Jingles publicitaires pour SérénIA Tech."
   }
 ]

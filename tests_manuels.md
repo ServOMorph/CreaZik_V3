@@ -20,12 +20,12 @@
 - Arc visuel d'un morceau : suivre un morceau en entier et vérifier que le décor évolue (teinte, zoom, second motif au milieu, ondes) sans à-coup ni saccade sur iPhone.
 - Bandeau Traveling Sound en mode auditeur : vérifier le lien sur téléphone.
 - iPhone : panneau Programmation lisible (lignes non écrasées), noms de playlists affichés sans « Playlist » et sur plusieurs lignes, bandeau « Aperçu auditeur » absent en mode auditeur.
-- Jingles vocaux : réécouter les 20 jingles, « Créa Zik IA WebRadio » bien prononcé.
 - run.py à la racine : lance le serveur et ouvre l'UI dans le navigateur.
-- UI auditeur sur iPhone 375 px : visuel réduit à gauche et carré de publicité à droite (même taille), publicités qui circulent en continu avec transitions fluides et sans saccade, boutons pouces / sans avis / Slow-Medium-High lisibles, bouton Suivant visible pour tous (phase de test).
 - Boutons « sans avis » et Slow/Medium/High : clic, ré-clic pour annuler, état conservé après rechargement ; un pouce retire le marqueur « sans avis ».
 - Admin : section Statistiques (KPI, constats, histogramme, tableaux triables, exports JSON et CSV), tri des playlists par score/nom/pondération, renommage et suppression d'un morceau et d'une playlist (fichier learning/morceaux_rejetes.jsonl créé), sections fermées par défaut avec dernier état restauré, nouvelle organisation de la page.
 - Morceau à score négatif : vérifier qu'il n'est plus diffusé automatiquement.
-- UI auditeur : intermède de 5 s avec la mascotte qui danse sur la musique entre chaque publicité, transitions (iris, diagonale, volets) fluides sur iPhone, légende titre/style centrée en bas du visuel sans pochette.
-- Jingle vers morceau : le morceau démarre en fondu pendant le jingle (volume bas), puis monte au maximum environ 3 s après la fin du jingle ; vérifier sur ordinateur et iPhone. Seuls les 20 jingles vocaux restent.
-- Mascotte : 20 chorégraphies choisies selon le style du morceau (disco, rock, hip-hop, électro, classique, jazz, folk, latin, reggae, metal, chill, chœur, épique, synthwave, lo-fi, celtique, afro, punk, valse, pop) ; vérifier le choix pour quelques playlists.
+- Jingle vers morceau : le morceau démarre en fondu pendant le jingle (volume bas), puis monte au maximum environ 3 s après la fin du jingle ; vérifier sur ordinateur et iPhone.
+- UI auditeur sur iPhone 375 px : cadre visuel centré, cycle pochette / animations / pub (9 s) / animations / pochette de 5 s par phase, transitions animées fluides sans saccade, pochette plein cadre sans visuel visible derrière.
+- Pubs : clic sur la pub SérénIA Tech ouvre serenia-tech.fr, clic sur une pub Traveling Sound ouvre son site, pub CréaZik sans clic ; lisibilité de la charte Traveling Sound.
+- Jingles : écouter les jingles 1 à 5 WebRadio (« CréaZik IA WebRadio » prononcé « I A »), les 5 jingles SérénIA Tech et les 5 Traveling Sound ; vérifier la seconde de silence en tête et le début non coupé.
+- Admin : section Jingles avec catégories repliables (état mémorisé), bouton lecture et texte de chaque jingle ; boutons Slow/Medium/High visibles en admin seulement, absents en aperçu auditeur.

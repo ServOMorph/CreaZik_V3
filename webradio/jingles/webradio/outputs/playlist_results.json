@@ -1,0 +1,226 @@
+{
+  "playlist": "Jingles parlés",
+  "model": "Chatterbox multilingue, timbre féminin",
+  "generations": [
+    {
+      "test_case_id": "1",
+      "name": "Jingle voix 01",
+      "prompt": "CréaZik IA WebRadio. Une radio de musiques générées par une intelligence artificielle qui tourne en local.",
+      "type": "voice",
+      "duration": 7.7,
+      "output_file": "jingles/webradio/outputs/01_voix.wav",
+      "status": "generated",
+      "generated_at": "2026-10-07T10:33:27.486172",
+      "model": "Chatterbox multilingue (voix locale, timbre féminin)"
+    },
+    {
+      "test_case_id": "2",
+      "name": "Jingle voix 02",
+      "prompt": "Sur CréaZik IA WebRadio, la musique est créée sur un ordinateur personnel, sans serveur de calcul distant.",
+      "type": "voice",
+      "duration": 9.1,
+      "output_file": "jingles/webradio/outputs/02_voix.wav",
+      "status": "generated",
+      "generated_at": "2026-10-07T10:33:27.736718",
+      "model": "Chatterbox multilingue (voix locale, timbre féminin)"
+    },
+    {
+      "test_case_id": "3",
+      "name": "Jingle voix 03",
+      "prompt": "CréaZik IA WebRadio : une autre façon de créer, plus proche de nous, et pensée pour rester sobre.",
+      "type": "voice",
+      "duration": 8.2,
+      "output_file": "jingles/webradio/outputs/03_voix.wav",
+      "status": "generated",
+      "generated_at": "2026-10-07T10:33:27.966128",
+      "model": "Chatterbox multilingue (voix locale, timbre féminin)"
+    },
+    {
+      "test_case_id": "4",
+      "name": "Jingle voix 04",
+      "prompt": "Chaque morceau que vous écoutez sur CréaZik IA WebRadio a été généré ici, sur une seule carte graphique.",
+      "type": "voice",
+      "duration": 8.2,
+      "output_file": "jingles/webradio/outputs/04_voix.wav",
+      "status": "generated",
+      "generated_at": "2026-10-07T10:33:28.210583",
+      "model": "Chatterbox multilingue (voix locale, timbre féminin)"
+    },
+    {
+      "test_case_id": "5",
+      "name": "Jingle voix 05",
+      "prompt": "Vous écoutez CréaZik IA WebRadio : des musiques du monde entier, imaginées par une IA locale.",
+      "type": "voice",
+      "duration": 9.3,
+      "output_file": "jingles/webradio/outputs/05_voix.wav",
+      "status": "generated",
+      "generated_at": "2026-10-07T10:33:28.450724",
+      "model": "Chatterbox multilingue (voix locale, timbre féminin)"
+    },
+    {
+      "test_case_id": "6",
+      "name": "Jingle voix 06",
+      "prompt": "CréaZik IA WebRadio : créer en local, c'est garder la main sur ses outils et sur ses données.",
+      "type": "voice",
+      "duration": 7.2,
+      "output_file": "jingles/webradio/outputs/06_voix.wav",
+      "status": "generated",
+      "generated_at": "2026-10-07T10:33:28.703103",
+      "model": "Chatterbox multilingue (voix locale, timbre féminin)"
+    },
+    {
+      "test_case_id": "7",
+      "name": "Jingle voix 07",
+      "prompt": "CréaZik IA WebRadio. Éclectique, curieuse, et fabriquée sur place.",
+      "type": "voice",
+      "duration": 6.3,
+      "output_file": "jingles/webradio/outputs/07_voix.wav",
+      "status": "generated",
+      "generated_at": "2026-10-07T10:33:28.983893",
+      "model": "Chatterbox multilingue (voix locale, timbre féminin)"
+    },
+    {
+      "test_case_id": "8",
+      "name": "Jingle voix 08",
+      "prompt": "CréaZik IA WebRadio : le calcul se fait sur une machine personnelle, pas dans un centre de données lointain.",
+      "type": "voice",
+      "duration": 8.2,
+      "output_file": "jingles/webradio/outputs/08_voix.wav",
+      "status": "generated",
+      "generated_at": "2026-10-07T10:33:29.229029",
+      "model": "Chatterbox multilingue (voix locale, timbre féminin)"
+    },
+    {
+      "test_case_id": "9",
+      "name": "Jingle voix 09",
+      "prompt": "Sur CréaZik IA WebRadio, votre avis compte : un pouce vers le haut, ou vers le bas, et la radio s'adapte à vos goûts.",
+      "type": "voice",
+      "duration": 8.6,
+      "output_file": "jingles/webradio/outputs/09_voix.wav",
+      "status": "generated",
+      "generated_at": "2026-10-07T10:33:29.481362",
+      "model": "Chatterbox multilingue (voix locale, timbre féminin)"
+    },
+    {
+      "test_case_id": "10",
+      "name": "Jingle voix 10",
+      "prompt": "CréaZik IA WebRadio, une radio qui tourne sur une IA locale : un choix de sobriété, de proximité et de liberté.",
+      "type": "voice",
+      "duration": 10.4,
+      "output_file": "jingles/webradio/outputs/10_voix.wav",
+      "status": "generated",
+      "generated_at": "2026-10-07T10:33:29.772826",
+      "model": "Chatterbox multilingue (voix locale, timbre féminin)"
+    },
+    {
+      "test_case_id": "11",
+      "name": "Jingle voix 11",
+      "prompt": "CréaZik IA WebRadio : une radio qui se fabrique elle-même. Chaque morceau est généré en local, un par un.",
+      "type": "voice",
+      "duration": 7.8,
+      "output_file": "jingles/webradio/outputs/11_voix.wav",
+      "status": "generated",
+      "generated_at": "2026-10-07T10:33:30.007611",
+      "model": "Chatterbox multilingue (voix locale, timbre féminin)"
+    },
+    {
+      "test_case_id": "12",
+      "name": "Jingle voix 12",
+      "prompt": "Ici, sur CréaZik IA WebRadio, pas de catalogue de morceaux enregistrés : la musique est créée par une IA, sur place.",
+      "type": "voice",
+      "duration": 9.6,
+      "output_file": "jingles/webradio/outputs/12_voix.wav",
+      "status": "generated",
+      "generated_at": "2026-10-07T10:33:30.286681",
+      "model": "Chatterbox multilingue (voix locale, timbre féminin)"
+    },
+    {
+      "test_case_id": "13",
+      "name": "Jingle voix 13",
+      "prompt": "Sur CréaZik IA WebRadio, les paroles sont inventées pour cette radio, et les poèmes sont tombés dans le domaine public.",
+      "type": "voice",
+      "duration": 8.7,
+      "output_file": "jingles/webradio/outputs/13_voix.wav",
+      "status": "generated",
+      "generated_at": "2026-10-07T10:33:30.538465",
+      "model": "Chatterbox multilingue (voix locale, timbre féminin)"
+    },
+    {
+      "test_case_id": "14",
+      "name": "Jingle voix 14",
+      "prompt": "CréaZik IA WebRadio : vos pouces façonnent la programmation, plus un morceau plaît, plus il revient.",
+      "type": "voice",
+      "duration": 6.8,
+      "output_file": "jingles/webradio/outputs/14_voix.wav",
+      "status": "generated",
+      "generated_at": "2026-10-07T10:33:30.756021",
+      "model": "Chatterbox multilingue (voix locale, timbre féminin)"
+    },
+    {
+      "test_case_id": "15",
+      "name": "Jingle voix 15",
+      "prompt": "CréaZik IA WebRadio, c'est une IA locale : un ordinateur, une carte graphique, et beaucoup de curiosité.",
+      "type": "voice",
+      "duration": 9.1,
+      "output_file": "jingles/webradio/outputs/15_voix.wav",
+      "status": "generated",
+      "generated_at": "2026-10-07T10:33:31.017056",
+      "model": "Chatterbox multilingue (voix locale, timbre féminin)"
+    },
+    {
+      "test_case_id": "16",
+      "name": "Jingle voix 16",
+      "prompt": "CréaZik IA WebRadio : générer en local, c'est aussi choisir ses outils et savoir exactement ce qui tourne sur sa machine.",
+      "type": "voice",
+      "duration": 8.5,
+      "output_file": "jingles/webradio/outputs/16_voix.wav",
+      "status": "generated",
+      "generated_at": "2026-10-07T10:33:31.280326",
+      "model": "Chatterbox multilingue (voix locale, timbre féminin)"
+    },
+    {
+      "test_case_id": "17",
+      "name": "Jingle voix 17",
+      "prompt": "Du flamenco au hard techno, en passant par la poésie : CréaZik IA WebRadio explore les styles du monde.",
+      "type": "voice",
+      "duration": 7.4,
+      "output_file": "jingles/webradio/outputs/17_voix.wav",
+      "status": "generated",
+      "generated_at": "2026-10-07T10:33:31.509316",
+      "model": "Chatterbox multilingue (voix locale, timbre féminin)"
+    },
+    {
+      "test_case_id": "18",
+      "name": "Jingle voix 18",
+      "prompt": "Sur CréaZik IA WebRadio, écrivez un commentaire sur le morceau en cours : il sera lu par les auditeurs de ce morceau.",
+      "type": "voice",
+      "duration": 9.0,
+      "output_file": "jingles/webradio/outputs/18_voix.wav",
+      "status": "generated",
+      "generated_at": "2026-10-07T10:33:31.777056",
+      "model": "Chatterbox multilingue (voix locale, timbre féminin)"
+    },
+    {
+      "test_case_id": "19",
+      "name": "Jingle voix 19",
+      "prompt": "CréaZik IA WebRadio tourne sur un seul ordinateur, sans abonnement à un service de création musicale en ligne.",
+      "type": "voice",
+      "duration": 8.8,
+      "output_file": "jingles/webradio/outputs/19_voix.wav",
+      "status": "generated",
+      "generated_at": "2026-10-07T10:33:32.030230",
+      "model": "Chatterbox multilingue (voix locale, timbre féminin)"
+    },
+    {
+      "test_case_id": "20",
+      "name": "Jingle voix 20",
+      "prompt": "CréaZik IA WebRadio estime l'énergie utilisée pour générer chaque morceau, et en parlera quand la mesure sera fiable.",
+      "type": "voice",
+      "duration": 8.3,
+      "output_file": "jingles/webradio/outputs/20_voix.wav",
+      "status": "generated",
+      "generated_at": "2026-10-07T10:33:32.279453",
+      "model": "Chatterbox multilingue (voix locale, timbre féminin)"
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "playlist": "Jingles SérénIA Tech",
+  "model": "Chatterbox multilingue (voix locale, timbre féminin)",
+  "generations": [
+    {
+      "test_case_id": "1",
+      "name": "Jingle SérénIA Tech 01",
+      "prompt": "SérénIA Tech accompagne les associations, les petites entreprises et les indépendants dans leur numérique, sans jargon et avec bienveillance.",
+      "type": "voice",
+      "duration": 9.1,
+      "output_file": "jingles/serenia-tech/outputs/01_voix.wav",
+      "status": "generated",
+      "generated_at": "2026-10-07T13:15:32.600497",
+      "model": "Chatterbox multilingue (voix locale, timbre féminin)"
+    },
+    {
+      "test_case_id": "2",
+      "name": "Jingle SérénIA Tech 02",
+      "prompt": "Votre informatique, sereinement : SérénIA Tech vous aide à la structurer à votre rythme.",
+      "type": "voice",
+      "duration": 6.5,
+      "output_file": "jingles/serenia-tech/outputs/02_voix.wav",
+      "status": "generated",
+      "generated_at": "2026-10-07T13:15:32.852722",
+      "model": "Chatterbox multilingue (voix locale, timbre féminin)"
+    },
+    {
+      "test_case_id": "3",
+      "name": "Jingle SérénIA Tech 03",
+      "prompt": "Se former à l'intelligence artificielle, pas à pas : découvrez les formations de SérénIA Tech.",
+      "type": "voice",
+      "duration": 6.9,
+      "output_file": "jingles/serenia-tech/outputs/03_voix.wav",
+      "status": "generated",
+      "generated_at": "2026-10-07T13:15:33.290654",
+      "model": "Chatterbox multilingue (voix locale, timbre féminin)"
+    },
+    {
+      "test_case_id": "4",
+      "name": "Jingle SérénIA Tech 04",
+      "prompt": "SérénIA Tech, partout en France, à distance ou en présentiel. Le premier rendez-vous de trente minutes est offert.",
+      "type": "voice",
+      "duration": 8.0,
+      "output_file": "jingles/serenia-tech/outputs/04_voix.wav",
+      "status": "generated",
+      "generated_at": "2026-10-07T13:15:33.865701",
+      "model": "Chatterbox multilingue (voix locale, timbre féminin)"
+    },
+    {
+      "test_case_id": "5",
+      "name": "Jingle SérénIA Tech 05",
+      "prompt": "Automatisation et intelligence artificielle sur mesure : SérénIA Tech développe des outils adaptés à votre activité.",
+      "type": "voice",
+      "duration": 8.7,
+      "output_file": "jingles/serenia-tech/outputs/05_voix.wav",
+      "status": "generated",
+      "generated_at": "2026-10-07T13:15:34.188472",
+      "model": "Chatterbox multilingue (voix locale, timbre féminin)"
+    }
+  ]
+}

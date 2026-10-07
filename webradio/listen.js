@@ -408,21 +408,22 @@
     }
 
     function showTrackCover(it) {
+        coverOk = false;
         trackCover.hidden = true;
         trackCover.removeAttribute('src');
-        canvas.hidden = false;
+        if (it && !it.jingle) phaseT0 = null;
         setCaption(it, true);
         if (!it || it.jingle || !it.file) return;
         const match = it.file.match(/^(playlists\/[\w-]+\/outputs\/.+)\.(?:wav|mp3|flac|ogg)$/i);
         if (!match) return;
         trackCover.onload = () => {
             if (current === it) {
+                coverOk = true;
                 trackCover.hidden = false;
-                canvas.hidden = true;
                 setCaption(it, false);
             }
         };
-        trackCover.onerror = () => { canvas.hidden = false; setCaption(it, true); };
+        trackCover.onerror = () => { coverOk = false; setCaption(it, true); };
         trackCover.src = './' + match[1] + '.cover.png?v=' + encodeURIComponent(it.generated_at || '');
     }
 
@@ -464,7 +465,7 @@
         const show = !!current && !current.jingle;
         box.hidden = !show;
         const dbx = $('dynBox');
-        if (dbx) dbx.hidden = !show;
+        if (dbx) dbx.hidden = !show || !effectiveAdmin();
         if (!show) return;
         const v = votes.tracks[current.key] || {up: 0, down: 0};
         const mine = votes.mine[current.key] || {up: 0, down: 0};
@@ -475,7 +476,7 @@
         set('thumbUpCount', v.up || 0);
         set('thumbDownCount', v.down || 0);
         const db = $('dynBox');
-        if (db) {
+        if (db && effectiveAdmin()) {
             db.hidden = false;
             const lvls = String((votes.dynamics || {})[current.key] || '').split('+');
             db.querySelectorAll('.dyn-btn').forEach(b => {
@@ -729,6 +730,53 @@
 
     const AD_SLOT_S = 9;
     const MASCOT_S = 5;
+    const PHASE_S = 5;
+    const AD_PHASE_S = 9;
+    const PHASES = [{kind: 'cover', d: PHASE_S}, {kind: 'viz', d: PHASE_S}, {kind: 'ad', d: AD_PHASE_S}, {kind: 'viz', d: PHASE_S}];
+    const CYCLE_S = PHASES.reduce((a, p) => a + p.d, 0);
+    const adPanelEl = $('adPanel');
+    let coverOk = false;
+    let phaseT0 = null;
+    let adN = -1;
+    let adStart = 0;
+    let adWasOn = false;
+    let adOffAt = -10;
+    const phaseShine = $('phaseShine');
+    const PHASE_FX_MS = 1000;
+    const reduceMotion = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    const PHASE_FX = reduceMotion ? [{k: [{opacity: 0}, {opacity: 1}], e: 'linear'}] : [
+        {k: [{clipPath: 'circle(0% at 50% 50%)'}, {clipPath: 'circle(75% at 50% 50%)'}], e: 'cubic-bezier(0.65, 0, 0.35, 1)'},
+        {k: [{clipPath: 'polygon(0 0, 0 0, 0 0)'}, {clipPath: 'polygon(0 0, 250% 0, 0 250%)'}], e: 'cubic-bezier(0.65, 0, 0.35, 1)'},
+        {k: [{transform: 'scale(1.4)', filter: 'blur(14px)', opacity: 0}, {transform: 'scale(1)', filter: 'blur(0)', opacity: 1}], e: 'cubic-bezier(0.22, 1, 0.36, 1)'},
+        {k: [{clipPath: 'inset(50% 0 50% 0)'}, {clipPath: 'inset(0 0 0 0)'}], e: 'cubic-bezier(0.65, 0, 0.35, 1)'},
+        {k: [{transform: 'perspective(700px) rotateY(-90deg)', opacity: 0}, {transform: 'perspective(700px) rotateY(0deg)', opacity: 1}], e: 'cubic-bezier(0.22, 1, 0.36, 1)'},
+        {k: [{transform: 'rotate(-14deg) scale(0.5)', filter: 'blur(6px)', opacity: 0}, {transform: 'rotate(0deg) scale(1)', filter: 'blur(0)', opacity: 1}], e: 'cubic-bezier(0.34, 1.4, 0.64, 1)'},
+        {k: [{clipPath: 'inset(0 100% 0 0)'}, {clipPath: 'inset(0 0 0 0)'}], e: 'cubic-bezier(0.65, 0, 0.35, 1)'},
+        {k: [{clipPath: 'inset(0 0 100% 0)', transform: 'translateY(-12%)'}, {clipPath: 'inset(0 0 0 0)', transform: 'translateY(0)'}], e: 'cubic-bezier(0.22, 1, 0.36, 1)'}
+    ];
+    let phaseFxN = 0;
+
+    function setLayer(el, on) {
+        if (!el || !!el._on === on) return;
+        el._on = on;
+        const fx = PHASE_FX[phaseFxN++ % PHASE_FX.length];
+        if (el._anim) el._anim.cancel();
+        const anim = el.animate(fx.k, {duration: PHASE_FX_MS, easing: fx.e, fill: 'both', direction: on ? 'normal' : 'reverse'});
+        el._anim = anim;
+        if (on) el.style.visibility = 'visible';
+        anim.onfinish = () => {
+            if (!on) el.style.visibility = 'hidden';
+            anim.cancel();
+            if (el._anim === anim) el._anim = null;
+        };
+        if (phaseShine && !reduceMotion) {
+            phaseShine.animate([
+                {transform: 'translateX(-130%)', opacity: 0},
+                {opacity: 1, offset: 0.35},
+                {transform: 'translateX(130%)', opacity: 0}
+            ], {duration: PHASE_FX_MS, easing: 'ease-in-out'});
+        }
+    }
     const AD_TR_S = 1.1;
     const adCanvas = $('adCanvas');
     const adCtx = adCanvas ? adCanvas.getContext('2d') : null;
@@ -740,31 +788,77 @@
     function panelAds() {
         if (panelAdsSrc !== content) {
             panelAdsSrc = content;
+            const site = content.site && content.site.url ? 'https://' + String(content.site.url).replace(/^https?:\/\//, '') + '/' : '';
+            const ts = content.traveling_sound || {};
+            const serenia = (content.ads || []).map(a => Object.assign({}, a, {kind: 'serenia', url: site, label: 'Publicité : découvrir SéréniaTech (serenia-tech.fr)'}));
             const radio = (content.jingle_messages || []).map(m => ({
                 headline: (m.lines && m.lines[0]) || m.title || '',
                 sub: (m.lines && m.lines.slice(1).join(' - ')) || '',
-                cta: m.title || 'CréaZik IA WebRadio'
+                cta: m.title || 'CréaZik IA WebRadio',
+                radio: true,
+                kind: 'radio'
             }));
-            const ads = content.ads || [];
-            const out = [];
-            for (let k = 0; k < Math.max(ads.length, radio.length); k++) {
-                if (k < ads.length) out.push(ads[k]);
-                if (k < radio.length) out.push(radio[k]);
-            }
-            panelAdsList = out;
+            const travel = (ts.ads || []).map(a => Object.assign({}, a, {kind: 'ts', url: ts.url || '', label: 'Écouter Traveling Sound Web Radio'}));
+            panelAdsList = [serenia, travel, radio].filter(g => g.length);
         }
         return panelAdsList;
+    }
+
+    function panelAdAt(n) {
+        const groups = panelAds();
+        if (!groups.length) return null;
+        const g = groups[n % groups.length];
+        return g[Math.floor(n / groups.length) % g.length];
     }
 
     function adItemDur(i) { return i % 2 === 0 ? AD_SLOT_S : MASCOT_S; }
 
     function easeInOut(x) { return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; }
 
-    function drawAdBackground(w, h, t, local, n) {
-        const hue = (200 + n * 47 + local * 5) % 360;
+    function drawAdBackground(w, h, t, local, n, mode) {
+        let hue = (200 + n * 47 + local * 5) % 360;
+        let h2 = (hue + 60) % 360;
+        if (mode === 'ts') {
+            const g = adCtx.createLinearGradient(0, 0, w, h);
+            g.addColorStop(0, '#0a0707');
+            g.addColorStop(1, '#221517');
+            adCtx.fillStyle = g;
+            adCtx.fillRect(0, 0, w, h);
+            for (let k = 0; k < 2; k++) {
+                const a = t * (0.25 + k * 0.13) + k * 2.1;
+                const cx = w * (0.5 + 0.35 * Math.cos(a));
+                const cy = h * (0.5 + 0.35 * Math.sin(a * 1.2));
+                const rg = adCtx.createRadialGradient(cx, cy, 0, cx, cy, Math.max(w, h) * 0.55);
+                const c = k ? 'hsla(30,70%,45%,' : 'hsla(123,34%,40%,';
+                rg.addColorStop(0, c + '0.22)');
+                rg.addColorStop(1, c + '0)');
+                adCtx.fillStyle = rg;
+                adCtx.fillRect(0, 0, w, h);
+            }
+            return;
+        }
+        if (mode === 'radio') {
+            const g = adCtx.createLinearGradient(0, 0, w, h);
+            g.addColorStop(0, '#11111d');
+            g.addColorStop(1, '#0b0b14');
+            adCtx.fillStyle = g;
+            adCtx.fillRect(0, 0, w, h);
+            for (let k = 0; k < 2; k++) {
+                const a = t * (0.25 + k * 0.13) + k * 2.1;
+                const cx = w * (0.5 + 0.35 * Math.cos(a));
+                const cy = h * (0.5 + 0.35 * Math.sin(a * 1.2));
+                const rg = adCtx.createRadialGradient(cx, cy, 0, cx, cy, Math.max(w, h) * 0.55);
+                const c = k ? 'hsla(200,88%,66%,' : 'hsla(330,92%,68%,';
+                rg.addColorStop(0, c + '0.20)');
+                rg.addColorStop(1, c + '0)');
+                adCtx.fillStyle = rg;
+                adCtx.fillRect(0, 0, w, h);
+            }
+            return;
+        }
         const g = adCtx.createLinearGradient(0, 0, w, h);
         g.addColorStop(0, `hsl(${hue} 55% 14%)`);
-        g.addColorStop(1, `hsl(${(hue + 60) % 360} 60% 8%)`);
+        g.addColorStop(1, `hsl(${h2} 60% 8%)`);
         adCtx.fillStyle = g;
         adCtx.fillRect(0, 0, w, h);
         for (let k = 0; k < 2; k++) {
@@ -789,8 +883,9 @@
                 const bpm = current && current.bpm ? current.bpm : 120;
                 window.CreaMascot.draw(adCtx, w, h, local, MASCOT_S, data, bpm, (200 + n * 47) % 360, current);
             } else {
-                drawAdBackground(w, h, t, local, n);
-                designs[n % designs.length].draw(adCtx, w, h, local, AD_SLOT_S, panelAds()[n % panelAds().length], data);
+                const adItem = panelAdAt(n);
+                drawAdBackground(w, h, t, local, n, adItem && (adItem.radio ? 'radio' : (adItem.kind === 'ts' ? 'ts' : null)));
+                designs[n % designs.length].draw(adCtx, w, h, local, AD_SLOT_S, adItem, data);
             }
         } finally {
             adCtx.restore();
@@ -856,8 +951,22 @@
         adCtx.restore();
     }
 
-    function drawAds(now) {
+    function drawAdPhase(w, h, t, local) {
+        const designs = window.CreaMotion.ads;
+        const n = Math.max(0, adN);
+        const item = panelAdAt(n);
+        adCtx.save();
+        try {
+            drawAdBackground(w, h, t, local, n, item && (item.radio ? 'radio' : (item.kind === 'ts' ? 'ts' : null)));
+            designs[n % designs.length].draw(adCtx, w, h, local, AD_PHASE_S, item, data);
+        } finally {
+            adCtx.restore();
+        }
+    }
+
+    function drawAds(t, adOn) {
         if (!adCtx || !window.CreaMotion || !window.CreaMotion.ads || !panelAds().length) return;
+        if (!adOn && t - adOffAt > 1.1) return;
         const w = adCanvas.clientWidth;
         const h = adCanvas.clientHeight;
         if (!w || !h) return;
@@ -867,34 +976,51 @@
             adCanvas.height = Math.round(h * dpr);
         }
         adCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        const t = now / 1000;
-        if (adState.start === null) adState.start = t;
-        let guard = 0;
-        while (t - adState.start >= adItemDur(adState.i) && guard++ < 8) {
-            adState.start += adItemDur(adState.i) - AD_TR_S;
-            adState.i += 1;
+        drawAdPhase(w, h, t, t - adStart);
+    }
+
+    function setAdLink(item) {
+        if (!adPanelEl) return;
+        const url = item && item.url;
+        if (url) {
+            adPanelEl.setAttribute('href', url);
+            adPanelEl.setAttribute('aria-label', item.label || 'Publicité');
+            adPanelEl.removeAttribute('tabindex');
+            adPanelEl.dataset.link = '1';
+        } else {
+            adPanelEl.removeAttribute('href');
+            adPanelEl.removeAttribute('aria-label');
+            adPanelEl.setAttribute('tabindex', '-1');
+            adPanelEl.dataset.link = '0';
         }
-        const i = adState.i;
-        const d = adItemDur(i);
-        const local = t - adState.start;
-        drawAdItem(i, w, h, t, local);
-        if (local >= d - AD_TR_S) {
-            const p = Math.min(1, (local - (d - AD_TR_S)) / AD_TR_S);
-            const e = easeInOut(p);
-            const style = i % 3;
-            adCtx.save();
-            revealPath(style, w, h, e);
-            adCtx.clip();
-            drawAdItem(i + 1, w, h, t, local - (d - AD_TR_S));
-            adCtx.restore();
-            drawRevealAccent(style, w, h, e, p, (200 + Math.floor((i + 1) / 2) * 47) % 360, t);
+    }
+
+    function updatePhase(t) {
+        if (phaseT0 === null) phaseT0 = t;
+        let x = (t - phaseT0) % CYCLE_S;
+        let kind = 'viz';
+        for (const p of PHASES) {
+            if (x < p.d) { kind = p.kind; break; }
+            x -= p.d;
         }
+        const adOn = kind === 'ad';
+        if (adOn && !adWasOn) {
+            adN += 1;
+            adStart = t;
+            setAdLink(panelAdAt(adN));
+        }
+        if (!adOn && adWasOn) adOffAt = t;
+        adWasOn = adOn;
+        setLayer(trackCover, kind === 'cover' && coverOk);
+        setLayer(adPanelEl, adOn);
+        return adOn;
     }
 
     function frame(now) {
         requestAnimationFrame(frame);
         if (document.hidden) return;
-        drawAds(now);
+        const adOn = updatePhase(now / 1000);
+        drawAds(now / 1000, adOn);
         resizeCanvas();
         updateData(now / 1000);
         const w = canvas.clientWidth;
@@ -1054,6 +1180,7 @@
         setHidden('adminBar', !adm);
         setHidden('progPanel', !adm);
         setHidden('humanRadio', adm);
+        updateThumbs();
         const icon = $('modeIcon');
         if (icon) {
             const mode = !isAdmin ? 'login' : (viewAsUser ? 'user' : 'admin');

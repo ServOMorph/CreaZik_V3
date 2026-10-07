@@ -11,7 +11,7 @@ Tri Yann
 Vangelis
 Rap Français autotuné
 Hight Light Tribe
-country 
+Country, vocal américain (paroles en anglais)
 ZZ top
 Dire straits
 Pink Floyd

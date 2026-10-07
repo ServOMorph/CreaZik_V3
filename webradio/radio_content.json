@@ -1,5 +1,5 @@
 {
-  "radio_name": "CreaZik Radio",
+  "radio_name": "CréaZik IA WebRadio",
   "site": {
     "name": "SéréniaTech",
     "url": "serenia-tech.fr",
@@ -7,21 +7,21 @@
   },
   "jingle_messages": [
     {
-      "title": "CreaZik Radio",
+      "title": "CréaZik IA WebRadio",
       "lines": [
         "Musique générée par une IA locale",
         "Sur un PC personnel, sans serveur de calcul distant"
       ]
     },
     {
-      "title": "CreaZik Radio",
+      "title": "CréaZik IA WebRadio",
       "lines": [
         "100 % IA locale",
         "Une démarche sobre et responsable"
       ]
     },
     {
-      "title": "CreaZik Radio",
+      "title": "CréaZik IA WebRadio",
       "lines": [
         "Des morceaux créés ici, sur place",
         "L'IA locale, une alternative à la création à distance"
@@ -79,5 +79,36 @@
       "sub": "Le numérique à votre mesure",
       "cta": "serenia-tech.fr"
     }
-  ]
+  ],
+  "traveling_sound": {
+    "name": "Traveling Sound Web Radio",
+    "url": "https://sites.google.com/view/traveling-sound-webradio?pli=1&authuser=0",
+    "ads": [
+      {
+        "headline": "De la musique faite par des humains ?",
+        "sub": "Rendez-vous sur Traveling Sound Web Radio",
+        "cta": "Écouter Traveling Sound"
+      },
+      {
+        "headline": "Ici, la musique est générée par une IA",
+        "sub": "Pour entendre des artistes humains, découvrez Traveling Sound Web Radio",
+        "cta": "Écouter Traveling Sound"
+      },
+      {
+        "headline": "Place aux musiciens en chair et en os",
+        "sub": "Traveling Sound Web Radio vous attend",
+        "cta": "Écouter Traveling Sound"
+      },
+      {
+        "headline": "Des voix et des instruments joués par des humains",
+        "sub": "Traveling Sound Web Radio est faite pour vous",
+        "cta": "Écouter Traveling Sound"
+      },
+      {
+        "headline": "Une pause humaine ?",
+        "sub": "Écoutez Traveling Sound Web Radio, la web radio de musique faite par des humains",
+        "cta": "Écouter Traveling Sound"
+      }
+    ]
+  }
 }

@@ -458,6 +458,9 @@
             cursor: pointer;
         }
         .track-act.del { color: var(--err); }
+        .track-play { min-width: 44px; min-height: 44px; border-radius: 22px; border: 1px solid var(--stroke); background: var(--glass); color: inherit; font-size: 1rem; cursor: pointer; }
+        .track-play.playing { border-color: var(--a2, #6fd3c8); }
+        .jingle-text { flex-basis: 100%; margin: 0 0 4px; color: var(--muted); font-size: 0.8125rem; line-height: 1.45; }
 
         #playlistSort option { background: #1c1c2a; color: #fff; }
 
@@ -692,7 +695,7 @@
                 <div class="stepper"><button onclick="step('dyn_tempo_tolerance', -0.05, 0.1, 0.6)">&minus;</button><span class="val" id="v_dyn_tempo_tolerance"></span><button onclick="step('dyn_tempo_tolerance', 0.05, 0.1, 0.6)">+</button></div>
             </div>
             <div class="row">
-                <span>Poids de l'avis des auditeurs<span class="hint">0 = énergie mesurée seule, 1 = avis Slow / Medium / High dominant (selon le nombre d'avis)</span></span>
+                <span>Poids de ta dynamique (Slow / Medium / High)<span class="hint">0 = énergie mesurée seule, 1 = ton choix remplace l'énergie mesurée du morceau</span></span>
                 <div class="stepper"><button onclick="step('dyn_user_weight', -0.1, 0, 1)">&minus;</button><span class="val" id="v_dyn_user_weight"></span><button onclick="step('dyn_user_weight', 0.1, 0, 1)">+</button></div>
             </div>
             <div class="info">L'énergie de chaque morceau est mesurée sur l'audio (rythme, brillance, niveau, tempo) puis classée par rapport au reste du catalogue. Les repères viennent d'études d'écoute : plus d'énergie en journée, calme tard le soir, et en France une écoute radio dominée par le créneau 7 h à 9 h puis un second palier en fin d'après-midi.</div>
@@ -842,7 +845,7 @@
         const DEFAULTS = {default_weight: 5, weights: {}, jingle_every: 5, jingles_enabled: true,
                           favorites_only: false, no_repeat: 3, no_repeat_songs: 15, excluded: [], thumb_strength: 0.15,
                           ads_enabled: true, ads_every: 5, ad_seconds: 9, ad_offset_s: 10, visual_transition_s: 5,
-                          dynamics_enabled: true, dynamics_strength: 1, dyn_base: 0.5, dyn_amp: 0.33, dyn_peak_hour: 17.5, dyn_weekend_shift_h: 1, dyn_energy_sigma: 0.25, dyn_tempo_tolerance: 0.25, dyn_user_weight: 0.5,
+                          dynamics_enabled: true, dynamics_strength: 1, dyn_base: 0.5, dyn_amp: 0.33, dyn_peak_hour: 17.5, dyn_weekend_shift_h: 1, dyn_energy_sigma: 0.25, dyn_tempo_tolerance: 0.25, dyn_user_weight: 1,
                           transitions: {
                               active: 'fondu',
                               jingle_preset: 'net',
@@ -1261,11 +1264,13 @@
             const on = !settings.excluded.includes(k);
             return `<label class="track ${on ? '' : 'off'}">
                 <input type="checkbox" ${on ? 'checked' : ''} onchange="toggleTrack('${k}', this.checked, this.parentElement)">
+                ${b.role === 'jingle' ? `<button type="button" class="track-play" onclick="event.preventDefault(); playJingle('${k}', this)" aria-label="Écouter le jingle" title="Écouter le jingle">&#9654;</button>` : ''}
                 <span class="tname">${esc(String(t.name || '').replace(/^\d+\s*-\s*/, ''))}</span>
                 ${scoreBadge(votes[k] ? (votes[k].up || 0) - (votes[k].down || 0) : 0)}${voteLabel(k)}${shareLabel(k)}
                 ${favs.has(k) ? '<span class="star">&#9733;</span>' : ''}
                 <button class="track-act" onclick="event.preventDefault(); renameTrack('${k}', this.dataset.name)" data-name="${esc(t.name || '')}" title="Renommer">Renommer</button>
                 <button class="track-act del" onclick="event.preventDefault(); deleteTrack('${k}', this.dataset.name)" data-name="${esc(String(t.name || '').replace(/^\d+\s*-\s*/, ''))}" title="Supprimer">Suppr.</button>
+                ${b.role === 'jingle' && t.prompt ? `<span class="jingle-text">${esc(t.prompt)}</span>` : ''}
             </label>`;
         }
 
@@ -1335,6 +1340,28 @@
                 await fetch('/api/favorites', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify([...favs])});
             } catch (e) { flash('Échec de l\'enregistrement des favoris'); }
             if (catFilter === 'fav') renderLists();
+        }
+
+        let jingleAudio = null;
+        let jingleBtn = null;
+
+        function stopJingle() {
+            if (jingleAudio) { jingleAudio.pause(); jingleAudio = null; }
+            if (jingleBtn) { jingleBtn.innerHTML = '&#9654;'; jingleBtn.classList.remove('playing'); jingleBtn = null; }
+        }
+
+        function playJingle(k, btn) {
+            const t = findTrack(k);
+            if (!t) return;
+            const same = jingleBtn === btn;
+            stopJingle();
+            if (same) return;
+            jingleAudio = new Audio(mp3Of(t));
+            jingleBtn = btn;
+            btn.innerHTML = '&#9632;';
+            btn.classList.add('playing');
+            jingleAudio.onended = stopJingle;
+            jingleAudio.play().catch(stopJingle);
         }
 
         function mp3Of(t) { return String(t.output_file || '').replace(/\.wav$/i, '.mp3'); }
@@ -1472,11 +1499,29 @@
             renderLists();
         }
 
+        function jcatOpen(id) {
+            try { return !!(JSON.parse(localStorage.getItem('radioFolds') || '{}')['jcat-' + id]); } catch (e) { return false; }
+        }
+
+        function jcatToggle(id, open) {
+            try {
+                const saved = JSON.parse(localStorage.getItem('radioFolds') || '{}');
+                saved['jcat-' + id] = open;
+                localStorage.setItem('radioFolds', JSON.stringify(saved));
+            } catch (e) {}
+        }
+
         function renderLists() {
-            const jb = playlists.find(b => b.role === 'jingle');
-            document.getElementById('jingleList').innerHTML = jb ? `
-                <div class="info">Jingles disponibles : ${results[jb.id].length}${results[jb.id].length ? '' : ' (aucun généré pour l\'instant)'}</div>
-                <div class="tracks" style="display:block">${results[jb.id].map(t => trackRow(jb, t)).join('')}</div>` : '<div class="info">Aucune playlist de jingles déclarée.</div>';
+            const jbs = playlists.filter(b => b.role === 'jingle' && (results[b.id] || []).length);
+            const jTotal = jbs.reduce((n, b) => n + results[b.id].length, 0);
+            const JCATS = [['webradio', 'WebRadio'], ['traveling-sound', 'Traveling Sound'], ['serenia-tech', 'SérénIA Tech']];
+            const known = new Set(JCATS.map(c => c[0]));
+            const groups = JCATS.concat(jbs.some(b => !known.has(b.category)) ? [['', 'Autres']] : [])
+                .map(([id, label]) => ({id: id || 'autres', label, lists: jbs.filter(b => id ? b.category === id : !known.has(b.category))}))
+                .filter(g => g.lists.length);
+            document.getElementById('jingleList').innerHTML = jbs.length ? `
+                <div class="info">Jingles disponibles : ${jTotal}</div>
+                ${groups.map(g => `<details class="transition-preset"${jcatOpen(g.id) ? ' open' : ''} ontoggle="jcatToggle('${g.id}', this.open)"><summary>${esc(g.label)} (${g.lists.reduce((n, b) => n + results[b.id].length, 0)})</summary>${g.lists.map(jb => `<div class="tracks" style="display:block">${results[jb.id].map(t => trackRow(jb, t)).join('')}</div>`).join('')}</details>`).join('')}` : '<div class="info">Aucun jingle disponible.</div>';
 
             const weightOfPl = b => settings.weights[b.id] === undefined ? settings.default_weight : settings.weights[b.id];
             const byName = (a, b) => a.label.localeCompare(b.label, 'fr', {numeric: true, sensitivity: 'base'});

@@ -1,5 +1,17 @@
 # Changelog
 
+## v1.3 — 2026-10-07
+
+### Ajouté
+- Jingles rangés dans `webradio/jingles/<catégorie>/` (WebRadio, Traveling Sound, SérénIA Tech) : 5 jingles Traveling Sound et 5 jingles SérénIA Tech, mélangés aux jingles CréaZik ; admin avec catégories repliables, bouton de lecture et texte de chaque jingle.
+- UI auditeur : cadre visuel unique centré, cycle de phases de 5 s (pochette, animations, pub de 9 s, animations, pochette) avec huit transitions animées ; pubs SérénIA Tech et Traveling Sound cliquables, pubs Traveling Sound à la charte du site.
+- Dossier `TEXTES/` pour les textes de test de génération musicale.
+
+### Modifié
+- Voix des jingles : voix féminine Chatterbox (timbre de référence synthétique), plus lente, avec 1 s de silence en tête ; un jingle tous les 5 morceaux ; nom « CréaZik IA WebRadio » affiché partout, prononcé avec « IA » sur 5 jingles (à valider).
+- Dynamique : boutons Slow/Medium/High réservés à l'admin (403 sinon), choix pris en compte à 100 % (poids 1) dans l'énergie du morceau.
+- Mascotte masquée (fonction conservée), description sous Lecture/Suivant supprimée.
+
 ## v1.2 — 2026-10-06
 
 ### Ajouté

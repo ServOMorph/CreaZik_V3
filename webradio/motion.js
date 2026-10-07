@@ -2,7 +2,8 @@
   'use strict';
 
   var TAU = Math.PI * 2;
-  var FONT = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
+  var DEFAULT_FONT = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
+  var FONT = DEFAULT_FONT;
   var TEAL = '111,211,200';
   var BLUE = '91,159,216';
   var WHITE = '243,241,234';
@@ -10,6 +11,29 @@
   var NAVY = '12,28,40';
   var PINK = '255,107,157';
   var RBLUE = '100,150,255';
+  var DK1 = '14,40,56';
+  var DK2 = '14,38,52';
+  var DK3 = '10,32,44';
+  var MINT = '140,225,200';
+  var MINT2 = '160,245,230';
+  var PALETTES = {
+    site: { TEAL: TEAL, BLUE: BLUE, WHITE: WHITE, SOFT: SOFT, NAVY: NAVY, DK1: DK1, DK2: DK2, DK3: DK3, MINT: MINT, MINT2: MINT2 },
+    ts: { TEAL: '153,165,111', BLUE: '224,150,80', WHITE: '247,243,225', SOFT: '215,208,160', NAVY: '8,6,6', DK1: '24,16,16', DK2: '34,21,23', DK3: '34,21,23', MINT: '120,160,110', MINT2: '190,205,140', FONT: '"American Typewriter", "Courier New", Courier, monospace' },
+    radio: { TEAL: '248,98,173', BLUE: '92,194,245', WHITE: '244,244,251', SOFT: '169,169,198', NAVY: '11,11,20', DK1: '17,17,29', DK2: '33,13,25', DK3: '33,13,25', MINT: '255,150,205', MINT2: '255,190,225' }
+  };
+
+  function usePalette(p) {
+    TEAL = p.TEAL; BLUE = p.BLUE; WHITE = p.WHITE; SOFT = p.SOFT; NAVY = p.NAVY;
+    DK1 = p.DK1; DK2 = p.DK2; DK3 = p.DK3; MINT = p.MINT; MINT2 = p.MINT2;
+    FONT = p.FONT || DEFAULT_FONT;
+  }
+
+  function withPalette(fn) {
+    return function (ctx, w, h, t, dur, ad, data) {
+      usePalette(ad && ad.radio ? PALETTES.radio : (ad && ad.kind === 'ts' ? PALETTES.ts : PALETTES.site));
+      return fn(ctx, w, h, t, dur, ad, data);
+    };
+  }
 
   function clamp01(x) { return x < 0 ? 0 : (x > 1 ? 1 : x); }
   function sm(x) { x = clamp01(x); return x * x * x * (x * (x * 6 - 15) + 10); }
@@ -92,10 +116,10 @@
     var g1;
     var g2;
     var total;
-    for (var it = 0; it < 6; it++) {
-      H = fit(ctx, head, maxW, 3, Math.min(w * 0.1, 46) * scale, 16, '700');
-      S = fit(ctx, sub, maxW, 3, Math.min(w * 0.048, 22) * scale, 12, '400');
-      cs = Math.max(14, Math.min(w * 0.045, 19));
+    for (var it = 0; it < 12; it++) {
+      H = fit(ctx, head, maxW, 3, Math.min(w * 0.1, 46) * scale, 9, '700');
+      S = fit(ctx, sub, maxW, 3, Math.min(w * 0.048, 22) * scale, 8, '400');
+      cs = Math.max(9, Math.min(w * 0.06, 19) * scale);
       setFont(ctx, '600', cs);
       while (cs > 8 && ctx.measureText(cta).width + cs * 2.6 > maxW) {
         cs -= 0.5;
@@ -108,7 +132,7 @@
       g1 = H.size * 0.55;
       g2 = cs * 1.1;
       total = H.lines.length * hlh + g1 + S.lines.length * slh + g2 + ctaH;
-      if (total <= h * 0.9) { break; }
+      if (total <= h * 0.8) { break; }
       scale *= 0.88;
     }
     var top = (h - total) / 2;
@@ -226,7 +250,7 @@
     drawStatic(ctx, L, w, ad, E, clamp01(open * 1.6 - 0.3), clamp01(open * 1.6 - 0.45), eo((t - 2.4) / 0.6), t);
     var ph = (h / 2) * (1 - open);
     if (ph > 0.5) {
-      ctx.fillStyle = rgba('14,40,56', 0.97 * E);
+      ctx.fillStyle = rgba(DK1, 0.97 * E);
       ctx.fillRect(0, 0, w, ph);
       ctx.fillRect(0, h - ph, w, ph);
       ctx.fillStyle = rgba(TEAL, 0.95 * E);
@@ -299,7 +323,7 @@
     var bc = bx0 - bw * 0.3 + ((t / 2.6) % 1) * bw * 1.6;
     var g = ctx.createLinearGradient(bc - bw * 0.25, 0, bc + bw * 0.25, 0);
     g.addColorStop(0, rgba(SOFT, 0.85));
-    g.addColorStop(0.5, rgba('160,245,230', 1));
+    g.addColorStop(0.5, rgba(MINT2, 1));
     g.addColorStop(1, rgba(SOFT, 0.85));
     var hp = eo((t - 0.3) / 0.9);
     ctx.globalAlpha = E * hp;
@@ -357,11 +381,11 @@
       ctx.shadowBlur = 0;
       if (i === 0) {
         setFont(ctx, '700', L.H.size);
-        ctx.fillStyle = rgba('14,38,52', 1);
+        ctx.fillStyle = rgba(DK2, 1);
         drawLines(ctx, L.H.lines, 0, -hs[i] / 2 + pad + L.hlh / 2, L.hlh);
       } else if (i === 1) {
         setFont(ctx, '400', L.S.size);
-        ctx.fillStyle = rgba('14,38,52', 1);
+        ctx.fillStyle = rgba(DK2, 1);
         drawLines(ctx, L.S.lines, 0, -hs[i] / 2 + pad + L.slh / 2, L.slh);
       } else {
         setFont(ctx, '700', L.cs);
@@ -481,7 +505,7 @@
       ctx.closePath();
       var g = ctx.createLinearGradient(0, 0, w, 0);
       g.addColorStop(0, rgba(TEAL, 0.95 * E));
-      g.addColorStop(1, rgba('140,225,200', 0.95 * E));
+      g.addColorStop(1, rgba(MINT, 0.95 * E));
       ctx.fillStyle = g;
       ctx.fill();
     }
@@ -503,7 +527,7 @@
     ctx.textBaseline = 'middle';
     var hp = eo((t - 1.3) / 0.7);
     setFont(ctx, '700', L.H.size);
-    ctx.fillStyle = rgba('10,32,44', E * hp);
+    ctx.fillStyle = rgba(DK3, E * hp);
     drawLines(ctx, L.H.lines, cx, L.hy + (1 - hp) * 10, L.hlh);
     var sp = eo((t - 1.9) / 0.7);
     setFont(ctx, '400', L.S.size);
@@ -573,7 +597,7 @@
     var segW = Math.max(40, ctx.measureText(seg).width);
     var off = (t * 64) % segW;
     ctx.textAlign = 'left';
-    ctx.fillStyle = rgba('10,32,44', E);
+    ctx.fillStyle = rgba(DK3, E);
     for (var x = -off; x < w; x += segW) { ctx.fillText(seg, x, by + bh / 2 + 1); }
     ctx.restore();
     var tp = eo((t - 0.7) / 0.8);
@@ -596,16 +620,16 @@
   }
 
   var ads = [
-    { id: 'kinetic', name: 'Typographie cinétique', draw: adKinetic },
-    { id: 'split', name: 'Volets', draw: adSplit },
-    { id: 'orbits', name: 'Orbites', draw: adOrbits },
-    { id: 'sweep', name: 'Balayage de dégradé', draw: adSweep },
-    { id: 'cards', name: 'Cartes empilées', draw: adCards },
-    { id: 'typewriter', name: 'Machine à écrire', draw: adTypewriter },
-    { id: 'spotlight', name: 'Projecteur', draw: adSpotlight },
-    { id: 'ribbon', name: 'Ruban', draw: adRibbon },
-    { id: 'grid', name: 'Grille qui se révèle', draw: adGrid },
-    { id: 'ticker', name: 'Bandeau défilant', draw: adTicker }
+    { id: 'kinetic', name: 'Typographie cinétique', draw: withPalette(adKinetic) },
+    { id: 'split', name: 'Volets', draw: withPalette(adSplit) },
+    { id: 'orbits', name: 'Orbites', draw: withPalette(adOrbits) },
+    { id: 'sweep', name: 'Balayage de dégradé', draw: withPalette(adSweep) },
+    { id: 'cards', name: 'Cartes empilées', draw: withPalette(adCards) },
+    { id: 'typewriter', name: 'Machine à écrire', draw: withPalette(adTypewriter) },
+    { id: 'spotlight', name: 'Projecteur', draw: withPalette(adSpotlight) },
+    { id: 'ribbon', name: 'Ruban', draw: withPalette(adRibbon) },
+    { id: 'grid', name: 'Grille qui se révèle', draw: withPalette(adGrid) },
+    { id: 'ticker', name: 'Bandeau défilant', draw: withPalette(adTicker) }
   ];
 
   var jc = { key: '', val: null };

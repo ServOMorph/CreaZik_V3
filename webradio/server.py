@@ -40,10 +40,10 @@ STATIC_FILES = {"/listen.html", "/silence.wav", "/listen.css", "/listen.js", "/m
                 "/traveling-sound.png", "/scenes.js", "/transitions.js", "/motion.js", "/scenes_spec.json", "/radio_content.json",
                 "/playlists.json", "/favorites.json", "/radio_settings.json"}
 STATIC_PATTERNS = [
-    re.compile(r"^/playlists/[\w\-]+/outputs/playlist_results\.json$"),
-    re.compile(r"^/playlists/[\w\-]+/outputs/[^/]+\.cover\.png$"),
-    re.compile(r"^/playlists/[\w\-]+/outputs/[^/]+\.(?:wav|mp3|flac|ogg)$"),
-    re.compile(r"^/playlists/[\w\-]+/outputs/[^/]+\.(?:wav|mp3|flac|ogg)\.viz\.json$"),
+    re.compile(r"^/(?:playlists|jingles)/[\w\-]+/outputs/playlist_results\.json$"),
+    re.compile(r"^/(?:playlists|jingles)/[\w\-]+/outputs/[^/]+\.cover\.png$"),
+    re.compile(r"^/(?:playlists|jingles)/[\w\-]+/outputs/[^/]+\.(?:wav|mp3|flac|ogg)$"),
+    re.compile(r"^/(?:playlists|jingles)/[\w\-]+/outputs/[^/]+\.(?:wav|mp3|flac|ogg)\.viz\.json$"),
     re.compile(r"^/[\w\-]+/(?:outputs/)?[^/]+\.(?:wav|mp3|flac|ogg)\.viz\.json$"),
     re.compile(r"^/radio/[\w\-]+\.json$"),
 ]
@@ -51,7 +51,7 @@ ADMIN_PAGES = {"/radio.html", "/ui.html"}
 LOGIN_NEXT = ("/radio.html", "/ui.html", "/listen.html")
 
 RANGE_RE = re.compile(r"bytes=(\d*)-(\d*)")
-RESULTS_RE = re.compile(r"^/playlists/[\w\-]+/outputs/playlist_results\.json$")
+RESULTS_RE = re.compile(r"^/(?:playlists|jingles)/[\w\-]+/outputs/playlist_results\.json$")
 CTRL_RE = re.compile(r"[\x00-\x08\x0b-\x1f\x7f]")
 
 CSP = ("default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; "
@@ -553,6 +553,9 @@ class Handler(SimpleHTTPRequestHandler):
         self._send_json(200, {"key": key, "on": on}, cookie=cookie)
 
     def _post_dynamics(self):
+        if not self._is_admin():
+            self.send_error(403)
+            return
         try:
             body = self._read_json_body(2048)
             key = str(body.get("key", ""))

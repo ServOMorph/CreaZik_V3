@@ -23,11 +23,12 @@
   <section class="player" aria-label="Lecteur">
     <div class="stage">
       <div class="viz-wrap">
-        <img id="trackCover" class="track-cover" alt="Pochette du morceau" hidden>
         <canvas id="vizCanvas" aria-hidden="true"></canvas>
-      <div id="vizCaption" class="viz-caption" hidden><span id="capTitle" class="cap-title"></span><span id="capStyle" class="cap-style"></span></div>
+        <div id="vizCaption" class="viz-caption" hidden><span id="capTitle" class="cap-title"></span><span id="capStyle" class="cap-style"></span></div>
+        <img id="trackCover" class="track-cover" alt="Pochette du morceau" hidden>
+        <a id="adPanel" class="ad-panel" data-link="0" target="_blank" rel="noopener" tabindex="-1"><canvas id="adCanvas" aria-hidden="true"></canvas></a>
+        <div id="phaseShine" class="phase-shine" aria-hidden="true"></div>
       </div>
-      <a id="adPanel" class="ad-panel" href="https://serenia-tech.fr/" target="_blank" rel="noopener" aria-label="Publicités : découvrir SéréniaTech (serenia-tech.fr)"><canvas id="adCanvas" aria-hidden="true"></canvas></a>
     </div>
 
     <div class="now" hidden>
@@ -65,10 +66,6 @@
     <div class="controls">
       <button id="playBtn" class="btn-play" type="button" aria-label="Lecture ou pause">▶</button>
       <button id="nextBtn" class="btn-next" type="button" aria-label="Morceau suivant">Suivant</button>
-    </div>
-
-    <div id="ticker" class="ticker" aria-label="Contexte de création du morceau">
-      <span id="tickerText" class="ticker-text"></span>
     </div>
 
   </section>
