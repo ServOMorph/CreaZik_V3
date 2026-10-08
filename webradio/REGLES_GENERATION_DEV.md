@@ -7,6 +7,7 @@ Document établi à partir des décisions prises au fil des conversations. Chaqu
 - Le projet est une WebRadio IA locale : tout est généré et servi depuis le PC de l'utilisateur (ACE-Step 1.5, RTX 4060 8 Go), exposé par un tunnel Cloudflare. Le client principal est l'iPhone (Safari).
 - Vocabulaire : on parle de « playlists », jamais de « benchmarks ». Le dossier applicatif est `webradio/`.
 - Les affirmations publiques (éthique, écologie, IA locale) doivent rester vérifiables.
+- Paroles françaises : un nom d'artiste cité pour imiter un style ne sert que de consigne d'écriture interne ; ne jamais recopier ou paraphraser de près des paroles existantes, ne pas attribuer le texte à l'artiste, ne pas le faire figurer dans un titre, un caption ou un affichage public.
 - Les textes ou poèmes utilisés doivent être de vrais textes du domaine public ; ne jamais en inventer en les attribuant à un auteur.
 - Le plan d'exécution est `PLAN_WEBRADIO.md`. La mise à jour des statuts de roadmap est faite par `/close`, pas en cours de session.
 - Tout ce qui reste à contrôler à la main va dans `tests_manuels.md` ; la section est supprimée une fois le test validé.
@@ -93,7 +94,7 @@ Document établi à partir des décisions prises au fil des conversations. Chaqu
 
 - Un décor par playlist (plus de choix de style) ; transitions visuelles très douces entre playlists.
 - Les visuels évoluent sur la durée du morceau (arc narratif : intensité en 5 temps, dérive de teinte, second motif, ondes ponctuelles), avec de l'aléatoire stable par morceau.
-- Le cadre visuel est unique et centré ; il enchaîne des phases de 5 s : pochette (si disponible), animations visuelles, publicité (9 s), animations visuelles, pochette, avec huit transitions animées (`PHASE_FX` dans `listen.js`). La mascotte (`mascot.js`) est conservée mais masquée.
+- Le cadre visuel est unique et centré ; il enchaîne des phases de 5 s : pochette (si disponible), animations visuelles, publicité (9 s), animations visuelles, pochette, avec huit transitions animées (`PHASE_FX` dans `listen.js`). La mascotte (`mascot.js`) est conservée mais masquée. La légende du visuel (titre, description) défile verticalement en alternance toutes les 3,5 s.
 - Publicités (`radio_content.json`) : SérénIA Tech (clic vers serenia-tech.fr), Traveling Sound (5 pubs tirées des textes des jingles, charte du site : fond sombre, vert jungle et orange, crème, police machine à écrire, clic vers son site), messages CréaZik IA WebRadio (sans clic) ; rotation par groupes.
 - Jingles parlés : voix féminine suave et lente générée par Chatterbox multilingue (CPU) avec un timbre de référence synthétique (Kokoro `ff_siwis`), `exaggeration` 0,4 et `cfg_weight` 0,1 ; le nom s'affiche « CréaZik IA WebRadio » et se prononce avec « IA » (« Créa Zique, I A, Ouèbe Radio ») ; « Traveling Sound Ouèbe Radio » et « Sérénia Tèk » pour les pubs ; contrôle d'intelligibilité par transcription (Whisper-small).
 - Design moderne et stylisé, lisible à 375 px, conçu pour le téléphone.
@@ -137,3 +138,4 @@ Document établi à partir des décisions prises au fil des conversations. Chaqu
 - Les suppressions de playlists ne retirent pas leurs identifiants de `series.txt` : la rotation peut les régénérer.
 - Génération ACE : le timbre de voix n'est pas constant sur un morceau (même sur 40 s) ; effet de la seed à trancher (v7 à v9 générées, à écouter) ; une génération à 120 s peut figer en décodage VAE.
 - Mise en ligne permanente : VPS Linux retenu mais non réalisé ; fonctionnement du serveur sous Linux non testé (voir `ARCHITECTURE_WEBRADIO.md` 8.3 bis).
+- Agents de zone `textes` (paroles françaises, `/generate_lyrics` à créer) et `modeles_llm` en parallèle : tests GPU à faire à tour de rôle sur la RTX 4060 8 Go.

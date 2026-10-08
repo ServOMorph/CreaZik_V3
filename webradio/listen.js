@@ -306,6 +306,7 @@
         haveClock = true;
         const changed = st.rev !== live.rev;
         live = st;
+        updateDiscover();
         if (changed || effectiveAdmin()) renderProgram();
     }
 
@@ -438,12 +439,42 @@
     function setCaption(it, show) {
         const box = $('vizCaption');
         if (!box) return;
-        const on = show && it && !it.jingle;
+        const on = it && !it.jingle;
         box.hidden = !on;
-        if (on) {
-            $('capTitle').textContent = trackTitle(it);
-            $('capStyle').textContent = plName(it.playlist_label);
-        }
+        if (on) startCaptionTyping(trackTitle(it), plName(it.playlist_label));
+        else stopCaptionTyping();
+    }
+
+    let capTimer = null;
+    let capKey = '';
+
+    function stopCaptionTyping() {
+        clearTimeout(capTimer);
+        capTimer = null;
+        capKey = '';
+    }
+
+    function startCaptionTyping(title, desc) {
+        const key = title + ' ' + desc;
+        if (key === capKey && capTimer) return;
+        stopCaptionTyping();
+        capKey = key;
+        const els = [$('capTitle'), $('capStyle')];
+        els[0].textContent = title;
+        els[1].textContent = desc;
+        let idx = 0;
+        const render = (prev) => els.forEach((e, i) => {
+            e.classList.toggle('cap-active', i === idx);
+            e.classList.toggle('cap-out', i === prev);
+        });
+        render(-1);
+        const tick = () => {
+            const prev = idx;
+            idx = 1 - idx;
+            render(prev);
+            capTimer = setTimeout(tick, 3500);
+        };
+        capTimer = setTimeout(tick, 3500);
     }
 
     function showTrackCover(it) {
@@ -770,10 +801,12 @@
     const AD_SLOT_S = 9;
     const MASCOT_S = 5;
     const PHASE_S = 5;
+    const COVER_PHASE_S = 7;
     const AD_PHASE_S = 9;
-    const PHASES = [{kind: 'cover', d: PHASE_S}, {kind: 'viz', d: PHASE_S}, {kind: 'ad', d: AD_PHASE_S}, {kind: 'viz', d: PHASE_S}];
+    const PHASES = [{kind: 'cover', d: COVER_PHASE_S}, {kind: 'viz', d: PHASE_S}, {kind: 'ad', d: AD_PHASE_S}, {kind: 'viz', d: PHASE_S}];
     const CYCLE_S = PHASES.reduce((a, p) => a + p.d, 0);
     const adPanelEl = $('adPanel');
+    const coverBlack = $('coverBlack');
     let coverOk = false;
     let phaseT0 = null;
     let adN = -1;
@@ -1038,8 +1071,9 @@
         if (phaseT0 === null) phaseT0 = t;
         let x = (t - phaseT0) % CYCLE_S;
         let kind = 'viz';
+        let pd = 0;
         for (const p of PHASES) {
-            if (x < p.d) { kind = p.kind; break; }
+            if (x < p.d) { kind = p.kind; pd = p.d; break; }
             x -= p.d;
         }
         const adOn = kind === 'ad';
@@ -1050,7 +1084,9 @@
         }
         if (!adOn && adWasOn) adOffAt = t;
         adWasOn = adOn;
-        setLayer(trackCover, kind === 'cover' && coverOk);
+        const coverOn = kind === 'cover' && coverOk;
+        setLayer(coverBlack, coverOn);
+        trackCover.classList.toggle('show', coverOn && x > PHASE_FX_MS / 1000 && x < pd - PHASE_FX_MS / 1000);
         setLayer(adPanelEl, adOn);
         return adOn;
     }
@@ -1151,9 +1187,23 @@
                 const T = Date.now() / 1000;
                 clockOffset = st.server_time - T;
                 live = st;
+                updateDiscover();
                 renderProgram();
             }
         } catch (e) {}
+    }
+
+    function updateDiscover() {
+        const b = $('discoverBtn');
+        if (!b) return;
+        b.hidden = !isAdmin;
+        const on = !!live.unrated_only;
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+        b.textContent = on ? 'Désactiver découverte' : 'Découverte';
+    }
+
+    function toggleDiscover() {
+        radioAction({action: 'unrated', on: !live.unrated_only});
     }
 
     async function skip() {
@@ -1216,9 +1266,11 @@
             if (el) el.hidden = hidden;
         };
         setHidden('nextBtn', false);
-        setHidden('adminBar', !adm);
+        setHidden('adminBar', true);
+        updateDiscover();
+        syncAdminEmbed();
         setHidden('progPanel', !adm);
-        setHidden('humanRadio', adm);
+        setHidden('humanRadio', true);
         updateThumbs();
         const icon = $('modeIcon');
         if (icon) {
@@ -1242,7 +1294,7 @@
     function onModeIcon() {
         if (!isAdmin) {
             try { sessionStorage.setItem('autoplayAdmin', '1'); } catch (e) {}
-            location.href = 'http://localhost:5001/login?next=/radio.html';
+            location.href = '/login?next=/listen.html';
             return;
         }
         setViewAsUser(!viewAsUser);
@@ -1343,12 +1395,42 @@
         }
     }
 
+    function syncAdminEmbed() {
+        const box = $('adminEmbed');
+        const frame = $('adminFrame');
+        if (!box || !frame || frame.getAttribute('src')) return;
+        box.hidden = false;
+        let ro = null;
+        const fit = () => {
+            const d = frame.contentDocument;
+            if (d && d.body) frame.style.height = Math.ceil(d.body.getBoundingClientRect().height) + 'px';
+        };
+        frame.addEventListener('load', async () => {
+            const d = frame.contentDocument;
+            if (ro) ro.disconnect();
+            if (d && d.body && window.ResizeObserver) {
+                d.documentElement.style.overflow = 'hidden';
+                d.body.style.minHeight = '0';
+                ro = new ResizeObserver(fit);
+                ro.observe(d.body);
+            }
+            fit();
+            const me = await getJSON('/api/me', {admin: false});
+            if (!!me.admin !== isAdmin) {
+                isAdmin = !!me.admin;
+                applyMode();
+            }
+        });
+        frame.src = '/radio.html';
+    }
+
     async function init() {
         const me = await getJSON('/api/me', {admin: false});
         isAdmin = !!me.admin;
         $('playBtn').addEventListener('click', toggle);
         $('nextBtn').addEventListener('click', skip);
         $('testBtn').addEventListener('click', toggleTest);
+        $('discoverBtn').addEventListener('click', toggleDiscover);
         testAudio.addEventListener('ended', stopTest);
         const mi = $('modeIcon');
         if (mi) mi.addEventListener('click', onModeIcon);
@@ -1362,10 +1444,10 @@
         const tn = $('thumbNeutral');
         if (tn) tn.addEventListener('click', toggleNeutral);
         slots.forEach(s => s.el.addEventListener('error', () => onSlotError(s)));
-        $('comForm').addEventListener('submit', postComment);
+        const cf = $('comForm');
+        if (cf) cf.addEventListener('submit', postComment);
         specs = await getJSON('./scenes_spec.json', {playlists: {}});
         content = Object.assign({jingle_messages: [], ads: []}, await getJSON('./radio_content.json', {}));
-        try { $('comName').value = localStorage.getItem('comName') || ''; } catch (e) {}
         initFolds();
         initHumanBanner();
         applyMode();

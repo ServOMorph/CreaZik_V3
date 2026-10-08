@@ -1,6 +1,9 @@
-# Signals — CreaZik_V3   (MAJ 2026-10-08)
+# Signals — CreaZik_V3   (MAJ 2026-10-08, fin de session)
 
 ## Actions ouvertes
+- [P1|ouvert] Créer la commande `/generate_lyrics` (paroles françaises de qualité, thème et style « à la manière de » en consigne interne, grille de qualité par script) : travail confié à l'agent `textes` (écriture limitée à `TEXTES/`)
+  - fait quand: la commande existe, un lot test de paroles est généré dans `TEXTES/` puis écouté et jugé par l'utilisateur
+  - réf: `TEXTES/agent_role.md`, `.claude/skills/generation-morceaux/SKILL.md`, `webradio/REGLES_GENERATION_DEV.md` sections 1 et 5.5
 - [P1|ouvert] Tests ACE « Marie » (voix) : écouter v7 (seed 1), v8 (seed 7) et v9 (seed 123), générées (fichiers du 07/10), même caption slam féminin piano seul sur le couplet 1 (40 s), et trancher si une seed garde un timbre de voix constant
   - fait quand: au moins une seed donne une voix féminine au timbre constant, ou la piste « seed » est écartée et une autre (extrait plus court, caption) est choisie
   - réf: `webradio/tests_ace/marie/config.json`, `webradio/tests_ace/marie/outputs/`, `webradio/playlists/tests-ace/outputs/playlist_results.json` (bouton Test de l'UI auditeur), `.claude/skills/generation-morceaux/SKILL.md`
@@ -39,6 +42,7 @@
   - réf: `PLAN_WEBRADIO.md` section 4.5
 
 ## Contexte chaud
+- Agents de zone créés le 2026-10-08 : `textes` (`TEXTES/`) et `modeles_llm` (`MODELES_LLM/`, installation et comparaison de modèles musicaux, `webradio/tests_ace/` exclu) ; lancement par `/start textes` ou `/start modeles_llm`. Travail en parallèle : tests GPU à faire à tour de rôle (RTX 4060 8 Go), ne pas lancer `/close` complet dans deux sessions à la fois.
 - Mode dev : un seul utilisateur (le développeur) ; votes, avis et dynamiques enregistrés dans `radio.db` sont à conserver (voir `.claude/memory.md`).
 - Au dernier statut, le serveur radio (port 5000) et ComfyUI (port 8189) tournaient, le batch de pochettes lancé dans un terminal cmd de l'utilisateur ; aucun worker ACE actif ; génération musicale en rotation arrêtée. Après toute modification Python, redémarrer avec `services.ps1 restart -Only serveur`.
 - Hors dépôt : `D:\ServOMorph\TTS_Local\` contient les scripts Chatterbox et les WAV sources des jingles.
@@ -46,22 +50,24 @@
 - Tests ACE : le bouton « Test » (UI auditeur, public comme « Suivant », à retirer avant déploiement) lit la dernière génération de `webradio/playlists/tests-ace/` (hors catalogue, non diffusé). Série Marie : v1 à v9 dans `webradio/tests_ace/marie/` (v6 à v9 : couplet 1, 40 s).
 - Fichiers non suivis laissés à part : `liste_musiques_queue.md`, `_archive_docs/`, `webradio/silence.wav.viz.json`, `TEXTES/` (textes de test pour la génération musicale, ex. `Marie-1_ace.md` au format ACE-Step).
 
-## Dernière session (2026-10-08)
-# Session du 2026-10-08 (préparation du déploiement)
+## Dernière session (2026-10-08, suite)
+# Session du 2026-10-08 (légende animée, cadrage des paroles)
 
 ## Décisions prises
-- Déploiement envisagé sur VPS Linux bon marché (service systemd, HTTPS, sous-domaine du site SéréniaTech, rsync des mp3) ; Vercel, Render gratuit et Netlify écartés (pas de disque durable ni de processus permanent). Documenté dans `webradio/ARCHITECTURE_WEBRADIO.md` section 8.3 bis, à réaliser plus tard.
-- Batch de pochettes relancé dans un terminal cmd indépendant de VS Code (`start "covers" /min python tools\cover_batch.py`).
+- Légende du visuel (titre / description) : défilement vertical alterné toutes les 3,5 s, validé sur iPhone par l'utilisateur.
+- Travail en parallèle réparti en deux agents de zone : `textes` (paroles françaises, commande `/generate_lyrics` à créer) et `modeles_llm` (autres modèles musicaux).
+- Paroles : le nom d'artiste ne sert que de consigne de style interne, jamais dans un titre, un caption ou une attribution publics.
 
 ## Livrables produits ou modifiés
-- `webradio/ARCHITECTURE_WEBRADIO.md` : section 8.3 bis ajoutée.
+- `webradio/listen.js`, `webradio/listen.css` : légende animée (`setCaption`, `startCaptionTyping`) ; première version en frappe remplacée par le défilement.
+- `webradio/REGLES_GENERATION_DEV.md` : règle de légende et cadrage des paroles.
 
 ## Hypothèses validées / invalidées
-- VALIDE : le batch de pochettes reprend là où il s'est arrêté (520 restantes au relancement, sans refaire les 330 faites).
-- EN ATTENTE : le batch survit à la fermeture de la session Claude Code (relancé hors VS Code pour l'éviter) ; fonctionnement du serveur sous Linux non testé.
+- VALIDE : défilement de la légende correct sur iPhone (contrôle utilisateur).
+- EN ATTENTE : qualité réelle des paroles produites par la future commande, à juger à l'écoute.
 
 ## Prochaine étape exacte
-Écouter v7 à v9 des tests ACE (bouton Test) et trancher la piste suivante ; contrôler que `done` progresse dans `cover_generation_state.json`.
+Lancer `/start textes` dans une session dédiée et créer `/generate_lyrics` ; écouter v7 à v9 des tests ACE si ce n'est pas fait.
 
 ## Question bloquante pour la session suivante
 Aucune

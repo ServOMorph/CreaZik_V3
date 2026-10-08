@@ -13,6 +13,7 @@ expérimentation de création de musique avec IA instrumental et vocal, avec mod
 WebRadio IA locale « CréaZik IA WebRadio » : 86 playlists musicales (921 morceaux) et 29 jingles vocaux dans `webradio/jingles/` ; interfaces auditeur/admin séparées (5000/5001) ; 25 tests du moteur passent.
 Tests de voix ACE-Step « Marie » v1 à v9 générés (`webradio/tests_ace/marie/`) : v7 à v9 (seeds) à écouter via le bouton « Test » ; timbre de voix encore instable.
 Batch de pochettes en cours dans un terminal cmd de l'utilisateur (reprise automatique) ; prononciation « IA » des jingles à valider ; génération en rotation arrêtée.
+Travail réparti en deux agents de zone (`textes` pour les paroles françaises, `modeles_llm` pour les autres modèles musicaux) ; légende animée du visuel validée sur iPhone.
 Déploiement : solution VPS Linux notée (ARCHITECTURE_WEBRADIO.md 8.3 bis), non réalisée ; l'UI du port 5000 reste l'UI dev (Suivant, Test et dynamique ouverts) à remplacer avant mise en ligne ; contrôles iPhone en attente.
 
 ## Décisions structurantes (append only — 10 entrées max, 5 lignes max/entrée, archiver au-delà)
@@ -26,3 +27,4 @@ Déploiement : solution VPS Linux notée (ARCHITECTURE_WEBRADIO.md 8.3 bis), non
 - 2026-10-07 : Tests de voix ACE hors catalogue (`playlists/tests-ace/`, bouton Test) ; BPM/tonalité en paramètres du worker ; un seul changement par version de test.
 - 2026-10-07 : L'UI du port 5000 devient l'UI dev ; boutons Slow/Medium/High rouverts à tous (`/api/dynamics` sans contrôle admin), à refermer avec l'UI auditeur future.
 - 2026-10-08 : Mise en ligne prévue sur VPS Linux bon marché (systemd, HTTPS, sous-domaine du site) ; Vercel, Render gratuit et Netlify écartés ; pas encore réalisée.
+- 2026-10-08 : Deux agents de zone (`textes`, `modeles_llm`) pour travailler en parallèle ; nom d'artiste en consigne de style interne seulement, jamais public.

@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.6 — 2026-10-08
+
+### Ajouté
+- Légende animée du visuel d'écoute : titre et description défilent en alternance (`listen.js`, `listen.css`), validée sur iPhone.
+- Agents de zone `textes` et `modeles_llm` ; commande `/generate_lyrics` planifiée (paroles françaises, style en consigne interne).
+
 ## v1.5 — 2026-10-08
 
 ### Ajouté
