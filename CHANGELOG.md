@@ -1,5 +1,13 @@
 # Changelog
 
+## v1.5 — 2026-10-08
+
+### Ajouté
+- `webradio/ARCHITECTURE_WEBRADIO.md` section 8.3 bis : solution retenue pour une mise en ligne permanente (VPS Linux, systemd, HTTPS, sous-domaine du site, synchronisation des mp3), Vercel, Render gratuit et Netlify écartés.
+
+### Modifié
+- Batch de pochettes relancé dans un terminal cmd indépendant de VS Code (reprise des pochettes restantes).
+
 ## v1.4 — 2026-10-07
 
 ### Ajouté

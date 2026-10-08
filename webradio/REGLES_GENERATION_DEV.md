@@ -41,7 +41,7 @@ Document établi à partir des décisions prises au fil des conversations. Chaqu
 ### 2.5 Mesures et énergie
 - La consommation de la carte est une estimation (`energy_wh_est`), car `nvidia-smi` ne donne pas la puissance ; elle est présentée comme telle.
 - Les pochettes sont générées avec une IA locale (ComfyUI-Qwen, Qwen-Image 2.1) et uniquement lorsque la file de génération musicale est vide.
-- Pochette : le texte (titre du morceau, nom de la playlist, date de création en plus petit) est généré dans l'image par le modèle, jamais incrusté après coup ; le prompt impose trois lignes explicites (titre très grand sans numéro devant, playlist en grand, date très petite), car une phrase unique fait mélanger les lignes au modèle. Une charte graphique par playlist est dans `webradio/covers_charte.json` (`tools/make_charte.py`), appliquée par `tools/cover_gen.py`.
+- Pochette : une image différente par morceau, sans aucun texte (ni titre, ni playlist, ni date), générée par `tools/cover_gen.py` à partir du titre et du prompt musical du morceau avec une graine propre au morceau. Plus de charte graphique par playlist.
 - Les playlists dont l'identifiant commence par `esprit-` ou dont le libellé commence par « Esprit » sont exclues de la génération des pochettes jusqu'au remplacement de ces références par des styles descriptifs.
 - La génération en lot se lance avec `/generate_covers`, attend que la génération musicale soit inactive et reprend en ignorant les pochettes PNG déjà créées. `/stop_covers` arrête uniquement ce lot et ComfyUI-Qwen ; sans pochette disponible, l'interface conserve l'animation visuelle.
 - Priorité des pochettes : relire les votes avant chaque image, générer d'abord les morceaux au solde positif, puis ceux sans vote, puis les soldes équilibrés ; exclure les soldes négatifs. Si le solde devient négatif pendant la génération, ne pas conserver l'image.
@@ -135,5 +135,5 @@ Document établi à partir des décisions prises au fil des conversations. Chaqu
 - Bouton « Suivant » public et exposition des boutons Renommer/Supprimer : à retirer ou verrouiller avant le déploiement.
 - Réorganisation de l'UI admin : propositions de l'agent design (barre d'accès rapide, onglets) en attente de choix ; sort de `ui.html`.
 - Les suppressions de playlists ne retirent pas leurs identifiants de `series.txt` : la rotation peut les régénérer.
-- Génération ACE : le timbre de voix n'est pas constant sur un morceau (même sur 40 s) ; effet de la seed à trancher (tests v7 à v9) ; une génération à 120 s peut figer en décodage VAE.
-
+- Génération ACE : le timbre de voix n'est pas constant sur un morceau (même sur 40 s) ; effet de la seed à trancher (v7 à v9 générées, à écouter) ; une génération à 120 s peut figer en décodage VAE.
+- Mise en ligne permanente : VPS Linux retenu mais non réalisé ; fonctionnement du serveur sous Linux non testé (voir `ARCHITECTURE_WEBRADIO.md` 8.3 bis).

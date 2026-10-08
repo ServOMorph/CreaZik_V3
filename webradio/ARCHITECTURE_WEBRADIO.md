@@ -137,6 +137,14 @@ Le mot de passe admin est `admin` tant qu'il n'est pas changé (demande actuelle
 
 Recommandation : Cloudflare Tunnel avec Access sur les chemins admin, ou Tailscale tant que la radio reste personnelle. Je n'ai pas vérifié les offres et limites actuelles de ces services : à confirmer avant de choisir.
 
+### 8.3 bis Solution retenue pour une mise en ligne permanente (à réaliser plus tard)
+Le serveur n'utilise que la bibliothèque standard Python et sert des fichiers déjà générés (874 mp3, 2,2 Go au 2026-10-08) : la génération (ACE, ComfyUI) n'est pas nécessaire pour l'écoute. Un VPS sans GPU suffit ; le PC ne sert qu'à générer.
+1. VPS Linux d'entrée de gamme (1 Go de RAM, 20 à 40 Go de disque, Ubuntu), serveur Python lancé comme service `systemd`.
+2. HTTPS via Caddy ou Cloudflare gratuit, sous-domaine `radio.serenia-tech.fr` (DNS chez OVH). Le site (Vercel + Render) ajoute un lien ou une page « Radio » ; un iframe exigerait de modifier la CSP `frame-src` et `X-Frame-Options` du site.
+3. Synchronisation PC vers VPS des seuls nouveaux mp3 et pochettes (`rsync`/`scp`) ; les données vivantes (votes, `radio.db`, files) restent sur le serveur et ne sont pas écrasées.
+4. Avant ouverture : retirer `DEV_UNIFIED`, le cadre admin, le bouton Test et la redirection `radio.html` ; changer le mot de passe admin ; revoir le mode Découverte et les pubs ; régler les droits de diffusion.
+Coût estimé : VPS environ 3 à 6 € par mois (ordre de grandeur non vérifié, à confirmer chez Hetzner, OVH ou Scaleway) ; DNS/HTTPS gratuits. Écartés : Vercel et Render gratuits (pas de disque persistant), tunnel depuis le PC (radio coupée quand le PC s'arrête). Netlify (comme Vercel) écarté : fonctions serverless sans disque durable ni processus permanent, alors que la radio a besoin d'un état serveur partagé (rotation, `radio.db`, votes, commentaires, session admin) ; héberger les mp3 en statique imposerait de réécrire le moteur côté navigateur et de renoncer à l'état commun (limites de l'offre gratuite non vérifiées). Non testé : fonctionnement du serveur sous Linux.
+
 ### 8.4 Reste à faire
 - Mot de passe admin fort ou clé d'accès ; second facteur via Cloudflare Access.
 - Séparer le flux public (Icecast) du serveur d'administration, qui ne doit jamais exposer la génération IA.
