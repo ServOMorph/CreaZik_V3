@@ -13,6 +13,7 @@ webradio/radio_settings.json
 webradio/*.tmp
 webradio/logs/
 webradio/playlists/*/outputs/
+MODELES_LLM/sorties/
 webradio/_archive_playlists/
 webradio/_archive_regeneration/
 webradio/**/*.wav
@@ -22,3 +23,8 @@ radio_state.json
 webradio/radio.db
 webradio/radio.db-*
 webradio/catalog_overrides.json
+
+# Demos privees sous autorisation (texte protege, ne jamais versionner)
+webradio/tests_ace/demo_lagniel/
+TEXTES/usage_prive/
+webradio/tests_state.json

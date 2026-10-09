@@ -18,11 +18,12 @@ Sources : doc locale `D:\ServOMorph\ACE-Step-1.5\docs\en\Tutorial.md` et `ace_st
 - Caption : facteur principal. Mots-clés séparés par des virgules, 5 à 12, genre en premier, 2 à 3 instruments précis, type de voix, style de production, ambiance. Précis plutôt que vague (« grand piano » plutôt que « piano »).
 - Pas de termes contradictoires, pas d'empilement de genres de niche. Pour un mélange, écrire une évolution dans le temps.
 - Tempo, tonalité, signature : en paramètres (`bpm`, `keyscale`, `timesignature`), pas dans le caption. Ce sont des ancres : le résultat peut dévier. Plage fiable : 60 à 180 BPM, tonalités courantes, 4/4.
-- Durée : courte (30 à 60 s) et moyenne (2 à 4 min) annoncées stables par la doc. Dans ce projet, aucun morceau de 150 s ou plus n'a été généré ; un test à 180 s a bloqué plus de 45 minutes en décodage VAE sur CPU. Rester à 135 s ou moins tant qu'un autre réglage n'est pas validé.
-- Seed : fixer pour comparer des réglages, varier pour explorer.
+- Durée : courte (30 à 60 s) et moyenne (2 à 4 min) annoncées stables par la doc. Dans ce projet, aucun morceau de 150 s ou plus n'a été généré ; un test à 180 s a bloqué plus de 45 minutes en décodage VAE sur CPU. Rester à 135 s ou moins tant qu'un autre réglage n'est pas validé. Le blocage du décodage dépend de la VRAM libre, pas seulement de la durée : dans le test Marie, v8 (40 s) a mis 12 373 s car il restait 0,01 Go avant le décodage, ce qui a basculé le décodage sur processeur (ligne `auto-enabling CPU VAE decode` du journal), alors que v7 et v9 (40 s, environ 2,1 Go libres) ont pris 15 s. Lancer une version par worker (`--only <id>`) et surveiller cette ligne.
+- Seed : fixer pour comparer des réglages, varier pour explorer. La graine n'est réellement appliquée que depuis le 2026-10-09 (`use_random_seed=False` dans `ace_worker.py`) ; avant, elle était ignorée. Une même graine redonne un audio presque identique (corrélation 0,99997 mesurée), pas bit à bit.
 
 ## Paroles
-- Balises de section : `[intro]`, `[verse]`, `[pre-chorus]`, `[chorus]`, `[bridge]`, `[outro]`, `[instrumental]`. Une section vide produit du silence.
+- Balises de section : `[intro]`, `[verse]`, `[pre-chorus]`, `[chorus]`, `[bridge]`, `[outro]`, `[instrumental]`. Une section de chant (verse, chorus, bridge) sans paroles est inutile. Pour un passage sans voix, la doc ACE (Tutorial, section Lyrics) emploie des balises sans paroles : `[Intro - piano]`, `[Outro - fade out]`, `[Instrumental]`, `[Breakdown]` (instrumentation réduite, espace), `[Guitar Solo]`, `[Piano Interlude]`, `[Build]`, `[Drop]`, `[Silence]`, `[Fade Out]`. Leur effet réel n'est pas testé dans ce projet (hypothèse) ; l'instrument d'un solo doit être cohérent avec le caption.
+- Laisser du temps entre les paroles : pas de commande de pause dans la doc. Leviers (hypothèses à tester une variable à la fois) : insérer une section sans paroles entre deux sections chantées, allonger la durée à texte égal (ACE répartit les paroles sur la durée), baisser le `bpm`, mettre « laid-back » ou « slow tempo » dans le caption, garder des lignes courtes (6 à 10 syllabes).
 - Descripteur après un tiret : `[Chorus - anthemic]`. Un seul ou deux mots, jamais d'empilement (le modèle peut chanter la balise).
 - Balises de voix : `[spoken word]` (rap, récitation), `[whispered]`, `[raspy vocal]`, `[harmonies]`, `[ad-lib]`.
 - Majuscules : plus d'intensité. Parenthèses : chœurs ou échos.
@@ -36,17 +37,33 @@ Sources : doc locale `D:\ServOMorph\ACE-Step-1.5\docs\en\Tutorial.md` et `ace_st
 - Français : fait partie des langues les mieux gérées selon la documentation.
 - Autotune (test Marie, seed 42, 120 s) : un caption sobre (« autotuned vocal ») donne un effet nul à léger ; « heavy hard-tuned autotune vocals, T-Pain and Future style, pitch-snapped robotic vocal effect » + rap trap donne un effet net.
 - Voix : le timbre change au fil du morceau ; « single male vocalist » dans le caption ne l'a pas corrigé (v4).
-- Un décodage VAE s'est figé 12 min à 120 s (v4) puis est passé en 47 s à la relance, mêmes paramètres.
+- Voix de femme (démo T01, 135 s, un seul auditeur) : « playful female voice » a donné une voix d'homme (test 11), le duo homme/femme par section ne fonctionne pas (test 13, comme l'issue ACE-Step #398), « playful female vocal » avec balises de voix a donné une voix d'homme puis de femme (test 14) ; les graines n'étant alors pas appliquées, 15 et 19 sont deux tirages aléatoires du même réglage (15 jugée la meilleure, 15 et 19 instables). Grille avec graines appliquées (tests 26 à 31 et 39 à 44) à écouter avant de conclure.
+- Un décodage VAE s'est figé 12 min à 120 s (v4) puis est passé en 47 s à la relance, mêmes paramètres. Cause probable (non démontrée) : VRAM libre insuffisante au moment du décodage.
 - Le résultat varie beaucoup d'une seed à l'autre : prévoir plusieurs versions.
 - Hors du worker actuel : Cover, Repaint (3 à 90 s), score d'alignement des paroles, modèles SFT et XL.
 
 ## Procédure d'une série de versions
 1. Fixer le point de départ avec l'utilisateur : paroles, durée, seed, LM oui ou non.
+1b. Contrôler les paroles avant tout lancement : `python TEXTES/tools/check_lyrics.py <fichier> --caption "<caption>" --duree <s>`. Le script ne modifie rien. Les ERREUR (balise absente ou collée au texte, section vide, texte avant la première balise, encodage corrompu, caption instrumental avec paroles) sont à corriger avant de lancer. Les AVERT (balise inconnue, lignes de plus de 10 syllabes, durée de plus de 135 s, tempo dans le caption, texte probablement trop long pour la durée) sont à présenter à l'utilisateur. Le comptage de syllabes et l'estimation de durée sont approximatifs.
 2. Créer ou compléter `config.json` dans `webradio/tests_ace/<sujet>/` : une entrée `test_cases` par version, un seul paramètre qui change à la fois.
-3. Nommer chaque version de façon lisible (`vN_<style>_<voix>`).
+3. Nommer chaque version de façon lisible (`vN_<style>_<voix>`). Dans la section Tests de l'UI, chaque test porte un numéro unique en début de nom (`NN · description`), jamais réutilisé : le suivant est le plus grand numéro existant plus un (le prochain libre au 2026-10-09 : 45). Avant d'ajouter un test à `webradio/playlists/tests-ace/outputs/playlist_results.json`, relire les noms existants pour trouver ce numéro.
 4. Lancer `generate.py` en arrière-plan et suivre `outputs/playlist_results.json` (statut) et la sortie du process.
 5. Donner à l'utilisateur le chemin des WAV et la durée de calcul ; noter ce qui a changé entre versions.
 6. Ne rien intégrer au catalogue ni aux playlists sans demande explicite.
+
+## Suivi des textes (liste d'attente)
+Quand la génération part d'un texte suivi dans `TEXTES/liste_attente.md` (identifiant `Txx`), tenir cette liste à jour pendant le travail.
+- Ne jamais éditer le tableau à la main : utiliser le script.
+  - `python TEXTES/tools/liste_attente.py set <ID> --statut <STATUT> --note "<remarque>"`
+  - `python TEXTES/tools/liste_attente.py add --titre ... [--auteur --fichier --droits --statut --note]`
+  - `python TEXTES/tools/liste_attente.py log "<message>"`
+- Statuts : `A_PREPARER`, `PRET`, `EN_GENERATION`, `GENERE`, `VALIDE`, `REJETE`, `BLOQUE_DROITS`.
+- Au lancement d'une série de versions : `EN_GENERATION`, avec en note le dossier de test et ce qui varie entre versions.
+- Une fois les MP3 produits : `GENERE`, avec en note le chemin des MP3.
+- `VALIDE` seulement après l'écoute et l'accord de l'utilisateur. `REJETE`, ou retour à `PRET`, seulement sur sa décision.
+- Échec ou blocage : laisser `EN_GENERATION` et écrire la cause en note, sans rien inventer.
+- Texte protégé (`TEXTES/usage_prive/`) : démo privée dans un dossier de test non versionné, jamais en playlist ni en rotation. Ne jamais mettre `VALIDE` ni autoriser un usage radio sans l'accord écrit de l'auteur.
+- Ne pas lire d'état courant dans cette liste sans la relire : elle est mise à jour par plusieurs agents.
 
 ## Adaptation de paroles existantes
 - Ne jamais modifier le fichier source : travailler sur une copie dans le dossier de test.

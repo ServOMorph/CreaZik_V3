@@ -47,3 +47,26 @@ Relancer `/generate_covers` pour reprendre les pochettes manquantes.
 
 ## Question bloquante pour la session suivante
 La prononciation « I A » des jingles WebRadio convient-elle ?
+
+---
+
+# Session du 2026-10-08 (légende animée, cadrage des paroles)
+
+## Décisions prises
+- Légende du visuel (titre / description) : défilement vertical alterné toutes les 3,5 s, validé sur iPhone par l'utilisateur.
+- Travail en parallèle réparti en deux agents de zone : `textes` (paroles françaises, commande `/generate_lyrics` à créer) et `modeles_llm` (autres modèles musicaux).
+- Paroles : le nom d'artiste ne sert que de consigne de style interne, jamais dans un titre, un caption ou une attribution publics.
+
+## Livrables produits ou modifiés
+- `webradio/listen.js`, `webradio/listen.css` : légende animée (`setCaption`, `startCaptionTyping`) ; première version en frappe remplacée par le défilement.
+- `webradio/REGLES_GENERATION_DEV.md` : règle de légende et cadrage des paroles.
+
+## Hypothèses validées / invalidées
+- VALIDE : défilement de la légende correct sur iPhone (contrôle utilisateur).
+- EN ATTENTE : qualité réelle des paroles produites par la future commande, à juger à l'écoute.
+
+## Prochaine étape exacte
+Lancer `/start textes` dans une session dédiée et créer `/generate_lyrics` ; écouter v7 à v9 des tests ACE si ce n'est pas fait.
+
+## Question bloquante pour la session suivante
+Aucune

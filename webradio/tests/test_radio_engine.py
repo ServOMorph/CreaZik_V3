@@ -505,6 +505,35 @@ def test_neutral_marker_and_vote_clears_it():
         assert eng.db.neutral_counts() == {}
 
 
+def test_unrated_only_mode():
+    with tempfile.TemporaryDirectory() as tmp:
+        eng, clock = make_persist(tmp, {"a": (4, 10, False)},
+                                  {"jingles_enabled": False, "no_repeat": 0, "no_repeat_songs": 0, "transitions": preset()})
+        (Path(tmp) / "votes.json").write_text(json.dumps({"tracks": {"a:1": {"up": 2, "down": 0},
+                                                                     "a:2": {"up": 0, "down": 0}}}), encoding="utf-8")
+        eng.db.set_neutral("v1", "a:3", True)
+        assert eng.action("unrated", {"on": True})
+        assert eng.snapshot()["unrated_only"] is True
+        seq = run(eng, clock, 10 * 200, step=1.0)
+        keys = {key for _, key, _ in seq[2:]}
+        assert keys <= {"a:2", "a:4"}, keys
+        eng._save_state()
+        eng2 = RadioEngine(Path(tmp), time_fn=clock, rng=random.Random(2), persist=True)
+        assert eng2.unrated_only is True
+        assert eng.action("unrated", {"on": False})
+        seq = run(eng, clock, 10 * 300, step=1.0)
+        assert {key for _, key, _ in seq[3:]} >= {"a:1", "a:3"}
+
+
+def test_unrated_only_falls_back_when_all_rated():
+    with tempfile.TemporaryDirectory() as tmp:
+        eng, clock = make_persist(tmp, {"a": (2, 10, False)}, {"jingles_enabled": False, "transitions": preset()})
+        (Path(tmp) / "votes.json").write_text(json.dumps({"tracks": {"a:1": {"up": 1}, "a:2": {"up": 1}}}), encoding="utf-8")
+        eng.action("unrated", {"on": True})
+        seq = run(eng, clock, 100, step=1.0)
+        assert len(seq) >= 5
+
+
 def test_rename_and_delete_with_learning_archive():
     with tempfile.TemporaryDirectory() as tmp:
         eng, clock = make_persist(tmp, {"a": (3, 20, False), "b": (2, 20, False)})

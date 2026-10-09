@@ -1,5 +1,19 @@
 # Changelog
 
+## v1.7 — 2026-10-09
+
+### Ajouté
+- UI : bouton de réinitialisation des pouces du morceau en cours (`/api/vote/reset`), volume des jingles réglable dans l'admin (`jingle_volume`), section « Tests » repliable (liste du plus récent au plus ancien, numéros uniques, pouces, suppression, barre de position, badge « Jamais écouté », routes `/api/tests*`), titre et date sur les pochettes, police Sora embarquée (`webradio/fonts/`).
+- `TEXTES/tools/check_lyrics.py` : contrôle des paroles avant génération (balises, sections vides, syllabes, durée, cohérence avec le caption) ; section « Caption ACE » dans `/generate_lyrics` ; suivi des textes dans le skill `generation-morceaux`.
+- Démo privée T01 « Arroser Les Roses » : versions numérotées de 1 à 44 dans la section Tests, version 18 retenue.
+
+### Modifié
+- `ace_worker.py` : graine appliquée (`use_random_seed=False`), les graines précédentes étaient ignorées.
+- iOS : circuit Web Audio forcé pour que le volume des jingles et la baisse du morceau (12 %) s'appliquent ; `fit` de `motion.js` ne laisse plus un titre sortir du cadre ; `.gitignore` : démos privées et `tests_state.json`.
+
+### Corrigé
+- Suppression d'un test sous Windows quand le fichier est verrouillé ; contrôleur de paroles (BOM, syllabes en « -ent », « non instrumental »).
+
 ## v1.6 — 2026-10-08
 
 ### Ajouté

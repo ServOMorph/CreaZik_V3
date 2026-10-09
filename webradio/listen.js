@@ -13,6 +13,9 @@
     const canvas = $('vizCanvas');
     const ctx2d = canvas.getContext('2d');
     const trackCover = $('trackCover');
+    const coverLabel = $('coverLabel');
+    const coverTitle = $('coverTitle');
+    const coverDate = $('coverDate');
 
     const slots = [$('audio'), new Audio(), new Audio()].map(el => {
         el.preload = 'auto';
@@ -21,6 +24,9 @@
     });
 
     const supportsVolume = (function () {
+        const ios = /iPad|iPhone|iPod/.test(navigator.userAgent)
+            || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+        if (ios) return false;
         try {
             const a = new Audio();
             a.volume = 0.5;
@@ -110,6 +116,8 @@
         return it.file + '?v=' + encodeURIComponent(it.generated_at || '');
     }
 
+    const JINGLE_GAIN = 0.8;
+
     function ease(x) {
         return Math.sin(Math.max(0, Math.min(1, x)) * Math.PI / 2);
     }
@@ -123,6 +131,7 @@
             if (T < d.until) g = Math.min(g, d.level * ease((T - it.start) / Math.max(0.5, d.until - it.start)));
             else g = Math.min(g, d.level + (1 - d.level) * ease((T - d.until) / Math.max(0.5, d.rise)));
         }
+        if (it.jingle) g *= jingleGain();
         return g;
     }
 
@@ -264,6 +273,132 @@
         testing = false;
         testAudio.pause();
         setTestLabel();
+        renderTests();
+    }
+
+    let testsItems = [];
+    let testsCur = '';
+
+    const TEST_ICONS = {
+        up: '<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 11v10H3V11z"/><path d="M7 11l4-8a2.5 2.5 0 0 1 2.5 2.8L13 9h6.2a2 2 0 0 1 2 2.3l-1.3 8a2 2 0 0 1-2 1.7H7"/></svg>',
+        down: '<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 13V3h4v10z"/><path d="M17 13l-4 8a2.5 2.5 0 0 1-2.5-2.8L11 15H4.8a2 2 0 0 1-2-2.3l1.3-8A2 2 0 0 1 6.100 3H17"/></svg>',
+        del: '<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M6 6l1 14h10l1-14"/></svg>'
+    };
+
+    function testSeekMax() {
+        const d = testAudio.duration;
+        if (isFinite(d) && d > 0) return d;
+        const it = testsItems.find(x => x.file === testsCur);
+        return it && it.duration ? Number(it.duration) : 0;
+    }
+
+    function updateTestSeek() {
+        const range = $('testSeek');
+        const label = $('testTime');
+        if (!range || !label) return;
+        const d = testSeekMax();
+        if (!range.matches(':active')) range.value = d ? Math.round(testAudio.currentTime / d * 1000) : 0;
+        label.textContent = fmtTime(testAudio.currentTime) + ' / ' + fmtTime(d);
+    }
+
+    function renderTests() {
+        const box = $('testsList');
+        const panel = $('testsPanel');
+        if (!box || !panel || panel.hidden) return;
+        if (!testsItems.length) {
+            box.innerHTML = '<div class="prog-empty">Aucune version de test.</div>';
+            return;
+        }
+        box.innerHTML = testsItems.map(it => {
+            const cur = it.file === testsCur;
+            const f = esc(it.file);
+            const act = (a, label, icon) => `<button type="button" class="prog-act test-act" data-act="${a}" data-file="${f}" aria-label="${label}" title="${label}"${a === 'up' || a === 'down' ? ` aria-pressed="${it.vote === a}"` : ''}>${icon}</button>`;
+            const generated = it.generated_at ? new Date(it.generated_at).toLocaleString('fr-FR') : '';
+            const provenance = [it.model, generated].filter(Boolean).join(' · ');
+            const quality = it.technical_status === 'pass_needs_listening' ? 'Controle technique reussi - ecoute requise' : it.technical_status === 'invalid' ? 'Controle technique invalide' : '';
+            return `<div class="prog-item test-item${cur ? ' is-now' : ''}${it.played ? '' : ' is-new'}">
+                <button type="button" class="prog-main" data-act="play" data-file="${f}">
+                    <span class="prog-title">${cur && testing ? '&#9646;&#9646; ' : '&#9654; '}${esc(String(it.name).replace(/_/g, ' '))}</span>
+                    ${provenance ? `<span class="prog-sub">${esc(provenance)}</span>` : ''}
+                    ${quality ? `<span class="prog-sub">${esc(quality)}</span>` : ''}
+                    <span class="prog-sub">${esc(it.prompt)}</span>
+                    ${it.played ? '' : '<span class="prog-badge">Jamais &eacute;cout&eacute;</span>'}
+                </button>
+                ${act('up', "J'aime", TEST_ICONS.up)}${act('down', "Je n'aime pas", TEST_ICONS.down)}${act('delete', 'Supprimer cette version', TEST_ICONS.del)}
+                ${cur ? '<div class="test-seek"><input id="testSeek" type="range" min="0" max="1000" step="1" value="0" aria-label="Position dans le morceau"><span id="testTime" class="time">0:00 / 0:00</span></div>' : ''}
+            </div>`;
+        }).join('');
+        updateTestSeek();
+    }
+
+    async function loadTests() {
+        const d = await getJSON('/api/tests', null);
+        if (!d || !Array.isArray(d.items)) return;
+        const num = f => parseInt((f.split('/').pop().match(/^(\d+)/) || [0, 0])[1], 10);
+        testsItems = d.items.slice().sort((a, b) => String(b.generated_at || '').localeCompare(String(a.generated_at || '')) || num(b.file) - num(a.file));
+        renderTests();
+    }
+
+    async function testsPost(path, body) {
+        try {
+            const r = await fetch(path, {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(body)});
+            return r.ok;
+        } catch (e) {
+            return false;
+        }
+    }
+
+    function markTestPlayed(file) {
+        const it = testsItems.find(x => x.file === file);
+        if (!it || it.played) return;
+        it.played = true;
+        testsPost('/api/tests/played', {file});
+    }
+
+    async function playTestFile(item) {
+        if (listening) stopListening();
+        if (testsCur !== item.file) {
+            testAudio.src = '/' + item.file + '?v=' + encodeURIComponent(item.generated_at || '');
+            testsCur = item.file;
+        }
+        try {
+            await testAudio.play();
+            testing = true;
+            markTestPlayed(item.file);
+        } catch (e) {
+            testing = false;
+        }
+        setTestLabel();
+        renderTests();
+    }
+
+    async function onTestsClick(ev) {
+        const btn = ev.target.closest('button[data-act]');
+        if (!btn) return;
+        const item = testsItems.find(x => x.file === btn.dataset.file);
+        if (!item) return;
+        const act = btn.dataset.act;
+        if (act === 'play') {
+            if (testsCur === item.file && testing) stopTest(); else playTestFile(item);
+        } else if (act === 'up' || act === 'down') {
+            const vote = item.vote === act ? 'none' : act;
+            if (await testsPost('/api/tests/vote', {file: item.file, vote})) {
+                item.vote = vote === 'none' ? '' : vote;
+                renderTests();
+            }
+        } else if (act === 'delete') {
+            if (!confirm('Supprimer définitivement cette version de test ?')) return;
+            if (await testsPost('/api/tests/delete', {file: item.file})) {
+                if (testsCur === item.file) {
+                    testing = false;
+                    testAudio.pause();
+                    testAudio.removeAttribute('src');
+                    testsCur = '';
+                    setTestLabel();
+                }
+                await loadTests();
+            }
+        }
     }
 
     async function toggleTest() {
@@ -271,16 +406,20 @@
         const b = $('testBtn');
         b.disabled = true;
         try {
-            const r = await fetch('/playlists/tests-ace/outputs/playlist_results.json?t=' + Date.now());
-            if (!r.ok) throw new Error(r.status);
-            const gens = ((await r.json()).generations || []).filter(g => g.status === 'generated');
-            const g = gens[gens.length - 1];
+            const d = await getJSON('/api/tests', null);
+            if (!d || !Array.isArray(d.items)) throw new Error('tests indisponibles');
+            testsItems = d.items.slice().sort((a, b) => String(a.generated_at || '').localeCompare(String(b.generated_at || '')));
+            const g = testsItems[testsItems.length - 1];
             if (!g) throw new Error('aucun test');
             if (listening) stopListening();
-            testAudio.src = '/' + g.output_file.replace(/\.wav$/, '.mp3') + '?v=' + encodeURIComponent(g.generated_at || '');
+            const mp3 = g.file;
+            testAudio.src = '/' + mp3 + '?v=' + encodeURIComponent(g.generated_at || '');
+            testsCur = mp3;
             await testAudio.play();
             testing = true;
+            markTestPlayed(mp3);
             setTestLabel();
+            renderTests();
         } catch (e) {
             testing = false;
             setTestLabel('Indisponible');
@@ -477,10 +616,79 @@
         capTimer = setTimeout(tick, 3500);
     }
 
+    let coverFitKey = '';
+
+    function coverBox(w, h) {
+        const areaTop = h * 0.05;
+        const areaH = h * 0.9;
+        const ratio = trackCover.naturalWidth && trackCover.naturalHeight ? trackCover.naturalWidth / trackCover.naturalHeight : 1;
+        let cw = w;
+        let ch = w / ratio;
+        if (ch > areaH) {
+            ch = areaH;
+            cw = ch * ratio;
+        }
+        return {left: (w - cw) / 2, top: areaTop + (areaH - ch) / 2, width: cw, height: ch};
+    }
+
+    function fitCoverTitle(force) {
+        const wrap = coverLabel.parentElement;
+        const w = wrap.clientWidth;
+        const h = wrap.clientHeight;
+        const key = (coverTitle.dataset.full || coverTitle.textContent) + '|' + w + '|' + h + '|' + trackCover.naturalWidth + 'x' + trackCover.naturalHeight;
+        if (!force && key === coverFitKey) return;
+        coverFitKey = key;
+        if (!coverTitle.textContent || !w || !h) return;
+        const box = coverBox(w, h);
+        const s = coverLabel.style;
+        s.left = box.left + 'px';
+        s.top = box.top + 'px';
+        s.width = box.width + 'px';
+        s.height = box.height + 'px';
+        coverDate.style.fontSize = Math.max(8, Math.min(11, box.width * 0.06)) + 'px';
+        const maxTitle = box.height * 0.45;
+        const full = coverTitle.dataset.full || coverTitle.textContent;
+        const base = Math.min(21.6, box.width * 0.13);
+        const layout = (parts, nowrap) => {
+            const nodes = [];
+            parts.forEach((p, i) => {
+                if (i) nodes.push(document.createElement('br'));
+                nodes.push(document.createTextNode(p));
+            });
+            coverTitle.replaceChildren(...nodes);
+            coverTitle.style.whiteSpace = nowrap ? 'nowrap' : 'normal';
+        };
+        const fits = () => coverTitle.scrollWidth <= coverTitle.clientWidth + 0.5
+            && coverTitle.offsetHeight <= maxTitle;
+        const shrink = (min) => {
+            for (let size = base; size >= min; size -= 0.5) {
+                coverTitle.style.fontSize = size + 'px';
+                if (fits()) return true;
+            }
+            return false;
+        };
+        layout([full], true);
+        if (shrink(9)) return;
+        const dash = full.indexOf(' - ');
+        if (dash > 0) {
+            layout([full.slice(0, dash), full.slice(dash + 3)], true);
+            if (shrink(9)) return;
+        }
+        layout([full], false);
+        coverTitle.style.overflowWrap = '';
+        if (shrink(7)) return;
+        coverTitle.style.overflowWrap = 'anywhere';
+        if (!shrink(7)) coverTitle.style.fontSize = '7px';
+    }
+
     function showTrackCover(it) {
         coverOk = false;
         trackCover.hidden = true;
         trackCover.removeAttribute('src');
+        coverTitle.textContent = it && !it.jingle ? trackTitle(it) : '';
+        coverTitle.dataset.full = coverTitle.textContent;
+        coverDate.textContent = it && !it.jingle ? fmtDate(it.generated_at) : '';
+        fitCoverTitle();
         if (it && !it.jingle) phaseT0 = null;
         setCaption(it, true);
         if (!it || it.jingle || !it.file) return;
@@ -491,6 +699,7 @@
                 coverOk = true;
                 trackCover.hidden = false;
                 setCaption(it, false);
+                fitCoverTitle(true);
             }
         };
         trackCover.onerror = () => { coverOk = false; setCaption(it, true); };
@@ -555,12 +764,8 @@
                 b.setAttribute('aria-pressed', on ? 'true' : 'false');
             });
         }
-        const nb = $('thumbNeutral');
-        if (nb) {
-            const on = (votes.neutral || []).includes(current.key);
-            nb.classList.toggle('active', on);
-            nb.setAttribute('aria-pressed', on ? 'true' : 'false');
-        }
+        const rb = $('thumbReset');
+        if (rb) rb.disabled = !((mine.up || 0) + (mine.down || 0));
         [['thumbUp', 'up'], ['thumbDown', 'down']].forEach(([id, kind]) => {
             const b = $(id);
             if (!b) return;
@@ -614,21 +819,19 @@
         }
     }
 
-    async function toggleNeutral() {
+    async function resetThumbs() {
         if (!current || current.jingle) return;
         const key = current.key;
-        const list = votes.neutral || [];
-        const on = !list.includes(key);
-        votes.neutral = on ? list.concat(key) : list.filter(k => k !== key);
-        updateThumbs();
+        delete pendingVotes[key];
         try {
-            const r = await fetch('/api/neutral', {method: 'POST', headers: {'Content-Type': 'application/json'},
-                                                   body: JSON.stringify({key, on})});
+            const r = await fetch('/api/vote/reset', {method: 'POST', headers: {'Content-Type': 'application/json'},
+                                                      body: JSON.stringify({key})});
             if (!r.ok) throw new Error(r.status);
-        } catch (e) {
-            votes.neutral = on ? (votes.neutral || []).filter(k => k !== key) : (votes.neutral || []).concat(key);
-            updateThumbs();
-        }
+            const res = await r.json();
+            votes.tracks[key] = {up: res.up, down: res.down, score: res.score};
+            votes.mine[key] = res.mine;
+        } catch (e) {}
+        updateThumbs();
     }
 
     async function flushVotes() {
@@ -763,6 +966,11 @@
         const root = document.documentElement.style;
         root.setProperty('--pl-h1', String(Math.round(spec.hue)));
         root.setProperty('--pl-h2', String(Math.round(spec.hue2)));
+    }
+
+    function jingleGain() {
+        const v = live.ui && live.ui.jingle_volume;
+        return typeof v === 'number' ? Math.max(0, Math.min(1, v)) : JINGLE_GAIN;
     }
 
     function transitionMs() {
@@ -1086,7 +1294,10 @@
         adWasOn = adOn;
         const coverOn = kind === 'cover' && coverOk;
         setLayer(coverBlack, coverOn);
-        trackCover.classList.toggle('show', coverOn && x > PHASE_FX_MS / 1000 && x < pd - PHASE_FX_MS / 1000);
+        const coverShown = coverOn && x > PHASE_FX_MS / 1000 && x < pd - PHASE_FX_MS / 1000;
+        trackCover.classList.toggle('show', coverShown);
+        if (coverShown) fitCoverTitle();
+        coverLabel.classList.toggle('show', coverShown);
         setLayer(adPanelEl, adOn);
         return adOn;
     }
@@ -1270,6 +1481,8 @@
         updateDiscover();
         syncAdminEmbed();
         setHidden('progPanel', !adm);
+        setHidden('testsPanel', !isAdmin);
+        if (isAdmin) loadTests();
         setHidden('humanRadio', true);
         updateThumbs();
         const icon = $('modeIcon');
@@ -1431,7 +1644,20 @@
         $('nextBtn').addEventListener('click', skip);
         $('testBtn').addEventListener('click', toggleTest);
         $('discoverBtn').addEventListener('click', toggleDiscover);
+        window.addEventListener('resize', () => fitCoverTitle(true));
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => fitCoverTitle(true));
         testAudio.addEventListener('ended', stopTest);
+        testAudio.addEventListener('timeupdate', updateTestSeek);
+        testAudio.addEventListener('loadedmetadata', updateTestSeek);
+        const tl = $('testsList');
+        if (tl) {
+            tl.addEventListener('click', onTestsClick);
+            tl.addEventListener('input', ev => {
+                if (ev.target.id !== 'testSeek') return;
+                const d = testSeekMax();
+                if (d) testAudio.currentTime = Number(ev.target.value) / 1000 * d;
+            });
+        }
         const mi = $('modeIcon');
         if (mi) mi.addEventListener('click', onModeIcon);
         const panel = $('progPanel');
@@ -1441,8 +1667,8 @@
         if (tu) tu.addEventListener('click', () => sendVote('up'));
         if (td) td.addEventListener('click', () => sendVote('down'));
         document.querySelectorAll('.dyn-btn').forEach(b => b.addEventListener('click', () => { setDynamics(b.dataset.level); b.blur(); }));
-        const tn = $('thumbNeutral');
-        if (tn) tn.addEventListener('click', toggleNeutral);
+        const tr = $('thumbReset');
+        if (tr) tr.addEventListener('click', resetThumbs);
         slots.forEach(s => s.el.addEventListener('error', () => onSlotError(s)));
         const cf = $('comForm');
         if (cf) cf.addEventListener('submit', postComment);
@@ -1468,5 +1694,6 @@
     }
 
     window.__radioDebug = () => ({current, T: serverNow(), live: {active: live.active, upcoming: live.upcoming.length}, content, sceneKey, listening, transActive: !!(transEngine && transEngine.active)});
+    window.__fitCoverTitle = fitCoverTitle;
     window.addEventListener('load', init);
 }());

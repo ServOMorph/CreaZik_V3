@@ -21,7 +21,7 @@ MP3_BITRATE = 192000
 OVERRIDES_FILE = "catalog_overrides.json"
 NAME_MAX = 120
 USER_DYN_REFRESH_S = 15.0
-DUCK_LEVEL = 0.22
+DUCK_LEVEL = 0.12
 DUCK_RISE_S = 3.0
 LEARNING_DIR = "learning"
 LEARNING_FILE = "morceaux_rejetes.jsonl"
@@ -41,6 +41,7 @@ DEFAULT_RADIO = {
     "weights": {},
     "jingle_every": 5,
     "jingles_enabled": True,
+    "jingle_volume": 0.8,
     "favorites_only": False,
     "no_repeat": 3,
     "no_repeat_songs": 15,
@@ -251,6 +252,8 @@ class RadioEngine:
         self._settings = (None, dict(DEFAULT_RADIO))
         self._votes = (None, {})
         self._user_dyn = (0.0, {})
+        self._neutral = (0.0, {})
+        self.unrated_only = False
         self._favs = (None, set())
         self.persist = persist
         self.db = StatsDB(self.root / "radio.db") if persist else None
@@ -266,6 +269,7 @@ class RadioEngine:
             "explicit": self.explicit, "auto": self.auto, "played": self.played, "history": self.history,
             "since_jingle": self.since_jingle, "jingle_seq": self.jingle_seq, "since_ad": self.since_ad,
             "ad_seq": self.ad_seq, "jingle_msg_seq": self.jingle_msg_seq, "song_history": self.song_history,
+            "unrated_only": self.unrated_only,
         }
         tmp = self._state_path().with_suffix(".tmp")
         try:
@@ -295,6 +299,7 @@ class RadioEngine:
         self.ad_seq = data.get("ad_seq", 0)
         self.jingle_msg_seq = data.get("jingle_msg_seq", 0)
         self.song_history = data.get("song_history", [])
+        self.unrated_only = bool(data.get("unrated_only", False))
 
     def _cached(self, slot, path, loader):
         mtime = Catalog._mtime(path)
@@ -361,6 +366,23 @@ class RadioEngine:
         w = (st.get("weights") or {}).get(playlist_id)
         return st.get("default_weight", 5) if w is None else w
 
+    def _neutral_counts(self):
+        if self.db is None:
+            return {}
+        ts, data = self._neutral
+        now = time.time()
+        if now - ts > USER_DYN_REFRESH_S:
+            try:
+                data = self.db.neutral_counts()
+            except Exception:
+                pass
+            self._neutral = (now, data)
+        return data
+
+    def _is_rated(self, key, neutral):
+        v = self.votes().get(key) or {}
+        return bool(v.get("up") or v.get("down") or neutral.get(key))
+
     def _playable_groups(self):
         st = self.settings()
         excluded = set(st.get("excluded") or [])
@@ -372,6 +394,12 @@ class RadioEngine:
             keys = [k for k in pl["keys"] if k not in excluded and (favs is None or k in favs) and self._score(k) >= 0]
             if keys:
                 groups.append((pl, keys))
+        if self.unrated_only:
+            neutral = self._neutral_counts()
+            unrated = [(pl, [k for k in keys if not self._is_rated(k, neutral)]) for pl, keys in groups]
+            unrated = [(pl, keys) for pl, keys in unrated if keys]
+            if unrated:
+                return unrated
         return groups
 
     def _jingle_keys(self):
@@ -733,8 +761,9 @@ class RadioEngine:
                         it["fade_out"] = fout
             st = self.settings()
             out = {"server_time": t, "rev": self.rev, "active": active,
-                   "upcoming": plan if admin else plan[:2],
-                   "ui": {"visual_transition_s": float(st.get("visual_transition_s", 5))}}
+                   "upcoming": plan if admin else plan[:2], "unrated_only": self.unrated_only,
+                   "ui": {"visual_transition_s": float(st.get("visual_transition_s", 5)),
+                          "jingle_volume": max(0.0, min(1.0, float(st.get("jingle_volume", 0.8))))}}
             if admin:
                 out["played"] = [dict(p) for p in self.played]
                 out["queue"] = [
@@ -898,6 +927,10 @@ class RadioEngine:
                 self._compose()
                 if name == "play_index":
                     self._promote(t, forced=True)
+            elif name == "unrated":
+                self.unrated_only = bool(params.get("on"))
+                self._neutral = (0.0, {})
+                self.auto = []
             elif name in ("playlist_next", "playlist_front", "playlist_now"):
                 pl = next((p for p in self.cat.playlists if p["id"] == params.get("id")), None)
                 if pl is None:

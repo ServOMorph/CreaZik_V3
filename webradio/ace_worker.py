@@ -208,7 +208,7 @@ for i, (case, entry) in enumerate(zip(cases, entries), 1):
     try:
         res = generate_music(
             dit, llm, params=params,
-            config=GenerationConfig(batch_size=1, audio_format="wav"),
+            config=GenerationConfig(batch_size=1, audio_format="wav", use_random_seed=False),
             save_dir=os.path.join(ACE, "output", "creazik"),
         )
         path = res.audios[0]["path"] if res.success and res.audios else ""

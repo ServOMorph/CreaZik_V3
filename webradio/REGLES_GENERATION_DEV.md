@@ -47,6 +47,12 @@ Document établi à partir des décisions prises au fil des conversations. Chaqu
 - La génération en lot se lance avec `/generate_covers`, attend que la génération musicale soit inactive et reprend en ignorant les pochettes PNG déjà créées. `/stop_covers` arrête uniquement ce lot et ComfyUI-Qwen ; sans pochette disponible, l'interface conserve l'animation visuelle.
 - Priorité des pochettes : relire les votes avant chaque image, générer d'abord les morceaux au solde positif, puis ceux sans vote, puis les soldes équilibrés ; exclure les soldes négatifs. Si le solde devient négatif pendant la génération, ne pas conserver l'image.
 
+### 2.6 Tests de génération (versions d'essai)
+- Les tests vivent dans `webradio/tests_ace/<sujet>/` (hors playlists, rotation et radio), une version par worker (`generate.py --only <id>`), une seule variable modifiée à la fois, avec contrôle des paroles par `TEXTES/tools/check_lyrics.py` avant le lancement. Les résultats à écouter sont copiés dans `playlists/tests-ace/outputs/` (section Tests de l'UI) ; seuls les MP3 sont gardés (le WAV du dossier de test et sa source dans `ACE-Step-1.5\output\creazik\` sont supprimés).
+- La graine du cas de test est appliquée depuis le 2026-10-09 (`use_random_seed=False` dans `ace_worker.py`) : avant, `use_random_seed` valait vrai par défaut et toutes les graines des tests (« seed 42 », etc.) étaient ignorées, donc les comparaisons « à graine fixe » plus anciennes ne sont pas fiables. Une même graine redonne un audio presque identique (corrélation 0,99997, pas bit à bit). Aucune configuration de playlist ne définit de graine : la rotation reste aléatoire.
+- Surveiller dans le journal la ligne `auto-enabling CPU VAE decode` : si la VRAM libre avant le décodage tombe à environ 0 Go (navigateurs, bureau), le décodage passe sur processeur et peut durer des heures. Fermer ou arrêter les consommateurs de VRAM avant de lancer.
+- Texte protégé (`TEXTES/usage_prive/`, ex. T01 « Arroser Les Roses ») : démo privée seulement, dossier de test non versionné, jamais en playlist ni en rotation ; un test d'écoute ne vaut pas accord de l'auteur : le statut `VALIDE` reste interdit tant que l'accord écrit n'existe pas. Toute adaptation du texte (ex. « posté », « zoublie ») est à signaler à l'auteur.
+
 ## 3. Règles de la radio (moteur)
 
 ### 3.1 Direct
@@ -55,7 +61,7 @@ Document établi à partir des décisions prises au fil des conversations. Chaqu
 - Aucun test de type « suivant » ou « lire maintenant » sur la radio en production.
 
 ### 3.2 Enchaînements
-- Jingle vers morceau : le morceau démarre en même temps que le jingle, en fondu à volume bas (22 % au plus) pendant la voix, puis le volume monte jusqu'au maximum sur 3 s après la fin du jingle (`DUCK_LEVEL`, `DUCK_RISE_S`).
+- Jingle vers morceau : le morceau démarre en même temps que le jingle, en fondu à volume bas (12 %, `DUCK_LEVEL`) pendant la voix, puis le volume monte jusqu'au maximum sur 3 s après la fin du jingle (`DUCK_RISE_S`). Le volume des jingles est réglable dans l'admin (`jingle_volume`, 0,8 par défaut) et appliqué aussi à la prévisualisation. Sur iPhone, Safari ignore `el.volume` : le client force le circuit Web Audio (GainNode) sur iOS pour que le volume des jingles et la baisse du morceau soient appliqués.
 - Seuls les jingles vocaux sont conservés ; ils sont rangés hors des playlists, dans `webradio/jingles/<catégorie>/` (`webradio` : CréaZik IA WebRadio, `traveling-sound`, `serenia-tech`), déclarés dans `playlists.json` avec `role: jingle` et `category`. Toutes les catégories sont mélangées dans la même rotation ; l'admin les trie par catégorie (blocs repliables).
 - Chaque jingle commence par 1 s de silence (le début était coupé) et reçoit le même traitement de volume (compression, loudnorm -11 LUFS).
 - Transitions réglables par préréglages en mode admin : fondu enchaîné, fondu, silence ; les fondus sont très doux.
@@ -68,7 +74,8 @@ Document établi à partir des décisions prises au fil des conversations. Chaqu
 - Chaque playlist a un poids : un poids 10 passe plus souvent qu'un poids 1.
 - Les pouces haut et bas peuvent être cliqués autant de fois que souhaité ; chaque clic modifie le poids ; un morceau dont le score (haut moins bas) est négatif n'est plus diffusé automatiquement (il reste programmable à la main par l'admin).
 - Commentaires associés au morceau en cours ; un commentaire au hasard est mis en avant toutes les 5 s.
-- Favoris disponibles ; la réinitialisation des votes est dans la page de gestion.
+- Un bouton de réinitialisation, entre les pouces, remet à zéro les pouces du morceau en cours uniquement (`/api/vote/reset`, désactivé sans pouce). Il n'y a plus de bouton « sans avis ».
+- Favoris disponibles ; la réinitialisation globale des votes est dans la page de gestion.
 
 ### 3.4 Dynamique de la journée
 - Énergie visée selon l'heure de Paris : sinusoïde, doux le matin, plus rythmé vers 17 h 30, décalage d'une heure le week-end, très calme la nuit.
@@ -83,18 +90,26 @@ Document établi à partir des décisions prises au fil des conversations. Chaqu
 - La page de gestion (`/radio.html`) et l'explorateur (`/ui.html`) sont réservés à l'admin ; les sections sont repliables.
 
 ### 3.6 Base de données, avis et suppression
-- `radio.db` (SQLite, non versionnée) enregistre chaque diffusion de morceau (horodatage, durée écoutée, passage forcé), les marqueurs « écouté, sans avis », les avis de dynamique Slow / Medium / High et l'historique des votes. Le bouton « sans avis » se trouve entre les pouces ; un pouce retire le marqueur.
+- `radio.db` (SQLite, non versionnée) enregistre chaque diffusion de morceau (horodatage, durée écoutée, passage forcé), les marqueurs « écouté, sans avis » (conservés en base, plus de bouton dans l'UI), les avis de dynamique Slow / Medium / High et l'historique des votes.
 - L'UI du port 5000 est l'UI dev : Suivant, Test et Slow/Medium/High y sont ouverts à tous ; `/api/dynamics` n'exige plus l'admin. Une UI auditeur sera créée plus tard et devra refermer ces accès.
 - Les avis Slow/Medium/High (0,15 / 0,5 / 0,85) sont fusionnés avec l'énergie mesurée dans la dynamique de la journée ; poids réglable (`dyn_user_weight`), croissant avec le nombre d'avis.
 - La section admin « Statistiques » expose les indicateurs, constats automatiques, tableaux triables et exports JSON (avec dictionnaire des champs) et CSV pour analyse humaine et IA.
 - Suppression d'un morceau ou d'une playlist : le MP3, la pochette et les fichiers dérivés sont effacés, l'entrée est masquée via `catalog_overrides.json` (le statut « generated » est conservé pour que la rotation ne le régénère pas) et les données de création (prompt, paroles, modèle, caractéristiques, votes, motif) sont ajoutées à `learning/morceaux_rejetes.jsonl`, corpus de ce qu'il ne faut pas reproduire. Refusé si le morceau est en cours de diffusion. Le renommage passe aussi par `catalog_overrides.json`.
 - Phase de test : le bouton « Suivant » est public (`PUBLIC_SKIP`) ; à retirer avant le déploiement (voir `AMELIORATIONS.md`).
 
+### 3.7 Section Tests de l'UI (admin)
+- Les sections « Gestion WebRadio » et « Tests » de la page d'écoute sont repliables et visibles dès que l'admin est connecté (même en « voir comme auditeur »). « Tests » liste les versions de `webradio/playlists/tests-ace/outputs/playlist_results.json` (hors catalogue, jamais diffusées), du plus récent au plus ancien : lecture, pouces haut/bas, suppression avec confirmation, barre de position.
+- Routes réservées à l'admin : `GET /api/tests`, `POST /api/tests/vote`, `/api/tests/played`, `/api/tests/delete`. L'état (pouces, « écouté », fichiers à supprimer plus tard si Windows les verrouille) est dans `webradio/tests_state.json`, non versionné. Une version jamais lancée porte le badge « Jamais écouté » ; il disparaît au premier clic sur lecture.
+- Chaque test a un numéro unique en tête du nom (`NN · description`), jamais réutilisé ; le suivant est le plus grand numéro existant plus un (45 au 2026-10-09). Seul le nom affiché change : les fichiers gardent leur nom.
+- Les MP3 de cette section sont servis par les motifs statiques publics de `playlists/*/outputs/` : lisibles sans connexion pour qui connaît l'URL (voir points non tranchés).
+
 ## 4. Règles visuelles et sonores
 
 - Un décor par playlist (plus de choix de style) ; transitions visuelles très douces entre playlists.
 - Les visuels évoluent sur la durée du morceau (arc narratif : intensité en 5 temps, dérive de teinte, second motif, ondes ponctuelles), avec de l'aléatoire stable par morceau.
 - Le cadre visuel est unique et centré ; il enchaîne des phases de 5 s : pochette (si disponible), animations visuelles, publicité (9 s), animations visuelles, pochette, avec huit transitions animées (`PHASE_FX` dans `listen.js`). La mascotte (`mascot.js`) est conservée mais masquée. La légende du visuel (titre, description) défile verticalement en alternance toutes les 3,5 s.
+- Titrage sur la pochette : le titre du morceau est centré en haut de l'image et la date de génération en petit en bas à droite, sans modifier le fichier de la pochette. La zone est calculée sur l'image réellement affichée (carrée, centrée) et non sur le cadre ; le titre reste sur une ligne en réduisant la police (jusqu'à 9 px), sinon coupé au « - », sinon sur plusieurs lignes entre les mots (`fitCoverTitle` dans `listen.js`). Les titres dessinés sur canvas (pubs, jingles) passent par `fit` de `motion.js`, qui réduit la taille puis coupe avec « … » plutôt que de déborder.
+- Police des titres : Sora (SIL OFL, fichier embarqué `webradio/fonts/Sora-latin.woff2`, aucune requête externe), pour tous les titrages de l'UI et des pubs SérénIA Tech et CréaZik. Les pubs Traveling Sound gardent la machine à écrire de leur charte.
 - Publicités (`radio_content.json`) : SérénIA Tech (clic vers serenia-tech.fr), Traveling Sound (5 pubs tirées des textes des jingles, charte du site : fond sombre, vert jungle et orange, crème, police machine à écrire, clic vers son site), messages CréaZik IA WebRadio (sans clic) ; rotation par groupes.
 - Jingles parlés : voix féminine suave et lente générée par Chatterbox multilingue (CPU) avec un timbre de référence synthétique (Kokoro `ff_siwis`), `exaggeration` 0,4 et `cfg_weight` 0,1 ; le nom s'affiche « CréaZik IA WebRadio » et se prononce avec « IA » (« Créa Zique, I A, Ouèbe Radio ») ; « Traveling Sound Ouèbe Radio » et « Sérénia Tèk » pour les pubs ; contrôle d'intelligibilité par transcription (Whisper-small).
 - Design moderne et stylisé, lisible à 375 px, conçu pour le téléphone.
@@ -113,7 +128,7 @@ Document établi à partir des décisions prises au fil des conversations. Chaqu
 
 ### 5.3 Tests et livraison
 - Chaque phase de développement inclut la création et l'exécution des tests pertinents avant d'être marquée faite.
-- Les tests automatiques sont dans `tests/test_radio_engine.py` (25 tests) ; ils portent sur la continuité, les fondus (dont le fondu sous jingle), les poids, les votes et le score négatif, les répétitions, la dynamique (dont les avis Slow/Medium/High), les statistiques et la base `radio.db`, le catalogue éditable, la reprise et le catalogue MP3.
+- Les tests automatiques sont dans `tests/test_radio_engine.py` (27 tests au dernier passage, début de session du 2026-10-08) ; ils portent sur la continuité, les fondus (dont le fondu sous jingle), les poids, les votes et le score négatif, les répétitions, la dynamique (dont les avis Slow/Medium/High), les statistiques et la base `radio.db`, le catalogue éditable, la reprise et le catalogue MP3.
 - Un commit et un push après chaque phase de codage, message en français ; fichiers sensibles ou volumineux exclus.
 - Les contrôles visuels se font dans le navigateur de test, puis sont à confirmer sur iPhone.
 
@@ -136,6 +151,11 @@ Document établi à partir des décisions prises au fil des conversations. Chaqu
 - Bouton « Suivant » public et exposition des boutons Renommer/Supprimer : à retirer ou verrouiller avant le déploiement.
 - Réorganisation de l'UI admin : propositions de l'agent design (barre d'accès rapide, onglets) en attente de choix ; sort de `ui.html`.
 - Les suppressions de playlists ne retirent pas leurs identifiants de `series.txt` : la rotation peut les régénérer.
-- Génération ACE : le timbre de voix n'est pas constant sur un morceau (même sur 40 s) ; effet de la seed à trancher (v7 à v9 générées, à écouter) ; une génération à 120 s peut figer en décodage VAE.
+- Génération ACE : le timbre de voix n'est pas constant sur un morceau (même sur 40 s). Voix de femme sur la démo T01 : instable sur les tests 11, 13 (duo homme/femme inopérant), 14, 15 et 19 (la 15, tirage aléatoire, était la meilleure selon l'écoute). Les tests « seed » du test Marie (v7 à v9) ne concluent rien : les graines n'étaient pas appliquées. Grille avec graines appliquées à écouter : tests 26 à 31 (135 s) et 39 à 44 (60 s, texte corrigé). Une cause de blocage du décodage est la VRAM libre insuffisante, pas la durée seule.
+- Voix de femme, pistes de recherche non testées : durée courte, « female vocal » en fin de caption, modèles Base ou XL Turbo (non installés ; Turbo seul).
+- Démo T01 (Arroser Les Roses, Jean-Marc Lagniel) : version 18 retenue par l'utilisateur (voix d'homme, silences `[Silence]` avant chaque « Arroser les roses », texte adapté « posté » et « zoublie ») ; accord de l'auteur non demandé.
+- Avant le déploiement : `DEV_UNIFIED = True` est écrit en dur dans `server.py` (pages admin et connexion atteignables, CSP assoupli) ; les MP3 et résultats de `playlists/tests-ace/` sont lisibles sans connexion par les motifs statiques publics ; la section Tests et ses routes sont à retirer ou verrouiller.
+- À confirmer : seuil `total <= h * 0.688` dans `jlayout` de `motion.js` (introduit hors de cette session, probable faute de frappe) ; suppression du formulaire de commentaires et masquage du bloc « musique humaine » et du contact dans `listen.html` (présente dans le répertoire de travail, non faite pendant cette session).
 - Mise en ligne permanente : VPS Linux retenu mais non réalisé ; fonctionnement du serveur sous Linux non testé (voir `ARCHITECTURE_WEBRADIO.md` 8.3 bis).
-- Agents de zone `textes` (paroles françaises, `/generate_lyrics` à créer) et `modeles_llm` en parallèle : tests GPU à faire à tour de rôle sur la RTX 4060 8 Go.
+- Agents de zone `textes` (paroles françaises, commande `/generate_lyrics` créée, avec contrôle `TEXTES/tools/check_lyrics.py` ; grille rimes, répétitions, clichés à compléter) et `modeles_llm` en parallèle : tests GPU à faire à tour de rôle sur la RTX 4060 8 Go.
+- Les services `analyse` et `compression` sont arrêtés (comme `generation`) à la fin de la session du 2026-10-09 : les relancer avant la prochaine génération de morceaux.

@@ -22,6 +22,7 @@ CRED_FILE = HERE / "admin_credentials.json"
 COMMENTS_FILE = HERE / "comments.json"
 COOKIE = "creazik_admin"
 PUBLIC_SKIP = True
+DEV_UNIFIED = True
 MAX_BODY = 256 * 1024
 PBKDF2_ROUNDS = 200_000
 LOGIN_WINDOW_S = 60
@@ -38,7 +39,7 @@ ADMIN_POST_TARGETS = {
 
 STATIC_FILES = {"/listen.html", "/silence.wav", "/listen.css", "/listen.js", "/mascot.js", "/visuals.js", "/cover-placeholder.png",
                 "/traveling-sound.png", "/scenes.js", "/transitions.js", "/motion.js", "/scenes_spec.json", "/radio_content.json",
-                "/playlists.json", "/favorites.json", "/radio_settings.json"}
+                "/playlists.json", "/favorites.json", "/radio_settings.json", "/fonts/Sora-latin.woff2"}
 STATIC_PATTERNS = [
     re.compile(r"^/(?:playlists|jingles)/[\w\-]+/outputs/playlist_results\.json$"),
     re.compile(r"^/(?:playlists|jingles)/[\w\-]+/outputs/[^/]+\.cover\.png$"),
@@ -207,6 +208,19 @@ def apply_vote(voter, key, vote, count=1):
     return entry, mine
 
 
+def reset_mine(voter, key):
+    with VOTES_LOCK:
+        data = read_votes()
+        mine_all = data["voters"].setdefault(voter, {})
+        mine = _mine_counts(mine_all.pop(key, None))
+        entry = data["tracks"].setdefault(key, {"up": 0, "down": 0, "score": 0})
+        entry["up"] = max(0, entry["up"] - mine["up"])
+        entry["down"] = max(0, entry["down"] - mine["down"])
+        entry["score"] = entry["up"] - entry["down"]
+        write_json_atomic(VOTES_FILE, data)
+    return entry
+
+
 def reset_votes(key):
     with VOTES_LOCK:
         data = read_votes()
@@ -239,6 +253,127 @@ def clean_text(s, limit):
     return CTRL_RE.sub("", str(s)).strip()[:limit]
 
 
+TESTS_DIRS = {
+    "tests-ace": HERE / "playlists" / "tests-ace" / "outputs",
+    "tests-modeles": HERE / "playlists" / "tests-modeles" / "outputs",
+}
+TESTS_FILE_RE = re.compile(r"^playlists/(?:tests-ace|tests-modeles)/outputs/[\w\-]+\.mp3$")
+TESTS_STATE = HERE / "tests_state.json"
+TESTS_LOCK = threading.Lock()
+
+
+def tests_read(path, fallback):
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return fallback
+
+
+def tests_list():
+    state = tests_read(TESTS_STATE, {})
+    votes = state.get("votes", {})
+    played = state.get("played", {})
+    items = []
+    for test_id, test_dir in TESTS_DIRS.items():
+        results = tests_read(test_dir / "playlist_results.json", {})
+        for g in results.get("generations", []):
+            mp3 = re.sub(r"\.wav$", ".mp3", str(g.get("output_file", "")))
+            if TESTS_FILE_RE.match(mp3) and (HERE / mp3).is_file():
+                items.append({"file": mp3, "name": str(g.get("name", "")), "prompt": str(g.get("prompt", "")),
+                              "model": str(g.get("model", results.get("model", test_id))),
+                              "duration": g.get("duration"), "generated_at": str(g.get("generated_at", "")),
+                              "technical_status": str(g.get("technical_status", "")),
+                              "metadata_file": str(g.get("metadata_file", "")),
+                              "vote": votes.get(mp3, ""), "played": mp3 in played})
+    if state.get("pending_delete"):
+        tests_retry_purge()
+    return items
+
+
+def tests_retry_purge():
+    with TESTS_LOCK:
+        state = tests_read(TESTS_STATE, {})
+        before = state.get("pending_delete") or []
+        left = tests_purge(before)
+        if left != before:
+            state["pending_delete"] = left
+            write_json_atomic(TESTS_STATE, state)
+
+
+def tests_mark_played(file):
+    if file not in {i["file"] for i in tests_list()}:
+        return False
+    with TESTS_LOCK:
+        state = tests_read(TESTS_STATE, {})
+        played = state.setdefault("played", {})
+        if file not in played:
+            played[file] = datetime.now().isoformat(timespec="seconds")
+            write_json_atomic(TESTS_STATE, state)
+    return True
+
+
+def tests_vote(file, vote):
+    if file not in {i["file"] for i in tests_list()} or vote not in ("up", "down", "none"):
+        return False
+    with TESTS_LOCK:
+        state = tests_read(TESTS_STATE, {})
+        votes = state.setdefault("votes", {})
+        if vote == "none":
+            votes.pop(file, None)
+        else:
+            votes[file] = vote
+        write_json_atomic(TESTS_STATE, state)
+    return True
+
+
+def tests_delete(file):
+    if file not in {i["file"] for i in tests_list()}:
+        return False
+    if not TESTS_FILE_RE.fullmatch(file):
+        return False
+    test_id = file.split("/")[1]
+    results_path = TESTS_DIRS[test_id] / "playlist_results.json"
+    stem = file[:-4]
+    with TESTS_LOCK:
+        results = tests_read(results_path, {})
+        metadata_files = [str(g.get("metadata_file", "")) for g in results.get("generations", [])
+                          if re.sub(r"\.wav$", ".mp3", str(g.get("output_file", ""))) == file]
+        results["generations"] = [g for g in results.get("generations", [])
+                                  if re.sub(r"\.wav$", ".mp3", str(g.get("output_file", ""))) != file]
+        write_json_atomic(results_path, results)
+        state = tests_read(TESTS_STATE, {})
+        state.get("votes", {}).pop(file, None)
+        state.get("played", {}).pop(file, None)
+        pending = state.setdefault("pending_delete", [])
+        for name in (file, f"{stem}.metadata.json", f"{stem}.wav", f"{stem}.wav.feat.json", f"{stem}.wav.viz.json",
+                     f"{stem}.cover.png", f"{file}.metadata.json", *metadata_files):
+            if name not in pending:
+                pending.append(name)
+        state["pending_delete"] = tests_purge(pending)
+        write_json_atomic(TESTS_STATE, state)
+    return True
+
+
+def tests_purge(names):
+    left = []
+    for name in names:
+        if "/" not in name:
+            relative = f"playlists/tests-ace/outputs/{name}"
+        else:
+            relative = name
+        if not re.fullmatch(r"playlists/(?:tests-ace|tests-modeles)/outputs/[\w\-.]+", relative):
+            continue
+        test_id = relative.split("/")[1]
+        target = (HERE / relative).resolve()
+        if target.parent != TESTS_DIRS[test_id].resolve():
+            continue
+        try:
+            target.unlink(missing_ok=True)
+        except OSError:
+            left.append(relative)
+    return left
+
+
 class Handler(SimpleHTTPRequestHandler):
     server_version = "CreaZik"
     sys_version = ""
@@ -262,7 +397,7 @@ class Handler(SimpleHTTPRequestHandler):
         return False
 
     def _is_user_interface(self):
-        return getattr(self.server, "interface", "user") == "user"
+        return not DEV_UNIFIED and getattr(self.server, "interface", "user") == "user"
 
     def _send_text(self, code, body, ctype="text/html; charset=utf-8"):
         data = body.encode("utf-8")
@@ -382,6 +517,12 @@ class Handler(SimpleHTTPRequestHandler):
             dyn = ENGINE.db.dynamics_of(voter[0]) if ENGINE.db is not None else {}
             self._send_json(200, {"tracks": data["tracks"], "mine": mine, "neutral": neutral, "dynamics": dyn}, cookie=voter[1])
             return
+        if path == "/api/tests":
+            if not self._is_admin() or self._is_user_interface():
+                self.send_error(401)
+                return
+            self._send_json(200, {"items": tests_list()})
+            return
         if path == "/api/catalog/overrides":
             if not self._is_admin() or self._is_user_interface():
                 self.send_error(401)
@@ -420,7 +561,7 @@ class Handler(SimpleHTTPRequestHandler):
 
     def do_POST(self):
         path = urlsplit(self.path).path
-        if self._is_user_interface() and path not in ("/api/comments", "/api/vote", "/api/neutral", "/api/dynamics", "/api/skip"):
+        if self._is_user_interface() and path not in ("/api/comments", "/api/vote", "/api/vote/reset", "/api/neutral", "/api/dynamics", "/api/skip"):
             self.send_error(404)
             return
         if path == "/login":
@@ -431,6 +572,9 @@ class Handler(SimpleHTTPRequestHandler):
             return
         if path == "/api/vote":
             self._post_vote()
+            return
+        if path == "/api/vote/reset":
+            self._post_vote_reset()
             return
         if path == "/api/neutral":
             self._post_neutral()
@@ -470,6 +614,16 @@ class Handler(SimpleHTTPRequestHandler):
                 body = self._read_json_body(4096)
                 ok, msg = ENGINE.edit_catalog(str(body.get("action", "")), body)
                 self._send_json(200 if ok else 400, {"ok": ok, "error": msg})
+            elif path == "/api/tests/vote":
+                body = self._read_json_body(2048)
+                ok = tests_vote(str(body.get("file", "")), str(body.get("vote", "")))
+                self._send_json(200 if ok else 400, {"ok": ok})
+            elif path == "/api/tests/played":
+                ok = tests_mark_played(str(self._read_json_body(2048).get("file", "")))
+                self._send_json(200 if ok else 400, {"ok": ok})
+            elif path == "/api/tests/delete":
+                ok = tests_delete(str(self._read_json_body(2048).get("file", "")))
+                self._send_json(200 if ok else 400, {"ok": ok})
             elif path == "/api/votes/reset":
                 key = str(self._read_json_body(2048).get("key", ""))
                 if not VOTE_KEY_RE.match(key):
@@ -533,6 +687,28 @@ class Handler(SimpleHTTPRequestHandler):
         entry, mine = apply_vote(voter, key, vote, count)
         self._send_json(200, {"key": key, "up": entry["up"], "down": entry["down"], "score": entry["score"],
                               "mine": mine}, cookie=cookie)
+
+    def _post_vote_reset(self):
+        try:
+            key = str(self._read_json_body(2048).get("key", ""))
+        except Exception:
+            self.send_error(400)
+            return
+        if not VOTE_KEY_RE.match(key) or key not in ENGINE.cat.tracks:
+            self._send_json(400, {"error": "morceau inconnu"})
+            return
+        if not vote_allowed(self._client_ip(), 1):
+            self._send_json(429, {"error": "trop d'actions, réessaie dans une minute"})
+            return
+        voter, cookie = self._voter_id()
+        entry = reset_mine(voter, key)
+        if ENGINE.db is not None:
+            try:
+                ENGINE.db.clear_neutral(voter, key)
+            except Exception:
+                pass
+        self._send_json(200, {"key": key, "up": entry["up"], "down": entry["down"], "score": entry["score"],
+                              "mine": {"up": 0, "down": 0}}, cookie=cookie)
 
     def _post_neutral(self):
         try:
@@ -672,9 +848,14 @@ class Handler(SimpleHTTPRequestHandler):
         self.send_header("Accept-Ranges", "bytes")
         self.send_header("Cache-Control", "no-store")
         self.send_header("X-Content-Type-Options", "nosniff")
-        self.send_header("X-Frame-Options", "DENY")
+        csp = CSP
+        if DEV_UNIFIED:
+            csp = csp.replace("frame-ancestors 'none'", "frame-ancestors 'self'") + "; frame-src 'self'"
+            self.send_header("X-Frame-Options", "SAMEORIGIN")
+        else:
+            self.send_header("X-Frame-Options", "DENY")
         self.send_header("Referrer-Policy", "no-referrer")
-        self.send_header("Content-Security-Policy", CSP)
+        self.send_header("Content-Security-Policy", csp)
         super().end_headers()
 
     def log_message(self, fmt, *a):

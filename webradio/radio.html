@@ -81,6 +81,7 @@
         .top h1 {
             flex: 1;
             min-width: 0;
+            text-align: center;
             font-size: 1.25rem;
             font-weight: 800;
             letter-spacing: -0.005em;
@@ -586,9 +587,7 @@
 <body>
     <div class="container">
         <div class="top">
-            <a class="back" href="http://localhost:5000/">&larr; Écoute</a>
             <h1>Gestion WebRadio</h1>
-            <button class="btn btn-danger" onclick="resetAll()">Réinitialiser</button>
         </div>
         <div class="saved" id="saved" role="status" aria-live="polite"></div>
 
@@ -712,6 +711,10 @@
             <div class="row">
                 <span>Un jingle tous les<span class="hint">morceaux (0 = jamais)</span></span>
                 <div class="stepper"><button onclick="step('jingle_every', -1, 0, 50)">&minus;</button><span class="val" id="v_jingle_every"></span><button onclick="step('jingle_every', 1, 0, 50)">+</button></div>
+            </div>
+            <div class="row">
+                <span>Volume des jingles<span class="hint">0 à 1 (le morceau n'est pas concerné)</span></span>
+                <div class="stepper"><button onclick="step('jingle_volume', -0.05, 0, 1)">&minus;</button><span class="val" id="v_jingle_volume"></span><button onclick="step('jingle_volume', 0.05, 0, 1)">+</button></div>
             </div>
             <div id="jingleList"></div>
             </div>
@@ -842,8 +845,9 @@
     </div>
 
     <script>
-        const DEFAULTS = {default_weight: 5, weights: {}, jingle_every: 5, jingles_enabled: true,
-                          favorites_only: false, no_repeat: 3, no_repeat_songs: 15, excluded: [], thumb_strength: 0.15,
+    if (window.top === window.self) { location.replace("/listen.html"); }
+        const DEFAULTS = {default_weight: 5, weights: {}, jingle_every: 5, jingles_enabled: true, jingle_volume: 0.8,
+favorites_only: false, no_repeat: 3, no_repeat_songs: 15, excluded: [], thumb_strength: 0.15,
                           ads_enabled: true, ads_every: 5, ad_seconds: 9, ad_offset_s: 10, visual_transition_s: 5,
                           dynamics_enabled: true, dynamics_strength: 1, dyn_base: 0.5, dyn_amp: 0.33, dyn_peak_hour: 17.5, dyn_weekend_shift_h: 1, dyn_energy_sigma: 0.25, dyn_tempo_tolerance: 0.25, dyn_user_weight: 1,
                           transitions: {
@@ -1193,6 +1197,7 @@
         function step(key, delta, min, max) {
             settings[key] = Math.round(Math.min(max, Math.max(min, (parseFloat(settings[key]) || 0) + delta)) * 100) / 100;
             document.getElementById('v_' + key).textContent = settings[key];
+            if (key === 'jingle_volume' && jingleAudio) jingleAudio.volume = jingleVolume();
             save();
         }
 
@@ -1370,11 +1375,17 @@
             stopJingle();
             if (same) return;
             jingleAudio = new Audio(mp3Of(t));
+            jingleAudio.volume = jingleVolume();
             jingleBtn = btn;
             btn.innerHTML = '&#9632;';
             btn.classList.add('playing');
             jingleAudio.onended = stopJingle;
             jingleAudio.play().catch(stopJingle);
+        }
+
+        function jingleVolume() {
+            const v = parseFloat(settings.jingle_volume);
+            return isFinite(v) ? Math.max(0, Math.min(1, v)) : 0.8;
         }
 
         function mp3Of(t) { return String(t.output_file || '').replace(/\.wav$/i, '.mp3'); }
@@ -1590,7 +1601,7 @@
         }
 
         function render() {
-            ['default_weight', 'no_repeat', 'no_repeat_songs', 'jingle_every', 'thumb_strength', 'ads_every', 'ad_seconds', 'ad_offset_s', 'visual_transition_s', 'dynamics_strength', 'dyn_base', 'dyn_amp', 'dyn_peak_hour', 'dyn_weekend_shift_h', 'dyn_energy_sigma', 'dyn_tempo_tolerance', 'dyn_user_weight'].forEach(k => document.getElementById('v_' + k).textContent = settings[k]);
+            ['default_weight', 'no_repeat', 'no_repeat_songs', 'jingle_every', 'jingle_volume', 'thumb_strength', 'ads_every', 'ad_seconds', 'ad_offset_s', 'visual_transition_s', 'dynamics_strength', 'dyn_base', 'dyn_amp', 'dyn_peak_hour', 'dyn_weekend_shift_h', 'dyn_energy_sigma', 'dyn_tempo_tolerance', 'dyn_user_weight'].forEach(k => document.getElementById('v_' + k).textContent = settings[k]);
             document.getElementById('favorites_only').checked = !!settings.favorites_only;
             document.getElementById('jingles_enabled').checked = !!settings.jingles_enabled;
             document.getElementById('ads_enabled').checked = !!settings.ads_enabled;
@@ -1776,13 +1787,6 @@
             const mm = String(Math.round((d.hour - hh) * 60)).padStart(2, '0');
             document.getElementById('dynInfo').textContent = 'Maintenant ' + hh + ' h ' + mm + ' : énergie visée ' + d.target_now
                 + ' (' + d.tracks_with_features + ' morceaux sur ' + d.tracks_total + ' analysés)' + (d.enabled ? '' : ' - dynamique désactivée');
-        }
-
-        function resetAll() {
-            if (!confirm('Réinitialiser tous les réglages de la radio ?')) return;
-            settings = JSON.parse(JSON.stringify(DEFAULTS));
-            render();
-            save();
         }
 
         window.addEventListener('load', () => { initFolds(); checkMe(); init(); loadContent(); loadDynamics(); loadAnalytics(); loadCatalogComments(); setInterval(loadAnalytics, 60000); });

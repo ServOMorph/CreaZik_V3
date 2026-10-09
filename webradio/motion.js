@@ -2,7 +2,7 @@
   'use strict';
 
   var TAU = Math.PI * 2;
-  var DEFAULT_FONT = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
+  var DEFAULT_FONT = '"Sora", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
   var FONT = DEFAULT_FONT;
   var TEAL = '111,211,200';
   var BLUE = '91,159,216';
@@ -77,23 +77,49 @@
   var fcache = {};
   var fcount = 0;
 
+  function clipLine(ctx, line, maxW) {
+    if (ctx.measureText(line).width <= maxW) { return line; }
+    var s = line;
+    while (s.length > 1 && ctx.measureText(s + '…').width > maxW) { s = s.slice(0, -1); }
+    return s.replace(/\s+$/, '') + '…';
+  }
+
+  function fitAt(ctx, text, maxW, maxLines, from, to, wt) {
+    for (var s = Math.floor(from); s >= to; s--) {
+      var r = wrapAt(ctx, text, maxW, s, wt);
+      if (r.lines.length <= maxLines && !r.tooWide) { return { size: s, lines: r.lines }; }
+    }
+    return null;
+  }
+
   function fit(ctx, text, maxW, maxLines, base, min, wt) {
-    var key = wt + '|' + (maxW | 0) + '|' + maxLines + '|' + (base | 0) + '|' + min + '|' + text;
+    var key = FONT + '|' + wt + '|' + (maxW | 0) + '|' + maxLines + '|' + (base | 0) + '|' + min + '|' + text;
     var hit = fcache[key];
     if (hit) { return hit; }
     if (fcount > 300) { fcache = {}; fcount = 0; }
-    var res = null;
-    for (var s = Math.floor(base); s >= min; s--) {
-      var r = wrapAt(ctx, text, maxW, s, wt);
-      if (r.lines.length <= maxLines && !r.tooWide) { res = { size: s, lines: r.lines }; break; }
-    }
+    var floor = Math.max(6, Math.floor(min * 0.6));
+    var res = fitAt(ctx, text, maxW, maxLines, base, min, wt) || fitAt(ctx, text, maxW, maxLines, min - 1, floor, wt);
     if (!res) {
-      var f = wrapAt(ctx, text, maxW, min, wt);
-      res = { size: min, lines: f.lines };
+      var f = wrapAt(ctx, text, maxW, floor, wt);
+      res = { size: floor, lines: f.lines.slice(0, Math.max(1, maxLines)) };
+      if (f.lines.length > maxLines) { res.lines[res.lines.length - 1] += ' …'; }
     }
+    setFont(ctx, wt, res.size);
+    res.lines = res.lines.map(function (l) { return clipLine(ctx, l, maxW); });
     fcache[key] = res;
     fcount++;
     return res;
+  }
+
+  function resetLayouts() {
+    fcache = {};
+    fcount = 0;
+    lc.key = '';
+    jc.key = '';
+  }
+
+  if (window.document && document.fonts && document.fonts.load) {
+    document.fonts.load('700 20px Sora').then(resetLayouts, function () {});
   }
 
   var lc = { key: '', val: null };
@@ -117,9 +143,9 @@
     var g2;
     var total;
     for (var it = 0; it < 12; it++) {
-      H = fit(ctx, head, maxW, 3, Math.min(w * 0.1, 46) * scale, 9, '700');
-      S = fit(ctx, sub, maxW, 3, Math.min(w * 0.048, 22) * scale, 8, '400');
-      cs = Math.max(9, Math.min(w * 0.06, 19) * scale);
+      H = fit(ctx, head, maxW, 3, Math.min(h * 0.2, 46) * scale, 9, '700');
+      S = fit(ctx, sub, maxW, 3, Math.min(h * 0.096, 22) * scale, 8, '400');
+      cs = Math.max(9, Math.min(h * 0.12, 19) * scale);
       setFont(ctx, '600', cs);
       while (cs > 8 && ctx.measureText(cta).width + cs * 2.6 > maxW) {
         cs -= 0.5;
@@ -132,7 +158,7 @@
       g1 = H.size * 0.55;
       g2 = cs * 1.1;
       total = H.lines.length * hlh + g1 + S.lines.length * slh + g2 + ctaH;
-      if (total <= h * 0.8) { break; }
+      if (total <= h * 0.68) { break; }
       scale *= 0.88;
     }
     var top = (h - total) / 2;
@@ -650,8 +676,8 @@
     var total;
     var i;
     for (var it = 0; it < 6; it++) {
-      T = fit(ctx, title, maxW, 1, Math.min(w * 0.14, 58) * scale, 16, '800');
-      sz = Math.min(w * 0.046, 20) * scale;
+      T = fit(ctx, title, maxW, 1, Math.min(h * 0.28, 58) * scale, 16, '800');
+      sz = Math.min(h * 0.092, 20) * scale;
       var lines3 = src.slice(0, 3);
       for (i = 0; i < lines3.length; i++) {
         var f = fit(ctx, lines3[i], maxW, 2, sz, 12, '400');
@@ -668,7 +694,7 @@
       titleH = T.size * 1.15;
       gap = T.size * 0.6;
       total = titleH + gap + cnt * lh + Math.max(0, groups.length - 1) * sz * 0.5;
-      if (total <= h * 0.88) { break; }
+      if (total <= h * 0.688) { break; }
       scale *= 0.88;
     }
     var top = (h - total) / 2;

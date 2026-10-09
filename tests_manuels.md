@@ -1,31 +1,8 @@
 # Tests manuels en attente
 
-- iPhone Safari via tunnel : lecture d'un morceau généré (MP3 d'environ 90 s), avance et recul dans le morceau (requêtes Range).
-- iPhone Safari : bouton play du mix en haut, enchaînement automatique des morceaux, jingle tous les N morceaux, écran verrouillé.
-- iPhone Safari : pliage et dépliage des morceaux, favoris, section commentaires (envoi, affichage).
-- Connexion admin sur /login, accès à la page Gestion WebRadio, changement du mot de passe admin, déconnexion.
-- Écoute des morceaux de la playlist de test : paroles françaises chantées, durée de 1 min 30.
-- Page auditeurs (/) sur iPhone : icône de mode en haut à droite (cadenas hors connexion, œil en admin, bouclier en aperçu auditeur), bouton suivant masqué en mode auditeur.
-- Transitions : préréglages dans Gestion WebRadio (crossfade, fondus, pause) ; vérifier sur ordinateur (fondu et crossfade audibles) et sur iPhone (seule la pause doit s'appliquer).
-- Animation synchronisée avec la musique, texte défilant, commentaire aléatoire toutes les 5 s, envoi d'un commentaire.
-- Pouces haut et bas : vote sur le morceau en cours, annulation en recliquant, compteurs mis à jour, effet sur la fréquence de passage (réglage « Poids des pouces » dans Gestion WebRadio).
-- Sections pliables : Gestion WebRadio (5 sections) et panneau Programmation de la page d'écoute, état mémorisé après rechargement.
-- Programmation admin : clic sur un morceau, un jingle ou une playlist pour le lire ensuite, bouton lire maintenant, retrait de la file.
-- Programmation admin : rechercher un morceau par titre et une playlist par nom, puis programmer le résultat après le morceau en cours.
-- Après le renommage benchmark vers playlist : page d'écoute, menu des playlists dans l'explorateur (ui.html), lecture d'un morceau de chaque playlist.
-- Direct : appuyer sur play, vérifier qu'on rejoint le morceau en cours (pas un nouveau départ) ; en mode admin, tester « suivant », « lire maintenant » et la lecture d'une playlist entière.
-- Visuels : un décor différent par playlist, transition douce au changement de playlist, motion design pendant un jingle, publicité du site tous les 5 morceaux (9 s), lisibilité à 375 px.
-- Commentaires associés au morceau : écrire un commentaire sur un morceau, vérifier qu'il s'affiche seulement sur ce morceau.
-- Fins de morceaux : écouter la fin de plusieurs morceaux pour confirmer qu'aucun n'est coupé (cause probable corrigée : essais « suivant » et redémarrages du serveur).
-- Arc visuel d'un morceau : suivre un morceau en entier et vérifier que le décor évolue (teinte, zoom, second motif au milieu, ondes) sans à-coup ni saccade sur iPhone.
-- Bandeau Traveling Sound en mode auditeur : vérifier le lien sur téléphone.
-- iPhone : panneau Programmation lisible (lignes non écrasées), noms de playlists affichés sans « Playlist » et sur plusieurs lignes, bandeau « Aperçu auditeur » absent en mode auditeur.
-- run.py à la racine : lance le serveur et ouvre l'UI dans le navigateur.
-- Boutons « sans avis » et Slow/Medium/High : clic, ré-clic pour annuler, état conservé après rechargement ; un pouce retire le marqueur « sans avis ».
-- Admin : section Statistiques (KPI, constats, histogramme, tableaux triables, exports JSON et CSV), tri des playlists par score/nom/pondération, renommage et suppression d'un morceau et d'une playlist (fichier learning/morceaux_rejetes.jsonl créé), sections fermées par défaut avec dernier état restauré, nouvelle organisation de la page.
-- Morceau à score négatif : vérifier qu'il n'est plus diffusé automatiquement.
-- Jingle vers morceau : le morceau démarre en fondu pendant le jingle (volume bas), puis monte au maximum environ 3 s après la fin du jingle ; vérifier sur ordinateur et iPhone.
-- UI auditeur sur iPhone 375 px : cadre visuel centré, cycle pochette / animations / pub (9 s) / animations / pochette de 5 s par phase, transitions animées fluides sans saccade, pochette plein cadre sans visuel visible derrière.
-- Pubs : clic sur la pub SérénIA Tech ouvre serenia-tech.fr, clic sur une pub Traveling Sound ouvre son site, pub CréaZik sans clic ; lisibilité de la charte Traveling Sound.
-- Jingles : écouter les jingles 1 à 5 WebRadio (« CréaZik IA WebRadio » prononcé « I A »), les 5 jingles SérénIA Tech et les 5 Traveling Sound ; vérifier la seconde de silence en tête et le début non coupé.
-- Admin : section Jingles avec catégories repliables (état mémorisé), bouton lecture et texte de chaque jingle ; boutons Slow/Medium/High visibles pour tous dans l'UI du port 5000 (vote enregistré sans session admin).
+1. iPhone, écran verrouillé et Safari en arrière-plan : la radio continue de jouer depuis le passage par le circuit audio Web Audio sur iOS (volume des jingles et baisse du morceau désormais appliqués sur iPhone).
+2. iPhone, connecté en admin, section « Tests » (sous « Gestion WebRadio ») : liste du plus récent au plus ancien avec numéro en tête, lecture d'une version, barre de position, pouces haut/bas, suppression d'une version de test, badge « Jamais écouté » qui disparaît au premier clic sur lecture. La suppression d'une version en cours de lecture doit réussir (fichier supprimé au prochain affichage).
+3. iPhone, titrage sur la pochette (titre centré en haut, date en bas à droite) : aucun titre ne déborde de l'image, y compris les longs titres (« Les souliers de ma grand-mère - Chant de chorale ») et « Nuit de cristal » ; taille lisible entre 375 et 430 px de large.
+4. iPhone, police Sora : en-tête, morceau en cours, légende animée, titres de section et pubs SérénIA / CréaZik en Sora ; pubs Traveling Sound toujours en machine à écrire ; aucun titre de pub ne sort du cadre.
+5. Écoute de la grille voix de femme (section Tests) : numéros 26 à 31 (135 s) et 39 à 44 (60 s, texte avec « posté » et « zoublie »). Noter pour chacune si la voix reste féminine du début à la fin ; en tirer une règle pour le skill `generation-morceaux`.
+6. Écoute de la version 18 de la démo T01 (voix d'homme, silences `[Silence]`) : texte complet chanté sans coupure de l'outro, « Arroser les roses » présent à chaque fois, « posté » et « zoublie » prononcés comme voulu.
