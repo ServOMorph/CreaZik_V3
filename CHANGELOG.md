@@ -1,5 +1,15 @@
 # Changelog
 
+## v1.11 — 2026-10-10
+
+### Ajouté
+- Traçabilité de chaque génération (`ace_worker.py` : sidecar `.metadata.json`, manifeste, nom de fichier avec horodatage et graine) ; `lyrics` pris en compte pour les instrumentaux.
+- Instrus rap mélodique de Marie conservés dans `TEXTES/artistes/Marie/` (`tops_instrus/` : graines 2026 et 31415) ; règle de génération des instrus de Marie et mesures d'intro dans le skill `generation-morceaux`.
+
+### Modifié
+- Pochettes sans texte : prompt par morceau (`cover_gen.py`, `cover_batch.py`), charte graphique supprimée.
+- Skill de génération : passage obligatoire par les Tests, graine imposée ; mémoire projet : sens de « garde ».
+
 ## v1.10 — 2026-10-10
 
 ### Modifié

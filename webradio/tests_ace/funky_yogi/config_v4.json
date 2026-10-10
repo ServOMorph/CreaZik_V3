@@ -1,0 +1,21 @@
+{
+  "playlist_name": "Test ACE Funky Yogi",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./tests_ace/funky_yogi/outputs",
+  "test_cases": [
+    {
+      "id": "4",
+      "name": "v4_nu_disco_filtre_seed42",
+      "prompt": "French nu-disco funk, filtered funk guitar chops, groovy slap bass, tight four-on-the-floor drums, shimmering synth stabs, vocoder-style vocal harmonies, smooth laid-back male lead vocal, warm vintage analog production, groovy, uplifting, danceable",
+      "bpm": 116,
+      "keyscale": "F# minor",
+      "timesignature": "4",
+      "type": "vocal",
+      "duration": 135,
+      "lyrics_file": "tests_ace/funky_yogi/paroles_ace.md",
+      "fit_lyrics": true,
+      "language": "fr",
+      "seed": 42
+    }
+  ]
+}

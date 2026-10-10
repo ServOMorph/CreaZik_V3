@@ -1,0 +1,62 @@
+{
+  "playlist_name": "Instrus rap melodique",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./tests_ace/instru_rap/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "v1_instru_rap_melodique_seed42",
+      "prompt": "melodic rap instrumental, minimal, sparse expressive piano, solo violin phrases, light trap beat with soft kick and crisp hi-hats, gentle sub bass, lots of empty space left for a vocal, cinematic dynamics with risers, swells and impacts, electronic sound design textures, glitchy ambient FX, spacious reverb, melancholic, no vocals",
+      "bpm": 70,
+      "type": "instrumental",
+      "duration": 150,
+      "lyrics": "[Intro - solo piano, no drums]\n\n[Instrumental - minimal beat enters, piano and violin]\n\n[Instrumental - sparse, space for vocal]\n\n[Build - riser]\n\n[Instrumental - minimal beat, piano and violin]\n\n[Break - piano only]\n\n[Instrumental - minimal beat, violin]\n\n[Build - riser]\n\n[Instrumental - sparse, space for vocal]\n\n[Instrumental - minimal beat, piano and violin]\n\n[Break - piano only]\n\n[Instrumental - minimal beat, violin]\n\n[Outro - fade out]",
+      "language": "fr",
+      "seed": 42
+    },
+    {
+      "id": "2",
+      "name": "v2_instru_rap_melodique_seed101",
+      "prompt": "melodic rap instrumental, minimal, sparse expressive piano, solo violin phrases, light trap beat with soft kick and crisp hi-hats, gentle sub bass, lots of empty space left for a vocal, cinematic dynamics with risers, swells and impacts, electronic sound design textures, glitchy ambient FX, spacious reverb, melancholic, no vocals",
+      "bpm": 70,
+      "type": "instrumental",
+      "duration": 150,
+      "lyrics": "[Intro - solo piano, no drums]\n\n[Instrumental - minimal beat enters, piano and violin]\n\n[Instrumental - sparse, space for vocal]\n\n[Build - riser]\n\n[Instrumental - minimal beat, piano and violin]\n\n[Break - piano only]\n\n[Instrumental - minimal beat, violin]\n\n[Build - riser]\n\n[Instrumental - sparse, space for vocal]\n\n[Instrumental - minimal beat, piano and violin]\n\n[Break - piano only]\n\n[Instrumental - minimal beat, violin]\n\n[Outro - fade out]",
+      "language": "fr",
+      "seed": 101
+    },
+    {
+      "id": "3",
+      "name": "v3_instru_rap_melodique_seed777",
+      "prompt": "melodic rap instrumental, minimal, sparse expressive piano, solo violin phrases, light trap beat with soft kick and crisp hi-hats, gentle sub bass, lots of empty space left for a vocal, cinematic dynamics with risers, swells and impacts, electronic sound design textures, glitchy ambient FX, spacious reverb, melancholic, no vocals",
+      "bpm": 70,
+      "type": "instrumental",
+      "duration": 150,
+      "lyrics": "[Intro - solo piano, no drums]\n\n[Instrumental - minimal beat enters, piano and violin]\n\n[Instrumental - sparse, space for vocal]\n\n[Build - riser]\n\n[Instrumental - minimal beat, piano and violin]\n\n[Break - piano only]\n\n[Instrumental - minimal beat, violin]\n\n[Build - riser]\n\n[Instrumental - sparse, space for vocal]\n\n[Instrumental - minimal beat, piano and violin]\n\n[Break - piano only]\n\n[Instrumental - minimal beat, violin]\n\n[Outro - fade out]",
+      "language": "fr",
+      "seed": 777
+    },
+    {
+      "id": "4",
+      "name": "v4_instru_rap_melodique_seed2026",
+      "prompt": "melodic rap instrumental, minimal, sparse expressive piano, solo violin phrases, light trap beat with soft kick and crisp hi-hats, gentle sub bass, lots of empty space left for a vocal, cinematic dynamics with risers, swells and impacts, electronic sound design textures, glitchy ambient FX, spacious reverb, melancholic, no vocals",
+      "bpm": 70,
+      "type": "instrumental",
+      "duration": 150,
+      "lyrics": "[Intro - solo piano, no drums]\n\n[Instrumental - minimal beat enters, piano and violin]\n\n[Instrumental - sparse, space for vocal]\n\n[Build - riser]\n\n[Instrumental - minimal beat, piano and violin]\n\n[Break - piano only]\n\n[Instrumental - minimal beat, violin]\n\n[Build - riser]\n\n[Instrumental - sparse, space for vocal]\n\n[Instrumental - minimal beat, piano and violin]\n\n[Break - piano only]\n\n[Instrumental - minimal beat, violin]\n\n[Outro - fade out]",
+      "language": "fr",
+      "seed": 2026
+    },
+    {
+      "id": "5",
+      "name": "v5_instru_rap_melodique_seed31415",
+      "prompt": "melodic rap instrumental, minimal, sparse expressive piano, solo violin phrases, light trap beat with soft kick and crisp hi-hats, gentle sub bass, lots of empty space left for a vocal, cinematic dynamics with risers, swells and impacts, electronic sound design textures, glitchy ambient FX, spacious reverb, melancholic, no vocals",
+      "bpm": 70,
+      "type": "instrumental",
+      "duration": 150,
+      "lyrics": "[Intro - solo piano, no drums]\n\n[Instrumental - minimal beat enters, piano and violin]\n\n[Instrumental - sparse, space for vocal]\n\n[Build - riser]\n\n[Instrumental - minimal beat, piano and violin]\n\n[Break - piano only]\n\n[Instrumental - minimal beat, violin]\n\n[Build - riser]\n\n[Instrumental - sparse, space for vocal]\n\n[Instrumental - minimal beat, piano and violin]\n\n[Break - piano only]\n\n[Instrumental - minimal beat, violin]\n\n[Outro - fade out]",
+      "language": "fr",
+      "seed": 31415
+    }
+  ]
+}

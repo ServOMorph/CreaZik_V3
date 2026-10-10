@@ -1,0 +1,17 @@
+{
+  "playlist_name": "Test ACE Marie rap",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./tests_ace/marie_rap/outputs",
+  "test_cases": [
+    {
+      "id": "2",
+      "name": "v2_rap_melodique_instrumental_seed42",
+      "prompt": "French melodic rap instrumental, introspective, melancholic and emotional, dark atmospheric synth pads, sparse piano, deep 808 bass, crisp hi-hats, spacious reverb, no vocals",
+      "bpm": 130,
+      "type": "instrumental",
+      "duration": 135,
+      "language": "fr",
+      "seed": 42
+    }
+  ]
+}

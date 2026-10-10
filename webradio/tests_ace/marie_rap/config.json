@@ -1,0 +1,19 @@
+{
+  "playlist_name": "Test ACE Marie rap",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./tests_ace/marie_rap/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "v1_rap_melodique_introspectif_seed42",
+      "prompt": "French melodic rap, introspective, melancholic and emotional, soft autotuned male vocal, dark atmospheric synth pads, sparse piano, deep 808 bass, crisp hi-hats, spacious reverb",
+      "bpm": 130,
+      "type": "vocal",
+      "duration": 135,
+      "lyrics_file": "../TEXTES/artistes/Marie/Marie-1_ace.md",
+      "fit_lyrics": false,
+      "language": "fr",
+      "seed": 42
+    }
+  ]
+}

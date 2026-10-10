@@ -7,20 +7,14 @@ from pathlib import Path
 
 URL = "http://127.0.0.1:8189"
 HERE = Path(__file__).resolve().parent.parent
-NEGATIVE = "faute d'orthographe, lettres deformees, texte illisible, texte répété, mots coupés, lignes de texte mélangées, texte manquant, filigrane, logo, flou, deformation"
+NEGATIVE = "texte, lettres, mots, titre, écriture, typographie, chiffres, légende, filigrane, logo, signature, cadre, flou, deformation, visages deformes"
 
 
-def build_prompt(charte, title, playlist_label, date):
+def build_prompt(title, style):
     return (
-        f"Pochette d'album carrée. Sujet : {charte['sujet']}. Technique : {charte['technique']}. "
-        f"Palette : {charte['palette']}. "
-        f"En bas à gauche, trois lignes de texte alignées à gauche, police {charte['typographie']}, "
-        f"nettes, lisibles, sur un fond calme. Le texte est écrit exactement une seule fois, dans cet ordre, "
-        f"chaque ligne complète sur une seule ligne :\n"
-        f"Ligne 1 (très grande, en gras, occupant presque toute la largeur) : « {title} »\n"
-        f"Ligne 2 (grande, en majuscules espacées) : « {playlist_label} »\n"
-        f"Ligne 3 (très petite) : « {date} »\n"
-        f"Aucun numéro ni chiffre devant le titre ; aucun autre texte que ces trois lignes."
+        f"Belle illustration artistique pour une pochette de morceau de musique, image carrée, composition soignée, "
+        f"détails riches, lumière travaillée. Thème inspiré par « {title} ». Ambiance musicale : {style}. "
+        f"Image uniquement visuelle : aucun texte, aucune lettre, aucun mot, aucun chiffre."
     )
 
 
@@ -57,13 +51,10 @@ def generate(prompt, out, seed=7):
 
 
 def main():
-    playlist_id, title, date, out = sys.argv[1:5]
-    charte = json.load(open(HERE / "covers_charte.json", encoding="utf-8"))[playlist_id]
-    label = next(p["label"] for p in json.load(open(HERE / "playlists.json", encoding="utf-8")) if p["id"] == playlist_id)
-    label = label.removeprefix("Playlist ")
-    prompt = build_prompt(charte, title, label, date)
+    title, style, seed, out = sys.argv[1:5]
+    prompt = build_prompt(title, style)
     print(prompt)
-    generate(prompt, out)
+    generate(prompt, out, int(seed))
     print("image", out)
 
 

@@ -1,0 +1,17 @@
+{
+  "playlist_name": "Test ACE Marie rap",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./tests_ace/marie_rap/outputs",
+  "test_cases": [
+    {
+      "id": "3",
+      "name": "v3_instrumental_cinematique_beat_leger_seed42",
+      "prompt": "cinematic melancholic instrumental, light minimal beat, soft kick and gentle brushed hi-hats, subtle sub bass, sparse piano, wide atmospheric synth pads, cinematic strings swells, sparse electronic ambient sounds and textures, spacious reverb, emotional, introspective, no vocals",
+      "bpm": 130,
+      "type": "instrumental",
+      "duration": 135,
+      "language": "fr",
+      "seed": 42
+    }
+  ]
+}

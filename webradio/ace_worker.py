@@ -1,7 +1,9 @@
 import argparse
 import gc
+import hashlib
 import json
 import os
+import platform
 import re
 import shutil
 import subprocess
@@ -73,6 +75,84 @@ def save():
     with open(temporary_path, "w", encoding="utf-8") as f:
         json.dump(results, f, indent=2, ensure_ascii=False)
     os.replace(temporary_path, results_path)
+
+
+def object_values(value):
+    fields = getattr(value, "__dataclass_fields__", None)
+    if fields:
+        return {name: getattr(value, name) for name in fields}
+    values = getattr(value, "__dict__", None)
+    return dict(values) if values else str(value)
+
+
+def write_generation_trace(entry, case, params, generation_config):
+    audio_path = os.path.join(ROOT, entry["output_file"])
+    relative_base = os.path.splitext(entry["output_file"])[0]
+    metadata_rel = f"{relative_base}.metadata.json"
+    metadata_path = os.path.join(ROOT, metadata_rel)
+    output = {"path": entry["output_file"], "format": os.path.splitext(audio_path)[1].lstrip(".")}
+    if os.path.isfile(audio_path):
+        output["size_bytes"] = os.path.getsize(audio_path)
+        with open(audio_path, "rb") as audio_file:
+            output["sha256"] = hashlib.file_digest(audio_file, "sha256").hexdigest()
+        try:
+            import torchaudio
+            info = torchaudio.info(audio_path)
+            output.update({"sample_rate": int(info.sample_rate), "channels": int(info.num_channels),
+                           "frames": int(info.num_frames), "duration_seconds": info.num_frames / info.sample_rate})
+        except Exception as error:
+            output["audio_probe_error"] = str(error)
+    try:
+        revision = subprocess.run(["git", "-C", ACE, "rev-parse", "HEAD"], capture_output=True,
+                                  text=True, timeout=5, check=True).stdout.strip()
+    except Exception:
+        revision = "non disponible"
+    metadata = {
+        "generated_at": entry.get("generated_at"), "model_name": results["model"],
+        "model_version": "ACE-Step 1.5 / acestep-v15-turbo" + (" + acestep-5Hz-lm-0.6B" if args.lm else ""),
+        "model_revision": revision, "runtime": {
+            "os": platform.platform(), "python": sys.version, "torch": str(torch.__version__),
+            "cuda_runtime": str(torch.version.cuda), "cuda_available": bool(torch.cuda.is_available()),
+            "cuda_visible_devices": os.environ.get("CUDA_VISIBLE_DEVICES"),
+            "device_selection": "auto", "offload_to_cpu": True,
+        },
+        "test_case_id": case["id"], "title": case.get("name", ""),
+        "prompt": params.caption, "lyrics": params.lyrics,
+        "input_files": [case["lyrics_file"]] if case.get("lyrics_file") else [],
+        "case_config": case,
+        "generation_config": {
+            "params": object_values(params), "runner": object_values(generation_config),
+            "worker": {"steps": args.steps, "lm_enabled": args.lm, "batch_size": 1,
+                       "audio_format": "wav", "random_seed": False, "elapsed_seconds": entry.get("elapsed_s")},
+        },
+        "output": output, "status": entry.get("status"), "error": entry.get("error"),
+        "listening_review": {"status": "pending"},
+    }
+    os.makedirs(os.path.dirname(metadata_path), exist_ok=True)
+    temporary_path = metadata_path + ".tmp"
+    with open(temporary_path, "w", encoding="utf-8") as metadata_file:
+        json.dump(metadata, metadata_file, indent=2, ensure_ascii=False)
+    os.replace(temporary_path, metadata_path)
+    entry["metadata_file"] = metadata_rel.replace(os.sep, "/")
+
+    manifest_path = os.path.join(OUT, "generation_manifest.json")
+    try:
+        with open(manifest_path, "r", encoding="utf-8") as manifest_file:
+            manifest = json.load(manifest_file)
+    except (OSError, json.JSONDecodeError):
+        manifest = {"playlist": cfg.get("playlist_name", ""), "model": results["model"], "tracks": []}
+    manifest["updated_at"] = entry.get("generated_at") or datetime.now().astimezone().isoformat(timespec="seconds")
+    manifest["model_revision"] = revision
+    manifest["tracks"] = [track for track in manifest.get("tracks", [])
+                          if track.get("output_file") != entry["output_file"]]
+    manifest["tracks"].append({"test_case_id": case["id"], "name": case.get("name", ""),
+                               "output_file": entry["output_file"], "metadata_file": entry["metadata_file"],
+                               "generated_at": entry.get("generated_at"), "status": entry.get("status"),
+                               "error": entry.get("error")})
+    temporary_path = manifest_path + ".tmp"
+    with open(temporary_path, "w", encoding="utf-8") as manifest_file:
+        json.dump(manifest, manifest_file, indent=2, ensure_ascii=False)
+    os.replace(temporary_path, manifest_path)
 
 
 SECTION_SECONDS = 14.5
@@ -162,13 +242,15 @@ for case in cfg["test_cases"]:
         all_entries.append(previous[case["id"]])
         continue
     slug = case["name"].replace(" ", "_").replace("/", "-")
+    attempt_at = datetime.now().astimezone().strftime("%Y%m%dT%H%M%S%f")
+    attempt_seed = case.get("seed", -1)
     entry = {
         "test_case_id": case["id"],
         "name": case["name"],
         "prompt": case["prompt"],
         "type": case["type"],
         "duration": case["duration"],
-        "output_file": f"{OUT_REL}/{int(case['id']):02d}_{slug}.wav",
+        "output_file": f"{OUT_REL}/{int(case['id']):02d}_{slug}_{attempt_at}_s{attempt_seed}.wav",
         "status": "pending",
     }
     all_entries.append(entry)
@@ -188,7 +270,7 @@ for i, (case, entry) in enumerate(zip(cases, entries), 1):
         task_type="text2music",
         thinking=args.lm,
         caption=case["prompt"],
-        lyrics="[Instrumental]" if instrumental else load_lyrics(case),
+        lyrics=(case.get("lyrics") or "[Instrumental]") if instrumental else load_lyrics(case),
         instrumental=instrumental,
         vocal_language=case.get("language", "en"),
         duration=case["duration"],
@@ -215,7 +297,7 @@ for i, (case, entry) in enumerate(zip(cases, entries), 1):
         if path and os.path.exists(path):
             shutil.copyfile(path, os.path.join(ROOT, rel))
             entry["status"] = "generated"
-            entry["generated_at"] = datetime.now().isoformat()
+            entry["generated_at"] = datetime.now().astimezone().isoformat(timespec="seconds")
             entry["model"] = results["model"]
         else:
             entry["status"] = "failed"
@@ -229,6 +311,8 @@ for i, (case, entry) in enumerate(zip(cases, entries), 1):
     gc.collect()
     torch.cuda.empty_cache()
     entry["elapsed_s"] = round(time.time() - t0, 1)
+    entry.setdefault("generated_at", datetime.now().astimezone().isoformat(timespec="seconds"))
+    write_generation_trace(entry, case, params, GenerationConfig(batch_size=1, audio_format="wav", use_random_seed=False))
     print(f"    -> {entry['status']} en {entry['elapsed_s']}s {entry.get('error', '')}", flush=True)
     save()
 

@@ -5,6 +5,7 @@ import re
 import subprocess
 import sys
 import time
+import zlib
 import urllib.error
 import urllib.request
 from datetime import datetime
@@ -134,21 +135,10 @@ def acquire_lock():
 
 def load_jobs(playlist_filter=None):
     playlists = read_json(HERE / "playlists.json", [])
-    charters = read_json(HERE / "covers_charte.json", {})
     ids = {p["id"] for p in playlists if p.get("role") != "jingle" and not is_esprit_playlist(p)}
     unknown = sorted((playlist_filter or set()) - ids)
     if unknown:
         raise RuntimeError("Identifiant de playlist inconnu : " + ", ".join(unknown))
-    missing = sorted(ids - set(charters))
-    if missing:
-        raise RuntimeError("Charte graphique manquante pour : " + ", ".join(missing))
-    styles = {}
-    for pid in sorted(ids):
-        signature = json.dumps(charters[pid], ensure_ascii=False, sort_keys=True)
-        styles.setdefault(signature, []).append(pid)
-    duplicates = [group for group in styles.values() if len(group) > 1]
-    if duplicates:
-        raise RuntimeError("Chartes identiques entre playlists : " + "; ".join(", ".join(group) for group in duplicates))
     entries = []
     for playlist in playlists:
         pid = playlist["id"]
@@ -168,15 +158,9 @@ def load_jobs(playlist_filter=None):
             title = re.sub(r"^\d+\s*-\s*", "", track.get("name", source.stem))
             entries.append({"playlist": pid, "test_case_id": str(track.get("test_case_id", "")),
                             "key": f"{pid}:{track.get('test_case_id', '')}", "title": title,
-                            "date": track.get("generated_at", ""), "source": source, "target": target})
+                            "style": str(track.get("prompt", "")).strip() or pid,
+                            "seed": zlib.crc32(f"{pid}:{track.get('test_case_id', '')}:{title}".encode("utf-8")), "source": source, "target": target})
     return entries
-
-
-def creation_date(value):
-    try:
-        return datetime.fromisoformat(value).strftime("%d/%m/%Y")
-    except (TypeError, ValueError):
-        return datetime.now().strftime("%d/%m/%Y")
 
 
 def main():
@@ -264,8 +248,8 @@ def main():
             temp = job["target"].with_name(job["target"].stem + ".tmp.png")
             temp.unlink(missing_ok=True)
             print(f"[{state['attempted']}] {job['playlist']} — {job['title']}", flush=True)
-            result = subprocess.run([sys.executable, str(HERE / "tools" / "cover_gen.py"), job["playlist"],
-                                     job["title"], creation_date(job["date"]), str(temp)], cwd=HERE)
+            result = subprocess.run([sys.executable, str(HERE / "tools" / "cover_gen.py"), job["title"],
+                                     job["style"], str(job["seed"]), str(temp)], cwd=HERE)
             if result.returncode == 0 and valid_png(temp):
                 latest_score = vote_score(read_json(HERE / "votes.json", {}), job)
                 if latest_score < 0:

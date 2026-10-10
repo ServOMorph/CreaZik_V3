@@ -1,0 +1,23 @@
+{
+  "timestamp": "2026-10-10T13:51:06.031456",
+  "mode": "real",
+  "playlist": "Test ACE Funky Yogi",
+  "model": "ACE-Step 1.5 turbo",
+  "generations": [
+    {
+      "test_case_id": "4",
+      "name": "v4_nu_disco_filtre_seed42",
+      "prompt": "French nu-disco funk, filtered funk guitar chops, groovy slap bass, tight four-on-the-floor drums, shimmering synth stabs, vocoder-style vocal harmonies, smooth laid-back male lead vocal, warm vintage analog production, groovy, uplifting, danceable",
+      "type": "vocal",
+      "duration": 135,
+      "output_file": "tests_ace/funky_yogi/outputs/04_v4_nu_disco_filtre_seed42_20261010T135106031456_s42.wav",
+      "status": "generated",
+      "generated_at": "2026-10-10T13:51:20+02:00",
+      "model": "ACE-Step 1.5 turbo",
+      "energy_wh_est": 0.296,
+      "gpu_util_avg_pct": 61.7,
+      "elapsed_s": 14.8,
+      "metadata_file": "tests_ace/funky_yogi/outputs/04_v4_nu_disco_filtre_seed42_20261010T135106031456_s42.metadata.json"
+    }
+  ]
+}

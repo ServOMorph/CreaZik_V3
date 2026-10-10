@@ -1,0 +1,53 @@
+{
+  "playlist": "Test ACE Marie rap",
+  "model": "ACE-Step 1.5 turbo",
+  "tracks": [
+    {
+      "test_case_id": "1",
+      "name": "v1_rap_melodique_introspectif_seed42",
+      "output_file": "tests_ace/marie_rap/outputs/01_v1_rap_melodique_introspectif_seed42_20261010T151606988214_s42.wav",
+      "metadata_file": "tests_ace/marie_rap/outputs/01_v1_rap_melodique_introspectif_seed42_20261010T151606988214_s42.metadata.json",
+      "generated_at": "2026-10-10T15:16:20+02:00",
+      "status": "generated",
+      "error": null
+    },
+    {
+      "test_case_id": "2",
+      "name": "v2_rap_melodique_instrumental_seed42",
+      "output_file": "tests_ace/marie_rap/outputs/02_v2_rap_melodique_instrumental_seed42_20261010T152004607897_s42.wav",
+      "metadata_file": "tests_ace/marie_rap/outputs/02_v2_rap_melodique_instrumental_seed42_20261010T152004607897_s42.metadata.json",
+      "generated_at": "2026-10-10T15:20:19+02:00",
+      "status": "generated",
+      "error": null
+    },
+    {
+      "test_case_id": "3",
+      "name": "v3_instrumental_cinematique_beat_leger_seed42",
+      "output_file": "tests_ace/marie_rap/outputs/03_v3_instrumental_cinematique_beat_leger_seed42_20261010T152553497855_s42.wav",
+      "metadata_file": "tests_ace/marie_rap/outputs/03_v3_instrumental_cinematique_beat_leger_seed42_20261010T152553497855_s42.metadata.json",
+      "generated_at": "2026-10-10T15:26:07+02:00",
+      "status": "generated",
+      "error": null
+    },
+    {
+      "test_case_id": "4",
+      "name": "v4_instrumental_intro_ambiante_beat_binaire_seed42",
+      "output_file": "tests_ace/marie_rap/outputs/04_v4_instrumental_intro_ambiante_beat_binaire_seed42_20261010T153015046696_s42.wav",
+      "metadata_file": "tests_ace/marie_rap/outputs/04_v4_instrumental_intro_ambiante_beat_binaire_seed42_20261010T153015046696_s42.metadata.json",
+      "generated_at": "2026-10-10T15:30:28+02:00",
+      "status": "generated",
+      "error": null
+    },
+    {
+      "test_case_id": "5",
+      "name": "v5_instrumental_piano_intro_beat_binaire_seed42",
+      "output_file": "tests_ace/marie_rap/outputs/05_v5_instrumental_piano_intro_beat_binaire_seed42_20261010T153105250168_s42.wav",
+      "metadata_file": "tests_ace/marie_rap/outputs/05_v5_instrumental_piano_intro_beat_binaire_seed42_20261010T153105250168_s42.metadata.json",
+      "generated_at": "2026-10-10T15:31:19+02:00",
+      "status": "generated",
+      "error": null
+    }
+  ],
+  "updated_at": "2026-10-10T15:31:19+02:00",
+  "model_revision": "ca1e85fe9430179831e6bc6be790c332190a3866"
+}

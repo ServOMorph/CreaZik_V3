@@ -5,7 +5,7 @@ ClaudeCode dans le studio, il code pendant qu’je groove
 Moi j’fais le Funky Yogi, lui, il m’pose tous les moves.
 
 Flux peint mes émotions en néons dans la nuit
-ChatGPT m’fait des rêves que même Morphéus sourit
+ChatGPT m’fait des rêves que même Morphéus envie
 Je danse avec les pixels comme en plein Funky Confinement
 Mais mon corps veut la scène, pas un écran tout le temps.
 

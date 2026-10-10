@@ -109,7 +109,12 @@
       "type": "vocal",
       "duration": 40,
       "output_file": "tests_ace/marie/outputs/08_v8_slam_feminin_piano_seed7.wav",
-      "status": "running"
+      "status": "generated",
+      "generated_at": "2026-10-07T23:27:03.358755",
+      "model": "ACE-Step 1.5 turbo",
+      "energy_wh_est": 56.494,
+      "gpu_util_avg_pct": 6.1,
+      "elapsed_s": 12373.0
     },
     {
       "test_case_id": "9",
@@ -118,7 +123,12 @@
       "type": "vocal",
       "duration": 40,
       "output_file": "tests_ace/marie/outputs/09_v9_slam_feminin_piano_seed123.wav",
-      "status": "pending"
+      "status": "generated",
+      "generated_at": "2026-10-07T23:27:18.269229",
+      "model": "ACE-Step 1.5 turbo",
+      "energy_wh_est": 0.315,
+      "gpu_util_avg_pct": 65.4,
+      "elapsed_s": 14.9
     }
   ]
 }

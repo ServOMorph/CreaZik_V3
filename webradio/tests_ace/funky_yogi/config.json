@@ -1,0 +1,43 @@
+{
+  "playlist_name": "Test ACE Funky Yogi",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./tests_ace/funky_yogi/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "v1_electro_funk_seed42",
+      "prompt": "French electro-funk with emotional electronic pads, warm analog bass, simple but powerful mid-tempo beat, subtle sidechain, light reverb and delay on vocals, uplifting, groovy and introspective, slightly melancholic but hopeful, warm synth pads, funky electric bass, simple electronic drums (kick, snare, hi-hat), light arpeggiated synths, optional background vocal chops, clear intelligible French male vocal, melodic, slightly laid-back, expressive, keep the chorus very catchy and repetitive, with space around the main hook line",
+      "bpm": 98,
+      "type": "vocal",
+      "duration": 135,
+      "lyrics_file": "tests_ace/funky_yogi/paroles_ace.md",
+      "fit_lyrics": true,
+      "language": "fr",
+      "seed": 42
+    },
+    {
+      "id": "2",
+      "name": "v2_electro_funk_seed777",
+      "prompt": "French electro-funk with emotional electronic pads, warm analog bass, simple but powerful mid-tempo beat, subtle sidechain, light reverb and delay on vocals, uplifting, groovy and introspective, slightly melancholic but hopeful, warm synth pads, funky electric bass, simple electronic drums (kick, snare, hi-hat), light arpeggiated synths, optional background vocal chops, clear intelligible French male vocal, melodic, slightly laid-back, expressive, keep the chorus very catchy and repetitive, with space around the main hook line",
+      "bpm": 98,
+      "type": "vocal",
+      "duration": 135,
+      "lyrics_file": "tests_ace/funky_yogi/paroles_ace.md",
+      "fit_lyrics": true,
+      "language": "fr",
+      "seed": 777
+    },
+    {
+      "id": "3",
+      "name": "v3_electro_funk_seed2026",
+      "prompt": "French electro-funk with emotional electronic pads, warm analog bass, simple but powerful mid-tempo beat, subtle sidechain, light reverb and delay on vocals, uplifting, groovy and introspective, slightly melancholic but hopeful, warm synth pads, funky electric bass, simple electronic drums (kick, snare, hi-hat), light arpeggiated synths, optional background vocal chops, clear intelligible French male vocal, melodic, slightly laid-back, expressive, keep the chorus very catchy and repetitive, with space around the main hook line",
+      "bpm": 98,
+      "type": "vocal",
+      "duration": 135,
+      "lyrics_file": "tests_ace/funky_yogi/paroles_ace.md",
+      "fit_lyrics": true,
+      "language": "fr",
+      "seed": 2026
+    }
+  ]
+}

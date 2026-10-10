@@ -39,6 +39,8 @@ Sources : doc locale `D:\ServOMorph\ACE-Step-1.5\docs\en\Tutorial.md` et `ace_st
 - Voix : le timbre change au fil du morceau ; « single male vocalist » dans le caption ne l'a pas corrigé (v4).
 - Voix de femme (démo T01, 135 s, un seul auditeur) : « playful female voice » a donné une voix d'homme (test 11), le duo homme/femme par section ne fonctionne pas (test 13, comme l'issue ACE-Step #398), « playful female vocal » avec balises de voix a donné une voix d'homme puis de femme (test 14) ; les graines n'étant alors pas appliquées, 15 et 19 sont deux tirages aléatoires du même réglage (15 jugée la meilleure, 15 et 19 instables). Grille avec graines appliquées (tests 26 à 31 et 39 à 44) à écouter avant de conclure.
 - Un décodage VAE s'est figé 12 min à 120 s (v4) puis est passé en 47 s à la relance, mêmes paramètres. Cause probable (non démontrée) : VRAM libre insuffisante au moment du décodage.
+- Intro avant l'entrée du beat (instrumental rap, mesure par énergie grave, 2026-10-10) : non réglable avec précision. Les balises de section n'ont pas d'effet net. Entrée mesurée : environ 30 s à 135 s et 130 BPM, 15 s à 45 s et 60 s, 24 à 32 s à 150 s selon le BPM ; à 150 s, 70 BPM a donné 14 à 15 s pour 2 graines sur 5 et 28 à 29 s pour 2 autres. Prévoir plusieurs graines et mesurer.
+- Instrus rap mélodique minimaux (piano, violon, 150 s, 70 BPM, caption et balises du 2026-10-10, tests 51 à 55) : l'utilisateur a retenu les graines 2026 et 31415 (pouces haut, jugées parfaites) et rejeté 42, 101 et 777 (pouces bas). Les deux retenues ont un beat tardif (environ 29 s) ou très discret, les deux rejetées avec intro courte (14 à 15 s) ; l'intro de 10 à 15 s demandée n'était donc pas le critère décisif à l'écoute.
 - Le résultat varie beaucoup d'une seed à l'autre : prévoir plusieurs versions.
 - Hors du worker actuel : Cover, Repaint (3 à 90 s), score d'alignement des paroles, modèles SFT et XL.
 
@@ -46,10 +48,17 @@ Sources : doc locale `D:\ServOMorph\ACE-Step-1.5\docs\en\Tutorial.md` et `ace_st
 1. Fixer le point de départ avec l'utilisateur : paroles, durée, seed, LM oui ou non.
 1b. Contrôler les paroles avant tout lancement : `python TEXTES/tools/check_lyrics.py <fichier> --caption "<caption>" --duree <s>`. Le script ne modifie rien. Les ERREUR (balise absente ou collée au texte, section vide, texte avant la première balise, encodage corrompu, caption instrumental avec paroles) sont à corriger avant de lancer. Les AVERT (balise inconnue, lignes de plus de 10 syllabes, durée de plus de 135 s, tempo dans le caption, texte probablement trop long pour la durée) sont à présenter à l'utilisateur. Le comptage de syllabes et l'estimation de durée sont approximatifs.
 2. Créer ou compléter `config.json` dans `webradio/tests_ace/<sujet>/` : une entrée `test_cases` par version, un seul paramètre qui change à la fois.
-3. Nommer chaque version de façon lisible (`vN_<style>_<voix>`). Dans la section Tests de l'UI, chaque test porte un numéro unique en début de nom (`NN · description`), jamais réutilisé : le suivant est le plus grand numéro existant plus un (le prochain libre au 2026-10-09 : 45). Avant d'ajouter un test à `webradio/playlists/tests-ace/outputs/playlist_results.json`, relire les noms existants pour trouver ce numéro.
+3. Nommer chaque version de façon lisible (`vN_<style>_<voix>`). Dans la section Tests de l'UI, chaque test porte un numéro unique en début de nom (`NN · description`), jamais réutilisé : le suivant est le plus grand numéro existant plus un (le prochain libre au 2026-10-10 : 56). Avant d'ajouter un test à `webradio/playlists/tests-ace/outputs/playlist_results.json`, relire les noms existants pour trouver ce numéro.
 4. Lancer `generate.py` en arrière-plan et suivre `outputs/playlist_results.json` (statut) et la sortie du process.
 5. Donner à l'utilisateur le chemin des WAV et la durée de calcul ; noter ce qui a changé entre versions.
-6. Ne rien intégrer au catalogue ni aux playlists sans demande explicite.
+6. Toute génération (test ou nouveau morceau destiné à la radio) est publiée dans la section Tests (MP3 dans `webradio/playlists/tests-ace/outputs/`, entrée dans son `playlist_results.json` avec la clé `folder` et la référence éventuelle) et soumise à l'utilisateur pour écoute. Ne rien intégrer au catalogue, aux playlists ni à la rotation sans demande explicite, même après validation.
+7. Toujours imposer une graine explicite (`seed` >= 0) : avec `-1` la graine tirée n'est pas relevée et le morceau n'est pas reproductible. Un sidecar `.metadata.json` et `generation_manifest.json` sont écrits par `ace_worker.py` dans le dossier de sortie du test.
+
+## Règle : instrus de Marie (hypothèses issues des essais du 2026-10-10, petit échantillon)
+- Rap mélodique minimal, 130 ou 70 BPM, 135 à 150 s, piano et violon, risers et habillage électro, `no vocals`, `type: instrumental`.
+- Générer 5 graines sans autre changement, publier dans les Tests, garder celles qui plaisent (elles vont dans `TEXTES/artistes/Marie/tops_instrus/`). Un seul tirage ne suffit pas : 2 graines sur 5 retenues.
+- Ne pas viser une intro précise : mesurer l'entrée du beat et accepter 15 à 30 s ; l'intro courte n'a pas été le critère décisif à l'écoute.
+- Non testé à graine égale : 70 contre 130 BPM, effet du mot « binaire », piano contre cordes. Tester un seul paramètre à la fois.
 
 ## Suivi des textes (liste d'attente)
 Quand la génération part d'un texte suivi dans `TEXTES/liste_attente.md` (identifiant `Txx`), tenir cette liste à jour pendant le travail.

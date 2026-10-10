@@ -1,0 +1,17 @@
+{
+  "playlist": "Test ACE Funky Yogi",
+  "model": "ACE-Step 1.5 turbo",
+  "tracks": [
+    {
+      "test_case_id": "4",
+      "name": "v4_nu_disco_filtre_seed42",
+      "output_file": "tests_ace/funky_yogi/outputs/04_v4_nu_disco_filtre_seed42_20261010T135106031456_s42.wav",
+      "metadata_file": "tests_ace/funky_yogi/outputs/04_v4_nu_disco_filtre_seed42_20261010T135106031456_s42.metadata.json",
+      "generated_at": "2026-10-10T13:51:20+02:00",
+      "status": "generated",
+      "error": null
+    }
+  ],
+  "updated_at": "2026-10-10T13:51:20+02:00",
+  "model_revision": "ca1e85fe9430179831e6bc6be790c332190a3866"
+}

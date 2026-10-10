@@ -1,0 +1,79 @@
+Skipping import of cpp extensions due to incompatible torch version 2.7.1+cu128 for torchao version 0.16.0             Please see https://github.com/pytorch/ao/issues/2919 for more info
+W1010 15:19:54.721000 98124 .venv\Lib\site-packages\torch\distributed\elastic\multiprocessing\redirects.py:29] NOTE: Redirects are currently not supported in Windows or MacOs.
+[32m2026-10-10 15:19:58.326[0m | [33m[1mWARNING [0m | [36macestep.training.trainer[0m:[36m<module>[0m:[36m40[0m - [33m[1mbitsandbytes not installed. Using standard AdamW.[0m
+[32m2026-10-10 15:19:58.355[0m | [1mINFO    [0m | [36macestep.gpu_config[0m:[36mget_gpu_memory_gb[0m:[36m578[0m - [1mCUDA GPU detected: NVIDIA GeForce RTX 4060 (8.0 GB)[0m
+[32m2026-10-10 15:19:58.471[0m | [1mINFO    [0m | [36macestep.core.generation.handler.init_service_loader[0m:[36m_load_main_model_from_checkpoint[0m:[36m174[0m - [1m[initialize_service] Attempting to load model with attention implementation: sdpa[0m
+[32m2026-10-10 15:19:58.776[0m | [1mINFO    [0m | [36macestep.core.generation.handler.init_service_loader[0m:[36m_load_main_model_from_checkpoint[0m:[36m200[0m - [1m[initialize_service] Keeping main model on cuda (persistent)[0m
+[1/1] v2_rap_melodique_instrumental_seed42 (instrumental)
+[32m2026-10-10 15:20:04.618[0m | [1mINFO    [0m | [36macestep.inference[0m:[36mgenerate_music[0m:[36m662[0m - [1m[generate_music] LLM usage decision: thinking=False, use_cot_caption=True, use_cot_language=True, use_cot_metas=True, need_lm_for_cot=True, llm_initialized=False, use_lm=False[0m
+[32m2026-10-10 15:20:04.619[0m | [1mINFO    [0m | [36macestep.core.generation.handler.generate_music[0m:[36mgenerate_music[0m:[36m329[0m - [1m[generate_music] Starting generation...[0m
+[32m2026-10-10 15:20:04.619[0m | [1mINFO    [0m | [36macestep.core.generation.handler.generate_music[0m:[36mgenerate_music[0m:[36m332[0m - [1m[generate_music] Preparing inputs...[0m
+[32m2026-10-10 15:20:04.827[0m | [34m[1mDEBUG   [0m | [36macestep.core.generation.handler.generate_music[0m:[36m_vram_preflight_check[0m:[36m133[0m - [34m[1m[generate_music] VRAM pre-flight: skipping check (offload_to_cpu=True, models loaded one-at-a-time)[0m
+[32m2026-10-10 15:20:04.860[0m | [1mINFO    [0m | [36macestep.core.generation.handler.init_service_offload_context[0m:[36m_load_model_context[0m:[36m41[0m - [1m[_load_model_context] Loading vae to cuda (RSS: 0 MB)[0m
+[32m2026-10-10 15:20:05.289[0m | [1mINFO    [0m | [36macestep.core.generation.handler.init_service_offload_context[0m:[36m_load_model_context[0m:[36m58[0m - [1m[_load_model_context] Loaded vae to cuda in 0.2089s (RSS: 0 -> 0 MB, delta: +0 MB)[0m
+[32m2026-10-10 15:20:05.329[0m | [1mINFO    [0m | [36macestep.core.generation.handler.init_service_offload_context[0m:[36m_load_model_context[0m:[36m67[0m - [1m[_load_model_context] Offloading vae to CPU (RSS: 0 MB)[0m
+[32m2026-10-10 15:20:05.764[0m | [1mINFO    [0m | [36macestep.core.generation.handler.init_service_offload_context[0m:[36m_load_model_context[0m:[36m83[0m - [1m[_load_model_context] Offloaded vae to CPU in 0.2088s (RSS: 0 -> 0 MB, delta: +0 MB)[0m
+[32m2026-10-10 15:20:05.791[0m | [1mINFO    [0m | [36macestep.core.generation.handler.conditioning_text[0m:[36m_prepare_text_conditioning_inputs[0m:[36m119[0m - [1m
+======================================================================[0m
+[32m2026-10-10 15:20:05.791[0m | [1mINFO    [0m | [36macestep.core.generation.handler.conditioning_text[0m:[36m_prepare_text_conditioning_inputs[0m:[36m120[0m - [1m\U0001f50d [DEBUG] DiT TEXT ENCODER INPUT (Inference)[0m
+[32m2026-10-10 15:20:05.791[0m | [1mINFO    [0m | [36macestep.core.generation.handler.conditioning_text[0m:[36m_prepare_text_conditioning_inputs[0m:[36m121[0m - [1m======================================================================[0m
+[32m2026-10-10 15:20:05.791[0m | [1mINFO    [0m | [36macestep.core.generation.handler.conditioning_text[0m:[36m_prepare_text_conditioning_inputs[0m:[36m122[0m - [1mtext_prompt:
+# Instruction
+Fill the audio semantic mask based on the given conditions:
+
+# Caption
+French melodic rap instrumental, introspective, melancholic and emotional, dark atmospheric synth pads, sparse piano, deep 808 bass, crisp hi-hats, spacious reverb, no vocals
+
+# Metas
+- bpm: 130
+- timesignature: N/A
+- keyscale: N/A
+- duration: 135 seconds
+<|endoftext|>
+[0m
+[32m2026-10-10 15:20:05.791[0m | [1mINFO    [0m | [36macestep.core.generation.handler.conditioning_text[0m:[36m_prepare_text_conditioning_inputs[0m:[36m123[0m - [1m======================================================================[0m
+[32m2026-10-10 15:20:05.791[0m | [1mINFO    [0m | [36macestep.core.generation.handler.conditioning_text[0m:[36m_prepare_text_conditioning_inputs[0m:[36m124[0m - [1mlyrics_text:
+# Languages
+fr
+
+# Lyric
+[Instrumental]<|endoftext|>[0m
+[32m2026-10-10 15:20:05.791[0m | [1mINFO    [0m | [36macestep.core.generation.handler.conditioning_text[0m:[36m_prepare_text_conditioning_inputs[0m:[36m125[0m - [1m======================================================================
+[0m
+[32m2026-10-10 15:20:05.814[0m | [1mINFO    [0m | [36macestep.core.generation.handler.init_service_offload_context[0m:[36m_load_model_context[0m:[36m41[0m - [1m[_load_model_context] Loading vae to cuda (RSS: 0 MB)[0m
+[32m2026-10-10 15:20:06.299[0m | [1mINFO    [0m | [36macestep.core.generation.handler.init_service_offload_context[0m:[36m_load_model_context[0m:[36m58[0m - [1m[_load_model_context] Loaded vae to cuda in 0.2795s (RSS: 0 -> 0 MB, delta: +0 MB)[0m
+[32m2026-10-10 15:20:06.310[0m | [1mINFO    [0m | [36macestep.core.generation.handler.init_service_offload_context[0m:[36m_load_model_context[0m:[36m67[0m - [1m[_load_model_context] Offloading vae to CPU (RSS: 0 MB)[0m
+[32m2026-10-10 15:20:06.827[0m | [1mINFO    [0m | [36macestep.core.generation.handler.init_service_offload_context[0m:[36m_load_model_context[0m:[36m83[0m - [1m[_load_model_context] Offloaded vae to CPU in 0.2592s (RSS: 0 -> 0 MB, delta: +0 MB)[0m
+[32m2026-10-10 15:20:06.828[0m | [1mINFO    [0m | [36macestep.core.generation.handler.conditioning_embed[0m:[36mpreprocess_batch[0m:[36m110[0m - [1m[preprocess_batch] Inferring prompt embeddings...[0m
+[32m2026-10-10 15:20:06.828[0m | [1mINFO    [0m | [36macestep.core.generation.handler.init_service_offload_context[0m:[36m_load_model_context[0m:[36m41[0m - [1m[_load_model_context] Loading text_encoder to cuda (RSS: 0 MB)[0m
+[32m2026-10-10 15:20:07.579[0m | [1mINFO    [0m | [36macestep.core.generation.handler.init_service_offload_context[0m:[36m_load_model_context[0m:[36m58[0m - [1m[_load_model_context] Loaded text_encoder to cuda in 0.5308s (RSS: 0 -> 0 MB, delta: +0 MB)[0m
+[32m2026-10-10 15:20:07.960[0m | [1mINFO    [0m | [36macestep.core.generation.handler.conditioning_embed[0m:[36mpreprocess_batch[0m:[36m113[0m - [1m[preprocess_batch] Inferring lyric embeddings...[0m
+[32m2026-10-10 15:20:07.961[0m | [1mINFO    [0m | [36macestep.core.generation.handler.init_service_offload_context[0m:[36m_load_model_context[0m:[36m67[0m - [1m[_load_model_context] Offloading text_encoder to CPU (RSS: 0 MB)[0m
+[32m2026-10-10 15:20:08.475[0m | [1mINFO    [0m | [36macestep.core.generation.handler.init_service_offload_context[0m:[36m_load_model_context[0m:[36m83[0m - [1m[_load_model_context] Offloaded text_encoder to CPU in 0.3222s (RSS: 0 -> 0 MB, delta: +0 MB)[0m
+[32m2026-10-10 15:20:08.475[0m | [1mINFO    [0m | [36macestep.core.generation.handler.service_generate_execute[0m:[36m_execute_service_generate_diffusion[0m:[36m173[0m - [1m[service_generate] Generating audio... (DiT backend: PyTorch (cuda))[0m
+[32m2026-10-10 15:20:08.634[0m | [1mINFO    [0m | [36macestep.core.generation.handler.service_generate_execute[0m:[36m_execute_service_generate_diffusion[0m:[36m276[0m - [1m[service_generate] DiT diffusion via PyTorch (cuda)...[0m
+[32m2026-10-10 15:20:08.779[0m | [1mINFO    [0m | [36macestep.models.common.dcw_correction[0m:[36m__init__[0m:[36m98[0m - [1m[DCW] Active — mode=double, scaler=0.0500, high_scaler=0.0200, wavelet='haar'[0m
+[32m2026-10-10 15:20:09.372[0m | [1mINFO    [0m | [36macestep.models.common.dcw_loader[0m:[36mget[0m:[36m84[0m - [1m[DCW] Built DWT1D for wavelet='haar' (low-pass filter taps=2, device=cuda:0, dtype=torch.bfloat16).[0m
+[32m2026-10-10 15:20:11.254[0m | [1mINFO    [0m | [36macestep.core.generation.handler.generate_music_decode[0m:[36m_prepare_generate_music_decode_state[0m:[36m42[0m - [1m[generate_music] Model generation completed. Decoding latents...[0m
+[32m2026-10-10 15:20:11.257[0m | [34m[1mDEBUG   [0m | [36macestep.core.generation.handler.generate_music_decode[0m:[36m_prepare_generate_music_decode_state[0m:[36m64[0m - [34m[1m[generate_music] pred_latents: torch.Size([1, 3375, 64]), dtype=torch.bfloat16[0m
+[32m2026-10-10 15:20:11.257[0m | [34m[1mDEBUG   [0m | [36macestep.core.generation.handler.generate_music_decode[0m:[36m_prepare_generate_music_decode_state[0m:[36m65[0m - [34m[1m[generate_music] time_costs: {'encoder_time_cost': 0.06760501861572266, 'diffusion_time_cost': 2.552675724029541, 'diffusion_per_step_time_cost': 0.3190844655036926, 'total_time_cost': 2.6202807426452637, 'offload_time_cost': 1.8094017505645752}[0m
+[32m2026-10-10 15:20:11.380[0m | [1mINFO    [0m | [36macestep.core.generation.handler.generate_music_decode[0m:[36m_decode_generate_music_pred_latents[0m:[36m127[0m - [1m[generate_music] Decoding latents with VAE...[0m
+[32m2026-10-10 15:20:11.380[0m | [1mINFO    [0m | [36macestep.core.generation.handler.init_service_offload_context[0m:[36m_load_model_context[0m:[36m41[0m - [1m[_load_model_context] Loading vae to cuda (RSS: 0 MB)[0m
+[32m2026-10-10 15:20:11.716[0m | [1mINFO    [0m | [36macestep.core.generation.handler.init_service_offload_context[0m:[36m_load_model_context[0m:[36m58[0m - [1m[_load_model_context] Loaded vae to cuda in 0.1337s (RSS: 0 -> 0 MB, delta: +0 MB)[0m
+[32m2026-10-10 15:20:11.717[0m | [34m[1mDEBUG   [0m | [36macestep.core.generation.handler.generate_music_decode[0m:[36m_decode_generate_music_pred_latents[0m:[36m136[0m - [34m[1m[generate_music] Before VAE decode: allocated=4.80GB, max=5.63GB[0m
+[32m2026-10-10 15:20:11.718[0m | [1mINFO    [0m | [36macestep.core.generation.handler.generate_music_decode[0m:[36m_decode_generate_music_pred_latents[0m:[36m154[0m - [1m[generate_music] Effective free VRAM before VAE decode: 1.51 GB[0m
+[32m2026-10-10 15:20:11.718[0m | [1mINFO    [0m | [36macestep.core.generation.handler.generate_music_decode[0m:[36m_decode_generate_music_pred_latents[0m:[36m172[0m - [1m[generate_music] Using tiled VAE decode to reduce VRAM usage...[0m
+[32m2026-10-10 15:20:11.718[0m | [34m[1mDEBUG   [0m | [36macestep.core.generation.handler.memory_utils[0m:[36m_get_auto_decode_chunk_size[0m:[36m108[0m - [34m[1m[_get_auto_decode_chunk_size] Effective free VRAM: 1.51 GB[0m
+[32m2026-10-10 15:20:11.719[0m | [34m[1mDEBUG   [0m | [36macestep.core.generation.handler.memory_utils[0m:[36m_should_offload_wav_to_cpu[0m:[36m131[0m - [34m[1m[_should_offload_wav_to_cpu] Effective free VRAM: 1.51 GB[0m
+[32m2026-10-10 15:20:11.719[0m | [1mINFO    [0m | [36macestep.core.generation.handler.vae_decode[0m:[36mtiled_decode[0m:[36m56[0m - [1m[tiled_decode] chunk_size=128, offload_wav_to_cpu=True, latents_shape=torch.Size([1, 64, 3375])[0m
+[32m2026-10-10 15:20:11.719[0m | [33m[1mWARNING [0m | [36macestep.core.generation.handler.vae_decode_chunks[0m:[36m_tiled_decode_inner[0m:[36m39[0m - [33m[1m[tiled_decode] Reduced overlap from 64 to 32 for chunk_size=128[0m
+[32m2026-10-10 15:20:16.827[0m | [34m[1mDEBUG   [0m | [36macestep.core.generation.handler.generate_music_decode[0m:[36m_decode_generate_music_pred_latents[0m:[36m193[0m - [34m[1m[generate_music] After VAE decode: allocated=4.96GB, max=5.63GB[0m
+[32m2026-10-10 15:20:17.056[0m | [1mINFO    [0m | [36macestep.core.generation.handler.init_service_offload_context[0m:[36m_load_model_context[0m:[36m67[0m - [1m[_load_model_context] Offloading vae to CPU (RSS: 0 MB)[0m
+[32m2026-10-10 15:20:17.432[0m | [1mINFO    [0m | [36macestep.core.generation.handler.init_service_offload_context[0m:[36m_load_model_context[0m:[36m83[0m - [1m[_load_model_context] Offloaded vae to CPU in 0.1805s (RSS: 0 -> 0 MB, delta: +0 MB)[0m
+[32m2026-10-10 15:20:17.604[0m | [1mINFO    [0m | [36macestep.core.generation.handler.generate_music_payload[0m:[36m_build_generate_music_success_payload[0m:[36m38[0m - [1m[generate_music] VAE decode completed. Preparing audio tensors...[0m
+[32m2026-10-10 15:20:17.604[0m | [1mINFO    [0m | [36macestep.core.generation.handler.generate_music_payload[0m:[36m_build_generate_music_success_payload[0m:[36m50[0m - [1m[generate_music] Done! Generated 1 audio tensors.[0m
+[32m2026-10-10 15:20:17.787[0m | [1mINFO    [0m | [36macestep.inference[0m:[36mgenerate_music[0m:[36m1002[0m - [1m[Normalization] Audio 0 BEFORE: Peak=1.0000, Target=-1.0dB[0m
+[32m2026-10-10 15:20:17.811[0m | [1mINFO    [0m | [36macestep.inference[0m:[36mgenerate_music[0m:[36m1007[0m - [1m[Normalization] Audio 0 AFTER: Peak=0.8913[0m
+[32m2026-10-10 15:20:18.571[0m | [34m[1mDEBUG   [0m | [36macestep.audio_utils[0m:[36msave_audio[0m:[36m319[0m - [34m[1m[AudioSaver] Saved audio to D:\ServOMorph\ACE-Step-1.5\output\creazik\61fdfd18-1b79-1f59-0ba6-4cb5a1f095a9.wav (wav, 48000Hz)[0m
+    -> generated en 14.6s 
+Terminé.

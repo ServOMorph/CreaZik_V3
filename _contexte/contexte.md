@@ -10,11 +10,10 @@ expérimentation de création de musique avec IA instrumental et vocal, avec mod
 - Audio diffusé : MP3 192 kbit/s uniquement. Règles détaillées : `webradio/REGLES_GENERATION_DEV.md`.
 
 ## État actuel (réécrit intégralement à chaque /close)
-WebRadio locale avec interface de Tests ; tout nouveau contenu destiné à la diffusion passe d'abord par l'écoute et nécessite ensuite une demande explicite de l'utilisateur.
-Campagne comparative écoutée : 40 votes dans les Tests ; ACE-Step 10 positifs sur 10, MusicGen, HeartMuLa et Stable Audio 2 positifs sur 10 chacun. Les contrôles techniques restent distincts des votes artistiques.
-Essais temporaires « Soul du matin » et « Funky Yogi » supprimés ; seul l'original « Soul du matin » reste dans la WebRadio. Les paroles Funky Yogi et Marie sont classées sous `TEXTES/artistes/` avec les droits déclarés par l'utilisateur.
-Démo T01 version 18 retenue ; grille de voix féminine et contrôles iPhone encore à effectuer (`tests_manuels.md`).
-La validation préalable est consignée mais son application technique à la génération automatique reste ouverte (`AMELIORATIONS.md`).
+WebRadio locale avec interface de Tests ; tout nouveau contenu destiné à la diffusion passe d'abord par l'écoute et nécessite ensuite une demande explicite de l'utilisateur (règle ajoutée au skill de génération).
+Les générations de test écrivent un sidecar `.metadata.json` et un manifeste ; la graine est toujours imposée. Pochettes sans texte (prompt par morceau) et traçabilité : code commité, test complet en attente.
+Instrus rap mélodique de Marie : 2 retenus dans `TEXTES/artistes/Marie/tops_instrus/` plus 2 à la racine du dossier ; règle de génération consignée dans le skill (5 graines, tri à l'écoute).
+Restent à faire : avis sur les tests 45 et 46, contrôles iPhone, grille de voix féminine, protocole d'apprentissage non câblé, application technique de la validation préalable.
 
 ## Décisions structurantes (append only — 10 entrées max, 5 lignes max/entrée, archiver au-delà)
 - 2026-10-07 : L'UI du port 5000 devient l'UI dev ; boutons Slow/Medium/High rouverts à tous (`/api/dynamics` sans contrôle admin), à refermer avec l'UI auditeur future.
@@ -27,3 +26,4 @@ La validation préalable est consignée mais son application technique à la gé
 - 2026-10-10 : Tout nouveau contenu destiné à la WebRadio est soumis dans les Tests avec sa référence éventuelle ; aucune diffusion sans demande explicite de l'utilisateur, même après validation.
 - 2026-10-10 : Paroles classées par artiste dans `TEXTES/artistes/` ; l'utilisateur déclare être Funky Yogi et détenir les droits sur ce texte, et déclare disposer des droits sur les textes Marie.
 - 2026-10-10 : section Tests rangée en dossiers (clé `folder` ou règles du serveur) avec commentaire par version dans `tests_state.json` ; bouton « Test » supprimé.
+- 2026-10-10 : Graine toujours imposée pour les tests ; sidecar et manifeste par génération ; « garde » = ranger le MP3 chez l'artiste ; instrus de Marie générés par 5 graines puis triés à l'écoute (intro non pilotable).

@@ -1,0 +1,83 @@
+{
+  "timestamp": "2026-10-10T15:49:13.175249",
+  "mode": "real",
+  "playlist": "Instrus rap melodique",
+  "model": "ACE-Step 1.5 turbo",
+  "generations": [
+    {
+      "test_case_id": "1",
+      "name": "v1_instru_rap_melodique_seed42",
+      "prompt": "melodic rap instrumental, minimal, sparse expressive piano, solo violin phrases, light trap beat with soft kick and crisp hi-hats, gentle sub bass, lots of empty space left for a vocal, cinematic dynamics with risers, swells and impacts, electronic sound design textures, glitchy ambient FX, spacious reverb, melancholic, no vocals",
+      "type": "instrumental",
+      "duration": 150,
+      "output_file": "tests_ace/instru_rap/outputs/01_v1_instru_rap_melodique_seed42_20261010T154716998937_s42.wav",
+      "status": "generated",
+      "generated_at": "2026-10-10T15:47:31+02:00",
+      "model": "ACE-Step 1.5 turbo",
+      "energy_wh_est": 0.29,
+      "gpu_util_avg_pct": 58.9,
+      "elapsed_s": 15.0,
+      "metadata_file": "tests_ace/instru_rap/outputs/01_v1_instru_rap_melodique_seed42_20261010T154716998937_s42.metadata.json"
+    },
+    {
+      "test_case_id": "2",
+      "name": "v2_instru_rap_melodique_seed101",
+      "prompt": "melodic rap instrumental, minimal, sparse expressive piano, solo violin phrases, light trap beat with soft kick and crisp hi-hats, gentle sub bass, lots of empty space left for a vocal, cinematic dynamics with risers, swells and impacts, electronic sound design textures, glitchy ambient FX, spacious reverb, melancholic, no vocals",
+      "type": "instrumental",
+      "duration": 150,
+      "output_file": "tests_ace/instru_rap/outputs/02_v2_instru_rap_melodique_seed101_20261010T154745579022_s101.wav",
+      "status": "generated",
+      "generated_at": "2026-10-10T15:48:00+02:00",
+      "model": "ACE-Step 1.5 turbo",
+      "energy_wh_est": 0.328,
+      "gpu_util_avg_pct": 66.9,
+      "elapsed_s": 14.9,
+      "metadata_file": "tests_ace/instru_rap/outputs/02_v2_instru_rap_melodique_seed101_20261010T154745579022_s101.metadata.json"
+    },
+    {
+      "test_case_id": "3",
+      "name": "v3_instru_rap_melodique_seed777",
+      "prompt": "melodic rap instrumental, minimal, sparse expressive piano, solo violin phrases, light trap beat with soft kick and crisp hi-hats, gentle sub bass, lots of empty space left for a vocal, cinematic dynamics with risers, swells and impacts, electronic sound design textures, glitchy ambient FX, spacious reverb, melancholic, no vocals",
+      "type": "instrumental",
+      "duration": 150,
+      "output_file": "tests_ace/instru_rap/outputs/03_v3_instru_rap_melodique_seed777_20261010T154814140145_s777.wav",
+      "status": "generated",
+      "generated_at": "2026-10-10T15:48:29+02:00",
+      "model": "ACE-Step 1.5 turbo",
+      "energy_wh_est": 0.315,
+      "gpu_util_avg_pct": 63.9,
+      "elapsed_s": 15.1,
+      "metadata_file": "tests_ace/instru_rap/outputs/03_v3_instru_rap_melodique_seed777_20261010T154814140145_s777.metadata.json"
+    },
+    {
+      "test_case_id": "4",
+      "name": "v4_instru_rap_melodique_seed2026",
+      "prompt": "melodic rap instrumental, minimal, sparse expressive piano, solo violin phrases, light trap beat with soft kick and crisp hi-hats, gentle sub bass, lots of empty space left for a vocal, cinematic dynamics with risers, swells and impacts, electronic sound design textures, glitchy ambient FX, spacious reverb, melancholic, no vocals",
+      "type": "instrumental",
+      "duration": 150,
+      "output_file": "tests_ace/instru_rap/outputs/04_v4_instru_rap_melodique_seed2026_20261010T154843023142_s2026.wav",
+      "status": "generated",
+      "generated_at": "2026-10-10T15:48:58+02:00",
+      "model": "ACE-Step 1.5 turbo",
+      "energy_wh_est": 0.325,
+      "gpu_util_avg_pct": 63.6,
+      "elapsed_s": 15.4,
+      "metadata_file": "tests_ace/instru_rap/outputs/04_v4_instru_rap_melodique_seed2026_20261010T154843023142_s2026.metadata.json"
+    },
+    {
+      "test_case_id": "5",
+      "name": "v5_instru_rap_melodique_seed31415",
+      "prompt": "melodic rap instrumental, minimal, sparse expressive piano, solo violin phrases, light trap beat with soft kick and crisp hi-hats, gentle sub bass, lots of empty space left for a vocal, cinematic dynamics with risers, swells and impacts, electronic sound design textures, glitchy ambient FX, spacious reverb, melancholic, no vocals",
+      "type": "instrumental",
+      "duration": 150,
+      "output_file": "tests_ace/instru_rap/outputs/05_v5_instru_rap_melodique_seed31415_20261010T154913180249_s31415.wav",
+      "status": "generated",
+      "generated_at": "2026-10-10T15:49:28+02:00",
+      "model": "ACE-Step 1.5 turbo",
+      "energy_wh_est": 0.309,
+      "gpu_util_avg_pct": 62.6,
+      "elapsed_s": 15.3,
+      "metadata_file": "tests_ace/instru_rap/outputs/05_v5_instru_rap_melodique_seed31415_20261010T154913180249_s31415.metadata.json"
+    }
+  ]
+}

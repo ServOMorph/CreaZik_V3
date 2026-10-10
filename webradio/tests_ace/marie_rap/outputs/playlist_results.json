@@ -1,0 +1,23 @@
+{
+  "timestamp": "2026-10-10T15:31:05.250168",
+  "mode": "real",
+  "playlist": "Test ACE Marie rap",
+  "model": "ACE-Step 1.5 turbo",
+  "generations": [
+    {
+      "test_case_id": "5",
+      "name": "v5_instrumental_piano_intro_beat_binaire_seed42",
+      "prompt": "cinematic melancholic piano instrumental, expressive grand piano as the lead instrument, long ambient intro with soft piano notes and atmospheric pads and sparse electronic textures, then a light minimal straight binary beat, steady even 4/4 kick, no syncopation, no swing, simple repetitive drum pattern, gentle hi-hats, subtle sub bass, spacious reverb, emotional, introspective, no vocals",
+      "type": "instrumental",
+      "duration": 135,
+      "output_file": "tests_ace/marie_rap/outputs/05_v5_instrumental_piano_intro_beat_binaire_seed42_20261010T153105250168_s42.wav",
+      "status": "generated",
+      "generated_at": "2026-10-10T15:31:19+02:00",
+      "model": "ACE-Step 1.5 turbo",
+      "energy_wh_est": 0.288,
+      "gpu_util_avg_pct": 62.7,
+      "elapsed_s": 14.0,
+      "metadata_file": "tests_ace/marie_rap/outputs/05_v5_instrumental_piano_intro_beat_binaire_seed42_20261010T153105250168_s42.metadata.json"
+    }
+  ]
+}
