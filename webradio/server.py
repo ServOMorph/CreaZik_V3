@@ -269,22 +269,52 @@ def tests_read(path, fallback):
         return fallback
 
 
+TESTS_FOLDER_RULES = [
+    (re.compile(r"\bMarie\b"), "marie", "ACE · Voix Marie (rap, chant, slam)"),
+    (re.compile(r"\bLagniel\b"), "lagniel", "ACE · Démo Lagniel « Arroser Les Roses »"),
+    (re.compile(r"\bGrille 135 s\b"), "grille-135", "ACE · Grille voix de femme 135 s"),
+    (re.compile(r"\bGrille 60 s\b"), "grille-60", "ACE · Grille voix de femme 60 s (texte corrigé)"),
+]
+
+
+def tests_slug(text):
+    return re.sub(r"[^\w\-]+", "-", text.lower())
+
+
+def tests_folder(test_id, g, model):
+    explicit = clean_text(g.get("folder", ""), 80)
+    if explicit:
+        return test_id + "/" + tests_slug(explicit), explicit
+    if test_id == "tests-modeles":
+        return test_id + "/" + tests_slug(model), "Modèles · " + model
+    name = str(g.get("name", ""))
+    for rx, key, label in TESTS_FOLDER_RULES:
+        if rx.search(name):
+            return f"{test_id}/{key}", label
+    return f"{test_id}/divers", "ACE · Divers"
+
+
 def tests_list():
     state = tests_read(TESTS_STATE, {})
     votes = state.get("votes", {})
     played = state.get("played", {})
+    comments = state.get("comments", {})
     items = []
     for test_id, test_dir in TESTS_DIRS.items():
         results = tests_read(test_dir / "playlist_results.json", {})
         for g in results.get("generations", []):
             mp3 = re.sub(r"\.wav$", ".mp3", str(g.get("output_file", "")))
             if TESTS_FILE_RE.match(mp3) and (HERE / mp3).is_file():
+                model = str(g.get("model", results.get("model", test_id)))
+                folder, folder_label = tests_folder(test_id, g, model)
                 items.append({"file": mp3, "name": str(g.get("name", "")), "prompt": str(g.get("prompt", "")),
-                              "model": str(g.get("model", results.get("model", test_id))),
+                              "folder": folder, "folder_label": folder_label,
+                              "model": model,
                               "duration": g.get("duration"), "generated_at": str(g.get("generated_at", "")),
                               "technical_status": str(g.get("technical_status", "")),
                               "metadata_file": str(g.get("metadata_file", "")),
-                              "vote": votes.get(mp3, ""), "played": mp3 in played})
+                              "vote": votes.get(mp3, ""), "played": mp3 in played,
+                              "comment": comments.get(mp3, "")})
     if state.get("pending_delete"):
         tests_retry_purge()
     return items
@@ -322,6 +352,21 @@ def tests_vote(file, vote):
             votes.pop(file, None)
         else:
             votes[file] = vote
+        write_json_atomic(TESTS_STATE, state)
+    return True
+
+
+def tests_comment(file, text):
+    if file not in {i["file"] for i in tests_list()}:
+        return False
+    text = CTRL_RE.sub("", str(text)).strip()[:2000]
+    with TESTS_LOCK:
+        state = tests_read(TESTS_STATE, {})
+        comments = state.setdefault("comments", {})
+        if text:
+            comments[file] = text
+        else:
+            comments.pop(file, None)
         write_json_atomic(TESTS_STATE, state)
     return True
 
@@ -617,6 +662,10 @@ class Handler(SimpleHTTPRequestHandler):
             elif path == "/api/tests/vote":
                 body = self._read_json_body(2048)
                 ok = tests_vote(str(body.get("file", "")), str(body.get("vote", "")))
+                self._send_json(200 if ok else 400, {"ok": ok})
+            elif path == "/api/tests/comment":
+                body = self._read_json_body(8192)
+                ok = tests_comment(str(body.get("file", "")), body.get("text", ""))
                 self._send_json(200 if ok else 400, {"ok": ok})
             elif path == "/api/tests/played":
                 ok = tests_mark_played(str(self._read_json_body(2048).get("file", "")))

@@ -10,17 +10,13 @@ expérimentation de création de musique avec IA instrumental et vocal, avec mod
 - Audio diffusé : MP3 192 kbit/s uniquement. Règles détaillées : `webradio/REGLES_GENERATION_DEV.md`.
 
 ## État actuel (réécrit intégralement à chaque /close)
-WebRadio locale : 86 playlists musicales, 29 jingles actifs ; interfaces auditeur/admin sur les ports 5000/5001 ; contrôles iPhone encore en attente (`tests_manuels.md`).
-Section Tests admin : campagne comparative de 30 morceaux exposée par modèle (10 ACE-Step, 10 MusicGen Small, 10 HeartMuLa OSS 3B) ; les statuts techniques ne remplacent pas l'écoute humaine.
-ACE-Step et MusicGen : 10/10 sorties techniquement passées chacun ; HeartMuLa : 5/10 passées et 5/10 invalides pour écrêtage probable, dont une aussi trop courte. Fichiers, prompts et configurations consignés dans `MODELES_LLM/sorties/campagne_2026-10-09/`.
-Démo T01 version 18 retenue ; grille de voix féminine toujours à écouter. Pochettes : lot terminé ; génération, analyse et compression à vérifier avant une nouvelle campagne GPU.
-Avant déploiement : contrôles iPhone, `DEV_UNIFIED`, éléments UI de test et noms d'artistes restent à traiter ; VPS Linux non réalisé.
+WebRadio locale avec interface de Tests ; tout nouveau contenu destiné à la diffusion passe d'abord par l'écoute et nécessite ensuite une demande explicite de l'utilisateur.
+Campagne comparative écoutée : 40 votes dans les Tests ; ACE-Step 10 positifs sur 10, MusicGen, HeartMuLa et Stable Audio 2 positifs sur 10 chacun. Les contrôles techniques restent distincts des votes artistiques.
+Essais temporaires « Soul du matin » et « Funky Yogi » supprimés ; seul l'original « Soul du matin » reste dans la WebRadio. Les paroles Funky Yogi et Marie sont classées sous `TEXTES/artistes/` avec les droits déclarés par l'utilisateur.
+Démo T01 version 18 retenue ; grille de voix féminine et contrôles iPhone encore à effectuer (`tests_manuels.md`).
+La validation préalable est consignée mais son application technique à la génération automatique reste ouverte (`AMELIORATIONS.md`).
 
 ## Décisions structurantes (append only — 10 entrées max, 5 lignes max/entrée, archiver au-delà)
-- 2026-10-06 : Panneau de pub carré cliquable avec mascotte (20 styles) ; jingles instrumentaux supprimés ; morceau en fondu sous le jingle.
-- 2026-10-07 : Jingles rangés dans `webradio/jingles/<catégorie>/`, mélangés, 1 s de silence en tête, voix féminine Chatterbox.
-- 2026-10-07 : Dynamique : seul l'admin saisit Slow/Medium/High et son choix remplace l'énergie mesurée ; mode dev à un seul utilisateur.
-- 2026-10-07 : Tests de voix ACE hors catalogue (`playlists/tests-ace/`, bouton Test) ; BPM/tonalité en paramètres du worker ; un seul changement par version de test.
 - 2026-10-07 : L'UI du port 5000 devient l'UI dev ; boutons Slow/Medium/High rouverts à tous (`/api/dynamics` sans contrôle admin), à refermer avec l'UI auditeur future.
 - 2026-10-08 : Mise en ligne prévue sur VPS Linux bon marché (systemd, HTTPS, sous-domaine du site) ; Vercel, Render gratuit et Netlify écartés ; pas encore réalisée.
 - 2026-10-08 : Deux agents de zone (`textes`, `modeles_llm`) pour travailler en parallèle ; nom d'artiste en consigne de style interne seulement, jamais public.
@@ -28,3 +24,6 @@ Avant déploiement : contrôles iPhone, `DEV_UNIFIED`, éléments UI de test et 
 - 2026-10-09 : La graine ACE n'était pas appliquée (`use_random_seed` vrai par défaut) : corrigé dans `ace_worker.py` ; les essais « à graine fixe » antérieurs ne sont pas fiables ; paroles contrôlées par `check_lyrics.py` avant chaque lancement.
 - 2026-10-09 : Démo privée T01 (Arroser Les Roses) : version 18 retenue, texte adapté (« posté », « zoublie »), voix de femme non retenue (instable), statut `VALIDE` interdit sans accord écrit de l'auteur ; lot de pochettes terminé, scores négatifs exclus.
 - 2026-10-10 : campagne comparative de 30 extraits (10 ACE-Step 1.5, 10 MusicGen Small, 10 HeartMuLa OSS 3B) ; statuts techniques conservés séparément de l'écoute humaine, avec pistes invalides HeartMuLa laissées visibles pour examen.
+- 2026-10-10 : Tout nouveau contenu destiné à la WebRadio est soumis dans les Tests avec sa référence éventuelle ; aucune diffusion sans demande explicite de l'utilisateur, même après validation.
+- 2026-10-10 : Paroles classées par artiste dans `TEXTES/artistes/` ; l'utilisateur déclare être Funky Yogi et détenir les droits sur ce texte, et déclare disposer des droits sur les textes Marie.
+- 2026-10-10 : section Tests rangée en dossiers (clé `folder` ou règles du serveur) avec commentaire par version dans `tests_state.json` ; bouton « Test » supprimé.

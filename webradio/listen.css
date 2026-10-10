@@ -631,11 +631,8 @@ button:disabled { opacity: 0.45; cursor: default; }
 
 .btn-next:active { transform: scale(0.95); background: var(--a1-a); border-color: var(--a1); }
 
-.btn-test { padding: 0 18px; }
-
 .btn-discover { padding: 0 18px; }
 .btn-discover[aria-pressed="true"] { background: var(--a1-a); border-color: var(--a1); }
-.btn-test[aria-pressed="true"] { background: var(--a1-a); border-color: var(--a1); }
 
 .ticker {
   width: auto;
@@ -942,6 +939,9 @@ button.prog-main:active { background: var(--glass-2); }
 
 .test-item .prog-main { flex: 1 1 0; }
 
+.test-folder.is-new { box-shadow: inset 3px 0 0 var(--a1); border-color: hsl(var(--pl-h1) 92% 68% / 0.45); }
+.test-folder.is-new .prog-title { color: #fff; }
+.test-folder-head { margin-bottom: 6px; }
 .test-item.is-new { box-shadow: inset 3px 0 0 var(--a1); border-color: hsl(var(--pl-h1) 92% 68% / 0.45); }
 
 .test-item.is-new .prog-title { color: #fff; }
@@ -1192,3 +1192,8 @@ input:focus, textarea:focus {
 .dyn-btn[data-level="slow"].active { background: rgba(80, 150, 255, 0.55); border-color: #6aa8ff; box-shadow: 0 0 18px -2px #6aa8ff; }
 .dyn-btn[data-level="medium"].active { background: rgba(240, 179, 74, 0.5); border-color: #f0b34a; box-shadow: 0 0 18px -2px #f0b34a; }
 .dyn-btn[data-level="high"].active { background: rgba(255, 90, 140, 0.55); border-color: #ff5a8c; box-shadow: 0 0 18px -2px #ff5a8c; }
+
+.test-comment { flex: 1 1 100%; margin-top: 6px; padding: 6px 10px; border-left: 2px solid var(--a1); color: var(--muted); font-size: 13px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.test-edit { flex: 1 1 100%; display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.test-edit textarea { flex: 1 1 100%; box-sizing: border-box; min-height: 64px; padding: 8px; border-radius: 8px; border: 1px solid var(--a1); background: rgba(255, 255, 255, 0.06); color: inherit; font: inherit; font-size: 16px; resize: vertical; }
+.test-save { padding: 0 14px; }

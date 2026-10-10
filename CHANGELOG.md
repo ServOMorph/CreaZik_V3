@@ -1,5 +1,21 @@
 # Changelog
 
+## v1.10 — 2026-10-10
+
+### Modifié
+- Validation dans l'interface de Tests exigée pour les nouveaux contenus destinés à la WebRadio ; diffusion uniquement sur demande explicite.
+- Paroles Funky Yogi et Marie classées sous `TEXTES/artistes/`, avec attribution et droits déclarés par l'utilisateur ; chemins des tests Marie mis à jour.
+- Campagne comparative renseignée par les votes d'écoute ; essais temporaires « Soul du matin » et « Funky Yogi » retirés, original radio conservé.
+
+## v1.9 — 2026-10-10
+
+### Ajouté
+- Section « Tests » en dossiers (nom lisible, nombre de versions, badge « jamais écoutés », dossiers à écouter en tête) ; clé `folder` optionnelle dans `playlist_results.json` (`tests_folder` dans `server.py`).
+- Commentaire par version de test (`/api/tests/comment`, stocké dans `tests_state.json`, champ `comment` de `/api/tests`).
+
+### Supprimé
+- Bouton « Test » de l'UI d'écoute (HTML, CSS, JS).
+
 ## v1.8 — 2026-10-10
 
 ### Ajouté

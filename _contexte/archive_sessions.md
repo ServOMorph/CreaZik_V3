@@ -94,3 +94,51 @@ Aucune
 
 ## Question bloquante pour la session suivante
 Une voix de femme stable est-elle obtenue sur l'une des versions de la grille ?
+
+---
+
+# Session du 2026-10-10
+
+## Décisions prises
+- Comparer ACE-Step 1.5, MusicGen Small et HeartMuLa OSS 3B sur dix briefs communs, en séparant les seuils techniques de l'écoute humaine.
+- Garder les sorties techniquement invalides de HeartMuLa dans l'UI pour rendre leurs défauts observables.
+
+## Livrables produits ou modifiés
+- `MODELES_LLM/sorties/campagne_2026-10-09/` : 30 sorties comparatives, sidecars, manifest et journaux de tentatives.
+- `webradio/playlists/tests-modeles/outputs/playlist_results.json` : 30 entrées de cette campagne exposées dans trois dossiers de modèles, en plus des dix pistes Stable Audio antérieures.
+- `MODELES_LLM/registre_campagne.py` et `DOCUMENTATION/` : suivi reproductible et documentation des modèles et critères.
+
+## Hypothèses validées / invalidées
+- VALIDE : ACE-Step et MusicGen Small passent les contrôles techniques sur les dix briefs chacun ; écoute humaine en attente.
+- VALIDE : HeartMuLa passe techniquement sur cinq briefs sur dix ; cinq sorties restent consultables comme invalides.
+- INVALIDE : toutes les sorties HeartMuLa seraient techniquement recevables -> écrêtage probable sur cinq pistes, durée insuffisante sur l'une d'elles.
+- EN ATTENTE : jugement artistique à l'écoute des 30 pistes dans l'UI.
+
+## Prochaine étape exacte
+Écouter les 30 pistes comparatives dans la section Tests et renseigner le résultat humain dans l'UI.
+
+## Question bloquante pour la session suivante
+Aucune
+
+---
+
+# Session du 2026-10-10
+
+## Décisions prises
+- Soumettre tout nouveau contenu destiné à la WebRadio à l'interface de Tests ; aucune diffusion sans demande explicite, même après validation.
+- Classer les paroles par artiste : Funky Yogi et Marie ; l'utilisateur déclare disposer des droits sur ces textes.
+
+## Livrables produits ou modifiés
+- `AGENTS.md`, `.claude/memory.md`, `webradio/REGLES_GENERATION_DEV.md`, `AMELIORATIONS.md` : règle de validation préalable et action d'application technique.
+- `TEXTES/artistes/funky-yogi/`, `TEXTES/artistes/Marie/`, `TEXTES/INDEX.md` : paroles et attribution rangées ; références des tests Marie mises à jour.
+- Essais ACE temporaires générés, écoutés puis supprimés à la demande de l'utilisateur ; référence radio conservée.
+
+## Hypothèses validées / invalidées
+- INVALIDE sur « Soul du matin » : `shift=3` n'a pas apporté le groove et la précision souhaités par rapport à la référence.
+- Selon l'écoute de l'utilisateur, les essais « Funky Yogi » avec moins de styles mêlés sont meilleurs ; cela ne démontre pas une règle générale pour le modèle.
+
+## Prochaine étape exacte
+Poursuivre les contrôles manuels restants ; si une nouvelle génération est demandée, la placer dans les Tests avant toute diffusion.
+
+## Question bloquante pour la session suivante
+Aucune

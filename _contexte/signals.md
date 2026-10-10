@@ -1,9 +1,9 @@
 # Signals — CreaZik_V3   (MAJ 2026-10-10, fin de session)
 
 ## Actions ouvertes
-- [P1|ouvert] Écouter et évaluer les 30 morceaux de la campagne comparative depuis les dossiers de l'UI Tests ; reporter l'évaluation humaine via l'UI.
-  - fait quand: les 30 pistes ont un statut/commentaire d'écoute renseigné ou sont explicitement écartées par l'utilisateur
-  - réf: `tests_manuels.md` n°7, `MODELES_LLM/sorties/campagne_2026-10-09/generation_manifest.json`
+- [P1|ouvert] Appliquer techniquement la validation préalable : envoyer les nouvelles générations vers les Tests et bloquer leur ajout à la diffusion ou à la rotation sans demande explicite.
+  - fait quand: le pipeline automatique produit d'abord des fichiers accessibles dans les Tests et aucun chemin n'ajoute un nouveau contenu à la diffusion sans demande de l'utilisateur
+  - réf: `AGENTS.md` section Spécificités projet, `AMELIORATIONS.md`, `webradio/REGLES_GENERATION_DEV.md` section 2.6
 - [P1|ouvert] Écouter la grille de voix de femme (section Tests de l'UI admin : tests 26 à 31 en 135 s et 39 à 44 en 60 s, texte corrigé) et trancher si une version garde la voix de femme du début à la fin ; en tirer la règle du skill `generation-morceaux` (la note actuelle dit « grille à écouter avant de conclure »)
   - fait quand: une version à voix de femme stable est retenue ou la piste est abandonnée, et le skill et `REGLES_GENERATION_DEV.md` section 6 sont mis à jour
   - réf: `webradio/playlists/tests-ace/outputs/playlist_results.json`, `.claude/skills/generation-morceaux/SKILL.md`, `tests_manuels.md` n°5
@@ -31,8 +31,8 @@
 - [P2|ouvert] Changer le mot de passe admin par défaut
   - fait quand: mot de passe admin changé et accès confirmé
   - réf: `webradio/REGLES_GENERATION_DEV.md` section 6, `tests_manuels.md`
-- [P2|ouvert] Avant le déploiement : retirer le bouton « Suivant » public (`PUBLIC_SKIP`), le bouton « Test » et la section « Tests » (ou les verrouiller), remplacer `DEV_UNIFIED = True` en dur par un réglage explicite, remplacer les noms d'artistes des titres de playlists par des genres, trancher l'exposition des boutons Renommer/Supprimer, refermer `/api/dynamics` avec une UI auditeur séparée
-  - fait quand: aucun saut public possible, `DEV_UNIFIED` piloté, aucun nom d'artiste public, dynamique, Test et Tests refermés dans l'UI auditeur
+- [P2|ouvert] Avant le déploiement : retirer le bouton « Suivant » public (`PUBLIC_SKIP`), la section « Tests » (ou la verrouiller ; le bouton « Test » est déjà supprimé), remplacer `DEV_UNIFIED = True` en dur par un réglage explicite, remplacer les noms d'artistes des titres de playlists par des genres, trancher l'exposition des boutons Renommer/Supprimer, refermer `/api/dynamics` avec une UI auditeur séparée
+  - fait quand: aucun saut public possible, `DEV_UNIFIED` piloté, aucun nom d'artiste public, dynamique et Tests refermés dans l'UI auditeur
   - réf: `AMELIORATIONS.md`, `webradio/REGLES_GENERATION_DEV.md` sections 3.4, 3.6, 3.7 et 5.5, `webradio/server.py`
 - [P2|ouvert] Confirmer deux changements du répertoire de travail non faits pendant cette session : seuil `0.688` dans `jlayout` (`webradio/motion.js`) et suppression du formulaire de commentaires, du bloc « musique humaine » et du contact dans `webradio/listen.html`
   - fait quand: l'utilisateur confirme ou demande la correction
@@ -54,30 +54,29 @@
   - réf: `PLAN_WEBRADIO.md` section 4.5
 
 ## Contexte chaud
-- Campagne comparative du 2026-10-10 : 30 pistes (10 ACE-Step 1.5, 10 MusicGen Small, 10 HeartMuLa OSS 3B) ; résultats et configurations dans `MODELES_LLM/sorties/campagne_2026-10-09/`.
-- Les 30 nouvelles pistes sont exposées dans l'UI admin par dossiers de modèle ; dix pistes Stable Audio antérieures sont aussi dans la liste. Statut d'écoute initial `pending`. Ne pas modifier `webradio/tests_state.json` manuellement.
-- ACE-Step : 10/10 techniquement passées ; MusicGen Small : 10/10 ; HeartMuLa : 5/10 passées et 5 invalides (écrêtage probable sur cinq, dont une aussi trop courte). Ces statuts n'évaluent pas la qualité artistique.
-- Avant une nouvelle génération GPU, consulter l'état des services et éviter d'interrompre une piste en cours.
+- Campagne comparative : 40 votes présents dans l'état des Tests (ACE-Step 10 positifs sur 10 ; MusicGen, HeartMuLa et Stable Audio 2 positifs sur 10 chacun). Les défauts techniques de cinq sorties HeartMuLa restent distincts du jugement d'écoute.
+- Les variantes temporaires « Soul du matin » et « Funky Yogi » ont été retirées des Tests ; l'original « Soul du matin » reste dans la WebRadio. Le texte « Funky Yogi » est classé dans `TEXTES/artistes/funky-yogi/`.
+- Section Tests : dossiers déterminés par `tests_folder` (`server.py`), clé `folder` optionnelle dans `playlist_results.json` ; commentaires par version dans `webradio/tests_state.json` (clé `comments`) et dans `/api/tests` (champ `comment`), à lire pour analyser les écoutes. Serveur relancé et actif (port 5000) en fin de session.
+- `tests_manuels.md` n°7 (écoute des 30 pistes) a disparu du fichier alors que l'action P1 le référence : ligne retirée par une autre session, à confirmer.
+- Avant une nouvelle génération GPU, consulter l'état des services et éviter d'interrompre une piste en cours. Toute nouvelle création destinée à la radio passe par les Tests puis une demande explicite avant diffusion.
 
-# Session du 2026-10-10
+# Session du 2026-10-10 (section Tests en dossiers, commentaires)
 
 ## Décisions prises
-- Comparer ACE-Step 1.5, MusicGen Small et HeartMuLa OSS 3B sur dix briefs communs, en séparant les seuils techniques de l'écoute humaine.
-- Garder les sorties techniquement invalides de HeartMuLa dans l'UI pour rendre leurs défauts observables.
+- Section Tests en dossiers avec badge des morceaux jamais écoutés ; nom du dossier par clé `folder` ou règles du serveur.
+- Commentaire par version stocké dans `tests_state.json` pour l'analyse ; bouton « Test » supprimé.
 
 ## Livrables produits ou modifiés
-- `MODELES_LLM/sorties/campagne_2026-10-09/` : 30 sorties comparatives, sidecars, manifest et journaux de tentatives.
-- `webradio/playlists/tests-modeles/outputs/playlist_results.json` : 30 entrées de cette campagne exposées dans trois dossiers de modèles, en plus des dix pistes Stable Audio antérieures.
-- `MODELES_LLM/registre_campagne.py` et `DOCUMENTATION/` : suivi reproductible et documentation des modèles et critères.
+- `webradio/server.py`, `listen.js`, `listen.css`, `listen.html` : dossiers, `/api/tests/comment`, suppression du bouton Test ; serveur relancé.
+- `webradio/REGLES_GENERATION_DEV.md`, `tests_manuels.md`, `AMELIORATIONS.md`, `CHANGELOG.md` (v1.9), `README.md` : mis à jour.
+- Prompt d'explication copié dans le presse-papier pour l'agent `modeles_llm`.
 
 ## Hypothèses validées / invalidées
-- VALIDE : ACE-Step et MusicGen Small passent les contrôles techniques sur les dix briefs chacun ; écoute humaine en attente.
-- VALIDE : HeartMuLa passe techniquement sur cinq briefs sur dix ; cinq sorties restent consultables comme invalides.
-- INVALIDE : toutes les sorties HeartMuLa seraient techniquement recevables -> écrêtage probable sur cinq pistes, durée insuffisante sur l'une d'elles.
-- EN ATTENTE : jugement artistique à l'écoute des 30 pistes dans l'UI.
+- VALIDE : regroupement en 5 dossiers côté serveur, enregistrement et effacement d'un commentaire (appel direct des fonctions).
+- EN ATTENTE : rendu et usage réels de l'UI (dossiers, commentaire) sur navigateur et iPhone.
 
 ## Prochaine étape exacte
-Écouter les 30 pistes comparatives dans la section Tests et renseigner le résultat humain dans l'UI.
+Écouter les pistes et les grilles dans les dossiers de la section Tests en commentant chaque version.
 
 ## Question bloquante pour la session suivante
 Aucune

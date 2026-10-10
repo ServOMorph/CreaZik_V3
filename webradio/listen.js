@@ -263,16 +263,9 @@
     const testAudio = new Audio();
     let testing = false;
 
-    function setTestLabel(text) {
-        const b = $('testBtn');
-        b.textContent = text || (testing ? 'Arrêter' : 'Test');
-        b.setAttribute('aria-pressed', testing ? 'true' : 'false');
-    }
-
     function stopTest() {
         testing = false;
         testAudio.pause();
-        setTestLabel();
         renderTests();
     }
 
@@ -282,6 +275,7 @@
     const TEST_ICONS = {
         up: '<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 11v10H3V11z"/><path d="M7 11l4-8a2.5 2.5 0 0 1 2.5 2.8L13 9h6.2a2 2 0 0 1 2 2.3l-1.3 8a2 2 0 0 1-2 1.7H7"/></svg>',
         down: '<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 13V3h4v10z"/><path d="M17 13l-4 8a2.5 2.5 0 0 1-2.5-2.8L11 15H4.8a2 2 0 0 1-2-2.3l1.3-8A2 2 0 0 1 6.100 3H17"/></svg>',
+        note: '<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>',
         del: '<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M6 6l1 14h10l1-14"/></svg>'
     };
 
@@ -301,6 +295,23 @@
         label.textContent = fmtTime(testAudio.currentTime) + ' / ' + fmtTime(d);
     }
 
+    let testsFolder = '';
+    let testsEditing = '';
+    let testsDraft = '';
+
+    function testsFolders() {
+        const map = new Map();
+        testsItems.forEach(it => {
+            const id = it.folder || 'divers';
+            let f = map.get(id);
+            if (!f) { f = {id, label: it.folder_label || 'Divers', items: [], fresh: 0, last: ''}; map.set(id, f); }
+            f.items.push(it);
+            if (!it.played) f.fresh++;
+            if (String(it.generated_at || '') > f.last) f.last = String(it.generated_at || '');
+        });
+        return Array.from(map.values()).sort((x, y) => (y.fresh > 0) - (x.fresh > 0) || y.last.localeCompare(x.last));
+    }
+
     function renderTests() {
         const box = $('testsList');
         const panel = $('testsPanel');
@@ -309,13 +320,32 @@
             box.innerHTML = '<div class="prog-empty">Aucune version de test.</div>';
             return;
         }
-        box.innerHTML = testsItems.map(it => {
+        const folders = testsFolders();
+        const open = folders.find(f => f.id === testsFolder);
+        if (!open) {
+            testsFolder = '';
+            box.innerHTML = folders.map(f => `<div class="prog-item test-folder${f.fresh ? ' is-new' : ''}">
+                <button type="button" class="prog-main" data-act="open" data-folder="${esc(f.id)}">
+                    <span class="prog-title">&#128193; ${esc(f.label)}</span>
+                    <span class="prog-sub">${f.items.length} version${f.items.length > 1 ? 's' : ''}</span>
+                    ${f.fresh ? `<span class="prog-badge">${f.fresh} jamais &eacute;cout&eacute;${f.fresh > 1 ? 's' : ''}</span>` : ''}
+                </button>
+            </div>`).join('');
+            return;
+        }
+        const head = `<div class="prog-item test-folder-head">
+            <button type="button" class="prog-main" data-act="back">
+                <span class="prog-title">&#8592; Dossiers</span>
+                <span class="prog-sub">${esc(open.label)}${open.fresh ? ' · ' + open.fresh + ' jamais &eacute;cout&eacute;' + (open.fresh > 1 ? 's' : '') : ''}</span>
+            </button>
+        </div>`;
+        box.innerHTML = head + open.items.map(it => {
             const cur = it.file === testsCur;
             const f = esc(it.file);
             const act = (a, label, icon) => `<button type="button" class="prog-act test-act" data-act="${a}" data-file="${f}" aria-label="${label}" title="${label}"${a === 'up' || a === 'down' ? ` aria-pressed="${it.vote === a}"` : ''}>${icon}</button>`;
             const generated = it.generated_at ? new Date(it.generated_at).toLocaleString('fr-FR') : '';
             const provenance = [it.model, generated].filter(Boolean).join(' · ');
-            const quality = it.technical_status === 'pass_needs_listening' ? 'Controle technique reussi - ecoute requise' : it.technical_status === 'invalid' ? 'Controle technique invalide' : '';
+            const quality = it.technical_status === 'pass_needs_listening' ? 'Contrôle technique réussi — écoute requise' : it.technical_status === 'invalid' ? 'Contrôle technique invalide' : '';
             return `<div class="prog-item test-item${cur ? ' is-now' : ''}${it.played ? '' : ' is-new'}">
                 <button type="button" class="prog-main" data-act="play" data-file="${f}">
                     <span class="prog-title">${cur && testing ? '&#9646;&#9646; ' : '&#9654; '}${esc(String(it.name).replace(/_/g, ' '))}</span>
@@ -324,7 +354,9 @@
                     <span class="prog-sub">${esc(it.prompt)}</span>
                     ${it.played ? '' : '<span class="prog-badge">Jamais &eacute;cout&eacute;</span>'}
                 </button>
-                ${act('up', "J'aime", TEST_ICONS.up)}${act('down', "Je n'aime pas", TEST_ICONS.down)}${act('delete', 'Supprimer cette version', TEST_ICONS.del)}
+                ${act('up', "J'aime", TEST_ICONS.up)}${act('down', "Je n'aime pas", TEST_ICONS.down)}${act('comment', 'Commentaire', TEST_ICONS.note)}${act('delete', 'Supprimer cette version', TEST_ICONS.del)}
+                ${it.comment && testsEditing !== it.file ? `<div class="test-comment">${esc(it.comment)}</div>` : ''}
+                ${testsEditing === it.file ? `<div class="test-edit"><textarea id="testNote" maxlength="2000" rows="3" placeholder="Votre avis sur ce morceau">${esc(testsDraft)}</textarea><button type="button" class="prog-act test-save" data-act="save" data-file="${f}">Enregistrer</button><button type="button" class="prog-act test-save" data-act="cancel" data-file="${f}">Annuler</button></div>` : ''}
                 ${cur ? '<div class="test-seek"><input id="testSeek" type="range" min="0" max="1000" step="1" value="0" aria-label="Position dans le morceau"><span id="testTime" class="time">0:00 / 0:00</span></div>' : ''}
             </div>`;
         }).join('');
@@ -368,13 +400,17 @@
         } catch (e) {
             testing = false;
         }
-        setTestLabel();
         renderTests();
     }
 
     async function onTestsClick(ev) {
         const btn = ev.target.closest('button[data-act]');
         if (!btn) return;
+        if (btn.dataset.act === 'open' || btn.dataset.act === 'back') {
+            testsFolder = btn.dataset.act === 'open' ? btn.dataset.folder : '';
+            renderTests();
+            return;
+        }
         const item = testsItems.find(x => x.file === btn.dataset.file);
         if (!item) return;
         const act = btn.dataset.act;
@@ -386,6 +422,23 @@
                 item.vote = vote === 'none' ? '' : vote;
                 renderTests();
             }
+        } else if (act === 'comment') {
+            testsEditing = testsEditing === item.file ? '' : item.file;
+            testsDraft = item.comment || '';
+            renderTests();
+            const ta = $('testNote');
+            if (ta) ta.focus();
+        } else if (act === 'cancel') {
+            testsEditing = '';
+            renderTests();
+        } else if (act === 'save') {
+            const ta = $('testNote');
+            const text = ta ? ta.value.trim() : '';
+            if (await testsPost('/api/tests/comment', {file: item.file, text})) {
+                item.comment = text;
+                testsEditing = '';
+                renderTests();
+            }
         } else if (act === 'delete') {
             if (!confirm('Supprimer définitivement cette version de test ?')) return;
             if (await testsPost('/api/tests/delete', {file: item.file})) {
@@ -394,38 +447,10 @@
                     testAudio.pause();
                     testAudio.removeAttribute('src');
                     testsCur = '';
-                    setTestLabel();
                 }
                 await loadTests();
             }
         }
-    }
-
-    async function toggleTest() {
-        if (testing) { stopTest(); return; }
-        const b = $('testBtn');
-        b.disabled = true;
-        try {
-            const d = await getJSON('/api/tests', null);
-            if (!d || !Array.isArray(d.items)) throw new Error('tests indisponibles');
-            testsItems = d.items.slice().sort((a, b) => String(a.generated_at || '').localeCompare(String(b.generated_at || '')));
-            const g = testsItems[testsItems.length - 1];
-            if (!g) throw new Error('aucun test');
-            if (listening) stopListening();
-            const mp3 = g.file;
-            testAudio.src = '/' + mp3 + '?v=' + encodeURIComponent(g.generated_at || '');
-            testsCur = mp3;
-            await testAudio.play();
-            testing = true;
-            markTestPlayed(mp3);
-            setTestLabel();
-            renderTests();
-        } catch (e) {
-            testing = false;
-            setTestLabel('Indisponible');
-            setTimeout(() => setTestLabel(), 2000);
-        }
-        b.disabled = false;
     }
 
     async function refreshLive() {
@@ -1642,7 +1667,6 @@
         isAdmin = !!me.admin;
         $('playBtn').addEventListener('click', toggle);
         $('nextBtn').addEventListener('click', skip);
-        $('testBtn').addEventListener('click', toggleTest);
         $('discoverBtn').addEventListener('click', toggleDiscover);
         window.addEventListener('resize', () => fitCoverTitle(true));
         if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => fitCoverTitle(true));

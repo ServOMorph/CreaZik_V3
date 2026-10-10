@@ -111,3 +111,5 @@ Pour les tâches répétitives et templated (commits, posts, changelogs, donnée
 ## Spécificités projet
 
 Section réservée aux règles propres à ce projet, hors périmètre du kit. Cette section est préservée intégralement par `/update` (jamais écrasée ni fusionnée avec le contenu du kit). Convention : toute règle liée à une section précise du fichier doit la référencer explicitement par son titre (ex: "Section Roadmap : ..."), plutôt que compter sur la position physique de cette section (toujours en fin de fichier).
+
+Section Tests manuels : tout nouveau fichier de test ou contenu généré destiné à la WebRadio doit être présenté dans l'interface de Tests pour validation par l'utilisateur avant toute diffusion. Inclure le fichier de référence lorsqu'une comparaison part d'un contenu existant. Si le format n'est pas pris en charge par l'interface, prévoir un moyen de validation adapté avant de publier le fichier. Ne rien ajouter aux playlists diffusées ni mettre en rotation sans demande explicite de l'utilisateur, même après validation. Cette règle prime les procédures de génération automatique pour les nouvelles créations.
