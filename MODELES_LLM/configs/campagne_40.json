@@ -1,0 +1,187 @@
+{
+  "campaign_id": "comparatif-4-modeles-2026-10-09",
+  "duration_seconds": 30,
+  "models": ["ACE-Step 1.5", "HeartMuLa OSS 3B", "MusicGen Small", "Stable Audio 3 Small-Music"],
+  "cases": [
+    {
+      "id": "01",
+      "slug": "electro-pop-progression",
+      "title": "Electro-pop mélodique — progression",
+      "bpm": 116,
+      "brief": "Electro-pop mélodique, 116 BPM, synthé analogique, basse ronde, arpèges lumineux, couplet contenu puis refrain ample, nostalgique mais optimiste.",
+      "ace": {
+        "caption": "Electro-pop mélodique, 116 BPM, synthé analogique, basse ronde, arpèges lumineux, progression d’un couplet contenu vers un refrain ample, ambiance nostalgique mais optimiste, production studio moderne.",
+        "instrumental": true,
+        "lyrics": "[Intro]\n[Instrumental]\n[Outro]"
+      },
+      "heartmula": {
+        "tags": "french,electro pop,116 bpm,analog synthesizer,round bass,bright arpeggios,nostalgic,hopeful,instrumental",
+        "lyrics": "[Intro]\n[Instrumental]\n[Outro]"
+      },
+      "musicgen": "Melodic electro-pop instrumental, 116 BPM, warm analog synthesizer, round bass, bright arpeggios, restrained opening building into a wide chorus, nostalgic but hopeful, polished modern studio production, no vocals.",
+      "stable_audio": "TrackType: Music, VocalType: Instrumental, Genre: melodic electro-pop, Instruments: warm analog synthesizer, round bass, bright arpeggios. 116 BPM, restrained opening gradually builds into a wide melodic chorus, nostalgic but hopeful mood, polished modern studio production, no speech, no vocals."
+    },
+    {
+      "id": "02",
+      "slug": "ambient-cinematique-texture",
+      "title": "Ambient cinématique — texture",
+      "bpm": 72,
+      "brief": "Ambient cinématique lent, piano feutré, nappes aériennes et cordes discrètes, montée douce, espace et mélancolie.",
+      "ace": {
+        "caption": "Ambient cinématique lent, 72 BPM, piano feutré, nappes aériennes et cordes discrètes, montée douce, espace profond et mélancolie, instrumental.",
+        "instrumental": true,
+        "lyrics": "[Intro]\n[Instrumental]\n[Outro]"
+      },
+      "heartmula": {
+        "tags": "cinematic ambient,slow,72 bpm,soft piano,airy pads,subtle strings,gentle build,spacious,melancholic,instrumental",
+        "lyrics": "[Intro]\n[Instrumental]\n[Outro]"
+      },
+      "musicgen": "Slow cinematic ambient instrumental, 72 BPM, muted piano, airy synthesizer pads and subtle strings, gentle gradual build, spacious and melancholic atmosphere, soft dynamics, no vocals.",
+      "stable_audio": "TrackType: Music, VocalType: Instrumental, Genre: cinematic ambient, Instruments: muted piano, airy synthesizer pads, subtle strings. 72 BPM, gentle gradual build, spacious melancholic mood, soft dynamics, no speech, no vocals."
+    },
+    {
+      "id": "03",
+      "slug": "house-groove",
+      "title": "House mélodique — groove",
+      "bpm": 124,
+      "brief": "House mélodique, 124 BPM, grosse caisse régulière, basse syncopée, accords de piano chaleureux, montée et relâchement dansant.",
+      "ace": {
+        "caption": "House mélodique, 124 BPM, grosse caisse régulière, basse syncopée, accords de piano chaleureux, montée progressive puis relâchement dansant, énergie positive, instrumental.",
+        "instrumental": true,
+        "lyrics": "[Intro]\n[Instrumental]\n[Outro]"
+      },
+      "heartmula": {
+        "tags": "melodic house,124 bpm,four on the floor,kick,syncopated bass,warm piano chords,build and release,danceable,positive,instrumental",
+        "lyrics": "[Intro]\n[Instrumental]\n[Outro]"
+      },
+      "musicgen": "Melodic house instrumental, 124 BPM, steady four-on-the-floor kick, syncopated bass, warm piano chords, gradual build and danceable release, positive club energy, clean electronic mix, no vocals.",
+      "stable_audio": "TrackType: Music, VocalType: Instrumental, Genre: melodic house, Instruments: steady four-on-the-floor kick, syncopated bass, warm piano chords. 124 BPM, gradual build and danceable release, positive club energy, clean electronic mix, no speech, no vocals."
+    },
+    {
+      "id": "04",
+      "slug": "jazz-trio-instruments",
+      "title": "Trio jazz — instruments",
+      "bpm": 92,
+      "brief": "Trio jazz intimiste, 92 BPM, piano acoustique, contrebasse ronde, batterie aux balais, échange mélodique naturel.",
+      "ace": {
+        "caption": "Trio jazz intimiste, 92 BPM, piano acoustique, contrebasse ronde, batterie aux balais, échange mélodique naturel, son chaleureux de club, instrumental.",
+        "instrumental": true,
+        "lyrics": "[Intro]\n[Instrumental]\n[Outro]"
+      },
+      "heartmula": {
+        "tags": "intimate jazz trio,92 bpm,acoustic piano,upright bass,brush drums,natural melodic interplay,warm club sound,instrumental",
+        "lyrics": "[Intro]\n[Instrumental]\n[Outro]"
+      },
+      "musicgen": "Intimate jazz trio instrumental, 92 BPM, acoustic piano, warm upright bass, brushed drums, natural melodic conversation, relaxed club-room sound, no vocals.",
+      "stable_audio": "TrackType: Music, VocalType: Instrumental, Genre: intimate jazz trio, Instruments: acoustic piano, upright bass, brushed drums. 92 BPM, natural melodic conversation, warm small-club sound, relaxed dynamics, no speech, no vocals."
+    },
+    {
+      "id": "05",
+      "slug": "folk-acoustique-liberte",
+      "title": "Folk acoustique — liberté",
+      "bpm": 98,
+      "brief": "Folk acoustique, 98 BPM, guitare en arpèges, basse naturelle, percussion légère, sentiment de route et de liberté.",
+      "ace": {
+        "caption": "Folk acoustique, 98 BPM, guitare en arpèges, basse naturelle, percussion légère, sensation de voyage et de liberté, prise chaleureuse et organique, instrumental.",
+        "instrumental": true,
+        "lyrics": "[Intro]\n[Instrumental]\n[Outro]"
+      },
+      "heartmula": {
+        "tags": "acoustic folk,98 bpm,arpeggiated acoustic guitar,natural bass,light percussion,travel,freedom,warm organic recording,instrumental",
+        "lyrics": "[Intro]\n[Instrumental]\n[Outro]"
+      },
+      "musicgen": "Acoustic folk instrumental, 98 BPM, arpeggiated acoustic guitar, natural bass, light percussion, open road and freedom feeling, warm organic recording, no vocals.",
+      "stable_audio": "TrackType: Music, VocalType: Instrumental, Genre: acoustic folk, Instruments: arpeggiated acoustic guitar, natural bass, light percussion. 98 BPM, open-road feeling, warm organic recording, gentle forward motion, no speech, no vocals."
+    },
+    {
+      "id": "06",
+      "slug": "beat-hip-hop",
+      "title": "Beat hip-hop — piano sombre",
+      "bpm": 88,
+      "brief": "Hip-hop instrumental, 88 BPM, kick profond, caisse claire sèche, basse souple, piano sombre et motif court, sans voix.",
+      "ace": {
+        "caption": "Beat hip-hop instrumental, 88 BPM, kick profond, caisse claire sèche, basse souple, piano sombre, motif court et répétable, production précise sans voix.",
+        "instrumental": true,
+        "lyrics": "[Intro]\n[Instrumental]\n[Outro]"
+      },
+      "heartmula": {
+        "tags": "instrumental hip hop,88 bpm,deep kick,dry snare,smooth bass,dark piano,short repeating motif,precise production,no vocals",
+        "lyrics": "[Intro]\n[Instrumental]\n[Outro]"
+      },
+      "musicgen": "Instrumental hip-hop beat, 88 BPM, deep kick, dry snare, smooth bass, dark piano and a short repeating motif, precise modern production, no vocals.",
+      "stable_audio": "TrackType: Music, VocalType: Instrumental, Genre: instrumental hip-hop, Instruments: deep kick, dry snare, smooth bass, dark piano. 88 BPM, short repeating motif, precise modern production, no speech, no vocals."
+    },
+    {
+      "id": "07",
+      "slug": "orchestre-dynamique",
+      "title": "Orchestre de film — crescendo",
+      "bpm": 96,
+      "brief": "Musique orchestrale de film, cordes en crescendo, cuivres retenus, percussion cinématique, tension puis résolution lumineuse.",
+      "ace": {
+        "caption": "Musique orchestrale de film, 96 BPM, cordes en crescendo, cuivres retenus, percussion cinématique, tension progressive puis résolution lumineuse, ample et émotionnelle, instrumental.",
+        "instrumental": true,
+        "lyrics": "[Intro]\n[Instrumental]\n[Outro]"
+      },
+      "heartmula": {
+        "tags": "cinematic orchestral,96 bpm,building strings,restrained brass,cinematic percussion,rising tension,bright resolution,emotional,instrumental",
+        "lyrics": "[Intro]\n[Instrumental]\n[Outro]"
+      },
+      "musicgen": "Cinematic orchestral instrumental, 96 BPM, strings in a gradual crescendo, restrained brass and cinematic percussion, rising tension resolving into a bright emotional finish, no vocals.",
+      "stable_audio": "TrackType: Music, VocalType: Instrumental, Genre: cinematic orchestral score, Instruments: building strings, restrained brass, cinematic percussion. 96 BPM, tension rises into a bright emotional resolution, spacious film-score production, no speech, no vocals."
+    },
+    {
+      "id": "08",
+      "slug": "funk-timbres",
+      "title": "Funk moderne — timbres",
+      "bpm": 108,
+      "brief": "Funk moderne, 108 BPM, basse slap, guitare rythmique étouffée, clavinet et section de cuivres, énergique et précis.",
+      "ace": {
+        "caption": "Funk moderne, 108 BPM, basse slap, guitare rythmique étouffée, clavinet et section de cuivres, groove énergique et précis, production nette, instrumental.",
+        "instrumental": true,
+        "lyrics": "[Intro]\n[Instrumental]\n[Outro]"
+      },
+      "heartmula": {
+        "tags": "modern funk,108 bpm,slap bass,muted rhythm guitar,clavinet,brass section,energetic,precise groove,instrumental",
+        "lyrics": "[Intro]\n[Instrumental]\n[Outro]"
+      },
+      "musicgen": "Modern funk instrumental, 108 BPM, slap bass, muted rhythm guitar, clavinet and a tight brass section, energetic precise groove, clean punchy studio mix, no vocals.",
+      "stable_audio": "TrackType: Music, VocalType: Instrumental, Genre: modern funk, Instruments: slap bass, muted rhythm guitar, clavinet, tight brass section. 108 BPM, energetic precise groove, clean punchy studio mix, no speech, no vocals."
+    },
+    {
+      "id": "09",
+      "slug": "chanson-francaise-emotion",
+      "title": "Chanson française — retour chez soi",
+      "bpm": 84,
+      "brief": "Chanson française pop acoustique, voix masculine intime, piano et guitare légère, texte original sur le retour chez soi, refrain mémorisable, émotion retenue.",
+      "ace": {
+        "caption": "Chanson française pop acoustique, 84 BPM, voix masculine intime, piano doux et guitare légère, interprétation retenue qui s’ouvre sur un refrain mémorisable, émotion sincère, production studio naturelle.",
+        "instrumental": false,
+        "lyrics": "[Verse 1]\nLe train ralentit dans le soir\nJe reconnais les vieux trottoirs\nLa porte attend au bout du chemin\nJ’ai gardé sa clé dans ma main\n\n[Chorus]\nJe rentre enfin, la lumière est là\nLe monde s’arrête au creux des bras\nJe laisse au vent les jours lointains\nEt je retrouve un peu de demain\n\n[Outro]"
+      },
+      "heartmula": {
+        "tags": "french acoustic pop,male intimate vocal,84 bpm,soft piano,light acoustic guitar,restrained emotion,memorable chorus,natural studio production",
+        "lyrics": "[Verse]\nLe train ralentit dans le soir\nJe reconnais les vieux trottoirs\nLa porte attend au bout du chemin\nJ’ai gardé sa clé dans ma main\n\n[Chorus]\nJe rentre enfin, la lumière est là\nLe monde s’arrête au creux des bras\nJe laisse au vent les jours lointains\nEt je retrouve un peu de demain\n\n[Outro]"
+      },
+      "musicgen": "Instrumental backing for a French acoustic pop ballad, 84 BPM, soft piano and light acoustic guitar, intimate restrained verses opening into a memorable emotional chorus, natural studio production, no vocals.",
+      "stable_audio": "TrackType: Music, VocalType: Instrumental, Genre: acoustic French pop ballad, Instruments: soft piano, light acoustic guitar, warm bass. 84 BPM, intimate restrained opening builds into a memorable emotional chorus, natural studio production, no speech, no vocals."
+    },
+    {
+      "id": "10",
+      "slug": "rap-melodique-perseverance",
+      "title": "Rap mélodique — persévérance",
+      "bpm": 92,
+      "brief": "Rap mélodique français, voix masculine, autotune modéré, 92 BPM, beat doux, piano nocturne et basse profonde, texte original sur la persévérance, refrain chanté.",
+      "ace": {
+        "caption": "Rap mélodique français, 92 BPM, voix masculine avec autotune modéré, beat hip-hop doux, piano nocturne, basse profonde, couplets retenus et refrain chanté mémorisable, ambiance intime et déterminée, production studio moderne.",
+        "instrumental": false,
+        "lyrics": "[Verse 1]\nJ’ai pris le temps de tomber\nPour mieux apprendre à rester\nLes mains ouvertes sous la pluie\nJe fais un pas, je dis oui\n\n[Chorus]\nJe tiens debout, je garde le cap\nMême si la nuit me rattrape\nJe vois demain dans le brouillard\nJe marche encore, il n’est pas tard\n\n[Outro]"
+      },
+      "heartmula": {
+        "tags": "french,melodic rap,male vocal,moderate autotune,soft hip hop beat,92 bpm,night piano,deep bass,hopeful,modern production",
+        "lyrics": "[Intro]\n\n[Verse]\nJ’ai pris le temps de tomber\nPour mieux apprendre à rester\nLes mains ouvertes sous la pluie\nJe fais un pas, je dis oui\n\n[Chorus]\nJe tiens debout, je garde le cap\nMême si la nuit me rattrape\nJe vois demain dans le brouillard\nJe marche encore, il n’est pas tard\n\n[Outro]"
+      },
+      "musicgen": "Instrumental backing track for French melodic rap, 92 BPM, soft hip-hop drums, nocturnal piano motif, deep warm bass, restrained modern production, emotional but determined progression, no vocals.",
+      "stable_audio": "TrackType: Music, VocalType: Instrumental, Genre: melodic hip-hop, Instruments: soft electronic drums, nocturnal piano, deep bass. 92 BPM, restrained verse groove builds toward a memorable melodic hook, intimate determined mood, polished modern studio mix, no speech, no vocals."
+    }
+  ]
+}

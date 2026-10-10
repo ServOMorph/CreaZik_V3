@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.8 — 2026-10-10
+
+### Ajouté
+- Campagne comparative de 30 générations musicales (ACE-Step 1.5, MusicGen Small, HeartMuLa OSS 3B), avec documentation, prompts, configurations, sidecars et résultats techniques accessibles dans l'UI de tests.
+
 ## v1.7 — 2026-10-09
 
 ### Ajouté

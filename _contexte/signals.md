@@ -1,6 +1,9 @@
-# Signals — CreaZik_V3   (MAJ 2026-10-09, fin de session)
+# Signals — CreaZik_V3   (MAJ 2026-10-10, fin de session)
 
 ## Actions ouvertes
+- [P1|ouvert] Écouter et évaluer les 30 morceaux de la campagne comparative depuis les dossiers de l'UI Tests ; reporter l'évaluation humaine via l'UI.
+  - fait quand: les 30 pistes ont un statut/commentaire d'écoute renseigné ou sont explicitement écartées par l'utilisateur
+  - réf: `tests_manuels.md` n°7, `MODELES_LLM/sorties/campagne_2026-10-09/generation_manifest.json`
 - [P1|ouvert] Écouter la grille de voix de femme (section Tests de l'UI admin : tests 26 à 31 en 135 s et 39 à 44 en 60 s, texte corrigé) et trancher si une version garde la voix de femme du début à la fin ; en tirer la règle du skill `generation-morceaux` (la note actuelle dit « grille à écouter avant de conclure »)
   - fait quand: une version à voix de femme stable est retenue ou la piste est abandonnée, et le skill et `REGLES_GENERATION_DEV.md` section 6 sont mis à jour
   - réf: `webradio/playlists/tests-ace/outputs/playlist_results.json`, `.claude/skills/generation-morceaux/SKILL.md`, `tests_manuels.md` n°5
@@ -51,34 +54,30 @@
   - réf: `PLAN_WEBRADIO.md` section 4.5
 
 ## Contexte chaud
-- Agents de zone `textes` (`TEXTES/`) et `modeles_llm` (`MODELES_LLM/`, `webradio/tests_ace/` exclu) ; lancement par `/start textes` ou `/start modeles_llm`. Tests GPU à faire à tour de rôle (RTX 4060 8 Go), ne pas lancer `/close` complet dans deux sessions à la fois.
-- Mode dev : un seul utilisateur ; votes, avis et dynamiques de `radio.db` à conserver (voir `.claude/memory.md`). Le lien de l'application n'est connu de personne (déclaré par l'utilisateur le 2026-10-08) ; le tunnel `cloudflared` tournait.
-- État au dernier statut : serveur radio actif (port 5000, redémarré le 2026-10-09 après le correctif de suppression des tests) ; analyse, compression et génération arrêtées ; lot de pochettes terminé (`completed_with_skips`, 256 morceaux à score négatif exclus) ; aucun worker ACE, ComfyUI arrêté. Après toute modification Python, redémarrer avec `services.ps1 restart -Only serveur`.
-- Section « Tests » : versions dans `webradio/playlists/tests-ace/outputs/` (non versionné), état dans `webradio/tests_state.json` ; prochain numéro de test libre : 45 ; originaux des versions Lagniel dans `webradio/tests_ace/demo_lagniel/outputs/` (non versionné). Les graines ACE ne sont appliquées que depuis le 2026-10-09.
-- Hors dépôt : `D:\ServOMorph\TTS_Local\` contient les scripts Chatterbox et les WAV sources des jingles.
-- 29 jingles actifs : 19 WebRadio, 5 Traveling Sound, 5 SérénIA Tech ; un jingle tous les 5 morceaux.
-- Fichiers non suivis ou modifiés laissés à part : `liste_musiques_queue.md`, `_archive_docs/`, `ad.png`, `MODELES_LLM/`, `DOCUMENTATION/`, `TEXTES/domaine_public/`, modifications d'outils de pochettes (`cover_batch.py`, `cover_gen.py`, `covers_charte.json`, `make_charte.py`, `generate_covers.md`) et journaux `tests_ace/marie/` antérieurs à cette session.
+- Campagne comparative du 2026-10-10 : 30 pistes (10 ACE-Step 1.5, 10 MusicGen Small, 10 HeartMuLa OSS 3B) ; résultats et configurations dans `MODELES_LLM/sorties/campagne_2026-10-09/`.
+- Les 30 nouvelles pistes sont exposées dans l'UI admin par dossiers de modèle ; dix pistes Stable Audio antérieures sont aussi dans la liste. Statut d'écoute initial `pending`. Ne pas modifier `webradio/tests_state.json` manuellement.
+- ACE-Step : 10/10 techniquement passées ; MusicGen Small : 10/10 ; HeartMuLa : 5/10 passées et 5 invalides (écrêtage probable sur cinq, dont une aussi trop courte). Ces statuts n'évaluent pas la qualité artistique.
+- Avant une nouvelle génération GPU, consulter l'état des services et éviter d'interrompre une piste en cours.
 
-## Dernière session (2026-10-09)
-# Session du 2026-10-09 (section Tests, démo T01, graine ACE, titrage)
+# Session du 2026-10-10
 
 ## Décisions prises
-- Section « Tests » dans l'UI admin (liste récente d'abord, pouces, suppression, position, repère « Jamais écouté », numéro unique par test) ; police Sora embarquée ; titre et date sur la pochette.
-- Démo T01 : version 18 retenue (voix d'homme, `[Silence]`, texte adapté « posté », « zoublie ») ; voix de femme non retenue, instable.
-- Graine ACE corrigée (`use_random_seed=False`) ; paroles contrôlées par `check_lyrics.py` avant lancement.
+- Comparer ACE-Step 1.5, MusicGen Small et HeartMuLa OSS 3B sur dix briefs communs, en séparant les seuils techniques de l'écoute humaine.
+- Garder les sorties techniquement invalides de HeartMuLa dans l'UI pour rendre leurs défauts observables.
 
 ## Livrables produits ou modifiés
-- `webradio/server.py`, `listen.js`, `listen.css`, `listen.html`, `motion.js`, `radio_engine.py`, `radio.html`, `ace_worker.py`, `fonts/` : voir `CHANGELOG.md` v1.7 ; correctifs de revue de code appliqués (suppression de test sous Windows, contrôleur de paroles).
-- `TEXTES/tools/check_lyrics.py`, `.claude/commands/generate_lyrics.md`, `.claude/skills/generation-morceaux/SKILL.md`, `webradio/REGLES_GENERATION_DEV.md`, `tests_manuels.md`, `AMELIORATIONS.md` : mis à jour.
-- Pochettes : lot terminé (175 créées, 256 exclues pour score négatif).
+- `MODELES_LLM/sorties/campagne_2026-10-09/` : 30 sorties comparatives, sidecars, manifest et journaux de tentatives.
+- `webradio/playlists/tests-modeles/outputs/playlist_results.json` : 30 entrées de cette campagne exposées dans trois dossiers de modèles, en plus des dix pistes Stable Audio antérieures.
+- `MODELES_LLM/registre_campagne.py` et `DOCUMENTATION/` : suivi reproductible et documentation des modèles et critères.
 
 ## Hypothèses validées / invalidées
-- VALIDE : la graine n'était pas appliquée (corrélation 0,0008 puis 0,99997 après correctif) ; volume des jingles réglable fonctionnel sur iPhone ; version 18 de la démo jugée bonne par l'utilisateur.
-- INVALIDE : les essais « seed » du test Marie (v7 à v9) et de la démo (graines 7, 123, 2024) ; le duo homme/femme par balises de section.
-- EN ATTENTE : voix de femme stable (grille à écouter) ; titrage sur iPhone ; relecture de la revue de code (points hors session).
+- VALIDE : ACE-Step et MusicGen Small passent les contrôles techniques sur les dix briefs chacun ; écoute humaine en attente.
+- VALIDE : HeartMuLa passe techniquement sur cinq briefs sur dix ; cinq sorties restent consultables comme invalides.
+- INVALIDE : toutes les sorties HeartMuLa seraient techniquement recevables -> écrêtage probable sur cinq pistes, durée insuffisante sur l'une d'elles.
+- EN ATTENTE : jugement artistique à l'écoute des 30 pistes dans l'UI.
 
 ## Prochaine étape exacte
-Écouter la grille voix de femme (tests 26 à 31 et 39 à 44) et valider le titrage sur iPhone ; relancer analyse et compression avant la prochaine génération de morceaux.
+Écouter les 30 pistes comparatives dans la section Tests et renseigner le résultat humain dans l'UI.
 
 ## Question bloquante pour la session suivante
-Une voix de femme stable est-elle obtenue sur l'une des versions de la grille ?
+Aucune

@@ -70,3 +70,27 @@ Lancer `/start textes` dans une session dédiée et créer `/generate_lyrics` ; 
 
 ## Question bloquante pour la session suivante
 Aucune
+---
+
+# Session du 2026-10-09 (section Tests, démo T01, graine ACE, titrage)
+
+## Décisions prises
+- Section « Tests » dans l'UI admin (liste récente d'abord, pouces, suppression, position, repère « Jamais écouté », numéro unique par test) ; police Sora embarquée ; titre et date sur la pochette.
+- Démo T01 : version 18 retenue (voix d'homme, `[Silence]`, texte adapté « posté », « zoublie ») ; voix de femme non retenue, instable.
+- Graine ACE corrigée (`use_random_seed=False`) ; paroles contrôlées par `check_lyrics.py` avant lancement.
+
+## Livrables produits ou modifiés
+- `webradio/server.py`, `listen.js`, `listen.css`, `listen.html`, `motion.js`, `radio_engine.py`, `radio.html`, `ace_worker.py`, `fonts/` : voir `CHANGELOG.md` v1.7 ; correctifs de revue de code appliqués.
+- `TEXTES/tools/check_lyrics.py`, `.claude/commands/generate_lyrics.md`, `.claude/skills/generation-morceaux/SKILL.md`, `webradio/REGLES_GENERATION_DEV.md`, `tests_manuels.md`, `AMELIORATIONS.md` : mis à jour.
+- Pochettes : lot terminé (175 créées, 256 exclues pour score négatif).
+
+## Hypothèses validées / invalidées
+- VALIDE : la graine n'était pas appliquée ; volume des jingles réglable fonctionnel sur iPhone ; version 18 de la démo jugée bonne par l'utilisateur.
+- INVALIDE : essais « seed » antérieurs du test Marie et de la démo ; duo homme/femme par balises de section.
+- EN ATTENTE : voix de femme stable ; titrage sur iPhone ; relecture de la revue de code.
+
+## Prochaine étape exacte
+Écouter la grille voix de femme et valider le titrage sur iPhone ; relancer analyse et compression avant la prochaine génération musicale.
+
+## Question bloquante pour la session suivante
+Une voix de femme stable est-elle obtenue sur l'une des versions de la grille ?

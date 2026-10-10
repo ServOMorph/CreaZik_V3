@@ -6,3 +6,4 @@
 4. iPhone, police Sora : en-tête, morceau en cours, légende animée, titres de section et pubs SérénIA / CréaZik en Sora ; pubs Traveling Sound toujours en machine à écrire ; aucun titre de pub ne sort du cadre.
 5. Écoute de la grille voix de femme (section Tests) : numéros 26 à 31 (135 s) et 39 à 44 (60 s, texte avec « posté » et « zoublie »). Noter pour chacune si la voix reste féminine du début à la fin ; en tirer une règle pour le skill `generation-morceaux`.
 6. Écoute de la version 18 de la démo T01 (voix d'homme, silences `[Silence]`) : texte complet chanté sans coupure de l'outro, « Arroser les roses » présent à chaque fois, « posté » et « zoublie » prononcés comme voulu.
+7. Écouter les 30 pistes de la campagne comparative dans l'UI admin (dossiers ACE-Step 1.5, MusicGen Small et HeartMuLa OSS 3B) ; distinguer les artefacts techniques des préférences artistiques et renseigner le résultat d'écoute via l'UI.

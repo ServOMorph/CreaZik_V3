@@ -10,11 +10,11 @@ expérimentation de création de musique avec IA instrumental et vocal, avec mod
 - Audio diffusé : MP3 192 kbit/s uniquement. Règles détaillées : `webradio/REGLES_GENERATION_DEV.md`.
 
 ## État actuel (réécrit intégralement à chaque /close)
-WebRadio IA locale : 86 playlists musicales (921 morceaux au 2026-10-08) et 29 jingles actifs ; interfaces auditeur/admin (5000/5001), UI du port 5000 = UI dev ; 27 tests du moteur (dernier passage 2026-10-08).
-Section « Tests » de l'UI admin (versions numérotées, pouces, suppression, barre de position, badge « Jamais écouté »), police Sora, titre et date sur la pochette, graine ACE désormais appliquée, contrôle de paroles `TEXTES/tools/check_lyrics.py`.
-Démo T01 « Arroser Les Roses » : version 18 retenue (voix d'homme) ; voix de femme instable, grille à écouter (tests 26 à 31 et 39 à 44) ; accord de l'auteur non demandé, démo privée.
-Pochettes : lot terminé (175 créées, 594 fichiers au total, 256 morceaux exclus pour score négatif). Génération musicale, analyse et compression arrêtées ; serveur actif (redémarré le 2026-10-09).
-Avant déploiement : `DEV_UNIFIED`, boutons Suivant/Test, section Tests, noms d'artistes ; VPS Linux non réalisé ; contrôles iPhone en attente (`tests_manuels.md`).
+WebRadio locale : 86 playlists musicales, 29 jingles actifs ; interfaces auditeur/admin sur les ports 5000/5001 ; contrôles iPhone encore en attente (`tests_manuels.md`).
+Section Tests admin : campagne comparative de 30 morceaux exposée par modèle (10 ACE-Step, 10 MusicGen Small, 10 HeartMuLa OSS 3B) ; les statuts techniques ne remplacent pas l'écoute humaine.
+ACE-Step et MusicGen : 10/10 sorties techniquement passées chacun ; HeartMuLa : 5/10 passées et 5/10 invalides pour écrêtage probable, dont une aussi trop courte. Fichiers, prompts et configurations consignés dans `MODELES_LLM/sorties/campagne_2026-10-09/`.
+Démo T01 version 18 retenue ; grille de voix féminine toujours à écouter. Pochettes : lot terminé ; génération, analyse et compression à vérifier avant une nouvelle campagne GPU.
+Avant déploiement : contrôles iPhone, `DEV_UNIFIED`, éléments UI de test et noms d'artistes restent à traiter ; VPS Linux non réalisé.
 
 ## Décisions structurantes (append only — 10 entrées max, 5 lignes max/entrée, archiver au-delà)
 - 2026-10-06 : Panneau de pub carré cliquable avec mascotte (20 styles) ; jingles instrumentaux supprimés ; morceau en fondu sous le jingle.
@@ -27,3 +27,4 @@ Avant déploiement : `DEV_UNIFIED`, boutons Suivant/Test, section Tests, noms d'
 - 2026-10-09 : Section « Tests » dans l'UI admin (du plus récent au plus ancien, pouces, suppression, barre de position, repère « Jamais écouté », numéro unique par test) ; police Sora embarquée pour tous les titrages, pubs Traveling Sound en machine à écrire ; titre et date sur la pochette sans toucher l'image.
 - 2026-10-09 : La graine ACE n'était pas appliquée (`use_random_seed` vrai par défaut) : corrigé dans `ace_worker.py` ; les essais « à graine fixe » antérieurs ne sont pas fiables ; paroles contrôlées par `check_lyrics.py` avant chaque lancement.
 - 2026-10-09 : Démo privée T01 (Arroser Les Roses) : version 18 retenue, texte adapté (« posté », « zoublie »), voix de femme non retenue (instable), statut `VALIDE` interdit sans accord écrit de l'auteur ; lot de pochettes terminé, scores négatifs exclus.
+- 2026-10-10 : campagne comparative de 30 extraits (10 ACE-Step 1.5, 10 MusicGen Small, 10 HeartMuLa OSS 3B) ; statuts techniques conservés séparément de l'écoute humaine, avec pistes invalides HeartMuLa laissées visibles pour examen.
