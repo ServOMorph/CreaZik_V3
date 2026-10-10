@@ -57,26 +57,29 @@
 - Campagne comparative : 40 votes présents dans l'état des Tests (ACE-Step 10 positifs sur 10 ; MusicGen, HeartMuLa et Stable Audio 2 positifs sur 10 chacun). Les défauts techniques de cinq sorties HeartMuLa restent distincts du jugement d'écoute.
 - Les variantes temporaires « Soul du matin » et « Funky Yogi » ont été retirées des Tests ; l'original « Soul du matin » reste dans la WebRadio. Le texte « Funky Yogi » est classé dans `TEXTES/artistes/funky-yogi/`.
 - Section Tests : dossiers déterminés par `tests_folder` (`server.py`), clé `folder` optionnelle dans `playlist_results.json` ; commentaires par version dans `webradio/tests_state.json` (clé `comments`) et dans `/api/tests` (champ `comment`), à lire pour analyser les écoutes. Serveur relancé et actif (port 5000) en fin de session.
-- `tests_manuels.md` n°7 (écoute des 30 pistes) a disparu du fichier alors que l'action P1 le référence : ligne retirée par une autre session, à confirmer.
 - Avant une nouvelle génération GPU, consulter l'état des services et éviter d'interrompre une piste en cours. Toute nouvelle création destinée à la radio passe par les Tests puis une demande explicite avant diffusion.
 
-# Session du 2026-10-10 (section Tests en dossiers, commentaires)
+# Session du 2026-10-10
 
 ## Décisions prises
 - Section Tests en dossiers avec badge des morceaux jamais écoutés ; nom du dossier par clé `folder` ou règles du serveur.
 - Commentaire par version stocké dans `tests_state.json` pour l'analyse ; bouton « Test » supprimé.
+- Toute nouvelle création destinée à la WebRadio passe par les Tests ; diffusion seulement sur demande explicite.
+- Paroles Funky Yogi et Marie classées par artiste ; l'utilisateur déclare disposer des droits.
 
 ## Livrables produits ou modifiés
 - `webradio/server.py`, `listen.js`, `listen.css`, `listen.html` : dossiers, `/api/tests/comment`, suppression du bouton Test ; serveur relancé.
 - `webradio/REGLES_GENERATION_DEV.md`, `tests_manuels.md`, `AMELIORATIONS.md`, `CHANGELOG.md` (v1.9), `README.md` : mis à jour.
-- Prompt d'explication copié dans le presse-papier pour l'agent `modeles_llm`.
+- `AGENTS.md`, `.claude/memory.md`, `TEXTES/artistes/`, `TEXTES/INDEX.md` : règle de validation et textes rangés ; chemins des tests Marie corrigés.
+- Essais « Soul du matin » et « Funky Yogi » retirés des Tests après écoute ; original radio conservé.
 
 ## Hypothèses validées / invalidées
 - VALIDE : regroupement en 5 dossiers côté serveur, enregistrement et effacement d'un commentaire (appel direct des fonctions).
+- INVALIDE sur « Soul du matin » : `shift=3` n'a pas apporté le groove et la précision souhaités ; l'utilisateur préfère les essais « Funky Yogi » avec moins de styles mêlés, sans conclusion générale sur le modèle.
 - EN ATTENTE : rendu et usage réels de l'UI (dossiers, commentaire) sur navigateur et iPhone.
 
 ## Prochaine étape exacte
-Écouter les pistes et les grilles dans les dossiers de la section Tests en commentant chaque version.
+Poursuivre les contrôles manuels restants et appliquer techniquement la validation préalable dans le pipeline automatique.
 
 ## Question bloquante pour la session suivante
 Aucune

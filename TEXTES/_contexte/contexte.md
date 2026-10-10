@@ -5,7 +5,7 @@
 
 ## Stack / contraintes techniques (stable, rarement modifié)
 - Textes destinés à ACE-Step 1.5 (génération locale, RTX 4060 8 Go) ; format de paroles à documenter par l'agent.
-- Textes existants : `TEXTES/Marie-1.md`, `TEXTES/Marie-1_ace.md` ; paroles du catalogue dans `webradio/playlists/perso/lyrics*` (lecture seule).
+- Textes existants : `TEXTES/artistes/Marie/Marie-1.md`, `TEXTES/artistes/Marie/Marie-1_ace.md` ; paroles du catalogue dans `webradio/playlists/perso/lyrics*` (lecture seule).
 - Écriture limitée à `TEXTES/` ; récupération par l'orchestrateur.
 
 ## État actuel (réécrit intégralement à chaque /close)

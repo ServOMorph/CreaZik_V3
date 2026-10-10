@@ -10,7 +10,7 @@
       "bpm": 130,
       "type": "vocal",
       "duration": 120,
-      "lyrics_file": "../TEXTES/Marie-1_ace.md",
+      "lyrics_file": "../TEXTES/artistes/Marie/Marie-1_ace.md",
       "fit_lyrics": false,
       "language": "fr",
       "seed": 42
@@ -22,7 +22,7 @@
       "bpm": 130,
       "type": "vocal",
       "duration": 120,
-      "lyrics_file": "../TEXTES/Marie-1_ace.md",
+      "lyrics_file": "../TEXTES/artistes/Marie/Marie-1_ace.md",
       "fit_lyrics": false,
       "language": "fr",
       "seed": 42
@@ -34,7 +34,7 @@
       "bpm": 130,
       "type": "vocal",
       "duration": 120,
-      "lyrics_file": "../TEXTES/Marie-1_ace.md",
+      "lyrics_file": "../TEXTES/artistes/Marie/Marie-1_ace.md",
       "fit_lyrics": false,
       "language": "fr",
       "seed": 42
@@ -46,7 +46,7 @@
       "bpm": 130,
       "type": "vocal",
       "duration": 120,
-      "lyrics_file": "../TEXTES/Marie-1_ace.md",
+      "lyrics_file": "../TEXTES/artistes/Marie/Marie-1_ace.md",
       "fit_lyrics": false,
       "language": "fr",
       "seed": 42
@@ -57,7 +57,7 @@
       "prompt": "French slam poetry, spoken word, female voice, solo piano only, intimate, minimalist, emotional, no drums",
       "type": "vocal",
       "duration": 120,
-      "lyrics_file": "../TEXTES/Marie-1_ace.md",
+      "lyrics_file": "../TEXTES/artistes/Marie/Marie-1_ace.md",
       "fit_lyrics": false,
       "language": "fr",
       "seed": 42
