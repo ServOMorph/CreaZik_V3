@@ -9,7 +9,8 @@
 - Écriture limitée à `TEXTES/` ; récupération par l'orchestrateur.
 
 ## État actuel (réécrit intégralement à chaque /close)
-Agent initialisé. Aucun livrable produit par l'agent.
+Génération de paroles par LLM abandonnée. Deux textes suivis dans `TEXTES/liste_attente.md` : T01 (Lagniel, démo v18 générée, accord de l'auteur absent) et T02 (Capitaine Red Barbosa, à préparer). Textes protégés dans `usage_prive/`, textes déclarés libres dans `domaine_public/`.
 
 ## Décisions structurantes (append only — 10 entrées max, 5 lignes max/entrée, archiver au-delà)
 - 2026-10-08 : Création de l'agent ; écriture restreinte à TEXTES/.
+- 2026-10-13 : Textes protégés uniquement dans `usage_prive/`, jamais en playlist/radio sans accord écrit de l'auteur ; suivi des textes par `liste_attente.py`.
