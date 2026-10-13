@@ -1,0 +1,19 @@
+{
+  "playlist_name": "Funky Yogi t8_base",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./tests_ace/funky_yogi_textes/t8_base/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "t8_base",
+      "prompt": "French disco-funk, driving bass, clean guitar chops, string stabs, four-on-the-floor, male vocal, intense, soulful",
+      "type": "vocal",
+      "duration": 120,
+      "lyrics_file": "tests_ace/funky_yogi_textes/t8_base/paroles.md",
+      "fit_lyrics": false,
+      "language": "fr",
+      "seed": 2026,
+      "bpm": 118
+    }
+  ]
+}

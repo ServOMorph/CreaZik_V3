@@ -1,0 +1,25 @@
+{
+  "timestamp": "2026-10-11T20:06:35.374259",
+  "mode": "real",
+  "playlist": "Funky Yogi t6_base",
+  "model": "ACE-Step 1.5 turbo",
+  "generations": [
+    {
+      "test_case_id": "1",
+      "name": "t6_base",
+      "prompt": "French electro-disco, bright synths, punchy drums, driving bass, female vocal, urgent, emotional",
+      "type": "vocal",
+      "duration": 90,
+      "output_file": "tests_ace/funky_yogi_textes/t6_base/outputs/01_t6_base_20261011T200635374259_s50253675.wav",
+      "seed": 50253675,
+      "seed_source": "tiree_par_worker",
+      "status": "generated",
+      "generated_at": "2026-10-11T20:06:46+02:00",
+      "model": "ACE-Step 1.5 turbo",
+      "energy_wh_est": 0.203,
+      "gpu_util_avg_pct": 58.5,
+      "elapsed_s": 10.8,
+      "metadata_file": "tests_ace/funky_yogi_textes/t6_base/outputs/01_t6_base_20261011T200635374259_s50253675.metadata.json"
+    }
+  ]
+}

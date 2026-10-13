@@ -1,0 +1,25 @@
+{
+  "timestamp": "2026-10-11T20:09:48.454834",
+  "mode": "real",
+  "playlist": "Funky Yogi t10_base",
+  "model": "ACE-Step 1.5 turbo",
+  "generations": [
+    {
+      "test_case_id": "1",
+      "name": "t10_base",
+      "prompt": "French disco soul, warm strings, groovy bass, steady four-on-the-floor, male vocal, reflective, bittersweet",
+      "type": "vocal",
+      "duration": 100,
+      "output_file": "tests_ace/funky_yogi_textes/t10_base/outputs/01_t10_base_20261011T200948454834_s329606273.wav",
+      "seed": 329606273,
+      "seed_source": "tiree_par_worker",
+      "status": "generated",
+      "generated_at": "2026-10-11T20:10:00+02:00",
+      "model": "ACE-Step 1.5 turbo",
+      "energy_wh_est": 0.222,
+      "gpu_util_avg_pct": 54.0,
+      "elapsed_s": 12.4,
+      "metadata_file": "tests_ace/funky_yogi_textes/t10_base/outputs/01_t10_base_20261011T200948454834_s329606273.metadata.json"
+    }
+  ]
+}

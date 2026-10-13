@@ -304,7 +304,8 @@ def tests_list():
         results = tests_read(test_dir / "playlist_results.json", {})
         for g in results.get("generations", []):
             mp3 = re.sub(r"\.wav$", ".mp3", str(g.get("output_file", "")))
-            if TESTS_FILE_RE.match(mp3) and (HERE / mp3).is_file():
+            planned = g.get("status") == "planned"
+            if TESTS_FILE_RE.match(mp3) and (planned or (HERE / mp3).is_file()):
                 model = str(g.get("model", results.get("model", test_id)))
                 folder, folder_label = tests_folder(test_id, g, model)
                 items.append({"file": mp3, "name": str(g.get("name", "")), "prompt": str(g.get("prompt", "")),
@@ -314,7 +315,8 @@ def tests_list():
                               "technical_status": str(g.get("technical_status", "")),
                               "metadata_file": str(g.get("metadata_file", "")),
                               "vote": votes.get(mp3, ""), "played": mp3 in played,
-                              "comment": comments.get(mp3, "")})
+                              "comment": comments.get(mp3, ""), "planned": planned,
+                              "description": clean_text(g.get("description", ""), 4000) if planned or g.get("description") else ""})
     if state.get("pending_delete"):
         tests_retry_purge()
     return items

@@ -1,0 +1,19 @@
+{
+  "playlist_name": "Funky Yogi t1_base",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./tests_ace/funky_yogi_textes/t1_base/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "t1_base",
+      "prompt": "French soft disco, warm strings, mellow bass groove, gentle four-on-the-floor, male vocal, bittersweet, shimmering",
+      "type": "vocal",
+      "duration": 105,
+      "lyrics_file": "tests_ace/funky_yogi_textes/t1_base/paroles.md",
+      "fit_lyrics": false,
+      "language": "fr",
+      "seed": -1,
+      "bpm": 110
+    }
+  ]
+}

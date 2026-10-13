@@ -297,6 +297,7 @@
 
     let testsFolder = '';
     let testsEditing = '';
+    const testsOpen = new Set();
     let testsDraft = '';
 
     function testsFolders() {
@@ -304,9 +305,9 @@
         testsItems.forEach(it => {
             const id = it.folder || 'divers';
             let f = map.get(id);
-            if (!f) { f = {id, label: it.folder_label || 'Divers', items: [], fresh: 0, last: ''}; map.set(id, f); }
+            if (!f) { f = {id, label: it.folder_label || 'Divers', items: [], fresh: 0, todo: 0, last: ''}; map.set(id, f); }
             f.items.push(it);
-            if (!it.played) f.fresh++;
+            if (it.planned) f.todo++; else if (!it.played) f.fresh++;
             if (String(it.generated_at || '') > f.last) f.last = String(it.generated_at || '');
         });
         return Array.from(map.values()).sort((x, y) => (y.fresh > 0) - (x.fresh > 0) || y.last.localeCompare(x.last));
@@ -327,7 +328,7 @@
             box.innerHTML = folders.map(f => `<div class="prog-item test-folder${f.fresh ? ' is-new' : ''}">
                 <button type="button" class="prog-main" data-act="open" data-folder="${esc(f.id)}">
                     <span class="prog-title">&#128193; ${esc(f.label)}</span>
-                    <span class="prog-sub">${f.items.length} version${f.items.length > 1 ? 's' : ''}</span>
+                    <span class="prog-sub">${f.items.length} version${f.items.length > 1 ? 's' : ''}${f.todo ? ' · ' + f.todo + ' &agrave; faire' : ''}</span>
                     ${f.fresh ? `<span class="prog-badge">${f.fresh} jamais &eacute;cout&eacute;${f.fresh > 1 ? 's' : ''}</span>` : ''}
                 </button>
             </div>`).join('');
@@ -338,26 +339,39 @@
                 <span class="prog-title">&#8592; Dossiers</span>
                 <span class="prog-sub">${esc(open.label)}${open.fresh ? ' · ' + open.fresh + ' jamais &eacute;cout&eacute;' + (open.fresh > 1 ? 's' : '') : ''}</span>
             </button>
-        </div>`;
+        </div><div class="test-foldall"><button type="button" class="prog-act test-save" data-act="foldall" data-folder="${esc(open.id)}">Tout d&eacute;plier</button><button type="button" class="prog-act test-save" data-act="unfoldall" data-folder="${esc(open.id)}">Tout replier</button></div>`;
         box.innerHTML = head + open.items.map(it => {
             const cur = it.file === testsCur;
             const f = esc(it.file);
-            const act = (a, label, icon) => `<button type="button" class="prog-act test-act" data-act="${a}" data-file="${f}" aria-label="${label}" title="${label}"${a === 'up' || a === 'down' ? ` aria-pressed="${it.vote === a}"` : ''}>${icon}</button>`;
+            const planned = !!it.planned;
+            const act = (a, label, icon, short) => `<button type="button" class="prog-act test-act" data-act="${a}" data-file="${f}" aria-label="${label}" title="${label}"${a === 'up' || a === 'down' ? ` aria-pressed="${it.vote === a}"` : ''}>${icon}<span class="test-act-l">${short || label}</span></button>`;
             const generated = it.generated_at ? new Date(it.generated_at).toLocaleString('fr-FR') : '';
             const provenance = [it.model, generated].filter(Boolean).join(' · ');
             const quality = it.technical_status === 'pass_needs_listening' ? 'Contrôle technique réussi — écoute requise' : it.technical_status === 'invalid' ? 'Contrôle technique invalide' : '';
-            return `<div class="prog-item test-item${cur ? ' is-now' : ''}${it.played ? '' : ' is-new'}">
-                <button type="button" class="prog-main" data-act="play" data-file="${f}">
-                    <span class="prog-title">${cur && testing ? '&#9646;&#9646; ' : '&#9654; '}${esc(String(it.name).replace(/_/g, ' '))}</span>
+            const title = esc(String(it.name).replace(/_/g, ' '));
+            const isOpen = testsOpen.has(it.file) || testsEditing === it.file;
+            const badge = planned ? '<span class="prog-badge">&Agrave; faire</span>' : it.played ? '' : '<span class="prog-badge">Jamais &eacute;cout&eacute;</span>';
+            const headInner = `<span class="prog-title">${planned ? '&#128221; ' : cur && testing ? '&#9646;&#9646; ' : '&#9654; '}${title}</span>${badge}`;
+            const main = planned
+                ? `<button type="button" class="prog-main test-main" data-act="fold" data-file="${f}" aria-expanded="${isOpen}">${headInner}</button>`
+                : `<button type="button" class="prog-main test-main" data-act="play" data-file="${f}">${headInner}</button>`;
+            const fold = `<button type="button" class="prog-act test-fold" data-act="fold" data-file="${f}" aria-expanded="${isOpen}" aria-label="${isOpen ? 'Replier' : 'D&eacute;plier'}" title="${isOpen ? 'Replier' : 'D&eacute;plier'}">${isOpen ? '&#9650;' : '&#9660;'}</button>`;
+            const actions = planned
+                ? act('comment', 'Commentaire', TEST_ICONS.note, 'R&eacute;pondre') + act('delete', 'Supprimer ce test', TEST_ICONS.del, 'Supprimer')
+                : act('up', "J'aime", TEST_ICONS.up, "J'aime") + act('down', "Je n'aime pas", TEST_ICONS.down, 'Pas aim&eacute;') + act('comment', 'Commentaire', TEST_ICONS.note, 'Commentaire') + act('delete', 'Supprimer cette version', TEST_ICONS.del, 'Supprimer');
+            const details = isOpen ? `<div class="test-details">
                     ${provenance ? `<span class="prog-sub">${esc(provenance)}</span>` : ''}
                     ${quality ? `<span class="prog-sub">${esc(quality)}</span>` : ''}
-                    <span class="prog-sub">${esc(it.prompt)}</span>
-                    ${it.played ? '' : '<span class="prog-badge">Jamais &eacute;cout&eacute;</span>'}
-                </button>
-                ${act('up', "J'aime", TEST_ICONS.up)}${act('down', "Je n'aime pas", TEST_ICONS.down)}${act('comment', 'Commentaire', TEST_ICONS.note)}${act('delete', 'Supprimer cette version', TEST_ICONS.del)}
-                ${it.comment && testsEditing !== it.file ? `<div class="test-comment">${esc(it.comment)}</div>` : ''}
-                ${testsEditing === it.file ? `<div class="test-edit"><textarea id="testNote" maxlength="2000" rows="3" placeholder="Votre avis sur ce morceau">${esc(testsDraft)}</textarea><button type="button" class="prog-act test-save" data-act="save" data-file="${f}">Enregistrer</button><button type="button" class="prog-act test-save" data-act="cancel" data-file="${f}">Annuler</button></div>` : ''}
+                    ${it.description ? `<span class="test-desc">${esc(it.description)}</span>` : ''}
+                    ${it.prompt ? `<span class="prog-sub test-prompt"><b>Caption :</b> ${esc(it.prompt)}</span>` : ''}
+                    ${it.comment && testsEditing !== it.file ? `<div class="test-comment">${esc(it.comment)}</div>` : ''}
+                    ${testsEditing === it.file ? `<div class="test-edit"><textarea id="testNote" maxlength="2000" rows="3" placeholder="${planned ? 'Votre réponse sur ce test' : 'Votre avis sur ce morceau'}">${esc(testsDraft)}</textarea><button type="button" class="prog-act test-save" data-act="save" data-file="${f}">Enregistrer</button><button type="button" class="prog-act test-save" data-act="cancel" data-file="${f}">Annuler</button></div>` : ''}
+                </div>
+                <div class="test-actions">${actions}</div>` : '';
+            return `<div class="prog-item test-item${cur ? ' is-now' : ''}${planned ? ' is-planned' : it.played ? '' : ' is-new'}">
+                <div class="test-head">${main}${fold}</div>
                 ${cur ? '<div class="test-seek"><input id="testSeek" type="range" min="0" max="1000" step="1" value="0" aria-label="Position dans le morceau"><span id="testTime" class="time">0:00 / 0:00</span></div>' : ''}
+                ${details}
             </div>`;
         }).join('');
         updateTestSeek();
@@ -411,9 +425,20 @@
             renderTests();
             return;
         }
+        if (btn.dataset.act === 'foldall' || btn.dataset.act === 'unfoldall') {
+            const fo = testsFolders().find(x => x.id === btn.dataset.folder);
+            if (fo) fo.items.forEach(x => { if (btn.dataset.act === 'foldall') testsOpen.add(x.file); else testsOpen.delete(x.file); });
+            renderTests();
+            return;
+        }
         const item = testsItems.find(x => x.file === btn.dataset.file);
         if (!item) return;
         const act = btn.dataset.act;
+        if (act === 'fold') {
+            if (testsOpen.has(item.file)) testsOpen.delete(item.file); else testsOpen.add(item.file);
+            renderTests();
+            return;
+        }
         if (act === 'play') {
             if (testsCur === item.file && testing) stopTest(); else playTestFile(item);
         } else if (act === 'up' || act === 'down') {
@@ -423,6 +448,7 @@
                 renderTests();
             }
         } else if (act === 'comment') {
+            testsOpen.add(item.file);
             testsEditing = testsEditing === item.file ? '' : item.file;
             testsDraft = item.comment || '';
             renderTests();

@@ -1,0 +1,19 @@
+{
+  "playlist_name": "Funky Yogi t2_base",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./tests_ace/funky_yogi_textes/t2_base/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "t2_base",
+      "prompt": "French funk, slap bass, tight drums, clean guitar chops, warm synths, male vocal, groovy, energetic",
+      "type": "vocal",
+      "duration": 135,
+      "lyrics_file": "tests_ace/funky_yogi_textes/t2_base/paroles.md",
+      "fit_lyrics": false,
+      "language": "fr",
+      "seed": 2026,
+      "bpm": 118
+    }
+  ]
+}

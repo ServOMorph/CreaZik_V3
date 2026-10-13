@@ -621,6 +621,10 @@
                 <div class="stepper"><button onclick="step('default_weight', -1, 0, 10)">&minus;</button><span class="val" id="v_default_weight"></span><button onclick="step('default_weight', 1, 0, 10)">+</button></div>
             </div>
             <div class="row">
+                <span>Playlists en boucle<span class="hint">Bouton « Boucle » dans chaque playlist : seules les playlists en boucle passent, sans anti-répétition. Un morceau dont le score devient négatif sort de la boucle.</span><span class="hint" id="loopSummary"></span></span>
+                <button class="btn" onclick="clearLoops()">Tout désactiver</button>
+            </div>
+            <div class="row">
                 <span>Favoris uniquement<span class="hint">Ne joue que les morceaux marqués ★</span></span>
                 <label class="switch"><input type="checkbox" id="favorites_only" onchange="setBool('favorites_only', this.checked)"><span class="slider"></span></label>
             </div>
@@ -847,7 +851,7 @@
     <script>
     if (window.top === window.self) { location.replace("/listen.html"); }
         const DEFAULTS = {default_weight: 5, weights: {}, jingle_every: 5, jingles_enabled: true, jingle_volume: 0.8,
-favorites_only: false, no_repeat: 3, no_repeat_songs: 15, excluded: [], thumb_strength: 0.15,
+favorites_only: false, no_repeat: 3, no_repeat_songs: 15, excluded: [], loop_playlists: [], thumb_strength: 0.15,
                           ads_enabled: true, ads_every: 5, ad_seconds: 9, ad_offset_s: 10, visual_transition_s: 5,
                           dynamics_enabled: true, dynamics_strength: 1, dyn_base: 0.5, dyn_amp: 0.33, dyn_peak_hour: 17.5, dyn_weekend_shift_h: 1, dyn_energy_sigma: 0.25, dyn_tempo_tolerance: 0.25, dyn_user_weight: 1,
                           transitions: {
@@ -1203,6 +1207,26 @@ favorites_only: false, no_repeat: 3, no_repeat_songs: 15, excluded: [], thumb_st
 
         function setBool(key, v) {
             settings[key] = v;
+            save();
+        }
+
+        function isLooped(id) {
+            return Array.isArray(settings.loop_playlists) && settings.loop_playlists.includes(id);
+        }
+
+        function toggleLoop(id) {
+            if (!Array.isArray(settings.loop_playlists)) settings.loop_playlists = [];
+            const i = settings.loop_playlists.indexOf(id);
+            if (i >= 0) settings.loop_playlists.splice(i, 1); else settings.loop_playlists.push(id);
+            renderLists();
+            render();
+            save();
+        }
+
+        function clearLoops() {
+            settings.loop_playlists = [];
+            renderLists();
+            render();
             save();
         }
 
@@ -1577,13 +1601,14 @@ favorites_only: false, no_repeat: 3, no_repeat_songs: 15, excluded: [], thumb_st
                 const isOpen = openPlaylists.has(b.id) || (filtering && list.length > 0);
                 return `<div class="playlist ${isOpen ? 'open' : ''}" id="playlist-${b.id}">
                     <div class="playlist-head">
-                        <span class="playlist-name" onclick="toggleOpen('${b.id}')">${esc(b.label)} <span class="count" id="count-${b.id}"></span>${scoreBadge(sc)}<span class="chev">&#9662;</span></span>
+                        <span class="playlist-name" onclick="toggleOpen('${b.id}')">${esc(b.label)} <span class="count" id="count-${b.id}"></span>${scoreBadge(sc)}${isLooped(b.id) ? ' <span class="count">&#8635; boucle</span>' : ''}<span class="chev">&#9662;</span></span>
                         <input type="range" min="0" max="10" step="1" value="${w}" oninput="setWeight('${b.id}', this.value, this)">
                         <span class="w-val">${w}</span>
                     </div>
                     <div class="hint" style="margin:-4px 0 4px">${results[b.id].length} généré(s), ${mins} min${pend ? ', ' + pend + ' en attente' : ''}${fail ? ', ' + fail + ' en échec' : ''}</div>
                     <div class="tracks">
                         <div class="mini-actions">
+                            <button onclick="toggleLoop('${b.id}')">${isLooped(b.id) ? 'Boucle : activée' : 'Boucle : désactivée'}</button>
                             <button onclick="queueFromCatalog('playlist_next', {id: '${b.id}'}, this)">Mettre en file</button>
                             <button onclick="bulk('${b.id}', true)">Tout activer</button>
                             <button onclick="bulk('${b.id}', false)">Tout désactiver</button>
@@ -1603,6 +1628,8 @@ favorites_only: false, no_repeat: 3, no_repeat_songs: 15, excluded: [], thumb_st
         function render() {
             ['default_weight', 'no_repeat', 'no_repeat_songs', 'jingle_every', 'jingle_volume', 'thumb_strength', 'ads_every', 'ad_seconds', 'ad_offset_s', 'visual_transition_s', 'dynamics_strength', 'dyn_base', 'dyn_amp', 'dyn_peak_hour', 'dyn_weekend_shift_h', 'dyn_energy_sigma', 'dyn_tempo_tolerance', 'dyn_user_weight'].forEach(k => document.getElementById('v_' + k).textContent = settings[k]);
             document.getElementById('favorites_only').checked = !!settings.favorites_only;
+            const loops = (settings.loop_playlists || []).map(id => (playlists.find(p => p.id === id) || {}).label || id);
+            document.getElementById('loopSummary').textContent = loops.length ? 'En boucle : ' + loops.join(', ') : 'Aucune playlist en boucle';
             document.getElementById('jingles_enabled').checked = !!settings.jingles_enabled;
             document.getElementById('ads_enabled').checked = !!settings.ads_enabled;
             document.getElementById('dynamics_enabled').checked = !!settings.dynamics_enabled;

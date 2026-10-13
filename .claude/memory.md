@@ -12,3 +12,6 @@ Tout nouveau fichier de test ou contenu généré destiné à la WebRadio doit �
 
 ## 2026-10-10 — Sens de « garde » pour un morceau
 Quand l'utilisateur dit « garde » à propos d'un morceau généré (test), déplacer le MP3 et son sidecar `.metadata.json` dans le dossier de l'artiste du texte (par exemple `TEXTES/artistes/Marie/`), le retirer de la section Tests et mettre à jour l'`INDEX.md` du dossier. Ne pas le laisser dans les Tests.
+
+## 2026-10-12 — Ajout de morceaux : prendre les json
+Quand l'utilisateur demande d'ajouter un morceau (MP3) à la WebRadio, prendre aussi les JSON qui l'accompagnent (`.metadata.json`, `.audiomap.json`) : les copier à côté du MP3 dans `outputs/` de la playlist et les référencer dans l'entrée de `playlist_results.json` (`metadata_file`, `audiomap_file`). Générer aussi le `.wav.feat.json` et le `.wav.viz.json` à partir du MP3 pour que la radio dispose des caractéristiques audio. Premier cas : `instru2_neoclassique_seed2026.mp3` ajouté à la playlist `instrumental` (`instrumental:22`), le 2026-10-12.

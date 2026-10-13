@@ -4,6 +4,7 @@ import hashlib
 import json
 import os
 import platform
+import random
 import re
 import shutil
 import subprocess
@@ -36,6 +37,7 @@ import torch
 from acestep.handler import AceStepHandler
 from acestep.llm_inference import LLMHandler
 from acestep.inference import GenerationParams, GenerationConfig, generate_music
+from acestep.constants import TASK_INSTRUCTIONS
 
 only = {s for s in args.only.split(",") if s}
 cases = [c for c in cfg["test_cases"] if not only or c["id"] in only]
@@ -216,6 +218,29 @@ def fit_lyrics(text, duration):
     return "\n".join(p.strip("\n") + "\n" for p in kept)
 
 
+FFMPEG_AUDIO = r"C:\Users\raph6\Documents\ServOMorph\ffmpeg\bin\ffmpeg.exe"
+
+
+def prepare_audio(path, start=None, dur=None):
+    """Convertit un fichier audio partage (mp3, mp4...) en WAV 48 kHz, decoupe si demande."""
+    src = os.path.abspath(path)
+    if not os.path.isfile(src):
+        raise SystemExit(f"audio partage introuvable : {src}")
+    refs = os.path.abspath(os.path.join(OUT, "..", "refs"))
+    os.makedirs(refs, exist_ok=True)
+    tag = hashlib.sha1(f"{src}|{start}|{dur}|{os.path.getmtime(src)}".encode()).hexdigest()[:10]
+    dst = os.path.join(refs, f"{os.path.splitext(os.path.basename(src))[0][:40]}_{tag}.wav")
+    if not os.path.isfile(dst):
+        cmd = [FFMPEG_AUDIO, "-y", "-loglevel", "error"]
+        if start:
+            cmd += ["-ss", str(start)]
+        if dur:
+            cmd += ["-t", str(dur)]
+        cmd += ["-i", src, "-vn", "-ac", "2", "-ar", "48000", dst]
+        subprocess.run(cmd, check=True)
+    return dst
+
+
 def load_lyrics(case):
     if case.get("lyrics_file"):
         with open(os.path.join(ROOT, case["lyrics_file"]), "r", encoding="utf-8") as f:
@@ -224,6 +249,13 @@ def load_lyrics(case):
             return fit_lyrics(text, case["duration"])
         return text
     return case.get("lyrics", "")
+
+
+def effective_seed(case):
+    seed = case.get("seed")
+    if isinstance(seed, int) and 0 <= seed < 2 ** 32:
+        return seed
+    return random.SystemRandom().randint(0, 2 ** 32 - 1)
 
 
 previous = {}
@@ -243,7 +275,7 @@ for case in cfg["test_cases"]:
         continue
     slug = case["name"].replace(" ", "_").replace("/", "-")
     attempt_at = datetime.now().astimezone().strftime("%Y%m%dT%H%M%S%f")
-    attempt_seed = case.get("seed", -1)
+    attempt_seed = effective_seed(case)
     entry = {
         "test_case_id": case["id"],
         "name": case["name"],
@@ -251,6 +283,8 @@ for case in cfg["test_cases"]:
         "type": case["type"],
         "duration": case["duration"],
         "output_file": f"{OUT_REL}/{int(case['id']):02d}_{slug}_{attempt_at}_s{attempt_seed}.wav",
+        "seed": attempt_seed,
+        "seed_source": "config" if attempt_seed == case.get("seed") else "tiree_par_worker",
         "status": "pending",
     }
     all_entries.append(entry)
@@ -276,8 +310,18 @@ for i, (case, entry) in enumerate(zip(cases, entries), 1):
         duration=case["duration"],
         inference_steps=args.steps,
         guidance_scale=1.0,
-        seed=case.get("seed", -1),
+        seed=entry["seed"],
     )
+    if case.get("task_type"):
+        params.task_type = str(case["task_type"])
+        params.instruction = TASK_INSTRUCTIONS.get(params.task_type, params.instruction)
+    for key in ("reference_audio", "src_audio"):
+        if case.get(key):
+            setattr(params, key, prepare_audio(case[key], case.get("audio_start_s"), case.get("audio_duration_s")))
+    if case.get("cover_noise_strength") is not None:
+        params.cover_noise_strength = float(case["cover_noise_strength"])
+    if case.get("audio_cover_strength") is not None:
+        params.audio_cover_strength = float(case["audio_cover_strength"])
     if case.get("bpm"):
         params.bpm = int(case["bpm"])
     if case.get("keyscale"):

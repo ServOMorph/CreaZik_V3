@@ -1,0 +1,19 @@
+{
+  "playlist_name": "Funky Yogi t5_base",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./tests_ace/funky_yogi_textes/t5_base/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "t5_base",
+      "prompt": "French slow disco soul, warm strings, soft bass groove, gentle beat, male vocal, melancholic, tender",
+      "type": "vocal",
+      "duration": 75,
+      "lyrics_file": "tests_ace/funky_yogi_textes/t5_base/paroles.md",
+      "fit_lyrics": false,
+      "language": "fr",
+      "seed": -1,
+      "bpm": 95
+    }
+  ]
+}

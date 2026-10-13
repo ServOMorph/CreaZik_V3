@@ -10,15 +10,12 @@ expérimentation de création de musique avec IA instrumental et vocal, avec mod
 - Audio diffusé : MP3 192 kbit/s uniquement. Règles détaillées : `webradio/REGLES_GENERATION_DEV.md`.
 
 ## État actuel (réécrit intégralement à chaque /close)
-WebRadio locale avec interface de Tests ; tout nouveau contenu destiné à la diffusion passe d'abord par l'écoute et nécessite ensuite une demande explicite de l'utilisateur (règle ajoutée au skill de génération).
-Les générations de test écrivent un sidecar `.metadata.json` et un manifeste ; la graine est toujours imposée. Pochettes sans texte (prompt par morceau) et traçabilité : code commité, test complet en attente.
-Instrus rap mélodique de Marie : 2 retenus dans `TEXTES/artistes/Marie/tops_instrus/` plus 2 à la racine du dossier ; règle de génération consignée dans le skill (5 graines, tri à l'écoute).
-Restent à faire : avis sur les tests 45 et 46, contrôles iPhone, grille de voix féminine, protocole d'apprentissage non câblé, application technique de la validation préalable.
+Réorientation vers l'écriture humaine : outils d'extraction, d'apprentissage et de run en place ; 10 textes Funky Yogi relus, 19 versions dans les Tests, à écouter.
+Radio : chansons françaises retirées (14 gardées), boucle désactivée, serveur arrêté ; morceaux ajoutés `instrumental:22` et `creation-francaise:1`.
+`ace_worker.py` gère référence audio et cover ; clip L'Invariable : Eurodisco et cover « Ça m'énerve » retenus, choix final et droits en attente.
+Restent : écoutes, validation des préférences, contrôles iPhone et navigateur, application technique de la validation préalable.
 
 ## Décisions structurantes (append only — 10 entrées max, 5 lignes max/entrée, archiver au-delà)
-- 2026-10-07 : L'UI du port 5000 devient l'UI dev ; boutons Slow/Medium/High rouverts à tous (`/api/dynamics` sans contrôle admin), à refermer avec l'UI auditeur future.
-- 2026-10-08 : Mise en ligne prévue sur VPS Linux bon marché (systemd, HTTPS, sous-domaine du site) ; Vercel, Render gratuit et Netlify écartés ; pas encore réalisée.
-- 2026-10-08 : Deux agents de zone (`textes`, `modeles_llm`) pour travailler en parallèle ; nom d'artiste en consigne de style interne seulement, jamais public.
 - 2026-10-09 : Section « Tests » dans l'UI admin (du plus récent au plus ancien, pouces, suppression, barre de position, repère « Jamais écouté », numéro unique par test) ; police Sora embarquée pour tous les titrages, pubs Traveling Sound en machine à écrire ; titre et date sur la pochette sans toucher l'image.
 - 2026-10-09 : La graine ACE n'était pas appliquée (`use_random_seed` vrai par défaut) : corrigé dans `ace_worker.py` ; les essais « à graine fixe » antérieurs ne sont pas fiables ; paroles contrôlées par `check_lyrics.py` avant chaque lancement.
 - 2026-10-09 : Démo privée T01 (Arroser Les Roses) : version 18 retenue, texte adapté (« posté », « zoublie »), voix de femme non retenue (instable), statut `VALIDE` interdit sans accord écrit de l'auteur ; lot de pochettes terminé, scores négatifs exclus.
@@ -27,3 +24,5 @@ Restent à faire : avis sur les tests 45 et 46, contrôles iPhone, grille de voi
 - 2026-10-10 : Paroles classées par artiste dans `TEXTES/artistes/` ; l'utilisateur déclare être Funky Yogi et détenir les droits sur ce texte, et déclare disposer des droits sur les textes Marie.
 - 2026-10-10 : section Tests rangée en dossiers (clé `folder` ou règles du serveur) avec commentaire par version dans `tests_state.json` ; bouton « Test » supprimé.
 - 2026-10-10 : Graine toujours imposée pour les tests ; sidecar et manifeste par génération ; « garde » = ranger le MP3 chez l'artiste ; instrus de Marie générés par 5 graines puis triés à l'écoute (intro non pilotable).
+- 2026-10-12 : Écriture humaine : Funky Yogi mis en musique (electro/funk/disco/soul, ~120 BPM), préférences issues des seuls votes radio avec accord avant mise à jour ; chansons françaises retirées de la radio sauf 14 versions.
+- 2026-10-12 : À chaque ajout de morceau à la WebRadio, prendre les JSON (sidecar, audiomap) avec ; playlist `creation-francaise` créée pour les créations originales.

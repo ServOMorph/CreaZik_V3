@@ -1,5 +1,19 @@
 # Changelog
 
+## v1.12 — 2026-10-12
+
+### Ajouté
+- Écriture humaine : `OUTILS/extraction_paroles/` (extraction locale des textes photographiés), `OUTILS/apprentissage/` (préférences issues des votes, diff avant application), `OUTILS/run_textes/` (run automatique par texte, graine de reprise) et `DOCUMENTATION/apprentissage/` ; 10 textes Funky Yogi relus et 19 versions générées dans les Tests ; `roadmap_ecriture_humaine.md`.
+- Section Tests : entrées `planned` sans MP3, texte sur plusieurs lignes, boutons sous le texte, plier/déplier.
+- `ace_worker.py` : graine effective enregistrée, `reference_audio`, `src_audio` et mode cover (`task_type`, extraits `audio_start_s`/`audio_duration_s`).
+- Playlist `creation-francaise` ; morceau 22 dans `instrumental` avec ses JSON ; clip L'Invariable : cas 7 à 22 dans `webradio/tests_ace/clip_atelier_invariable/`.
+
+### Corrigé
+- Serveur relancé après arrêt prolongé : le rattrapage du moteur empêchait la lecture sur téléphone ; serveur Eleventy parasite du port 5000 arrêté.
+
+### Modifié
+- Chansons françaises retirées de la diffusion (14 versions gardées), boucle de lecture désactivée ; `/close` calcule et présente le diff des préférences.
+
 ## v1.11 — 2026-10-10
 
 ### Ajouté

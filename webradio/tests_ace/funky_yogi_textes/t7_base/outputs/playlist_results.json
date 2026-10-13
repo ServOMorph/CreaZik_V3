@@ -1,0 +1,25 @@
+{
+  "timestamp": "2026-10-11T20:07:01.392861",
+  "mode": "real",
+  "playlist": "Funky Yogi t7_base",
+  "model": "ACE-Step 1.5 turbo",
+  "generations": [
+    {
+      "test_case_id": "1",
+      "name": "t7_base",
+      "prompt": "French electro-funk, slap bass, playful synths, tight drum machine, male vocal, quirky, upbeat",
+      "type": "vocal",
+      "duration": 80,
+      "output_file": "tests_ace/funky_yogi_textes/t7_base/outputs/01_t7_base_20261011T200701392861_s3095063796.wav",
+      "seed": 3095063796,
+      "seed_source": "tiree_par_worker",
+      "status": "generated",
+      "generated_at": "2026-10-11T20:07:11+02:00",
+      "model": "ACE-Step 1.5 turbo",
+      "energy_wh_est": 0.17,
+      "gpu_util_avg_pct": 51.7,
+      "elapsed_s": 9.8,
+      "metadata_file": "tests_ace/funky_yogi_textes/t7_base/outputs/01_t7_base_20261011T200701392861_s3095063796.metadata.json"
+    }
+  ]
+}

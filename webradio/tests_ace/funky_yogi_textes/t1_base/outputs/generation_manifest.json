@@ -1,0 +1,26 @@
+{
+  "playlist": "Funky Yogi t1_base",
+  "model": "ACE-Step 1.5 turbo",
+  "tracks": [
+    {
+      "test_case_id": "1",
+      "name": "t1_base",
+      "output_file": "tests_ace/funky_yogi_textes/t1_base/outputs/01_t1_base_20261011T200033000783_s3541839257.wav",
+      "metadata_file": "tests_ace/funky_yogi_textes/t1_base/outputs/01_t1_base_20261011T200033000783_s3541839257.metadata.json",
+      "generated_at": "2026-10-11T20:00:54+02:00",
+      "status": "generated",
+      "error": null
+    },
+    {
+      "test_case_id": "1",
+      "name": "t1_base",
+      "output_file": "tests_ace/funky_yogi_textes/t1_base/outputs/01_t1_base_20261011T200128995262_s1998029159.wav",
+      "metadata_file": "tests_ace/funky_yogi_textes/t1_base/outputs/01_t1_base_20261011T200128995262_s1998029159.metadata.json",
+      "generated_at": "2026-10-11T20:01:40+02:00",
+      "status": "generated",
+      "error": null
+    }
+  ],
+  "updated_at": "2026-10-11T20:01:40+02:00",
+  "model_revision": "ca1e85fe9430179831e6bc6be790c332190a3866"
+}

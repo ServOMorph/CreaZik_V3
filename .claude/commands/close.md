@@ -182,5 +182,11 @@ Lire `.claude/zones.md` pour obtenir la table des alias → dossiers réels.
 génération ou de développement actées pendant la session, corriger ou retirer celles
 invalidées, et mettre à jour la section « Points non tranchés ». Si rien n'a changé : ne pas
 toucher au fichier. Si le fichier est modifié, l'inclure au commit de l'étape 13.
+
+Étape 13 (avant le commit) : si la session a touché `webradio/votes.json` ou si des préférences sont en
+attente, lancer `python OUTILS/apprentissage/calculer_preferences.py` puis
+`python OUTILS/apprentissage/diff_preferences.py` et montrer le diff à l'utilisateur. Ne lancer
+`diff_preferences.py --appliquer` qu'après son accord explicite ; sans accord, laisser
+`preferences.proposition.json` en attente. Ne jamais appliquer automatiquement.
 <!-- SPECIFICITES PROJET : FIN -->
 

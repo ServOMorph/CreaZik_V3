@@ -1,0 +1,25 @@
+{
+  "timestamp": "2026-10-11T20:05:41.683634",
+  "mode": "real",
+  "playlist": "Funky Yogi t4_v3",
+  "model": "ACE-Step 1.5 turbo",
+  "generations": [
+    {
+      "test_case_id": "1",
+      "name": "t4_v3",
+      "prompt": "French electro-funk, tense slap bass, synth stabs, driving drum machine, male vocal, urgent, restless",
+      "type": "vocal",
+      "duration": 120,
+      "output_file": "tests_ace/funky_yogi_textes/t4_v3/outputs/01_t4_v3_20261011T200541683634_s2026.wav",
+      "seed": 2026,
+      "seed_source": "config",
+      "status": "generated",
+      "generated_at": "2026-10-11T20:05:53+02:00",
+      "model": "ACE-Step 1.5 turbo",
+      "energy_wh_est": 0.238,
+      "gpu_util_avg_pct": 58.6,
+      "elapsed_s": 12.2,
+      "metadata_file": "tests_ace/funky_yogi_textes/t4_v3/outputs/01_t4_v3_20261011T200541683634_s2026.metadata.json"
+    }
+  ]
+}

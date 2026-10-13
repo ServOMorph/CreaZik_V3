@@ -1,0 +1,19 @@
+{
+  "playlist_name": "Création française",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./playlists/creation-francaise/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "Clip promo Eurodisco",
+      "prompt": "French 70s Eurodisco anthem, groovy slap bass, tight funky rhythm guitar, punchy four-on-the-floor kick, crisp hi-hats and claps, lush strings and piano stabs, brass accents, powerful soulful female lead vocal with female backing trio in tight harmonies, occasional deep male voice, call and response vocals, catchy melodic chorus, warm epic hopeful and determined mood, strong kick on the first beat, snare roll builds into big groovy drops, polished modern mix, stable 4/4 tempo",
+      "bpm": 120,
+      "timesignature": "4",
+      "type": "vocal",
+      "duration": 90,
+      "lyrics_file": "playlists/creation-francaise/lyrics/1.txt",
+      "language": "fr",
+      "seed": 2026
+    }
+  ]
+}

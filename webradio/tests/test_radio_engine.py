@@ -219,6 +219,35 @@ def test_negative_score_track_never_broadcast():
         assert min(counts.get("a:2", 0), counts.get("a:3", 0), counts.get("a:4", 0)) > 200, counts
 
 
+def test_loop_playlists_restrict_and_repeat():
+    with tempfile.TemporaryDirectory() as tmp:
+        eng, clock = make(tmp, {"a": (2, 10, False), "b": (6, 10, False), "c": (6, 10, False)},
+                          {"jingles_enabled": False, "no_repeat": 5, "no_repeat_songs": 15,
+                           "loop_playlists": ["a"], "transitions": preset()})
+        seq = run(eng, clock, 10 * 400, step=1.0)
+        keys = [k for _, k, _ in seq]
+        assert len(keys) > 100, len(keys)
+        assert set(keys) == {"a:1", "a:2"}, set(keys)
+        assert all(x != y for x, y in zip(keys, keys[1:]))
+
+
+def test_loop_playlist_negative_score_leaves_loop():
+    with tempfile.TemporaryDirectory() as tmp:
+        eng, clock = make(tmp, {"a": (3, 10, False), "b": (4, 10, False)},
+                          {"jingles_enabled": False, "loop_playlists": ["a"], "transitions": preset()})
+        (Path(tmp) / "votes.json").write_text(json.dumps({"tracks": {"a:1": {"up": 0, "down": 1}}}), encoding="utf-8")
+        keys = [k for _, k, _ in run(eng, clock, 10 * 200, step=1.0)]
+        assert set(keys) == {"a:2", "a:3"}, set(keys)
+
+
+def test_loop_ignored_when_no_playable_loop_playlist():
+    with tempfile.TemporaryDirectory() as tmp:
+        eng, clock = make(tmp, {"b": (4, 10, False)},
+                          {"jingles_enabled": False, "loop_playlists": ["zzz"], "transitions": preset()})
+        keys = [k for _, k, _ in run(eng, clock, 100, step=1.0)]
+        assert keys and all(k.startswith("b:") for k in keys)
+
+
 def test_overlays_jingle_and_ads():
     with tempfile.TemporaryDirectory() as tmp:
         eng, clock = make(tmp, {"a": (8, 40, False), "j": (2, 5, True)},

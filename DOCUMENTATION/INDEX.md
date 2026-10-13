@@ -9,3 +9,4 @@
 | [Stable Audio 3 Small-Music](STABLE_AUDIO_3_SMALL_MUSIC.md) | Génération instrumentale TFLite sur CPU Windows et formulation des prompts. |
 | [Prompts d’évaluation](PROMPTS_EVALUATION_MUSICALE.md) | Dix briefs communs et leur adaptation aux quatre modèles de la campagne comparative. |
 | [Traçabilité des générations](TRACABILITE_GENERATIONS.md) | Informations à conserver pour retrouver et reproduire chaque morceau généré. |
+| [Système d'apprentissage](APPRENTISSAGE.md) | Préférences tirées des votes, règles par modèle, opérations d'adaptation de texte, procédure de mise à jour validée. |

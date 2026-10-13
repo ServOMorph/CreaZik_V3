@@ -937,7 +937,48 @@ button.prog-main:active { background: var(--glass-2); }
 
 .test-item { flex-wrap: wrap; }
 
-.test-item .prog-main { flex: 1 1 0; }
+.test-item { flex-direction: column; align-items: stretch; gap: 0; }
+
+.test-item .prog-main { flex: 1 1 auto; width: 100%; box-sizing: border-box; gap: 4px; padding: 10px 12px; }
+
+.test-item .prog-title,
+.test-item .prog-sub,
+.test-desc {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+  overflow-wrap: anywhere;
+}
+
+.test-item .prog-title { font-size: var(--fs-m); line-height: 1.35; }
+
+.test-desc {
+  display: block;
+  font-size: var(--fs-s);
+  line-height: 1.5;
+  color: var(--text);
+  white-space: pre-wrap;
+}
+
+.test-prompt b { color: var(--text); font-weight: 700; }
+
+.test-item.is-planned { border-style: dashed; }
+
+.test-actions { display: flex; border-top: 1px solid var(--stroke); }
+
+.test-actions .test-act {
+  flex: 1 1 0;
+  width: auto;
+  min-width: 0;
+  gap: 6px;
+  padding: 0 6px;
+  font: inherit;
+  font-size: var(--fs-s);
+}
+
+.test-actions .test-act:first-child { border-left: 0; }
+
+.test-act-l { white-space: nowrap; }
 
 .test-folder.is-new { box-shadow: inset 3px 0 0 var(--a1); border-color: hsl(var(--pl-h1) 92% 68% / 0.45); }
 .test-folder.is-new .prog-title { color: #fff; }
@@ -1197,3 +1238,24 @@ input:focus, textarea:focus {
 .test-edit { flex: 1 1 100%; display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
 .test-edit textarea { flex: 1 1 100%; box-sizing: border-box; min-height: 64px; padding: 8px; border-radius: 8px; border: 1px solid var(--a1); background: rgba(255, 255, 255, 0.06); color: inherit; font: inherit; font-size: 16px; resize: vertical; }
 .test-save { padding: 0 14px; }
+
+.test-head { display: flex; align-items: stretch; }
+
+.test-head .prog-main { flex: 1 1 0; min-width: 0; }
+
+.test-fold { flex: none; width: 48px; color: var(--muted); font-size: 14px; }
+
+.test-details {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 0 12px 10px;
+  min-width: 0;
+}
+
+.test-details .test-comment,
+.test-details .test-edit { margin-top: 2px; }
+
+.test-foldall { display: flex; gap: 6px; margin: 0 0 6px; }
+
+.test-foldall .test-save { min-height: 36px; flex: 1 1 0; border: 1px solid var(--stroke); border-radius: var(--r-s); }

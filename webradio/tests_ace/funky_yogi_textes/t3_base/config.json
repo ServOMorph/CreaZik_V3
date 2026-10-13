@@ -1,0 +1,19 @@
+{
+  "playlist_name": "Funky Yogi t3_base",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./tests_ace/funky_yogi_textes/t3_base/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "t3_base",
+      "prompt": "French disco, glittering synths, funky bass, four-on-the-floor, string stabs, male vocal, playful, dreamy",
+      "type": "vocal",
+      "duration": 60,
+      "lyrics_file": "tests_ace/funky_yogi_textes/t3_base/paroles.md",
+      "fit_lyrics": false,
+      "language": "fr",
+      "seed": -1,
+      "bpm": 120
+    }
+  ]
+}

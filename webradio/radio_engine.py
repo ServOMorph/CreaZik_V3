@@ -46,6 +46,7 @@ DEFAULT_RADIO = {
     "no_repeat": 3,
     "no_repeat_songs": 15,
     "excluded": [],
+    "loop_playlists": [],
     "thumb_strength": 0.15,
     "ads_enabled": True,
     "ads_every": 5,
@@ -383,6 +384,10 @@ class RadioEngine:
         v = self.votes().get(key) or {}
         return bool(v.get("up") or v.get("down") or neutral.get(key))
 
+    def _loop_ids(self):
+        raw = self.settings().get("loop_playlists") or []
+        return {x for x in raw if isinstance(x, str)} if isinstance(raw, list) else set()
+
     def _playable_groups(self):
         st = self.settings()
         excluded = set(st.get("excluded") or [])
@@ -394,6 +399,11 @@ class RadioEngine:
             keys = [k for k in pl["keys"] if k not in excluded and (favs is None or k in favs) and self._score(k) >= 0]
             if keys:
                 groups.append((pl, keys))
+        loop = self._loop_ids()
+        if loop:
+            looped = [g for g in groups if g[0]["id"] in loop]
+            if looped:
+                groups = looped
         if self.unrated_only:
             neutral = self._neutral_counts()
             unrated = [(pl, [k for k in keys if not self._is_rated(k, neutral)]) for pl, keys in groups]
@@ -520,6 +530,9 @@ class RadioEngine:
         avoid = last or (self.current["key"] if self.current else None)
         cands = [k for k in keys if k != avoid] or keys
         songs = songs or set()
+        if chosen[0]["id"] in self._loop_ids():
+            weights = [self._multiplier(k) * factors[k] for k in cands]
+            return self.rng.choices(cands, weights=weights, k=1)[0]
         fresh = [k for k in cands if k not in used and self._song_of(k) not in songs and self._multiplier(k) >= 0.05]
         if fresh:
             cands = fresh

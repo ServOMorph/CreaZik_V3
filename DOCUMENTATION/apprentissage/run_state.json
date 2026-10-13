@@ -1,0 +1,270 @@
+{
+  "versions": {
+    "t1_base": {
+      "statut": "TERMINE",
+      "tentatives": [
+        {
+          "graine": -1,
+          "duree_calcul_s": 26.6,
+          "resultat": "OK",
+          "graine_reelle": 1998029159,
+          "test": "47 · Dans la figure, Disco doux, 110 BPM, 105 s, graine 1998029159"
+        }
+      ],
+      "fichier": "playlists/tests-ace/outputs/47_t1_base_seed1998029159.mp3",
+      "graine": 1998029159
+    },
+    "t2_base": {
+      "statut": "TERMINE",
+      "tentatives": [
+        {
+          "graine": 2026,
+          "duree_calcul_s": 28.4,
+          "resultat": "OK",
+          "graine_reelle": 2026,
+          "test": "48 · Faut que ça groove, Funk groove, 118 BPM, base, 135 s, graine 2026"
+        }
+      ],
+      "fichier": "playlists/tests-ace/outputs/48_t2_base_seed2026.mp3",
+      "graine": 2026
+    },
+    "t2_v1": {
+      "statut": "TERMINE",
+      "tentatives": [
+        {
+          "graine": 2026,
+          "duree_calcul_s": 28.0,
+          "resultat": "OK",
+          "graine_reelle": 2026,
+          "test": "49 · Faut que ça groove, Funk groove, 118 BPM, V1 écho, 135 s, graine 2026"
+        }
+      ],
+      "fichier": "playlists/tests-ace/outputs/49_t2_v1_seed2026.mp3",
+      "graine": 2026
+    },
+    "t2_v2": {
+      "statut": "TERMINE",
+      "tentatives": [
+        {
+          "graine": 2026,
+          "duree_calcul_s": 32.6,
+          "resultat": "OK",
+          "graine_reelle": 2026,
+          "test": "50 · Faut que ça groove, Funk groove, 118 BPM, V2 harmonies, 135 s, graine 2026"
+        }
+      ],
+      "fichier": "playlists/tests-ace/outputs/50_t2_v2_seed2026.mp3",
+      "graine": 2026
+    },
+    "t2_v3": {
+      "statut": "TERMINE",
+      "tentatives": [
+        {
+          "graine": 2026,
+          "duree_calcul_s": 28.6,
+          "resultat": "OK",
+          "graine_reelle": 2026,
+          "test": "51 · Faut que ça groove, Funk groove, 118 BPM, V3 ad-lib, 135 s, graine 2026"
+        }
+      ],
+      "fichier": "playlists/tests-ace/outputs/51_t2_v3_seed2026.mp3",
+      "graine": 2026
+    },
+    "t3_base": {
+      "statut": "TERMINE",
+      "tentatives": [
+        {
+          "graine": -1,
+          "duree_calcul_s": 23.9,
+          "resultat": "OK",
+          "graine_reelle": 3725766651,
+          "test": "52 · Idées folles, Disco, 120 BPM, 60 s, graine 3725766651"
+        }
+      ],
+      "fichier": "playlists/tests-ace/outputs/52_t3_base_seed3725766651.mp3",
+      "graine": 3725766651
+    },
+    "t4_base": {
+      "statut": "TERMINE",
+      "tentatives": [
+        {
+          "graine": 2026,
+          "duree_calcul_s": 27.6,
+          "resultat": "OK",
+          "graine_reelle": 2026,
+          "test": "53 · Kes kis pas, Electro-funk tendu, 122 BPM, base, 120 s, graine 2026"
+        }
+      ],
+      "fichier": "playlists/tests-ace/outputs/53_t4_base_seed2026.mp3",
+      "graine": 2026
+    },
+    "t4_v1": {
+      "statut": "TERMINE",
+      "tentatives": [
+        {
+          "graine": 2026,
+          "duree_calcul_s": 27.7,
+          "resultat": "OK",
+          "graine_reelle": 2026,
+          "test": "54 · Kes kis pas, Electro-funk tendu, 122 BPM, V1 écho, 120 s, graine 2026"
+        }
+      ],
+      "fichier": "playlists/tests-ace/outputs/54_t4_v1_seed2026.mp3",
+      "graine": 2026
+    },
+    "t4_v2": {
+      "statut": "TERMINE",
+      "tentatives": [
+        {
+          "graine": 2026,
+          "duree_calcul_s": 27.6,
+          "resultat": "OK",
+          "graine_reelle": 2026,
+          "test": "55 · Kes kis pas, Electro-funk tendu, 122 BPM, V2 harmonies, 120 s, graine 2026"
+        }
+      ],
+      "fichier": "playlists/tests-ace/outputs/55_t4_v2_seed2026.mp3",
+      "graine": 2026
+    },
+    "t4_v3": {
+      "statut": "TERMINE",
+      "tentatives": [
+        {
+          "graine": 2026,
+          "duree_calcul_s": 27.9,
+          "resultat": "OK",
+          "graine_reelle": 2026,
+          "test": "56 · Kes kis pas, Electro-funk tendu, 122 BPM, V3 ad-lib, 120 s, graine 2026"
+        }
+      ],
+      "fichier": "playlists/tests-ace/outputs/56_t4_v3_seed2026.mp3",
+      "graine": 2026
+    },
+    "t5_base": {
+      "statut": "TERMINE",
+      "tentatives": [
+        {
+          "graine": -1,
+          "duree_calcul_s": 25.3,
+          "resultat": "OK",
+          "graine_reelle": 2753174745,
+          "test": "57 · Loin des papas, Disco-soul, 95 BPM, 75 s, graine 2753174745"
+        }
+      ],
+      "fichier": "playlists/tests-ace/outputs/57_t5_base_seed2753174745.mp3",
+      "graine": 2753174745
+    },
+    "t6_base": {
+      "statut": "TERMINE",
+      "tentatives": [
+        {
+          "graine": -1,
+          "duree_calcul_s": 26.4,
+          "resultat": "OK",
+          "graine_reelle": 50253675,
+          "test": "58 · Mes bordels, Electro-disco, 116 BPM, 90 s, graine 50253675"
+        }
+      ],
+      "fichier": "playlists/tests-ace/outputs/58_t6_base_seed50253675.mp3",
+      "graine": 50253675
+    },
+    "t7_base": {
+      "statut": "TERMINE",
+      "tentatives": [
+        {
+          "graine": -1,
+          "duree_calcul_s": 24.8,
+          "resultat": "OK",
+          "graine_reelle": 3095063796,
+          "test": "59 · Mineur majeur, Electro-funk joueur, 120 BPM, 80 s, graine 3095063796"
+        }
+      ],
+      "fichier": "playlists/tests-ace/outputs/59_t7_base_seed3095063796.mp3",
+      "graine": 3095063796
+    },
+    "t8_base": {
+      "statut": "TERMINE",
+      "tentatives": [
+        {
+          "graine": 2026,
+          "duree_calcul_s": 28.0,
+          "resultat": "OK",
+          "graine_reelle": 2026,
+          "test": "60 · Miracle, Disco-funk, 118 BPM, base, 120 s, graine 2026"
+        }
+      ],
+      "fichier": "playlists/tests-ace/outputs/60_t8_base_seed2026.mp3",
+      "graine": 2026
+    },
+    "t8_v1": {
+      "statut": "TERMINE",
+      "tentatives": [
+        {
+          "graine": 2026,
+          "duree_calcul_s": 28.0,
+          "resultat": "OK",
+          "graine_reelle": 2026,
+          "test": "61 · Miracle, Disco-funk, 118 BPM, V1 écho, 120 s, graine 2026"
+        }
+      ],
+      "fichier": "playlists/tests-ace/outputs/61_t8_v1_seed2026.mp3",
+      "graine": 2026
+    },
+    "t8_v2": {
+      "statut": "TERMINE",
+      "tentatives": [
+        {
+          "graine": 2026,
+          "duree_calcul_s": 28.2,
+          "resultat": "OK",
+          "graine_reelle": 2026,
+          "test": "62 · Miracle, Disco-funk, 118 BPM, V2 harmonies, 120 s, graine 2026"
+        }
+      ],
+      "fichier": "playlists/tests-ace/outputs/62_t8_v2_seed2026.mp3",
+      "graine": 2026
+    },
+    "t8_v3": {
+      "statut": "TERMINE",
+      "tentatives": [
+        {
+          "graine": 2026,
+          "duree_calcul_s": 29.0,
+          "resultat": "OK",
+          "graine_reelle": 2026,
+          "test": "63 · Miracle, Disco-funk, 118 BPM, V3 ad-lib, 120 s, graine 2026"
+        }
+      ],
+      "fichier": "playlists/tests-ace/outputs/63_t8_v3_seed2026.mp3",
+      "graine": 2026
+    },
+    "t9_base": {
+      "statut": "TERMINE",
+      "tentatives": [
+        {
+          "graine": -1,
+          "duree_calcul_s": 26.0,
+          "resultat": "OK",
+          "graine_reelle": 3226866593,
+          "test": "64 · Pause, House soul, 122 BPM, 80 s, graine 3226866593"
+        }
+      ],
+      "fichier": "playlists/tests-ace/outputs/64_t9_base_seed3226866593.mp3",
+      "graine": 3226866593
+    },
+    "t10_base": {
+      "statut": "TERMINE",
+      "tentatives": [
+        {
+          "graine": -1,
+          "duree_calcul_s": 30.1,
+          "resultat": "OK",
+          "graine_reelle": 329606273,
+          "test": "65 · Truc, Disco-soul, 100 BPM, 100 s, graine 329606273"
+        }
+      ],
+      "fichier": "playlists/tests-ace/outputs/65_t10_base_seed329606273.mp3",
+      "graine": 329606273
+    }
+  }
+}

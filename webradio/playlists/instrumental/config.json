@@ -149,6 +149,13 @@
       "prompt": "synthwave, retro analog synths, driving bass, neon night drive, 110 bpm",
       "type": "instrumental",
       "duration": 95
+    },
+    {
+      "id": "22",
+      "name": "Néoclassique cinématique",
+      "prompt": "cinematic neoclassical instrumental, solo grand piano opening, swelling string orchestra, epic taiko and orchestral percussion, powerful orchestral build to a triumphant climax, return to gentle piano at the end, emotional, hopeful and determined mood, wide cinematic mix, no vocals",
+      "type": "instrumental",
+      "duration": 90
     }
   ]
 }

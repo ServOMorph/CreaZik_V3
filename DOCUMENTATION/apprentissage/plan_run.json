@@ -1,0 +1,240 @@
+{
+  "version": 1,
+  "cree_le": "2026-10-11",
+  "textes": [
+    {
+      "id": "t1",
+      "titre": "Dans la figure",
+      "source": "TEXTES/artistes/funky-yogi/textes/dans-la-figure.md",
+      "versions": [
+        {
+          "id": "base",
+          "label": "Disco doux, 110 BPM",
+          "caption": "French soft disco, warm strings, mellow bass groove, gentle four-on-the-floor, male vocal, bittersweet, shimmering",
+          "bpm": 110,
+          "duree_s": 105,
+          "paroles": "DOCUMENTATION/apprentissage/paroles_run/t1_base.txt"
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "titre": "Faut que ça groove",
+      "source": "TEXTES/artistes/funky-yogi/textes/faut-que-ca-groove.md",
+      "versions": [
+        {
+          "id": "base",
+          "label": "Funk groove, 118 BPM, base",
+          "caption": "French funk, slap bass, tight drums, clean guitar chops, warm synths, male vocal, groovy, energetic",
+          "bpm": 118,
+          "duree_s": 135,
+          "graine": 2026,
+          "paroles": "DOCUMENTATION/apprentissage/paroles_run/t2_base.txt"
+        },
+        {
+          "id": "v1",
+          "label": "Funk groove, 118 BPM, V1 écho",
+          "caption": "French funk, slap bass, tight drums, clean guitar chops, warm synths, male vocal, groovy, energetic",
+          "bpm": 118,
+          "duree_s": 135,
+          "graine": 2026,
+          "paroles": "DOCUMENTATION/apprentissage/paroles_run/t2_v1.txt"
+        },
+        {
+          "id": "v2",
+          "label": "Funk groove, 118 BPM, V2 harmonies",
+          "caption": "French funk, slap bass, tight drums, clean guitar chops, warm synths, male vocal, groovy, energetic, layered backing vocals, group harmonies",
+          "bpm": 118,
+          "duree_s": 135,
+          "graine": 2026,
+          "paroles": "DOCUMENTATION/apprentissage/paroles_run/t2_v2.txt"
+        },
+        {
+          "id": "v3",
+          "label": "Funk groove, 118 BPM, V3 ad-lib",
+          "caption": "French funk, slap bass, tight drums, clean guitar chops, warm synths, male vocal, groovy, energetic",
+          "bpm": 118,
+          "duree_s": 135,
+          "graine": 2026,
+          "paroles": "DOCUMENTATION/apprentissage/paroles_run/t2_v3.txt"
+        }
+      ]
+    },
+    {
+      "id": "t3",
+      "titre": "Idées folles",
+      "source": "TEXTES/artistes/funky-yogi/textes/idees-folles.md",
+      "versions": [
+        {
+          "id": "base",
+          "label": "Disco, 120 BPM",
+          "caption": "French disco, glittering synths, funky bass, four-on-the-floor, string stabs, male vocal, playful, dreamy",
+          "bpm": 120,
+          "duree_s": 60,
+          "paroles": "DOCUMENTATION/apprentissage/paroles_run/t3_base.txt"
+        }
+      ]
+    },
+    {
+      "id": "t4",
+      "titre": "Kes kis pas",
+      "source": "TEXTES/artistes/funky-yogi/textes/kes-kis-pas.md",
+      "versions": [
+        {
+          "id": "base",
+          "label": "Electro-funk tendu, 122 BPM, base",
+          "caption": "French electro-funk, tense slap bass, synth stabs, driving drum machine, male vocal, urgent, restless",
+          "bpm": 122,
+          "duree_s": 120,
+          "graine": 2026,
+          "paroles": "DOCUMENTATION/apprentissage/paroles_run/t4_base.txt"
+        },
+        {
+          "id": "v1",
+          "label": "Electro-funk tendu, 122 BPM, V1 écho",
+          "caption": "French electro-funk, tense slap bass, synth stabs, driving drum machine, male vocal, urgent, restless",
+          "bpm": 122,
+          "duree_s": 120,
+          "graine": 2026,
+          "paroles": "DOCUMENTATION/apprentissage/paroles_run/t4_v1.txt"
+        },
+        {
+          "id": "v2",
+          "label": "Electro-funk tendu, 122 BPM, V2 harmonies",
+          "caption": "French electro-funk, tense slap bass, synth stabs, driving drum machine, male vocal, urgent, restless, layered backing vocals, group harmonies",
+          "bpm": 122,
+          "duree_s": 120,
+          "graine": 2026,
+          "paroles": "DOCUMENTATION/apprentissage/paroles_run/t4_v2.txt"
+        },
+        {
+          "id": "v3",
+          "label": "Electro-funk tendu, 122 BPM, V3 ad-lib",
+          "caption": "French electro-funk, tense slap bass, synth stabs, driving drum machine, male vocal, urgent, restless",
+          "bpm": 122,
+          "duree_s": 120,
+          "graine": 2026,
+          "paroles": "DOCUMENTATION/apprentissage/paroles_run/t4_v3.txt"
+        }
+      ]
+    },
+    {
+      "id": "t5",
+      "titre": "Loin des papas",
+      "source": "TEXTES/artistes/funky-yogi/textes/loin-des-papas.md",
+      "versions": [
+        {
+          "id": "base",
+          "label": "Disco-soul, 95 BPM",
+          "caption": "French slow disco soul, warm strings, soft bass groove, gentle beat, male vocal, melancholic, tender",
+          "bpm": 95,
+          "duree_s": 75,
+          "paroles": "DOCUMENTATION/apprentissage/paroles_run/t5_base.txt"
+        }
+      ]
+    },
+    {
+      "id": "t6",
+      "titre": "Mes bordels",
+      "source": "TEXTES/artistes/funky-yogi/textes/mes-bordels.md",
+      "versions": [
+        {
+          "id": "base",
+          "label": "Electro-disco, 116 BPM",
+          "caption": "French electro-disco, bright synths, punchy drums, driving bass, female vocal, urgent, emotional",
+          "bpm": 116,
+          "duree_s": 90,
+          "paroles": "DOCUMENTATION/apprentissage/paroles_run/t6_base.txt"
+        }
+      ]
+    },
+    {
+      "id": "t7",
+      "titre": "Mineur majeur",
+      "source": "TEXTES/artistes/funky-yogi/textes/mineur-majeur.md",
+      "versions": [
+        {
+          "id": "base",
+          "label": "Electro-funk joueur, 120 BPM",
+          "caption": "French electro-funk, slap bass, playful synths, tight drum machine, male vocal, quirky, upbeat",
+          "bpm": 120,
+          "duree_s": 80,
+          "paroles": "DOCUMENTATION/apprentissage/paroles_run/t7_base.txt"
+        }
+      ]
+    },
+    {
+      "id": "t8",
+      "titre": "Miracle",
+      "source": "TEXTES/artistes/funky-yogi/textes/miracle.md",
+      "versions": [
+        {
+          "id": "base",
+          "label": "Disco-funk, 118 BPM, base",
+          "caption": "French disco-funk, driving bass, clean guitar chops, string stabs, four-on-the-floor, male vocal, intense, soulful",
+          "bpm": 118,
+          "duree_s": 120,
+          "graine": 2026,
+          "paroles": "DOCUMENTATION/apprentissage/paroles_run/t8_base.txt"
+        },
+        {
+          "id": "v1",
+          "label": "Disco-funk, 118 BPM, V1 écho",
+          "caption": "French disco-funk, driving bass, clean guitar chops, string stabs, four-on-the-floor, male vocal, intense, soulful",
+          "bpm": 118,
+          "duree_s": 120,
+          "graine": 2026,
+          "paroles": "DOCUMENTATION/apprentissage/paroles_run/t8_v1.txt"
+        },
+        {
+          "id": "v2",
+          "label": "Disco-funk, 118 BPM, V2 harmonies",
+          "caption": "French disco-funk, driving bass, clean guitar chops, string stabs, four-on-the-floor, male vocal, intense, soulful, layered backing vocals, group harmonies",
+          "bpm": 118,
+          "duree_s": 120,
+          "graine": 2026,
+          "paroles": "DOCUMENTATION/apprentissage/paroles_run/t8_v2.txt"
+        },
+        {
+          "id": "v3",
+          "label": "Disco-funk, 118 BPM, V3 ad-lib",
+          "caption": "French disco-funk, driving bass, clean guitar chops, string stabs, four-on-the-floor, male vocal, intense, soulful",
+          "bpm": 118,
+          "duree_s": 120,
+          "graine": 2026,
+          "paroles": "DOCUMENTATION/apprentissage/paroles_run/t8_v3.txt"
+        }
+      ]
+    },
+    {
+      "id": "t9",
+      "titre": "Pause",
+      "source": "TEXTES/artistes/funky-yogi/textes/pause.md",
+      "versions": [
+        {
+          "id": "base",
+          "label": "House soul, 122 BPM",
+          "caption": "French deep house soul, dusty keys, soft four-on-the-floor, warm bass, male vocal, relaxed, late night",
+          "bpm": 122,
+          "duree_s": 80,
+          "paroles": "DOCUMENTATION/apprentissage/paroles_run/t9_base.txt"
+        }
+      ]
+    },
+    {
+      "id": "t10",
+      "titre": "Truc",
+      "source": "TEXTES/artistes/funky-yogi/textes/truc.md",
+      "versions": [
+        {
+          "id": "base",
+          "label": "Disco-soul, 100 BPM",
+          "caption": "French disco soul, warm strings, groovy bass, steady four-on-the-floor, male vocal, reflective, bittersweet",
+          "bpm": 100,
+          "duree_s": 100,
+          "paroles": "DOCUMENTATION/apprentissage/paroles_run/t10_base.txt"
+        }
+      ]
+    }
+  ]
+}

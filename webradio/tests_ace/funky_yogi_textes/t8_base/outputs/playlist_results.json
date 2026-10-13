@@ -1,0 +1,25 @@
+{
+  "timestamp": "2026-10-11T20:07:26.470626",
+  "mode": "real",
+  "playlist": "Funky Yogi t8_base",
+  "model": "ACE-Step 1.5 turbo",
+  "generations": [
+    {
+      "test_case_id": "1",
+      "name": "t8_base",
+      "prompt": "French disco-funk, driving bass, clean guitar chops, string stabs, four-on-the-floor, male vocal, intense, soulful",
+      "type": "vocal",
+      "duration": 120,
+      "output_file": "tests_ace/funky_yogi_textes/t8_base/outputs/01_t8_base_20261011T200726470626_s2026.wav",
+      "seed": 2026,
+      "seed_source": "config",
+      "status": "generated",
+      "generated_at": "2026-10-11T20:07:38+02:00",
+      "model": "ACE-Step 1.5 turbo",
+      "energy_wh_est": 0.242,
+      "gpu_util_avg_pct": 59.8,
+      "elapsed_s": 12.4,
+      "metadata_file": "tests_ace/funky_yogi_textes/t8_base/outputs/01_t8_base_20261011T200726470626_s2026.metadata.json"
+    }
+  ]
+}

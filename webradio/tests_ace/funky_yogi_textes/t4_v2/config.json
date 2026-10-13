@@ -1,0 +1,19 @@
+{
+  "playlist_name": "Funky Yogi t4_v2",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./tests_ace/funky_yogi_textes/t4_v2/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "t4_v2",
+      "prompt": "French electro-funk, tense slap bass, synth stabs, driving drum machine, male vocal, urgent, restless, layered backing vocals, group harmonies",
+      "type": "vocal",
+      "duration": 120,
+      "lyrics_file": "tests_ace/funky_yogi_textes/t4_v2/paroles.md",
+      "fit_lyrics": false,
+      "language": "fr",
+      "seed": 2026,
+      "bpm": 122
+    }
+  ]
+}

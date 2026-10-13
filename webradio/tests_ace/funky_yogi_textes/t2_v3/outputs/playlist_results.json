@@ -1,0 +1,25 @@
+{
+  "timestamp": "2026-10-11T20:03:25.488542",
+  "mode": "real",
+  "playlist": "Funky Yogi t2_v3",
+  "model": "ACE-Step 1.5 turbo",
+  "generations": [
+    {
+      "test_case_id": "1",
+      "name": "t2_v3",
+      "prompt": "French funk, slap bass, tight drums, clean guitar chops, warm synths, male vocal, groovy, energetic",
+      "type": "vocal",
+      "duration": 135,
+      "output_file": "tests_ace/funky_yogi_textes/t2_v3/outputs/01_t2_v3_20261011T200325488542_s2026.wav",
+      "seed": 2026,
+      "seed_source": "config",
+      "status": "generated",
+      "generated_at": "2026-10-11T20:03:38+02:00",
+      "model": "ACE-Step 1.5 turbo",
+      "energy_wh_est": 0.246,
+      "gpu_util_avg_pct": 56.2,
+      "elapsed_s": 13.0,
+      "metadata_file": "tests_ace/funky_yogi_textes/t2_v3/outputs/01_t2_v3_20261011T200325488542_s2026.metadata.json"
+    }
+  ]
+}

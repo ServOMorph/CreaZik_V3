@@ -1,0 +1,1632 @@
+{
+ "cree_le": "2026-10-11T17:38:54+02:00",
+ "regle": "chantes en francais, sauf Les souliers de ma grand-mere et Les gars de la cote (14 versions) ; poesie-fr conservee",
+ "conserves": {
+  "perso:7": {
+   "name": "Les souliers de ma grand-mère",
+   "status": "generated",
+   "mp3": true
+  },
+  "perso:17": {
+   "name": "Les gars de la côte",
+   "status": "generated",
+   "mp3": true
+  },
+  "francais_tests-electro:7": {
+   "name": "Les souliers de ma grand-mère - Electro",
+   "status": "generated",
+   "mp3": true
+  },
+  "francais_tests-electro:17": {
+   "name": "Les gars de la côte - Electro",
+   "status": "generated",
+   "mp3": true
+  },
+  "francais_tests-folk:7": {
+   "name": "Les souliers de ma grand-mère - Folk",
+   "status": "generated",
+   "mp3": true
+  },
+  "francais_tests-folk:17": {
+   "name": "Les gars de la côte - Folk",
+   "status": "generated",
+   "mp3": true
+  },
+  "francais_tests-rock:7": {
+   "name": "Les souliers de ma grand-mère - Rock",
+   "status": "generated",
+   "mp3": true
+  },
+  "francais_tests-rock:17": {
+   "name": "Les gars de la côte - Rock",
+   "status": "generated",
+   "mp3": true
+  },
+  "francais_tests-classique:7": {
+   "name": "Les souliers de ma grand-mère - Classique",
+   "status": "generated",
+   "mp3": true
+  },
+  "francais_tests-classique:17": {
+   "name": "Les gars de la côte - Classique",
+   "status": "generated",
+   "mp3": true
+  },
+  "francais_tests-gregorien:7": {
+   "name": "Les souliers de ma grand-mère - Chant grégorien",
+   "status": "generated",
+   "mp3": true
+  },
+  "francais_tests-gregorien:17": {
+   "name": "Les gars de la côte - Chant grégorien",
+   "status": "generated",
+   "mp3": true
+  },
+  "francais_tests-chorale:7": {
+   "name": "Les souliers de ma grand-mère - Chant de chorale",
+   "status": "generated",
+   "mp3": true
+  },
+  "francais_tests-chorale:17": {
+   "name": "Les gars de la côte - Chant de chorale",
+   "status": "generated",
+   "mp3": true
+  }
+ },
+ "a_retirer": [
+  {
+   "key": "auto:2",
+   "playlist": "auto",
+   "name": "Hip-Hop - Rap",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "auto:4",
+   "playlist": "auto",
+   "name": "Jazz - Vocal",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "auto:9",
+   "playlist": "auto",
+   "name": "Synthwave - Vocal",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "auto:10",
+   "playlist": "auto",
+   "name": "Folk - Vocal",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "perso:1",
+   "playlist": "perso",
+   "name": "Je prends mon temps",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "perso:2",
+   "playlist": "perso",
+   "name": "Les quais la nuit",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "perso:3",
+   "playlist": "perso",
+   "name": "Demain, on change",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "perso:4",
+   "playlist": "perso",
+   "name": "Minuit sur l'autoroute",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "perso:5",
+   "playlist": "perso",
+   "name": "Mon voisin est un hérisson",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "perso:6",
+   "playlist": "perso",
+   "name": "Le bateau du matin",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "perso:8",
+   "playlist": "perso",
+   "name": "Elle danse seule",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "perso:9",
+   "playlist": "perso",
+   "name": "Une route en été",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "perso:10",
+   "playlist": "perso",
+   "name": "Le facteur et la fleuriste",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "perso:11",
+   "playlist": "perso",
+   "name": "Chemin de montagne",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "perso:12",
+   "playlist": "perso",
+   "name": "Là où brille la mer",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "perso:13",
+   "playlist": "perso",
+   "name": "Blues du lundi",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "perso:14",
+   "playlist": "perso",
+   "name": "Le vent et le large",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "perso:15",
+   "playlist": "perso",
+   "name": "La dernière nuit",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "perso:16",
+   "playlist": "perso",
+   "name": "Une carte postale",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "perso:18",
+   "playlist": "perso",
+   "name": "La maison au bout du chemin",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "perso:19",
+   "playlist": "perso",
+   "name": "Les amis du port",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "perso:20",
+   "playlist": "perso",
+   "name": "Chantons la vie",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "perso:21",
+   "playlist": "perso",
+   "name": "Le bar du coin",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-electro:1",
+   "playlist": "francais_tests-electro",
+   "name": "Je prends mon temps - Electro",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-electro:2",
+   "playlist": "francais_tests-electro",
+   "name": "Les quais la nuit - Electro",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-electro:3",
+   "playlist": "francais_tests-electro",
+   "name": "Demain, on change - Electro",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-electro:4",
+   "playlist": "francais_tests-electro",
+   "name": "Minuit sur l'autoroute - Electro",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-electro:5",
+   "playlist": "francais_tests-electro",
+   "name": "Mon voisin est un hérisson - Electro",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-electro:6",
+   "playlist": "francais_tests-electro",
+   "name": "Le bateau du matin - Electro",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-electro:8",
+   "playlist": "francais_tests-electro",
+   "name": "Elle danse seule - Electro",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-electro:9",
+   "playlist": "francais_tests-electro",
+   "name": "Une route en été - Electro",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-electro:10",
+   "playlist": "francais_tests-electro",
+   "name": "Le facteur et la fleuriste - Electro",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-electro:11",
+   "playlist": "francais_tests-electro",
+   "name": "Chemin de montagne - Electro",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-electro:12",
+   "playlist": "francais_tests-electro",
+   "name": "Là où brille la mer - Electro",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-electro:13",
+   "playlist": "francais_tests-electro",
+   "name": "Blues du lundi - Electro",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-electro:14",
+   "playlist": "francais_tests-electro",
+   "name": "Le vent et le large - Electro",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-electro:15",
+   "playlist": "francais_tests-electro",
+   "name": "La dernière nuit - Electro",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-electro:16",
+   "playlist": "francais_tests-electro",
+   "name": "Une carte postale - Electro",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-electro:18",
+   "playlist": "francais_tests-electro",
+   "name": "La maison au bout du chemin - Electro",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-electro:19",
+   "playlist": "francais_tests-electro",
+   "name": "Les amis du port - Electro",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-electro:20",
+   "playlist": "francais_tests-electro",
+   "name": "Chantons la vie - Electro",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-electro:21",
+   "playlist": "francais_tests-electro",
+   "name": "Le bar du coin - Electro",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-folk:1",
+   "playlist": "francais_tests-folk",
+   "name": "Je prends mon temps - Folk",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-folk:2",
+   "playlist": "francais_tests-folk",
+   "name": "Les quais la nuit - Folk",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-folk:3",
+   "playlist": "francais_tests-folk",
+   "name": "Demain, on change - Folk",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-folk:4",
+   "playlist": "francais_tests-folk",
+   "name": "Minuit sur l'autoroute - Folk",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-folk:5",
+   "playlist": "francais_tests-folk",
+   "name": "Mon voisin est un hérisson - Folk",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-folk:6",
+   "playlist": "francais_tests-folk",
+   "name": "Le bateau du matin - Folk",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-folk:8",
+   "playlist": "francais_tests-folk",
+   "name": "Elle danse seule - Folk",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-folk:9",
+   "playlist": "francais_tests-folk",
+   "name": "Une route en été - Folk",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-folk:10",
+   "playlist": "francais_tests-folk",
+   "name": "Le facteur et la fleuriste - Folk",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-folk:11",
+   "playlist": "francais_tests-folk",
+   "name": "Chemin de montagne - Folk",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-folk:12",
+   "playlist": "francais_tests-folk",
+   "name": "Là où brille la mer - Folk",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-folk:13",
+   "playlist": "francais_tests-folk",
+   "name": "Blues du lundi - Folk",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-folk:14",
+   "playlist": "francais_tests-folk",
+   "name": "Le vent et le large - Folk",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-folk:15",
+   "playlist": "francais_tests-folk",
+   "name": "La dernière nuit - Folk",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-folk:16",
+   "playlist": "francais_tests-folk",
+   "name": "Une carte postale - Folk",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-folk:18",
+   "playlist": "francais_tests-folk",
+   "name": "La maison au bout du chemin - Folk",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-folk:19",
+   "playlist": "francais_tests-folk",
+   "name": "Les amis du port - Folk",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-folk:20",
+   "playlist": "francais_tests-folk",
+   "name": "Chantons la vie - Folk",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-folk:21",
+   "playlist": "francais_tests-folk",
+   "name": "Le bar du coin - Folk",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-rock:1",
+   "playlist": "francais_tests-rock",
+   "name": "Je prends mon temps - Rock",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-rock:2",
+   "playlist": "francais_tests-rock",
+   "name": "Les quais la nuit - Rock",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-rock:3",
+   "playlist": "francais_tests-rock",
+   "name": "Demain, on change - Rock",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-rock:4",
+   "playlist": "francais_tests-rock",
+   "name": "Minuit sur l'autoroute - Rock",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-rock:5",
+   "playlist": "francais_tests-rock",
+   "name": "Mon voisin est un hérisson - Rock",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-rock:6",
+   "playlist": "francais_tests-rock",
+   "name": "Le bateau du matin - Rock",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-rock:8",
+   "playlist": "francais_tests-rock",
+   "name": "Elle danse seule - Rock",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-rock:9",
+   "playlist": "francais_tests-rock",
+   "name": "Une route en été - Rock",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-rock:10",
+   "playlist": "francais_tests-rock",
+   "name": "Le facteur et la fleuriste - Rock",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-rock:11",
+   "playlist": "francais_tests-rock",
+   "name": "Chemin de montagne - Rock",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-rock:12",
+   "playlist": "francais_tests-rock",
+   "name": "Là où brille la mer - Rock",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-rock:13",
+   "playlist": "francais_tests-rock",
+   "name": "Blues du lundi - Rock",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-rock:14",
+   "playlist": "francais_tests-rock",
+   "name": "Le vent et le large - Rock",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-rock:15",
+   "playlist": "francais_tests-rock",
+   "name": "La dernière nuit - Rock",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-rock:16",
+   "playlist": "francais_tests-rock",
+   "name": "Une carte postale - Rock",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-rock:18",
+   "playlist": "francais_tests-rock",
+   "name": "La maison au bout du chemin - Rock",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-rock:19",
+   "playlist": "francais_tests-rock",
+   "name": "Les amis du port - Rock",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-rock:20",
+   "playlist": "francais_tests-rock",
+   "name": "Chantons la vie - Rock",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-rock:21",
+   "playlist": "francais_tests-rock",
+   "name": "Le bar du coin - Rock",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-classique:1",
+   "playlist": "francais_tests-classique",
+   "name": "Je prends mon temps - Classique",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-classique:2",
+   "playlist": "francais_tests-classique",
+   "name": "Les quais la nuit - Classique",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-classique:3",
+   "playlist": "francais_tests-classique",
+   "name": "Demain, on change - Classique",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-classique:4",
+   "playlist": "francais_tests-classique",
+   "name": "Minuit sur l'autoroute - Classique",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-classique:5",
+   "playlist": "francais_tests-classique",
+   "name": "Mon voisin est un hérisson - Classique",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-classique:6",
+   "playlist": "francais_tests-classique",
+   "name": "Le bateau du matin - Classique",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-classique:8",
+   "playlist": "francais_tests-classique",
+   "name": "Elle danse seule - Classique",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-classique:9",
+   "playlist": "francais_tests-classique",
+   "name": "Une route en été - Classique",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-classique:10",
+   "playlist": "francais_tests-classique",
+   "name": "Le facteur et la fleuriste - Classique",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-classique:11",
+   "playlist": "francais_tests-classique",
+   "name": "Chemin de montagne - Classique",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-classique:12",
+   "playlist": "francais_tests-classique",
+   "name": "Là où brille la mer - Classique",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-classique:13",
+   "playlist": "francais_tests-classique",
+   "name": "Blues du lundi - Classique",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-classique:14",
+   "playlist": "francais_tests-classique",
+   "name": "Le vent et le large - Classique",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-classique:15",
+   "playlist": "francais_tests-classique",
+   "name": "La dernière nuit - Classique",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-classique:16",
+   "playlist": "francais_tests-classique",
+   "name": "Une carte postale - Classique",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-classique:18",
+   "playlist": "francais_tests-classique",
+   "name": "La maison au bout du chemin - Classique",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-classique:19",
+   "playlist": "francais_tests-classique",
+   "name": "Les amis du port - Classique",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-classique:20",
+   "playlist": "francais_tests-classique",
+   "name": "Chantons la vie - Classique",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-classique:21",
+   "playlist": "francais_tests-classique",
+   "name": "Le bar du coin - Classique",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-gregorien:1",
+   "playlist": "francais_tests-gregorien",
+   "name": "Je prends mon temps - Chant grégorien",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-gregorien:2",
+   "playlist": "francais_tests-gregorien",
+   "name": "Les quais la nuit - Chant grégorien",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-gregorien:3",
+   "playlist": "francais_tests-gregorien",
+   "name": "Demain, on change - Chant grégorien",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-gregorien:4",
+   "playlist": "francais_tests-gregorien",
+   "name": "Minuit sur l'autoroute - Chant grégorien",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-gregorien:5",
+   "playlist": "francais_tests-gregorien",
+   "name": "Mon voisin est un hérisson - Chant grégorien",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-gregorien:6",
+   "playlist": "francais_tests-gregorien",
+   "name": "Le bateau du matin - Chant grégorien",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-gregorien:8",
+   "playlist": "francais_tests-gregorien",
+   "name": "Elle danse seule - Chant grégorien",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-gregorien:9",
+   "playlist": "francais_tests-gregorien",
+   "name": "Une route en été - Chant grégorien",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-gregorien:10",
+   "playlist": "francais_tests-gregorien",
+   "name": "Le facteur et la fleuriste - Chant grégorien",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-gregorien:11",
+   "playlist": "francais_tests-gregorien",
+   "name": "Chemin de montagne - Chant grégorien",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-gregorien:12",
+   "playlist": "francais_tests-gregorien",
+   "name": "Là où brille la mer - Chant grégorien",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-gregorien:13",
+   "playlist": "francais_tests-gregorien",
+   "name": "Blues du lundi - Chant grégorien",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-gregorien:14",
+   "playlist": "francais_tests-gregorien",
+   "name": "Le vent et le large - Chant grégorien",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-gregorien:15",
+   "playlist": "francais_tests-gregorien",
+   "name": "La dernière nuit - Chant grégorien",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-gregorien:16",
+   "playlist": "francais_tests-gregorien",
+   "name": "Une carte postale - Chant grégorien",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-gregorien:18",
+   "playlist": "francais_tests-gregorien",
+   "name": "La maison au bout du chemin - Chant grégorien",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-gregorien:19",
+   "playlist": "francais_tests-gregorien",
+   "name": "Les amis du port - Chant grégorien",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-gregorien:20",
+   "playlist": "francais_tests-gregorien",
+   "name": "Chantons la vie - Chant grégorien",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-gregorien:21",
+   "playlist": "francais_tests-gregorien",
+   "name": "Le bar du coin - Chant grégorien",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-chorale:1",
+   "playlist": "francais_tests-chorale",
+   "name": "Je prends mon temps - Chant de chorale",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-chorale:2",
+   "playlist": "francais_tests-chorale",
+   "name": "Les quais la nuit - Chant de chorale",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-chorale:3",
+   "playlist": "francais_tests-chorale",
+   "name": "Demain, on change - Chant de chorale",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-chorale:4",
+   "playlist": "francais_tests-chorale",
+   "name": "Minuit sur l'autoroute - Chant de chorale",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-chorale:5",
+   "playlist": "francais_tests-chorale",
+   "name": "Mon voisin est un hérisson - Chant de chorale",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-chorale:6",
+   "playlist": "francais_tests-chorale",
+   "name": "Le bateau du matin - Chant de chorale",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-chorale:8",
+   "playlist": "francais_tests-chorale",
+   "name": "Elle danse seule - Chant de chorale",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-chorale:9",
+   "playlist": "francais_tests-chorale",
+   "name": "Une route en été - Chant de chorale",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-chorale:10",
+   "playlist": "francais_tests-chorale",
+   "name": "Le facteur et la fleuriste - Chant de chorale",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-chorale:11",
+   "playlist": "francais_tests-chorale",
+   "name": "Chemin de montagne - Chant de chorale",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-chorale:12",
+   "playlist": "francais_tests-chorale",
+   "name": "Là où brille la mer - Chant de chorale",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-chorale:13",
+   "playlist": "francais_tests-chorale",
+   "name": "Blues du lundi - Chant de chorale",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-chorale:14",
+   "playlist": "francais_tests-chorale",
+   "name": "Le vent et le large - Chant de chorale",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-chorale:15",
+   "playlist": "francais_tests-chorale",
+   "name": "La dernière nuit - Chant de chorale",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-chorale:16",
+   "playlist": "francais_tests-chorale",
+   "name": "Une carte postale - Chant de chorale",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-chorale:18",
+   "playlist": "francais_tests-chorale",
+   "name": "La maison au bout du chemin - Chant de chorale",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-chorale:19",
+   "playlist": "francais_tests-chorale",
+   "name": "Les amis du port - Chant de chorale",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-chorale:20",
+   "playlist": "francais_tests-chorale",
+   "name": "Chantons la vie - Chant de chorale",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "francais_tests-chorale:21",
+   "playlist": "francais_tests-chorale",
+   "name": "Le bar du coin - Chant de chorale",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "electro-pop-fr:1",
+   "playlist": "electro-pop-fr",
+   "name": "Mon téléphone et moi",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "electro-pop-fr:2",
+   "playlist": "electro-pop-fr",
+   "name": "Le dernier métro",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "electro-pop-fr:3",
+   "playlist": "electro-pop-fr",
+   "name": "Ça va, ça va pas",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "electro-pop-fr:4",
+   "playlist": "electro-pop-fr",
+   "name": "Cuisine de nuit",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "electro-pop-fr:5",
+   "playlist": "electro-pop-fr",
+   "name": "Ligne douze",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "electro-pop-fr:6",
+   "playlist": "electro-pop-fr",
+   "name": "Les mots qu'on oublie",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "electro-pop-fr:7",
+   "playlist": "electro-pop-fr",
+   "name": "Danse avec le lundi",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "electro-pop-fr:8",
+   "playlist": "electro-pop-fr",
+   "name": "Fatigué de courir",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "electro-pop-fr:9",
+   "playlist": "electro-pop-fr",
+   "name": "Le robot du coin",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "electro-pop-fr:10",
+   "playlist": "electro-pop-fr",
+   "name": "Ombres et néons",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "annees-50:6",
+   "playlist": "annees-50",
+   "name": "Le bal du samedi",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "annees-50:7",
+   "playlist": "annees-50",
+   "name": "Petite robe à pois",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "annees-50:8",
+   "playlist": "annees-50",
+   "name": "Un soir à Saint-Germain",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "annees-50:9",
+   "playlist": "annees-50",
+   "name": "Les amoureux du quai",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "annees-50:10",
+   "playlist": "annees-50",
+   "name": "Rock à la guinguette",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "rap-fr-melodique:1",
+   "playlist": "rap-fr-melodique",
+   "name": "Soleil sur le béton",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "rap-fr-melodique:2",
+   "playlist": "rap-fr-melodique",
+   "name": "Dans la vieille voiture",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "rap-fr-melodique:3",
+   "playlist": "rap-fr-melodique",
+   "name": "Tout pour la famille",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "rap-fr-melodique:4",
+   "playlist": "rap-fr-melodique",
+   "name": "Marseille au petit matin",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "rap-fr-melodique:5",
+   "playlist": "rap-fr-melodique",
+   "name": "Le son dans les écouteurs",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "rap-fr-melodique:6",
+   "playlist": "rap-fr-melodique",
+   "name": "Ballon et bitume",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "rap-fr-melodique:7",
+   "playlist": "rap-fr-melodique",
+   "name": "On y croit encore",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "rap-fr-melodique:8",
+   "playlist": "rap-fr-melodique",
+   "name": "Mes potes, mon quartier",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "rap-fr-melodique:9",
+   "playlist": "rap-fr-melodique",
+   "name": "Un dernier tour de ville",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "rap-fr-melodique:10",
+   "playlist": "rap-fr-melodique",
+   "name": "Mer et horizon",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "acappella-hommes:6",
+   "playlist": "acappella-hommes",
+   "name": "Chant des marins",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "acappella-hommes:7",
+   "playlist": "acappella-hommes",
+   "name": "Les hommes du village",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "acappella-hommes:8",
+   "playlist": "acappella-hommes",
+   "name": "La veillée",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "acappella-hommes:9",
+   "playlist": "acappella-hommes",
+   "name": "Le grand départ",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "acappella-hommes:10",
+   "playlist": "acappella-hommes",
+   "name": "Au pied de la montagne",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "acappella-femmes:6",
+   "playlist": "acappella-femmes",
+   "name": "Berceuse du soir",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "acappella-femmes:7",
+   "playlist": "acappella-femmes",
+   "name": "La fontaine",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "acappella-femmes:8",
+   "playlist": "acappella-femmes",
+   "name": "Chanson de la rivière",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "acappella-femmes:9",
+   "playlist": "acappella-femmes",
+   "name": "Les voix du matin",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "acappella-femmes:10",
+   "playlist": "acappella-femmes",
+   "name": "Le jardin secret",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "esprit-hallyday:1",
+   "playlist": "esprit-hallyday",
+   "name": "Allumer la nuit",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "esprit-hallyday:2",
+   "playlist": "esprit-hallyday",
+   "name": "Que je t'aime encore",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "esprit-hallyday:3",
+   "playlist": "esprit-hallyday",
+   "name": "Le pénitencier des rêves",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "esprit-hallyday:4",
+   "playlist": "esprit-hallyday",
+   "name": "Moto sur la nationale",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "esprit-hallyday:5",
+   "playlist": "esprit-hallyday",
+   "name": "L'envie de vivre",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "esprit-hallyday:6",
+   "playlist": "esprit-hallyday",
+   "name": "Gabrielle",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "esprit-hallyday:7",
+   "playlist": "esprit-hallyday",
+   "name": "Né dans la rue",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "esprit-hallyday:8",
+   "playlist": "esprit-hallyday",
+   "name": "Requiem pour un fou",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "esprit-hallyday:9",
+   "playlist": "esprit-hallyday",
+   "name": "Le blues du bord de mer",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "esprit-hallyday:10",
+   "playlist": "esprit-hallyday",
+   "name": "Debout jusqu'au bout",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "esprit-goldman:1",
+   "playlist": "esprit-goldman",
+   "name": "Encore un matin",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "esprit-goldman:2",
+   "playlist": "esprit-goldman",
+   "name": "Là-bas, de l'autre côté",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "esprit-goldman:3",
+   "playlist": "esprit-goldman",
+   "name": "Pas toi",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "esprit-goldman:4",
+   "playlist": "esprit-goldman",
+   "name": "Envole-moi",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "esprit-goldman:5",
+   "playlist": "esprit-goldman",
+   "name": "Comme toi",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "esprit-goldman:6",
+   "playlist": "esprit-goldman",
+   "name": "Je te donne",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "esprit-goldman:7",
+   "playlist": "esprit-goldman",
+   "name": "Il suffira d'un signe",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "esprit-goldman:8",
+   "playlist": "esprit-goldman",
+   "name": "Puisque tu pars",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "esprit-goldman:9",
+   "playlist": "esprit-goldman",
+   "name": "Né en dix-sept",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "esprit-goldman:10",
+   "playlist": "esprit-goldman",
+   "name": "On ira",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "blues-vocal:1",
+   "playlist": "blues-vocal",
+   "name": "Le blues du lundi",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "blues-vocal:2",
+   "playlist": "blues-vocal",
+   "name": "Train de la Louisiane",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "blues-vocal:3",
+   "playlist": "blues-vocal",
+   "name": "La croisée des chemins",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "blues-vocal:4",
+   "playlist": "blues-vocal",
+   "name": "Whisky et pluie",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "blues-vocal:5",
+   "playlist": "blues-vocal",
+   "name": "Je suis né sous une mauvaise étoile",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "blues-vocal:6",
+   "playlist": "blues-vocal",
+   "name": "Rivière boueuse",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "blues-vocal:7",
+   "playlist": "blues-vocal",
+   "name": "Le blues de la cuisine",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "blues-vocal:8",
+   "playlist": "blues-vocal",
+   "name": "Trois heures du matin",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "blues-vocal:9",
+   "playlist": "blues-vocal",
+   "name": "Les mains du travailleur",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "blues-vocal:10",
+   "playlist": "blues-vocal",
+   "name": "Dernier verre au Delta",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "esprit-lapointe:1",
+   "playlist": "esprit-lapointe",
+   "name": "Ta Katie s'est tue",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "esprit-lapointe:2",
+   "playlist": "esprit-lapointe",
+   "name": "Le hareng saur et la sardine",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "esprit-lapointe:3",
+   "playlist": "esprit-lapointe",
+   "name": "Avanie et framboise",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "esprit-lapointe:4",
+   "playlist": "esprit-lapointe",
+   "name": "Le bossu du métro",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "esprit-lapointe:5",
+   "playlist": "esprit-lapointe",
+   "name": "La maman des poissons",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "esprit-lapointe:6",
+   "playlist": "esprit-lapointe",
+   "name": "Aragon et Castille",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "esprit-lapointe:7",
+   "playlist": "esprit-lapointe",
+   "name": "Comprend qui peut",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "esprit-lapointe:8",
+   "playlist": "esprit-lapointe",
+   "name": "Méli-mélodie",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "esprit-lapointe:9",
+   "playlist": "esprit-lapointe",
+   "name": "Le tube de toilette",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "esprit-lapointe:10",
+   "playlist": "esprit-lapointe",
+   "name": "Saucisson de cheval",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "esprit-tri-yann:1",
+   "playlist": "esprit-tri-yann",
+   "name": "La complainte du marin",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "esprit-tri-yann:2",
+   "playlist": "esprit-tri-yann",
+   "name": "La danse de Plougastel",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "esprit-tri-yann:3",
+   "playlist": "esprit-tri-yann",
+   "name": "Le loup de la lande",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "esprit-tri-yann:4",
+   "playlist": "esprit-tri-yann",
+   "name": "Les filles de Quimper",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "esprit-tri-yann:5",
+   "playlist": "esprit-tri-yann",
+   "name": "Le roi de la forêt",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "esprit-tri-yann:6",
+   "playlist": "esprit-tri-yann",
+   "name": "Pêcheurs d'Islande",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "esprit-tri-yann:7",
+   "playlist": "esprit-tri-yann",
+   "name": "La gavotte du cidre",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "esprit-tri-yann:8",
+   "playlist": "esprit-tri-yann",
+   "name": "Les menhirs",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "esprit-tri-yann:9",
+   "playlist": "esprit-tri-yann",
+   "name": "Le retour au pays",
+   "status": "generated",
+   "mp3_present": true
+  },
+  {
+   "key": "esprit-tri-yann:10",
+   "playlist": "esprit-tri-yann",
+   "name": "Kenavo",
+   "status": "generated",
+   "mp3_present": true
+  }
+ ]
+}

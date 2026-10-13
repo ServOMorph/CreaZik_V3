@@ -1,0 +1,78 @@
+{
+  "default_weight": 5,
+  "weights": {
+    "test": 0,
+    "instrumental": 8
+  },
+  "jingle_every": 4,
+  "jingles_enabled": true,
+  "jingle_volume": 0.4,
+  "favorites_only": false,
+  "no_repeat": 3,
+  "no_repeat_songs": 15,
+  "excluded": [
+    "afrobeats:2",
+    "auto:8"
+  ],
+  "thumb_strength": 0.15,
+  "ads_enabled": true,
+  "ads_every": 5,
+  "ad_seconds": 9,
+  "ad_offset_s": 10,
+  "visual_transition_s": 5,
+  "dynamics_enabled": true,
+  "dynamics_strength": 1,
+  "dyn_base": 0.5,
+  "dyn_amp": 0.33,
+  "dyn_peak_hour": 17.5,
+  "dyn_weekend_shift_h": 1,
+  "dyn_energy_sigma": 0.25,
+  "dyn_tempo_tolerance": 0.25,
+  "dyn_user_weight": 1,
+  "transitions": {
+    "active": "crossfade",
+    "jingle_preset": "fondu",
+    "presets": [
+      {
+        "id": "net",
+        "name": "Net",
+        "crossfade_s": 0,
+        "fade_in_s": 0,
+        "fade_out_s": 0,
+        "gap_s": 0
+      },
+      {
+        "id": "fondu",
+        "name": "Fondu",
+        "crossfade_s": 3,
+        "fade_in_s": 3,
+        "fade_out_s": 3,
+        "gap_s": 0
+      },
+      {
+        "id": "crossfade",
+        "name": "Crossfade 4 s",
+        "crossfade_s": 4,
+        "fade_in_s": 0,
+        "fade_out_s": 0,
+        "gap_s": 0
+      },
+      {
+        "id": "radio",
+        "name": "Radio (crossfade 2,5 s)",
+        "crossfade_s": 2.5,
+        "fade_in_s": 0,
+        "fade_out_s": 0,
+        "gap_s": 0
+      },
+      {
+        "id": "respiration",
+        "name": "Respiration",
+        "crossfade_s": 0,
+        "fade_in_s": 3,
+        "fade_out_s": 3,
+        "gap_s": 2
+      }
+    ]
+  }
+}

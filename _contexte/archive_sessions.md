@@ -142,3 +142,29 @@ Poursuivre les contrôles manuels restants ; si une nouvelle génération est de
 
 ## Question bloquante pour la session suivante
 Aucune
+
+---
+
+# Session du 2026-10-10 (précédente)
+
+## Décisions prises
+- Graine toujours imposée (>= 0) pour les tests ; passage obligatoire par les Tests ajouté au skill (étapes 6 et 7).
+- « Garde » = ranger le MP3 et son sidecar chez l'artiste (mémoire projet).
+- Instrus de Marie : générer 5 graines, trier à l'écoute ; l'intro courte n'est pas le critère décisif.
+- Nom d'artiste cité en inspiration jamais dans le caption ni le titre d'un test.
+
+## Livrables produits ou modifiés
+- `webradio/ace_worker.py`, `tools/cover_gen.py`, `tools/cover_batch.py`, `.claude/commands/generate_covers.md` : changements antérieurs identifiés (traçabilité, pochettes sans texte), commités, test complet en attente ; `ace_worker.py` lit `lyrics` pour un instrumental.
+- `.claude/skills/generation-morceaux/SKILL.md`, `.claude/memory.md`, `tests_manuels.md`, `TEXTES/artistes/Marie/INDEX.md` : mis à jour.
+- `TEXTES/artistes/Marie/` : 2 instrus et `tops_instrus/` (MP3 non commités) ; tests Funky Yogi, Marie rap et instrus dans `webradio/tests_ace/`.
+
+## Hypothèses validées / invalidées
+- VALIDE : sidecar et manifeste écrits pour chaque génération ; 150 s sans décodage VAE sur CPU (graines testées).
+- INVALIDE : intro de 10 s réglable (beat entre 14 et 30 s selon graine et tempo) ; premier style Funky Yogi (electro-funk, 3 graines) rejeté et supprimé.
+- EN ATTENTE : avis sur les tests 45 et 46 ; effet réel de 70 contre 130 BPM, de « binaire » et du piano à graine égale.
+
+## Prochaine étape exacte
+Tester les pochettes sans texte et la reprise de piste d'`ace_worker.py`, puis appliquer techniquement la validation préalable dans le pipeline automatique.
+
+## Question bloquante pour la session suivante
+Aucune

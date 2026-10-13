@@ -1,6 +1,24 @@
-# Signals — CreaZik_V3   (MAJ 2026-10-10, fin de session)
+# Signals — CreaZik_V3   (MAJ 2026-10-12, fin de session)
 
 ## Actions ouvertes
+- [P1|ouvert] Écouter les 19 versions Funky Yogi (tests 47 à 65 : 10 textes en 3 styles, dont 3 textes avec chœurs base/v1/v2/v3) et voter ; juger les chœurs ; la première boucle d'apprentissage en dépend
+  - fait quand: les 19 versions sont votées, les moyens de chœurs notés `teste` ou `echec` dans `regles_modeles.json` après accord, un bilan par texte rédigé (roadmap phase 6)
+  - réf: `roadmap_ecriture_humaine.md` phase 6, `DOCUMENTATION/apprentissage/plan_run.json`, `DOCUMENTATION/apprentissage/propositions/textes-funky-yogi-photos.md`, `webradio/tests_state.json`
+- [P1|ouvert] Valider le premier calcul de préférences (851 votes pris en compte ; 395 différences, premier calcul) : `diff_preferences.py --appliquer` seulement après accord
+  - fait quand: l'utilisateur a relu le diff et accepte ou corrige `preferences.proposition.json`, puis `preferences.json` existe
+  - réf: `OUTILS/apprentissage/diff_preferences.py`, `DOCUMENTATION/apprentissage/preferences.proposition.json`, `DOCUMENTATION/APPRENTISSAGE.md`
+- [P1|ouvert] Clip promo L'Invariable (17 octobre 2026) : retenus dans le dossier `clip_promo\musique\retenus\` de SerenIATech (Eurodisco graine 2026, cover « Ça m'énerve » graine 42) ; écouter, améliorer refrain et variations mélodiques, choisir pour le clip ; droits du morceau de Helmut Fritz à trancher avant tout usage public du cover
+  - fait quand: un morceau est choisi pour le clip, ses paroles finalisées dans `paroles_clip.md`, et la question des droits du cover tranchée
+  - réf: `webradio/tests_ace/clip_atelier_invariable/config.json` (cas 7 à 22), `webradio/playlists/creation-francaise/`
+- [P2|ouvert] Tester `src_audio` (cover) et `reference_audio` de `ace_worker.py` sur un cas réel suivi d'une écoute, et contrôler qu'un cas sans ces champs se comporte comme avant (pytest `webradio/tests`)
+  - fait quand: pytest `webradio/tests` passe et le cover est écouté
+  - réf: `webradio/ace_worker.py` (`prepare_audio`, `task_type`), `webradio/tests_ace/clip_atelier_invariable/outputs/`
+- [P2|ouvert] Supprimer ou non du catalogue les 8 versions françaises « négatives » conservées (tri du 2026-10-12) ; aligner les descriptions de playlist (`instrumental` dit encore « 21 morceaux », `disco-en` inchangée)
+  - fait quand: décision prise et appliquée, descriptions de `playlists.json` alignées
+  - réf: `DOCUMENTATION/apprentissage/retrait_fr.json`, `webradio/playlists.json`, `webradio/catalog_overrides.json`
+- [P2|ouvert] Contrôler dans le navigateur l'UI Tests (texte sur plusieurs lignes, plier/déplier) et la diffusion de `instrumental:22` et `creation-francaise:1` (serveur relancé le 2026-10-13, lecture confirmée sur téléphone par l'utilisateur)
+  - fait quand: UI Tests contrôlée, les deux morceaux entendus à l'antenne ou signalés défaillants
+  - réf: `tests_manuels.md` n°9 à 13, `webradio/listen.js`, `webradio/services.ps1`
 - [P1|ouvert] Appliquer techniquement la validation préalable : envoyer les nouvelles générations vers les Tests et bloquer leur ajout à la diffusion ou à la rotation sans demande explicite.
   - fait quand: le pipeline automatique produit d'abord des fichiers accessibles dans les Tests et aucun chemin n'ajoute un nouveau contenu à la diffusion sans demande de l'utilisateur
   - réf: `AGENTS.md` section Spécificités projet, `AMELIORATIONS.md`, `webradio/REGLES_GENERATION_DEV.md` section 2.6, `.claude/skills/generation-morceaux/SKILL.md` étapes 6 et 7
@@ -46,9 +64,9 @@
 - [P2|ouvert] Choisir parmi les propositions de réaménagement de l'UI admin et décider du sort de `ui.html`
   - fait quand: l'utilisateur a tranché et les choix retenus sont appliqués
   - réf: `webradio/radio.html`, `webradio/ui.html`
-- [P3|ouvert] Relever la graine effective quand `seed` vaut `-1` (rotation) : le sidecar enregistre `-1` et le morceau n'est pas reproductible
-  - fait quand: la graine tirée par ACE est écrite dans le sidecar et dans `playlist_results.json`
-  - réf: `webradio/ace_worker.py`, `D:\ServOMorph\ACE-Step-1.5\acestep\core\generation\handler\task_utils.py` (`prepare_seeds`)
+- [P3|ouvert] Faire sauter le moteur radio à l'heure réelle au démarrage : après un arrêt prolongé il rejoue en accéléré les morceaux manqués (environ 20 min pour 23 h) et la lecture ne démarre pas sur téléphone pendant ce temps
+  - fait quand: une relance après plusieurs heures d'arrêt donne un morceau en cours synchronisé en moins d'une minute
+  - réf: `webradio/radio_engine.py`, `webradio/radio_state.json`
 - [P3|ouvert] Décider du versionnage des MP3 conservés dans `TEXTES/artistes/Marie/` (2 instrus et `tops_instrus/`, environ 3 à 3,6 Mo chacun) : non commités à cette clôture car la règle est de ne pas versionner l'audio
   - fait quand: l'utilisateur tranche entre versionner, ajouter au `.gitignore` ou stocker ailleurs
   - réf: `TEXTES/artistes/Marie/INDEX.md`, `.gitignore`
@@ -66,31 +84,35 @@
   - réf: `PLAN_WEBRADIO.md` section 4.5
 
 ## Contexte chaud
-- Section Tests : dossiers par clé `folder` (`tests_folder`, `server.py`) ; commentaires et pouces dans `webradio/tests_state.json`, à lire pour analyser les écoutes. Contient en fin de session : test 45 (Funky Yogi nu-disco), test 46 (Marie rap avec voix) et la grille voix de femme. Serveur actif (port 5000).
-- Instrus de Marie : la règle (5 graines, tri à l'écoute, intro non pilotable, 15 à 30 s) est dans le skill `generation-morceaux`. Retenus : `TEXTES/artistes/Marie/tops_instrus/` (graines 2026 et 31415, copiés aussi dans Téléchargements) et 2 instrus à la racine de `TEXTES/artistes/Marie/`. Mot « garde » d'un morceau = le ranger chez l'artiste (`.claude/memory.md`).
-- `ace_worker.py` écrit un sidecar `.metadata.json` et un manifeste par test ; le nom du WAV porte horodatage et graine ; `lyrics` est lu pour un cas instrumental. Services `analyse` et `compression` actifs, `generation` arrêté.
-- Avant une nouvelle génération GPU, consulter l'état des services et la VRAM libre. Toute nouvelle création destinée à la radio passe par les Tests puis une demande explicite avant diffusion.
+- Roadmap écriture humaine : phases 1 à 5 faites (outils, apprentissage, retrait des morceaux français, propositions, run) ; phase 6 en cours (attente des écoutes). Les 19 versions Funky Yogi sont dans les Tests ; `paroles.md` pas encore dans le run.
+- `ace_worker.py` accepte `reference_audio`, `src_audio`, `task_type` (cover), `audio_start_s`/`audio_duration_s`, `audio_cover_strength`, `cover_noise_strength` ; seuls une référence audio et un cover ont été essayés.
+- Radio : boucle désactivée, serveur du port 5000 relancé le 2026-10-13 et écouté par le tunnel (`vertia-test.serenia-tech.fr` vers `localhost:5000`, vérifié) ; après un arrêt prolongé le moteur rattrape son retard en accéléré (environ 20 min pour 23 h d'arrêt), pendant lequel la lecture ne démarre pas sur téléphone ; `instrumental:22` et `creation-francaise:1` ajoutés avec leurs JSON (règle mémoire : à chaque ajout, prendre les JSON).
+- Section Tests : entrées `status: planned` possibles (sans MP3) ; UI avec plier/déplier. Dossier du clip : `webradio/tests_ace/clip_atelier_invariable/`.
+- Avant une génération GPU, vérifier la VRAM libre (environ 1 Go pris par Windows et les applications).
 
-# Session du 2026-10-10
+# Session du 2026-10-12
 
 ## Décisions prises
-- Graine toujours imposée (>= 0) pour les tests ; passage obligatoire par les Tests ajouté au skill (étapes 6 et 7).
-- « Garde » = ranger le MP3 et son sidecar chez l'artiste (mémoire projet).
-- Instrus de Marie : générer 5 graines, trier à l'écoute ; l'intro courte n'est pas le critère décisif.
-- Nom d'artiste cité en inspiration jamais dans le caption ni le titre d'un test.
+- Réorientation vers l'écriture humaine : Funky Yogi mis en musique (electro, funk, disco, soul ; ~120 BPM, un à 100 et un à 95), ACE seul, 150 s au plus, échec technique = nouvelle graine.
+- Apprentissage fondé sur les seuls votes radio ; `preferences.json` mis à jour seulement avec accord, diff présenté par `/close`.
+- Chansons françaises retirées de la diffusion (14 versions gardées) ; boucle désactivée.
+- Clip L'Invariable : disco funk puis groupe vocal Eurodisco ; retenus dans `clip_promo/musique/retenus/` ; playlist `creation-francaise` créée.
+- À chaque ajout de morceau à la WebRadio : prendre les JSON avec (mémoire projet).
 
 ## Livrables produits ou modifiés
-- `webradio/ace_worker.py`, `tools/cover_gen.py`, `tools/cover_batch.py`, `.claude/commands/generate_covers.md` : changements antérieurs identifiés (traçabilité, pochettes sans texte), commités, test complet en attente ; `ace_worker.py` lit `lyrics` pour un instrumental.
-- `.claude/skills/generation-morceaux/SKILL.md`, `.claude/memory.md`, `tests_manuels.md`, `TEXTES/artistes/Marie/INDEX.md` : mis à jour.
-- `TEXTES/artistes/Marie/` : 2 instrus et `tops_instrus/` (MP3 non commités) ; tests Funky Yogi, Marie rap et instrus dans `webradio/tests_ace/`.
+- `OUTILS/` (extraction, apprentissage, run_textes), `DOCUMENTATION/apprentissage/`, `DOCUMENTATION/APPRENTISSAGE.md` : outils et données, 15 tests passés ; `roadmap_ecriture_humaine.md` : statuts à jour.
+- `TEXTES/artistes/funky-yogi/textes/` : 10 textes `RELU` ; 19 versions générées (tests 47 à 65).
+- `webradio/ace_worker.py`, `server.py`, `listen.js`, `listen.css`, `radio_engine.py` : graine effective, entrées `planned`, UI Tests, référence audio et cover.
+- `webradio/playlists/instrumental/` (morceau 22), `playlists/creation-francaise/` (nouvelle), `webradio/tests_ace/clip_atelier_invariable/` (cas 1 à 22).
 
 ## Hypothèses validées / invalidées
-- VALIDE : sidecar et manifeste écrits pour chaque génération ; 150 s sans décodage VAE sur CPU (graines testées).
-- INVALIDE : intro de 10 s réglable (beat entre 14 et 30 s selon graine et tempo) ; premier style Funky Yogi (electro-funk, 3 graines) rejeté et supprimé.
-- EN ATTENTE : avis sur les tests 45 et 46 ; effet réel de 70 contre 130 BPM, de « binaire » et du piano à graine égale.
+- VALIDE : run automatique de 19 versions ; graine enregistrée sur génération réelle ; cover et référence audio s'exécutent (journal « cover task », référence dans le sidecar).
+- VALIDE : serveur du port 5000 relancé, tunnel atteint, lecture confirmée sur téléphone après le rattrapage du moteur ; serveur Eleventy parasite du port 5000 arrêté sur demande.
+- EN ATTENTE : écoute des 19 versions, des chœurs, du clip, du cover et des voix Eurodisco ; effet réel de la référence audio.
+- INVALIDE : aucune.
 
 ## Prochaine étape exacte
-Tester les pochettes sans texte et la reprise de piste d'`ace_worker.py`, puis appliquer techniquement la validation préalable dans le pipeline automatique.
+Écouter et voter les 19 versions Funky Yogi, valider le diff des préférences, puis rédiger le bilan par texte (phase 6).
 
 ## Question bloquante pour la session suivante
-Aucune
+Quel morceau du clip L'Invariable est retenu, et les droits du cover de Helmut Fritz sont-ils réglés ?

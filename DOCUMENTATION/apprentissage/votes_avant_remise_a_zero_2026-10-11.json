@@ -1,0 +1,143 @@
+{
+ "sauvegarde_le": "2026-10-11T17:38:35+02:00",
+ "motif": "remise a zero avant nouvelle ecoute (Souliers de ma grand-mere, Les gars de la cote)",
+ "votes": {
+  "perso:7": {
+   "up": 1,
+   "down": 0,
+   "score": 1
+  },
+  "perso:17": {
+   "up": 1,
+   "down": 0,
+   "score": 1
+  },
+  "francais_tests-rock:7": {
+   "up": 2,
+   "down": 3,
+   "score": -1
+  },
+  "francais_tests-rock:17": {
+   "up": 0,
+   "down": 1,
+   "score": -1
+  },
+  "francais_tests-gregorien:7": {
+   "up": 1,
+   "down": 0,
+   "score": 1
+  },
+  "francais_tests-gregorien:17": {
+   "up": 0,
+   "down": 1,
+   "score": -1
+  },
+  "francais_tests-folk:7": {
+   "up": 1,
+   "down": 0,
+   "score": 1
+  },
+  "francais_tests-folk:17": {
+   "up": 0,
+   "down": 1,
+   "score": -1
+  },
+  "francais_tests-classique:7": {
+   "up": 0,
+   "down": 1,
+   "score": -1
+  },
+  "francais_tests-classique:17": {
+   "up": 1,
+   "down": 0,
+   "score": 1
+  },
+  "francais_tests-electro:7": {
+   "up": 0,
+   "down": 1,
+   "score": -1
+  },
+  "francais_tests-electro:17": {
+   "up": 1,
+   "down": 0,
+   "score": 1
+  },
+  "francais_tests-chorale:7": {
+   "up": 1,
+   "down": 0,
+   "score": 1
+  },
+  "francais_tests-chorale:17": {
+   "up": 0,
+   "down": 1,
+   "score": -1
+  }
+ },
+ "voters": {
+  "4cfdc4d6beb935f931433e889bec5c72": {
+   "perso:7": {
+    "up": 1,
+    "down": 0
+   },
+   "perso:17": {
+    "up": 1,
+    "down": 0
+   },
+   "francais_tests-rock:7": {
+    "up": 0,
+    "down": 1
+   },
+   "francais_tests-gregorien:7": {
+    "up": 1,
+    "down": 0
+   },
+   "francais_tests-gregorien:17": {
+    "up": 0,
+    "down": 1
+   },
+   "francais_tests-folk:7": {
+    "up": 1,
+    "down": 0
+   },
+   "francais_tests-folk:17": {
+    "up": 0,
+    "down": 1
+   },
+   "francais_tests-classique:17": {
+    "up": 1,
+    "down": 0
+   },
+   "francais_tests-electro:7": {
+    "up": 0,
+    "down": 1
+   },
+   "francais_tests-electro:17": {
+    "up": 1,
+    "down": 0
+   }
+  },
+  "6f1360aaa5c119d3fc7d814e3df1997d": {
+   "francais_tests-rock:7": {
+    "up": 2,
+    "down": 2
+   },
+   "francais_tests-rock:17": {
+    "up": 0,
+    "down": 1
+   },
+   "francais_tests-classique:7": {
+    "up": 0,
+    "down": 1
+   },
+   "francais_tests-chorale:7": {
+    "up": 1,
+    "down": 0
+   },
+   "francais_tests-chorale:17": {
+    "up": 0,
+    "down": 1
+   }
+  },
+  "2254454ba4aa0175da4c39a4a5763d0e": {}
+ }
+}

@@ -15,5 +15,5 @@ WebRadio IA locale : musique générée en local avec ACE-Step 1.5, diffusée en
 
 ## État actuel
 Interfaces auditeur/admin séparées (5000/5001) et section « Tests » pour écouter les créations avant toute diffusion. Chaque ajout à la WebRadio nécessite une demande explicite de l'utilisateur.
-Chaque génération de test écrit un fichier de traçabilité (`.metadata.json`) et un manifeste ; la graine est toujours imposée. Les pochettes sont générées sans texte, une image par morceau.
-Instrus rap mélodique de Marie conservés dans `TEXTES/artistes/Marie/` (dont `tops_instrus/`). Les contrôles iPhone, la grille de voix féminine et l'application technique de la validation préalable au pipeline automatique restent en attente ; déploiement VPS non réalisé.
+Réorientation vers l'écriture humaine : outils d'extraction de textes, d'apprentissage et de run (`OUTILS/`), 10 textes Funky Yogi relus et 19 versions générées à écouter ; chansons françaises retirées de la radio (14 gardées).
+Les générations de test écrivent un `.metadata.json` et un manifeste ; la graine est toujours imposée ; `ace_worker.py` accepte une référence audio et le mode cover. Contrôles iPhone, écoutes, validation des préférences et déploiement VPS en attente.

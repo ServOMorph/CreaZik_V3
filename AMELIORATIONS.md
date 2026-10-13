@@ -21,4 +21,7 @@ Cette liste centrale recense les améliorations encore ouvertes. Garder chaque e
 - [ ] Confirmer le seuil `0.688` de `jlayout` dans `webradio/motion.js` et la suppression du formulaire de commentaires / du bloc « musique humaine » dans `webradio/listen.html` (changements hors de cette session) : corriger ou assumer.
 - [ ] Concurrence entre `ace_worker.py` (réécrit `playlist_results.json` sans verrou) et la suppression d'un test du dossier `tests-ace` par le serveur : masquer par un état séparé ou partager un verrou si des tests y sont régénérés pendant une suppression.
 - [ ] Câbler un protocole d'apprentissage : `webradio/learning/morceaux_rejetes.jsonl` n'est lu par aucun code de génération ; relier les votes et commentaires des Tests, le prompt et la graine à des réglages recommandés par le skill `generation-morceaux`.
-- [ ] Relever la graine effective quand `seed` vaut `-1` dans `ace_worker.py` (sidecar et résultats), pour rendre reproductibles les morceaux de la rotation.
+- [ ] Tester `ace_worker.py` avec `src_audio` (cover) et `reference_audio` sur un cas réel, puis ajouter un test automatique des nouveaux champs (`prepare_audio`, `task_type`).
+- [ ] Décider du sort des 8 versions françaises « négatives » conservées au catalogue et aligner les descriptions de playlist (`instrumental`, `disco-en`) avec le nombre réel de morceaux.
+- [ ] Ajouter à l'UI Tests un affichage des morceaux rangés par texte source (lien vers le texte `RELU`) pour faciliter le bilan d'écoute de la roadmap écriture humaine.
+- [ ] Faire sauter le moteur de la radio à l'heure réelle au démarrage (`radio_engine.py`) : après un arrêt prolongé il rejoue en accéléré les morceaux manqués, ce qui bloque la lecture sur téléphone pendant environ 20 minutes pour 23 h d'arrêt.

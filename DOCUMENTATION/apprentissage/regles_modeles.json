@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "mis_a_jour_le": "2026-10-11",
+  "sources": ["DOCUMENTATION/ACE_STEP_1_5.md", ".claude/skills/generation-morceaux/SKILL.md", "TEXTES/tools/check_lyrics.py"],
+  "graines_de_reprise": [2026, 31415, 42, 101, 777, 1234, 8888, 5150],
+  "modeles": {
+    "ace-step-1.5-turbo": {
+      "actif": true,
+      "duree_max_s": 150,
+      "duree_sure_s": 135,
+      "note_duree": "Maximum fixe par l'utilisateur le 2026-10-11 (modifiable). Des instrus de 150 s ont ete generes sans blocage (tests 51 a 55) ; un test a 180 s a bloque en decodage VAE sur CPU. Surveiller la ligne 'auto-enabling CPU VAE decode'.",
+      "langue": "fr",
+      "voix": {"male": "fiable", "female": "instable (voix d'homme obtenue avec un caption 'female' lors de la demo T01, a ecouter)", "duo": "ne fonctionne pas"},
+      "formatage_paroles": {
+        "sections": ["[intro]", "[verse]", "[pre-chorus]", "[chorus]", "[bridge]", "[outro]", "[instrumental]"],
+        "ligne_syllabes_cible": [6, 10],
+        "ligne_syllabes_max": 10,
+        "balise_seule_sur_sa_ligne": true,
+        "controle": "python TEXTES/tools/check_lyrics.py <fichier> --caption \"<caption>\" --duree <s>"
+      },
+      "caption": {"mots_cles": [5, 12], "ordre": "genre, instruments, voix, production, ambiance", "interdits": ["noms d'artistes", "termes contradictoires"]},
+      "operations_texte": [
+        {"nom": "silence", "moyen": "balise [Silence] sur sa propre ligne", "etat": "teste", "preuve": "demo T01, version 18"},
+        {"nom": "mise_en_lumiere", "moyen": "mot ou phrase en MAJUSCULES", "etat": "hypothese"},
+        {"nom": "echo_choeur", "moyen": "mot ou fin de phrase entre parentheses", "etat": "hypothese"},
+        {"nom": "respiration", "moyen": "[Instrumental] ou [Breakdown] entre deux sections", "etat": "hypothese"},
+        {"nom": "refrain", "moyen": "balise [chorus] ; 'Ref :' imprime devient [chorus]", "etat": "teste"},
+        {"nom": "repetition", "moyen": "recopie de la section [chorus]", "etat": "pratique_du_projet"},
+        {"nom": "decoupe_ligne_longue", "moyen": "decouper une ligne de plus de 10 syllabes", "etat": "regle_du_skill"},
+        {"nom": "voix_parlee", "moyen": "balise [spoken word]", "etat": "hypothese"}
+      ],
+      "parametres_generation": {"steps": 8, "lm": false, "fit_lyrics": false, "seed": "toujours explicite (>= 0), enregistree"}
+    }
+  }
+}

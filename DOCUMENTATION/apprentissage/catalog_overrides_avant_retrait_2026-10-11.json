@@ -1,0 +1,342 @@
+{
+ "playlists": {
+  "jingles": {
+   "deleted": true
+  },
+  "caraibes": {
+   "deleted": true
+  },
+  "classique-varie": {
+   "deleted": true
+  },
+  "gospel": {
+   "deleted": true
+  },
+  "gamelan": {
+   "deleted": true
+  },
+  "medieval-renaissance": {
+   "deleted": true
+  },
+  "mariachi": {
+   "deleted": true
+  },
+  "bollywood": {
+   "deleted": true
+  },
+  "jeux-video": {
+   "deleted": true
+  },
+  "balkans": {
+   "deleted": true
+  },
+  "test": {
+   "deleted": true
+  }
+ },
+ "tracks": {
+  "jingles:1": {
+   "deleted": true
+  },
+  "jingles:2": {
+   "deleted": true
+  },
+  "jingles:3": {
+   "deleted": true
+  },
+  "jingles:4": {
+   "deleted": true
+  },
+  "jingles:5": {
+   "deleted": true
+  },
+  "jingles:6": {
+   "deleted": true
+  },
+  "jingles:7": {
+   "deleted": true
+  },
+  "jingles:8": {
+   "deleted": true
+  },
+  "bachata-merengue:10": {
+   "deleted": true
+  },
+  "jingles-voix-femme:20": {
+   "deleted": true
+  },
+  "caraibes:1": {
+   "deleted": true
+  },
+  "caraibes:2": {
+   "deleted": true
+  },
+  "caraibes:3": {
+   "deleted": true
+  },
+  "caraibes:4": {
+   "deleted": true
+  },
+  "caraibes:5": {
+   "deleted": true
+  },
+  "caraibes:6": {
+   "deleted": true
+  },
+  "caraibes:7": {
+   "deleted": true
+  },
+  "caraibes:8": {
+   "deleted": true
+  },
+  "caraibes:9": {
+   "deleted": true
+  },
+  "caraibes:10": {
+   "deleted": true
+  },
+  "classique-varie:1": {
+   "deleted": true
+  },
+  "classique-varie:2": {
+   "deleted": true
+  },
+  "classique-varie:3": {
+   "deleted": true
+  },
+  "classique-varie:4": {
+   "deleted": true
+  },
+  "classique-varie:5": {
+   "deleted": true
+  },
+  "classique-varie:6": {
+   "deleted": true
+  },
+  "classique-varie:7": {
+   "deleted": true
+  },
+  "classique-varie:8": {
+   "deleted": true
+  },
+  "classique-varie:9": {
+   "deleted": true
+  },
+  "classique-varie:10": {
+   "deleted": true
+  },
+  "gospel:1": {
+   "deleted": true
+  },
+  "gospel:2": {
+   "deleted": true
+  },
+  "gospel:3": {
+   "deleted": true
+  },
+  "gospel:4": {
+   "deleted": true
+  },
+  "gospel:5": {
+   "deleted": true
+  },
+  "gospel:6": {
+   "deleted": true
+  },
+  "gospel:7": {
+   "deleted": true
+  },
+  "gospel:8": {
+   "deleted": true
+  },
+  "gospel:9": {
+   "deleted": true
+  },
+  "gospel:10": {
+   "deleted": true
+  },
+  "gamelan:1": {
+   "deleted": true
+  },
+  "gamelan:2": {
+   "deleted": true
+  },
+  "gamelan:3": {
+   "deleted": true
+  },
+  "gamelan:4": {
+   "deleted": true
+  },
+  "gamelan:5": {
+   "deleted": true
+  },
+  "gamelan:6": {
+   "deleted": true
+  },
+  "gamelan:7": {
+   "deleted": true
+  },
+  "gamelan:8": {
+   "deleted": true
+  },
+  "gamelan:9": {
+   "deleted": true
+  },
+  "gamelan:10": {
+   "deleted": true
+  },
+  "medieval-renaissance:1": {
+   "deleted": true
+  },
+  "medieval-renaissance:2": {
+   "deleted": true
+  },
+  "medieval-renaissance:3": {
+   "deleted": true
+  },
+  "medieval-renaissance:4": {
+   "deleted": true
+  },
+  "medieval-renaissance:5": {
+   "deleted": true
+  },
+  "medieval-renaissance:6": {
+   "deleted": true
+  },
+  "medieval-renaissance:7": {
+   "deleted": true
+  },
+  "medieval-renaissance:8": {
+   "deleted": true
+  },
+  "medieval-renaissance:9": {
+   "deleted": true
+  },
+  "medieval-renaissance:10": {
+   "deleted": true
+  },
+  "mariachi:1": {
+   "deleted": true
+  },
+  "mariachi:2": {
+   "deleted": true
+  },
+  "mariachi:3": {
+   "deleted": true
+  },
+  "mariachi:4": {
+   "deleted": true
+  },
+  "mariachi:5": {
+   "deleted": true
+  },
+  "mariachi:6": {
+   "deleted": true
+  },
+  "mariachi:7": {
+   "deleted": true
+  },
+  "mariachi:8": {
+   "deleted": true
+  },
+  "mariachi:9": {
+   "deleted": true
+  },
+  "mariachi:10": {
+   "deleted": true
+  },
+  "bollywood:1": {
+   "deleted": true
+  },
+  "bollywood:2": {
+   "deleted": true
+  },
+  "bollywood:3": {
+   "deleted": true
+  },
+  "bollywood:4": {
+   "deleted": true
+  },
+  "bollywood:5": {
+   "deleted": true
+  },
+  "bollywood:6": {
+   "deleted": true
+  },
+  "bollywood:7": {
+   "deleted": true
+  },
+  "bollywood:8": {
+   "deleted": true
+  },
+  "bollywood:9": {
+   "deleted": true
+  },
+  "bollywood:10": {
+   "deleted": true
+  },
+  "jeux-video:1": {
+   "deleted": true
+  },
+  "jeux-video:2": {
+   "deleted": true
+  },
+  "jeux-video:3": {
+   "deleted": true
+  },
+  "jeux-video:4": {
+   "deleted": true
+  },
+  "jeux-video:5": {
+   "deleted": true
+  },
+  "jeux-video:6": {
+   "deleted": true
+  },
+  "jeux-video:7": {
+   "deleted": true
+  },
+  "jeux-video:8": {
+   "deleted": true
+  },
+  "jeux-video:9": {
+   "deleted": true
+  },
+  "jeux-video:10": {
+   "deleted": true
+  },
+  "balkans:1": {
+   "deleted": true
+  },
+  "balkans:2": {
+   "deleted": true
+  },
+  "balkans:3": {
+   "deleted": true
+  },
+  "balkans:4": {
+   "deleted": true
+  },
+  "balkans:5": {
+   "deleted": true
+  },
+  "balkans:6": {
+   "deleted": true
+  },
+  "balkans:7": {
+   "deleted": true
+  },
+  "balkans:8": {
+   "deleted": true
+  },
+  "balkans:9": {
+   "deleted": true
+  },
+  "balkans:10": {
+   "deleted": true
+  },
+  "test:1": {
+   "deleted": true
+  }
+ }
+}

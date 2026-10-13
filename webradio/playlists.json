@@ -538,5 +538,11 @@
     "role": "jingle",
     "category": "serenia-tech",
     "description": "Jingles publicitaires pour SérénIA Tech."
+  },
+  {
+    "id": "creation-francaise",
+    "label": "Création française",
+    "results": "playlists/creation-francaise/outputs/playlist_results.json",
+    "description": "Créations françaises originales (textes et musiques de l'atelier), générées en local."
   }
 ]

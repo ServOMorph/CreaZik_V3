@@ -1,0 +1,25 @@
+{
+  "timestamp": "2026-10-11T20:09:20.990856",
+  "mode": "real",
+  "playlist": "Funky Yogi t9_base",
+  "model": "ACE-Step 1.5 turbo",
+  "generations": [
+    {
+      "test_case_id": "1",
+      "name": "t9_base",
+      "prompt": "French deep house soul, dusty keys, soft four-on-the-floor, warm bass, male vocal, relaxed, late night",
+      "type": "vocal",
+      "duration": 80,
+      "output_file": "tests_ace/funky_yogi_textes/t9_base/outputs/01_t9_base_20261011T200920990856_s3226866593.wav",
+      "seed": 3226866593,
+      "seed_source": "tiree_par_worker",
+      "status": "generated",
+      "generated_at": "2026-10-11T20:09:30+02:00",
+      "model": "ACE-Step 1.5 turbo",
+      "energy_wh_est": 0.158,
+      "gpu_util_avg_pct": 47.0,
+      "elapsed_s": 9.9,
+      "metadata_file": "tests_ace/funky_yogi_textes/t9_base/outputs/01_t9_base_20261011T200920990856_s3226866593.metadata.json"
+    }
+  ]
+}
