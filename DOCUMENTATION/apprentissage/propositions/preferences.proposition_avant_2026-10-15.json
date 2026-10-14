@@ -1,0 +1,617 @@
+{
+  "version": 1,
+  "calcule_le": "2026-10-12T14:22:22+02:00",
+  "sources": {
+    "votes": "webradio/votes.json",
+    "morceaux_votes": 851
+  },
+  "modeles": {
+    "ace-step-1.5-turbo": {
+      "mots_cles_caption": [
+        {
+          "terme": "instrumental",
+          "pour": 123,
+          "contre": 248,
+          "taux": 0.332
+        },
+        {
+          "terme": "piano",
+          "pour": 13,
+          "contre": 37,
+          "taux": 0.26
+        },
+        {
+          "terme": "french lyrics",
+          "pour": 20,
+          "contre": 27,
+          "taux": 0.426
+        },
+        {
+          "terme": "a cappella",
+          "pour": 8,
+          "contre": 31,
+          "taux": 0.205
+        },
+        {
+          "terme": "violin",
+          "pour": 14,
+          "contre": 25,
+          "taux": 0.359
+        },
+        {
+          "terme": "fiddle",
+          "pour": 15,
+          "contre": 23,
+          "taux": 0.395
+        },
+        {
+          "terme": "harmonica",
+          "pour": 19,
+          "contre": 12,
+          "taux": 0.613
+        },
+        {
+          "terme": "english lyrics",
+          "pour": 28,
+          "contre": 2,
+          "taux": 0.933
+        },
+        {
+          "terme": "no other instruments",
+          "pour": 9,
+          "contre": 18,
+          "taux": 0.333
+        },
+        {
+          "terme": "orchestral strings",
+          "pour": 7,
+          "contre": 18,
+          "taux": 0.28
+        },
+        {
+          "terme": "classical music",
+          "pour": 2,
+          "contre": 22,
+          "taux": 0.083
+        },
+        {
+          "terme": "upright bass",
+          "pour": 11,
+          "contre": 13,
+          "taux": 0.458
+        },
+        {
+          "terme": "acoustic folk",
+          "pour": 6,
+          "contre": 17,
+          "taux": 0.261
+        },
+        {
+          "terme": "deep bass",
+          "pour": 9,
+          "contre": 14,
+          "taux": 0.391
+        },
+        {
+          "terme": "drum machine",
+          "pour": 11,
+          "contre": 12,
+          "taux": 0.478
+        },
+        {
+          "terme": "storytelling",
+          "pour": 6,
+          "contre": 17,
+          "taux": 0.261
+        },
+        {
+          "terme": "accordion",
+          "pour": 6,
+          "contre": 16,
+          "taux": 0.273
+        },
+        {
+          "terme": "bass",
+          "pour": 2,
+          "contre": 20,
+          "taux": 0.091
+        },
+        {
+          "terme": "choir",
+          "pour": 4,
+          "contre": 18,
+          "taux": 0.182
+        },
+        {
+          "terme": "energetic french vocal",
+          "pour": 1,
+          "contre": 21,
+          "taux": 0.045
+        },
+        {
+          "terme": "french vocal",
+          "pour": 11,
+          "contre": 11,
+          "taux": 0.5
+        },
+        {
+          "terme": "mellow",
+          "pour": 5,
+          "contre": 17,
+          "taux": 0.227
+        },
+        {
+          "terme": "walking bass",
+          "pour": 13,
+          "contre": 9,
+          "taux": 0.591
+        },
+        {
+          "terme": "distorted electric guitars",
+          "pour": 1,
+          "contre": 20,
+          "taux": 0.048
+        },
+        {
+          "terme": "driving four-on-the-floor beat",
+          "pour": 10,
+          "contre": 11,
+          "taux": 0.476
+        },
+        {
+          "terme": "electronic music",
+          "pour": 10,
+          "contre": 11,
+          "taux": 0.476
+        },
+        {
+          "terme": "fingerpicked acoustic guitar",
+          "pour": 4,
+          "contre": 17,
+          "taux": 0.19
+        },
+        {
+          "terme": "male vocal",
+          "pour": 15,
+          "contre": 6,
+          "taux": 0.714
+        },
+        {
+          "terme": "powerful drums",
+          "pour": 1,
+          "contre": 20,
+          "taux": 0.048
+        },
+        {
+          "terme": "rock",
+          "pour": 1,
+          "contre": 20,
+          "taux": 0.048
+        },
+        {
+          "terme": "synthesizers",
+          "pour": 10,
+          "contre": 11,
+          "taux": 0.476
+        },
+        {
+          "terme": "warm natural vocal",
+          "pour": 4,
+          "contre": 17,
+          "taux": 0.19
+        },
+        {
+          "terme": "120 bpm",
+          "pour": 14,
+          "contre": 6,
+          "taux": 0.7
+        },
+        {
+          "terme": "art song",
+          "pour": 2,
+          "contre": 18,
+          "taux": 0.1
+        },
+        {
+          "terme": "bodhran",
+          "pour": 8,
+          "contre": 12,
+          "taux": 0.4
+        },
+        {
+          "terme": "church acoustics",
+          "pour": 3,
+          "contre": 17,
+          "taux": 0.15
+        },
+        {
+          "terme": "lyrical operatic vocal",
+          "pour": 2,
+          "contre": 18,
+          "taux": 0.1
+        },
+        {
+          "terme": "mixed choir four-part harmony satb",
+          "pour": 3,
+          "contre": 17,
+          "taux": 0.15
+        },
+        {
+          "terme": "offbeat guitar skank",
+          "pour": 11,
+          "contre": 9,
+          "taux": 0.55
+        },
+        {
+          "terme": "warm and full",
+          "pour": 3,
+          "contre": 17,
+          "taux": 0.15
+        },
+        {
+          "terme": "blues",
+          "pour": 10,
+          "contre": 9,
+          "taux": 0.526
+        },
+        {
+          "terme": "gregorian chant",
+          "pour": 5,
+          "contre": 14,
+          "taux": 0.263
+        },
+        {
+          "terme": "long reverb",
+          "pour": 5,
+          "contre": 14,
+          "taux": 0.263
+        },
+        {
+          "terme": "monastery",
+          "pour": 5,
+          "contre": 14,
+          "taux": 0.263
+        },
+        {
+          "terme": "monophonic unison male voices",
+          "pour": 5,
+          "contre": 14,
+          "taux": 0.263
+        },
+        {
+          "terme": "no instruments",
+          "pour": 16,
+          "contre": 3,
+          "taux": 0.842
+        },
+        {
+          "terme": "slap bass",
+          "pour": 17,
+          "contre": 2,
+          "taux": 0.895
+        },
+        {
+          "terme": "solemn",
+          "pour": 5,
+          "contre": 14,
+          "taux": 0.263
+        },
+        {
+          "terme": "steel guitar",
+          "pour": 7,
+          "contre": 12,
+          "taux": 0.368
+        },
+        {
+          "terme": "female vocal",
+          "pour": 17,
+          "contre": 1,
+          "taux": 0.944
+        },
+        {
+          "terme": "upbeat",
+          "pour": 6,
+          "contre": 12,
+          "taux": 0.333
+        },
+        {
+          "terme": "brass section",
+          "pour": 16,
+          "contre": 1,
+          "taux": 0.941
+        },
+        {
+          "terme": "cinematic",
+          "pour": 6,
+          "contre": 11,
+          "taux": 0.353
+        },
+        {
+          "terme": "congas",
+          "pour": 10,
+          "contre": 7,
+          "taux": 0.588
+        },
+        {
+          "terme": "gentle",
+          "pour": 7,
+          "contre": 10,
+          "taux": 0.412
+        },
+        {
+          "terme": "nylon guitar",
+          "pour": 5,
+          "contre": 12,
+          "taux": 0.294
+        },
+        {
+          "terme": "slow",
+          "pour": 12,
+          "contre": 5,
+          "taux": 0.706
+        },
+        {
+          "terme": "strings",
+          "pour": 4,
+          "contre": 12,
+          "taux": 0.25
+        },
+        {
+          "terme": "trumpets",
+          "pour": 5,
+          "contre": 11,
+          "taux": 0.312
+        },
+        {
+          "terme": "disco",
+          "pour": 14,
+          "contre": 1,
+          "taux": 0.933
+        },
+        {
+          "terme": "four-on-the-floor kick",
+          "pour": 14,
+          "contre": 1,
+          "taux": 0.933
+        },
+        {
+          "terme": "saxophone",
+          "pour": 11,
+          "contre": 3,
+          "taux": 0.786
+        },
+        {
+          "terme": "124 bpm",
+          "pour": 11,
+          "contre": 2,
+          "taux": 0.846
+        },
+        {
+          "terme": "dramatic",
+          "pour": 3,
+          "contre": 10,
+          "taux": 0.231
+        },
+        {
+          "terme": "duet vocal",
+          "pour": 12,
+          "contre": 1,
+          "taux": 0.923
+        },
+        {
+          "terme": "french rock",
+          "pour": 3,
+          "contre": 10,
+          "taux": 0.231
+        },
+        {
+          "terme": "organ",
+          "pour": 3,
+          "contre": 10,
+          "taux": 0.231
+        },
+        {
+          "terme": "tambourine",
+          "pour": 1,
+          "contre": 12,
+          "taux": 0.077
+        },
+        {
+          "terme": "118 bpm",
+          "pour": 9,
+          "contre": 3,
+          "taux": 0.75
+        },
+        {
+          "terme": "electric guitar",
+          "pour": 4,
+          "contre": 8,
+          "taux": 0.333
+        },
+        {
+          "terme": "guitar",
+          "pour": 3,
+          "contre": 9,
+          "taux": 0.25
+        },
+        {
+          "terme": "handclaps",
+          "pour": 4,
+          "contre": 8,
+          "taux": 0.333
+        },
+        {
+          "terme": "horn section",
+          "pour": 3,
+          "contre": 9,
+          "taux": 0.25
+        },
+        {
+          "terme": "playful",
+          "pour": 10,
+          "contre": 2,
+          "taux": 0.833
+        },
+        {
+          "terme": "powerful",
+          "pour": 6,
+          "contre": 6,
+          "taux": 0.5
+        },
+        {
+          "terme": "soft pads",
+          "pour": 8,
+          "contre": 4,
+          "taux": 0.667
+        },
+        {
+          "terme": "tabla",
+          "pour": 3,
+          "contre": 9,
+          "taux": 0.25
+        },
+        {
+          "terme": "tuba",
+          "pour": 1,
+          "contre": 11,
+          "taux": 0.083
+        },
+        {
+          "terme": "122 bpm",
+          "pour": 7,
+          "contre": 4,
+          "taux": 0.636
+        },
+        {
+          "terme": "acoustic",
+          "pour": 3,
+          "contre": 8,
+          "taux": 0.273
+        }
+      ],
+      "familles_style": [
+        {
+          "famille": "funk-soul",
+          "pour": 65,
+          "contre": 30,
+          "taux": 0.684
+        },
+        {
+          "famille": "hip-hop",
+          "pour": 14,
+          "contre": 8,
+          "taux": 0.636
+        },
+        {
+          "famille": "jazz-blues",
+          "pour": 47,
+          "contre": 40,
+          "taux": 0.54
+        },
+        {
+          "famille": "electro",
+          "pour": 94,
+          "contre": 81,
+          "taux": 0.537
+        },
+        {
+          "famille": "pop",
+          "pour": 24,
+          "contre": 24,
+          "taux": 0.5
+        },
+        {
+          "famille": "ambient",
+          "pour": 39,
+          "contre": 46,
+          "taux": 0.459
+        },
+        {
+          "famille": "choeur",
+          "pour": 31,
+          "contre": 48,
+          "taux": 0.392
+        },
+        {
+          "famille": "rock",
+          "pour": 38,
+          "contre": 62,
+          "taux": 0.38
+        },
+        {
+          "famille": "folk",
+          "pour": 59,
+          "contre": 106,
+          "taux": 0.358
+        },
+        {
+          "famille": "latin-monde",
+          "pour": 19,
+          "contre": 41,
+          "taux": 0.317
+        },
+        {
+          "famille": "classique-sacre",
+          "pour": 23,
+          "contre": 50,
+          "taux": 0.315
+        },
+        {
+          "famille": "metal",
+          "pour": 4,
+          "contre": 12,
+          "taux": 0.25
+        }
+      ],
+      "tempo": {
+        "aime": [
+          85.5,
+          153.8
+        ],
+        "rejete": [
+          85.4,
+          158.5
+        ]
+      },
+      "duree_s": {
+        "aime": [
+          50,
+          130.0
+        ]
+      },
+      "voix": [
+        {
+          "type": "female",
+          "pour": 40,
+          "contre": 4,
+          "taux": 0.909
+        },
+        {
+          "type": "male",
+          "pour": 104,
+          "contre": 55,
+          "taux": 0.654
+        },
+        {
+          "type": "non_precise",
+          "pour": 69,
+          "contre": 85,
+          "taux": 0.448
+        },
+        {
+          "type": "instrumental",
+          "pour": 171,
+          "contre": 303,
+          "taux": 0.361
+        },
+        {
+          "type": "choeur",
+          "pour": 3,
+          "contre": 17,
+          "taux": 0.15
+        }
+      ]
+    }
+  },
+  "effectif_minimum": 5
+}

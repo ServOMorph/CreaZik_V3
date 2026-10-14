@@ -1,0 +1,7922 @@
+{
+  "tracks": {
+    "auto:4": {
+      "up": 3,
+      "down": 4,
+      "score": -1
+    },
+    "perso-chorale:1": {
+      "up": 2,
+      "down": 0,
+      "score": 2
+    },
+    "instrumental:1": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "guitare-seule:1": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "poesie-fr:3": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "acappella-femmes:2": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "percussion-amerique-sud:3": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "disco-pt:1": {
+      "up": 2,
+      "down": 0,
+      "score": 2
+    },
+    "maghreb:1": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "japon-traditionnel:1": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "inde-classique:8": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "electro-spatiale:4": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "mariachi:3": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "tribal:9": {
+      "up": 2,
+      "down": 2,
+      "score": 0
+    },
+    "jazz-varie:4": {
+      "up": 1,
+      "down": 2,
+      "score": -1
+    },
+    "balkans:7": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "valse-musette:1": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "poesie-fr:6": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "funk-saxophone:5": {
+      "up": 3,
+      "down": 0,
+      "score": 3
+    },
+    "gospel:2": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "tribal:4": {
+      "up": 2,
+      "down": 0,
+      "score": 2
+    },
+    "maghreb:2": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "gospel:4": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "auto:1": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "auto:2": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "auto:9": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "auto:10": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "polynesie:1": {
+      "up": 1,
+      "down": 2,
+      "score": -1
+    },
+    "groove-en:1": {
+      "up": 2,
+      "down": 0,
+      "score": 2
+    },
+    "caraibes:6": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "valse-musette:8": {
+      "up": 1,
+      "down": 2,
+      "score": -1
+    },
+    "maghreb:7": {
+      "up": 1,
+      "down": 1,
+      "score": 0
+    },
+    "punk-indie:1": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "classique-varie:10": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "blues-vocal:1": {
+      "up": 2,
+      "down": 2,
+      "score": 0
+    },
+    "poesie-fr:5": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "rap-fr-melodique:5": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "hard-rock:10": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "medieval-renaissance:1": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "chant-mongol:1": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "chant-mongol:7": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "tango:2": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "perso:7": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "synthes-epiques:2": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "maghreb:10": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "blues-vocal:4": {
+      "up": 2,
+      "down": 3,
+      "score": -1
+    },
+    "bollywood:9": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "gamelan:4": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "caraibes:1": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "ska-rocksteady:8": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "japon-traditionnel:6": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "futuriste-2046:7": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "country-bluegrass:5": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "disco-it:2": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "disco-de:9": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "tango:4": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "perso-chorale:11": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "acappella-hommes:4": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "esprit-goldman:5": {
+      "up": 1,
+      "down": 2,
+      "score": -1
+    },
+    "drum-and-bass:7": {
+      "up": 2,
+      "down": 0,
+      "score": 2
+    },
+    "caraibes:8": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "esprit-jackson:8": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "hip-hop-beats:2": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "jazz-varie:1": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "rock-progressif-instrumental:10": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "percussion-afrique:9": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "afrobeats:4": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "disco-pt:7": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "annees-50:5": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "poesie-fr:8": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "country-bluegrass:1": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "esprit-lapointe:10": {
+      "up": 2,
+      "down": 0,
+      "score": 2
+    },
+    "blues:10": {
+      "up": 1,
+      "down": 2,
+      "score": -1
+    },
+    "acappella-femmes:4": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "bachata-merengue:10": {
+      "up": 2,
+      "down": 4,
+      "score": -2
+    },
+    "francais_tests-gregorien:10": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "reggae-dub:8": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "afrobeats:10": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "disco-en:5": {
+      "up": 1,
+      "down": 2,
+      "score": -1
+    },
+    "classique-varie:5": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "punk-indie:4": {
+      "up": 1,
+      "down": 2,
+      "score": -1
+    },
+    "disco-es:5": {
+      "up": 2,
+      "down": 0,
+      "score": 2
+    },
+    "polynesie:6": {
+      "up": 1,
+      "down": 2,
+      "score": -1
+    },
+    "annees-50:3": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "esprit-hallyday:1": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "salsa-latine:7": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "esprit-lapointe:9": {
+      "up": 2,
+      "down": 2,
+      "score": 0
+    },
+    "hard-tech:5": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "nordique:7": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "electro-atmospherique:10": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "groove-en:4": {
+      "up": 2,
+      "down": 0,
+      "score": 2
+    },
+    "disco-en:6": {
+      "up": 2,
+      "down": 0,
+      "score": 2
+    },
+    "mariachi:4": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "soul-motown:10": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "metal:4": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "disco-de:2": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "mariachi:9": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "afrobeats:9": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "house-trance:7": {
+      "up": 2,
+      "down": 0,
+      "score": 2
+    },
+    "tribal:1": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "instrumental:21": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "gospel:6": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "disco-pt:2": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "tech:6": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "house-trance:1": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "drum-and-bass:8": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "funk-saxophone:10": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "metal:3": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "funk-saxophone:8": {
+      "up": 2,
+      "down": 0,
+      "score": 2
+    },
+    "francais_tests-folk:8": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "perso:18": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "disco-en:1": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "valse-musette:6": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "balkans:1": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "disco-en:7": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "esprit-tri-yann:3": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "metal:2": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "annees-50:10": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "balkans:6": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "flamenco:3": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "francais_tests-electro:17": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "disco-de:4": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "disco-en:2": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "esprit-madness:4": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "disco-it:6": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "tribal:10": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "tribal:5": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "hard-rock:6": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "hard-tech:1": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "disco-es:9": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "francais_tests-electro:19": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "disco-pt:10": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "salsa-latine:8": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "francais_tests-chorale:1": {
+      "up": 1,
+      "down": 2,
+      "score": -1
+    },
+    "francais_tests-classique:10": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "tech:7": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "disco-es:6": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "disco-pt:6": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "poesie-en:3": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "tech:9": {
+      "up": 2,
+      "down": 2,
+      "score": 0
+    },
+    "instrumental:9": {
+      "up": 1,
+      "down": 2,
+      "score": -1
+    },
+    "disco-es:1": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "maghreb:9": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "disco-pt:8": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "house-trance:4": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "rap-fr-melodique:1": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "futuriste-2046:5": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "rap-fr-melodique:6": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "disco-de:5": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "esprit-jackson:4": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "francais_tests-chorale:11": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "nordique:10": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "esprit-tri-yann:6": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "jeux-video:2": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "esprit-goldman:4": {
+      "up": 1,
+      "down": 1,
+      "score": 0
+    },
+    "esprit-jackson:1": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "acappella-femmes:6": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "francais_tests-chorale:2": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "esprit-goldman:6": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "country-bluegrass:4": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "acappella-hommes:7": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "classique-varie:1": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "gamelan:10": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "caraibes:3": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "poesie-fr:10": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "blues-instrumental:2": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "bollywood:4": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "bachata-merengue:2": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "futuriste-2046:6": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "blues:7": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "esprit-vangelis:6": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "poesie-en:7": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "jeux-video:6": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "medieval-renaissance:7": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "esprit-dylan:4": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "punk-indie:6": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "esprit-jackson:5": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "gamelan:7": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "medieval-renaissance:6": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "percussion-amerique-sud:9": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "blues:8": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "guitare-seule:10": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "esprit-jackson:3": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "instrumental:14": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "maghreb:4": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "groove-en:9": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "bachata-merengue:1": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "esprit-madness:5": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "francais_tests-chorale:3": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "hip-hop-beats:7": {
+      "up": 0,
+      "down": 0,
+      "score": 0
+    },
+    "bresil:1": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "disco-it:4": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "funk-saxophone:2": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-classique:17": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "piano-seul:3": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "annees-50:6": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "maghreb:3": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "valse-musette:2": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "flamenco:2": {
+      "up": 0,
+      "down": 2,
+      "score": -2
+    },
+    "electro-atmospherique:6": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "tango:8": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "esprit-dylan:9": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "gospel:8": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "country-bluegrass:6": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "esprit-lapointe:1": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "blues-vocal:2": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "funk-saxophone:3": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "electro-pop-fr:3": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "ambient-chill:3": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "blues-vocal:6": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "polynesie:4": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "instrumental:4": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "caraibes:7": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "classique-varie:6": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "electro-pop-fr:6": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "nordique:8": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "flamenco:5": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "mariachi:5": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "japon-traditionnel:8": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "poesie-fr:9": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "blues-vocal:9": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "house-trance:8": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "annees-50:7": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "groove-en:2": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "esprit-dylan:1": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "instrumental:13": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "drum-and-bass:3": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "futuriste-2046:4": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "disco-pt:5": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "rap-fr-melodique:7": {
+      "up": 2,
+      "down": 0,
+      "score": 2
+    },
+    "esprit-madness:1": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "metal:10": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "disco-es:4": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "caraibes:2": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "caraibes:4": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "caraibes:5": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "caraibes:9": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "caraibes:10": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "gospel:1": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "gospel:3": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "hard-rock:7": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "rap-fr-melodique:2": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "inde-classique:7": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "chine-traditionnelle:6": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "acappella-hommes:3": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "valse-musette:9": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "tech:4": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "disco-en:10": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "electro-spatiale:5": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "hard-tech:4": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-classique:9": {
+      "up": 2,
+      "down": 0,
+      "score": 2
+    },
+    "inde-classique:6": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "tribal:3": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "salsa-latine:2": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "valse-musette:3": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "reggae-dub:6": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "esprit-jackson:9": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "reggae-dub:9": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "polynesie:3": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "electro-pop-fr:4": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "polynesie:5": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "guitare-seule:6": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "disco-es:3": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "tribal:6": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "electro-atmospherique:7": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "hip-hop-beats:10": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "guitare-seule:2": {
+      "up": 1,
+      "down": 2,
+      "score": -1
+    },
+    "tribal:8": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "acappella-femmes:1": {
+      "up": 2,
+      "down": 0,
+      "score": 2
+    },
+    "disco-en:4": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "japon-traditionnel:4": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "percussion-afrique:5": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "soul-motown:6": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "electro-spatiale:3": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "percussion-amerique-sud:5": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "electro-spatiale:8": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "instrumental:3": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "hip-hop-beats:4": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "acappella-hommes:6": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "maghreb:6": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "maghreb:5": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "disco-pt:3": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "tribal:2": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "percussion-afrique:1": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "poesie-en:4": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "tango:6": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "tech:3": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "salsa-latine:9": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "punk-indie:7": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "afrobeats:8": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "esprit-hallyday:7": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "esprit-dylan:5": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "inde-classique:2": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "disco-es:8": {
+      "up": 2,
+      "down": 3,
+      "score": -1
+    },
+    "disco-en:9": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "auto:5": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "piano-seul:1": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "celtique:10": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "nordique:2": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "punk-indie:3": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "guitare-seule:5": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "maghreb:8": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "country-bluegrass:7": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "soul-motown:5": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "esprit-vangelis:1": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "jazz-varie:9": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "celtique:5": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "afrobeats:1": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "electro-atmospherique:5": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "piano-seul:9": {
+      "up": 2,
+      "down": 2,
+      "score": 0
+    },
+    "rock-progressif-instrumental:1": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "poesie-fr:2": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "blues-vocal:3": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "groove-en:8": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "francais_tests-gregorien:12": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "flamenco:8": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "poesie-fr:4": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "polynesie:2": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "flamenco:4": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-folk:5": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "flamenco:9": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "percussion-amerique-sud:1": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "polynesie:7": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "flamenco:7": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-rock:7": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "poesie-fr:7": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "disco-en:8": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "esprit-lapointe:2": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "francais_tests-classique:14": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "japon-traditionnel:3": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "tech:2": {
+      "up": 2,
+      "down": 1,
+      "score": 1
+    },
+    "hard-tech:7": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "klezmer:4": {
+      "up": 1,
+      "down": 2,
+      "score": -1
+    },
+    "hard-tech:3": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "esprit-vangelis:3": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-classique:21": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "blues:3": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "esprit-lapointe:8": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "flamenco:6": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "instrumental:19": {
+      "up": 1,
+      "down": 2,
+      "score": -1
+    },
+    "disco-en:3": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "rock-progressif-instrumental:9": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "poesie-fr:1": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "harpe-seule:7": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "perso:11": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "disco-pt:9": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "country-bluegrass:10": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "auto:6": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "poesie-en:8": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "polynesie:8": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "esprit-jackson:6": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "instrumental:7": {
+      "up": 1,
+      "down": 1,
+      "score": 0
+    },
+    "futuriste-2046:3": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "afrobeats:3": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "hard-tech:6": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "percussion-amerique-sud:2": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "blues:1": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "tech:5": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "country-bluegrass:9": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "instrumental:2": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "esprit-madness:3": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "japon-traditionnel:2": {
+      "up": 1,
+      "down": 2,
+      "score": -1
+    },
+    "hard-tech:8": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "blues-vocal:5": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "chant-mongol:2": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "klezmer:7": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "reggae-dub:2": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "esprit-hallyday:5": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "valse-musette:5": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "groove-en:10": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "funk-saxophone:7": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "drum-and-bass:10": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "disco-pt:4": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "acappella-hommes:2": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "electro-spatiale:7": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "afrobeats:6": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "esprit-lapointe:5": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "esprit-goldman:7": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "annees-50:2": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "auto:7": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "futuriste-2046:9": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "acappella-hommes:9": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "groove-en:7": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "bachata-merengue:3": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "esprit-dylan:6": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "esprit-dylan:7": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "nordique:6": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "instrumental:5": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "blues-instrumental:9": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "nordique:9": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "bresil:3": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "percussion-amerique-sud:6": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "metal:9": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "afrobeats:7": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "reggae-dub:7": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "acappella-hommes:5": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "japon-traditionnel:5": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-folk:17": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "valse-musette:4": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "esprit-goldman:9": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "percussion-afrique:2": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "valse-musette:7": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "esprit-tri-yann:5": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "esprit-madness:7": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "disco-es:7": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "hard-tech:10": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "francais_tests-classique:3": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "acappella-hommes:1": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "esprit-madness:10": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "funk-saxophone:9": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "hard-tech:2": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "francais_tests-folk:7": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "soul-motown:2": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-classique:8": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "esprit-goldman:1": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "ska-rocksteady:6": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "percussion-afrique:8": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "inde-classique:4": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "inde-classique:1": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-electro:10": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "tango:7": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "ska-rocksteady:2": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "disco-es:2": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "percussion-afrique:7": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "house-trance:6": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-folk:18": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "groove-en:3": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "esprit-madness:2": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-folk:6": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "celtique:1": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "bachata-merengue:7": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "country-bluegrass:3": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "afrobeats:5": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "esprit-goldman:3": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "chine-traditionnelle:4": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "reggae-dub:1": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "reggae-dub:4": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "annees-50:4": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "tribal:7": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "jazz-varie:6": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "bresil:5": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "drum-and-bass:2": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "groove-en:6": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "celtique:9": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "valse-musette:10": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "esprit-hallyday:10": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "salsa-latine:10": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "esprit-tri-yann:7": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "acappella-femmes:10": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "electro-pop-fr:9": {
+      "up": 1,
+      "down": 2,
+      "score": -1
+    },
+    "piano-seul:6": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "acappella-hommes:8": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "percussion-afrique:4": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "blues:5": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "esprit-dylan:2": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "instrumental:10": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "electro-spatiale:9": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "esprit-vangelis:2": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "country-bluegrass:8": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "celtique:8": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "tango:1": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "esprit-hallyday:3": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "acappella-femmes:8": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-chorale:14": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "ska-rocksteady:9": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "disco-it:9": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "perso:15": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "esprit-tri-yann:2": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-classique:19": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "hard-rock:8": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "reggae-dub:10": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "metal:1": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "esprit-tri-yann:9": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "bachata-merengue:9": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "esprit-dylan:8": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "esprit-madness:8": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "punk-indie:5": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-rock:8": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "percussion-afrique:10": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "percussion-amerique-sud:8": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "tango:9": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "francais_tests-electro:11": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "percussion-afrique:3": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-chorale:20": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "annees-50:9": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "funk-saxophone:1": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "annees-50:1": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "perso:3": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-rock:12": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "soul-motown:3": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "hard-tech:9": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "esprit-jackson:7": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "punk-indie:2": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-electro:7": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "esprit-lapointe:7": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "esprit-madness:9": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "esprit-hallyday:4": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "rock-progressif-instrumental:2": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "hard-rock:3": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "esprit-lapointe:3": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "disco-de:10": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "ska-rocksteady:1": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "nordique:3": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "percussion-afrique:6": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "poesie-en:9": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "funk-saxophone:6": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "acappella-femmes:5": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "jazz-varie:2": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "electro-spatiale:1": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "esprit-madness:6": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "electro-atmospherique:9": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "esprit-goldman:2": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "tech:8": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "esprit-tri-yann:10": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "klezmer:3": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "salsa-latine:1": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "electro-pop-fr:1": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "disco-de:3": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "funk-saxophone:4": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "esprit-goldman:10": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "esprit-tri-yann:1": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "bachata-merengue:6": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "polynesie:9": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "soul-motown:1": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-rock:20": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "electro-spatiale:2": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "electro-pop-fr:8": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "guitare-seule:9": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "instrumental:20": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "drum-and-bass:9": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-rock:11": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "perso:8": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "salsa-latine:4": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "groove-en:5": {
+      "up": 2,
+      "down": 0,
+      "score": 2
+    },
+    "francais_tests-rock:3": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "disco-it:3": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "house-trance:3": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "tango:3": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "electro-pop-fr:7": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "esprit-lapointe:4": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "annees-50:8": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "bresil:10": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "disco-de:6": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "salsa-latine:5": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "esprit-jackson:2": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "hip-hop-beats:8": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "hard-rock:11": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "electro-pop-fr:5": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "percussion-amerique-sud:10": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "disco-de:1": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "disco-de:8": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "disco-es:10": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "tech:10": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-rock:18": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "esprit-hallyday:2": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "hard-rock:2": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "hard-rock:9": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "francais_tests-rock:9": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "hard-rock:1": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "hard-rock:5": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "hip-hop-beats:5": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "ska-rocksteady:3": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "esprit-goldman:8": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-electro:20": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "disco-it:8": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "celtique:7": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "rock-progressif-instrumental:7": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "esprit-hallyday:9": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-rock:4": {
+      "up": 1,
+      "down": 2,
+      "score": -1
+    },
+    "esprit-hallyday:6": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "esprit-lapointe:6": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-rock:5": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "bachata-merengue:4": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "francais_tests-chorale:18": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "francais_tests-gregorien:7": {
+      "up": 0,
+      "down": 0,
+      "score": 0
+    },
+    "francais_tests-classique:13": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "ska-rocksteady:5": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "percussion-amerique-sud:4": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "francais_tests-rock:15": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "rap-fr-melodique:3": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "rap-fr-melodique:4": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "rap-fr-melodique:10": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "drum-and-bass:5": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "harpe-seule:9": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "celtique:4": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-gregorien:21": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "disco-it:7": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "hard-rock:4": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "rap-fr-melodique:9": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "hip-hop-beats:3": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "perso:19": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "rap-fr-melodique:8": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "acappella-femmes:7": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "country-bluegrass:2": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-folk:14": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "acappella-femmes:9": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "blues:6": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "esprit-hallyday:8": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "bresil:6": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "perso:13": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "percussion-amerique-sud:7": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "hip-hop-beats:6": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "drum-and-bass:4": {
+      "up": 1,
+      "down": 2,
+      "score": -1
+    },
+    "ska-rocksteady:10": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "perso:5": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "perso:9": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-classique:12": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "celtique:6": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "disco-de:7": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "house-trance:2": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "francais_tests-electro:21": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "francais_tests-classique:2": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "punk-indie:8": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "acappella-femmes:3": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "francais_tests-chorale:19": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "perso:17": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "francais_tests-chorale:15": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "bresil:9": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-electro:18": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "klezmer:6": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-classique:1": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "celtique:2": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "guitare-seule:3": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-rock:16": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "hip-hop-beats:1": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "esprit-tri-yann:8": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "disco-it:10": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-gregorien:11": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "disco-it:1": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "francais_tests-electro:9": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "francais_tests-folk:12": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "nordique:5": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "disco-it:5": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "perso:21": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-rock:13": {
+      "up": 1,
+      "down": 2,
+      "score": -1
+    },
+    "tango:5": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "tango:10": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-rock:17": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-folk:15": {
+      "up": 1,
+      "down": 2,
+      "score": -1
+    },
+    "francais_tests-rock:2": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-gregorien:3": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "electro-pop-fr:2": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "electro-atmospherique:8": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "blues-vocal:8": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "esprit-tri-yann:4": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "inde-classique:10": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-rock:19": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "bresil:8": {
+      "up": 1,
+      "down": 1,
+      "score": 0
+    },
+    "klezmer:9": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-electro:16": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "esprit-jackson:10": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "blues-vocal:7": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "perso:14": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-chorale:5": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "rock-progressif-instrumental:6": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "bresil:4": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "futuriste-2046:8": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "francais_tests-gregorien:9": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "ska-rocksteady:4": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "instrumental:17": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "instrumental:18": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-chorale:10": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "blues-vocal:10": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "francais_tests-rock:1": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "soul-motown:7": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "blues:4": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "francais_tests-classique:20": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-gregorien:18": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "piano-seul:2": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "metal:7": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "futuriste-2046:10": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "soul-motown:9": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-chorale:13": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-chorale:4": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "metal:5": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "punk-indie:9": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "salsa-latine:3": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "soul-motown:4": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "ambient-chill:2": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "soul-motown:8": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "electro-pop-fr:10": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "chant-mongol:5": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "klezmer:1": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "rock-progressif-instrumental:4": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "ska-rocksteady:7": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-folk:16": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "piano-seul:7": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "ambient-chill:10": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "metal:8": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "reggae-dub:3": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-chorale:6": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "esprit-dylan:3": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "francais_tests-electro:1": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "francais_tests-electro:5": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "punk-indie:10": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-gregorien:4": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "esprit-vangelis:9": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-chorale:21": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "perso:2": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "piano-seul:10": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "francais_tests-rock:10": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "bresil:7": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-gregorien:20": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "perso:12": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "drum-and-bass:1": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "perso:16": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "chine-traditionnelle:3": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "bachata-merengue:5": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "rock-progressif-instrumental:3": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "francais_tests-classique:18": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "blues:2": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "drum-and-bass:6": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "francais_tests-folk:9": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "esprit-dylan:10": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "house-trance:10": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "francais_tests-classique:15": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-rock:14": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "piano-seul:4": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "francais_tests-rock:6": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-rock:21": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "klezmer:10": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "blues-instrumental:8": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "francais_tests-electro:8": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "metal:6": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "inde-classique:3": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "klezmer:5": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "esprit-vangelis:4": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "francais_tests-classique:11": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "perso:20": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-chorale:16": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "blues:9": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "auto:3": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "francais_tests-chorale:7": {
+      "up": 0,
+      "down": 0,
+      "score": 0
+    },
+    "francais_tests-gregorien:1": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "japon-traditionnel:7": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "esprit-tiersen:8": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "klezmer:8": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "perso:4": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "reggae-dub:5": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "bachata-merengue:8": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "guitare-seule:8": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "francais_tests-gregorien:14": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "perso:10": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "house-trance:9": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "esprit-vangelis:5": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-classique:5": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "guitare-seule:4": {
+      "up": 1,
+      "down": 2,
+      "score": -1
+    },
+    "francais_tests-electro:3": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "poesie-en:2": {
+      "up": 2,
+      "down": 1,
+      "score": 1
+    },
+    "instrumental:11": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "francais_tests-chorale:8": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "chant-mongol:4": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "poesie-en:1": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "jazz-varie:10": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "perso:1": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "rock-progressif-instrumental:5": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "jazz-varie:3": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "perso:6": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "francais_tests-gregorien:16": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-electro:13": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "instrumental:15": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "francais_tests-classique:7": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-electro:2": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "francais_tests-electro:4": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "francais_tests-classique:4": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "japon-traditionnel:9": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "house-trance:5": {
+      "up": 2,
+      "down": 0,
+      "score": 2
+    },
+    "synthes-epiques:10": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "francais_tests-electro:15": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "blues-instrumental:3": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-electro:14": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-gregorien:6": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-chorale:9": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "chine-traditionnelle:8": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-gregorien:5": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "instrumental:12": {
+      "up": 1,
+      "down": 1,
+      "score": 0
+    },
+    "blues-instrumental:5": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "esprit-vangelis:10": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "blues-instrumental:1": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "esprit-tiersen:9": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-chorale:12": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-chorale:17": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "instrumental:16": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "guitare-seule:7": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "inde-classique:5": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "harpe-seule:1": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "jazz-varie:8": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "synthes-epiques:1": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-classique:6": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "inde-classique:9": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "chant-mongol:9": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "chine-traditionnelle:7": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "chant-mongol:3": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "klezmer:2": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-folk:19": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "ambient-chill:8": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "jazz-varie:7": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "chine-traditionnelle:9": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "esprit-vangelis:8": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "instrumental:8": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "futuriste-2046:1": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "piano-seul:8": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "blues-instrumental:7": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "rock-progressif-instrumental:8": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "instrumental:6": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "synthes-epiques:8": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-electro:12": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "futuriste-2046:2": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "esprit-tiersen:5": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "chine-traditionnelle:2": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "chine-traditionnelle:10": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "ambient-chill:5": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "jazz-varie:5": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "chine-traditionnelle:1": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-gregorien:19": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "electro-atmospherique:4": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "esprit-tiersen:10": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "poesie-en:6": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "francais_tests-electro:6": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "synthes-epiques:6": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "synthes-epiques:7": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "piano-seul:5": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "blues-instrumental:4": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "synthes-epiques:3": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "esprit-vangelis:7": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-gregorien:13": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "ambient-chill:1": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "synthes-epiques:9": {
+      "up": 1,
+      "down": 1,
+      "score": 0
+    },
+    "chine-traditionnelle:5": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "synthes-epiques:4": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "chant-mongol:10": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "esprit-tiersen:6": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "poesie-en:10": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "poesie-en:5": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "blues-instrumental:6": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "chant-mongol:8": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-gregorien:17": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "francais_tests-gregorien:2": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-folk:21": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "ambient-chill:4": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "chant-mongol:6": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "francais_tests-gregorien:15": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "harpe-seule:2": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-folk:4": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "electro-atmospherique:3": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "blues-instrumental:10": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-folk:10": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-folk:3": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "harpe-seule:5": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "harpe-seule:3": {
+      "up": 1,
+      "down": 1,
+      "score": 0
+    },
+    "francais_tests-folk:13": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "electro-atmospherique:1": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "esprit-tiersen:2": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-folk:1": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-folk:2": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "ambient-chill:9": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "esprit-tiersen:1": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "esprit-tiersen:3": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "ambient-chill:7": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-folk:11": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "francais_tests-folk:20": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "esprit-tiersen:7": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "electro-atmospherique:2": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "electro-spatiale:10": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "harpe-seule:4": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "harpe-seule:6": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "harpe-seule:8": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "electro-spatiale:6": {
+      "up": 1,
+      "down": 2,
+      "score": -1
+    },
+    "ambient-chill:6": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "esprit-tiersen:4": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "harpe-seule:10": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "hip-hop-beats:9": {
+      "up": 0,
+      "down": 1,
+      "score": -1
+    },
+    "creation-francaise:1": {
+      "up": 1,
+      "down": 0,
+      "score": 1
+    },
+    "polynesie:10": {
+      "up": 0,
+      "down": 2,
+      "score": -2
+    }
+  },
+  "voters": {
+    "4cfdc4d6beb935f931433e889bec5c72": {
+      "auto:4": {
+        "up": 3,
+        "down": 4
+      },
+      "perso-chorale:1": {
+        "up": 2,
+        "down": 0
+      },
+      "instrumental:1": {
+        "up": 1,
+        "down": 0
+      },
+      "guitare-seule:1": {
+        "up": 1,
+        "down": 0
+      },
+      "poesie-fr:3": {
+        "up": 1,
+        "down": 0
+      },
+      "acappella-femmes:2": {
+        "up": 1,
+        "down": 0
+      },
+      "percussion-amerique-sud:3": {
+        "up": 1,
+        "down": 0
+      },
+      "disco-pt:1": {
+        "up": 2,
+        "down": 0
+      },
+      "maghreb:1": {
+        "up": 1,
+        "down": 0
+      },
+      "japon-traditionnel:1": {
+        "up": 1,
+        "down": 0
+      },
+      "inde-classique:8": {
+        "up": 0,
+        "down": 1
+      },
+      "electro-spatiale:4": {
+        "up": 1,
+        "down": 0
+      },
+      "mariachi:3": {
+        "up": 0,
+        "down": 1
+      },
+      "tribal:9": {
+        "up": 2,
+        "down": 2
+      },
+      "jazz-varie:4": {
+        "up": 1,
+        "down": 2
+      },
+      "balkans:7": {
+        "up": 0,
+        "down": 1
+      },
+      "valse-musette:1": {
+        "up": 1,
+        "down": 0
+      },
+      "poesie-fr:6": {
+        "up": 1,
+        "down": 0
+      },
+      "funk-saxophone:5": {
+        "up": 3,
+        "down": 0
+      },
+      "gospel:2": {
+        "up": 0,
+        "down": 1
+      },
+      "tribal:4": {
+        "up": 2,
+        "down": 0
+      },
+      "maghreb:2": {
+        "up": 1,
+        "down": 0
+      },
+      "gospel:4": {
+        "up": 0,
+        "down": 1
+      },
+      "auto:1": {
+        "up": 1,
+        "down": 0
+      },
+      "auto:2": {
+        "up": 1,
+        "down": 0
+      },
+      "auto:9": {
+        "up": 1,
+        "down": 0
+      },
+      "auto:10": {
+        "up": 1,
+        "down": 0
+      },
+      "polynesie:1": {
+        "up": 1,
+        "down": 2
+      },
+      "groove-en:1": {
+        "up": 2,
+        "down": 0
+      },
+      "caraibes:6": {
+        "up": 0,
+        "down": 1
+      },
+      "valse-musette:8": {
+        "up": 1,
+        "down": 2
+      },
+      "maghreb:7": {
+        "up": 1,
+        "down": 1
+      },
+      "punk-indie:1": {
+        "up": 1,
+        "down": 0
+      },
+      "classique-varie:10": {
+        "up": 0,
+        "down": 1
+      },
+      "blues-vocal:1": {
+        "up": 2,
+        "down": 2
+      },
+      "poesie-fr:5": {
+        "up": 1,
+        "down": 0
+      },
+      "rap-fr-melodique:5": {
+        "up": 1,
+        "down": 0
+      },
+      "hard-rock:10": {
+        "up": 1,
+        "down": 0
+      },
+      "medieval-renaissance:1": {
+        "up": 0,
+        "down": 1
+      },
+      "chant-mongol:1": {
+        "up": 1,
+        "down": 0
+      },
+      "chant-mongol:7": {
+        "up": 1,
+        "down": 0
+      },
+      "tango:2": {
+        "up": 0,
+        "down": 1
+      },
+      "synthes-epiques:2": {
+        "up": 1,
+        "down": 0
+      },
+      "maghreb:10": {
+        "up": 1,
+        "down": 0
+      },
+      "blues-vocal:4": {
+        "up": 2,
+        "down": 3
+      },
+      "bollywood:9": {
+        "up": 0,
+        "down": 1
+      },
+      "gamelan:4": {
+        "up": 0,
+        "down": 1
+      },
+      "caraibes:1": {
+        "up": 0,
+        "down": 1
+      },
+      "japon-traditionnel:6": {
+        "up": 1,
+        "down": 0
+      },
+      "futuriste-2046:7": {
+        "up": 1,
+        "down": 0
+      },
+      "country-bluegrass:5": {
+        "up": 1,
+        "down": 0
+      },
+      "disco-it:2": {
+        "up": 1,
+        "down": 0
+      },
+      "disco-de:9": {
+        "up": 1,
+        "down": 0
+      },
+      "tango:4": {
+        "up": 1,
+        "down": 0
+      },
+      "perso-chorale:11": {
+        "up": 1,
+        "down": 0
+      },
+      "drum-and-bass:7": {
+        "up": 1,
+        "down": 0
+      },
+      "caraibes:8": {
+        "up": 0,
+        "down": 1
+      },
+      "esprit-jackson:8": {
+        "up": 1,
+        "down": 0
+      },
+      "hip-hop-beats:2": {
+        "up": 1,
+        "down": 0
+      },
+      "jazz-varie:1": {
+        "up": 1,
+        "down": 0
+      },
+      "rock-progressif-instrumental:10": {
+        "up": 1,
+        "down": 0
+      },
+      "percussion-afrique:9": {
+        "up": 1,
+        "down": 0
+      },
+      "afrobeats:4": {
+        "up": 1,
+        "down": 0
+      },
+      "country-bluegrass:1": {
+        "up": 1,
+        "down": 0
+      },
+      "esprit-lapointe:10": {
+        "up": 2,
+        "down": 0
+      },
+      "blues:10": {
+        "up": 1,
+        "down": 2
+      },
+      "acappella-femmes:4": {
+        "up": 1,
+        "down": 0
+      },
+      "bachata-merengue:10": {
+        "up": 2,
+        "down": 4
+      },
+      "francais_tests-gregorien:10": {
+        "up": 1,
+        "down": 0
+      },
+      "reggae-dub:8": {
+        "up": 1,
+        "down": 0
+      },
+      "afrobeats:10": {
+        "up": 1,
+        "down": 0
+      },
+      "disco-en:5": {
+        "up": 1,
+        "down": 2
+      },
+      "polynesie:6": {
+        "up": 1,
+        "down": 2
+      },
+      "annees-50:3": {
+        "up": 1,
+        "down": 0
+      },
+      "esprit-hallyday:1": {
+        "up": 1,
+        "down": 0
+      },
+      "salsa-latine:7": {
+        "up": 1,
+        "down": 0
+      },
+      "esprit-lapointe:9": {
+        "up": 2,
+        "down": 2
+      },
+      "hard-tech:5": {
+        "up": 1,
+        "down": 0
+      },
+      "nordique:7": {
+        "up": 0,
+        "down": 1
+      },
+      "electro-atmospherique:10": {
+        "up": 1,
+        "down": 0
+      },
+      "groove-en:4": {
+        "up": 2,
+        "down": 0
+      },
+      "disco-en:6": {
+        "up": 2,
+        "down": 0
+      },
+      "mariachi:4": {
+        "up": 1,
+        "down": 0
+      },
+      "soul-motown:10": {
+        "up": 0,
+        "down": 1
+      },
+      "metal:4": {
+        "up": 0,
+        "down": 1
+      },
+      "disco-de:2": {
+        "up": 1,
+        "down": 0
+      },
+      "mariachi:9": {
+        "up": 0,
+        "down": 1
+      },
+      "afrobeats:9": {
+        "up": 0,
+        "down": 1
+      },
+      "house-trance:7": {
+        "up": 2,
+        "down": 0
+      },
+      "tribal:1": {
+        "up": 0,
+        "down": 1
+      },
+      "instrumental:21": {
+        "up": 0,
+        "down": 1
+      },
+      "gospel:6": {
+        "up": 0,
+        "down": 1
+      },
+      "disco-pt:2": {
+        "up": 0,
+        "down": 1
+      },
+      "tech:6": {
+        "up": 1,
+        "down": 0
+      },
+      "drum-and-bass:8": {
+        "up": 0,
+        "down": 1
+      },
+      "funk-saxophone:10": {
+        "up": 1,
+        "down": 0
+      },
+      "metal:3": {
+        "up": 1,
+        "down": 0
+      },
+      "funk-saxophone:8": {
+        "up": 2,
+        "down": 0
+      },
+      "francais_tests-folk:8": {
+        "up": 1,
+        "down": 0
+      },
+      "perso:18": {
+        "up": 1,
+        "down": 0
+      },
+      "disco-en:1": {
+        "up": 1,
+        "down": 0
+      },
+      "valse-musette:6": {
+        "up": 1,
+        "down": 0
+      },
+      "balkans:1": {
+        "up": 0,
+        "down": 1
+      },
+      "disco-en:7": {
+        "up": 1,
+        "down": 0
+      },
+      "metal:2": {
+        "up": 1,
+        "down": 0
+      },
+      "balkans:6": {
+        "up": 1,
+        "down": 0
+      },
+      "flamenco:3": {
+        "up": 1,
+        "down": 0
+      },
+      "disco-en:2": {
+        "up": 1,
+        "down": 0
+      },
+      "esprit-madness:4": {
+        "up": 1,
+        "down": 0
+      },
+      "disco-it:6": {
+        "up": 1,
+        "down": 0
+      },
+      "tribal:10": {
+        "up": 1,
+        "down": 0
+      },
+      "tribal:5": {
+        "up": 1,
+        "down": 0
+      },
+      "hard-rock:6": {
+        "up": 1,
+        "down": 0
+      },
+      "hard-tech:1": {
+        "up": 1,
+        "down": 0
+      },
+      "disco-es:9": {
+        "up": 1,
+        "down": 0
+      },
+      "francais_tests-electro:19": {
+        "up": 1,
+        "down": 0
+      },
+      "disco-pt:10": {
+        "up": 1,
+        "down": 0
+      },
+      "salsa-latine:8": {
+        "up": 1,
+        "down": 0
+      },
+      "francais_tests-chorale:1": {
+        "up": 1,
+        "down": 2
+      },
+      "francais_tests-classique:10": {
+        "up": 1,
+        "down": 0
+      },
+      "tech:7": {
+        "up": 1,
+        "down": 0
+      },
+      "disco-es:6": {
+        "up": 1,
+        "down": 0
+      },
+      "disco-pt:6": {
+        "up": 1,
+        "down": 0
+      },
+      "poesie-en:3": {
+        "up": 1,
+        "down": 0
+      },
+      "tech:9": {
+        "up": 2,
+        "down": 2
+      },
+      "instrumental:9": {
+        "up": 1,
+        "down": 2
+      },
+      "disco-es:1": {
+        "up": 1,
+        "down": 0
+      },
+      "maghreb:9": {
+        "up": 1,
+        "down": 0
+      },
+      "disco-pt:8": {
+        "up": 1,
+        "down": 0
+      },
+      "house-trance:4": {
+        "up": 1,
+        "down": 0
+      },
+      "rap-fr-melodique:1": {
+        "up": 1,
+        "down": 0
+      },
+      "rap-fr-melodique:6": {
+        "up": 1,
+        "down": 0
+      },
+      "disco-de:5": {
+        "up": 1,
+        "down": 0
+      },
+      "esprit-jackson:4": {
+        "up": 1,
+        "down": 0
+      },
+      "francais_tests-chorale:11": {
+        "up": 1,
+        "down": 0
+      },
+      "nordique:10": {
+        "up": 1,
+        "down": 0
+      },
+      "esprit-tri-yann:6": {
+        "up": 1,
+        "down": 0
+      },
+      "jeux-video:2": {
+        "up": 0,
+        "down": 1
+      },
+      "esprit-goldman:4": {
+        "up": 1,
+        "down": 0
+      },
+      "esprit-jackson:1": {
+        "up": 1,
+        "down": 0
+      },
+      "acappella-femmes:6": {
+        "up": 1,
+        "down": 0
+      },
+      "francais_tests-chorale:2": {
+        "up": 0,
+        "down": 1
+      },
+      "esprit-goldman:6": {
+        "up": 1,
+        "down": 0
+      },
+      "country-bluegrass:4": {
+        "up": 1,
+        "down": 0
+      },
+      "acappella-hommes:7": {
+        "up": 0,
+        "down": 1
+      },
+      "classique-varie:1": {
+        "up": 0,
+        "down": 1
+      },
+      "gamelan:10": {
+        "up": 0,
+        "down": 1
+      },
+      "caraibes:3": {
+        "up": 0,
+        "down": 1
+      },
+      "poesie-fr:10": {
+        "up": 1,
+        "down": 0
+      },
+      "blues-instrumental:2": {
+        "up": 1,
+        "down": 0
+      },
+      "bollywood:4": {
+        "up": 0,
+        "down": 1
+      },
+      "bachata-merengue:2": {
+        "up": 0,
+        "down": 1
+      },
+      "futuriste-2046:6": {
+        "up": 0,
+        "down": 1
+      },
+      "blues:7": {
+        "up": 1,
+        "down": 0
+      },
+      "esprit-vangelis:6": {
+        "up": 1,
+        "down": 0
+      },
+      "poesie-en:7": {
+        "up": 1,
+        "down": 0
+      },
+      "jeux-video:6": {
+        "up": 0,
+        "down": 1
+      },
+      "medieval-renaissance:7": {
+        "up": 0,
+        "down": 1
+      },
+      "esprit-dylan:4": {
+        "up": 1,
+        "down": 0
+      },
+      "punk-indie:6": {
+        "up": 1,
+        "down": 0
+      },
+      "esprit-jackson:5": {
+        "up": 1,
+        "down": 0
+      },
+      "gamelan:7": {
+        "up": 0,
+        "down": 1
+      },
+      "medieval-renaissance:6": {
+        "up": 0,
+        "down": 1
+      },
+      "percussion-amerique-sud:9": {
+        "up": 0,
+        "down": 1
+      },
+      "blues:8": {
+        "up": 0,
+        "down": 1
+      },
+      "guitare-seule:10": {
+        "up": 0,
+        "down": 1
+      },
+      "esprit-jackson:3": {
+        "up": 1,
+        "down": 0
+      },
+      "instrumental:14": {
+        "up": 1,
+        "down": 0
+      },
+      "maghreb:4": {
+        "up": 1,
+        "down": 0
+      },
+      "groove-en:9": {
+        "up": 1,
+        "down": 0
+      },
+      "bachata-merengue:1": {
+        "up": 1,
+        "down": 0
+      },
+      "esprit-madness:5": {
+        "up": 1,
+        "down": 0
+      },
+      "francais_tests-chorale:3": {
+        "up": 0,
+        "down": 1
+      },
+      "bresil:1": {
+        "up": 1,
+        "down": 0
+      },
+      "disco-it:4": {
+        "up": 1,
+        "down": 0
+      },
+      "funk-saxophone:2": {
+        "up": 0,
+        "down": 1
+      },
+      "piano-seul:3": {
+        "up": 1,
+        "down": 0
+      },
+      "annees-50:6": {
+        "up": 1,
+        "down": 0
+      },
+      "maghreb:3": {
+        "up": 1,
+        "down": 0
+      },
+      "valse-musette:2": {
+        "up": 0,
+        "down": 1
+      },
+      "flamenco:2": {
+        "up": 0,
+        "down": 2
+      },
+      "electro-atmospherique:6": {
+        "up": 1,
+        "down": 0
+      },
+      "tango:8": {
+        "up": 0,
+        "down": 1
+      },
+      "esprit-dylan:9": {
+        "up": 1,
+        "down": 0
+      },
+      "gospel:8": {
+        "up": 0,
+        "down": 1
+      },
+      "country-bluegrass:6": {
+        "up": 1,
+        "down": 0
+      },
+      "esprit-lapointe:1": {
+        "up": 1,
+        "down": 0
+      },
+      "blues-vocal:2": {
+        "up": 1,
+        "down": 0
+      },
+      "funk-saxophone:3": {
+        "up": 1,
+        "down": 0
+      },
+      "electro-pop-fr:3": {
+        "up": 1,
+        "down": 0
+      },
+      "ambient-chill:3": {
+        "up": 1,
+        "down": 0
+      },
+      "blues-vocal:6": {
+        "up": 1,
+        "down": 0
+      },
+      "polynesie:4": {
+        "up": 0,
+        "down": 1
+      },
+      "instrumental:4": {
+        "up": 1,
+        "down": 0
+      },
+      "caraibes:7": {
+        "up": 0,
+        "down": 1
+      },
+      "classique-varie:6": {
+        "up": 0,
+        "down": 1
+      },
+      "electro-pop-fr:6": {
+        "up": 1,
+        "down": 0
+      },
+      "nordique:8": {
+        "up": 0,
+        "down": 1
+      },
+      "flamenco:5": {
+        "up": 0,
+        "down": 1
+      },
+      "mariachi:5": {
+        "up": 0,
+        "down": 1
+      },
+      "japon-traditionnel:8": {
+        "up": 0,
+        "down": 1
+      },
+      "poesie-fr:9": {
+        "up": 1,
+        "down": 0
+      },
+      "futuriste-2046:4": {
+        "up": 1,
+        "down": 0
+      },
+      "disco-pt:5": {
+        "up": 1,
+        "down": 0
+      },
+      "rap-fr-melodique:7": {
+        "up": 2,
+        "down": 0
+      },
+      "esprit-madness:1": {
+        "up": 1,
+        "down": 0
+      },
+      "metal:10": {
+        "up": 1,
+        "down": 0
+      },
+      "disco-es:4": {
+        "up": 1,
+        "down": 0
+      },
+      "caraibes:2": {
+        "up": 0,
+        "down": 1
+      },
+      "caraibes:4": {
+        "up": 0,
+        "down": 1
+      },
+      "caraibes:5": {
+        "up": 0,
+        "down": 1
+      },
+      "caraibes:9": {
+        "up": 0,
+        "down": 1
+      },
+      "caraibes:10": {
+        "up": 0,
+        "down": 1
+      },
+      "gospel:1": {
+        "up": 0,
+        "down": 1
+      },
+      "gospel:3": {
+        "up": 0,
+        "down": 1
+      },
+      "hard-rock:7": {
+        "up": 1,
+        "down": 0
+      },
+      "rap-fr-melodique:2": {
+        "up": 0,
+        "down": 1
+      },
+      "inde-classique:7": {
+        "up": 0,
+        "down": 1
+      },
+      "chine-traditionnelle:6": {
+        "up": 1,
+        "down": 0
+      },
+      "acappella-hommes:3": {
+        "up": 1,
+        "down": 0
+      },
+      "valse-musette:9": {
+        "up": 1,
+        "down": 0
+      },
+      "tech:4": {
+        "up": 0,
+        "down": 1
+      },
+      "disco-en:10": {
+        "up": 1,
+        "down": 0
+      },
+      "electro-spatiale:5": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-classique:9": {
+        "up": 2,
+        "down": 0
+      },
+      "inde-classique:6": {
+        "up": 1,
+        "down": 0
+      },
+      "tribal:3": {
+        "up": 0,
+        "down": 1
+      },
+      "salsa-latine:2": {
+        "up": 0,
+        "down": 1
+      },
+      "valse-musette:3": {
+        "up": 1,
+        "down": 0
+      },
+      "reggae-dub:6": {
+        "up": 0,
+        "down": 1
+      },
+      "esprit-jackson:9": {
+        "up": 1,
+        "down": 0
+      },
+      "reggae-dub:9": {
+        "up": 1,
+        "down": 0
+      },
+      "polynesie:3": {
+        "up": 0,
+        "down": 1
+      },
+      "electro-pop-fr:4": {
+        "up": 1,
+        "down": 0
+      },
+      "polynesie:5": {
+        "up": 0,
+        "down": 1
+      },
+      "guitare-seule:6": {
+        "up": 0,
+        "down": 1
+      },
+      "disco-es:3": {
+        "up": 1,
+        "down": 0
+      },
+      "tribal:6": {
+        "up": 1,
+        "down": 0
+      },
+      "electro-atmospherique:7": {
+        "up": 1,
+        "down": 0
+      },
+      "hip-hop-beats:10": {
+        "up": 0,
+        "down": 1
+      },
+      "guitare-seule:2": {
+        "up": 1,
+        "down": 2
+      },
+      "tribal:8": {
+        "up": 1,
+        "down": 0
+      },
+      "acappella-femmes:1": {
+        "up": 2,
+        "down": 0
+      },
+      "disco-en:4": {
+        "up": 1,
+        "down": 0
+      },
+      "japon-traditionnel:4": {
+        "up": 0,
+        "down": 1
+      },
+      "percussion-afrique:5": {
+        "up": 0,
+        "down": 1
+      },
+      "soul-motown:6": {
+        "up": 0,
+        "down": 1
+      },
+      "electro-spatiale:3": {
+        "up": 0,
+        "down": 1
+      },
+      "percussion-amerique-sud:5": {
+        "up": 0,
+        "down": 1
+      },
+      "electro-spatiale:8": {
+        "up": 1,
+        "down": 0
+      },
+      "instrumental:3": {
+        "up": 0,
+        "down": 1
+      },
+      "hip-hop-beats:4": {
+        "up": 0,
+        "down": 1
+      },
+      "acappella-hommes:6": {
+        "up": 1,
+        "down": 0
+      },
+      "maghreb:6": {
+        "up": 1,
+        "down": 0
+      },
+      "maghreb:5": {
+        "up": 0,
+        "down": 1
+      },
+      "tribal:2": {
+        "up": 0,
+        "down": 1
+      },
+      "percussion-afrique:1": {
+        "up": 0,
+        "down": 1
+      },
+      "poesie-en:4": {
+        "up": 1,
+        "down": 0
+      },
+      "tango:6": {
+        "up": 0,
+        "down": 1
+      },
+      "tech:3": {
+        "up": 1,
+        "down": 0
+      },
+      "salsa-latine:9": {
+        "up": 0,
+        "down": 1
+      },
+      "punk-indie:7": {
+        "up": 0,
+        "down": 1
+      },
+      "afrobeats:8": {
+        "up": 0,
+        "down": 1
+      },
+      "esprit-hallyday:7": {
+        "up": 1,
+        "down": 0
+      },
+      "esprit-dylan:5": {
+        "up": 1,
+        "down": 0
+      },
+      "inde-classique:2": {
+        "up": 1,
+        "down": 0
+      },
+      "disco-es:8": {
+        "up": 2,
+        "down": 3
+      },
+      "disco-en:9": {
+        "up": 1,
+        "down": 0
+      },
+      "auto:5": {
+        "up": 0,
+        "down": 1
+      },
+      "piano-seul:1": {
+        "up": 1,
+        "down": 0
+      },
+      "celtique:10": {
+        "up": 1,
+        "down": 0
+      },
+      "nordique:2": {
+        "up": 0,
+        "down": 1
+      },
+      "punk-indie:3": {
+        "up": 0,
+        "down": 1
+      },
+      "guitare-seule:5": {
+        "up": 0,
+        "down": 1
+      },
+      "maghreb:8": {
+        "up": 1,
+        "down": 0
+      },
+      "country-bluegrass:7": {
+        "up": 0,
+        "down": 1
+      },
+      "soul-motown:5": {
+        "up": 0,
+        "down": 1
+      },
+      "esprit-vangelis:1": {
+        "up": 0,
+        "down": 1
+      },
+      "jazz-varie:9": {
+        "up": 0,
+        "down": 1
+      },
+      "celtique:5": {
+        "up": 0,
+        "down": 1
+      },
+      "afrobeats:1": {
+        "up": 0,
+        "down": 1
+      },
+      "electro-atmospherique:5": {
+        "up": 1,
+        "down": 0
+      },
+      "piano-seul:9": {
+        "up": 2,
+        "down": 2
+      },
+      "rock-progressif-instrumental:1": {
+        "up": 0,
+        "down": 1
+      },
+      "poesie-fr:2": {
+        "up": 1,
+        "down": 0
+      },
+      "blues-vocal:3": {
+        "up": 1,
+        "down": 0
+      },
+      "groove-en:8": {
+        "up": 1,
+        "down": 0
+      },
+      "francais_tests-gregorien:12": {
+        "up": 1,
+        "down": 0
+      },
+      "flamenco:8": {
+        "up": 1,
+        "down": 0
+      },
+      "poesie-fr:4": {
+        "up": 1,
+        "down": 0
+      },
+      "polynesie:2": {
+        "up": 0,
+        "down": 1
+      },
+      "flamenco:4": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-folk:5": {
+        "up": 1,
+        "down": 0
+      },
+      "instrumental:2": {
+        "up": 1,
+        "down": 0
+      },
+      "esprit-madness:3": {
+        "up": 1,
+        "down": 0
+      },
+      "japon-traditionnel:2": {
+        "up": 1,
+        "down": 2
+      },
+      "hard-tech:8": {
+        "up": 1,
+        "down": 0
+      },
+      "blues-vocal:5": {
+        "up": 1,
+        "down": 0
+      },
+      "chant-mongol:2": {
+        "up": 1,
+        "down": 0
+      },
+      "klezmer:7": {
+        "up": 0,
+        "down": 1
+      },
+      "reggae-dub:2": {
+        "up": 0,
+        "down": 1
+      },
+      "esprit-hallyday:5": {
+        "up": 1,
+        "down": 0
+      },
+      "valse-musette:5": {
+        "up": 0,
+        "down": 1
+      },
+      "groove-en:10": {
+        "up": 1,
+        "down": 0
+      },
+      "funk-saxophone:7": {
+        "up": 0,
+        "down": 1
+      },
+      "drum-and-bass:10": {
+        "up": 0,
+        "down": 1
+      },
+      "disco-pt:4": {
+        "up": 1,
+        "down": 0
+      },
+      "acappella-hommes:2": {
+        "up": 1,
+        "down": 0
+      },
+      "electro-spatiale:7": {
+        "up": 0,
+        "down": 1
+      },
+      "afrobeats:6": {
+        "up": 0,
+        "down": 1
+      },
+      "esprit-lapointe:5": {
+        "up": 1,
+        "down": 0
+      },
+      "esprit-goldman:7": {
+        "up": 0,
+        "down": 1
+      },
+      "annees-50:2": {
+        "up": 1,
+        "down": 0
+      },
+      "auto:7": {
+        "up": 1,
+        "down": 0
+      },
+      "futuriste-2046:9": {
+        "up": 1,
+        "down": 0
+      },
+      "acappella-hommes:9": {
+        "up": 0,
+        "down": 1
+      },
+      "groove-en:7": {
+        "up": 1,
+        "down": 0
+      },
+      "bachata-merengue:3": {
+        "up": 0,
+        "down": 1
+      },
+      "esprit-dylan:6": {
+        "up": 1,
+        "down": 0
+      },
+      "esprit-dylan:7": {
+        "up": 1,
+        "down": 0
+      },
+      "nordique:6": {
+        "up": 0,
+        "down": 1
+      },
+      "instrumental:5": {
+        "up": 1,
+        "down": 0
+      },
+      "blues-instrumental:9": {
+        "up": 1,
+        "down": 0
+      },
+      "nordique:9": {
+        "up": 0,
+        "down": 1
+      },
+      "bresil:3": {
+        "up": 0,
+        "down": 1
+      },
+      "percussion-amerique-sud:6": {
+        "up": 0,
+        "down": 1
+      },
+      "metal:9": {
+        "up": 0,
+        "down": 1
+      },
+      "afrobeats:7": {
+        "up": 0,
+        "down": 1
+      },
+      "reggae-dub:7": {
+        "up": 0,
+        "down": 1
+      },
+      "acappella-hommes:5": {
+        "up": 1,
+        "down": 0
+      },
+      "japon-traditionnel:5": {
+        "up": 0,
+        "down": 1
+      },
+      "valse-musette:4": {
+        "up": 0,
+        "down": 1
+      },
+      "esprit-goldman:9": {
+        "up": 1,
+        "down": 0
+      },
+      "percussion-afrique:2": {
+        "up": 0,
+        "down": 1
+      },
+      "valse-musette:7": {
+        "up": 0,
+        "down": 1
+      },
+      "esprit-tri-yann:5": {
+        "up": 1,
+        "down": 0
+      },
+      "esprit-madness:7": {
+        "up": 1,
+        "down": 0
+      },
+      "disco-es:7": {
+        "up": 1,
+        "down": 0
+      },
+      "hard-tech:10": {
+        "up": 1,
+        "down": 0
+      },
+      "francais_tests-classique:3": {
+        "up": 0,
+        "down": 1
+      },
+      "acappella-hommes:1": {
+        "up": 1,
+        "down": 0
+      },
+      "esprit-madness:10": {
+        "up": 1,
+        "down": 0
+      },
+      "funk-saxophone:9": {
+        "up": 1,
+        "down": 0
+      },
+      "hard-tech:2": {
+        "up": 1,
+        "down": 0
+      },
+      "soul-motown:2": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-classique:8": {
+        "up": 0,
+        "down": 1
+      },
+      "esprit-goldman:1": {
+        "up": 0,
+        "down": 1
+      },
+      "ska-rocksteady:6": {
+        "up": 0,
+        "down": 1
+      },
+      "percussion-afrique:8": {
+        "up": 0,
+        "down": 1
+      },
+      "inde-classique:4": {
+        "up": 0,
+        "down": 1
+      },
+      "inde-classique:1": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-electro:10": {
+        "up": 0,
+        "down": 1
+      },
+      "tango:7": {
+        "up": 0,
+        "down": 1
+      },
+      "ska-rocksteady:2": {
+        "up": 0,
+        "down": 1
+      },
+      "disco-es:2": {
+        "up": 1,
+        "down": 0
+      },
+      "percussion-afrique:7": {
+        "up": 0,
+        "down": 1
+      },
+      "house-trance:6": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-folk:18": {
+        "up": 0,
+        "down": 1
+      },
+      "groove-en:3": {
+        "up": 1,
+        "down": 0
+      },
+      "esprit-madness:2": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-folk:6": {
+        "up": 0,
+        "down": 1
+      },
+      "celtique:1": {
+        "up": 1,
+        "down": 0
+      },
+      "bachata-merengue:7": {
+        "up": 0,
+        "down": 1
+      },
+      "country-bluegrass:3": {
+        "up": 0,
+        "down": 1
+      },
+      "afrobeats:5": {
+        "up": 1,
+        "down": 0
+      },
+      "esprit-goldman:3": {
+        "up": 0,
+        "down": 1
+      },
+      "chine-traditionnelle:4": {
+        "up": 1,
+        "down": 0
+      },
+      "reggae-dub:1": {
+        "up": 0,
+        "down": 1
+      },
+      "annees-50:4": {
+        "up": 1,
+        "down": 0
+      },
+      "tribal:7": {
+        "up": 0,
+        "down": 1
+      },
+      "jazz-varie:6": {
+        "up": 0,
+        "down": 1
+      },
+      "bresil:5": {
+        "up": 0,
+        "down": 1
+      },
+      "drum-and-bass:2": {
+        "up": 0,
+        "down": 1
+      },
+      "groove-en:6": {
+        "up": 1,
+        "down": 0
+      },
+      "valse-musette:10": {
+        "up": 0,
+        "down": 1
+      },
+      "esprit-hallyday:10": {
+        "up": 0,
+        "down": 1
+      },
+      "salsa-latine:10": {
+        "up": 1,
+        "down": 0
+      },
+      "esprit-tri-yann:7": {
+        "up": 0,
+        "down": 1
+      },
+      "acappella-femmes:10": {
+        "up": 1,
+        "down": 0
+      },
+      "electro-pop-fr:9": {
+        "up": 1,
+        "down": 2
+      },
+      "piano-seul:6": {
+        "up": 1,
+        "down": 0
+      },
+      "acappella-hommes:8": {
+        "up": 1,
+        "down": 0
+      },
+      "percussion-afrique:4": {
+        "up": 0,
+        "down": 1
+      },
+      "blues:5": {
+        "up": 0,
+        "down": 1
+      },
+      "esprit-dylan:2": {
+        "up": 0,
+        "down": 1
+      },
+      "instrumental:10": {
+        "up": 1,
+        "down": 0
+      },
+      "electro-spatiale:9": {
+        "up": 0,
+        "down": 1
+      },
+      "esprit-vangelis:2": {
+        "up": 1,
+        "down": 0
+      },
+      "country-bluegrass:8": {
+        "up": 0,
+        "down": 1
+      },
+      "celtique:8": {
+        "up": 1,
+        "down": 0
+      },
+      "tango:1": {
+        "up": 0,
+        "down": 1
+      },
+      "esprit-hallyday:3": {
+        "up": 0,
+        "down": 1
+      },
+      "acappella-femmes:8": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-chorale:14": {
+        "up": 0,
+        "down": 1
+      },
+      "ska-rocksteady:9": {
+        "up": 0,
+        "down": 1
+      },
+      "disco-it:9": {
+        "up": 1,
+        "down": 0
+      },
+      "perso:15": {
+        "up": 0,
+        "down": 1
+      },
+      "esprit-tri-yann:2": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-classique:19": {
+        "up": 0,
+        "down": 1
+      },
+      "hard-rock:8": {
+        "up": 1,
+        "down": 0
+      },
+      "reggae-dub:10": {
+        "up": 0,
+        "down": 1
+      },
+      "metal:1": {
+        "up": 1,
+        "down": 0
+      },
+      "esprit-tri-yann:9": {
+        "up": 0,
+        "down": 1
+      },
+      "bachata-merengue:9": {
+        "up": 0,
+        "down": 1
+      },
+      "esprit-dylan:8": {
+        "up": 1,
+        "down": 0
+      },
+      "esprit-madness:8": {
+        "up": 1,
+        "down": 0
+      },
+      "punk-indie:5": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-rock:8": {
+        "up": 0,
+        "down": 1
+      },
+      "percussion-afrique:10": {
+        "up": 0,
+        "down": 1
+      },
+      "percussion-amerique-sud:8": {
+        "up": 0,
+        "down": 1
+      },
+      "tango:9": {
+        "up": 1,
+        "down": 0
+      },
+      "francais_tests-electro:11": {
+        "up": 1,
+        "down": 0
+      },
+      "percussion-afrique:3": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-chorale:20": {
+        "up": 0,
+        "down": 1
+      },
+      "annees-50:9": {
+        "up": 1,
+        "down": 0
+      },
+      "funk-saxophone:1": {
+        "up": 1,
+        "down": 0
+      },
+      "annees-50:1": {
+        "up": 1,
+        "down": 0
+      },
+      "perso:3": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-rock:12": {
+        "up": 0,
+        "down": 1
+      },
+      "soul-motown:3": {
+        "up": 0,
+        "down": 1
+      },
+      "hard-tech:9": {
+        "up": 0,
+        "down": 1
+      },
+      "esprit-jackson:7": {
+        "up": 1,
+        "down": 0
+      },
+      "punk-indie:2": {
+        "up": 0,
+        "down": 1
+      },
+      "esprit-lapointe:7": {
+        "up": 0,
+        "down": 1
+      },
+      "esprit-madness:9": {
+        "up": 1,
+        "down": 0
+      },
+      "esprit-hallyday:4": {
+        "up": 0,
+        "down": 1
+      },
+      "rock-progressif-instrumental:2": {
+        "up": 0,
+        "down": 1
+      },
+      "hard-rock:3": {
+        "up": 0,
+        "down": 1
+      },
+      "esprit-lapointe:3": {
+        "up": 0,
+        "down": 1
+      },
+      "disco-de:10": {
+        "up": 1,
+        "down": 0
+      },
+      "ska-rocksteady:1": {
+        "up": 0,
+        "down": 1
+      },
+      "nordique:3": {
+        "up": 0,
+        "down": 1
+      },
+      "percussion-afrique:6": {
+        "up": 0,
+        "down": 1
+      },
+      "poesie-en:9": {
+        "up": 0,
+        "down": 1
+      },
+      "funk-saxophone:6": {
+        "up": 0,
+        "down": 1
+      },
+      "acappella-femmes:5": {
+        "up": 1,
+        "down": 0
+      },
+      "jazz-varie:2": {
+        "up": 0,
+        "down": 1
+      },
+      "electro-spatiale:1": {
+        "up": 0,
+        "down": 1
+      },
+      "esprit-madness:6": {
+        "up": 1,
+        "down": 0
+      },
+      "electro-atmospherique:9": {
+        "up": 0,
+        "down": 1
+      },
+      "esprit-goldman:2": {
+        "up": 0,
+        "down": 1
+      },
+      "tech:8": {
+        "up": 0,
+        "down": 1
+      },
+      "esprit-tri-yann:10": {
+        "up": 0,
+        "down": 1
+      },
+      "klezmer:3": {
+        "up": 0,
+        "down": 1
+      },
+      "salsa-latine:1": {
+        "up": 0,
+        "down": 1
+      },
+      "electro-pop-fr:1": {
+        "up": 1,
+        "down": 0
+      },
+      "disco-de:3": {
+        "up": 1,
+        "down": 0
+      },
+      "funk-saxophone:4": {
+        "up": 0,
+        "down": 1
+      },
+      "esprit-goldman:10": {
+        "up": 0,
+        "down": 1
+      },
+      "esprit-tri-yann:1": {
+        "up": 1,
+        "down": 0
+      },
+      "bachata-merengue:6": {
+        "up": 0,
+        "down": 1
+      },
+      "polynesie:9": {
+        "up": 0,
+        "down": 1
+      },
+      "soul-motown:1": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-rock:20": {
+        "up": 0,
+        "down": 1
+      },
+      "electro-spatiale:2": {
+        "up": 0,
+        "down": 1
+      },
+      "electro-pop-fr:8": {
+        "up": 0,
+        "down": 1
+      },
+      "guitare-seule:9": {
+        "up": 0,
+        "down": 1
+      },
+      "instrumental:20": {
+        "up": 0,
+        "down": 1
+      },
+      "drum-and-bass:9": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-rock:11": {
+        "up": 0,
+        "down": 1
+      },
+      "perso:8": {
+        "up": 0,
+        "down": 1
+      },
+      "salsa-latine:4": {
+        "up": 0,
+        "down": 1
+      },
+      "groove-en:5": {
+        "up": 2,
+        "down": 0
+      },
+      "francais_tests-rock:3": {
+        "up": 0,
+        "down": 1
+      },
+      "disco-it:3": {
+        "up": 1,
+        "down": 0
+      },
+      "house-trance:3": {
+        "up": 1,
+        "down": 0
+      },
+      "tango:3": {
+        "up": 0,
+        "down": 1
+      },
+      "electro-pop-fr:7": {
+        "up": 0,
+        "down": 1
+      },
+      "esprit-lapointe:4": {
+        "up": 0,
+        "down": 1
+      },
+      "annees-50:8": {
+        "up": 1,
+        "down": 0
+      },
+      "bresil:10": {
+        "up": 0,
+        "down": 1
+      },
+      "disco-de:6": {
+        "up": 1,
+        "down": 0
+      },
+      "salsa-latine:5": {
+        "up": 0,
+        "down": 1
+      },
+      "esprit-jackson:2": {
+        "up": 1,
+        "down": 0
+      },
+      "disco-es:10": {
+        "up": 1,
+        "down": 0
+      },
+      "ska-rocksteady:3": {
+        "up": 1,
+        "down": 0
+      },
+      "esprit-goldman:8": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-electro:20": {
+        "up": 0,
+        "down": 1
+      },
+      "disco-it:8": {
+        "up": 0,
+        "down": 1
+      },
+      "celtique:7": {
+        "up": 1,
+        "down": 0
+      },
+      "rock-progressif-instrumental:7": {
+        "up": 1,
+        "down": 0
+      },
+      "esprit-hallyday:9": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-rock:4": {
+        "up": 1,
+        "down": 2
+      },
+      "esprit-hallyday:6": {
+        "up": 0,
+        "down": 1
+      },
+      "esprit-lapointe:6": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-rock:5": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-chorale:18": {
+        "up": 1,
+        "down": 0
+      },
+      "francais_tests-classique:13": {
+        "up": 0,
+        "down": 1
+      },
+      "ska-rocksteady:5": {
+        "up": 0,
+        "down": 1
+      },
+      "percussion-amerique-sud:4": {
+        "up": 1,
+        "down": 0
+      },
+      "francais_tests-rock:15": {
+        "up": 0,
+        "down": 1
+      },
+      "rap-fr-melodique:3": {
+        "up": 1,
+        "down": 0
+      },
+      "rap-fr-melodique:4": {
+        "up": 1,
+        "down": 0
+      },
+      "rap-fr-melodique:10": {
+        "up": 1,
+        "down": 0
+      },
+      "drum-and-bass:5": {
+        "up": 1,
+        "down": 0
+      },
+      "harpe-seule:9": {
+        "up": 0,
+        "down": 1
+      },
+      "celtique:4": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-gregorien:21": {
+        "up": 0,
+        "down": 1
+      },
+      "disco-it:7": {
+        "up": 1,
+        "down": 0
+      },
+      "hard-rock:4": {
+        "up": 1,
+        "down": 0
+      },
+      "rap-fr-melodique:9": {
+        "up": 1,
+        "down": 0
+      },
+      "hip-hop-beats:3": {
+        "up": 0,
+        "down": 1
+      },
+      "perso:19": {
+        "up": 1,
+        "down": 0
+      },
+      "rap-fr-melodique:8": {
+        "up": 1,
+        "down": 0
+      },
+      "acappella-femmes:7": {
+        "up": 1,
+        "down": 0
+      },
+      "country-bluegrass:2": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-folk:14": {
+        "up": 0,
+        "down": 1
+      },
+      "acappella-femmes:9": {
+        "up": 1,
+        "down": 0
+      },
+      "blues:6": {
+        "up": 0,
+        "down": 1
+      },
+      "esprit-hallyday:8": {
+        "up": 0,
+        "down": 1
+      },
+      "bresil:6": {
+        "up": 0,
+        "down": 1
+      },
+      "perso:13": {
+        "up": 1,
+        "down": 0
+      },
+      "percussion-amerique-sud:7": {
+        "up": 0,
+        "down": 1
+      },
+      "hip-hop-beats:6": {
+        "up": 1,
+        "down": 0
+      },
+      "drum-and-bass:4": {
+        "up": 1,
+        "down": 2
+      },
+      "ska-rocksteady:10": {
+        "up": 0,
+        "down": 1
+      },
+      "perso:5": {
+        "up": 0,
+        "down": 1
+      },
+      "perso:9": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-classique:12": {
+        "up": 0,
+        "down": 1
+      },
+      "celtique:6": {
+        "up": 0,
+        "down": 1
+      },
+      "disco-de:7": {
+        "up": 1,
+        "down": 0
+      },
+      "house-trance:2": {
+        "up": 1,
+        "down": 0
+      },
+      "francais_tests-electro:21": {
+        "up": 1,
+        "down": 0
+      },
+      "francais_tests-classique:2": {
+        "up": 0,
+        "down": 1
+      },
+      "punk-indie:8": {
+        "up": 0,
+        "down": 1
+      },
+      "acappella-femmes:3": {
+        "up": 1,
+        "down": 0
+      },
+      "francais_tests-chorale:19": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-chorale:15": {
+        "up": 0,
+        "down": 1
+      },
+      "bresil:9": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-electro:18": {
+        "up": 0,
+        "down": 1
+      },
+      "klezmer:6": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-classique:1": {
+        "up": 0,
+        "down": 1
+      },
+      "celtique:2": {
+        "up": 0,
+        "down": 1
+      },
+      "guitare-seule:3": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-rock:16": {
+        "up": 0,
+        "down": 1
+      },
+      "hip-hop-beats:1": {
+        "up": 0,
+        "down": 1
+      },
+      "esprit-tri-yann:8": {
+        "up": 0,
+        "down": 1
+      },
+      "disco-it:10": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-gregorien:11": {
+        "up": 0,
+        "down": 1
+      },
+      "ska-rocksteady:4": {
+        "up": 1,
+        "down": 0
+      },
+      "instrumental:17": {
+        "up": 0,
+        "down": 1
+      },
+      "instrumental:18": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-chorale:10": {
+        "up": 0,
+        "down": 1
+      },
+      "blues-vocal:10": {
+        "up": 1,
+        "down": 0
+      },
+      "francais_tests-rock:1": {
+        "up": 0,
+        "down": 1
+      },
+      "soul-motown:7": {
+        "up": 0,
+        "down": 1
+      },
+      "blues:4": {
+        "up": 1,
+        "down": 0
+      },
+      "francais_tests-classique:20": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-gregorien:18": {
+        "up": 0,
+        "down": 1
+      },
+      "piano-seul:2": {
+        "up": 1,
+        "down": 0
+      },
+      "metal:7": {
+        "up": 0,
+        "down": 1
+      },
+      "futuriste-2046:10": {
+        "up": 1,
+        "down": 0
+      },
+      "soul-motown:9": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-chorale:13": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-chorale:4": {
+        "up": 0,
+        "down": 1
+      },
+      "metal:5": {
+        "up": 0,
+        "down": 1
+      },
+      "punk-indie:9": {
+        "up": 1,
+        "down": 0
+      },
+      "salsa-latine:3": {
+        "up": 0,
+        "down": 1
+      },
+      "soul-motown:4": {
+        "up": 1,
+        "down": 0
+      },
+      "ambient-chill:2": {
+        "up": 0,
+        "down": 1
+      },
+      "soul-motown:8": {
+        "up": 0,
+        "down": 1
+      },
+      "electro-pop-fr:10": {
+        "up": 1,
+        "down": 0
+      },
+      "chant-mongol:5": {
+        "up": 1,
+        "down": 0
+      },
+      "klezmer:1": {
+        "up": 0,
+        "down": 1
+      },
+      "rock-progressif-instrumental:4": {
+        "up": 0,
+        "down": 1
+      },
+      "ska-rocksteady:7": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-folk:16": {
+        "up": 0,
+        "down": 1
+      },
+      "piano-seul:7": {
+        "up": 0,
+        "down": 1
+      },
+      "ambient-chill:10": {
+        "up": 1,
+        "down": 0
+      },
+      "metal:8": {
+        "up": 0,
+        "down": 1
+      },
+      "reggae-dub:3": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-chorale:6": {
+        "up": 0,
+        "down": 1
+      },
+      "esprit-dylan:3": {
+        "up": 1,
+        "down": 0
+      },
+      "francais_tests-electro:1": {
+        "up": 1,
+        "down": 0
+      },
+      "francais_tests-electro:5": {
+        "up": 1,
+        "down": 0
+      },
+      "punk-indie:10": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-gregorien:4": {
+        "up": 1,
+        "down": 0
+      },
+      "esprit-vangelis:9": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-chorale:21": {
+        "up": 0,
+        "down": 1
+      },
+      "perso:2": {
+        "up": 0,
+        "down": 1
+      },
+      "piano-seul:10": {
+        "up": 1,
+        "down": 0
+      },
+      "francais_tests-rock:10": {
+        "up": 0,
+        "down": 1
+      },
+      "bresil:7": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-gregorien:20": {
+        "up": 1,
+        "down": 0
+      },
+      "perso:12": {
+        "up": 1,
+        "down": 0
+      },
+      "drum-and-bass:1": {
+        "up": 0,
+        "down": 1
+      },
+      "perso:16": {
+        "up": 0,
+        "down": 1
+      },
+      "house-trance:9": {
+        "up": 1,
+        "down": 0
+      },
+      "perso:6": {
+        "up": 1,
+        "down": 0
+      },
+      "francais_tests-gregorien:16": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-electro:4": {
+        "up": 1,
+        "down": 0
+      },
+      "francais_tests-classique:4": {
+        "up": 0,
+        "down": 1
+      },
+      "japon-traditionnel:9": {
+        "up": 0,
+        "down": 1
+      },
+      "inde-classique:5": {
+        "up": 1,
+        "down": 0
+      },
+      "inde-classique:9": {
+        "up": 0,
+        "down": 1
+      },
+      "chant-mongol:9": {
+        "up": 1,
+        "down": 0
+      },
+      "chine-traditionnelle:7": {
+        "up": 0,
+        "down": 1
+      },
+      "chant-mongol:3": {
+        "up": 0,
+        "down": 1
+      },
+      "klezmer:2": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-folk:19": {
+        "up": 0,
+        "down": 1
+      },
+      "ambient-chill:8": {
+        "up": 1,
+        "down": 0
+      },
+      "jazz-varie:7": {
+        "up": 0,
+        "down": 1
+      },
+      "chine-traditionnelle:9": {
+        "up": 0,
+        "down": 1
+      },
+      "esprit-vangelis:8": {
+        "up": 0,
+        "down": 1
+      },
+      "instrumental:8": {
+        "up": 0,
+        "down": 1
+      },
+      "futuriste-2046:1": {
+        "up": 1,
+        "down": 0
+      },
+      "piano-seul:8": {
+        "up": 1,
+        "down": 0
+      },
+      "blues-instrumental:7": {
+        "up": 0,
+        "down": 1
+      },
+      "rock-progressif-instrumental:8": {
+        "up": 0,
+        "down": 1
+      },
+      "instrumental:6": {
+        "up": 0,
+        "down": 1
+      },
+      "synthes-epiques:8": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-electro:12": {
+        "up": 0,
+        "down": 1
+      },
+      "futuriste-2046:2": {
+        "up": 1,
+        "down": 0
+      },
+      "esprit-tiersen:5": {
+        "up": 0,
+        "down": 1
+      },
+      "chine-traditionnelle:2": {
+        "up": 0,
+        "down": 1
+      },
+      "chine-traditionnelle:10": {
+        "up": 0,
+        "down": 1
+      },
+      "ambient-chill:5": {
+        "up": 1,
+        "down": 0
+      },
+      "jazz-varie:5": {
+        "up": 0,
+        "down": 1
+      },
+      "chine-traditionnelle:1": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-gregorien:19": {
+        "up": 0,
+        "down": 1
+      },
+      "electro-atmospherique:4": {
+        "up": 0,
+        "down": 1
+      },
+      "esprit-tiersen:10": {
+        "up": 0,
+        "down": 1
+      },
+      "poesie-en:6": {
+        "up": 1,
+        "down": 0
+      },
+      "francais_tests-electro:6": {
+        "up": 0,
+        "down": 1
+      },
+      "synthes-epiques:6": {
+        "up": 0,
+        "down": 1
+      },
+      "synthes-epiques:7": {
+        "up": 0,
+        "down": 1
+      },
+      "piano-seul:5": {
+        "up": 0,
+        "down": 1
+      },
+      "blues-instrumental:4": {
+        "up": 1,
+        "down": 0
+      },
+      "synthes-epiques:3": {
+        "up": 1,
+        "down": 0
+      },
+      "esprit-vangelis:7": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-gregorien:13": {
+        "up": 0,
+        "down": 1
+      },
+      "ambient-chill:1": {
+        "up": 0,
+        "down": 1
+      },
+      "synthes-epiques:9": {
+        "up": 1,
+        "down": 1
+      },
+      "chine-traditionnelle:5": {
+        "up": 0,
+        "down": 1
+      },
+      "synthes-epiques:4": {
+        "up": 1,
+        "down": 0
+      },
+      "chant-mongol:10": {
+        "up": 1,
+        "down": 0
+      },
+      "esprit-tiersen:6": {
+        "up": 0,
+        "down": 1
+      },
+      "poesie-en:10": {
+        "up": 1,
+        "down": 0
+      },
+      "poesie-en:5": {
+        "up": 1,
+        "down": 0
+      },
+      "blues-instrumental:6": {
+        "up": 0,
+        "down": 1
+      },
+      "chant-mongol:8": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-gregorien:2": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-folk:21": {
+        "up": 0,
+        "down": 1
+      },
+      "ambient-chill:4": {
+        "up": 0,
+        "down": 1
+      },
+      "chant-mongol:6": {
+        "up": 1,
+        "down": 0
+      },
+      "francais_tests-gregorien:15": {
+        "up": 0,
+        "down": 1
+      },
+      "harpe-seule:2": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-folk:4": {
+        "up": 0,
+        "down": 1
+      },
+      "electro-atmospherique:2": {
+        "up": 1,
+        "down": 0
+      },
+      "electro-spatiale:10": {
+        "up": 1,
+        "down": 0
+      },
+      "harpe-seule:4": {
+        "up": 0,
+        "down": 1
+      },
+      "harpe-seule:6": {
+        "up": 0,
+        "down": 1
+      },
+      "harpe-seule:8": {
+        "up": 0,
+        "down": 1
+      },
+      "electro-spatiale:6": {
+        "up": 1,
+        "down": 2
+      },
+      "ambient-chill:6": {
+        "up": 1,
+        "down": 0
+      },
+      "esprit-tiersen:4": {
+        "up": 1,
+        "down": 0
+      },
+      "harpe-seule:10": {
+        "up": 0,
+        "down": 1
+      },
+      "esprit-tri-yann:3": {
+        "up": 0,
+        "down": 1
+      },
+      "house-trance:1": {
+        "up": 1,
+        "down": 0
+      },
+      "bachata-merengue:4": {
+        "up": 1,
+        "down": 0
+      },
+      "annees-50:10": {
+        "up": 0,
+        "down": 1
+      },
+      "reggae-dub:4": {
+        "up": 0,
+        "down": 1
+      },
+      "futuriste-2046:5": {
+        "up": 0,
+        "down": 1
+      },
+      "hard-tech:4": {
+        "up": 0,
+        "down": 1
+      },
+      "hip-hop-beats:9": {
+        "up": 0,
+        "down": 1
+      },
+      "instrumental:12": {
+        "up": 0,
+        "down": 1
+      },
+      "ska-rocksteady:8": {
+        "up": 0,
+        "down": 1
+      },
+      "drum-and-bass:3": {
+        "up": 0,
+        "down": 1
+      },
+      "instrumental:7": {
+        "up": 0,
+        "down": 1
+      },
+      "bresil:8": {
+        "up": 0,
+        "down": 1
+      },
+      "guitare-seule:4": {
+        "up": 0,
+        "down": 2
+      },
+      "harpe-seule:3": {
+        "up": 0,
+        "down": 1
+      },
+      "celtique:9": {
+        "up": 0,
+        "down": 1
+      },
+      "klezmer:4": {
+        "up": 0,
+        "down": 2
+      },
+      "instrumental:19": {
+        "up": 0,
+        "down": 2
+      },
+      "francais_tests-rock:13": {
+        "up": 0,
+        "down": 2
+      },
+      "esprit-goldman:5": {
+        "up": 0,
+        "down": 2
+      },
+      "francais_tests-folk:15": {
+        "up": 0,
+        "down": 2
+      },
+      "francais_tests-gregorien:17": {
+        "up": 1,
+        "down": 0
+      },
+      "francais_tests-rock:17": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-electro:17": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-electro:7": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-folk:7": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-chorale:17": {
+        "up": 1,
+        "down": 0
+      },
+      "francais_tests-rock:7": {
+        "up": 1,
+        "down": 0
+      },
+      "perso:7": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-classique:7": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-classique:17": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-folk:17": {
+        "up": 0,
+        "down": 1
+      },
+      "poesie-en:2": {
+        "up": 1,
+        "down": 0
+      },
+      "creation-francaise:1": {
+        "up": 1,
+        "down": 0
+      },
+      "punk-indie:4": {
+        "up": 0,
+        "down": 2
+      },
+      "disco-pt:3": {
+        "up": 1,
+        "down": 0
+      },
+      "polynesie:10": {
+        "up": 0,
+        "down": 2
+      },
+      "perso:17": {
+        "up": 1,
+        "down": 0
+      }
+    },
+    "6f1360aaa5c119d3fc7d814e3df1997d": {
+      "acappella-hommes:4": {
+        "up": 1,
+        "down": 0
+      },
+      "esprit-goldman:5": {
+        "up": 1,
+        "down": 0
+      },
+      "disco-pt:7": {
+        "up": 1,
+        "down": 0
+      },
+      "annees-50:5": {
+        "up": 1,
+        "down": 0
+      },
+      "poesie-fr:8": {
+        "up": 1,
+        "down": 0
+      },
+      "drum-and-bass:7": {
+        "up": 1,
+        "down": 0
+      },
+      "classique-varie:5": {
+        "up": 0,
+        "down": 1
+      },
+      "punk-indie:4": {
+        "up": 1,
+        "down": 0
+      },
+      "disco-es:5": {
+        "up": 2,
+        "down": 0
+      },
+      "disco-de:4": {
+        "up": 1,
+        "down": 0
+      },
+      "blues-vocal:9": {
+        "up": 1,
+        "down": 0
+      },
+      "house-trance:8": {
+        "up": 1,
+        "down": 0
+      },
+      "annees-50:7": {
+        "up": 1,
+        "down": 0
+      },
+      "groove-en:2": {
+        "up": 1,
+        "down": 0
+      },
+      "esprit-dylan:1": {
+        "up": 1,
+        "down": 0
+      },
+      "instrumental:13": {
+        "up": 1,
+        "down": 0
+      },
+      "flamenco:9": {
+        "up": 0,
+        "down": 1
+      },
+      "percussion-amerique-sud:1": {
+        "up": 0,
+        "down": 1
+      },
+      "polynesie:7": {
+        "up": 0,
+        "down": 1
+      },
+      "flamenco:7": {
+        "up": 0,
+        "down": 1
+      },
+      "poesie-fr:7": {
+        "up": 1,
+        "down": 0
+      },
+      "disco-en:8": {
+        "up": 1,
+        "down": 0
+      },
+      "esprit-lapointe:2": {
+        "up": 1,
+        "down": 0
+      },
+      "francais_tests-classique:14": {
+        "up": 0,
+        "down": 1
+      },
+      "japon-traditionnel:3": {
+        "up": 0,
+        "down": 1
+      },
+      "tech:2": {
+        "up": 2,
+        "down": 1
+      },
+      "hard-tech:7": {
+        "up": 0,
+        "down": 1
+      },
+      "klezmer:4": {
+        "up": 1,
+        "down": 0
+      },
+      "hard-tech:3": {
+        "up": 1,
+        "down": 0
+      },
+      "esprit-vangelis:3": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-classique:21": {
+        "up": 0,
+        "down": 1
+      },
+      "blues:3": {
+        "up": 0,
+        "down": 1
+      },
+      "esprit-lapointe:8": {
+        "up": 1,
+        "down": 0
+      },
+      "flamenco:6": {
+        "up": 1,
+        "down": 0
+      },
+      "instrumental:19": {
+        "up": 1,
+        "down": 0
+      },
+      "disco-en:3": {
+        "up": 1,
+        "down": 0
+      },
+      "rock-progressif-instrumental:9": {
+        "up": 0,
+        "down": 1
+      },
+      "poesie-fr:1": {
+        "up": 1,
+        "down": 0
+      },
+      "harpe-seule:7": {
+        "up": 0,
+        "down": 1
+      },
+      "perso:11": {
+        "up": 0,
+        "down": 1
+      },
+      "disco-pt:9": {
+        "up": 1,
+        "down": 0
+      },
+      "country-bluegrass:10": {
+        "up": 1,
+        "down": 0
+      },
+      "auto:6": {
+        "up": 0,
+        "down": 1
+      },
+      "poesie-en:8": {
+        "up": 1,
+        "down": 0
+      },
+      "polynesie:8": {
+        "up": 0,
+        "down": 1
+      },
+      "esprit-jackson:6": {
+        "up": 1,
+        "down": 0
+      },
+      "instrumental:7": {
+        "up": 1,
+        "down": 0
+      },
+      "futuriste-2046:3": {
+        "up": 0,
+        "down": 1
+      },
+      "afrobeats:3": {
+        "up": 1,
+        "down": 0
+      },
+      "hard-tech:6": {
+        "up": 0,
+        "down": 1
+      },
+      "percussion-amerique-sud:2": {
+        "up": 0,
+        "down": 1
+      },
+      "blues:1": {
+        "up": 0,
+        "down": 1
+      },
+      "tech:5": {
+        "up": 1,
+        "down": 0
+      },
+      "country-bluegrass:9": {
+        "up": 1,
+        "down": 0
+      },
+      "hip-hop-beats:8": {
+        "up": 0,
+        "down": 1
+      },
+      "hard-rock:11": {
+        "up": 1,
+        "down": 0
+      },
+      "electro-pop-fr:5": {
+        "up": 0,
+        "down": 1
+      },
+      "percussion-amerique-sud:10": {
+        "up": 0,
+        "down": 1
+      },
+      "disco-de:1": {
+        "up": 1,
+        "down": 0
+      },
+      "disco-de:8": {
+        "up": 1,
+        "down": 0
+      },
+      "tech:10": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-rock:18": {
+        "up": 0,
+        "down": 1
+      },
+      "esprit-hallyday:2": {
+        "up": 0,
+        "down": 1
+      },
+      "hard-rock:2": {
+        "up": 1,
+        "down": 0
+      },
+      "hard-rock:9": {
+        "up": 1,
+        "down": 0
+      },
+      "francais_tests-rock:9": {
+        "up": 0,
+        "down": 1
+      },
+      "hard-rock:1": {
+        "up": 1,
+        "down": 0
+      },
+      "hard-rock:5": {
+        "up": 1,
+        "down": 0
+      },
+      "hip-hop-beats:5": {
+        "up": 1,
+        "down": 0
+      },
+      "disco-it:1": {
+        "up": 1,
+        "down": 0
+      },
+      "francais_tests-electro:9": {
+        "up": 1,
+        "down": 0
+      },
+      "francais_tests-folk:12": {
+        "up": 1,
+        "down": 0
+      },
+      "nordique:5": {
+        "up": 0,
+        "down": 1
+      },
+      "disco-it:5": {
+        "up": 1,
+        "down": 0
+      },
+      "perso:21": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-rock:13": {
+        "up": 1,
+        "down": 0
+      },
+      "tango:5": {
+        "up": 0,
+        "down": 1
+      },
+      "tango:10": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-folk:15": {
+        "up": 1,
+        "down": 0
+      },
+      "francais_tests-rock:2": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-gregorien:3": {
+        "up": 0,
+        "down": 1
+      },
+      "electro-pop-fr:2": {
+        "up": 0,
+        "down": 1
+      },
+      "electro-atmospherique:8": {
+        "up": 1,
+        "down": 0
+      },
+      "blues-vocal:8": {
+        "up": 0,
+        "down": 1
+      },
+      "esprit-tri-yann:4": {
+        "up": 1,
+        "down": 0
+      },
+      "inde-classique:10": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-rock:19": {
+        "up": 0,
+        "down": 1
+      },
+      "bresil:8": {
+        "up": 1,
+        "down": 0
+      },
+      "klezmer:9": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-electro:16": {
+        "up": 0,
+        "down": 1
+      },
+      "esprit-jackson:10": {
+        "up": 1,
+        "down": 0
+      },
+      "blues-vocal:7": {
+        "up": 0,
+        "down": 1
+      },
+      "perso:14": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-chorale:5": {
+        "up": 0,
+        "down": 1
+      },
+      "rock-progressif-instrumental:6": {
+        "up": 0,
+        "down": 1
+      },
+      "bresil:4": {
+        "up": 0,
+        "down": 1
+      },
+      "futuriste-2046:8": {
+        "up": 1,
+        "down": 0
+      },
+      "francais_tests-gregorien:9": {
+        "up": 0,
+        "down": 1
+      },
+      "chine-traditionnelle:3": {
+        "up": 0,
+        "down": 1
+      },
+      "bachata-merengue:5": {
+        "up": 0,
+        "down": 1
+      },
+      "rock-progressif-instrumental:3": {
+        "up": 1,
+        "down": 0
+      },
+      "francais_tests-classique:18": {
+        "up": 0,
+        "down": 1
+      },
+      "blues:2": {
+        "up": 1,
+        "down": 0
+      },
+      "drum-and-bass:6": {
+        "up": 1,
+        "down": 0
+      },
+      "francais_tests-folk:9": {
+        "up": 0,
+        "down": 1
+      },
+      "esprit-dylan:10": {
+        "up": 1,
+        "down": 0
+      },
+      "house-trance:10": {
+        "up": 1,
+        "down": 0
+      },
+      "francais_tests-classique:15": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-rock:14": {
+        "up": 0,
+        "down": 1
+      },
+      "piano-seul:4": {
+        "up": 1,
+        "down": 0
+      },
+      "francais_tests-rock:6": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-rock:21": {
+        "up": 0,
+        "down": 1
+      },
+      "klezmer:10": {
+        "up": 0,
+        "down": 1
+      },
+      "blues-instrumental:8": {
+        "up": 1,
+        "down": 0
+      },
+      "francais_tests-electro:8": {
+        "up": 0,
+        "down": 1
+      },
+      "metal:6": {
+        "up": 0,
+        "down": 1
+      },
+      "inde-classique:3": {
+        "up": 0,
+        "down": 1
+      },
+      "klezmer:5": {
+        "up": 0,
+        "down": 1
+      },
+      "esprit-vangelis:4": {
+        "up": 1,
+        "down": 0
+      },
+      "francais_tests-classique:11": {
+        "up": 0,
+        "down": 1
+      },
+      "perso:20": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-chorale:16": {
+        "up": 0,
+        "down": 1
+      },
+      "blues:9": {
+        "up": 1,
+        "down": 0
+      },
+      "auto:3": {
+        "up": 1,
+        "down": 0
+      },
+      "francais_tests-gregorien:1": {
+        "up": 0,
+        "down": 1
+      },
+      "japon-traditionnel:7": {
+        "up": 0,
+        "down": 1
+      },
+      "esprit-tiersen:8": {
+        "up": 1,
+        "down": 0
+      },
+      "klezmer:8": {
+        "up": 0,
+        "down": 1
+      },
+      "perso:4": {
+        "up": 0,
+        "down": 1
+      },
+      "reggae-dub:5": {
+        "up": 0,
+        "down": 1
+      },
+      "bachata-merengue:8": {
+        "up": 1,
+        "down": 0
+      },
+      "guitare-seule:8": {
+        "up": 1,
+        "down": 0
+      },
+      "francais_tests-gregorien:14": {
+        "up": 0,
+        "down": 1
+      },
+      "perso:10": {
+        "up": 1,
+        "down": 0
+      },
+      "esprit-vangelis:5": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-classique:5": {
+        "up": 0,
+        "down": 1
+      },
+      "guitare-seule:4": {
+        "up": 1,
+        "down": 0
+      },
+      "francais_tests-electro:3": {
+        "up": 1,
+        "down": 0
+      },
+      "poesie-en:2": {
+        "up": 1,
+        "down": 1
+      },
+      "instrumental:11": {
+        "up": 1,
+        "down": 0
+      },
+      "francais_tests-chorale:8": {
+        "up": 0,
+        "down": 1
+      },
+      "chant-mongol:4": {
+        "up": 0,
+        "down": 1
+      },
+      "poesie-en:1": {
+        "up": 1,
+        "down": 0
+      },
+      "jazz-varie:10": {
+        "up": 0,
+        "down": 1
+      },
+      "perso:1": {
+        "up": 0,
+        "down": 1
+      },
+      "rock-progressif-instrumental:5": {
+        "up": 1,
+        "down": 0
+      },
+      "jazz-varie:3": {
+        "up": 1,
+        "down": 0
+      },
+      "francais_tests-electro:13": {
+        "up": 0,
+        "down": 1
+      },
+      "instrumental:15": {
+        "up": 1,
+        "down": 0
+      },
+      "francais_tests-electro:2": {
+        "up": 1,
+        "down": 0
+      },
+      "house-trance:5": {
+        "up": 2,
+        "down": 0
+      },
+      "synthes-epiques:10": {
+        "up": 1,
+        "down": 0
+      },
+      "francais_tests-electro:15": {
+        "up": 1,
+        "down": 0
+      },
+      "blues-instrumental:3": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-electro:14": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-gregorien:6": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-chorale:9": {
+        "up": 0,
+        "down": 1
+      },
+      "chine-traditionnelle:8": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-gregorien:5": {
+        "up": 0,
+        "down": 1
+      },
+      "instrumental:12": {
+        "up": 1,
+        "down": 0
+      },
+      "blues-instrumental:5": {
+        "up": 0,
+        "down": 1
+      },
+      "esprit-vangelis:10": {
+        "up": 0,
+        "down": 1
+      },
+      "blues-instrumental:1": {
+        "up": 0,
+        "down": 1
+      },
+      "esprit-tiersen:9": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-chorale:12": {
+        "up": 0,
+        "down": 1
+      },
+      "instrumental:16": {
+        "up": 1,
+        "down": 0
+      },
+      "guitare-seule:7": {
+        "up": 0,
+        "down": 1
+      },
+      "harpe-seule:1": {
+        "up": 0,
+        "down": 1
+      },
+      "jazz-varie:8": {
+        "up": 1,
+        "down": 0
+      },
+      "synthes-epiques:1": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-classique:6": {
+        "up": 0,
+        "down": 1
+      }
+    },
+    "2254454ba4aa0175da4c39a4a5763d0e": {
+      "electro-atmospherique:3": {
+        "up": 0,
+        "down": 1
+      },
+      "blues-instrumental:10": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-folk:10": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-folk:3": {
+        "up": 0,
+        "down": 1
+      },
+      "harpe-seule:5": {
+        "up": 0,
+        "down": 1
+      },
+      "harpe-seule:3": {
+        "up": 1,
+        "down": 0
+      },
+      "francais_tests-folk:13": {
+        "up": 1,
+        "down": 0
+      },
+      "electro-atmospherique:1": {
+        "up": 1,
+        "down": 0
+      },
+      "esprit-tiersen:2": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-folk:1": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-folk:2": {
+        "up": 0,
+        "down": 1
+      },
+      "ambient-chill:9": {
+        "up": 1,
+        "down": 0
+      },
+      "esprit-tiersen:1": {
+        "up": 0,
+        "down": 1
+      },
+      "esprit-tiersen:3": {
+        "up": 1,
+        "down": 0
+      },
+      "ambient-chill:7": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-folk:11": {
+        "up": 0,
+        "down": 1
+      },
+      "francais_tests-folk:20": {
+        "up": 0,
+        "down": 1
+      },
+      "esprit-tiersen:7": {
+        "up": 0,
+        "down": 1
+      },
+      "esprit-goldman:4": {
+        "up": 0,
+        "down": 1
+      }
+    }
+  }
+}

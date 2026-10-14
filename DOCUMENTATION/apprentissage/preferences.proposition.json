@@ -1,18 +1,18 @@
 {
   "version": 1,
-  "calcule_le": "2026-10-12T14:22:22+02:00",
+  "calcule_le": "2026-10-15T00:02:07+02:00",
   "sources": {
     "votes": "webradio/votes.json",
-    "morceaux_votes": 851
+    "morceaux_votes": 857
   },
   "modeles": {
     "ace-step-1.5-turbo": {
       "mots_cles_caption": [
         {
           "terme": "instrumental",
-          "pour": 123,
-          "contre": 248,
-          "taux": 0.332
+          "pour": 118,
+          "contre": 255,
+          "taux": 0.316
         },
         {
           "terme": "piano",
@@ -27,16 +27,16 @@
           "taux": 0.426
         },
         {
+          "terme": "violin",
+          "pour": 14,
+          "contre": 26,
+          "taux": 0.35
+        },
+        {
           "terme": "a cappella",
           "pour": 8,
           "contre": 31,
           "taux": 0.205
-        },
-        {
-          "terme": "violin",
-          "pour": 14,
-          "contre": 25,
-          "taux": 0.359
         },
         {
           "terme": "fiddle",
@@ -59,8 +59,8 @@
         {
           "terme": "no other instruments",
           "pour": 9,
-          "contre": 18,
-          "taux": 0.333
+          "contre": 19,
+          "taux": 0.321
         },
         {
           "terme": "orchestral strings",
@@ -79,6 +79,12 @@
           "pour": 11,
           "contre": 13,
           "taux": 0.458
+        },
+        {
+          "terme": "accordion",
+          "pour": 6,
+          "contre": 17,
+          "taux": 0.261
         },
         {
           "terme": "acoustic folk",
@@ -103,12 +109,6 @@
           "pour": 6,
           "contre": 17,
           "taux": 0.261
-        },
-        {
-          "terme": "accordion",
-          "pour": 6,
-          "contre": 16,
-          "taux": 0.273
         },
         {
           "terme": "bass",
@@ -243,6 +243,12 @@
           "taux": 0.55
         },
         {
+          "terme": "steel guitar",
+          "pour": 6,
+          "contre": 14,
+          "taux": 0.3
+        },
+        {
           "terme": "warm and full",
           "pour": 3,
           "contre": 17,
@@ -286,21 +292,15 @@
         },
         {
           "terme": "slap bass",
-          "pour": 17,
-          "contre": 2,
-          "taux": 0.895
+          "pour": 16,
+          "contre": 3,
+          "taux": 0.842
         },
         {
           "terme": "solemn",
           "pour": 5,
           "contre": 14,
           "taux": 0.263
-        },
-        {
-          "terme": "steel guitar",
-          "pour": 7,
-          "contre": 12,
-          "taux": 0.368
         },
         {
           "terme": "female vocal",
@@ -316,9 +316,9 @@
         },
         {
           "terme": "brass section",
-          "pour": 16,
-          "contre": 1,
-          "taux": 0.941
+          "pour": 15,
+          "contre": 2,
+          "taux": 0.882
         },
         {
           "terme": "cinematic",
@@ -328,9 +328,9 @@
         },
         {
           "terme": "congas",
-          "pour": 10,
-          "contre": 7,
-          "taux": 0.588
+          "pour": 9,
+          "contre": 8,
+          "taux": 0.529
         },
         {
           "terme": "gentle",
@@ -375,6 +375,12 @@
           "taux": 0.933
         },
         {
+          "terme": "dramatic",
+          "pour": 4,
+          "contre": 10,
+          "taux": 0.286
+        },
+        {
           "terme": "saxophone",
           "pour": 11,
           "contre": 3,
@@ -385,12 +391,6 @@
           "pour": 11,
           "contre": 2,
           "taux": 0.846
-        },
-        {
-          "terme": "dramatic",
-          "pour": 3,
-          "contre": 10,
-          "taux": 0.231
         },
         {
           "terme": "duet vocal",
@@ -412,6 +412,12 @@
         },
         {
           "terme": "tambourine",
+          "pour": 1,
+          "contre": 12,
+          "taux": 0.077
+        },
+        {
+          "terme": "tuba",
           "pour": 1,
           "contre": 12,
           "taux": 0.077
@@ -447,10 +453,16 @@
           "taux": 0.25
         },
         {
+          "terme": "lively",
+          "pour": 0,
+          "contre": 12,
+          "taux": 0.0
+        },
+        {
           "terme": "playful",
-          "pour": 10,
-          "contre": 2,
-          "taux": 0.833
+          "pour": 9,
+          "contre": 3,
+          "taux": 0.75
         },
         {
           "terme": "powerful",
@@ -471,30 +483,18 @@
           "taux": 0.25
         },
         {
-          "terme": "tuba",
-          "pour": 1,
-          "contre": 11,
-          "taux": 0.083
-        },
-        {
           "terme": "122 bpm",
           "pour": 7,
           "contre": 4,
           "taux": 0.636
-        },
-        {
-          "terme": "acoustic",
-          "pour": 3,
-          "contre": 8,
-          "taux": 0.273
         }
       ],
       "familles_style": [
         {
           "famille": "funk-soul",
           "pour": 65,
-          "contre": 30,
-          "taux": 0.684
+          "contre": 31,
+          "taux": 0.677
         },
         {
           "famille": "hip-hop",
@@ -522,9 +522,9 @@
         },
         {
           "famille": "ambient",
-          "pour": 39,
+          "pour": 40,
           "contre": 46,
-          "taux": 0.459
+          "taux": 0.465
         },
         {
           "famille": "choeur",
@@ -534,15 +534,15 @@
         },
         {
           "famille": "rock",
-          "pour": 38,
-          "contre": 62,
-          "taux": 0.38
+          "pour": 37,
+          "contre": 63,
+          "taux": 0.37
         },
         {
           "famille": "folk",
-          "pour": 59,
+          "pour": 60,
           "contre": 106,
-          "taux": 0.358
+          "taux": 0.361
         },
         {
           "famille": "latin-monde",
@@ -553,8 +553,8 @@
         {
           "famille": "classique-sacre",
           "pour": 23,
-          "contre": 50,
-          "taux": 0.315
+          "contre": 51,
+          "taux": 0.311
         },
         {
           "famille": "metal",
@@ -576,33 +576,33 @@
       "duree_s": {
         "aime": [
           50,
-          130.0
+          130
         ]
       },
       "voix": [
         {
           "type": "female",
-          "pour": 40,
+          "pour": 41,
           "contre": 4,
-          "taux": 0.909
+          "taux": 0.911
         },
         {
           "type": "male",
           "pour": 104,
-          "contre": 55,
-          "taux": 0.654
+          "contre": 56,
+          "taux": 0.65
         },
         {
           "type": "non_precise",
-          "pour": 69,
+          "pour": 70,
           "contre": 85,
-          "taux": 0.448
+          "taux": 0.452
         },
         {
           "type": "instrumental",
-          "pour": 171,
-          "contre": 303,
-          "taux": 0.361
+          "pour": 166,
+          "contre": 311,
+          "taux": 0.348
         },
         {
           "type": "choeur",
