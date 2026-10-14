@@ -1519,6 +1519,18 @@
                 try { localStorage.setItem('folds', JSON.stringify(saved)); } catch (e) {}
             });
         });
+        const progBtn = document.getElementById('progFoldAll');
+        if (progBtn) {
+            const folds = () => Array.from(document.querySelectorAll('#progPanel details[data-fold]'));
+            const sync = () => { progBtn.textContent = folds().some(d => d.open) ? 'Tout plier' : 'Tout d\u00e9plier'; };
+            progBtn.addEventListener('click', () => {
+                const target = !folds().some(d => d.open);
+                folds().forEach(d => { d.open = target; });
+                sync();
+            });
+            folds().forEach(d => d.addEventListener('toggle', sync));
+            sync();
+        }
     }
 
     function applyMode() {

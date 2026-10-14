@@ -588,6 +588,7 @@
     <div class="container">
         <div class="top">
             <h1>Gestion WebRadio</h1>
+            <button class="btn" type="button" id="foldAllBtn" onclick="toggleAllFolds()">Tout déplier</button>
         </div>
         <div class="saved" id="saved" role="status" aria-live="polite"></div>
 
@@ -1751,6 +1752,21 @@ favorites_only: false, no_repeat: 3, no_repeat_songs: 15, excluded: [], loop_pla
                 </details>`).join('');
         }
 
+        function topFolds() {
+            return [...document.querySelectorAll('details.fold[data-fold]')];
+        }
+
+        function updateFoldAllBtn() {
+            const btn = document.getElementById('foldAllBtn');
+            if (btn) btn.textContent = topFolds().some(d => d.open) ? 'Tout replier' : 'Tout d\u00e9plier';
+        }
+
+        function toggleAllFolds() {
+            const target = !topFolds().some(d => d.open);
+            topFolds().forEach(d => { d.open = target; });
+            updateFoldAllBtn();
+        }
+
         function initFolds() {
             let saved = {};
             try { saved = JSON.parse(localStorage.getItem('radioFolds') || '{}'); } catch (e) {}
@@ -1760,8 +1776,10 @@ favorites_only: false, no_repeat: 3, no_repeat_songs: 15, excluded: [], loop_pla
                 d.addEventListener('toggle', () => {
                     saved[k] = d.open;
                     try { localStorage.setItem('radioFolds', JSON.stringify(saved)); } catch (e) {}
+                    updateFoldAllBtn();
                 });
             });
+            updateFoldAllBtn();
         }
 
         async function loadContent() {

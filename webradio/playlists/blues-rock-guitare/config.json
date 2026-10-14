@@ -1,0 +1,118 @@
+{
+  "playlist_name": "Playlist Blues-rock guitare claire",
+  "ace_step_path": "D:/ServOMorph/ACE-Step-1.5",
+  "output_dir": "./playlists/blues-rock-guitare/outputs",
+  "test_cases": [
+    {
+      "id": "1",
+      "name": "Midnight Fretboard",
+      "prompt": "blues rock, clean electric guitar fingerstyle, melodic bass guitar, deep spoken-sung male vocal, warm analog production, swinging shuffle, jazzy fills, brushed drums, small club feel",
+      "type": "vocal",
+      "duration": 85,
+      "lyrics_file": "playlists/blues-rock-guitare/lyrics/01.txt",
+      "language": "en",
+      "bpm": 132,
+      "seed": 4101
+    },
+    {
+      "id": "2",
+      "name": "Hard Hat Dreams",
+      "prompt": "blues rock, clean electric guitar fingerstyle, melodic bass guitar, deep spoken-sung male vocal, warm analog production, driving mid-tempo rock groove, crunchy riff, steady drums, anthemic",
+      "type": "vocal",
+      "duration": 110,
+      "lyrics_file": "playlists/blues-rock-guitare/lyrics/02.txt",
+      "language": "en",
+      "bpm": 134,
+      "seed": 4102
+    },
+    {
+      "id": "3",
+      "name": "Brothers of the Harbor",
+      "prompt": "blues rock, clean electric guitar fingerstyle, melodic bass guitar, deep spoken-sung male vocal, warm analog production, slow atmospheric ballad, soft pads, swelling guitar, spacious reverb, emotional",
+      "type": "vocal",
+      "duration": 85,
+      "lyrics_file": "playlists/blues-rock-guitare/lyrics/03.txt",
+      "language": "en",
+      "bpm": 64,
+      "seed": 4103,
+      "duration_fixed": true
+    },
+    {
+      "id": "4",
+      "name": "Walk It Off",
+      "prompt": "blues rock, clean electric guitar fingerstyle, melodic bass guitar, deep spoken-sung male vocal, warm analog production, upbeat boogie rock, honky-tonk piano, shuffle drums, joyful, feel-good",
+      "type": "vocal",
+      "duration": 75,
+      "lyrics_file": "playlists/blues-rock-guitare/lyrics/04.txt",
+      "language": "en",
+      "bpm": 156,
+      "seed": 4104
+    },
+    {
+      "id": "5",
+      "name": "Letters to Juliet Street",
+      "prompt": "blues rock, clean electric guitar fingerstyle, melodic bass guitar, deep spoken-sung male vocal, warm analog production, storytelling folk blues, resonator guitar, soft brushed drums, wistful, intimate",
+      "type": "vocal",
+      "duration": 70,
+      "lyrics_file": "playlists/blues-rock-guitare/lyrics/05.txt",
+      "language": "en",
+      "bpm": 85,
+      "seed": 4105
+    },
+    {
+      "id": "6",
+      "name": "Telegraph Wire Road",
+      "prompt": "blues rock, clean electric guitar fingerstyle, melodic bass guitar, deep spoken-sung male vocal, warm analog production, slow epic build, long guitar phrases, rolling drums, cinematic, gradually intensifying",
+      "type": "vocal",
+      "duration": 80,
+      "lyrics_file": "playlists/blues-rock-guitare/lyrics/06.txt",
+      "language": "en",
+      "bpm": 90,
+      "seed": 4106
+    },
+    {
+      "id": "7",
+      "name": "Far From the Shore Light",
+      "prompt": "blues rock, clean electric guitar fingerstyle, melodic bass guitar, deep spoken-sung male vocal, warm analog production, mid-tempo soft rock, warm chorus guitar, gentle drums, nostalgic, travelling mood",
+      "type": "vocal",
+      "duration": 70,
+      "lyrics_file": "playlists/blues-rock-guitare/lyrics/07.txt",
+      "language": "en",
+      "bpm": 100,
+      "seed": 4107
+    },
+    {
+      "id": "8",
+      "name": "Dust of the Old Frontier",
+      "prompt": "blues rock, clean electric guitar fingerstyle, melodic bass guitar, deep spoken-sung male vocal, warm analog production, country tinged blues rock, twangy clean guitar, walking bass, brushed snare, wide open feel",
+      "type": "vocal",
+      "duration": 80,
+      "lyrics_file": "playlists/blues-rock-guitare/lyrics/08.txt",
+      "language": "en",
+      "bpm": 105,
+      "seed": 4108
+    },
+    {
+      "id": "9",
+      "name": "Private Rain",
+      "prompt": "blues rock, clean electric guitar fingerstyle, melodic bass guitar, deep spoken-sung male vocal, warm analog production, slow film noir blues, nylon string guitar, brushed drums, whispered spoken vocal, smoky, mysterious",
+      "type": "vocal",
+      "duration": 55,
+      "lyrics_file": "playlists/blues-rock-guitare/lyrics/09.txt",
+      "language": "en",
+      "bpm": 70,
+      "seed": 4109
+    },
+    {
+      "id": "10",
+      "name": "Calling Mister Moon",
+      "prompt": "blues rock, clean electric guitar fingerstyle, melodic bass guitar, deep spoken-sung male vocal, warm analog production, bluesy rock and roll, lively rhythm guitar, tight drums, playful, swagger",
+      "type": "vocal",
+      "duration": 70,
+      "lyrics_file": "playlists/blues-rock-guitare/lyrics/10.txt",
+      "language": "en",
+      "bpm": 120,
+      "seed": 4110
+    }
+  ]
+}

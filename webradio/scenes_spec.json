@@ -622,6 +622,13 @@
       "hue2": 190,
       "speed": 0.35,
       "density": 0.5
+    },
+    "blues-rock-guitare": {
+      "motif": "strings",
+      "hue": 30,
+      "hue2": 200,
+      "speed": 0.45,
+      "density": 0.5
     }
   }
 }
