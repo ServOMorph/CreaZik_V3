@@ -14,6 +14,7 @@ from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import parse_qs, unquote, urlsplit
 
+import covers_review
 from radio_engine import RadioEngine
 from stats_db import parse_level
 
@@ -570,6 +571,15 @@ class Handler(SimpleHTTPRequestHandler):
                 return
             self._send_json(200, {"items": tests_list()})
             return
+        if path == "/api/covers/review":
+            if not self._is_admin() or self._is_user_interface():
+                self.send_error(401)
+                return
+            with ENGINE.lock:
+                ENGINE.cat.refresh()
+                tracks = dict(ENGINE.cat.tracks)
+            self._send_json(200, covers_review.list_review(tracks))
+            return
         if path == "/api/catalog/overrides":
             if not self._is_admin() or self._is_user_interface():
                 self.send_error(401)
@@ -661,6 +671,13 @@ class Handler(SimpleHTTPRequestHandler):
                 body = self._read_json_body(4096)
                 ok, msg = ENGINE.edit_catalog(str(body.get("action", "")), body)
                 self._send_json(200 if ok else 400, {"ok": ok, "error": msg})
+            elif path == "/api/covers/verdict":
+                body = self._read_json_body(2048)
+                with ENGINE.lock:
+                    ENGINE.cat.refresh()
+                    tracks = dict(ENGINE.cat.tracks)
+                status = covers_review.apply_verdict(str(body.get("key", "")), str(body.get("verdict", "")), tracks)
+                self._send_json(200 if status else 400, {"ok": bool(status), "status": status})
             elif path == "/api/tests/vote":
                 body = self._read_json_body(2048)
                 ok = tests_vote(str(body.get("file", "")), str(body.get("vote", "")))

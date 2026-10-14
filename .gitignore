@@ -28,3 +28,6 @@ webradio/catalog_overrides.json
 webradio/tests_ace/demo_lagniel/
 TEXTES/usage_prive/
 webradio/tests_state.json
+webradio/covers_review_state.json
+webradio/covers_review_state.lock
+webradio/covers_review_state.tmp
