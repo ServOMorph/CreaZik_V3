@@ -616,3 +616,32 @@ def test_dynamics_two_levels_and_effective_energy():
         an = eng.analytics()
         row = next(r for r in an["by_track"] if r["key"] == "a:1")
         assert row["dyn_slow"] == 2 and row["dyn_medium"] == 1 and row["dyn_high"] == 0
+
+
+def test_test_loop_plays_zero_weight_playlist_then_returns_to_normal():
+    with tempfile.TemporaryDirectory() as tmp:
+        eng, clock = make(tmp, {"blues-rock-guitare": (5, 10, False), "b": (6, 10, False)},
+                          {"jingles_enabled": False, "no_repeat": 3, "weights": {"blues-rock-guitare": 0},
+                          "transitions": preset()})
+        before = [k for _, k, _ in run(eng, clock, 300, step=1.0)]
+        assert before and all(k.startswith("b:") for k in before), set(before)
+        assert eng.snapshot()["test_loop"] is False
+        assert eng.action("test_loop", {"on": True})
+        assert eng.snapshot()["test_loop"] is True
+        during = [k for _, k, _ in run(eng, clock, 400, step=1.0)]
+        assert len(during) > 10, len(during)
+        assert all(k.startswith("blues-rock-guitare:") for k in during[1:]), set(during)
+        assert set(during[1:]) == {f"blues-rock-guitare:{i}" for i in range(1, 6)}
+        assert all(x != y for x, y in zip(during, during[1:]))
+        assert eng.action("test_loop", {"on": False})
+        assert eng.snapshot()["test_loop"] is False
+        after = [k for _, k, _ in run(eng, clock, 400, step=1.0)]
+        assert len(after) > 10 and all(k.startswith("b:") for k in after[1:]), set(after)
+
+
+def test_test_loop_without_playable_tracks_falls_back_to_normal():
+    with tempfile.TemporaryDirectory() as tmp:
+        eng, clock = make(tmp, {"b": (4, 10, False)}, {"jingles_enabled": False, "transitions": preset()})
+        eng.action("test_loop", {"on": True})
+        keys = [k for _, k, _ in run(eng, clock, 100, step=1.0)]
+        assert keys and all(k.startswith("b:") for k in keys)

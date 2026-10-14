@@ -1462,6 +1462,20 @@
         const on = !!live.unrated_only;
         b.setAttribute('aria-pressed', on ? 'true' : 'false');
         b.textContent = on ? 'Désactiver découverte' : 'Découverte';
+        updateTestLoop();
+    }
+
+    function updateTestLoop() {
+        const b = $('testLoopBtn');
+        if (!b) return;
+        b.hidden = !isAdmin;
+        const on = !!live.test_loop;
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+        b.textContent = on ? 'Arr\u00eater le test' : 'Test';
+    }
+
+    function toggleTestLoop() {
+        radioAction({action: 'test_loop', on: !live.test_loop});
     }
 
     function toggleDiscover() {
@@ -1774,6 +1788,7 @@
         $('playBtn').addEventListener('click', toggle);
         $('nextBtn').addEventListener('click', skip);
         $('discoverBtn').addEventListener('click', toggleDiscover);
+        $('testLoopBtn').addEventListener('click', toggleTestLoop);
         window.addEventListener('resize', () => fitCoverTitle(true));
         if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => fitCoverTitle(true));
         testAudio.addEventListener('ended', stopTest);
