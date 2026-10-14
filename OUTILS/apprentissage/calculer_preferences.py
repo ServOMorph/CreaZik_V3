@@ -1,7 +1,8 @@
 """Calcule les preferences de generation a partir des seuls votes radio.
 
 Ecrit DOCUMENTATION/apprentissage/preferences.proposition.json. Ne touche jamais preferences.json.
-Sources : webradio/votes.json, config.json des playlists, learning/morceaux_rejetes.jsonl, .feat.json.
+Sources : webradio/votes.json et archives DOCUMENTATION/apprentissage/votes_archive/*.json (votes sommes par morceau,
+photos prises juste avant chaque remise a zero), config.json des playlists, learning/morceaux_rejetes.jsonl, .feat.json.
 Exclus : avis Slow/Medium/High, pouces et commentaires des Tests.
 """
 import argparse
@@ -111,6 +112,24 @@ def taux(pour, contre):
     return round(pour / (pour + contre), 3) if pour + contre else 0.0
 
 
+def fusionner_votes(*jeux):
+    total = {}
+    for jeu in jeux:
+        for cle, v in jeu.items():
+            t = total.setdefault(cle, {"up": 0, "down": 0})
+            t["up"] += int(v.get("up", 0))
+            t["down"] += int(v.get("down", 0))
+    for t in total.values():
+        t["score"] = t["up"] - t["down"]
+    return total
+
+
+def charger_archives(dossier):
+    if not dossier.is_dir():
+        return []
+    return [json.loads(f.read_text(encoding="utf-8")).get("tracks", {}) for f in sorted(dossier.glob("*.json"))]
+
+
 def calculer(votes, recs, maintenant=None):
     par_modele = defaultdict(lambda: {"termes": defaultdict(lambda: [0, 0]), "familles": defaultdict(lambda: [0, 0]),
                                       "voix": defaultdict(lambda: [0, 0]), "bpm_pour": [], "bpm_contre": [], "duree_pour": []})
@@ -151,7 +170,7 @@ def calculer(votes, recs, maintenant=None):
     return {
         "version": 1,
         "calcule_le": (maintenant or datetime.now().astimezone()).isoformat(timespec="seconds"),
-        "sources": {"votes": "webradio/votes.json", "morceaux_votes": votes_pris},
+        "sources": {"votes": "webradio/votes.json + DOCUMENTATION/apprentissage/votes_archive", "morceaux_votes": votes_pris},
         "modeles": modeles,
         "effectif_minimum": EFFECTIF_MINIMUM,
     }
@@ -161,9 +180,12 @@ def main():
     p = argparse.ArgumentParser()
     p.add_argument("--racine", default=str(RACINE))
     p.add_argument("--sortie", default=None)
+    p.add_argument("--sans-archive", action="store_true", help="ignore DOCUMENTATION/apprentissage/votes_archive")
     a = p.parse_args()
     racine = Path(a.racine)
     votes = json.loads((racine / "webradio" / "votes.json").read_text(encoding="utf-8"))["tracks"]
+    if not a.sans_archive:
+        votes = fusionner_votes(*charger_archives(racine / "DOCUMENTATION" / "apprentissage" / "votes_archive"), votes)
     recs = charger_enregistrements(racine)
     completer_depuis_playlists(recs, votes.keys(), racine)
     res = calculer(votes, recs)

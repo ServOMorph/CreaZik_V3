@@ -20,6 +20,7 @@ Plan d'ensemble : `roadmap_ecriture_humaine.md`.
 
 ## Sources des préférences
 - Retenues : votes radio `webradio/votes.json` (872 morceaux votés au 2026-10-11 : 393 positifs, 463 négatifs, 16 nuls), avec les `config.json` des playlists (caption, type, langue, durée) et les caractéristiques audio (`.feat.json` : tempo, brillance, niveau, dynamique) ; morceaux supprimés via `webradio/learning/morceaux_rejetes.jsonl`.
+- Archives de votes : `DOCUMENTATION/apprentissage/votes_archive/*.json` (photos de `webradio/votes.json` prises juste avant une remise à zéro des scores). `calculer_preferences.py` somme, par morceau, les pouces haut et bas des archives et de `votes.json` courant ; `--sans-archive` les ignore. Règle : une archive est une photo prise avant la remise à zéro ; ne jamais archiver une copie de `votes.json` sans remettre ensuite les scores à zéro, sinon les votes sont comptés deux fois. Première archive : `votes_avant_remise_a_zero_2026-10-15.json` (remise à zéro du 2026-10-15).
 - Exclues : avis Slow/Medium/High, pouces et commentaires des Tests.
 - Limites : un vote par morceau en général (signal binaire) ; les morceaux générés avant le 2026-10-11 en rotation ont une graine aléatoire non relevée, donc leurs préférences portent sur le style et le caption, pas sur la graine. Depuis le 2026-10-11, `ace_worker.py` tire et enregistre la graine (`seed`, `seed_source` dans `playlist_results.json`) ; des captions de playlists « esprit » contiennent des références d'artistes, à ne jamais reprendre dans un caption proposé.
 
