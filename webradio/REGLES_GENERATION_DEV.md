@@ -92,6 +92,8 @@ Document établi à partir des décisions prises au fil des conversations. Chaqu
 - Mode auditeur : aucun changement de morceau possible ; bandeau Traveling Sound visible.
 - Mode admin : programmation (lire à suivre, jouer maintenant, jingles, playlists) ; bascule par une icône en haut à droite, sans boutons dédiés ; passer en admin lance l'écoute de la radio.
 - La page de gestion (`/radio.html`) et l'explorateur (`/ui.html`) sont réservés à l'admin ; les sections sont repliables.
+- Bouton « Test » (admin, UI d'écoute) : un premier appui active `test_loop` (action `test_loop` du moteur, état persisté) et la radio ne joue que la playlist `TEST_LOOP_PLAYLIST` (`blues-rock-guitare`), même à poids 0 ; un second appui rétablit la programmation normale ; repli sur la programmation normale si cette playlist n'a aucun morceau jouable. Il change le morceau pour tous les auditeurs : à retirer avant le déploiement. Le réglage `loop_playlists` existant (admin, par playlist) reste distinct.
+- Boutons « Tout plier / Tout déplier » : dans le panneau « Programmation » de l'UI d'écoute et en haut de `radio.html` (sections de premier niveau).
 
 ### 3.6 Base de données, avis et suppression
 - `radio.db` (SQLite, non versionnée) enregistre chaque diffusion de morceau (horodatage, durée écoutée, passage forcé), les marqueurs « écouté, sans avis » (conservés en base, plus de bouton dans l'UI), les avis de dynamique Slow / Medium / High et l'historique des votes.
@@ -108,6 +110,15 @@ Document établi à partir des décisions prises au fil des conversations. Chaqu
 - Commentaire par version : `POST /api/tests/comment` (admin, 2000 caractères), stocké sous `comments` dans `webradio/tests_state.json` et renvoyé dans le champ `comment` de `/api/tests` ; conservé après suppression de la version, pour l'analyse des résultats.
 - Chaque test a un numéro unique en tête du nom (`NN · description`), jamais réutilisé ; le suivant est le plus grand numéro existant plus un (45 au 2026-10-09). Seul le nom affiché change : les fichiers gardent leur nom.
 - Les MP3 de cette section sont servis par les motifs statiques publics de `playlists/*/outputs/` : lisibles sans connexion pour qui connaît l'URL (voir points non tranchés).
+
+### 3.8 Section Pochettes de l'UI (admin)
+- Section repliable « Pochettes » : une pochette du catalogue à la fois, en grand, boutons « Valider » et « À refaire » ; routes admin `GET /api/covers/review` et `POST /api/covers/verdict` (`webradio/covers_review.py`) ; état dans `webradio/covers_review_state.json` (non versionné, verrou de fichier). Les pochettes régénérées reviennent en fin de file.
+- Plafond de 3 régénérations par pochette : au 4e refus la pochette passe en `abandoned` et est conservée. Le script `webradio/tools/cover_review_watch.py` relance `cover_gen.py` (graine différente par essai, sans texte sur l'image) pour les verdicts `redo`, après la fin de la génération musicale ; arrêt : fichier `webradio/logs/stop_cover_review.request`. Playlists « esprit » : abandon automatique (exclues de la génération).
+
+### 3.9 Suppression en masse et remise à zéro des scores
+- Supprimer des morceaux en masse avec `RadioEngine.edit_catalog("delete_track" | "delete_playlist", ...)` dans un processus séparé (`persist=False`, `eng.db = StatsDB(...)`), jamais avec du code de suppression parallèle ; sauter le morceau en cours (`/api/radio/state`) ; relancer `os.replace` en cas de `PermissionError` (fichier verrouillé) ; contrôler après coup qu'aucun fichier ne reste ; retirer les playlists supprimées de `series.txt` (LF seul).
+- Avant une remise à zéro des scores : copier `webradio/votes.json` dans `DOCUMENTATION/apprentissage/votes_archive/` (une photo juste avant la remise à zéro, jamais une copie sans remise à zéro, sinon double comptage par `calculer_preferences.py`) et sauvegarder `radio.db`.
+- Une playlist hors rotation reçoit le poids 0 (`weights` de `radio_settings.json`) et n'est pas ajoutée à `series.txt` ; la générer avec `run_queue.py <config>` ; une playlist de test passe en rotation seulement après écoute et demande de l'utilisateur (cas `blues-rock-guitare` : poids retiré après écoute, 6 morceaux positifs gardés).
 
 ## 4. Règles visuelles et sonores
 
@@ -156,7 +167,7 @@ Document établi à partir des décisions prises au fil des conversations. Chaqu
 - Comportements iPhone non vérifiés : fondus audio dont le fondu sous jingle, lecture automatique après connexion, écran verrouillé, cycle visuel, transitions et clics sur les pubs.
 - Bouton « Suivant » public et exposition des boutons Renommer/Supprimer : à retirer ou verrouiller avant le déploiement.
 - Réorganisation de l'UI admin : propositions de l'agent design (barre d'accès rapide, onglets) en attente de choix ; sort de `ui.html`.
-- Les suppressions de playlists ne retirent pas leurs identifiants de `series.txt` : la rotation peut les régénérer.
+- Les suppressions de playlists ne retirent pas automatiquement leurs identifiants de `series.txt` (nettoyé à la main le 2026-10-15) : la rotation peut les régénérer.
 - Génération ACE : le timbre de voix n'est pas constant sur un morceau (même sur 40 s). Voix de femme sur la démo T01 : instable sur les tests 11, 13 (duo homme/femme inopérant), 14, 15 et 19 (la 15, tirage aléatoire, était la meilleure selon l'écoute). Les tests « seed » du test Marie (v7 à v9) ne concluent rien : les graines n'étaient pas appliquées. Grille avec graines appliquées à écouter : tests 26 à 31 (135 s) et 39 à 44 (60 s, texte corrigé). Une cause de blocage du décodage est la VRAM libre insuffisante, pas la durée seule.
 - Voix de femme, pistes de recherche non testées : durée courte, « female vocal » en fin de caption, modèles Base ou XL Turbo (non installés ; Turbo seul).
 - Démo T01 (Arroser Les Roses, Jean-Marc Lagniel) : version 18 retenue par l'utilisateur (voix d'homme, silences `[Silence]` avant chaque « Arroser les roses », texte adapté « posté » et « zoublie ») ; accord de l'auteur non demandé.
@@ -170,3 +181,6 @@ Document établi à partir des décisions prises au fil des conversations. Chaqu
 - Écriture humaine : préférences calculées par `OUTILS/apprentissage/` à partir des seuls votes radio, jamais appliquées sans accord (diff montré par `/close`) ; premier calcul (851 votes, 395 différences) en attente de validation. Les chansons françaises sont retirées de la diffusion (14 versions gardées) ; boucle désactivée ; entrées `planned` possibles dans les Tests.
 - Clip L'Invariable : retenus Eurodisco (graine 2026) et cover « Ça m'énerve » (graine 42), choix final et droits du cover non tranchés ; playlist `creation-francaise` créée ; à chaque ajout de morceau, prendre les JSON.
 - Redémarrage du serveur après un arrêt prolongé : le moteur rattrape son retard en accéléré (23 h d'arrêt, environ 20 minutes) et la lecture ne démarre pas sur téléphone tant qu'il n'est pas à l'heure ; vérifier `/api/radio/state` (début du morceau actif proche de l'heure) avant d'écouter. Le tunnel (`~/.cloudflared/config.yml`) pointe sur `localhost:5000` ; un autre serveur sur ce port (Eleventy, IPv6) peut capter le tunnel.
+- Règles tirées des 473 morceaux négatifs (voix anglaise 9 % de négatifs contre 62 % en français, captions et styles à éviter) : proposées dans `DOCUMENTATION/apprentissage/propositions/regles_negatifs_2026-10-15.md`, non appliquées ; préférences recalculées (867 votes avec l'archive, 395 différences) en attente d'accord.
+- Section « Pochettes », bouton « Test » et boutons plier/déplier contrôlés au navigateur avec des réponses simulées seulement (pas de session admin) ; régénération réelle d'une pochette par `cover_review_watch.py` jamais essayée ; mode Test laissé actif à la fin de la session du 2026-10-15 ; ComfyUI peut être resté démarré.
+- Incident de suppression du 2026-10-15 : `os.replace` de `catalog_overrides.json` a échoué après la purge d'un morceau (`electro-atmospherique:3`), enregistrement d'apprentissage reconstitué à la main ; suppression à rendre robuste.

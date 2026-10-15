@@ -168,3 +168,32 @@ Tester les pochettes sans texte et la reprise de piste d'`ace_worker.py`, puis a
 
 ## Question bloquante pour la session suivante
 Aucune
+
+---
+
+# Session du 2026-10-12
+
+## Décisions prises
+- Réorientation vers l'écriture humaine : Funky Yogi mis en musique (electro, funk, disco, soul ; ~120 BPM, un à 100 et un à 95), ACE seul, 150 s au plus, échec technique = nouvelle graine.
+- Apprentissage fondé sur les seuls votes radio ; `preferences.json` mis à jour seulement avec accord, diff présenté par `/close`.
+- Chansons françaises retirées de la diffusion (14 versions gardées) ; boucle désactivée.
+- Clip L'Invariable : disco funk puis groupe vocal Eurodisco ; retenus dans `clip_promo/musique/retenus/` ; playlist `creation-francaise` créée.
+- À chaque ajout de morceau à la WebRadio : prendre les JSON avec (mémoire projet).
+
+## Livrables produits ou modifiés
+- `OUTILS/` (extraction, apprentissage, run_textes), `DOCUMENTATION/apprentissage/`, `DOCUMENTATION/APPRENTISSAGE.md` : outils et données, 15 tests passés ; `roadmap_ecriture_humaine.md` : statuts à jour.
+- `TEXTES/artistes/funky-yogi/textes/` : 10 textes `RELU` ; 19 versions générées (tests 47 à 65).
+- `webradio/ace_worker.py`, `server.py`, `listen.js`, `listen.css`, `radio_engine.py` : graine effective, entrées `planned`, UI Tests, référence audio et cover.
+- `webradio/playlists/instrumental/` (morceau 22), `playlists/creation-francaise/` (nouvelle), `webradio/tests_ace/clip_atelier_invariable/` (cas 1 à 22).
+
+## Hypothèses validées / invalidées
+- VALIDE : run automatique de 19 versions ; graine enregistrée sur génération réelle ; cover et référence audio s'exécutent (journal « cover task », référence dans le sidecar).
+- VALIDE : serveur du port 5000 relancé, tunnel atteint, lecture confirmée sur téléphone après le rattrapage du moteur ; serveur Eleventy parasite du port 5000 arrêté sur demande.
+- EN ATTENTE : écoute des 19 versions, des chœurs, du clip, du cover et des voix Eurodisco ; effet réel de la référence audio.
+- INVALIDE : aucune.
+
+## Prochaine étape exacte
+Écouter et voter les 19 versions Funky Yogi, valider le diff des préférences, puis rédiger le bilan par texte (phase 6).
+
+## Question bloquante pour la session suivante
+Quel morceau du clip L'Invariable est retenu, et les droits du cover de Helmut Fritz sont-ils réglés ?

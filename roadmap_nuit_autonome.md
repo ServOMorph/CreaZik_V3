@@ -13,7 +13,7 @@ Exécutant : Haiku, seul, sans l'utilisateur (endormi). Début : 2026-10-15 00:0
 - Ne rien supprimer hors de la liste figée en phase 1.
 - Les statuts des phases ne sont pas modifiés par Haiku (tâche de `/close`) : seul le journal en fin de fichier est mis à jour.
 
-## Phase 1 - Analyse des morceaux négatifs [EN COURS]
+## Phase 1 - Analyse des morceaux négatifs [FAIT]
 Dépend de : rien.
 0. Avant tout calcul : copier `DOCUMENTATION/apprentissage/preferences.proposition.json` vers `DOCUMENTATION/apprentissage/propositions/preferences.proposition_avant_2026-10-15.json` (la proposition de 395 différences que l'utilisateur n'a pas encore relue ne doit pas être perdue). Mentionner dans le journal qu'une version recalculée la remplace.
 1. Copier `webradio/votes.json` vers `DOCUMENTATION/apprentissage/votes_archive/votes_avant_remise_a_zero_2026-10-15.json` (créer le dossier ; c'est l'archive qui servira aux calculs futurs, voir phase 3).
@@ -22,7 +22,7 @@ Dépend de : rien.
 4. Analyser les morceaux négatifs contre les positifs : caption et tags, tempo et durée (`.feat.json`), type vocal/instrumental, langue, longueur et structure des paroles, paramètres ACE effectifs (sidecar `.metadata.json` quand il existe, sinon `config.json` de la playlist), graine, modèle. Seules les différences avec effectif d'au moins 5 morceaux par groupe comptent comme règles ; le reste est une hypothèse. Écrire `DOCUMENTATION/apprentissage/propositions/regles_negatifs_2026-10-15.md` : règles proposées (« éviter / préférer »), effectif et preuve de chacune, limites. Ne modifier ni le skill `generation-morceaux` ni `regles_modeles.json` : ce sont des propositions, soumises à l'accord de l'utilisateur.
 Fait quand : le fichier de liste figée, le diff et les règles proposées existent et le nombre de morceaux listés est consigné dans le journal.
 
-## Phase 2 - Suppression des morceaux négatifs et des playlists vides [TODO]
+## Phase 2 - Suppression des morceaux négatifs et des playlists vides [FAIT]
 Dépend de : phase 1 (liste figée).
 1. Lire `webradio/radio_engine.py` (`edit_catalog`, actions `delete_track`, `delete_playlist`) et `webradio/server.py` (route `POST /api/catalog`). Supprimer chaque morceau de la liste en réutilisant ce chemin (il efface le MP3, la pochette et les dérivés, masque l'entrée via `catalog_overrides.json`, garde le statut `generated` et verse le morceau dans `webradio/learning/morceaux_rejetes.jsonl`). Ne pas écrire de code de suppression parallèle.
 2. Lire `webradio/radio_state.json` / `/api/radio/state` : si le morceau est en cours de diffusion (le serveur refuse), le sauter, le noter dans le journal avec sa clé, et le retenter en phase 8.
@@ -31,7 +31,7 @@ Dépend de : phase 1 (liste figée).
 5. Contrôler : aucun morceau supprimé n'apparaît dans l'API du catalogue (`library`) ni dans `/api/radio/state` ; compter MP3/WAV restants des morceaux supprimés (attendu 0 hors morceau en cours).
 Fait quand : le bilan (supprimés, sautés, playlists supprimées, fichiers restants) est dans le journal.
 
-## Phase 3 - Remise à zéro des scores [TODO]
+## Phase 3 - Remise à zéro des scores [FAIT]
 Dépend de : phases 1 et 2.
 1. Sauvegarder `webradio/votes.json` et la table de votes de `webradio/radio.db` (copie de `radio.db` vers `DOCUMENTATION/apprentissage/radio_db_avant_remise_a_zero_2026-10-15.db`), sans écraser une sauvegarde existante.
 2. Remettre à zéro tous les scores : pour chaque clé de `tracks`, mettre `{"up":0,"down":0,"score":0}` et vider les votes individuels des votants, avec le même mécanisme que `reset_votes` de `server.py`. Ne pas toucher aux commentaires, favoris, avis Slow/Medium/High ni à l'historique de diffusion.
@@ -39,7 +39,7 @@ Dépend de : phases 1 et 2.
 4. Contrôler dans `radio_engine.py` et dans `webradio/tests/test_radio_engine.py` qu'un morceau dont le score est négatif n'est plus choisi en diffusion automatique (règle 3.3, il reste programmable à la main par l'admin). Si aucun test ne le couvre, l'écrire. Si le test échoue, corriger puis relancer.
 Fait quand : tous les scores valent 0, la sauvegarde existe, le test du score négatif passe, le calcul des préférences retrouve l'effectif d'avant la remise à zéro grâce à l'archive.
 
-## Phase 4 - Playlist blues-rock guitare claire (10 morceaux vocaux anglais) [TODO]
+## Phase 4 - Playlist blues-rock guitare claire (10 morceaux vocaux anglais) [FAIT]
 Dépend de : phase 3 terminée (la génération démarre ici, en arrière-plan, pendant les phases 5 à 7 qui n'utilisent pas le GPU).
 1. Lire `.claude/skills/generation-morceaux/SKILL.md` et la configuration d'une playlist vocale existante (`webradio/playlists/blues-vocal/config.json`, `lyrics/`, entrée dans `webradio/playlists.json`, entrée dans `webradio/scenes_spec.json`).
 2. Créer la playlist `blues-rock-guitare` : label « Blues-rock guitare claire », description sans nom d'artiste. Prompt de base descriptif : blues rock, clean electric guitar fingerstyle, melodic bass, laid-back mid-tempo, deep spoken-sung male vocal, English lyrics. Aucun nom d'artiste dans le titre, le caption, les paroles, l'affichage. 10 morceaux vocaux, langue `en`, durées 90 s plus ou moins 45 s (`set_durations.py`).
@@ -49,7 +49,7 @@ Dépend de : phase 3 terminée (la génération démarre ici, en arrière-plan, 
 6. Lancer la génération par `generate.py` ou `run_queue.py` pour cette playlist seulement (ne pas lancer `run_rotation.py`), en arrière-plan, après contrôle de la VRAM. Chaque piste : 3 tentatives ; échec technique = nouvelle graine ; après 3 échecs, abandonner la piste et noter dans le journal.
 Fait quand : 10 MP3 existent (ou les pistes abandonnées sont listées dans le journal), les services `analyse` et `compression` ont produit les `.feat.json` et `.viz.json`, aucun WAV ne reste.
 
-## Phase 5 - Boutons plier/déplier [TODO]
+## Phase 5 - Boutons plier/déplier [FAIT]
 Dépend de : rien. Pas de GPU.
 1. `webradio/listen.html` : dans le panneau `progPanel` (« Programmation »), ajouter un bouton « Tout plier / Tout déplier » qui agit sur les quatre blocs `<details data-fold="prog-played|prog-now|prog-queue|prog-library">`, en s'appuyant sur le fonctionnement existant de `data-fold` dans `listen.js`.
 2. `webradio/radio.html` : ajouter un bouton global « Tout plier / Tout déplier » pour les sections de premier niveau (`secProgram`, `secPlay`, `secTrans`, `secDynamics`, `secJingle`, `secVisuals`, `secWeights`, `secStats`, `secAccount`), modelé sur `catFoldBtn` / `toggleAllCards()` (libellé qui bascule selon l'état).
@@ -57,7 +57,7 @@ Dépend de : rien. Pas de GPU.
 4. Ajouter à `tests_manuels.md` le contrôle sur iPhone de ces deux boutons.
 Fait quand : les deux boutons fonctionnent dans le navigateur, le contrôle iPhone est dans `tests_manuels.md`.
 
-## Phase 6 - Revue des pochettes : page locale et script de suivi [TODO]
+## Phase 6 - Revue des pochettes : page locale et script de suivi [FAIT]
 Dépend de : phases 2 et 5 (catalogue final). Écriture du code seulement ; l'exécution de la régénération est en phase 8.
 1. État : `webradio/covers_review_state.json` (non versionné, à ajouter au `.gitignore`) : par clé de morceau, `status` (`pending`, `validated`, `redo`, `abandoned`), `redo_count`, `seed`, fichier courant.
 2. Serveur (`webradio/server.py`, routes réservées à l'admin comme `/api/tests*`) : liste des pochettes à relire (une à la fois, ordre stable), enregistrement du verdict `validated` ou `redo`, lecture de l'avancement.
@@ -67,7 +67,7 @@ Dépend de : phases 2 et 5 (catalogue final). Écriture du code seulement ; l'ex
 6. Ajouter à `tests_manuels.md` le contrôle de la section « Pochettes » (navigateur et iPhone).
 Fait quand : tests passés, page contrôlée au navigateur avec un état simulé, script lancé en simulation sans erreur.
 
-## Phase 7 - Bouton Test (boucle de la playlist blues-rock) [TODO]
+## Phase 7 - Bouton Test (boucle de la playlist blues-rock) [FAIT]
 Dépend de : phases 4 (au moins une piste générée) et 5. Pas de GPU.
 1. Moteur (`webradio/radio_engine.py`) : réglage persistant `test_loop` (identifiant de playlist ou vide). Quand il est défini, la programmation ne choisit que dans cette playlist, en boucle (ordre des pistes). Ne rien changer d'autre : jingles et publicités gardent leur fonctionnement actuel. Quand il est vide, retour à la programmation normale sans perturber le morceau en cours.
 2. Serveur : route admin `POST /api/test_loop` (activer/désactiver) et état dans `/api/radio/state` ; le bouton ne doit pas être accessible à un auditeur non admin.
@@ -76,7 +76,7 @@ Dépend de : phases 4 (au moins une piste générée) et 5. Pas de GPU.
 5. Ajouter à `AMELIORATIONS.md` : retirer le bouton Test avant le déploiement ; ajouter à `tests_manuels.md` le contrôle iPhone.
 Fait quand : tests passés, bascule contrôlée au navigateur dans les deux sens.
 
-## Phase 8 - Finalisation [TODO]
+## Phase 8 - Finalisation [FAIT]
 Dépend de : toutes les autres (celles bloquées sont notées au journal).
 1. Retenter les suppressions sautées en phase 2 (morceau qui était en cours de diffusion).
 2. Quand la génération musicale est terminée et inactive : générer les pochettes de la playlist `blues-rock-guitare` (`webradio/tools/cover_batch.py --playlist blues-rock-guitare`), puis alimenter `covers_review_state.json` avec les pochettes à relire, puis lancer `cover_review_watch.py` en arrière-plan (ComfyUI arrêté si le script n'en a pas besoin). Si la génération musicale n'est pas finie, ne pas lancer les pochettes et le noter.

@@ -15,5 +15,5 @@ WebRadio IA locale : musique générée en local avec ACE-Step 1.5, diffusée en
 
 ## État actuel
 Interfaces auditeur/admin séparées (5000/5001) et section « Tests » pour écouter les créations avant toute diffusion. Chaque ajout à la WebRadio nécessite une demande explicite de l'utilisateur.
-Réorientation vers l'écriture humaine : outils d'extraction de textes, d'apprentissage et de run (`OUTILS/`), 10 textes Funky Yogi relus et 19 versions générées à écouter ; chansons françaises retirées de la radio (14 gardées).
-Les générations de test écrivent un `.metadata.json` et un manifeste ; la graine est toujours imposée ; `ace_worker.py` accepte une référence audio et le mode cover. Contrôles iPhone, écoutes, validation des préférences et déploiement VPS en attente.
+Réorientation vers l'écriture humaine : outils d'extraction de textes, d'apprentissage et de run (`OUTILS/`), 10 textes Funky Yogi relus et 19 versions générées à écouter ; préférences et règles tirées des morceaux négatifs en attente d'accord.
+Radio nettoyée le 2026-10-15 (morceaux négatifs et playlists vides supprimés, scores remis à zéro avec archive) ; playlist « Blues-rock guitare claire » en rotation ; bouton « Test » (boucle d'une playlist) et section « Pochettes » (revue et régénération) en admin. Écoutes, contrôles iPhone, validation des préférences et déploiement VPS en attente.

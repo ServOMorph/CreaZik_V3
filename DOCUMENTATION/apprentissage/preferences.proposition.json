@@ -1,9 +1,9 @@
 {
   "version": 1,
-  "calcule_le": "2026-10-15T00:02:07+02:00",
+  "calcule_le": "2026-10-15T08:12:20+02:00",
   "sources": {
-    "votes": "webradio/votes.json",
-    "morceaux_votes": 857
+    "votes": "webradio/votes.json + DOCUMENTATION/apprentissage/votes_archive",
+    "morceaux_votes": 867
   },
   "modeles": {
     "ace-step-1.5-turbo": {
@@ -111,6 +111,12 @@
           "taux": 0.261
         },
         {
+          "terme": "walking bass",
+          "pour": 14,
+          "contre": 9,
+          "taux": 0.609
+        },
+        {
           "terme": "bass",
           "pour": 2,
           "contre": 20,
@@ -139,12 +145,6 @@
           "pour": 5,
           "contre": 17,
           "taux": 0.227
-        },
-        {
-          "terme": "walking bass",
-          "pour": 13,
-          "contre": 9,
-          "taux": 0.591
         },
         {
           "terme": "distorted electric guitars",
@@ -303,6 +303,12 @@
           "taux": 0.263
         },
         {
+          "terme": "cinematic",
+          "pour": 7,
+          "contre": 11,
+          "taux": 0.389
+        },
+        {
           "terme": "female vocal",
           "pour": 17,
           "contre": 1,
@@ -319,12 +325,6 @@
           "pour": 15,
           "contre": 2,
           "taux": 0.882
-        },
-        {
-          "terme": "cinematic",
-          "pour": 6,
-          "contre": 11,
-          "taux": 0.353
         },
         {
           "terme": "congas",
@@ -411,6 +411,18 @@
           "taux": 0.231
         },
         {
+          "terme": "playful",
+          "pour": 10,
+          "contre": 3,
+          "taux": 0.769
+        },
+        {
+          "terme": "soft pads",
+          "pour": 8,
+          "contre": 5,
+          "taux": 0.615
+        },
+        {
           "terme": "tambourine",
           "pour": 1,
           "contre": 12,
@@ -459,22 +471,10 @@
           "taux": 0.0
         },
         {
-          "terme": "playful",
-          "pour": 9,
-          "contre": 3,
-          "taux": 0.75
-        },
-        {
           "terme": "powerful",
           "pour": 6,
           "contre": 6,
           "taux": 0.5
-        },
-        {
-          "terme": "soft pads",
-          "pour": 8,
-          "contre": 4,
-          "taux": 0.667
         },
         {
           "terme": "tabla",
@@ -483,18 +483,18 @@
           "taux": 0.25
         },
         {
-          "terme": "122 bpm",
-          "pour": 7,
-          "contre": 4,
-          "taux": 0.636
+          "terme": "tight drums",
+          "pour": 9,
+          "contre": 3,
+          "taux": 0.75
         }
       ],
       "familles_style": [
         {
           "famille": "funk-soul",
           "pour": 65,
-          "contre": 31,
-          "taux": 0.677
+          "contre": 32,
+          "taux": 0.67
         },
         {
           "famille": "hip-hop",
@@ -504,9 +504,9 @@
         },
         {
           "famille": "jazz-blues",
-          "pour": 47,
-          "contre": 40,
-          "taux": 0.54
+          "pour": 53,
+          "contre": 44,
+          "taux": 0.546
         },
         {
           "famille": "electro",
@@ -522,9 +522,9 @@
         },
         {
           "famille": "ambient",
-          "pour": 40,
-          "contre": 46,
-          "taux": 0.465
+          "pour": 41,
+          "contre": 47,
+          "taux": 0.466
         },
         {
           "famille": "choeur",
@@ -534,15 +534,15 @@
         },
         {
           "famille": "rock",
-          "pour": 37,
-          "contre": 63,
-          "taux": 0.37
+          "pour": 43,
+          "contre": 67,
+          "taux": 0.391
         },
         {
           "famille": "folk",
-          "pour": 60,
-          "contre": 106,
-          "taux": 0.361
+          "pour": 61,
+          "contre": 107,
+          "taux": 0.363
         },
         {
           "famille": "latin-monde",
@@ -565,7 +565,7 @@
       ],
       "tempo": {
         "aime": [
-          85.5,
+          85.4,
           153.8
         ],
         "rejete": [
@@ -588,9 +588,9 @@
         },
         {
           "type": "male",
-          "pour": 104,
-          "contre": 56,
-          "taux": 0.65
+          "pour": 110,
+          "contre": 60,
+          "taux": 0.647
         },
         {
           "type": "non_precise",

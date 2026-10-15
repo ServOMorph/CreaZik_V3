@@ -1,5 +1,16 @@
 # Changelog
 
+## v1.13 — 2026-10-15
+
+### Ajouté
+- Section « Pochettes » (admin) avec boutons Valider / À refaire, `webradio/covers_review.py`, routes `/api/covers/review` et `/api/covers/verdict`, script `webradio/tools/cover_review_watch.py` (plafond de 3 régénérations) et 8 tests.
+- Bouton « Test » : boucle de la playlist `blues-rock-guitare` (`test_loop` du moteur, 2 tests) ; boutons « Tout plier / Tout déplier » (panneau Programmation et sections de `radio.html`).
+- Playlist « Blues-rock guitare claire » (10 morceaux générés, 6 gardés après écoute) ; `roadmap_nuit_autonome.md`.
+- Archive de votes `DOCUMENTATION/apprentissage/votes_archive/` sommée par `calculer_preferences.py` (`--sans-archive`, 3 tests) ; analyse des morceaux négatifs et règles proposées.
+
+### Modifié
+- 300 morceaux à score négatif supprimés, 5 playlists vides supprimées, `series.txt` nettoyé, scores remis à zéro ; la playlist blues-rock passe de poids 0 à la rotation normale.
+
 ## v1.12 — 2026-10-12
 
 ### Ajouté

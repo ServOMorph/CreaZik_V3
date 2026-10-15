@@ -1,21 +1,36 @@
-# Signals — CreaZik_V3   (MAJ 2026-10-12, fin de session)
+# Signals — CreaZik_V3   (MAJ 2026-10-15, fin de session)
 
 ## Actions ouvertes
+- [P1|ouvert] Arrêter le mode Test (bouton « Arrêter le test », admin) : `test_loop` était actif à la fin de la session et la radio ne joue alors que la playlist blues-rock ; puis contrôler que cette playlist (6 morceaux, poids par défaut 5) passe avec les autres
+  - fait quand: `/api/radio/state` indique `test_loop` à `false` et la playlist `blues-rock-guitare` passe à l'antenne dans la programmation normale
+  - réf: `tests_manuels.md` n°17, `webradio/radio_engine.py` (`test_loop`)
+- [P1|ouvert] Juger les pochettes dans la section « Pochettes » (admin) et relancer le script de suivi : `webradio/tools/cover_review_watch.py` avait été lancé en arrière-plan pendant la nuit, la session a été interrompue depuis (ComfyUI aussi peut être resté démarré, il occupe de la VRAM)
+  - fait quand: les pochettes sont validées ou abandonnées, le script est arrêté (`webradio/logs/stop_cover_review.request`), ComfyUI est arrêté avant une génération musicale
+  - réf: `tests_manuels.md` n°16, `webradio/covers_review.py`, `webradio/tools/cover_review_watch.py`
+- [P1|ouvert] Valider ou refuser les règles tirées des morceaux négatifs (voix anglaise 9 % de négatifs contre 62 % en français, captions à éviter, styles) et relire le diff de préférences recalculé (867 votes pris en compte avec l'archive, 395 différences) : `diff_preferences.py --appliquer` seulement après accord
+  - fait quand: règles acceptées (reportées dans le skill `generation-morceaux` ou `regles_modeles.json`), refusées ou corrigées, et `preferences.json` existe ou la proposition est écartée
+  - réf: `DOCUMENTATION/apprentissage/propositions/regles_negatifs_2026-10-15.md`, `DOCUMENTATION/apprentissage/propositions/diff_2026-10-15.txt`, `DOCUMENTATION/APPRENTISSAGE.md`
+- [P2|ouvert] Tester la régénération réelle d'une pochette par `cover_review_watch.py` (verdict « À refaire », graine différente, retour en fin de file) : jamais exécutée avec ComfyUI, seulement avec un générateur simulé
+  - fait quand: une pochette marquée « À refaire » est régénérée, revient en attente de validation avec la mention « refaite 1/3 fois »
+  - réf: `webradio/tools/cover_review_watch.py`, `webradio/tests/test_covers_review.py`
+- [P2|ouvert] Rendre la suppression de morceau résistante au verrouillage Windows : `os.replace` de `catalog_overrides.json` a échoué (PermissionError) après la purge des fichiers du morceau (incident `electro-atmospherique:3`, 2026-10-15) ; marquer le morceau supprimé avant de purger ou relancer `os.replace`
+  - fait quand: une suppression interrompue ne laisse ni morceau sans fichiers au catalogue ni enregistrement d'apprentissage perdu ou en double
+  - réf: `webradio/radio_engine.py` (`edit_catalog`, `_purge_track`), `DOCUMENTATION/apprentissage/suppression_2026-10-15.json`
+- [P3|ouvert] Décider du sort de la sauvegarde `DOCUMENTATION/apprentissage/radio_db_avant_remise_a_zero_2026-10-15.db` (1,7 Mo, non versionnée) : versionner, ajouter au `.gitignore` ou stocker ailleurs
+  - fait quand: l'utilisateur tranche
+  - réf: `DOCUMENTATION/apprentissage/votes_archive/`, `.gitignore`
 - [P1|ouvert] Écouter les 19 versions Funky Yogi (tests 47 à 65 : 10 textes en 3 styles, dont 3 textes avec chœurs base/v1/v2/v3) et voter ; juger les chœurs ; la première boucle d'apprentissage en dépend
   - fait quand: les 19 versions sont votées, les moyens de chœurs notés `teste` ou `echec` dans `regles_modeles.json` après accord, un bilan par texte rédigé (roadmap phase 6)
   - réf: `roadmap_ecriture_humaine.md` phase 6, `DOCUMENTATION/apprentissage/plan_run.json`, `DOCUMENTATION/apprentissage/propositions/textes-funky-yogi-photos.md`, `webradio/tests_state.json`
-- [P1|ouvert] Valider le premier calcul de préférences (851 votes pris en compte ; 395 différences, premier calcul) : `diff_preferences.py --appliquer` seulement après accord
-  - fait quand: l'utilisateur a relu le diff et accepte ou corrige `preferences.proposition.json`, puis `preferences.json` existe
-  - réf: `OUTILS/apprentissage/diff_preferences.py`, `DOCUMENTATION/apprentissage/preferences.proposition.json`, `DOCUMENTATION/APPRENTISSAGE.md`
 - [P1|ouvert] Clip promo L'Invariable (17 octobre 2026) : retenus dans le dossier `clip_promo\musique\retenus\` de SerenIATech (Eurodisco graine 2026, cover « Ça m'énerve » graine 42) ; écouter, améliorer refrain et variations mélodiques, choisir pour le clip ; droits du morceau de Helmut Fritz à trancher avant tout usage public du cover
   - fait quand: un morceau est choisi pour le clip, ses paroles finalisées dans `paroles_clip.md`, et la question des droits du cover tranchée
   - réf: `webradio/tests_ace/clip_atelier_invariable/config.json` (cas 7 à 22), `webradio/playlists/creation-francaise/`
 - [P2|ouvert] Tester `src_audio` (cover) et `reference_audio` de `ace_worker.py` sur un cas réel suivi d'une écoute, et contrôler qu'un cas sans ces champs se comporte comme avant (pytest `webradio/tests`)
   - fait quand: pytest `webradio/tests` passe et le cover est écouté
   - réf: `webradio/ace_worker.py` (`prepare_audio`, `task_type`), `webradio/tests_ace/clip_atelier_invariable/outputs/`
-- [P2|ouvert] Supprimer ou non du catalogue les 8 versions françaises « négatives » conservées (tri du 2026-10-12) ; aligner les descriptions de playlist (`instrumental` dit encore « 21 morceaux », `disco-en` inchangée)
-  - fait quand: décision prise et appliquée, descriptions de `playlists.json` alignées
-  - réf: `DOCUMENTATION/apprentissage/retrait_fr.json`, `webradio/playlists.json`, `webradio/catalog_overrides.json`
+- [P2|ouvert] Aligner les descriptions de playlist avec le nombre réel de morceaux après les suppressions du 2026-10-15 (`instrumental` dit encore « 21 morceaux », `disco-en` inchangée, autres playlists amputées)
+  - fait quand: les descriptions de `playlists.json` indiquent le nombre de morceaux réel
+  - réf: `webradio/playlists.json`, `DOCUMENTATION/apprentissage/suppression_2026-10-15.json`
 - [P2|ouvert] Contrôler dans le navigateur l'UI Tests (texte sur plusieurs lignes, plier/déplier) et la diffusion de `instrumental:22` et `creation-francaise:1` (serveur relancé le 2026-10-13, lecture confirmée sur téléphone par l'utilisateur)
   - fait quand: UI Tests contrôlée, les deux morceaux entendus à l'antenne ou signalés défaillants
   - réf: `tests_manuels.md` n°9 à 13, `webradio/listen.js`, `webradio/services.ps1`
@@ -40,7 +55,7 @@
 - [P1|ouvert] Valider les jingles SérénIA Tech (5 textes) et la prononciation « Sérénia Tèk » / « Traveling Sound Ouèbe Radio »
   - fait quand: textes et prononciation validés ou corrigés puis régénérés
   - réf: `D:\ServOMorph\TTS_Local\jingles_pub_texts.json`, `D:\ServOMorph\TTS_Local\jingles_pub_batch.py`, `D:\ServOMorph\TTS_Local\jingles_pub_finalize.py`
-- [P1|ouvert] Contrôles manuels iPhone des nouveautés (écran verrouillé avec Web Audio, section Tests, titrage, police, cycle visuel, pubs, jingles, admin)
+- [P1|ouvert] Contrôles manuels iPhone des nouveautés (écran verrouillé avec Web Audio, section Tests, titrage, police, cycle visuel, pubs, jingles, admin, boutons plier/déplier n°15, section Pochettes n°16, bouton Test n°17)
   - fait quand: les sections correspondantes de `tests_manuels.md` sont vidées par contrôles réels
   - réf: `tests_manuels.md`, `webradio/listen.js`, `webradio/radio.html`
 - [P2|ouvert] Tester les modifications de pochettes sans texte et de traçabilité d'`ace_worker.py` commitées sans test complet : une pochette sur une playlist (`cover_batch.py --playlist`), puis la reprise d'une piste déjà générée avec le nouveau nom de fichier horodaté (risque de régénération), et la compatibilité avec `compress_audio.py` et la suppression de morceau
@@ -55,7 +70,7 @@
 - [P2|ouvert] Changer le mot de passe admin par défaut
   - fait quand: mot de passe admin changé et accès confirmé
   - réf: `webradio/REGLES_GENERATION_DEV.md` section 6, `tests_manuels.md`
-- [P2|ouvert] Avant le déploiement : retirer le bouton « Suivant » public (`PUBLIC_SKIP`), la section « Tests » (ou la verrouiller), remplacer `DEV_UNIFIED = True` en dur par un réglage explicite, remplacer les noms d'artistes des titres de playlists par des genres, trancher l'exposition des boutons Renommer/Supprimer, refermer `/api/dynamics` avec une UI auditeur séparée
+- [P2|ouvert] Avant le déploiement : retirer le bouton « Suivant » public (`PUBLIC_SKIP`), la section « Tests » (ou la verrouiller), remplacer `DEV_UNIFIED = True` en dur par un réglage explicite, remplacer les noms d'artistes des titres de playlists par des genres, trancher l'exposition des boutons Renommer/Supprimer, refermer `/api/dynamics` avec une UI auditeur séparée, retirer ou verrouiller le bouton « Test » et la section « Pochettes »
   - fait quand: aucun saut public possible, `DEV_UNIFIED` piloté, aucun nom d'artiste public, dynamique et Tests refermés dans l'UI auditeur
   - réf: `AMELIORATIONS.md`, `webradio/REGLES_GENERATION_DEV.md` sections 3.4, 3.6, 3.7 et 5.5, `webradio/server.py`
 - [P2|ouvert] Confirmer deux changements du répertoire de travail non faits pendant ces sessions : seuil `0.688` dans `jlayout` (`webradio/motion.js`) et suppression du formulaire de commentaires, du bloc « musique humaine » et du contact dans `webradio/listen.html`
@@ -73,7 +88,7 @@
 - [P3|ouvert] Jingles de pub Traveling Sound : les 5 textes sont générés et mélangés aux autres ; à ajuster si besoin
   - fait quand: l'utilisateur confirme les 5 textes ou demande des changements
   - réf: `webradio/jingles/traveling-sound/outputs/playlist_results.json`
-- [P3|ouvert] Poursuivre la génération musicale en rotation (`/start_generation`, service `generation` arrêté ; `analyse` et `compression` relancés) et retirer de « idée de playlist.md » chaque entrée terminée
+- [P3|ouvert] Poursuivre la génération musicale en rotation (`/start_generation`, service `generation` arrêté ; `series.txt` nettoyé le 2026-10-15 des playlists supprimées ; contrôle automatique à la suppression d'une playlist encore à faire) et retirer de « idée de playlist.md » chaque entrée terminée
   - fait quand: toutes les pistes prévues sont générées et les entrées terminées sont retirées de la liste d'idées
   - réf: `webradio/run_rotation.py`, `webradio/series.txt`, `idée de playlist.md`
 - [P3|ouvert] Mise en ligne permanente : VPS Linux (systemd, Caddy ou Cloudflare, sous-domaine `radio.serenia-tech.fr`, rsync des mp3) ; Vercel, Render gratuit et Netlify écartés ; fonctionnement du serveur sous Linux non testé
@@ -84,35 +99,31 @@
   - réf: `PLAN_WEBRADIO.md` section 4.5
 
 ## Contexte chaud
-- Roadmap écriture humaine : phases 1 à 5 faites (outils, apprentissage, retrait des morceaux français, propositions, run) ; phase 6 en cours (attente des écoutes). Les 19 versions Funky Yogi sont dans les Tests ; `paroles.md` pas encore dans le run.
-- `ace_worker.py` accepte `reference_audio`, `src_audio`, `task_type` (cover), `audio_start_s`/`audio_duration_s`, `audio_cover_strength`, `cover_noise_strength` ; seuls une référence audio et un cover ont été essayés.
-- Radio : boucle désactivée, serveur du port 5000 relancé le 2026-10-13 et écouté par le tunnel (`vertia-test.serenia-tech.fr` vers `localhost:5000`, vérifié) ; après un arrêt prolongé le moteur rattrape son retard en accéléré (environ 20 min pour 23 h d'arrêt), pendant lequel la lecture ne démarre pas sur téléphone ; `instrumental:22` et `creation-francaise:1` ajoutés avec leurs JSON (règle mémoire : à chaque ajout, prendre les JSON).
-- Section Tests : entrées `status: planned` possibles (sans MP3) ; UI avec plier/déplier. Dossier du clip : `webradio/tests_ace/clip_atelier_invariable/`.
-- Avant une génération GPU, vérifier la VRAM libre (environ 1 Go pris par Windows et les applications).
+- Roadmap écriture humaine : phase 6 en cours (attente des écoutes des 19 versions Funky Yogi) ; `paroles.md` pas encore dans le run. Roadmap `roadmap_nuit_autonome.md` : phases 1 à 8 exécutées de nuit le 2026-10-15 (journal et bilan en fin de fichier) ; à archiver sur accord.
+- Nettoyage du 2026-10-15 : 296 morceaux à score négatif supprimés (0 sauté) puis 4 de la playlist blues-rock après test ; 5 playlists vides supprimées ; `series.txt` nettoyé (14 lignes). Suppression faite par `RadioEngine.edit_catalog` dans un processus séparé (`persist=False`), car l'API exige le cookie admin. Scores remis à zéro : archive dans `DOCUMENTATION/apprentissage/votes_archive/`, sommée par `calculer_preferences.py` (option `--sans-archive`).
+- Playlist `blues-rock-guitare` (« Blues-rock guitare claire », 6 morceaux vocaux anglais gardés) en rotation au poids par défaut ; bouton « Test » (admin) = boucle de cette playlist (`test_loop`, état persisté) ; section « Pochettes » (admin) et script de suivi des verdicts « À refaire » (plafond de 3 régénérations).
+- Serveur du port 5000 relancé le 2026-10-15 à 05 h 29 et sain (`/api/radio/state`). `ace_worker.py` accepte `reference_audio`, `src_audio`, `task_type` (cover) ; seuls une référence audio et un cover ont été essayés.
+- Avant une génération GPU, vérifier la VRAM libre (environ 1 Go pris par Windows) et que ComfyUI est arrêté.
 
-# Session du 2026-10-12
+# Session du 2026-10-15
 
 ## Décisions prises
-- Réorientation vers l'écriture humaine : Funky Yogi mis en musique (electro, funk, disco, soul ; ~120 BPM, un à 100 et un à 95), ACE seul, 150 s au plus, échec technique = nouvelle graine.
-- Apprentissage fondé sur les seuls votes radio ; `preferences.json` mis à jour seulement avec accord, diff présenté par `/close`.
-- Chansons françaises retirées de la diffusion (14 versions gardées) ; boucle désactivée.
-- Clip L'Invariable : disco funk puis groupe vocal Eurodisco ; retenus dans `clip_promo/musique/retenus/` ; playlist `creation-francaise` créée.
-- À chaque ajout de morceau à la WebRadio : prendre les JSON avec (mémoire projet).
+- Morceaux à score négatif du catalogue diffusé supprimés (8 versions françaises incluses), playlists vides supprimées, scores remis à zéro avec archive des votes lue par le calcul de préférences.
+- Validation de la playlist « Blues-rock guitare claire » après test : 4 morceaux négatifs supprimés, 6 intégrés à la rotation.
+- Revue des pochettes par page locale (et non artefact claude.ai) avec script de régénération, plafond de 3 refus par pochette ; pas de push pendant l'exécution autonome.
 
 ## Livrables produits ou modifiés
-- `OUTILS/` (extraction, apprentissage, run_textes), `DOCUMENTATION/apprentissage/`, `DOCUMENTATION/APPRENTISSAGE.md` : outils et données, 15 tests passés ; `roadmap_ecriture_humaine.md` : statuts à jour.
-- `TEXTES/artistes/funky-yogi/textes/` : 10 textes `RELU` ; 19 versions générées (tests 47 à 65).
-- `webradio/ace_worker.py`, `server.py`, `listen.js`, `listen.css`, `radio_engine.py` : graine effective, entrées `planned`, UI Tests, référence audio et cover.
-- `webradio/playlists/instrumental/` (morceau 22), `playlists/creation-francaise/` (nouvelle), `webradio/tests_ace/clip_atelier_invariable/` (cas 1 à 22).
+- `DOCUMENTATION/apprentissage/` : liste figée des négatifs, diff, règles proposées, archive de votes, journal de suppression ; `OUTILS/apprentissage/calculer_preferences.py` : archives sommées (tests : 8 passent).
+- `webradio/` : `covers_review.py`, `tools/cover_review_watch.py`, routes et section « Pochettes », bouton « Test » (`radio_engine.py`), boutons plier/déplier (`listen.*`, `radio.html`), playlist `blues-rock-guitare` (config, 6 morceaux) : commités, tests `webradio/tests` : 40 passent.
+- `roadmap_nuit_autonome.md` : exécutée, journal et bilan.
 
 ## Hypothèses validées / invalidées
-- VALIDE : run automatique de 19 versions ; graine enregistrée sur génération réelle ; cover et référence audio s'exécutent (journal « cover task », référence dans le sidecar).
-- VALIDE : serveur du port 5000 relancé, tunnel atteint, lecture confirmée sur téléphone après le rattrapage du moteur ; serveur Eleventy parasite du port 5000 arrêté sur demande.
-- EN ATTENTE : écoute des 19 versions, des chœurs, du clip, du cover et des voix Eurodisco ; effet réel de la référence audio.
+- VALIDE : suppression en masse et remise à zéro des scores ; archive retrouvant 857 votes ; 10 morceaux de la nouvelle playlist générés du premier coup ; playlist testée à l'écoute par l'utilisateur (6 positifs, 4 négatifs).
+- EN ATTENTE : section « Pochettes », bouton « Test » et boutons plier/déplier vérifiés seulement au navigateur avec des réponses simulées ; régénération réelle d'une pochette ; règles tirées des négatifs ; préférences.
 - INVALIDE : aucune.
 
 ## Prochaine étape exacte
-Écouter et voter les 19 versions Funky Yogi, valider le diff des préférences, puis rédiger le bilan par texte (phase 6).
+Arrêter le mode Test, juger les pochettes dans la section « Pochettes », puis écouter et voter les 19 versions Funky Yogi et valider les préférences et règles (phase 6).
 
 ## Question bloquante pour la session suivante
 Quel morceau du clip L'Invariable est retenu, et les droits du cover de Helmut Fritz sont-ils réglés ?

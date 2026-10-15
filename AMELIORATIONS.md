@@ -9,7 +9,7 @@ Cette liste centrale recense les améliorations encore ouvertes. Garder chaque e
 - [ ] Avant le déploiement : retirer le bouton « Suivant » public de l'UI auditeur (listen.js, fonction applyMode, et `PUBLIC_SKIP` dans server.py), ainsi que les boutons Renommer/Supprimer si exposés. Le saut change le morceau pour tous les auditeurs ; il n'est public que pendant la phase de test.
 - [ ] Choisir parmi les propositions de réaménagement de l'UI admin (barre d'accès rapide, onglets Direct/Réglages/Catalogue/Analyse, tableau de bord Direct, réglages simples/avancés) et les appliquer.
 - [ ] Décider du sort de `webradio/ui.html` (explorateur) maintenant que ses fonctions sont dans le catalogue admin ; le supprimer ou le garder.
-- [ ] Retirer de `series.txt` les playlists supprimées via l'admin, sinon la rotation les régénère ; ajouter un contrôle automatique à la suppression d'une playlist.
+- [ ] Ajouter à la suppression d'une playlist un retrait automatique de son identifiant de `series.txt` (nettoyé à la main le 2026-10-15), sinon la rotation la régénère.
 - [ ] Faire utiliser les noms modifiés dans `catalog_overrides.json` par `cover_gen.py` / `cover_batch.py` (ils lisent encore `playlists.json`).
 - [ ] Régénérer les 14 jingles WebRadio restants avec « IA » prononcé, une fois la prononciation validée à l'écoute (scripts dans `D:\ServOMorph\TTS_Local\`).
 - [ ] Décider avant le déploiement si les boutons Slow/Medium/High restent réservés au développeur (actuellement ouverts à tous dans l'UI dev, `/api/dynamics` sans contrôle admin, poids 1 dans la dynamique). Créer une UI auditeur séparée de l'UI dev.
@@ -22,8 +22,9 @@ Cette liste centrale recense les améliorations encore ouvertes. Garder chaque e
 - [ ] Concurrence entre `ace_worker.py` (réécrit `playlist_results.json` sans verrou) et la suppression d'un test du dossier `tests-ace` par le serveur : masquer par un état séparé ou partager un verrou si des tests y sont régénérés pendant une suppression.
 - [ ] Câbler un protocole d'apprentissage : `webradio/learning/morceaux_rejetes.jsonl` n'est lu par aucun code de génération ; relier les votes et commentaires des Tests, le prompt et la graine à des réglages recommandés par le skill `generation-morceaux`.
 - [ ] Tester `ace_worker.py` avec `src_audio` (cover) et `reference_audio` sur un cas réel, puis ajouter un test automatique des nouveaux champs (`prepare_audio`, `task_type`).
-- [ ] Décider du sort des 8 versions françaises « négatives » conservées au catalogue et aligner les descriptions de playlist (`instrumental`, `disco-en`) avec le nombre réel de morceaux.
+- [ ] Aligner les descriptions de playlist (`instrumental`, `disco-en` et playlists amputées le 2026-10-15) avec le nombre réel de morceaux.
 - [ ] Ajouter à l'UI Tests un affichage des morceaux rangés par texte source (lien vers le texte `RELU`) pour faciliter le bilan d'écoute de la roadmap écriture humaine.
 - [ ] Faire sauter le moteur de la radio à l'heure réelle au démarrage (`radio_engine.py`) : après un arrêt prolongé il rejoue en accéléré les morceaux manqués, ce qui bloque la lecture sur téléphone pendant environ 20 minutes pour 23 h d'arrêt.
 - [ ] Avant le déploiement : retirer le bouton « Test » de l'UI d'écoute admin (`testLoopBtn` dans listen.html et listen.js, action `test_loop` et constante `TEST_LOOP_PLAYLIST` dans `radio_engine.py`) ou le verrouiller ; il change le morceau pour tous les auditeurs.
 - [ ] Ajouter à la section « Pochettes » (`covers_review.py`, `tools/cover_review_watch.py`) un affichage des pochettes déjà validées et un retour arrière sur un verdict ; avant le déploiement, retirer la section ou la verrouiller comme « Tests ».
+- [ ] Rendre la suppression de morceau résistante au verrouillage Windows : marquer le morceau supprimé avant de purger ses fichiers ou relancer `os.replace` de `catalog_overrides.json` (incident du 2026-10-15).
