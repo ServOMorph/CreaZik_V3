@@ -197,3 +197,27 @@ Aucune
 
 ## Question bloquante pour la session suivante
 Quel morceau du clip L'Invariable est retenu, et les droits du cover de Helmut Fritz sont-ils réglés ?
+
+---
+# Session du 2026-10-15
+
+## Décisions prises
+- Morceaux à score négatif du catalogue diffusé supprimés (8 versions françaises incluses), playlists vides supprimées, scores remis à zéro avec archive des votes lue par le calcul de préférences.
+- Validation de la playlist « Blues-rock guitare claire » après test : 4 morceaux négatifs supprimés, 6 intégrés à la rotation.
+- Revue des pochettes par page locale (et non artefact claude.ai) avec script de régénération, plafond de 3 refus par pochette ; pas de push pendant l'exécution autonome.
+
+## Livrables produits ou modifiés
+- `DOCUMENTATION/apprentissage/` : liste figée des négatifs, diff, règles proposées, archive de votes, journal de suppression ; `OUTILS/apprentissage/calculer_preferences.py` : archives sommées (tests : 8 passent).
+- `webradio/` : `covers_review.py`, `tools/cover_review_watch.py`, routes et section « Pochettes », bouton « Test » (`radio_engine.py`), boutons plier/déplier (`listen.*`, `radio.html`), playlist `blues-rock-guitare` (config, 6 morceaux) : commités, tests `webradio/tests` : 40 passent.
+- `roadmap_nuit_autonome.md` : exécutée, journal et bilan.
+
+## Hypothèses validées / invalidées
+- VALIDE : suppression en masse et remise à zéro des scores ; archive retrouvant 857 votes ; 10 morceaux de la nouvelle playlist générés du premier coup ; playlist testée à l'écoute par l'utilisateur (6 positifs, 4 négatifs).
+- EN ATTENTE : section « Pochettes », bouton « Test » et boutons plier/déplier vérifiés seulement au navigateur avec des réponses simulées ; régénération réelle d'une pochette ; règles tirées des négatifs ; préférences.
+- INVALIDE : aucune.
+
+## Prochaine étape exacte
+Arrêter le mode Test, juger les pochettes dans la section « Pochettes », puis écouter et voter les 19 versions Funky Yogi et valider les préférences et règles (phase 6).
+
+## Question bloquante pour la session suivante
+Quel morceau du clip L'Invariable est retenu, et les droits du cover de Helmut Fritz sont-ils réglés ?

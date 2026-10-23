@@ -295,6 +295,10 @@ class RadioEngine:
         self.explicit = data.get("explicit", [])
         self.auto = data.get("auto", [])
         self.played = data.get("played", [])
+        if self.current is not None and self.current.get("end", 0) <= t:
+            self.played.append(self.current)
+            self.played = self.played[-PLAYED_LEN:]
+            self.current = None
         self.history = data.get("history", [])
         self.since_jingle = data.get("since_jingle", 0)
         self.jingle_seq = data.get("jingle_seq", 0)

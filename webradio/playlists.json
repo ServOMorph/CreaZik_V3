@@ -524,14 +524,6 @@
     "category": "webradio"
   },
   {
-    "id": "jingles-traveling-sound",
-    "label": "Jingles Traveling Sound",
-    "results": "jingles/traveling-sound/outputs/playlist_results.json",
-    "role": "jingle",
-    "category": "traveling-sound",
-    "description": "Jingles publicitaires pour Traveling Sound Web Radio."
-  },
-  {
     "id": "jingles-serenia-tech",
     "label": "Jingles SérénIA Tech",
     "results": "jingles/serenia-tech/outputs/playlist_results.json",

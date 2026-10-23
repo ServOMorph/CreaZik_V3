@@ -7,13 +7,14 @@ WebRadio IA locale : musique générée en local avec ACE-Step 1.5, diffusée en
 - Radio : serveur Python (port 5000 pour les auditeurs, port local 5001 pour l'administration), moteur `webradio/radio_engine.py`, audio MP3 uniquement.
 
 ## Structure
-- `webradio/` : application (serveur, moteur, client, génération, playlists).
+- `webradio/` : application (serveur, moteur, client, génération, playlists) ; `webradio/user.html` : interface auditeur (page d'accueil du port 5000).
+- `revue_ui_user/` : artefact de revue de l'interface auditeur.
 - `PLAN_WEBRADIO.md`, `roadmap_webradio.md` : suivi d'exécution et phases.
 - `webradio/REGLES_GENERATION_DEV.md` : règles de génération et de développement.
 - `tests_manuels.md` : contrôles manuels en attente.
 - `TEXTES/` : paroles classées par artiste et textes destinés à la génération musicale.
 
 ## État actuel
-Interfaces auditeur/admin séparées (5000/5001) et section « Tests » pour écouter les créations avant toute diffusion. Chaque ajout à la WebRadio nécessite une demande explicite de l'utilisateur.
+Interface auditeur dédiée (`user.html`, page d'accueil du port 5000, votes auditeurs collectés à part pour analyse) ; interface admin sur le port 5001 ; section « Tests » pour écouter les créations avant toute diffusion. Chaque ajout à la WebRadio nécessite une demande explicite de l'utilisateur.
 Réorientation vers l'écriture humaine : outils d'extraction de textes, d'apprentissage et de run (`OUTILS/`), 10 textes Funky Yogi relus et 19 versions générées à écouter ; préférences et règles tirées des morceaux négatifs en attente d'accord.
-Radio nettoyée le 2026-10-15 (morceaux négatifs et playlists vides supprimés, scores remis à zéro avec archive) ; playlist « Blues-rock guitare claire » en rotation ; bouton « Test » (boucle d'une playlist) et section « Pochettes » (revue et régénération) en admin. Écoutes, contrôles iPhone, validation des préférences et déploiement VPS en attente.
+Radio nettoyée le 2026-10-15 (morceaux négatifs et playlists vides supprimés, scores remis à zéro avec archive) ; playlist « Blues-rock guitare claire » en rotation ; bouton « Test » (boucle d'une playlist) et section « Pochettes » (revue et régénération) en admin. Pubs Traveling Sound supprimées, moteur corrigé après arrêt prolongé. Écoutes, contrôles navigateur et iPhone de l'UI auditeur, validation des préférences et déploiement VPS en attente.

@@ -8,6 +8,8 @@
     const SLEW_PER_S = 4;
     const POLL_MS = 2000;
     const SILENT_WAV = '/silence.wav';
+    const USER_UI = window.CREAZIK_USER_UI === true;
+    const UI_HEADERS = USER_UI ? {'X-Creazik-Ui': 'user'} : {};
 
     const $ = id => document.getElementById(id);
     const canvas = $('vizCanvas');
@@ -98,7 +100,7 @@
 
     async function getJSON(url, fallback) {
         try {
-            const r = await fetch(url + (url.includes('?') ? '&' : '?') + 't=' + Date.now());
+            const r = await fetch(url + (url.includes('?') ? '&' : '?') + 't=' + Date.now(), {headers: UI_HEADERS});
             if (r.ok) return await r.json();
         } catch (e) {}
         return fallback;
@@ -767,7 +769,7 @@
         navigator.mediaSession.setActionHandler('play', startListening);
         navigator.mediaSession.setActionHandler('pause', stopListening);
         try {
-            navigator.mediaSession.setActionHandler('nexttrack', skip);
+            navigator.mediaSession.setActionHandler('nexttrack', USER_UI ? null : skip);
         } catch (e) {}
     }
 
@@ -829,8 +831,37 @@
     const pendingVotes = {};
     let voteTimer = null;
 
+    let voteBusy = false;
+
+    async function sendVoteSingle(kind) {
+        if (voteBusy) return;
+        voteBusy = true;
+        const key = current.key;
+        const other = kind === 'up' ? 'down' : 'up';
+        const mine = Object.assign({up: 0, down: 0}, votes.mine[key]);
+        const apply = res => {
+            votes.tracks[key] = {up: res.up, down: res.down, score: res.score};
+            votes.mine[key] = res.mine;
+        };
+        const post = async (url, body) => {
+            const r = await fetch(url, {method: 'POST', headers: Object.assign({'Content-Type': 'application/json'}, UI_HEADERS), body: JSON.stringify(body)});
+            if (!r.ok) throw new Error(r.status);
+            apply(await r.json());
+        };
+        try {
+            if (mine[kind] > 0 || mine[other] > 0) await post('/api/vote/reset', {key});
+            if (!(mine[kind] > 0)) await post('/api/vote', {key, vote: kind, count: 1});
+        } catch (e) {}
+        voteBusy = false;
+        updateThumbs();
+    }
+
     function sendVote(kind) {
         if (!current || current.jingle) return;
+        if (USER_UI) {
+            sendVoteSingle(kind);
+            return;
+        }
         const key = current.key;
         const entry = Object.assign({up: 0, down: 0}, votes.tracks[key]);
         entry[kind] += 1;
@@ -1783,12 +1814,13 @@
     }
 
     async function init() {
-        const me = await getJSON('/api/me', {admin: false});
+        const me = USER_UI ? {admin: false} : await getJSON('/api/me', {admin: false});
         isAdmin = !!me.admin;
-        $('playBtn').addEventListener('click', toggle);
-        $('nextBtn').addEventListener('click', skip);
-        $('discoverBtn').addEventListener('click', toggleDiscover);
-        $('testLoopBtn').addEventListener('click', toggleTestLoop);
+        const on = (id, fn) => { const el = $(id); if (el) el.addEventListener('click', fn); };
+        on('playBtn', toggle);
+        on('nextBtn', skip);
+        on('discoverBtn', toggleDiscover);
+        on('testLoopBtn', toggleTestLoop);
         window.addEventListener('resize', () => fitCoverTitle(true));
         if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => fitCoverTitle(true));
         testAudio.addEventListener('ended', stopTest);

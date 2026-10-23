@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "calcule_le": "2026-10-15T08:12:20+02:00",
+  "calcule_le": "2026-10-23T18:15:34+02:00",
   "sources": {
     "votes": "webradio/votes.json + DOCUMENTATION/apprentissage/votes_archive",
     "morceaux_votes": 867

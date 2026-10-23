@@ -1,0 +1,423 @@
+<title>Revue UI auditeur</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600&family=Sora:wght@500;600;700&display=swap">
+<style>
+  /* Plan : poste de revue de l'UI auditeur CréaZik. Capture de l'écran à gauche, retours et questions à droite. Fond nuit bleutée de la radio, dégradé rose vers bleu de la marque réservé aux repères. */
+  :root {
+    --bg: #f4f3f8;
+    --panel: #fcfbff;
+    --fg: #1c1b2e;
+    --muted: #5f5d78;
+    --line: #dcdae8;
+    --ink: #5a3fa8;
+    --ink-fg: #ffffff;
+    --mark: #e86aa8;
+    --ok: #2f7a4d;
+    --danger: #a8342f;
+    --display: "Sora", "Segoe UI", system-ui, sans-serif;
+    --body: "Public Sans", system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0d0c17; --panel: #171627; --fg: #ecebf5; --muted: #a09eb8; --line: #2c2a42;
+      --ink: #a995f0; --ink-fg: #12101f; --mark: #e47ab3; --ok: #6cc18b; --danger: #ee8a84;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0d0c17; --panel: #171627; --fg: #ecebf5; --muted: #a09eb8; --line: #2c2a42;
+    --ink: #a995f0; --ink-fg: #12101f; --mark: #e47ab3; --ok: #6cc18b; --danger: #ee8a84;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 15px; line-height: 1.5; padding-block: 20px 40px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  .wrap { max-width: 1100px; margin: 0 auto; display: grid; gap: 20px; }
+  header h1 { font-family: var(--display); font-weight: 700; font-size: 30px; line-height: 1.15; margin: 0; color: var(--ink); text-wrap: balance; }
+  header p { margin: 6px 0 0; color: var(--muted); max-width: 70ch; }
+  .picker { display: flex; flex-wrap: wrap; gap: 8px; }
+  .picker button { font: inherit; font-weight: 600; text-align: left; padding: 8px 14px; border: 1px solid var(--line); background: var(--panel); color: var(--fg); border-radius: 8px; cursor: pointer; }
+  .picker button small { display: block; font-weight: 400; color: var(--muted); font-size: 12px; }
+  .picker button[aria-pressed="true"] { background: var(--ink); color: var(--ink-fg); border-color: var(--ink); }
+  .picker button[aria-pressed="true"] small { color: var(--ink-fg); opacity: .8; }
+  .cols { display: grid; gap: 24px; grid-template-columns: minmax(0, 1fr); align-items: start; }
+  @media (min-width: 860px) { .cols { grid-template-columns: 390px minmax(0, 1fr); } .left { position: sticky; top: 16px; } }
+  .left { display: grid; gap: 12px; min-width: 0; }
+  .shot { width: 100%; max-width: 390px; margin: 0 auto; border: 1px solid var(--line); border-radius: 18px; overflow: hidden; background: #0b0b14; }
+  .shot img { display: block; width: 100%; height: auto; }
+  .cap { max-width: 390px; margin: 0 auto; color: var(--muted); font-size: 13px; }
+  .right { min-width: 0; display: grid; gap: 14px; }
+  .tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .tabs button { font: inherit; font-weight: 600; padding: 10px 14px; border: 0; background: none; color: var(--muted); cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -1px; }
+  .tabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--ink); }
+  .count { display: inline-block; min-width: 20px; padding: 0 6px; margin-left: 6px; border-radius: 10px; background: var(--line); color: var(--fg); font-size: 12px; text-align: center; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 14px; }
+  .composer { display: grid; gap: 10px; }
+  textarea, select { width: 100%; font: inherit; color: var(--fg); background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 10px; }
+  textarea { min-height: 76px; resize: vertical; }
+  select { width: auto; max-width: 100%; }
+  textarea:focus-visible, select:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+  .btn { font: inherit; font-weight: 600; padding: 8px 14px; border-radius: 8px; border: 1px solid var(--ink); background: var(--ink); color: var(--ink-fg); cursor: pointer; }
+  .btn.sm { padding: 4px 12px; font-size: 13px; }
+  .btn:disabled { opacity: .5; cursor: default; }
+  .handoff { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+  .okmark { color: var(--ok); font-weight: 600; }
+  .row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .list { display: grid; gap: 10px; }
+  .comment { display: grid; gap: 6px; }
+  .comment.done .txt { color: var(--muted); text-decoration: line-through; }
+  .comment .txt { white-space: pre-wrap; overflow-wrap: anywhere; }
+  .zone { font-weight: 600; background: var(--mark); color: #1c1b2e; padding: 2px 8px; border-radius: 5px; font-size: 13px; }
+  .reply { border-left: 3px solid var(--ink); padding-left: 10px; white-space: pre-wrap; overflow-wrap: anywhere; }
+  .reply small, .muted { color: var(--muted); }
+  .link { font: inherit; font-size: 13px; border: 0; background: none; color: var(--muted); cursor: pointer; text-decoration: underline; padding: 2px; }
+  .link.danger { color: var(--danger); }
+  .empty { color: var(--muted); padding: 18px; border: 1px dashed var(--line); border-radius: 10px; }
+  .q h3 { margin: 0 0 4px; font-size: 15px; font-weight: 600; text-wrap: pretty; }
+  .q .ctx { margin: 0 0 10px; color: var(--muted); font-size: 13px; }
+  .q label.opt { display: flex; gap: 10px; align-items: flex-start; padding: 6px 4px; cursor: pointer; }
+  .q label.opt input { margin-top: 4px; accent-color: var(--ink); }
+  .q textarea { min-height: 56px; margin-top: 8px; }
+  .q .state { font-size: 12px; font-weight: 600; color: var(--ok); }
+  .q .state.todo { color: var(--muted); font-weight: 500; }
+  .bar { height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; }
+  .bar i { display: block; height: 100%; background: var(--ok); width: 0; transition: width .2s; }
+  .q .sum { display: none; gap: 10px; align-items: baseline; flex-wrap: wrap; margin: 2px 0 6px; }
+  .q .sum span { overflow-wrap: anywhere; color: var(--ink); font-weight: 500; }
+  .q.done .sum { display: flex; }
+  .q.done .opt, .q.done textarea, .q.done .ctx { display: none; }
+  .q.done { padding-block: 10px; }
+  .sendbar { position: sticky; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); display: flex; gap: 12px; align-items: center; flex-wrap: wrap; box-shadow: 0 -6px 16px rgba(0, 0, 0, .1); }
+  .notice { padding: 10px 12px; border-radius: 8px; background: var(--panel); border: 1px solid var(--danger); color: var(--danger); }
+  .fait h2 { margin: 0 0 4px; font-family: var(--display); font-size: 15px; font-weight: 600; }
+  .fait ul { margin: 6px 0 0; padding-left: 20px; display: grid; gap: 4px; }
+  .fait .lim { margin-top: 12px; }
+  .fait code { font-size: 13px; overflow-wrap: anywhere; }
+  @media (prefers-reduced-motion: reduce) { .bar i { transition: none; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>Revue de l'interface auditeur</h1>
+    <p>Version de la WebRadio destinée aux auditeurs, séparée de l'interface de développement. Choisissez une version, regardez la capture, commentez une zone de l'écran et répondez aux questions. Claude relit tout.</p>
+  </header>
+  <div id="notice" class="notice" hidden>L'enregistrement est indisponible dans cette vue : vos retours ne seront pas conservés.</div>
+  <div class="picker" id="picker" role="group" aria-label="Choix de la version"></div>
+  <div class="cols">
+    <div class="left">
+      <figure class="shot" style="margin:0 auto"><img id="shot" alt="Capture de l'interface auditeur sur un écran de 390 pixels de large"></figure>
+      <p class="cap" id="cap"></p>
+    </div>
+    <div class="right">
+      <section class="card fait" id="fait"></section>
+      <div class="card handoff"><button class="btn" id="done" type="button">J'ai terminé : Claude peut traiter</button><span class="muted" id="donemsg" role="status">Envoie vos réponses non envoyées et prévient Claude.</span></div>
+      <div class="tabs" role="tablist">
+        <button role="tab" id="tab-c" aria-selected="true" aria-controls="p-c">Commentaires<span class="count" id="n-c">0</span></button>
+        <button role="tab" id="tab-q" aria-selected="false" aria-controls="p-q">Questions<span class="count" id="n-q">0</span></button>
+      </div>
+      <section id="p-c" role="tabpanel" aria-labelledby="tab-c" class="right">
+        <form class="card composer" id="form">
+          <div class="row"><label class="muted" for="zone">Zone concernée</label><select id="zone"></select></div>
+          <textarea id="txt" aria-label="Votre commentaire" placeholder="Ce qui ne va pas, ce qui plaît, ce qu'il faut changer…"></textarea>
+          <div class="row"><button class="btn" id="add" type="submit" disabled>Ajouter le commentaire</button><span class="muted" id="hint">Ctrl+Entrée pour envoyer</span></div>
+        </form>
+        <div class="list" id="clist"><div class="empty">Aucun commentaire pour le moment.</div></div>
+      </section>
+      <section id="p-q" role="tabpanel" aria-labelledby="tab-q" class="right" hidden>
+        <div class="card"><div class="row"><b id="qprog">0 / 0 répondues</b></div><div class="bar" style="margin-top:8px"><i id="qbar"></i></div></div>
+        <div class="list" id="qlist"><div class="empty">Les questions de Claude s'afficheront ici.</div></div>
+        <div class="card sendbar"><button class="btn" id="send" type="button" disabled>Envoyer mes réponses</button><span class="muted" id="sendmsg" role="status">Aucune modification à envoyer.</span></div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var ZONES = ["Général", "En-tête et titre", "Cadre visuel (pochette, animations, pubs)", "Pouces et votes", "Barre de progression", "Bouton lecture", "Bas de page et contact", "Autre"];
+  var VERSIONS = [
+    {
+      id: "v1", nom: "v1", sous: "Première version · 2026-10-17", fichier: "apercu_v1_chargement.png",
+      legende: "Capture à 390 px au chargement de la page, lecture lancée. Aucun morceau n'est en cours à ce moment : le moteur radio rejoue encore les morceaux manqués depuis l'arrêt, donc le titre et les pouces ne sont pas visibles.",
+      fait: [
+        "Page créée : webradio/user.html, servie sur /user.html. Elle reprend la feuille de style et le script de l'interface actuelle, avec un drapeau qui coupe tout le code d'administration.",
+        "Éléments retirés pour l'auditeur : bouton Suivant, boutons Slow / Medium / High, boutons Découverte et Test, panneau Programmation, Gestion WebRadio, Tests, Pochettes, icône de connexion admin.",
+        "Éléments conservés : lecteur (cadre visuel, pochette, pubs), pouces haut / bas et remise à zéro, barre de progression, bouton lecture, commandes de l'écran verrouillé sans « morceau suivant ».",
+        "Contrôles faits dans le navigateur : aucune erreur console au chargement ; avant la lecture, le seul bouton visible est le bouton lecture."
+      ],
+      limites: [
+        "L'état en cours de lecture (titre, pouces visibles, pochette) n'a pas pu être capturé : à refaire quand le moteur sera à l'heure.",
+        "Le serveur accepte encore les routes /api/skip et /api/dynamics : la page ne les appelle plus, mais elles ne sont pas fermées.",
+        "Le mode Test de la radio était actif au moment du contrôle (la radio ne joue que la playlist blues-rock).",
+        "Rien n'a été testé sur iPhone."
+      ]
+    },
+    {
+      id: "v2", nom: "v2", sous: "Vos réponses appliquées · 2026-10-17", fichier: "",
+      legende: "Pas de capture pour cette version : le navigateur de test ne répond plus et n'a pas pu charger la page. La version v2 est à regarder directement sur http://localhost:5000/user.html.",
+      fait: [
+        "Pouces : un seul vote par morceau et par auditeur. Un clic sur le pouce actif retire le vote ; un clic sur l'autre pouce remplace le vote. Le bouton de remise à zéro est retiré de la page auditeur.",
+        "Commentaires : le bloc « Ce que disent les auditeurs » (commentaire mis en avant, formulaire nom et message) est de retour dans la page auditeur.",
+        "Suppression des commentaires par le développeur : la fonction existe déjà dans la page de gestion (radio.html, route /api/comments/delete). Je ne l'ai pas essayée.",
+        "Moteur radio : après un long arrêt, il rejouait en accéléré les morceaux manqués. Il repart maintenant à l'heure : un test automatique le couvre et les 41 tests passent. Après le redémarrage du serveur, le morceau en cours avait commencé 21 s plus tôt.",
+        "Contrôle fait : syntaxe de listen.js valide."
+      ],
+      limites: [
+        "La page v2 n'a pas été chargée dans un navigateur : le comportement des pouces et du formulaire n'est pas contrôlé en vrai.",
+        "Un seul vote par auditeur n'est appliqué que par la page : le serveur accepte encore plusieurs votes envoyés directement.",
+        "Lire le son dans cet artefact n'est pas possible : une page d'artefact ne peut ni charger la radio locale ni l'intégrer. Voir ma réponse dans la conversation."
+      ]
+    }
+  ];
+  var cur = VERSIONS[0];
+  var $ = function (id) { return document.getElementById(id); };
+  var db = null, commentsAll = [], questionsAll = [], comments = [], questions = [], answers = {};
+
+  function lastVer() { try { return localStorage.getItem("revue_ui_version"); } catch (e) { return null; } }
+  function saveVer(id) { try { localStorage.setItem("revue_ui_version", id); } catch (e) {} }
+
+  var zsel = $("zone");
+  ZONES.forEach(function (z) { var o = document.createElement("option"); o.value = z; o.textContent = z; zsel.appendChild(o); });
+
+  function buildPicker() {
+    var box = $("picker");
+    VERSIONS.forEach(function (x) {
+      var b = document.createElement("button"); b.type = "button"; b.dataset.id = x.id;
+      b.appendChild(document.createTextNode(x.nom));
+      var s = document.createElement("small"); s.textContent = x.sous; b.appendChild(s);
+      b.addEventListener("click", function () { selectVersion(x.id); });
+      box.appendChild(b);
+    });
+  }
+
+  function selectVersion(id) {
+    cur = VERSIONS.filter(function (x) { return x.id === id; })[0] || VERSIONS[0];
+    saveVer(cur.id);
+    Array.prototype.slice.call($("picker").children).forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.id === cur.id)); });
+    var fig = $("shot").parentNode;
+    fig.hidden = !cur.fichier;
+    if (cur.fichier) $("shot").src = cur.fichier; else $("shot").removeAttribute("src");
+    $("cap").textContent = cur.legende;
+    var f = $("fait"); f.textContent = "";
+    var h = document.createElement("h2"); h.textContent = "Ce qui a été fait dans cette version"; f.appendChild(h);
+    var ul = document.createElement("ul");
+    cur.fait.forEach(function (x) { var li = document.createElement("li"); li.textContent = x; ul.appendChild(li); });
+    f.appendChild(ul);
+    var h2 = document.createElement("h2"); h2.className = "lim"; h2.textContent = "Limites connues"; f.appendChild(h2);
+    var ul2 = document.createElement("ul");
+    cur.limites.forEach(function (x) { var li = document.createElement("li"); li.textContent = x; ul2.appendChild(li); });
+    f.appendChild(ul2);
+    refilter();
+  }
+
+  function showTab(n) {
+    ["c", "q"].forEach(function (k) { $("tab-" + k).setAttribute("aria-selected", String(k === n)); $("p-" + k).hidden = k !== n; });
+  }
+  $("tab-c").addEventListener("click", function () { showTab("c"); });
+  $("tab-q").addEventListener("click", function () { showTab("q"); });
+
+  var txt = $("txt");
+  txt.addEventListener("input", function () { $("add").disabled = !db || !txt.value.trim(); });
+  txt.addEventListener("keydown", function (e) { if ((e.ctrlKey || e.metaKey) && e.key === "Enter") { e.preventDefault(); $("form").requestSubmit(); } });
+  var posting = false;
+  $("form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var texte = txt.value.trim();
+    if (!db || !texte || posting) return;
+    posting = true; $("add").disabled = true;
+    db.collection("commentaires").add({ version: cur.id, zone: zsel.value, texte: texte, creeLe: Date.now(), resolu: false })
+      .then(function () { txt.value = ""; $("hint").textContent = "Commentaire enregistré."; })
+      .catch(function (err) { $("hint").textContent = "Échec de l'enregistrement (" + (err && err.code || "erreur") + "). Réessayez."; })
+      .then(function () { posting = false; $("add").disabled = !txt.value.trim(); });
+  });
+
+  function renderComments() {
+    $("n-c").textContent = String(comments.length);
+    var box = $("clist"); box.textContent = "";
+    if (!comments.length) { box.innerHTML = '<div class="empty">Aucun commentaire sur cette version. Choisissez une zone et écrivez ce que vous voulez changer.</div>'; return; }
+    comments.forEach(function (c) {
+      var el = document.createElement("article");
+      el.className = "card comment" + (c.resolu ? " done" : "");
+      var head = document.createElement("div"); head.className = "row";
+      var zb = document.createElement("span"); zb.className = "zone"; zb.textContent = c.zone || "Général";
+      head.appendChild(zb);
+      if (c.valide) { var bd = document.createElement("span"); bd.className = "okmark"; bd.textContent = "Validé"; head.appendChild(bd); }
+      var body = document.createElement("div"); body.className = "txt"; body.textContent = c.texte;
+      el.appendChild(head); el.appendChild(body);
+      if (c.reponse) {
+        var r = document.createElement("div"); r.className = "reply";
+        var s = document.createElement("small"); s.textContent = "Claude";
+        r.appendChild(s); r.appendChild(document.createElement("br")); r.appendChild(document.createTextNode(c.reponse));
+        el.appendChild(r);
+      }
+      var act = document.createElement("div"); act.className = "row";
+      var ok = document.createElement("button"); ok.type = "button";
+      ok.className = c.valide ? "link" : "btn sm";
+      ok.textContent = c.valide ? "Annuler la validation" : "Valider : c'est ok";
+      ok.addEventListener("click", function () { if (db) db.doc("commentaires/" + c.id).update(c.valide ? { valide: false } : { valide: true, resolu: true }); });
+      var done = document.createElement("button"); done.type = "button"; done.className = "link";
+      done.textContent = (c.resolu || c.valide) ? "Pas ok, rouvrir" : "Marquer traité";
+      done.addEventListener("click", function () { if (db) db.doc("commentaires/" + c.id).update((c.resolu || c.valide) ? { resolu: false, valide: false } : { resolu: true }); });
+      var del = document.createElement("button"); del.type = "button"; del.className = "link danger"; del.textContent = "Supprimer";
+      var armed = false, timer;
+      del.addEventListener("click", function () {
+        if (!armed) { armed = true; del.textContent = "Confirmer la suppression"; timer = setTimeout(function () { armed = false; del.textContent = "Supprimer"; }, 3000); return; }
+        clearTimeout(timer); if (db) db.doc("commentaires/" + c.id).delete();
+      });
+      act.appendChild(ok); act.appendChild(done); act.appendChild(del); el.appendChild(act);
+      box.appendChild(el);
+    });
+  }
+
+  var draft = {}, dirty = {}, reopened = {}, sending = false;
+  function eff(q) { return dirty[q.id] ? draft[q.id] : answers[q.id]; }
+  function valeurDe(q) { var a = eff(q); return a ? a.valeur : (q.type === "multi" ? [] : ""); }
+  function isAnswered(q) { var a = eff(q); if (!a) return false; var v2 = a.valeur; return (Array.isArray(v2) ? v2.length > 0 : !!v2) || !!(a.note && a.note.trim()); }
+
+  function saveAnswer(q, patch) {
+    var c = eff(q) || { valeur: q.type === "multi" ? [] : "", note: "" };
+    var next = { valeur: c.valeur, note: c.note || "", maj: Date.now() };
+    for (var k in patch) next[k] = patch[k];
+    draft[q.id] = next; dirty[q.id] = true;
+    applyAnswers(); updateSend();
+  }
+  function updateSend() {
+    var n = Object.keys(dirty).length;
+    $("send").disabled = !db || n === 0 || sending;
+    if (n && !sending) $("sendmsg").textContent = n + " réponse" + (n > 1 ? "s" : "") + " à envoyer.";
+  }
+  function sendAnswers() {
+    var ids = Object.keys(dirty);
+    if (!db || !ids.length || sending) return Promise.resolve();
+    sending = true; updateSend(); $("sendmsg").textContent = "Envoi en cours…";
+    var ok = 0, fail = 0;
+    return ids.reduce(function (p, id) {
+      return p.then(function () {
+        var d = draft[id];
+        return db.doc("reponses/" + id).set(d).then(function () { if (draft[id] === d) { delete dirty[id]; delete reopened[id]; } answers[id] = d; ok++; }).catch(function () { fail++; });
+      });
+    }, Promise.resolve()).then(function () {
+      sending = false;
+      var h = new Date(), hm = h.getHours() + ":" + String(h.getMinutes()).padStart(2, "0");
+      $("sendmsg").textContent = fail ? ok + " envoyée(s), " + fail + " en échec : réessayez." : "Envoyé à Claude à " + hm + " (" + ok + " réponse" + (ok > 1 ? "s" : "") + ").";
+      applyAnswers(); updateSend();
+    });
+  }
+  $("send").addEventListener("click", sendAnswers);
+
+  var handing = false;
+  $("done").addEventListener("click", function () {
+    if (handing) return;
+    handing = true; $("done").disabled = true; $("donemsg").textContent = "Envoi des réponses…";
+    sendAnswers().then(function () {
+      var rest = commentsAll.filter(function (c) { return !c.valide; }).length;
+      var nrep = Object.keys(answers).length;
+      var text = "J'ai terminé la revue de l'UI auditeur : " + nrep + " réponse(s) enregistrée(s), " + rest + " commentaire(s) non validé(s). Tu peux traiter directement.";
+      if (db) db.doc("signaux/pret").set({ t: Date.now(), reponses: nrep, commentaires: rest }).catch(function () {});
+      return window.claude.use("comments").then(function (cm) {
+        if (!cm) throw { code: "not_granted" };
+        return cm.canSendToClaude().then(function (st) {
+          if (st !== "available") throw { code: "claude_unavailable" };
+          return cm.anchorFor($("done"));
+        }).then(function (anchor) { return cm.sendToClaude({ anchor: anchor, text: text }); });
+      });
+    }).then(function () {
+      var h = new Date();
+      $("donemsg").textContent = "Claude est prévenu à " + h.getHours() + ":" + String(h.getMinutes()).padStart(2, "0") + ". Il traite et répond ici.";
+    }).catch(function (e) {
+      var c = e && e.code;
+      $("donemsg").textContent = c === "consent_required"
+        ? "Envoi refusé : autorisez les commentaires de la page, ou dites-le-moi dans la conversation."
+        : "Retours enregistrés, mais Claude n'a pas pu être prévenu depuis la page : dites-le-moi dans la conversation.";
+    }).then(function () { handing = false; $("done").disabled = false; });
+  });
+
+  function buildQuestions() {
+    $("n-q").textContent = String(questions.length);
+    var box = $("qlist"); box.textContent = "";
+    if (!questions.length) { box.innerHTML = '<div class="empty">Les questions de Claude s\'afficheront ici.</div>'; refreshProgress(); return; }
+    questions.forEach(function (q, i) {
+      var el = document.createElement("article"); el.className = "card q"; el.dataset.q = q.id;
+      var h = document.createElement("h3"); h.textContent = (i + 1) + ". " + q.texte; el.appendChild(h);
+      var sum = document.createElement("div"); sum.className = "sum";
+      var sv = document.createElement("span"); sv.dataset.sum = q.id;
+      var sb = document.createElement("button"); sb.type = "button"; sb.className = "link"; sb.textContent = "Modifier";
+      sb.addEventListener("click", function () { reopened[q.id] = true; applyAnswers(); });
+      sum.appendChild(sv); sum.appendChild(sb); el.appendChild(sum);
+      var rp = document.createElement("div"); rp.className = "reply"; rp.hidden = !q.reponse;
+      var rs = document.createElement("small"); rs.textContent = "Claude"; rp.appendChild(rs); rp.appendChild(document.createElement("br")); rp.appendChild(document.createTextNode(q.reponse || ""));
+      el.appendChild(rp);
+      if (q.contexte) { var p = document.createElement("p"); p.className = "ctx"; p.textContent = q.contexte; el.appendChild(p); }
+      (q.options || []).forEach(function (o, k) {
+        var l = document.createElement("label"); l.className = "opt";
+        var inp = document.createElement("input");
+        inp.type = q.type === "multi" ? "checkbox" : "radio"; inp.name = "q_" + q.id; inp.value = o; inp.id = "q_" + q.id + "_" + k;
+        inp.addEventListener("change", function () {
+          if (q.type === "multi") {
+            var sel = Array.prototype.slice.call(el.querySelectorAll("input:checked")).map(function (x) { return x.value; });
+            saveAnswer(q, { valeur: sel });
+          } else saveAnswer(q, { valeur: o });
+        });
+        var s = document.createElement("span"); s.textContent = o;
+        l.appendChild(inp); l.appendChild(s); el.appendChild(l);
+      });
+      var ta = document.createElement("textarea"); ta.id = "note_" + q.id;
+      ta.setAttribute("aria-label", "Précisions pour la question " + (i + 1));
+      ta.placeholder = q.type === "libre" ? "Votre réponse…" : "Précisions (facultatif)";
+      ta.addEventListener("input", function () { saveAnswer(q, { note: ta.value }); });
+      el.appendChild(ta);
+      var st = document.createElement("div"); st.className = "state todo"; st.dataset.state = q.id; st.textContent = "À répondre"; el.appendChild(st);
+      box.appendChild(el);
+    });
+    applyAnswers();
+  }
+
+  function applyAnswers() {
+    questions.forEach(function (q) {
+      var el = document.querySelector('[data-q="' + q.id + '"]'); if (!el) return;
+      var val = valeurDe(q);
+      Array.prototype.slice.call(el.querySelectorAll("input")).forEach(function (inp) {
+        inp.checked = Array.isArray(val) ? val.indexOf(inp.value) >= 0 : val === inp.value;
+      });
+      var ta = el.querySelector("textarea"), a = eff(q);
+      if (ta && document.activeElement !== ta) ta.value = a && a.note ? a.note : "";
+      var st = el.querySelector("[data-state]"), ok = isAnswered(q), d = !!dirty[q.id];
+      st.textContent = d ? "Modifiée, pas encore envoyée" : (ok ? "Envoyée" : "À répondre");
+      st.className = "state" + (ok || d ? "" : " todo");
+      el.classList.toggle("done", ok && !d && !reopened[q.id]);
+      var vv = valeurDe(q), parts = [Array.isArray(vv) ? vv.join(" ; ") : vv];
+      if (a && a.note && a.note.trim()) parts.push(a.note.trim());
+      el.querySelector("[data-sum]").textContent = parts.filter(Boolean).join(" : ");
+    });
+    refreshProgress();
+  }
+  function refreshProgress() {
+    var n = questions.filter(isAnswered).length;
+    $("qprog").textContent = n + " / " + questions.length + " répondues";
+    $("qbar").style.width = (questions.length ? n / questions.length * 100 : 0) + "%";
+  }
+
+  function toList(snap) {
+    return snap.docs.map(function (d) { var o = Object.assign({}, d.data() || {}); o.id = d.id; return o; });
+  }
+  function refilter() {
+    comments = commentsAll.filter(function (c) { return c.version === cur.id; });
+    questions = questionsAll.filter(function (q) { return q.version === cur.id || q.version === "general"; });
+    renderComments(); buildQuestions();
+  }
+
+  buildPicker();
+  var start = lastVer();
+  selectVersion(VERSIONS.some(function (x) { return x.id === start; }) ? start : VERSIONS[0].id);
+
+  if (window.claude && window.claude.use) {
+    window.claude.use("db").then(function (d) {
+      if (!d) { $("notice").hidden = false; return; }
+      db = d; updateSend();
+      $("add").disabled = !txt.value.trim();
+      db.collection("commentaires").orderBy("creeLe").onSnapshot(function (s) { commentsAll = toList(s); refilter(); }, function () { $("notice").hidden = false; });
+      db.collection("questions").orderBy("ordre").onSnapshot(function (s) { questionsAll = toList(s); refilter(); }, function () {});
+      db.collection("reponses").onSnapshot(function (s) { var m = {}; s.docs.forEach(function (d) { m[d.id] = d.data(); }); answers = m; applyAnswers(); }, function () {});
+    }).catch(function () { $("notice").hidden = false; });
+  } else { $("notice").hidden = false; }
+})();
+</script>

@@ -1564,7 +1564,7 @@ favorites_only: false, no_repeat: 3, no_repeat_songs: 15, excluded: [], loop_pla
         function renderLists() {
             const jbs = playlists.filter(b => b.role === 'jingle' && (results[b.id] || []).length);
             const jTotal = jbs.reduce((n, b) => n + results[b.id].length, 0);
-            const JCATS = [['webradio', 'WebRadio'], ['traveling-sound', 'Traveling Sound'], ['serenia-tech', 'SérénIA Tech']];
+            const JCATS = [['webradio', 'WebRadio'], ['serenia-tech', 'SérénIA Tech']];
             const known = new Set(JCATS.map(c => c[0]));
             const groups = JCATS.concat(jbs.some(b => !known.has(b.category)) ? [['', 'Autres']] : [])
                 .map(([id, label]) => ({id: id || 'autres', label, lists: jbs.filter(b => id ? b.category === id : !known.has(b.category))}))

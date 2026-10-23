@@ -38,8 +38,8 @@ ADMIN_POST_TARGETS = {
     "/api/content": (HERE / "radio_content.json", "dict"),
 }
 
-STATIC_FILES = {"/listen.html", "/silence.wav", "/listen.css", "/listen.js", "/mascot.js", "/visuals.js", "/cover-placeholder.png",
-                "/traveling-sound.png", "/scenes.js", "/transitions.js", "/motion.js", "/scenes_spec.json", "/radio_content.json",
+STATIC_FILES = {"/listen.html", "/user.html", "/silence.wav", "/listen.css", "/listen.js", "/mascot.js", "/visuals.js", "/cover-placeholder.png",
+                "/scenes.js", "/transitions.js", "/motion.js", "/scenes_spec.json", "/radio_content.json",
                 "/playlists.json", "/favorites.json", "/radio_settings.json", "/fonts/Sora-latin.woff2"}
 STATIC_PATTERNS = [
     re.compile(r"^/(?:playlists|jingles)/[\w\-]+/outputs/playlist_results\.json$"),
@@ -151,8 +151,10 @@ COMMENTS_LOCK = threading.Lock()
 
 VOTES_FILE = HERE / "votes.json"
 VOTES_LOCK = threading.Lock()
+USER_VOTES_FILE = HERE / "user_votes.json"
 VOTE_KEY_RE = re.compile(r"^[\w\-]+:\d{1,4}$")
 VOTER_COOKIE = "creazik_voter"
+VOTER_COOKIE_USER = "creazik_voter_u"
 VOTE_WINDOW_S = 60
 VOTE_MAX_PER_WINDOW = 600
 VOTE_MAX_BATCH = 200
@@ -167,6 +169,33 @@ def read_votes():
     data.setdefault("tracks", {})
     data.setdefault("voters", {})
     return data
+
+
+def read_user_votes():
+    try:
+        data = json.loads(USER_VOTES_FILE.read_text(encoding="utf-8"))
+    except Exception:
+        data = {}
+    data.setdefault("voters", {})
+    return data
+
+
+def set_user_vote(voter, key, vote):
+    with VOTES_LOCK:
+        data = read_user_votes()
+        mine = data["voters"].setdefault(voter, {})
+        if vote is None:
+            mine.pop(key, None)
+        else:
+            mine[key] = {"vote": vote, "t": datetime.now().astimezone().isoformat(timespec="seconds")}
+        write_json_atomic(USER_VOTES_FILE, data)
+    cur = mine.get(key, {}).get("vote")
+    return {"up": 1 if cur == "up" else 0, "down": 1 if cur == "down" else 0}
+
+
+def user_votes_mine(voter):
+    mine = read_user_votes()["voters"].get(voter, {})
+    return {k: {"up": 1 if v.get("vote") == "up" else 0, "down": 1 if v.get("vote") == "down" else 0} for k, v in mine.items()}
 
 
 def vote_allowed(ip, cost=1):
@@ -456,14 +485,23 @@ class Handler(SimpleHTTPRequestHandler):
         if self.command != "HEAD":
             self.wfile.write(data)
 
+    def _is_user_ui_request(self):
+        return self.headers.get("X-Creazik-Ui") == "user"
+
+    def _vote_view(self, entry, mine):
+        if self._is_user_ui_request():
+            return {"up": mine["up"], "down": mine["down"], "score": mine["up"] - mine["down"]}
+        return {"up": entry["up"], "down": entry["down"], "score": entry["score"]}
+
     def _voter_id(self):
+        cname = VOTER_COOKIE_USER if self._is_user_ui_request() else VOTER_COOKIE
         for part in self.headers.get("Cookie", "").split(";"):
             k, _, v = part.strip().partition("=")
-            if k == VOTER_COOKIE and re.fullmatch(r"[0-9a-f]{32}", v):
+            if k == cname and re.fullmatch(r"[0-9a-f]{32}", v):
                 return v, None
         vid = secrets.token_hex(16)
         secure = "; Secure" if self._is_https() else ""
-        return vid, f"{VOTER_COOKIE}={vid}; Path=/; Max-Age={365 * 86400}; HttpOnly; SameSite=Lax{secure}"
+        return vid, f"{cname}={vid}; Path=/; Max-Age={365 * 86400}; HttpOnly; SameSite=Lax{secure}"
 
     def _send_json(self, code, obj, cookie=None):
         data = json.dumps(obj, ensure_ascii=False).encode("utf-8")
@@ -560,10 +598,18 @@ class Handler(SimpleHTTPRequestHandler):
             voter = self._voter_id()
             with VOTES_LOCK:
                 data = read_votes()
-            mine = {k: _mine_counts(v) for k, v in data["voters"].get(voter[0], {}).items()}
+            if self._is_user_ui_request():
+                mine = user_votes_mine(voter[0])
+            else:
+                mine = {k: _mine_counts(v) for k, v in data["voters"].get(voter[0], {}).items()}
             neutral = ENGINE.db.neutral_of(voter[0]) if ENGINE.db is not None else []
             dyn = ENGINE.db.dynamics_of(voter[0]) if ENGINE.db is not None else {}
-            self._send_json(200, {"tracks": data["tracks"], "mine": mine, "neutral": neutral, "dynamics": dyn}, cookie=voter[1])
+            if self._is_user_ui_request():
+                tracks = {k: {"up": m["up"], "down": m["down"], "score": m["up"] - m["down"]} for k, m in mine.items()}
+                neutral, dyn = [], {}
+            else:
+                tracks = data["tracks"]
+            self._send_json(200, {"tracks": tracks, "mine": mine, "neutral": neutral, "dynamics": dyn}, cookie=voter[1])
             return
         if path == "/api/tests":
             if not self._is_admin() or self._is_user_interface():
@@ -600,8 +646,8 @@ class Handler(SimpleHTTPRequestHandler):
             self._serve(head)
             return
         if path in ("/", "/index.html"):
-            if self._is_user_interface():
-                path = "/listen.html"
+            if getattr(self.server, "interface", "user") == "user":
+                path = "/user.html"
             else:
                 self._redirect("/radio.html")
                 return
@@ -752,9 +798,12 @@ class Handler(SimpleHTTPRequestHandler):
             self._send_json(400, {"error": "morceau inconnu"})
             return
         voter, cookie = self._voter_id()
+        if self._is_user_ui_request():
+            mine = set_user_vote(voter, key, vote)
+            self._send_json(200, dict({"key": key, "mine": mine}, **self._vote_view(None, mine)), cookie=cookie)
+            return
         entry, mine = apply_vote(voter, key, vote, count)
-        self._send_json(200, {"key": key, "up": entry["up"], "down": entry["down"], "score": entry["score"],
-                              "mine": mine}, cookie=cookie)
+        self._send_json(200, dict({"key": key, "mine": mine}, **self._vote_view(entry, mine)), cookie=cookie)
 
     def _post_vote_reset(self):
         try:
@@ -769,14 +818,18 @@ class Handler(SimpleHTTPRequestHandler):
             self._send_json(429, {"error": "trop d'actions, réessaie dans une minute"})
             return
         voter, cookie = self._voter_id()
+        if self._is_user_ui_request():
+            mine = set_user_vote(voter, key, None)
+            self._send_json(200, dict({"key": key, "mine": mine}, **self._vote_view(None, mine)), cookie=cookie)
+            return
         entry = reset_mine(voter, key)
         if ENGINE.db is not None:
             try:
                 ENGINE.db.clear_neutral(voter, key)
             except Exception:
                 pass
-        self._send_json(200, {"key": key, "up": entry["up"], "down": entry["down"], "score": entry["score"],
-                              "mine": {"up": 0, "down": 0}}, cookie=cookie)
+        zero = {"up": 0, "down": 0}
+        self._send_json(200, dict({"key": key, "mine": zero}, **self._vote_view(entry, zero)), cookie=cookie)
 
     def _post_neutral(self):
         try:

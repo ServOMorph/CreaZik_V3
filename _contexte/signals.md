@@ -1,7 +1,13 @@
-# Signals — CreaZik_V3   (MAJ 2026-10-15, fin de session)
+# Signals — CreaZik_V3   (MAJ 2026-10-23, fin de session)
 
 ## Actions ouvertes
-- [P1|ouvert] Arrêter le mode Test (bouton « Arrêter le test », admin) : `test_loop` était actif à la fin de la session et la radio ne joue alors que la playlist blues-rock ; puis contrôler que cette playlist (6 morceaux, poids par défaut 5) passe avec les autres
+- [P1|ouvert] Contrôler la page auditeur v2 dans un navigateur et sur iPhone via `https://vertia-test.serenia-tech.fr/` : pouces à vote unique exclusif (le second pouce remplace le premier), absence de totaux et de pubs Traveling Sound, formulaire de commentaires, titre et pochette en lecture ; publier une capture dans l'onglet v2 de l'artefact (le navigateur de test s'est bloqué deux fois, aucune capture de la v2)
+  - fait quand: la v2 est vue en vrai (navigateur et iPhone), une capture est publiée dans l'artefact et les défauts sont corrigés ou consignés
+  - réf: https://claude.ai/artifact/SCjtgCNBYAQhEMr56zaFuU, `revue_ui_user/revue_ui_user.html`, `webradio/user.html`, `webradio/listen.js` (`USER_UI`, `sendVoteSingle`)
+- [P1|ouvert] Trancher comment relire l'UI auditeur avec le son : une page d'artefact ne peut ni appeler la radio locale ni l'intégrer (option 1 : revue dans l'artefact et écoute sur `localhost:5000/user.html` ; option 2 : maquette jouant quelques morceaux téléversés, hors direct)
+  - fait quand: l'utilisateur choisit une option et elle est appliquée ou écartée
+  - réf: fil de commentaires de l'artefact, `revue_ui_user/revue_ui_user.html`
+- [P1|ouvert] Arrêter le mode Test (bouton « Arrêter le test », admin) : `test_loop` était encore à `true` au dernier contrôle (2026-10-18) et la radio ne joue alors que la playlist blues-rock ; puis contrôler que cette playlist (6 morceaux, poids par défaut 5) passe avec les autres
   - fait quand: `/api/radio/state` indique `test_loop` à `false` et la playlist `blues-rock-guitare` passe à l'antenne dans la programmation normale
   - réf: `tests_manuels.md` n°17, `webradio/radio_engine.py` (`test_loop`)
 - [P1|ouvert] Juger les pochettes dans la section « Pochettes » (admin) et relancer le script de suivi : `webradio/tools/cover_review_watch.py` avait été lancé en arrière-plan pendant la nuit, la session a été interrompue depuis (ComfyUI aussi peut être resté démarré, il occupe de la VRAM)
@@ -10,6 +16,12 @@
 - [P1|ouvert] Valider ou refuser les règles tirées des morceaux négatifs (voix anglaise 9 % de négatifs contre 62 % en français, captions à éviter, styles) et relire le diff de préférences recalculé (867 votes pris en compte avec l'archive, 395 différences) : `diff_preferences.py --appliquer` seulement après accord
   - fait quand: règles acceptées (reportées dans le skill `generation-morceaux` ou `regles_modeles.json`), refusées ou corrigées, et `preferences.json` existe ou la proposition est écartée
   - réf: `DOCUMENTATION/apprentissage/propositions/regles_negatifs_2026-10-15.md`, `DOCUMENTATION/apprentissage/propositions/diff_2026-10-15.txt`, `DOCUMENTATION/APPRENTISSAGE.md`
+- [P2|ouvert] Analyser les votes des auditeurs quand il y en aura (`python webradio/tools/user_votes_report.py --min-votes N`) : écarter les votes de l'appareil du développeur, comparer au score de gestion (colonne « désaccord »), décider suppression ou pondération ; ces votes n'agissent pas sur la rotation
+  - fait quand: un rapport est produit sur de vrais votes et les décisions (suppression, poids) sont prises ou écartées
+  - réf: `webradio/user_votes.json` (non versionné), `webradio/tools/user_votes_report.py`, `webradio/server.py` (`set_user_vote`)
+- [P3|ouvert] Décider si le vote unique par cookie suffit (un auditeur qui efface ses cookies ou change d'appareil revote) et si les votes auditeurs doivent un jour influer sur la rotation
+  - fait quand: décision prise et appliquée
+  - réf: `webradio/server.py` (`_voter_id`, `VOTER_COOKIE_USER`)
 - [P2|ouvert] Tester la régénération réelle d'une pochette par `cover_review_watch.py` (verdict « À refaire », graine différente, retour en fin de file) : jamais exécutée avec ComfyUI, seulement avec un générateur simulé
   - fait quand: une pochette marquée « À refaire » est régénérée, revient en attente de validation avec la mention « refaite 1/3 fois »
   - réf: `webradio/tools/cover_review_watch.py`, `webradio/tests/test_covers_review.py`
@@ -70,24 +82,18 @@
 - [P2|ouvert] Changer le mot de passe admin par défaut
   - fait quand: mot de passe admin changé et accès confirmé
   - réf: `webradio/REGLES_GENERATION_DEV.md` section 6, `tests_manuels.md`
-- [P2|ouvert] Avant le déploiement : retirer le bouton « Suivant » public (`PUBLIC_SKIP`), la section « Tests » (ou la verrouiller), remplacer `DEV_UNIFIED = True` en dur par un réglage explicite, remplacer les noms d'artistes des titres de playlists par des genres, trancher l'exposition des boutons Renommer/Supprimer, refermer `/api/dynamics` avec une UI auditeur séparée, retirer ou verrouiller le bouton « Test » et la section « Pochettes »
+- [P2|ouvert] Avant le déploiement : retirer le bouton « Suivant » public (`PUBLIC_SKIP`), la section « Tests » (ou la verrouiller), remplacer `DEV_UNIFIED = True` en dur par un réglage explicite, remplacer les noms d'artistes des titres de playlists par des genres, trancher l'exposition des boutons Renommer/Supprimer, refermer `/api/dynamics` avec une UI auditeur séparée, retirer ou verrouiller le bouton « Test » et la section « Pochettes », fermer `/listen.html` et `/radio.html` sur le port 5000 exposé par le tunnel (servis tant que `DEV_UNIFIED` est actif ; redirection de `/listen.html` vers `/user.html` pour les visiteurs sans cookie admin proposée, non faite)
   - fait quand: aucun saut public possible, `DEV_UNIFIED` piloté, aucun nom d'artiste public, dynamique et Tests refermés dans l'UI auditeur
   - réf: `AMELIORATIONS.md`, `webradio/REGLES_GENERATION_DEV.md` sections 3.4, 3.6, 3.7 et 5.5, `webradio/server.py`
-- [P2|ouvert] Confirmer deux changements du répertoire de travail non faits pendant ces sessions : seuil `0.688` dans `jlayout` (`webradio/motion.js`) et suppression du formulaire de commentaires, du bloc « musique humaine » et du contact dans `webradio/listen.html`
+- [P2|ouvert] Confirmer deux changements du répertoire de travail non faits pendant ces sessions : seuil `0.688` dans `jlayout` (`webradio/motion.js`) et suppression du formulaire de commentaires et du contact dans `webradio/listen.html` (formulaire remis dans `user.html` et bloc « musique humaine » retiré des deux pages à la demande du 2026-10-18)
   - fait quand: l'utilisateur confirme ou demande la correction
   - réf: `git diff webradio/motion.js webradio/listen.html`, `AMELIORATIONS.md`
 - [P2|ouvert] Choisir parmi les propositions de réaménagement de l'UI admin et décider du sort de `ui.html`
   - fait quand: l'utilisateur a tranché et les choix retenus sont appliqués
   - réf: `webradio/radio.html`, `webradio/ui.html`
-- [P3|ouvert] Faire sauter le moteur radio à l'heure réelle au démarrage : après un arrêt prolongé il rejoue en accéléré les morceaux manqués (environ 20 min pour 23 h) et la lecture ne démarre pas sur téléphone pendant ce temps
-  - fait quand: une relance après plusieurs heures d'arrêt donne un morceau en cours synchronisé en moins d'une minute
-  - réf: `webradio/radio_engine.py`, `webradio/radio_state.json`
 - [P3|ouvert] Décider du versionnage des MP3 conservés dans `TEXTES/artistes/Marie/` (2 instrus et `tops_instrus/`, environ 3 à 3,6 Mo chacun) : non commités à cette clôture car la règle est de ne pas versionner l'audio
   - fait quand: l'utilisateur tranche entre versionner, ajouter au `.gitignore` ou stocker ailleurs
   - réf: `TEXTES/artistes/Marie/INDEX.md`, `.gitignore`
-- [P3|ouvert] Jingles de pub Traveling Sound : les 5 textes sont générés et mélangés aux autres ; à ajuster si besoin
-  - fait quand: l'utilisateur confirme les 5 textes ou demande des changements
-  - réf: `webradio/jingles/traveling-sound/outputs/playlist_results.json`
 - [P3|ouvert] Poursuivre la génération musicale en rotation (`/start_generation`, service `generation` arrêté ; `series.txt` nettoyé le 2026-10-15 des playlists supprimées ; contrôle automatique à la suppression d'une playlist encore à faire) et retirer de « idée de playlist.md » chaque entrée terminée
   - fait quand: toutes les pistes prévues sont générées et les entrées terminées sont retirées de la liste d'idées
   - réf: `webradio/run_rotation.py`, `webradio/series.txt`, `idée de playlist.md`
@@ -99,31 +105,36 @@
   - réf: `PLAN_WEBRADIO.md` section 4.5
 
 ## Contexte chaud
-- Roadmap écriture humaine : phase 6 en cours (attente des écoutes des 19 versions Funky Yogi) ; `paroles.md` pas encore dans le run. Roadmap `roadmap_nuit_autonome.md` : phases 1 à 8 exécutées de nuit le 2026-10-15 (journal et bilan en fin de fichier) ; à archiver sur accord.
-- Nettoyage du 2026-10-15 : 296 morceaux à score négatif supprimés (0 sauté) puis 4 de la playlist blues-rock après test ; 5 playlists vides supprimées ; `series.txt` nettoyé (14 lignes). Suppression faite par `RadioEngine.edit_catalog` dans un processus séparé (`persist=False`), car l'API exige le cookie admin. Scores remis à zéro : archive dans `DOCUMENTATION/apprentissage/votes_archive/`, sommée par `calculer_preferences.py` (option `--sans-archive`).
-- Playlist `blues-rock-guitare` (« Blues-rock guitare claire », 6 morceaux vocaux anglais gardés) en rotation au poids par défaut ; bouton « Test » (admin) = boucle de cette playlist (`test_loop`, état persisté) ; section « Pochettes » (admin) et script de suivi des verdicts « À refaire » (plafond de 3 régénérations).
-- Serveur du port 5000 relancé le 2026-10-15 à 05 h 29 et sain (`/api/radio/state`). `ace_worker.py` accepte `reference_audio`, `src_audio`, `task_type` (cover) ; seuls une référence audio et un cover ont été essayés.
+- Roadmap écriture humaine : phase 6 en cours (attente des écoutes des 19 versions Funky Yogi) ; `paroles.md` pas encore dans le run. Roadmap `roadmap_nuit_autonome.md` : phases 1 à 8 exécutées le 2026-10-15 ; à archiver sur accord.
+- UI auditeur : `webradio/user.html` (même `listen.js`, drapeau `CREAZIK_USER_UI`) est la page d'accueil du port 5000 ; le tunnel `vertia-test.serenia-tech.fr` pointe sur `localhost:5000` (contrôlé en HTTP : `/` et `/user.html` servent l'UI auditeur, `/listen.html` l'UI dev). Artefact de revue : onglet v1 avec capture, onglet v2 sans capture ; 5 questions répondues le 2026-10-17.
+- Votes auditeurs à part : `webradio/user_votes.json`, cookie `creazik_voter_u`, en-tête `X-Creazik-Ui: user` ; sans effet sur `votes.json`, `radio.db` ni la rotation ; l'UI auditeur ne reçoit que ses propres votes.
+- Pubs et jingles Traveling Sound supprimés (contenu, catégorie, bloc « musique humaine », image) ; fichiers récupérables dans git.
+- Moteur : un morceau courant périmé est abandonné au chargement de l'état (test ajouté, 41 tests passent en 3 min 40) ; serveur relancé plusieurs fois les 17 et 18 octobre.
+- Le navigateur de test (Playwright) ne répondait plus aux deux dernières tentatives ; ne pas en dépendre sans le relancer.
 - Avant une génération GPU, vérifier la VRAM libre (environ 1 Go pris par Windows) et que ComfyUI est arrêté.
 
-# Session du 2026-10-15
+# Session du 2026-10-23
 
 ## Décisions prises
-- Morceaux à score négatif du catalogue diffusé supprimés (8 versions françaises incluses), playlists vides supprimées, scores remis à zéro avec archive des votes lue par le calcul de préférences.
-- Validation de la playlist « Blues-rock guitare claire » après test : 4 morceaux négatifs supprimés, 6 intégrés à la rotation.
-- Revue des pochettes par page locale (et non artefact claude.ai) avec script de régénération, plafond de 3 refus par pochette ; pas de push pendant l'exécution autonome.
+- UI auditeur séparée (`webradio/user.html`) servie à la racine du port 5000 ; sans Suivant, Slow/Medium/High, remise à zéro ni administration ; pouces à vote unique exclusif ; commentaires restaurés ; dev (`/listen.html`, `/radio.html`) inchangé.
+- Votes auditeurs collectés à part, sans effet sur la rotation, pour analyse manuelle avant toute suppression ou pondération.
+- Pubs et jingles Traveling Sound supprimés (demande de l'utilisateur : toutes les pubs).
+- Revue de l'UI auditeur dans un artefact claude.ai (modèle SHORTS) ; lecture du son dans l'artefact impossible.
 
 ## Livrables produits ou modifiés
-- `DOCUMENTATION/apprentissage/` : liste figée des négatifs, diff, règles proposées, archive de votes, journal de suppression ; `OUTILS/apprentissage/calculer_preferences.py` : archives sommées (tests : 8 passent).
-- `webradio/` : `covers_review.py`, `tools/cover_review_watch.py`, routes et section « Pochettes », bouton « Test » (`radio_engine.py`), boutons plier/déplier (`listen.*`, `radio.html`), playlist `blues-rock-guitare` (config, 6 morceaux) : commités, tests `webradio/tests` : 40 passent.
-- `roadmap_nuit_autonome.md` : exécutée, journal et bilan.
+- `webradio/user.html`, `webradio/listen.js` (`USER_UI`), `webradio/server.py` (racine, `/user.html`, votes auditeurs séparés) : fonctionnels, vérifiés en HTTP, page v2 jamais chargée dans un navigateur.
+- `webradio/radio_engine.py` + test : rattrapage en accéléré après arrêt corrigé.
+- `webradio/tools/user_votes_report.py` + 3 tests : rapport des votes auditeurs (lecture seule), jamais lancé sur de vrais votes.
+- `revue_ui_user/` : artefact de revue (https://claude.ai/artifact/SCjtgCNBYAQhEMr56zaFuU).
+- `radio_content.json`, `playlists.json`, `jingles/traveling-sound/` : pubs Traveling Sound retirées.
 
 ## Hypothèses validées / invalidées
-- VALIDE : suppression en masse et remise à zéro des scores ; archive retrouvant 857 votes ; 10 morceaux de la nouvelle playlist générés du premier coup ; playlist testée à l'écoute par l'utilisateur (6 positifs, 4 négatifs).
-- EN ATTENTE : section « Pochettes », bouton « Test » et boutons plier/déplier vérifiés seulement au navigateur avec des réponses simulées ; régénération réelle d'une pochette ; règles tirées des négatifs ; préférences.
-- INVALIDE : aucune.
+- VALIDE : `/` du port 5000 et du tunnel servent l'UI auditeur (HTTP) ; vote, remplacement et remise à zéro côté serveur sur un morceau réel ; `votes.json` inchangé ; 41 tests passent.
+- INVALIDE : afficher le son de la radio dans l'artefact -> pivot vers écoute sur localhost ou maquette (choix en attente).
+- EN ATTENTE : v2 jamais chargée dans un navigateur ni sur iPhone ; rapport de votes sur de vrais votes ; cause du téléphone qui affichait l'UI dev (URL `/listen.html` supposée, non confirmée).
 
 ## Prochaine étape exacte
-Arrêter le mode Test, juger les pochettes dans la section « Pochettes », puis écouter et voter les 19 versions Funky Yogi et valider les préférences et règles (phase 6).
+Charger `user.html` dans un navigateur et sur iPhone via la racine du tunnel, contrôler pouces, commentaires et absence de pubs Traveling Sound, puis publier la capture v2 dans l'artefact.
 
 ## Question bloquante pour la session suivante
-Quel morceau du clip L'Invariable est retenu, et les droits du cover de Helmut Fritz sont-ils réglés ?
+Écoute du son pour la revue : option 1 (localhost) ou option 2 (maquette dans l'artefact avec quelques morceaux téléversés) ?

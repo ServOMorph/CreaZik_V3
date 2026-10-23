@@ -61,12 +61,12 @@ Document établi à partir des décisions prises au fil des conversations. Chaqu
 
 ### 3.1 Direct
 - La radio est un direct partagé : cliquer sur play rejoint le morceau en cours, sans nouveau départ.
-- Le moteur reprend le morceau en cours après un redémarrage du serveur.
+- Le moteur reprend le morceau en cours après un redémarrage du serveur ; si sa fin est dépassée (arrêt prolongé), il est ajouté à l'historique et le moteur repart sur un morceau frais, sans rattrapage en accéléré.
 - Aucun test de type « suivant » ou « lire maintenant » sur la radio en production.
 
 ### 3.2 Enchaînements
 - Jingle vers morceau : le morceau démarre en même temps que le jingle, en fondu à volume bas (12 %, `DUCK_LEVEL`) pendant la voix, puis le volume monte jusqu'au maximum sur 3 s après la fin du jingle (`DUCK_RISE_S`). Le volume des jingles est réglable dans l'admin (`jingle_volume`, 0,8 par défaut) et appliqué aussi à la prévisualisation. Sur iPhone, Safari ignore `el.volume` : le client force le circuit Web Audio (GainNode) sur iOS pour que le volume des jingles et la baisse du morceau soient appliqués.
-- Seuls les jingles vocaux sont conservés ; ils sont rangés hors des playlists, dans `webradio/jingles/<catégorie>/` (`webradio` : CréaZik IA WebRadio, `traveling-sound`, `serenia-tech`), déclarés dans `playlists.json` avec `role: jingle` et `category`. Toutes les catégories sont mélangées dans la même rotation ; l'admin les trie par catégorie (blocs repliables).
+- Seuls les jingles vocaux sont conservés ; ils sont rangés hors des playlists, dans `webradio/jingles/<catégorie>/` (`webradio` : CréaZik IA WebRadio, `serenia-tech`), déclarés dans `playlists.json` avec `role: jingle` et `category`. Toutes les catégories sont mélangées dans la même rotation ; l'admin les trie par catégorie (blocs repliables).
 - Chaque jingle commence par 1 s de silence (le début était coupé) et reçoit le même traitement de volume (compression, loudnorm -11 LUFS).
 - Transitions réglables par préréglages en mode admin : fondu enchaîné, fondu, silence ; les fondus sont très doux.
 - Jingle tous les N morceaux (valeur modifiable dans l'interface ; réglée à 5).
@@ -89,7 +89,7 @@ Document établi à partir des décisions prises au fil des conversations. Chaqu
 - C'est une approximation réglable (Médiamétrie et études d'écoute en streaming) ; les limites sont documentées.
 
 ### 3.5 Modes
-- Mode auditeur : aucun changement de morceau possible ; bandeau Traveling Sound visible.
+- Mode auditeur : aucun changement de morceau possible ; page dédiée `user.html` (voir 3.10).
 - Mode admin : programmation (lire à suivre, jouer maintenant, jingles, playlists) ; bascule par une icône en haut à droite, sans boutons dédiés ; passer en admin lance l'écoute de la radio.
 - La page de gestion (`/radio.html`) et l'explorateur (`/ui.html`) sont réservés à l'admin ; les sections sont repliables.
 - Bouton « Test » (admin, UI d'écoute) : un premier appui active `test_loop` (action `test_loop` du moteur, état persisté) et la radio ne joue que la playlist `TEST_LOOP_PLAYLIST` (`blues-rock-guitare`), même à poids 0 ; un second appui rétablit la programmation normale ; repli sur la programmation normale si cette playlist n'a aucun morceau jouable. Il change le morceau pour tous les auditeurs : à retirer avant le déploiement. Le réglage `loop_playlists` existant (admin, par playlist) reste distinct.
@@ -97,7 +97,7 @@ Document établi à partir des décisions prises au fil des conversations. Chaqu
 
 ### 3.6 Base de données, avis et suppression
 - `radio.db` (SQLite, non versionnée) enregistre chaque diffusion de morceau (horodatage, durée écoutée, passage forcé), les marqueurs « écouté, sans avis » (conservés en base, plus de bouton dans l'UI), les avis de dynamique Slow / Medium / High et l'historique des votes.
-- L'UI du port 5000 est l'UI dev : Suivant et Slow/Medium/High y sont ouverts (le bouton « Test » public est supprimé) à tous ; `/api/dynamics` n'exige plus l'admin. Une UI auditeur sera créée plus tard et devra refermer ces accès.
+- Les pages dev (`/listen.html`, `/radio.html`) restent servies sur le port 5000 tant que `DEV_UNIFIED` est actif ; `/api/skip` et `/api/dynamics` restent ouvertes côté serveur (la page `user.html` ne les appelle pas) et seront fermées avant le déploiement.
 - Les avis Slow/Medium/High (0,15 / 0,5 / 0,85) sont fusionnés avec l'énergie mesurée dans la dynamique de la journée ; poids réglable (`dyn_user_weight`), croissant avec le nombre d'avis.
 - La section admin « Statistiques » expose les indicateurs, constats automatiques, tableaux triables et exports JSON (avec dictionnaire des champs) et CSV pour analyse humaine et IA.
 - Suppression d'un morceau ou d'une playlist : le MP3, la pochette et les fichiers dérivés sont effacés, l'entrée est masquée via `catalog_overrides.json` (le statut « generated » est conservé pour que la rotation ne le régénère pas) et les données de création (prompt, paroles, modèle, caractéristiques, votes, motif) sont ajoutées à `learning/morceaux_rejetes.jsonl`, corpus de ce qu'il ne faut pas reproduire. Refusé si le morceau est en cours de diffusion. Le renommage passe aussi par `catalog_overrides.json`.
@@ -120,15 +120,22 @@ Document établi à partir des décisions prises au fil des conversations. Chaqu
 - Avant une remise à zéro des scores : copier `webradio/votes.json` dans `DOCUMENTATION/apprentissage/votes_archive/` (une photo juste avant la remise à zéro, jamais une copie sans remise à zéro, sinon double comptage par `calculer_preferences.py`) et sauvegarder `radio.db`.
 - Une playlist hors rotation reçoit le poids 0 (`weights` de `radio_settings.json`) et n'est pas ajoutée à `series.txt` ; la générer avec `run_queue.py <config>` ; une playlist de test passe en rotation seulement après écoute et demande de l'utilisateur (cas `blues-rock-guitare` : poids retiré après écoute, 6 morceaux positifs gardés).
 
+### 3.10 UI auditeur (`user.html`)
+- `webradio/user.html` est la page d'accueil du port 5000 (`/`) et reste atteignable en `/user.html` ; elle charge `listen.js` avec `window.CREAZIK_USER_UI = true`, qui coupe l'administration (pas de Suivant, Slow/Medium/High, Découverte, Test, Programmation, Gestion, Tests, Pochettes) et n'appelle pas `/api/me`.
+- Pouces : un seul vote par morceau et par auditeur ; le second pouce remplace le premier, un second clic sur le pouce actif le retire, pas de remise à zéro. Les requêtes portent l'en-tête `X-Creazik-Ui: user` : le serveur les enregistre dans `webradio/user_votes.json` (cookie `creazik_voter_u`, non versionné) sans toucher `votes.json`, `radio.db` ni la rotation, et ne renvoie que les votes de l'auditeur (jamais les totaux ni les scores de gestion de l'admin).
+- Analyse des votes : `python webradio/tools/user_votes_report.py [--min-votes N]` (lecture seule) ; la décision de supprimer ou de repondérer un morceau reste manuelle.
+- Commentaires : formulaire et commentaire mis en avant dans la page ; suppression par l'admin dans `radio.html` (`/api/comments/delete`).
+- Revue de développement dans un artefact claude.ai (`revue_ui_user/revue_ui_user.html`).
+
 ## 4. Règles visuelles et sonores
 
 - Un décor par playlist (plus de choix de style) ; transitions visuelles très douces entre playlists.
 - Les visuels évoluent sur la durée du morceau (arc narratif : intensité en 5 temps, dérive de teinte, second motif, ondes ponctuelles), avec de l'aléatoire stable par morceau.
 - Le cadre visuel est unique et centré ; il enchaîne des phases de 5 s : pochette (si disponible), animations visuelles, publicité (9 s), animations visuelles, pochette, avec huit transitions animées (`PHASE_FX` dans `listen.js`). La mascotte (`mascot.js`) est conservée mais masquée. La légende du visuel (titre, description) défile verticalement en alternance toutes les 3,5 s.
 - Titrage sur la pochette : le titre du morceau est centré en haut de l'image et la date de génération en petit en bas à droite, sans modifier le fichier de la pochette. La zone est calculée sur l'image réellement affichée (carrée, centrée) et non sur le cadre ; le titre reste sur une ligne en réduisant la police (jusqu'à 9 px), sinon coupé au « - », sinon sur plusieurs lignes entre les mots (`fitCoverTitle` dans `listen.js`). Les titres dessinés sur canvas (pubs, jingles) passent par `fit` de `motion.js`, qui réduit la taille puis coupe avec « … » plutôt que de déborder.
-- Police des titres : Sora (SIL OFL, fichier embarqué `webradio/fonts/Sora-latin.woff2`, aucune requête externe), pour tous les titrages de l'UI et des pubs SérénIA Tech et CréaZik. Les pubs Traveling Sound gardent la machine à écrire de leur charte.
-- Publicités (`radio_content.json`) : SérénIA Tech (clic vers serenia-tech.fr), Traveling Sound (5 pubs tirées des textes des jingles, charte du site : fond sombre, vert jungle et orange, crème, police machine à écrire, clic vers son site), messages CréaZik IA WebRadio (sans clic) ; rotation par groupes.
-- Jingles parlés : voix féminine suave et lente générée par Chatterbox multilingue (CPU) avec un timbre de référence synthétique (Kokoro `ff_siwis`), `exaggeration` 0,4 et `cfg_weight` 0,1 ; le nom s'affiche « CréaZik IA WebRadio » et se prononce avec « IA » (« Créa Zique, I A, Ouèbe Radio ») ; « Traveling Sound Ouèbe Radio » et « Sérénia Tèk » pour les pubs ; contrôle d'intelligibilité par transcription (Whisper-small).
+- Police des titres : Sora (SIL OFL, fichier embarqué `webradio/fonts/Sora-latin.woff2`, aucune requête externe), pour tous les titrages de l'UI et des pubs SérénIA Tech et CréaZik.
+- Publicités (`radio_content.json`) : SérénIA Tech (clic vers serenia-tech.fr) et messages CréaZik IA WebRadio (sans clic) ; rotation par groupes. Les pubs et jingles Traveling Sound ont été supprimés le 2026-10-18.
+- Jingles parlés : voix féminine suave et lente générée par Chatterbox multilingue (CPU) avec un timbre de référence synthétique (Kokoro `ff_siwis`), `exaggeration` 0,4 et `cfg_weight` 0,1 ; le nom s'affiche « CréaZik IA WebRadio » et se prononce avec « IA » (« Créa Zique, I A, Ouèbe Radio ») ; « Sérénia Tèk » pour les pubs ; contrôle d'intelligibilité par transcription (Whisper-small).
 - Design moderne et stylisé, lisible à 375 px, conçu pour le téléphone.
 
 ## 5. Règles de développement
@@ -145,7 +152,7 @@ Document établi à partir des décisions prises au fil des conversations. Chaqu
 
 ### 5.3 Tests et livraison
 - Chaque phase de développement inclut la création et l'exécution des tests pertinents avant d'être marquée faite.
-- Les tests automatiques sont dans `tests/test_radio_engine.py` (27 tests au dernier passage, début de session du 2026-10-08) ; ils portent sur la continuité, les fondus (dont le fondu sous jingle), les poids, les votes et le score négatif, les répétitions, la dynamique (dont les avis Slow/Medium/High), les statistiques et la base `radio.db`, le catalogue éditable, la reprise et le catalogue MP3.
+- Les tests automatiques sont dans `tests/test_radio_engine.py` (`webradio/tests` : 41 tests au dernier passage, le 2026-10-18) ; ils portent sur la continuité, les fondus (dont le fondu sous jingle), les poids, les votes et le score négatif, les répétitions, la dynamique (dont les avis Slow/Medium/High), les statistiques et la base `radio.db`, le catalogue éditable, la reprise et le catalogue MP3.
 - Un commit et un push après chaque phase de codage, message en français ; fichiers sensibles ou volumineux exclus.
 - Les contrôles visuels se font dans le navigateur de test, puis sont à confirmer sur iPhone.
 
@@ -180,7 +187,8 @@ Document établi à partir des décisions prises au fil des conversations. Chaqu
 - Protocole d'apprentissage non câblé : `learning/morceaux_rejetes.jsonl` n'est lu par aucune génération.
 - Écriture humaine : préférences calculées par `OUTILS/apprentissage/` à partir des seuls votes radio, jamais appliquées sans accord (diff montré par `/close`) ; premier calcul (851 votes, 395 différences) en attente de validation. Les chansons françaises sont retirées de la diffusion (14 versions gardées) ; boucle désactivée ; entrées `planned` possibles dans les Tests.
 - Clip L'Invariable : retenus Eurodisco (graine 2026) et cover « Ça m'énerve » (graine 42), choix final et droits du cover non tranchés ; playlist `creation-francaise` créée ; à chaque ajout de morceau, prendre les JSON.
-- Redémarrage du serveur après un arrêt prolongé : le moteur rattrape son retard en accéléré (23 h d'arrêt, environ 20 minutes) et la lecture ne démarre pas sur téléphone tant qu'il n'est pas à l'heure ; vérifier `/api/radio/state` (début du morceau actif proche de l'heure) avant d'écouter. Le tunnel (`~/.cloudflared/config.yml`) pointe sur `localhost:5000` ; un autre serveur sur ce port (Eleventy, IPv6) peut capter le tunnel.
+- Le tunnel (`~/.cloudflared/config.yml`, `vertia-test.serenia-tech.fr`) pointe sur `localhost:5000` ; un autre serveur sur ce port (Eleventy, IPv6) peut capter le tunnel. Un favori ou une icône de téléphone sur `/listen.html` ouvre l'UI dev : utiliser la racine.
+- UI auditeur v2 (pouces à vote unique, commentaires) jamais chargée dans un navigateur ni sur iPhone ; le vote unique repose sur un cookie (contournable) ; lecture du son impossible dans l'artefact de revue (écoute sur `localhost:5000/user.html` ou maquette, choix de l'utilisateur en attente).
 - Règles tirées des 473 morceaux négatifs (voix anglaise 9 % de négatifs contre 62 % en français, captions et styles à éviter) : proposées dans `DOCUMENTATION/apprentissage/propositions/regles_negatifs_2026-10-15.md`, non appliquées ; préférences recalculées (867 votes avec l'archive, 395 différences) en attente d'accord.
 - Section « Pochettes », bouton « Test » et boutons plier/déplier contrôlés au navigateur avec des réponses simulées seulement (pas de session admin) ; régénération réelle d'une pochette par `cover_review_watch.py` jamais essayée ; mode Test laissé actif à la fin de la session du 2026-10-15 ; ComfyUI peut être resté démarré.
 - Incident de suppression du 2026-10-15 : `os.replace` de `catalog_overrides.json` a échoué après la purge d'un morceau (`electro-atmospherique:3`), enregistrement d'apprentissage reconstitué à la main ; suppression à rendre robuste.

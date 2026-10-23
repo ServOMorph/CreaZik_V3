@@ -1,5 +1,18 @@
 # Changelog
 
+## v1.14 — 2026-10-23
+
+### Ajouté
+- Interface auditeur `webradio/user.html` (page d'accueil du port 5000, drapeau `CREAZIK_USER_UI` dans `listen.js`) : sans administration, pouces à vote unique exclusif, commentaires restaurés.
+- Votes auditeurs séparés (`webradio/user_votes.json`, cookie `creazik_voter_u`, en-tête `X-Creazik-Ui`), sans effet sur la rotation ; rapport `webradio/tools/user_votes_report.py` et 3 tests.
+- Artefact de revue de l'UI auditeur `revue_ui_user/` (commentaires par zone, questions, onglets de versions) ; test de redémarrage après arrêt prolongé.
+
+### Corrigé
+- Moteur radio : après un long arrêt, un morceau courant périmé n'est plus restauré (plus de rattrapage en accéléré).
+
+### Modifié
+- Pubs et jingles Traveling Sound supprimés (contenu, catégorie, bloc « musique humaine », image).
+
 ## v1.13 — 2026-10-15
 
 ### Ajouté

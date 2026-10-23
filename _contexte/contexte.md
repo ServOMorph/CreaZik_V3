@@ -10,13 +10,12 @@ expérimentation de création de musique avec IA instrumental et vocal, avec mod
 - Audio diffusé : MP3 192 kbit/s uniquement. Règles détaillées : `webradio/REGLES_GENERATION_DEV.md`.
 
 ## État actuel (réécrit intégralement à chaque /close)
-Réorientation vers l'écriture humaine : outils d'extraction, d'apprentissage et de run en place ; 19 versions Funky Yogi dans les Tests, à écouter ; préférences (867 votes archivés) et règles tirées des négatifs en attente d'accord.
-Radio nettoyée le 2026-10-15 : 300 morceaux négatifs et 5 playlists vides supprimés, scores remis à zéro (archive sommée par le calcul) ; playlist « Blues-rock guitare claire » (6 morceaux) en rotation, bouton Test (boucle) et section « Pochettes » (revue + script de régénération) ajoutés.
-Restent : mode Test à arrêter, jugement des pochettes, écoutes, clip L'Invariable (droits du cover), contrôles iPhone et navigateur en vraie session admin, application technique de la validation préalable.
+UI auditeur séparée (`webradio/user.html`) : page d'accueil du port 5000 et du tunnel `vertia-test.serenia-tech.fr`, revue dans un artefact claude.ai (v2 jamais vue dans un navigateur) ; pubs Traveling Sound supprimées ; moteur radio corrigé (plus de rattrapage en accéléré après un arrêt).
+Votes auditeurs collectés à part (`user_votes.json`), sans effet sur la rotation ; rapport `webradio/tools/user_votes_report.py` à lancer quand il y aura des votes.
+Réorientation écriture humaine : 19 versions Funky Yogi à écouter ; préférences (867 votes) et règles tirées des négatifs en attente d'accord ; radio nettoyée le 2026-10-15, playlist blues-rock en rotation, mode Test à arrêter.
+Restent : contrôles navigateur et iPhone de la v2, choix de l'écoute du son pour la revue, clip L'Invariable (droits du cover), jugement des pochettes, déploiement.
 
 ## Décisions structurantes (append only — 10 entrées max, 5 lignes max/entrée, archiver au-delà)
-- 2026-10-09 : Démo privée T01 (Arroser Les Roses) : version 18 retenue, texte adapté (« posté », « zoublie »), voix de femme non retenue (instable), statut `VALIDE` interdit sans accord écrit de l'auteur ; lot de pochettes terminé, scores négatifs exclus.
-- 2026-10-10 : campagne comparative de 30 extraits (10 ACE-Step 1.5, 10 MusicGen Small, 10 HeartMuLa OSS 3B) ; statuts techniques conservés séparément de l'écoute humaine, avec pistes invalides HeartMuLa laissées visibles pour examen.
 - 2026-10-10 : Tout nouveau contenu destiné à la WebRadio est soumis dans les Tests avec sa référence éventuelle ; aucune diffusion sans demande explicite de l'utilisateur, même après validation.
 - 2026-10-10 : Paroles classées par artiste dans `TEXTES/artistes/` ; l'utilisateur déclare être Funky Yogi et détenir les droits sur ce texte, et déclare disposer des droits sur les textes Marie.
 - 2026-10-10 : section Tests rangée en dossiers (clé `folder` ou règles du serveur) avec commentaire par version dans `tests_state.json` ; bouton « Test » supprimé.
@@ -25,3 +24,5 @@ Restent : mode Test à arrêter, jugement des pochettes, écoutes, clip L'Invari
 - 2026-10-12 : À chaque ajout de morceau à la WebRadio, prendre les JSON (sidecar, audiomap) avec ; playlist `creation-francaise` créée pour les créations originales.
 - 2026-10-15 : Morceaux à score négatif du catalogue diffusé supprimés (suppression par `RadioEngine.edit_catalog` hors serveur), scores remis à zéro ; archive `DOCUMENTATION/apprentissage/votes_archive/` sommée par `calculer_preferences.py` ; règles tirées des négatifs proposées, non appliquées.
 - 2026-10-15 : Playlist « Blues-rock guitare claire » (anglais, nom d'artiste jamais public) validée après test : 6 morceaux positifs en rotation, 4 négatifs supprimés ; bouton Test (`test_loop`) ; revue des pochettes par page locale, plafond de 3 refus ; pas de push pendant l'exécution autonome.
+- 2026-10-17 : UI auditeur séparée `webradio/user.html` (même `listen.js`, drapeau `CREAZIK_USER_UI`), page d'accueil du port 5000 ; sans Suivant, Slow/Medium/High ni remise à zéro ; pouces à vote unique exclusif ; commentaires restaurés ; pages dev inchangées ; revue dans un artefact claude.ai (lecture du son impossible dans l'artefact).
+- 2026-10-18 : Votes auditeurs collectés à part (`user_votes.json`, cookie `creazik_voter_u`, en-tête `X-Creazik-Ui`), sans effet sur la rotation, pour analyse manuelle avant suppression ou pondération ; pubs et jingles Traveling Sound supprimés.

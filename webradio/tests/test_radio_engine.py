@@ -471,6 +471,25 @@ def test_restart_resumes_current_track():
         assert eng2.current["key"] == key
 
 
+def test_restart_after_long_stop_starts_now():
+    with tempfile.TemporaryDirectory() as tmp:
+        root = Path(tmp)
+        build(root, {"a": (6, 60, False)})
+        (root / "radio_settings.json").write_text(json.dumps({"jingles_enabled": False, "transitions": preset()}), encoding="utf-8")
+        clock = Clock()
+        eng = RadioEngine(root, time_fn=clock, rng=random.Random(3), persist=True)
+        run(eng, clock, 30)
+        clock.t += 3 * 3600
+        eng2 = RadioEngine(root, time_fn=clock, rng=random.Random(4), persist=True)
+        eng2.tick()
+        assert eng2.current is not None
+        assert eng2.current["start"] >= clock.t - 1
+        assert len(eng2.active) == 1
+        eng2.tick()
+        assert eng2.current["start"] >= clock.t - 1
+        assert len(eng2.active) == 1
+
+
 def test_listener_snapshot_hides_queue():
     with tempfile.TemporaryDirectory() as tmp:
         eng, clock = make(tmp, {"a": (5, 20, False)}, {"jingles_enabled": False, "transitions": preset()})
