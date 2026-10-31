@@ -10,10 +10,17 @@
 <body>
 <audio id="audio" preload="auto" playsinline></audio>
 
+<a id="sessionIcon" class="mode-icon" data-mode="login" href="/login" aria-label="Connexion" title="Connexion">
+  <svg class="ico ico-user ico-admin" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 7.5-2"/></svg>
+  <svg class="ico ico-login" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+</a>
+
 <header class="top">
   <h1 class="brand">CréaZik IA WebRadio</h1>
   <p class="tagline">Radio générée par IA locale</p>
 </header>
+
+<div id="slotTop" data-plugin-slot="top"></div>
 
 <main class="page">
   <section class="player" aria-label="Lecteur">
@@ -23,6 +30,7 @@
         <div id="coverBlack" class="cover-black" aria-hidden="true"></div>
         <img id="trackCover" class="track-cover" alt="Pochette du morceau" hidden>
         <div id="coverLabel" class="cover-label" aria-hidden="true"><span id="coverTitle" class="cover-title"></span><span id="coverDate" class="cover-date"></span></div>
+        <img id="userImage" class="track-cover user-image" alt="Votre image" hidden>
         <a id="adPanel" class="ad-panel" data-link="0" target="_blank" rel="noopener" tabindex="-1"><canvas id="adCanvas" aria-hidden="true"></canvas></a>
         <div id="phaseShine" class="phase-shine" aria-hidden="true"></div>
       </div>
@@ -39,6 +47,9 @@
         <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 11v10H3V11z"/><path d="M7 11l4-8a2.5 2.5 0 0 1 2.5 2.8L13 9h6.2a2 2 0 0 1 2 2.3l-1.3 8a2 2 0 0 1-2 1.7H7"/></svg>
         <span id="thumbUpCount" class="thumb-count">0</span>
       </button>
+      <button id="thumbReset" class="thumb thumb-neutral" type="button" aria-label="Réinitialiser mes pouces sur ce morceau" title="Réinitialiser mes pouces sur ce morceau" hidden>
+        <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
+      </button>
       <button id="thumbDown" class="thumb thumb-down" type="button" aria-pressed="false" aria-label="Je n'aime pas ce morceau">
         <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 13V3h4v10z"/><path d="M17 13l-4 8a2.5 2.5 0 0 1-2.5-2.8L11 15H4.8a2 2 0 0 1-2-2.3l1.3-8A2 2 0 0 1 6.100 3H17"/></svg>
         <span id="thumbDownCount" class="thumb-count">0</span>
@@ -51,8 +62,20 @@
     </div>
 
     <div class="controls">
+      <button id="userPrevBtn" class="btn-next" type="button" aria-label="Morceau précédent">⏮</button>
       <button id="playBtn" class="btn-play" type="button" aria-label="Lecture ou pause">▶</button>
+      <button id="userNextBtn" class="btn-next" type="button" aria-label="Morceau suivant">⏭</button>
     </div>
+    <div class="controls">
+      <button id="userLiveBtn" class="btn-next" type="button" hidden>Revenir au direct</button>
+    </div>
+    <div id="slotPlayer" data-plugin-slot="player"></div>
+  </section>
+
+  <section id="plugins" class="plugins" aria-label="Plugins" hidden>
+    <h2 class="section-title">Plugins</h2>
+
+    <div id="pluginList"></div>
   </section>
 
   <section class="comments" aria-label="Commentaires">
@@ -77,6 +100,11 @@
     </form>
   </section>
 
+  <section class="human" aria-label="Liens">
+    <div id="slotFooter" data-plugin-slot="footer"></div>
+    <p class="human-text"><a id="sessionText" href="/login">Connexion</a></p>
+  </section>
+
 </main>
 
 <footer class="foot" hidden>
@@ -85,7 +113,6 @@
   <p class="foot-line"><a id="contactSite" href="https://serenia-tech.fr/" target="_blank" rel="noopener">serenia-tech.fr</a></p>
 </footer>
 
-<script>window.CREAZIK_USER_UI = true;</script>
 <script src="scenes.js"></script>
 <script src="transitions.js"></script>
 <script src="motion.js"></script>

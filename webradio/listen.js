@@ -8,8 +8,25 @@
     const SLEW_PER_S = 4;
     const POLL_MS = 2000;
     const SILENT_WAV = '/silence.wav';
-    const USER_UI = window.CREAZIK_USER_UI === true;
-    const UI_HEADERS = USER_UI ? {'X-Creazik-Ui': 'user'} : {};
+    const USER_HEADERS = Object.freeze({'X-Creazik-Ui': 'user'});
+    let UI_HEADERS = USER_HEADERS;
+    let adminSession = false;
+    const pluginDefs = {};
+    const hooks = {live: [], track: [], listen: []};
+    let session = null;
+    let profile = null;
+
+    function emit(name, ...args) {
+        hooks[name].forEach(fn => {
+            try { fn(...args); } catch (e) {}
+        });
+    }
+
+    window.CreaZik = Object.freeze({
+        registerPlugin(def) {
+            if (def && typeof def.id === 'string' && typeof def.init === 'function' && !pluginDefs[def.id]) pluginDefs[def.id] = def;
+        }
+    });
 
     const $ = id => document.getElementById(id);
     const canvas = $('vizCanvas');
@@ -40,6 +57,14 @@
 
     let audioCtx = null;
     const gainNodes = new Map();
+    const notifyAudio = new Audio();
+    notifyAudio.preload = 'auto';
+    notifyAudio.setAttribute('playsinline', '');
+    const NOTIFY_DUCK = 0.25;
+    const NOTIFY_RISE_MS = 1500;
+    let notifyBusy = false;
+    let notifyEndAt = -1e9;
+    let notifyFinish = null;
 
     let live = {active: [], upcoming: [], played: [], queue: [], rev: -1};
     let clockOffset = 0;
@@ -47,15 +72,10 @@
     let listening = false;
     let current = null;
     let viz = null;
-    let isAdmin = false;
-    let viewAsUser = false;
     let comments = [];
     let featuredId = null;
     let votes = {tracks: {}, mine: {}};
-    let library = [];
-    let libraryLoaded = false;
     let lastTick = performance.now();
-    const openPlaylists = new Set();
     const sm = {level: 0, bass: 0, mid: 0, treble: 0};
     const freq = new Uint8Array(NB_FREQ);
     const wave = new Uint8Array(NB_WAVE);
@@ -65,12 +85,6 @@
     const scenes = {};
     let sceneKey = null;
     let transEngine = null;
-
-    try { viewAsUser = localStorage.getItem('viewAsUser') === '1'; } catch (e) {}
-
-    function effectiveAdmin() {
-        return isAdmin && !viewAsUser;
-    }
 
     function esc(v) {
         return String(v == null ? '' : v).replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
@@ -150,6 +164,11 @@
                 g.connect(audioCtx.destination);
                 gainNodes.set(s.el, g);
             });
+            const ns = audioCtx.createMediaElementSource(notifyAudio);
+            const ng = audioCtx.createGain();
+            ns.connect(ng);
+            ng.connect(audioCtx.destination);
+            gainNodes.set(notifyAudio, ng);
             if (navigator.audioSession) navigator.audioSession.type = 'playback';
         } catch (e) {
             audioCtx = null;
@@ -241,244 +260,73 @@
         });
     }
 
+    function duckFactor() {
+        if (notifyBusy) return NOTIFY_DUCK;
+        const x = (performance.now() - notifyEndAt) / NOTIFY_RISE_MS;
+        return x >= 1 ? 1 : NOTIFY_DUCK + (1 - NOTIFY_DUCK) * ease(x);
+    }
+
+    function unlockNotify() {
+        if (notifyBusy) return;
+        notifyAudio.src = SILENT_WAV;
+        const p = notifyAudio.play();
+        const done = () => { if (!notifyBusy) notifyAudio.pause(); };
+        if (p && p.then) p.then(done, done); else done();
+    }
+
+    function playNotify(src, after) {
+        let finished = false;
+        let timer = null;
+        const end = () => {
+            if (finished) return;
+            finished = true;
+            clearTimeout(timer);
+            notifyFinish = null;
+            notifyBusy = false;
+            notifyEndAt = performance.now();
+            notifyAudio.onended = notifyAudio.onerror = null;
+            after();
+        };
+        notifyBusy = true;
+        notifyFinish = end;
+        notifyAudio.onended = end;
+        notifyAudio.onerror = end;
+        notifyAudio.src = src;
+        setGain(notifyAudio, jingleGain());
+        const p = notifyAudio.play();
+        if (p && p.catch) p.catch(end);
+        timer = setTimeout(end, 10000);
+    }
+
     function startListening() {
+        syncPersonalClock(serverNow());
         ensureGraph();
         unlockSlots();
+        unlockNotify();
         listening = true;
         setPlayLabel();
         refreshLive();
+        emit('listen');
     }
 
     function stopListening() {
+        syncPersonalClock(serverNow());
         listening = false;
         slots.forEach(s => {
             if (!s.el.paused) s.el.pause();
         });
+        notifyAudio.pause();
+        notifyAudio.onended = notifyAudio.onerror = null;
+        notifyAudio.removeAttribute('src');
+        notifyAudio.load();
+        if (notifyFinish) notifyFinish();
+        notifyBusy = false;
+        notifyEndAt = -1e9;
         setPlayLabel();
     }
 
     function toggle() {
-        if (testing) stopTest();
         if (listening) stopListening(); else startListening();
-    }
-
-    const testAudio = new Audio();
-    let testing = false;
-
-    function stopTest() {
-        testing = false;
-        testAudio.pause();
-        renderTests();
-    }
-
-    let testsItems = [];
-    let testsCur = '';
-
-    const TEST_ICONS = {
-        up: '<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 11v10H3V11z"/><path d="M7 11l4-8a2.5 2.5 0 0 1 2.5 2.8L13 9h6.2a2 2 0 0 1 2 2.3l-1.3 8a2 2 0 0 1-2 1.7H7"/></svg>',
-        down: '<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 13V3h4v10z"/><path d="M17 13l-4 8a2.5 2.5 0 0 1-2.5-2.8L11 15H4.8a2 2 0 0 1-2-2.3l1.3-8A2 2 0 0 1 6.100 3H17"/></svg>',
-        note: '<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>',
-        del: '<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M6 6l1 14h10l1-14"/></svg>'
-    };
-
-    function testSeekMax() {
-        const d = testAudio.duration;
-        if (isFinite(d) && d > 0) return d;
-        const it = testsItems.find(x => x.file === testsCur);
-        return it && it.duration ? Number(it.duration) : 0;
-    }
-
-    function updateTestSeek() {
-        const range = $('testSeek');
-        const label = $('testTime');
-        if (!range || !label) return;
-        const d = testSeekMax();
-        if (!range.matches(':active')) range.value = d ? Math.round(testAudio.currentTime / d * 1000) : 0;
-        label.textContent = fmtTime(testAudio.currentTime) + ' / ' + fmtTime(d);
-    }
-
-    let testsFolder = '';
-    let testsEditing = '';
-    const testsOpen = new Set();
-    let testsDraft = '';
-
-    function testsFolders() {
-        const map = new Map();
-        testsItems.forEach(it => {
-            const id = it.folder || 'divers';
-            let f = map.get(id);
-            if (!f) { f = {id, label: it.folder_label || 'Divers', items: [], fresh: 0, todo: 0, last: ''}; map.set(id, f); }
-            f.items.push(it);
-            if (it.planned) f.todo++; else if (!it.played) f.fresh++;
-            if (String(it.generated_at || '') > f.last) f.last = String(it.generated_at || '');
-        });
-        return Array.from(map.values()).sort((x, y) => (y.fresh > 0) - (x.fresh > 0) || y.last.localeCompare(x.last));
-    }
-
-    function renderTests() {
-        const box = $('testsList');
-        const panel = $('testsPanel');
-        if (!box || !panel || panel.hidden) return;
-        if (!testsItems.length) {
-            box.innerHTML = '<div class="prog-empty">Aucune version de test.</div>';
-            return;
-        }
-        const folders = testsFolders();
-        const open = folders.find(f => f.id === testsFolder);
-        if (!open) {
-            testsFolder = '';
-            box.innerHTML = folders.map(f => `<div class="prog-item test-folder${f.fresh ? ' is-new' : ''}">
-                <button type="button" class="prog-main" data-act="open" data-folder="${esc(f.id)}">
-                    <span class="prog-title">&#128193; ${esc(f.label)}</span>
-                    <span class="prog-sub">${f.items.length} version${f.items.length > 1 ? 's' : ''}${f.todo ? ' · ' + f.todo + ' &agrave; faire' : ''}</span>
-                    ${f.fresh ? `<span class="prog-badge">${f.fresh} jamais &eacute;cout&eacute;${f.fresh > 1 ? 's' : ''}</span>` : ''}
-                </button>
-            </div>`).join('');
-            return;
-        }
-        const head = `<div class="prog-item test-folder-head">
-            <button type="button" class="prog-main" data-act="back">
-                <span class="prog-title">&#8592; Dossiers</span>
-                <span class="prog-sub">${esc(open.label)}${open.fresh ? ' · ' + open.fresh + ' jamais &eacute;cout&eacute;' + (open.fresh > 1 ? 's' : '') : ''}</span>
-            </button>
-        </div><div class="test-foldall"><button type="button" class="prog-act test-save" data-act="foldall" data-folder="${esc(open.id)}">Tout d&eacute;plier</button><button type="button" class="prog-act test-save" data-act="unfoldall" data-folder="${esc(open.id)}">Tout replier</button></div>`;
-        box.innerHTML = head + open.items.map(it => {
-            const cur = it.file === testsCur;
-            const f = esc(it.file);
-            const planned = !!it.planned;
-            const act = (a, label, icon, short) => `<button type="button" class="prog-act test-act" data-act="${a}" data-file="${f}" aria-label="${label}" title="${label}"${a === 'up' || a === 'down' ? ` aria-pressed="${it.vote === a}"` : ''}>${icon}<span class="test-act-l">${short || label}</span></button>`;
-            const generated = it.generated_at ? new Date(it.generated_at).toLocaleString('fr-FR') : '';
-            const provenance = [it.model, generated].filter(Boolean).join(' · ');
-            const quality = it.technical_status === 'pass_needs_listening' ? 'Contrôle technique réussi — écoute requise' : it.technical_status === 'invalid' ? 'Contrôle technique invalide' : '';
-            const title = esc(String(it.name).replace(/_/g, ' '));
-            const isOpen = testsOpen.has(it.file) || testsEditing === it.file;
-            const badge = planned ? '<span class="prog-badge">&Agrave; faire</span>' : it.played ? '' : '<span class="prog-badge">Jamais &eacute;cout&eacute;</span>';
-            const headInner = `<span class="prog-title">${planned ? '&#128221; ' : cur && testing ? '&#9646;&#9646; ' : '&#9654; '}${title}</span>${badge}`;
-            const main = planned
-                ? `<button type="button" class="prog-main test-main" data-act="fold" data-file="${f}" aria-expanded="${isOpen}">${headInner}</button>`
-                : `<button type="button" class="prog-main test-main" data-act="play" data-file="${f}">${headInner}</button>`;
-            const fold = `<button type="button" class="prog-act test-fold" data-act="fold" data-file="${f}" aria-expanded="${isOpen}" aria-label="${isOpen ? 'Replier' : 'D&eacute;plier'}" title="${isOpen ? 'Replier' : 'D&eacute;plier'}">${isOpen ? '&#9650;' : '&#9660;'}</button>`;
-            const actions = planned
-                ? act('comment', 'Commentaire', TEST_ICONS.note, 'R&eacute;pondre') + act('delete', 'Supprimer ce test', TEST_ICONS.del, 'Supprimer')
-                : act('up', "J'aime", TEST_ICONS.up, "J'aime") + act('down', "Je n'aime pas", TEST_ICONS.down, 'Pas aim&eacute;') + act('comment', 'Commentaire', TEST_ICONS.note, 'Commentaire') + act('delete', 'Supprimer cette version', TEST_ICONS.del, 'Supprimer');
-            const details = isOpen ? `<div class="test-details">
-                    ${provenance ? `<span class="prog-sub">${esc(provenance)}</span>` : ''}
-                    ${quality ? `<span class="prog-sub">${esc(quality)}</span>` : ''}
-                    ${it.description ? `<span class="test-desc">${esc(it.description)}</span>` : ''}
-                    ${it.prompt ? `<span class="prog-sub test-prompt"><b>Caption :</b> ${esc(it.prompt)}</span>` : ''}
-                    ${it.comment && testsEditing !== it.file ? `<div class="test-comment">${esc(it.comment)}</div>` : ''}
-                    ${testsEditing === it.file ? `<div class="test-edit"><textarea id="testNote" maxlength="2000" rows="3" placeholder="${planned ? 'Votre réponse sur ce test' : 'Votre avis sur ce morceau'}">${esc(testsDraft)}</textarea><button type="button" class="prog-act test-save" data-act="save" data-file="${f}">Enregistrer</button><button type="button" class="prog-act test-save" data-act="cancel" data-file="${f}">Annuler</button></div>` : ''}
-                </div>
-                <div class="test-actions">${actions}</div>` : '';
-            return `<div class="prog-item test-item${cur ? ' is-now' : ''}${planned ? ' is-planned' : it.played ? '' : ' is-new'}">
-                <div class="test-head">${main}${fold}</div>
-                ${cur ? '<div class="test-seek"><input id="testSeek" type="range" min="0" max="1000" step="1" value="0" aria-label="Position dans le morceau"><span id="testTime" class="time">0:00 / 0:00</span></div>' : ''}
-                ${details}
-            </div>`;
-        }).join('');
-        updateTestSeek();
-    }
-
-    async function loadTests() {
-        const d = await getJSON('/api/tests', null);
-        if (!d || !Array.isArray(d.items)) return;
-        const num = f => parseInt((f.split('/').pop().match(/^(\d+)/) || [0, 0])[1], 10);
-        testsItems = d.items.slice().sort((a, b) => String(b.generated_at || '').localeCompare(String(a.generated_at || '')) || num(b.file) - num(a.file));
-        renderTests();
-    }
-
-    async function testsPost(path, body) {
-        try {
-            const r = await fetch(path, {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(body)});
-            return r.ok;
-        } catch (e) {
-            return false;
-        }
-    }
-
-    function markTestPlayed(file) {
-        const it = testsItems.find(x => x.file === file);
-        if (!it || it.played) return;
-        it.played = true;
-        testsPost('/api/tests/played', {file});
-    }
-
-    async function playTestFile(item) {
-        if (listening) stopListening();
-        if (testsCur !== item.file) {
-            testAudio.src = '/' + item.file + '?v=' + encodeURIComponent(item.generated_at || '');
-            testsCur = item.file;
-        }
-        try {
-            await testAudio.play();
-            testing = true;
-            markTestPlayed(item.file);
-        } catch (e) {
-            testing = false;
-        }
-        renderTests();
-    }
-
-    async function onTestsClick(ev) {
-        const btn = ev.target.closest('button[data-act]');
-        if (!btn) return;
-        if (btn.dataset.act === 'open' || btn.dataset.act === 'back') {
-            testsFolder = btn.dataset.act === 'open' ? btn.dataset.folder : '';
-            renderTests();
-            return;
-        }
-        if (btn.dataset.act === 'foldall' || btn.dataset.act === 'unfoldall') {
-            const fo = testsFolders().find(x => x.id === btn.dataset.folder);
-            if (fo) fo.items.forEach(x => { if (btn.dataset.act === 'foldall') testsOpen.add(x.file); else testsOpen.delete(x.file); });
-            renderTests();
-            return;
-        }
-        const item = testsItems.find(x => x.file === btn.dataset.file);
-        if (!item) return;
-        const act = btn.dataset.act;
-        if (act === 'fold') {
-            if (testsOpen.has(item.file)) testsOpen.delete(item.file); else testsOpen.add(item.file);
-            renderTests();
-            return;
-        }
-        if (act === 'play') {
-            if (testsCur === item.file && testing) stopTest(); else playTestFile(item);
-        } else if (act === 'up' || act === 'down') {
-            const vote = item.vote === act ? 'none' : act;
-            if (await testsPost('/api/tests/vote', {file: item.file, vote})) {
-                item.vote = vote === 'none' ? '' : vote;
-                renderTests();
-            }
-        } else if (act === 'comment') {
-            testsOpen.add(item.file);
-            testsEditing = testsEditing === item.file ? '' : item.file;
-            testsDraft = item.comment || '';
-            renderTests();
-            const ta = $('testNote');
-            if (ta) ta.focus();
-        } else if (act === 'cancel') {
-            testsEditing = '';
-            renderTests();
-        } else if (act === 'save') {
-            const ta = $('testNote');
-            const text = ta ? ta.value.trim() : '';
-            if (await testsPost('/api/tests/comment', {file: item.file, text})) {
-                item.comment = text;
-                testsEditing = '';
-                renderTests();
-            }
-        } else if (act === 'delete') {
-            if (!confirm('Supprimer définitivement cette version de test ?')) return;
-            if (await testsPost('/api/tests/delete', {file: item.file})) {
-                if (testsCur === item.file) {
-                    testing = false;
-                    testAudio.pause();
-                    testAudio.removeAttribute('src');
-                    testsCur = '';
-                }
-                await loadTests();
-            }
-        }
     }
 
     async function refreshLive() {
@@ -498,8 +346,7 @@
         haveClock = true;
         const changed = st.rev !== live.rev;
         live = st;
-        updateDiscover();
-        if (changed || effectiveAdmin()) renderProgram();
+        emit('live', changed);
     }
 
     function tick() {
@@ -508,10 +355,21 @@
         lastTick = now;
         if (!haveClock) return;
         const T = serverNow();
-        const items = live.active.concat(live.upcoming);
+        syncPersonalClock(T);
+        if (personal && listening) {
+            const ps = slots.find(x => x.key === personal.item.key && x.seeded);
+            if (T >= personal.item.end || (ps && ps.el.ended)) {
+                if (personal.pending != null) playPersonal(personal.pending); else advancePersonal();
+            }
+        }
+        const items = personal ? [personal.item] : liveItems();
         const audible = items.filter(it => it.start <= T && T < it.end);
         const wanted = audible.map(it => ({it, play: true}));
         items.filter(it => it.start > T && it.start - T < PRELOAD_S).forEach(it => wanted.push({it, play: false}));
+        if (personal) {
+            const nx = personal.list[personal.pending != null ? personal.pending : personal.idx + 1];
+            if (nx && nx.key !== personal.item.key) wanted.push({it: nx, play: false});
+        }
 
         const used = new Set();
         wanted.forEach(w => {
@@ -533,6 +391,243 @@
         updateDominant(audible, T);
     }
 
+    let personal = null;
+
+    function jingleFilterOn() {
+        return !!profile && Array.isArray(profile.jingle_categories);
+    }
+
+    function jingleAllowed(it) {
+        if (!it || !it.jingle || !jingleFilterOn()) return true;
+        return it.category === 'annonces' || it.urgent_at != null || profile.jingle_categories.includes(it.category);
+    }
+
+    const duckDrop = new Map();
+    const liveView = new WeakMap();
+
+    function liveItems() {
+        const all = live.active.concat(live.upcoming);
+        if (!jingleFilterOn()) return all;
+        return all.filter(jingleAllowed).map(it => {
+            if (it.jingle || !it.duck) return it;
+            let view = liveView.get(it);
+            if (view) return view;
+            const id = it.key + '@' + it.start;
+            let drop = duckDrop.get(id);
+            if (drop === undefined) {
+                const jg = all.find(x => x.jingle && Math.abs(x.end - it.duck.until) < 0.05);
+                if (jg) {
+                    drop = !jingleAllowed(jg);
+                    duckDrop.set(id, drop);
+                    if (duckDrop.size > 50) duckDrop.delete(duckDrop.keys().next().value);
+                }
+            }
+            view = drop ? Object.assign({}, it, {duck: null}) : it;
+            liveView.set(it, view);
+            return view;
+        });
+    }
+
+    function syncPersonalClock(T) {
+        if (!personal || !personal.item) return;
+        if (!listening) {
+            const elapsed = T - personal.clock;
+            personal.item.start += elapsed;
+            personal.item.end += elapsed;
+        }
+        personal.clock = T;
+    }
+
+    function liveSong(T) {
+        let best = null;
+        live.active.forEach(it => {
+            if (!it.jingle && it.start <= T && (!best || it.start > best.start)) best = it;
+        });
+        return best;
+    }
+
+    function navList(T) {
+        const nav = live.nav || {played: [], next: []};
+        const list = [];
+        const seen = new Set();
+        const id = it => it.uid != null ? 'u' + it.uid : it.key + '@' + it.start;
+        const push = it => {
+            if (!it || it.jingle || seen.has(id(it))) return;
+            seen.add(id(it));
+            list.push(it);
+        };
+        (nav.played || []).forEach(push);
+        const before = list.length;
+        const cur = liveSong(T);
+        push(cur);
+        (nav.next || []).forEach(push);
+        const idx = cur ? list.findIndex(x => id(x) === id(cur)) : before - 0.5;
+        return {list, idx};
+    }
+
+    function resetSlots() {
+        slots.forEach(s => {
+            if (s.key && !s.unlocking) releaseSlot(s);
+        });
+    }
+
+    function prepareSlots(key) {
+        slots.forEach(s => {
+            if (s.unlocking || !s.key) return;
+            if (s.key === key) {
+                s.seeded = false;
+                s.lastSeek = 0;
+                try { s.el.currentTime = 0; } catch (e) {}
+            } else {
+                releaseSlot(s);
+            }
+        });
+        current = null;
+        updateNavUi();
+    }
+
+    function playPersonal(i) {
+        const src = personal.list[i];
+        const T = serverNow();
+        personal.idx = i;
+        personal.pending = null;
+        personal.sinceJingle = (personal.sinceJingle || 0) + 1;
+        personal.item = Object.assign({}, src, {
+            start: T, end: T + src.duration, fade_in: 0, fade_out: 1.5, duck: null, overlay: null, explicit: false
+        });
+        personal.clock = T;
+        prepareSlots(src.key);
+    }
+
+    const URGENT_STORE = 'urgentHeard';
+    const urgentHeard = new Set();
+    let lastHeardAnnouncement = null;
+    try { JSON.parse(localStorage.getItem(URGENT_STORE) || '[]').forEach(x => urgentHeard.add(x)); } catch (e) {}
+
+    function urgentId(u) {
+        return u.key + '@' + u.urgent_at;
+    }
+
+    function markUrgentHeard(item) {
+        const occurrence = item.urgent_at != null ? item : ((live.nav && live.nav.urgent) || [])
+            .filter(u => u.key === item.key && !urgentHeard.has(urgentId(u)))
+            .sort((a, b) => a.urgent_at - b.urgent_at)[0];
+        if (!occurrence) return;
+        urgentHeard.add(urgentId(occurrence));
+        try { localStorage.setItem(URGENT_STORE, JSON.stringify([...urgentHeard].slice(-50))); } catch (e) {}
+    }
+
+    function nextUrgent() {
+        return ((live.nav && live.nav.urgent) || []).find(u => !urgentHeard.has(urgentId(u))) || null;
+    }
+
+    function playJingleThen(i, jg) {
+        const T = serverNow();
+        if (jg.follow && jg.follow.key && jg.follow.duration) {
+            i = Math.min(Math.max(0, i), personal.list.length);
+            personal.list.splice(i, 0, Object.assign({}, jg.follow, {uid: 'u' + jg.urgent_at + '-' + i}));
+        }
+        personal.pending = i;
+        personal.sinceJingle = 0;
+        personal.item = Object.assign({}, jg, {
+            start: T, end: T + jg.duration, fade_in: 0, fade_out: 0, duck: null, overlay: null, explicit: false, jingle: true,
+            urgent: !!jg.urgent_at
+        });
+        personal.clock = T;
+        if (jg.urgent_at != null) markUrgentHeard(jg);
+        prepareSlots(jg.key);
+    }
+
+    function goTo(i, regular) {
+        const urgent = nextUrgent();
+        if (urgent) {
+            playJingleThen(i, urgent);
+            return;
+        }
+        const every = Number((live.ui || {}).jingle_every) || 0;
+        const js = ((live.nav && live.nav.jingles) || []).filter(jingleAllowed);
+        if (regular !== false && every > 0 && js.length && (personal.sinceJingle || 0) >= every) {
+            playJingleThen(i, js[(personal.jseq || 0) % js.length]);
+            personal.jseq = (personal.jseq || 0) + 1;
+        } else {
+            playPersonal(i);
+        }
+    }
+
+    function advancePersonal() {
+        if (personal.idx + 1 >= personal.list.length) {
+            const keys = new Set(personal.list.slice(-PLAYED_KEEP).map(x => x.key));
+            let more;
+            if (personal.refill) {
+                more = (personal.refill() || []).filter(t => t && t.key && !keys.has(t.key));
+            } else {
+                more = ((live.nav && live.nav.next) || []).filter(t => !keys.has(t.key));
+            }
+            if (!more.length) {
+                goLive();
+                return;
+            }
+            const base = personal.list.length;
+            more.forEach((t, j) => personal.list.push(Object.assign({}, t, {uid: 'p' + (base + j)})));
+        }
+        goTo(personal.idx + 1);
+    }
+
+    function goLive() {
+        personal = null;
+        resetSlots();
+        current = null;
+        updateNavUi();
+    }
+
+    const NAV_COOLDOWN_MS = 600;
+    const PLAYED_KEEP = 4;
+    let navLockUntil = 0;
+
+    function lockNavButtons() {
+        navLockUntil = performance.now() + NAV_COOLDOWN_MS;
+        ['userPrevBtn', 'userNextBtn'].forEach(id => {
+            const b = $(id);
+            if (b) b.disabled = true;
+        });
+        setTimeout(() => {
+            ['userPrevBtn', 'userNextBtn'].forEach(id => {
+                const b = $(id);
+                if (b) b.disabled = false;
+            });
+        }, NAV_COOLDOWN_MS);
+    }
+
+    function navigate(dir) {
+        if (!haveClock || performance.now() < navLockUntil) return;
+        if (personal && personal.item && personal.item.urgent) return;
+        lockNavButtons();
+        if (!personal) {
+            const nav = navList(serverNow());
+            if (!nav.list.length) return;
+            personal = {list: nav.list, idx: nav.idx, item: null, sinceJingle: 1};
+        }
+        if (personal.pending != null) {
+            playPersonal(dir > 0 ? personal.pending : Math.max(0, personal.pending - 1));
+        } else {
+            const target = Math.round(personal.idx + dir * (Number.isInteger(personal.idx) ? 1 : 0.5));
+            if (target >= personal.list.length) {
+                personal.idx = personal.list.length - 1;
+                advancePersonal();
+            } else if (dir > 0) {
+                goTo(target);
+            } else {
+                goTo(Math.max(0, target), false);
+            }
+        }
+        if (!listening) startListening();
+    }
+
+    function updateNavUi() {
+        const lb = $('userLiveBtn');
+        if (lb) lb.hidden = !personal;
+    }
+
     function driveSlot(s, play, T, dt) {
         const it = s.item;
         let target = 0;
@@ -549,13 +644,13 @@
                     s.lastSeek = performance.now();
                 }
             }
-            if (s.el.paused) playSlot(s);
+            if (s.el.paused && !s.el.ended) playSlot(s);
         } else if (!s.el.paused) {
             s.el.pause();
         }
         const step = SLEW_PER_S * dt;
         s.gain += Math.max(-step, Math.min(step, target - s.gain));
-        setGain(s.el, s.gain);
+        setGain(s.el, s.gain * duckFactor());
     }
 
     function updateDominant(audible, T) {
@@ -569,6 +664,14 @@
             if (changed) showMeta(best);
         } else if (best) {
             current = best;
+        }
+        if (best && best.category === 'annonces' && listening) {
+            const slot = slots.find(s => s.item === best && s.seeded && !s.el.paused && !s.el.ended && s.el.readyState >= 2);
+            const occurrence = best.key + '@' + best.start + '@' + best.urgent_at;
+            if (slot && occurrence !== lastHeardAnnouncement) {
+                markUrgentHeard(best);
+                lastHeardAnnouncement = occurrence;
+            }
         }
         updateProgress(T);
     }
@@ -614,6 +717,7 @@
     }
 
     function showMeta(it) {
+        userImageOnTrack(it);
         showTrackCover(it);
         $('nowTitle').textContent = it.jingle ? 'Jingle' : trackTitle(it);
         $('nowSub').textContent = it.jingle ? 'CréaZik IA WebRadio' : plName(it.playlist_label);
@@ -621,7 +725,7 @@
         loadViz(it);
         applyMediaSession();
         updateThumbs();
-        renderProgram();
+        emit('track', Object.assign({}, it));
         const area = $('comText');
         if (area) area.placeholder = it.jingle ? 'Ton commentaire sur la radio...' : 'Ton commentaire sur « ' + trackTitle(it) + ' »...';
         featuredId = null;
@@ -769,7 +873,8 @@
         navigator.mediaSession.setActionHandler('play', startListening);
         navigator.mediaSession.setActionHandler('pause', stopListening);
         try {
-            navigator.mediaSession.setActionHandler('nexttrack', USER_UI ? null : skip);
+            navigator.mediaSession.setActionHandler('nexttrack', () => navigate(1));
+            navigator.mediaSession.setActionHandler('previoustrack', () => navigate(-1));
         } catch (e) {}
     }
 
@@ -796,8 +901,6 @@
         if (!box) return;
         const show = !!current && !current.jingle;
         box.hidden = !show;
-        const dbx = $('dynBox');
-        if (dbx) dbx.hidden = !show;
         if (!show) return;
         const v = votes.tracks[current.key] || {up: 0, down: 0};
         const mine = votes.mine[current.key] || {up: 0, down: 0};
@@ -807,18 +910,11 @@
         };
         set('thumbUpCount', v.up || 0);
         set('thumbDownCount', v.down || 0);
-        const db = $('dynBox');
-        if (db) {
-            db.hidden = false;
-            const lvls = String((votes.dynamics || {})[current.key] || '').split('+');
-            db.querySelectorAll('.dyn-btn').forEach(b => {
-                const on = lvls.includes(b.dataset.level);
-                b.classList.toggle('active', on);
-                b.setAttribute('aria-pressed', on ? 'true' : 'false');
-            });
-        }
         const rb = $('thumbReset');
-        if (rb) rb.disabled = !((mine.up || 0) + (mine.down || 0));
+        if (rb) {
+            rb.hidden = !adminSession;
+            rb.disabled = !((mine.up || 0) + (mine.down || 0));
+        }
         [['thumbUp', 'up'], ['thumbDown', 'down']].forEach(([id, kind]) => {
             const b = $(id);
             if (!b) return;
@@ -858,7 +954,7 @@
 
     function sendVote(kind) {
         if (!current || current.jingle) return;
-        if (USER_UI) {
+        if (!adminSession) {
             sendVoteSingle(kind);
             return;
         }
@@ -876,37 +972,12 @@
         if (!voteTimer) voteTimer = setTimeout(flushVotes, 400);
     }
 
-    async function setDynamics(level) {
-        if (!current || current.jingle) return;
-        const key = current.key;
-        const prev = (votes.dynamics || {})[key];
-        const order = ['slow', 'medium', 'high'];
-        const sel = prev ? prev.split('+') : [];
-        let nextSel;
-        if (sel.includes(level)) nextSel = sel.filter(l => l !== level);
-        else if (sel.length >= 2) nextSel = [level];
-        else nextSel = sel.concat(level);
-        nextSel.sort((a, b) => order.indexOf(a) - order.indexOf(b));
-        const next = nextSel.length ? nextSel.join('+') : 'none';
-        votes.dynamics = Object.assign({}, votes.dynamics);
-        if (next === 'none') delete votes.dynamics[key]; else votes.dynamics[key] = next;
-        updateThumbs();
-        try {
-            const r = await fetch('/api/dynamics', {method: 'POST', headers: {'Content-Type': 'application/json'},
-                                                    body: JSON.stringify({key, level: next})});
-            if (!r.ok) throw new Error(r.status);
-        } catch (e) {
-            if (prev) votes.dynamics[key] = prev; else delete votes.dynamics[key];
-            updateThumbs();
-        }
-    }
-
     async function resetThumbs() {
-        if (!current || current.jingle) return;
+        if (!current || current.jingle || !adminSession) return;
         const key = current.key;
         delete pendingVotes[key];
         try {
-            const r = await fetch('/api/vote/reset', {method: 'POST', headers: {'Content-Type': 'application/json'},
+            const r = await fetch('/api/vote/reset', {method: 'POST', headers: Object.assign({'Content-Type': 'application/json'}, UI_HEADERS),
                                                       body: JSON.stringify({key})});
             if (!r.ok) throw new Error(r.status);
             const res = await r.json();
@@ -925,7 +996,7 @@
                 const count = batch[key][kind];
                 if (!count) continue;
                 try {
-                    const r = await fetch('/api/vote', {method: 'POST', headers: {'Content-Type': 'application/json'},
+                    const r = await fetch('/api/vote', {method: 'POST', headers: Object.assign({'Content-Type': 'application/json'}, UI_HEADERS),
                                                         body: JSON.stringify({key, vote: kind, count})});
                     if (r.ok) {
                         const res = await r.json();
@@ -1008,18 +1079,6 @@
         data.key = current ? (current.key || '') : '';
         const base = current ? hueFor(current.key || '') : 200;
         data.hue = (base + progress * 140 + sm.level * 50) % 360;
-    }
-
-    function initHumanBanner() {
-        const img = $('humanBanner');
-        const fb = $('humanFallback');
-        if (!img || !fb) return;
-        const fail = () => {
-            img.hidden = true;
-            fb.hidden = false;
-        };
-        img.addEventListener('error', fail);
-        if (img.complete && img.naturalWidth === 0) fail();
     }
 
     function resizeCanvas() {
@@ -1161,7 +1220,11 @@
                 kind: 'radio'
             }));
             const travel = (ts.ads || []).map(a => Object.assign({}, a, {kind: 'ts', url: ts.url || '', label: 'Écouter Traveling Sound Web Radio'}));
-            panelAdsList = [serenia, travel, radio].filter(g => g.length);
+            const messages = (content.messages || []).map(m => Object.assign({}, m, {radio: true, kind: 'radio'}));
+            const groups = profile && Array.isArray(profile.ad_groups) ? profile.ad_groups : null;
+            const allow = g => !groups || groups.includes(g);
+            panelAdsList = [[serenia, 'serenia'], [travel, 'traveling_sound'], [radio, 'radio'], [messages, 'messages']]
+                .filter(([g, id]) => g.length && allow(id)).map(([g]) => g);
         }
         return panelAdsList;
     }
@@ -1366,7 +1429,8 @@
             if (x < p.d) { kind = p.kind; pd = p.d; break; }
             x -= p.d;
         }
-        const adOn = kind === 'ad';
+        const userOn = userImageOn();
+        const adOn = kind === 'ad' && !userOn;
         if (adOn && !adWasOn) {
             adN += 1;
             adStart = t;
@@ -1374,12 +1438,13 @@
         }
         if (!adOn && adWasOn) adOffAt = t;
         adWasOn = adOn;
-        const coverOn = kind === 'cover' && coverOk;
-        setLayer(coverBlack, coverOn);
+        const coverOn = kind === 'cover' && coverOk && !userOn;
+        setLayer(coverBlack, coverOn || userOn);
         const coverShown = coverOn && x > PHASE_FX_MS / 1000 && x < pd - PHASE_FX_MS / 1000;
         trackCover.classList.toggle('show', coverShown);
         if (coverShown) fitCoverTitle();
         coverLabel.classList.toggle('show', coverShown);
+        if (userImageEl) userImageEl.classList.toggle('show', userOn);
         setLayer(adPanelEl, adOn);
         return adOn;
     }
@@ -1396,79 +1461,220 @@
         if (w && h) drawVisual(w, h, now);
     }
 
-    function rowHtml(it, src, extra) {
-        const isJ = !!it.jingle;
-        const sub = (isJ ? 'Jingle' : plName(it.playlist_label)) + (it.duration ? ' - ' + fmtTime(it.duration) : '');
-        const badge = extra.explicit ? '<span class="prog-badge">Choisi</span>'
-            : (extra.auto && isJ ? '<span class="prog-badge">Jingle auto</span>' : '');
-        const attrs = `data-src="${src}" data-key="${esc(it.key)}"` + (extra.qi !== undefined ? ` data-qi="${extra.qi}"` : '');
-        const removable = src === 'queue' && !(extra.auto && isJ);
-        return `<div class="prog-item${isJ ? ' is-jingle' : ''}${extra.explicit ? ' is-explicit' : ''}${extra.cls || ''}" ${attrs}>
-            <button type="button" class="prog-main" data-act="next" ${attrs}>
-                <span class="prog-title">${esc(trackTitle(it))}</span>
-                <span class="prog-sub">${esc(sub)}${extra.time ? ' - ' + esc(extra.time) : ''}</span>
-                ${badge}
-            </button>
-            <button type="button" class="prog-act" data-act="now" ${attrs} aria-label="Lire juste après" title="Lire juste après">&#9654;</button>
-            ${removable ? `<button type="button" class="prog-act" data-act="remove" ${attrs} aria-label="Retirer de la file" title="Retirer de la file">&times;</button>` : ''}
-        </div>`;
-    }
-
-    function renderProgram() {
-        const panel = $('progPanel');
-        if (!panel || panel.hidden || !effectiveAdmin()) return;
-        const setHtml = (id, html) => {
-            const el = $(id);
-            if (el) el.innerHTML = html;
-        };
-        const empty = txt => `<div class="prog-empty">${txt}</div>`;
-        const played = (live.played || []).slice(-8);
-        setHtml('progPlayed', played.length
-            ? played.map(p => rowHtml(p, 'played', {time: fmtClock(p.start), cls: ' is-played'})).join('')
-            : empty('Rien de joué avant ce morceau.'));
-        setHtml('progNow', current
-            ? `<div class="prog-item is-now${current.jingle ? ' is-jingle' : ''}"><div class="prog-main">
-                   <span class="prog-title">${esc(current.jingle ? 'Jingle - ' + trackTitle(current) : trackTitle(current))}</span>
-                   <span class="prog-sub">${esc(current.jingle ? 'CréaZik IA WebRadio' : plName(current.playlist_label))}</span>
-                   <span class="prog-badge">En direct</span></div></div>`
-            : empty('Aucun morceau en cours.'));
-        const queue = live.queue || [];
-        const upcoming = live.upcoming || [];
-        const n = Math.min(queue.length, upcoming.length);
-        const rows = [];
-        for (let i = 0; i < n; i++) {
-            rows.push(rowHtml(upcoming[i], 'queue', {qi: queue[i].index, explicit: queue[i].explicit, auto: queue[i].auto}));
-        }
-        setHtml('progQueue', rows.length ? rows.join('') : empty('File vide : aucun morceau disponible.'));
-        setHtml('progLibrary', library.length ? library.map(pl => {
-            const open = openPlaylists.has(pl.id);
-            const b = esc(pl.id);
-            return `<div class="prog-playlist${open ? ' open' : ''}" data-playlist="${b}">
-                <div class="prog-pl-head">
-                    <button type="button" class="prog-expand" data-act="toggle" data-playlist="${b}" aria-expanded="${open}">
-                        <span class="prog-pl-name">${esc(plName(pl.label))}</span>
-                        <span class="prog-pl-count">${pl.tracks.length}</span>
-                    </button>
-                    <button type="button" class="prog-pl-act" data-act="pl-next" data-playlist="${b}">Ensuite</button>
-                    <button type="button" class="prog-pl-act" data-act="pl-now" data-playlist="${b}">Lire</button>
-                </div>
-                <div class="prog-pl-tracks">${open ? pl.tracks.map(t => rowHtml(t, 'library', {})).join('') : ''}</div>
-            </div>`;
-        }).join('') : empty('Aucune playlist disponible.'));
-    }
-
     function plName(label) {
         return String(label || '').replace(/^playlist\s+/i, '');
     }
 
-    async function loadLibrary() {
-        const list = await getJSON('/api/radio/library', []);
-        library = list.map(pl => ({
-            id: pl.id, label: pl.label,
-            tracks: pl.tracks.map(t => ({key: t.key, name: t.name, playlist_label: pl.label, duration: t.duration, jingle: pl.jingle}))
-        }));
-        libraryLoaded = true;
-        renderProgram();
+    function playList(list, refill) {
+        if (!haveClock || !Array.isArray(list) || !list.length) return false;
+        personal = {list: list.map((t, i) => Object.assign({}, t, {uid: 's' + i})), idx: 0, item: null,
+                    refill: typeof refill === 'function' ? refill : null, sinceJingle: 1};
+        goTo(0, false);
+        if (!listening) startListening();
+        return true;
+    }
+
+    const userImageEl = $('userImage');
+    let userImg = null;
+
+    function showUserImage(src) {
+        if (!userImageEl) return;
+        const cur = current && !current.jingle ? current : null;
+        userImg = {src, key: cur ? cur.key : null};
+        userImageEl.src = src;
+        userImageEl.hidden = false;
+    }
+
+    function clearUserImage() {
+        userImg = null;
+        if (!userImageEl) return;
+        userImageEl.classList.remove('show');
+        userImageEl.hidden = true;
+        userImageEl.removeAttribute('src');
+    }
+
+    function userImageOnTrack(it) {
+        if (!userImg || !it) return;
+        if (userImg.key === null) {
+            if (!it.jingle) userImg.key = it.key;
+        } else if (it.key !== userImg.key) {
+            clearUserImage();
+        }
+    }
+
+    function userImageOn() {
+        return !!(userImg && userImg.key && current && current.key === userImg.key);
+    }
+
+    function pluginNotify(src, after) {
+        const done = typeof after === 'function' ? after : () => {};
+        if (!listening) {
+            done();
+            return;
+        }
+        playNotify(src, done);
+    }
+
+    function unlockAudio() {
+        ensureGraph();
+        unlockNotify();
+    }
+
+    function uiFetch(url, opts) {
+        const o = Object.assign({}, opts || {});
+        o.headers = Object.assign({}, UI_HEADERS, o.headers || {});
+        return fetch(url, o);
+    }
+
+    function adminApi() {
+        return Object.freeze({
+            live: () => live,
+            current: () => (current ? Object.assign({}, current) : null),
+            votes: () => votes,
+            radioAction,
+            stopListening,
+            isListening: () => listening,
+            onLive: fn => { if (typeof fn === 'function') hooks.live.push(fn); },
+            onTrack: fn => { if (typeof fn === 'function') hooks.track.push(fn); },
+            onListen: fn => { if (typeof fn === 'function') hooks.listen.push(fn); },
+            trackTitle,
+            fmtTime,
+            fmtClock
+        });
+    }
+
+    function pluginCtx(entry, body, card) {
+        return Object.freeze({
+            id: entry.id,
+            title: entry.title,
+            body,
+            session: session ? JSON.parse(JSON.stringify(session)) : null,
+            profile: profile ? JSON.parse(JSON.stringify(profile)) : null,
+            esc,
+            plName,
+            getJSON,
+            fetch: uiFetch,
+            postJSON: (url, data) => uiFetch(url, {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data)}),
+            state: () => ({listening, haveClock, current: current ? Object.assign({}, current) : null}),
+            playList,
+            unlockAudio,
+            playNotify: pluginNotify,
+            notifyBusy: () => notifyBusy,
+            showImage: showUserImage,
+            setVisible: v => { if (card) card.hidden = !v; },
+            admin: adminSession && entry.scope === 'admin' ? adminApi() : null
+        });
+    }
+
+    function loadAsset(tag, attrs) {
+        return new Promise(resolve => {
+            const el = document.createElement(tag);
+            Object.keys(attrs).forEach(k => el.setAttribute(k, attrs[k]));
+            el.onload = () => resolve(true);
+            el.onerror = () => resolve(false);
+            (tag === 'script' ? document.body : document.head).appendChild(el);
+        });
+    }
+
+    function pluginCard(entry) {
+        const list = $('pluginList');
+        if (!list) return null;
+        const card = document.createElement('article');
+        card.className = 'plugin' + (entry.scope === 'admin' ? ' plugin-admin' : '');
+        card.dataset.plugin = entry.id;
+        const bodyId = 'plugin-' + entry.id + '-body';
+        card.innerHTML = '<h3 class="plugin-h"><button class="plugin-toggle" type="button" aria-expanded="false" aria-controls="' + esc(bodyId) + '">'
+            + '<span class="plugin-name">' + esc(entry.title) + '</span><span class="plugin-chev" aria-hidden="true"></span></button></h3>'
+            + '<div id="' + esc(bodyId) + '" class="plugin-body" hidden></div>';
+        list.appendChild(card);
+        return card;
+    }
+
+    function mountPlugin(entry) {
+        const def = pluginDefs[entry.id];
+        if (!def) return false;
+        const slot = entry.slot || 'card';
+        let card = null;
+        let body;
+        if (slot === 'card') {
+            card = pluginCard(entry);
+            if (!card) return false;
+            body = card.querySelector('.plugin-body');
+        } else {
+            const host = document.querySelector('[data-plugin-slot="' + slot + '"]');
+            if (!host) return false;
+            body = document.createElement('div');
+            body.dataset.plugin = entry.id;
+            host.appendChild(body);
+        }
+        const ctx = pluginCtx(entry, body, card);
+        try {
+            def.init(ctx);
+        } catch (e) {
+            if (card) card.remove(); else body.remove();
+            return false;
+        }
+        if (card) {
+            const btn = card.querySelector('.plugin-toggle');
+            const remember = entry.scope === 'admin';
+            let opened = false;
+            const setOpen = open => {
+                btn.setAttribute('aria-expanded', String(open));
+                body.hidden = !open;
+                if (remember) {
+                    cardsOpen[entry.id] = open;
+                    try { localStorage.setItem(CARDS_STORE, JSON.stringify(cardsOpen)); } catch (e) {}
+                }
+                if (open && !opened) {
+                    opened = true;
+                    if (typeof def.open === 'function') def.open(ctx);
+                }
+            };
+            btn.addEventListener('click', () => setOpen(btn.getAttribute('aria-expanded') !== 'true'));
+            if (remember && cardsOpen[entry.id]) setOpen(true);
+        }
+        return slot === 'card';
+    }
+
+    const CARDS_STORE = 'adminCardsOpen';
+    let cardsOpen = {};
+    try { cardsOpen = JSON.parse(localStorage.getItem(CARDS_STORE) || '{}') || {}; } catch (e) { cardsOpen = {}; }
+
+    async function mountPlugins() {
+        const entries = (session && Array.isArray(session.plugins) ? session.plugins : [])
+            .filter(e => e && /^[a-z0-9][a-z0-9-]*$/.test(e.id) && /^[\w-]+\.js$/.test(e.file || '')
+                && (e.scope !== 'admin' || adminSession));
+        const sheets = new Set();
+        entries.forEach(e => { if (e.css && /^[\w-]+\.css$/.test(e.css)) sheets.add(e.css); });
+        await Promise.all(Array.from(sheets).map(css => loadAsset('link', {rel: 'stylesheet', href: '/plugins/' + css})));
+        const scripts = new Set(entries.map(e => e.file));
+        await Promise.all(Array.from(scripts).map(f => loadAsset('script', {src: '/plugins/' + f})));
+        let cards = 0;
+        entries.forEach(e => { if (mountPlugin(e)) cards += 1; });
+        const section = $('plugins');
+        if (section) section.hidden = !cards;
+    }
+
+    async function loadSession() {
+        session = await getJSON('/api/session', {role: 'anon', user: null, profile: null, plugins: [], view_as: null});
+        profile = session && session.profile ? session.profile : null;
+        adminSession = !!session && session.role === 'admin';
+        UI_HEADERS = adminSession ? {} : USER_HEADERS;
+        panelAdsSrc = null;
+        const logged = session && (session.role === 'admin' || session.role === 'user');
+        const icon = $('sessionIcon');
+        if (icon) {
+            const label = logged ? 'Déconnexion' + (session.user ? ' (' + session.user + ')' : '') : 'Connexion';
+            icon.setAttribute('href', logged ? '/logout' : '/login');
+            icon.dataset.mode = logged ? (session.role === 'admin' ? 'admin' : 'user') : 'login';
+            icon.setAttribute('aria-label', label);
+            icon.title = label;
+        }
+        const text = $('sessionText');
+        if (text) {
+            text.setAttribute('href', logged ? '/logout' : '/login');
+            text.textContent = logged ? 'Déconnexion' + (session.user ? ' (' + session.user + ')' : '') : 'Connexion';
+        }
     }
 
     async function radioAction(body) {
@@ -1477,239 +1683,14 @@
                                                         body: JSON.stringify(body)});
             const st = await r.json().catch(() => null);
             if (st && st.active) {
-                const T = Date.now() / 1000;
-                clockOffset = st.server_time - T;
-                live = st;
-                updateDiscover();
-                renderProgram();
-            }
-        } catch (e) {}
-    }
-
-    function updateDiscover() {
-        const b = $('discoverBtn');
-        if (!b) return;
-        b.hidden = !isAdmin;
-        const on = !!live.unrated_only;
-        b.setAttribute('aria-pressed', on ? 'true' : 'false');
-        b.textContent = on ? 'Désactiver découverte' : 'Découverte';
-        updateTestLoop();
-    }
-
-    function updateTestLoop() {
-        const b = $('testLoopBtn');
-        if (!b) return;
-        b.hidden = !isAdmin;
-        const on = !!live.test_loop;
-        b.setAttribute('aria-pressed', on ? 'true' : 'false');
-        b.textContent = on ? 'Arr\u00eater le test' : 'Test';
-    }
-
-    function toggleTestLoop() {
-        radioAction({action: 'test_loop', on: !live.test_loop});
-    }
-
-    function toggleDiscover() {
-        radioAction({action: 'unrated', on: !live.unrated_only});
-    }
-
-    async function skip() {
-        if (effectiveAdmin()) {
-            radioAction({action: 'skip'});
-            return;
-        }
-        try {
-            await fetch('/api/skip', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: '{}'});
-            const r = await fetch('/api/radio/state?t=' + Date.now());
-            const st = await r.json().catch(() => null);
-            if (st && st.active) {
                 clockOffset = st.server_time - Date.now() / 1000;
                 live = st;
+                emit('live', true);
             }
-        } catch (e) {}
-    }
-
-    function onProgramClick(ev) {
-        const btn = ev.target.closest('[data-act]');
-        if (!btn || !effectiveAdmin()) return;
-        const act = btn.dataset.act;
-        const src = btn.dataset.src;
-        const key = btn.dataset.key;
-        const playlistId = btn.dataset.playlist;
-        if (act === 'toggle') {
-            if (openPlaylists.has(playlistId)) openPlaylists.delete(playlistId); else openPlaylists.add(playlistId);
-            renderProgram();
-            return;
-        }
-        if (act === 'pl-next') { radioAction({action: 'playlist_next', id: playlistId}); return; }
-        if (act === 'pl-now') { radioAction({action: 'playlist_front', id: playlistId}); return; }
-        if (src === 'queue') {
-            const index = parseInt(btn.dataset.qi, 10);
-            if (act === 'remove') radioAction({action: 'remove', index});
-            else if (act === 'next' || act === 'now') radioAction({action: 'move_front', index});
-            return;
-        }
-        if (act === 'now') radioAction({action: 'front', key});
-        else radioAction({action: 'next', key});
-    }
-
-    let coversData = null;
-    let coversBusy = false;
-
-    function coversTodo() {
-        const items = (coversData && coversData.items) || [];
-        return items.map((x, i) => ({x, i})).filter(o => o.x.status === 'pending')
-            .sort((a, b) => a.x.redo_count - b.x.redo_count || a.i - b.i).map(o => o.x);
-    }
-
-    function renderCovers() {
-        const box = $('coversBox');
-        if (!box || !coversData) return;
-        const c = coversData.counts || {};
-        const todo = coversTodo();
-        const stats = `<div class="cov-stats"><span>&Agrave; relire : <b>${todo.length}</b></span><span>Valid&eacute;es : <b>${c.validated || 0}</b></span><span>&Agrave; r&eacute;g&eacute;n&eacute;rer : <b>${c.redo || 0}</b></span><span>Abandonn&eacute;es : <b>${c.abandoned || 0}</b></span></div>`;
-        const cur = todo[0];
-        if (!cur) {
-            box.innerHTML = stats + `<p class="cov-empty">${c.redo ? 'Toutes les pochettes restantes attendent leur r&eacute;g&eacute;n&eacute;ration.' : 'Aucune pochette &agrave; relire.'}</p>`;
-            return;
-        }
-        const again = cur.redo_count ? ` &middot; refaite ${cur.redo_count}/${cur.max_redo} fois` : '';
-        box.innerHTML = stats + `<figure class="cov-fig"><img class="cov-img" src="${esc(cur.url)}" alt="Pochette de ${esc(cur.title)}"><figcaption><strong>${esc(cur.title)}</strong><span>${esc(cur.playlist_label)}${again}</span></figcaption></figure>
-            <div class="cov-actions"><button type="button" class="cov-btn cov-ok" data-verdict="validated" data-key="${esc(cur.key)}">Valider</button><button type="button" class="cov-btn cov-redo" data-verdict="redo" data-key="${esc(cur.key)}">&Agrave; refaire</button></div>`;
-        if (todo[1]) new Image().src = todo[1].url;
-    }
-
-    async function loadCovers() {
-        if (coversBusy) return;
-        const d = await getJSON('/api/covers/review', null);
-        if (!d || !Array.isArray(d.items)) return;
-        coversData = d;
-        renderCovers();
-    }
-
-    async function coversVerdict(key, verdict) {
-        coversBusy = true;
-        try {
-            const r = await fetch('/api/covers/verdict', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({key, verdict})});
-            if (!r.ok) return;
-            const res = await r.json();
-            const it = coversData.items.find(x => x.key === key);
-            if (it && res.status) {
-                const c = coversData.counts;
-                c[it.status] = Math.max(0, (c[it.status] || 0) - 1);
-                it.status = res.status;
-                c[res.status] = (c[res.status] || 0) + 1;
-            }
+            return r.ok;
         } catch (e) {
-        } finally {
-            coversBusy = false;
+            return false;
         }
-        renderCovers();
-    }
-
-    function initCovers() {
-        const box = $('coversBox');
-        const det = document.querySelector('#coversPanel details');
-        if (!box || !det) return;
-        det.addEventListener('toggle', () => { if (det.open) loadCovers(); });
-        box.addEventListener('click', ev => {
-            const btn = ev.target.closest('button[data-verdict]');
-            if (!btn || coversBusy) return;
-            coversVerdict(btn.dataset.key, btn.dataset.verdict);
-        });
-        setInterval(() => { if (isAdmin && det.open && !coversBusy && !document.hidden) loadCovers(); }, 20000);
-    }
-
-    function initFolds() {
-        let saved = {};
-        try { saved = JSON.parse(localStorage.getItem('folds') || '{}'); } catch (e) {}
-        document.querySelectorAll('details[data-fold]').forEach(d => {
-            const k = d.dataset.fold;
-            if (k in saved) d.open = !!saved[k];
-            d.addEventListener('toggle', () => {
-                saved[k] = d.open;
-                try { localStorage.setItem('folds', JSON.stringify(saved)); } catch (e) {}
-            });
-        });
-        const progBtn = document.getElementById('progFoldAll');
-        if (progBtn) {
-            const folds = () => Array.from(document.querySelectorAll('#progPanel details[data-fold]'));
-            const sync = () => { progBtn.textContent = folds().some(d => d.open) ? 'Tout plier' : 'Tout d\u00e9plier'; };
-            progBtn.addEventListener('click', () => {
-                const target = !folds().some(d => d.open);
-                folds().forEach(d => { d.open = target; });
-                sync();
-            });
-            folds().forEach(d => d.addEventListener('toggle', sync));
-            sync();
-        }
-    }
-
-    function applyMode() {
-        const adm = effectiveAdmin();
-        const setHidden = (id, hidden) => {
-            const el = $(id);
-            if (el) el.hidden = hidden;
-        };
-        setHidden('nextBtn', false);
-        setHidden('adminBar', true);
-        updateDiscover();
-        syncAdminEmbed();
-        setHidden('progPanel', !adm);
-        setHidden('testsPanel', !isAdmin);
-        setHidden('coversPanel', !isAdmin);
-        if (isAdmin) loadTests();
-        setHidden('humanRadio', true);
-        updateThumbs();
-        const icon = $('modeIcon');
-        if (icon) {
-            const mode = !isAdmin ? 'login' : (viewAsUser ? 'user' : 'admin');
-            const label = {login: 'Connexion admin', admin: 'Voir comme auditeur', user: 'Revenir en mode admin'}[mode];
-            icon.dataset.mode = mode;
-            icon.setAttribute('aria-label', label);
-            icon.title = label;
-        }
-        applyMediaSession();
-        if (adm && !libraryLoaded) loadLibrary();
-        renderProgram();
-    }
-
-    function setViewAsUser(v) {
-        viewAsUser = v;
-        try { localStorage.setItem('viewAsUser', v ? '1' : '0'); } catch (e) {}
-        applyMode();
-    }
-
-    function onModeIcon() {
-        if (!isAdmin) {
-            try { sessionStorage.setItem('autoplayAdmin', '1'); } catch (e) {}
-            location.href = '/login?next=/listen.html';
-            return;
-        }
-        setViewAsUser(!viewAsUser);
-        if (!viewAsUser && !listening) startListening();
-    }
-
-    function autoplayAfterLogin() {
-        let flag = null;
-        try {
-            flag = sessionStorage.getItem('autoplayAdmin');
-            sessionStorage.removeItem('autoplayAdmin');
-        } catch (e) {}
-        if (!flag || !isAdmin || viewAsUser) return;
-        listening = true;
-        setPlayLabel();
-        onAutoplayBlockedCheck();
-    }
-
-    function onAutoplayBlockedCheck() {
-        const probe = slots[0].el;
-        const prevSrc = probe.getAttribute('src');
-        if (prevSrc) return;
-        const p = probe.play ? probe.play() : null;
-        if (p && p.catch) p.catch(err => {
-            if (err && err.name === 'NotAllowedError') onAutoplayBlocked();
-        });
     }
 
     function showFeatured() {
@@ -1784,80 +1765,27 @@
         }
     }
 
-    function syncAdminEmbed() {
-        const box = $('adminEmbed');
-        const frame = $('adminFrame');
-        if (!box || !frame || frame.getAttribute('src')) return;
-        box.hidden = false;
-        let ro = null;
-        const fit = () => {
-            const d = frame.contentDocument;
-            if (d && d.body) frame.style.height = Math.ceil(d.body.getBoundingClientRect().height) + 'px';
-        };
-        frame.addEventListener('load', async () => {
-            const d = frame.contentDocument;
-            if (ro) ro.disconnect();
-            if (d && d.body && window.ResizeObserver) {
-                d.documentElement.style.overflow = 'hidden';
-                d.body.style.minHeight = '0';
-                ro = new ResizeObserver(fit);
-                ro.observe(d.body);
-            }
-            fit();
-            const me = await getJSON('/api/me', {admin: false});
-            if (!!me.admin !== isAdmin) {
-                isAdmin = !!me.admin;
-                applyMode();
-            }
-        });
-        frame.src = '/radio.html';
-    }
-
     async function init() {
-        const me = USER_UI ? {admin: false} : await getJSON('/api/me', {admin: false});
-        isAdmin = !!me.admin;
         const on = (id, fn) => { const el = $(id); if (el) el.addEventListener('click', fn); };
         on('playBtn', toggle);
-        on('nextBtn', skip);
-        on('discoverBtn', toggleDiscover);
-        on('testLoopBtn', toggleTestLoop);
+        on('userPrevBtn', () => navigate(-1));
+        on('userNextBtn', () => navigate(1));
+        on('userLiveBtn', goLive);
+        on('thumbUp', () => sendVote('up'));
+        on('thumbDown', () => sendVote('down'));
+        on('thumbReset', resetThumbs);
         window.addEventListener('resize', () => fitCoverTitle(true));
         if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => fitCoverTitle(true));
-        testAudio.addEventListener('ended', stopTest);
-        testAudio.addEventListener('timeupdate', updateTestSeek);
-        testAudio.addEventListener('loadedmetadata', updateTestSeek);
-        const tl = $('testsList');
-        if (tl) {
-            tl.addEventListener('click', onTestsClick);
-            tl.addEventListener('input', ev => {
-                if (ev.target.id !== 'testSeek') return;
-                const d = testSeekMax();
-                if (d) testAudio.currentTime = Number(ev.target.value) / 1000 * d;
-            });
-        }
-        const mi = $('modeIcon');
-        if (mi) mi.addEventListener('click', onModeIcon);
-        const panel = $('progPanel');
-        if (panel) panel.addEventListener('click', onProgramClick);
-        const tu = $('thumbUp');
-        const td = $('thumbDown');
-        if (tu) tu.addEventListener('click', () => sendVote('up'));
-        if (td) td.addEventListener('click', () => sendVote('down'));
-        document.querySelectorAll('.dyn-btn').forEach(b => b.addEventListener('click', () => { setDynamics(b.dataset.level); b.blur(); }));
-        const tr = $('thumbReset');
-        if (tr) tr.addEventListener('click', resetThumbs);
         slots.forEach(s => s.el.addEventListener('error', () => onSlotError(s)));
         const cf = $('comForm');
         if (cf) cf.addEventListener('submit', postComment);
+        await loadSession();
         specs = await getJSON('./scenes_spec.json', {playlists: {}});
         content = Object.assign({jingle_messages: [], ads: []}, await getJSON('./radio_content.json', {}));
-        initFolds();
-        initCovers();
-        initHumanBanner();
-        applyMode();
         setPlayLabel();
         setTicker('CréaZik IA WebRadio : musiques générées par intelligence artificielle, en local   |   Contact : sereniatech33@gmail.com   |   serenia-tech.fr');
         await refreshLive();
+        mountPlugins();
         await Promise.all([loadComments(), loadVotes()]);
         setInterval(rotateFeatured, 5000);
         setInterval(loadComments, 30000);
@@ -1868,10 +1796,11 @@
             if (!document.hidden) refreshLive();
         });
         requestAnimationFrame(frame);
-        autoplayAfterLogin();
     }
 
-    window.__radioDebug = () => ({current, T: serverNow(), live: {active: live.active, upcoming: live.upcoming.length}, content, sceneKey, listening, transActive: !!(transEngine && transEngine.active)});
+    window.__radioDebug = () => ({current, T: serverNow(), live: {active: live.active, upcoming: live.upcoming.length}, content, sceneKey, listening, transActive: !!(transEngine && transEngine.active),
+                                  profile: profile && profile.id, view: liveItems().map(it => ({key: it.key, jingle: !!it.jingle, category: it.category, duck: !!it.duck})),
+                                  ads: panelAds().map(g => g[0] && (g[0].kind + ':' + g[0].headline))});
     window.__fitCoverTitle = fitCoverTitle;
     window.addEventListener('load', init);
 }());

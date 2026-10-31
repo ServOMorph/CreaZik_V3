@@ -1,0 +1,16 @@
+[
+  {"id": "styles", "title": "Choisir mes styles", "scope": "user", "slot": "card", "file": "styles.js", "css": null},
+  {"id": "image", "title": "Créer une image", "scope": "user", "slot": "card", "file": "image.js", "css": null},
+  {"id": "song", "title": "Créer un morceau", "scope": "user", "slot": "card", "file": "song.js", "css": null},
+  {"id": "sponsor", "title": "Lien partenaire", "scope": "user", "slot": "footer", "file": "sponsor.js", "css": null},
+  {"id": "view-as", "title": "Voir comme un profil", "scope": "admin", "slot": "top", "file": "view_as.js", "css": "view_as.css"},
+  {"id": "commandes-globales", "title": "Commandes globales (tous les auditeurs)", "scope": "admin", "slot": "player", "file": "commandes_globales.js", "css": "admin.css"},
+  {"id": "programmation", "title": "Programmation", "scope": "admin", "slot": "card", "file": "programmation.js", "css": "admin.css"},
+  {"id": "dynamique", "title": "Dynamique du morceau (Slow / Medium / High)", "scope": "admin", "slot": "card", "file": "dynamique.js", "css": "admin.css"},
+  {"id": "outils-radio", "title": "Outils radio", "scope": "admin", "slot": "card", "file": "outils_radio.js", "css": "admin.css"},
+  {"id": "jingle-texte", "title": "Texte vers jingle urgent", "scope": "admin", "slot": "card", "file": "jingle_texte.js", "css": "admin.css"},
+  {"id": "tests", "title": "Tests", "scope": "admin", "slot": "card", "file": "tests.js", "css": "admin.css"},
+  {"id": "pochettes", "title": "Pochettes", "scope": "admin", "slot": "card", "file": "pochettes.js", "css": "admin.css"},
+  {"id": "gestion", "title": "Gestion WebRadio", "scope": "admin", "slot": "card", "file": "gestion.js", "css": "admin.css"},
+  {"id": "suivi", "title": "Suivi du travail", "scope": "admin", "slot": "card", "file": "suivi.js", "css": "admin.css"}
+]

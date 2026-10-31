@@ -1,0 +1,37 @@
+{
+  "maj": "31/10/2026 09:20",
+  "sections": [
+    {"nom": "En cours", "items": []},
+    {"nom": "En attente", "items": [
+      {"titre": "Plugins image et morceau en pause (carte graphique)", "qui": "Entraînement v9 de la session LLM, environ 2 jours et demi", "statut": "ko",
+       "detail": ["Les demandes des auditeurs restent en attente", "Reprise : supprimer webradio/gpu_pause.flag (je peux le faire sur demande)", "Le test réel de l'image admin attend cette reprise"]},
+      {"titre": "Choix des pistes stop motion", "qui": "À vous : planche https://claude.ai/artifact/TpxwZoKDTNRPEc4qVBinoD", "statut": "wait", "detail": []},
+      {"titre": "Vote de test à retirer de user_votes.json", "qui": "Morceau rock-progressif-instrumental:5, 2026-10-31 09:06 (laissé par un test, suppression refusée à l'agent)", "statut": "wait", "detail": []}
+    ]},
+    {"nom": "Fait aujourd'hui", "items": [
+      {"titre": "UI unique sur le port 5000, tout en plugins", "qui": "Agent Claude 5 (Opus) · 99 tests · connexion admin réelle contrôlée par moi (28/28 en local et via le tunnel, formulaire au navigateur)", "statut": "done",
+       "detail": ["11 cartes pour l'admin : styles, image, morceau, programmation, dynamique, outils radio, texte vers jingle, tests, pochettes, gestion, suivi", "Boutons ⏮⏭ personnels + Précédent/Suivant (tous)", "/listen.html et /suivi.html redirigent vers /", "Voix rapide Kokoro : 52 s mesurées pour 6 s d'audio (pas « quelques secondes »)", "Non écouté, iPhone non testé, aucun jingle diffusé"]},
+      {"titre": "Profils d'UI, comptes et plugins déclaratifs", "qui": "Agent Claude 4 (Opus) · 87 tests, anonyme et Olive contrôlés au serveur et au navigateur", "statut": "done",
+       "detail": ["Profils classique et traveling-sound, Olive/Olive", "Plugins : styles, image, morceau, partenaire, « voir comme »", "Connexion admin réelle non testée par l'agent", "Mot de passe Olive faible"]},
+      {"titre": "Template de délégation Codex + OpenCode réutilisable", "qui": "Codex · vérifié : syntaxe, installation, idempotence, DryRun · VibeObs prévenu", "statut": "done", "detail": ["_templates/delegation/ (v1.0.0)", "Aucun appel réel depuis une copie installée"]},
+      {"titre": "Exploration stop motion : 5 pistes à choisir", "qui": "Agent Claude 3 · planche publiée, à vous de choisir", "statut": "done", "detail": ["https://claude.ai/artifact/TpxwZoKDTNRPEc4qVBinoD", "Méthode : édition de l'image de base (même personnage), 62 s par pose", "Carte graphique libérée, session LLM prévenue"]},
+      {"titre": "4 bugs de la lecture personnelle + purge des images", "qui": "Codex · vérifié : pause figée 8 s au navigateur, reprise correcte, 10 tests", "statut": "done", "detail": ["Annonce marquée entendue à tort : corrigé", "Pause qui laisse jouer « image prête » : corrigé", "Purge des images de plus de 7 jours"]},
+      {"titre": "Plugin « Créer un morceau »", "qui": "Agent Claude 2 · vérifié (morceau réel diffusé, 69 tests)", "statut": "done",
+       "detail": ["Paroles gemma4, ACE-Step, jingle puis morceau à l'antenne pour tous", "Total mesuré 18 min (dont attentes de la carte graphique)", "Non écouté, iPhone à contrôler", "Annonce radio diffusée (jingles-annonces:4)"]},
+      {"titre": "Icône cadenas de connexion admin sur l'UI auditeur", "qui": "Vérifié au navigateur", "statut": "done", "detail": []},
+      {"titre": "Revue Codex du travail de l'agent 1", "qui": "148 s · 8 constats, 1 grave (pas de quota : votre choix)", "statut": "done", "detail": []},
+      {"titre": "Page de suivi en direct /suivi.html","qui": "Testée : connexion admin exigée, rafraîchie toutes les 10 s", "statut": "done", "detail": []},
+      {"titre": "Plugins UI auditeur + plugin « Créer une image »", "qui": "Agent Claude 1 · vérifié (3 images réelles, navigateur, 51 tests)", "statut": "done",
+       "detail": ["Cartes pliables, styles en plugin", "Image Qwen locale pour le demandeur seul, jingle « image prête »", "5 à 12 min par image", "Annonce radio diffusée (jingles-annonces:2)"]},
+      {"titre": "Mot de passe admin changé", "qui": "Testé : nouveau accepté, ancien refusé", "statut": "done", "detail": []},
+      {"titre": "Commandes /tel et /pc", "qui": "Mode téléphone : 1 ou 2 phrases, questions à choix", "statut": "done", "detail": []},
+      {"titre": "Commande /jingle (annonce + rotation)", "qui": "OpenCode gratuit · vérifié", "statut": "done", "detail": []},
+      {"titre": "Circuits de délégation Codex et OpenCode (gratuit)", "qui": "Testés en écriture : 14 s et 11 s", "statut": "done", "detail": []},
+      {"titre": "Jingles urgents (annonces prioritaires, une fois par auditeur)", "qui": "Vérifié côté serveur et navigateur", "statut": "done", "detail": []},
+      {"titre": "Choix des styles, Précédent / Suivant, anti-spam, jingles en navigation", "qui": "Vérifié au navigateur", "statut": "done", "detail": []},
+      {"titre": "Bugs « relance au milieu » et Suivant lent", "qui": "Corrigés, vérifiés au navigateur", "statut": "done", "detail": []},
+      {"titre": "Jingles Traveling Sound tous les 2 morceaux, lien en bas", "qui": "Vérifié", "statut": "done", "detail": []},
+      {"titre": "Visuel « Salut Olive, ça farte ? »", "qui": "En rotation dans les pubs animées", "statut": "done", "detail": []}
+    ]}
+  ]
+}

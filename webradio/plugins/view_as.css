@@ -1,0 +1,27 @@
+.view-as {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px 12px;
+  box-sizing: border-box;
+  width: calc(100% - 32px);
+  max-width: 560px;
+  margin: 0 auto 8px;
+  padding: 8px 12px;
+  border: 1px dashed var(--stroke-2);
+  border-radius: var(--r-m);
+  font-size: var(--fs-s);
+  color: var(--muted);
+}
+.view-as-field { display: flex; align-items: center; gap: 8px; }
+.view-as-select {
+  min-height: 44px;
+  padding: 0 10px;
+  border: 1px solid var(--stroke-2);
+  border-radius: 10px;
+  color: var(--text);
+  background: var(--glass-2);
+  font-size: var(--fs-s);
+}
+.view-as-hint:empty { display: none; }

@@ -1,0 +1,13 @@
+{
+  "id": "traveling-sound",
+  "label": "Traveling Sound",
+  "plugins": ["styles", "image", "song", "sponsor"],
+  "sponsor": {
+    "name": "Traveling Sound Web Radio",
+    "url": "https://sites.google.com/view/traveling-sound-webradio?pli=1&authuser=0",
+    "text": "Vous voulez écouter de la musique faite par des humains ?",
+    "link_text": "Allez écouter Traveling Sound Web Radio"
+  },
+  "ad_groups": ["serenia", "traveling_sound", "radio", "messages"],
+  "jingle_categories": ["traveling-sound"]
+}

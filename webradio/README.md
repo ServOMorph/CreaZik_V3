@@ -29,7 +29,7 @@ Commandes : `python ..\\run.py` ouvre l'écoute auditeur sur `http://localhost:5
 | `radio_engine.py` | moteur de radio en direct (tirage, jingles, transitions, publicités) |
 | `server.py` | serveur web, rôles, API |
 | `run_rotation.py`, `run_queue.py`, `generate.py`, `ace_worker.py` | génération supervisée |
-| `listen.html/css/js`, `scenes.js`, `transitions.js`, `motion.js` | page d'écoute et visuels |
+| `user.html`, `listen.css/js`, `plugins/`, `scenes.js`, `transitions.js`, `motion.js` | page d'écoute et visuels |
 
 ## Ajouter une playlist (procédure)
 

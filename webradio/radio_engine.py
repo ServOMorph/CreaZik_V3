@@ -13,6 +13,11 @@ from stats_db import StatsDB, build_analytics, dynamics_mean
 
 QUEUE_LEN = 8
 PLAYED_LEN = 8
+NAV_NEXT_LEN = 5
+ANNOUNCE_CATEGORY = "annonces"
+URGENT_FILE = "annonces_state.json"
+URGENT_TTL_S = 24 * 3600
+URGENT_KEEP = 20
 SKIP_FADE_OUT = 1.5
 SKIP_FADE_IN = 1.0
 MAX_CF_RATIO = 0.4
@@ -258,6 +263,7 @@ class RadioEngine:
         self.unrated_only = False
         self.test_loop = False
         self._favs = (None, set())
+        self.urgent = read_json(self.root / URGENT_FILE, []) if persist else []
         self.persist = persist
         self.db = StatsDB(self.root / "radio.db") if persist else None
         if persist:
@@ -432,7 +438,8 @@ class RadioEngine:
         out = []
         for pl in self.cat.playlists:
             if pl["jingle"]:
-                out.extend(k for k in pl["keys"] if k not in excluded)
+                out.extend(k for k in pl["keys"] if k not in excluded
+                           and self.cat.tracks.get(k, {}).get("category") != ANNOUNCE_CATEGORY)
         return out
 
     def dyn_target(self, t):
@@ -792,7 +799,14 @@ class RadioEngine:
             out = {"server_time": t, "rev": self.rev, "active": active,
                    "upcoming": plan if admin else plan[:2], "unrated_only": self.unrated_only,
                    "test_loop": self.test_loop,
+                   "nav": {"played": [dict(p) for p in self.played if not p.get("jingle")],
+                           "next": [dict(p) for p in plan if not p.get("jingle")][:NAV_NEXT_LEN],
+                           "jingles": [dict(self.cat.tracks[k], key=k) for k in
+                                       (self._jingle_keys() if st.get("jingles_enabled") else [])
+                                       if k in self.cat.tracks],
+                           "urgent": self._urgent_items(t)},
                    "ui": {"visual_transition_s": float(st.get("visual_transition_s", 5)),
+                          "jingle_every": int(st.get("jingle_every") or 0),
                           "jingle_volume": max(0.0, min(1.0, float(st.get("jingle_volume", 0.8))))}}
             if admin:
                 out["played"] = [dict(p) for p in self.played]
@@ -924,6 +938,54 @@ class RadioEngine:
                             for k in pl["keys"]]}
                 for pl in self.cat.playlists
             ]
+
+    def add_urgent(self, key, follow=None):
+        with self.lock:
+            if key not in self.cat.tracks or (follow is not None and follow not in self.cat.tracks):
+                return False
+            entry = {"key": key, "at": self.now()}
+            if follow is not None:
+                entry["follow"] = follow
+            self.urgent = (self.urgent + [entry])[-URGENT_KEEP:]
+            if self.persist:
+                path = self.root / URGENT_FILE
+                tmp = path.with_suffix(".tmp")
+                tmp.write_text(json.dumps(self.urgent), encoding="utf-8")
+                os.replace(tmp, path)
+            return self.action("front", {"key": key})
+
+    def _urgent_items(self, t):
+        out = []
+        for u in self.urgent:
+            if t - u["at"] >= URGENT_TTL_S or u["key"] not in self.cat.tracks:
+                continue
+            item = dict(self.cat.tracks[u["key"]], key=u["key"], urgent_at=u["at"])
+            follow = u.get("follow")
+            if follow:
+                if follow not in self.cat.tracks:
+                    continue
+                item["follow"] = dict(self.cat.tracks[follow], key=follow)
+            out.append(item)
+        return out
+
+    def styles(self):
+        fields = ("name", "file", "duration", "generated_at", "playlist", "playlist_label", "playlist_description",
+                  "prompt", "model", "type", "song")
+        with self.lock:
+            self.cat.refresh()
+            out = []
+            for pl, keys in self._playable_groups():
+                tracks = []
+                for k in keys:
+                    tr = self.cat.tracks.get(k)
+                    if not tr or not tr.get("duration"):
+                        continue
+                    item = {f: tr.get(f) for f in fields}
+                    item.update({"key": k, "jingle": False})
+                    tracks.append(item)
+                if tracks:
+                    out.append({"id": pl["id"], "label": pl.get("label", pl["id"]), "tracks": tracks})
+            return out
 
     def action(self, name, params):
         with self.lock:

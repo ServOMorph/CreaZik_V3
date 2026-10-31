@@ -14,7 +14,11 @@ from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import parse_qs, unquote, urlsplit
 
+import accounts
+import admin_jingle
 import covers_review
+import user_images
+import user_songs
 from radio_engine import RadioEngine
 from stats_db import parse_level
 
@@ -22,6 +26,8 @@ HERE = Path(__file__).parent.resolve()
 CRED_FILE = HERE / "admin_credentials.json"
 COMMENTS_FILE = HERE / "comments.json"
 COOKIE = "creazik_admin"
+SESSION_COOKIE = "creazik_session"
+VIEW_AS_COOKIE = "creazik_view_as"
 PUBLIC_SKIP = True
 DEV_UNIFIED = True
 MAX_BODY = 256 * 1024
@@ -38,10 +44,13 @@ ADMIN_POST_TARGETS = {
     "/api/content": (HERE / "radio_content.json", "dict"),
 }
 
-STATIC_FILES = {"/listen.html", "/user.html", "/silence.wav", "/listen.css", "/listen.js", "/mascot.js", "/visuals.js", "/cover-placeholder.png",
-                "/scenes.js", "/transitions.js", "/motion.js", "/scenes_spec.json", "/radio_content.json",
-                "/playlists.json", "/favorites.json", "/radio_settings.json", "/fonts/Sora-latin.woff2"}
+STATIC_FILES = {"/user.html", "/silence.wav", "/listen.css", "/listen.js", "/mascot.js", "/visuals.js", "/cover-placeholder.png",
+                "/traveling-sound.png", "/scenes.js", "/transitions.js", "/motion.js", "/scenes_spec.json", "/radio_content.json",
+                "/playlists.json", "/favorites.json", "/radio_settings.json", "/fonts/Sora-latin.woff2",
+                "/jingles/systeme/image_prete.mp3", "/plugins/index.json"}
 STATIC_PATTERNS = [
+    re.compile(r"^/user_images/[0-9a-f]{32}\.png$"),
+    re.compile(r"^/plugins/[\w\-]+\.(?:js|css)$"),
     re.compile(r"^/(?:playlists|jingles)/[\w\-]+/outputs/playlist_results\.json$"),
     re.compile(r"^/(?:playlists|jingles)/[\w\-]+/outputs/[^/]+\.cover\.png$"),
     re.compile(r"^/(?:playlists|jingles)/[\w\-]+/outputs/[^/]+\.(?:wav|mp3|flac|ogg)$"),
@@ -50,7 +59,10 @@ STATIC_PATTERNS = [
     re.compile(r"^/radio/[\w\-]+\.json$"),
 ]
 ADMIN_PAGES = {"/radio.html", "/ui.html"}
-LOGIN_NEXT = ("/radio.html", "/ui.html", "/listen.html")
+LOGIN_NEXT = ("/", "/radio.html", "/ui.html")
+REDIRECT_HOME = {"/listen.html", "/suivi.html", "/index.html"}
+PLUGIN_FILE_RE = re.compile(r"^/plugins/([\w\-]+\.(?:js|css))$")
+SUIVI_FILE = HERE.parent / "suivi_travail" / "etat.json"
 
 RANGE_RE = re.compile(r"bytes=(\d*)-(\d*)")
 RESULTS_RE = re.compile(r"^/(?:playlists|jingles)/[\w\-]+/outputs/playlist_results\.json$")
@@ -62,7 +74,7 @@ CSP = ("default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 
 LOGIN_PAGE = """<!DOCTYPE html>
 <html lang="fr"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CréaZik IA WebRadio - Connexion admin</title>
+<title>CréaZik IA WebRadio - Connexion</title>
 <style>
 body{font-family:-apple-system,Segoe UI,sans-serif;background:#1e1e2e;color:#e0e0e0;display:flex;
 min-height:100vh;align-items:center;justify-content:center;margin:0;padding:16px}
@@ -75,18 +87,19 @@ a{color:#6496ff;font-size:.85em}
 .err{color:#f44336;font-size:.85em;margin-bottom:10px}
 </style></head><body>
 <form method="post" action="/login">
-<h1>CréaZik IA WebRadio - Espace admin</h1>
+<h1>CréaZik IA WebRadio - Connexion</h1>
 __ERR__
 <input type="hidden" name="next" value="__NEXT__">
-<input type="text" name="user" placeholder="Identifiant" autocomplete="username" autocapitalize="none" autofocus>
-<input type="password" name="password" placeholder="Mot de passe" autocomplete="current-password">
+<label for="lu" style="font-size:.85em">Identifiant</label>
+<input id="lu" type="text" name="user" placeholder="Identifiant" autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false" required autofocus>
+<label for="lp" style="font-size:.85em">Mot de passe</label>
+<input id="lp" type="password" name="password" placeholder="Mot de passe" autocomplete="current-password" required>
 <button type="submit">Se connecter</button>
-<p style="margin:12px 0 0"><a href="/ui.html">Retour à l'écoute</a></p>
+<p style="margin:12px 0 0"><a href="/">Retour à l'écoute</a></p>
 </form></body></html>"""
 
 
-def hash_pw(password, salt_hex):
-    return hashlib.pbkdf2_hmac("sha256", password.encode("utf-8"), bytes.fromhex(salt_hex), PBKDF2_ROUNDS).hex()
+hash_pw = accounts.hash_pw
 
 
 def new_credentials(password, default):
@@ -106,6 +119,7 @@ class State:
     def __init__(self):
         self.lock = threading.Lock()
         self.cred = load_credentials()
+        self.session_secret = accounts.load_secret()
         self.login_fails = []
         self.comment_times = {}
 
@@ -113,9 +127,12 @@ class State:
         return hmac.new(bytes.fromhex(self.cred["hash"]), b"creazik-admin-session-v1", hashlib.sha256).hexdigest()
 
     def check_login(self, user, password):
-        ok_user = hmac.compare_digest(user.encode(), self.cred["user"].encode())
+        ok_user = hmac.compare_digest(accounts.norm_id(user).encode(), accounts.norm_id(self.cred["user"]).encode())
         ok_pw = hmac.compare_digest(hash_pw(password, self.cred["salt"]), self.cred["hash"])
         return ok_user and ok_pw
+
+    def is_admin_id(self, user):
+        return accounts.norm_id(user) == accounts.norm_id(self.cred["user"])
 
     def set_password(self, password):
         self.cred = new_credentials(password, False)
@@ -147,6 +164,27 @@ class State:
 
 STATE = State()
 ENGINE = RadioEngine(HERE, persist=True)
+IMAGES = user_images.ImageQueue()
+IMAGE_STATUS_RE = re.compile(r"^/api/images/([0-9a-f]{32})$")
+SONG_STATUS_RE = re.compile(r"^/api/songs/([0-9a-f]{32})$")
+JINGLE_STATUS_RE = re.compile(r"^/api/admin/jingle/([0-9a-f]{32})$")
+JINGLES = admin_jingle.JingleQueue()
+
+
+def schedule_song(key):
+    jingle = user_songs.ensure_jingle()
+    with ENGINE.lock:
+        ENGINE.cat.refresh()
+        if not ENGINE.action("front", {"key": key}):
+            return False
+        if jingle:
+            ENGINE.add_urgent(jingle, follow=key)
+    suffix = f" avec jingle {jingle}" if jingle else " sans jingle"
+    sys.stderr.write(f"[{datetime.now():%H:%M:%S}] création {key} programmée{suffix}\n")
+    return True
+
+
+SONGS = user_songs.SongQueue(schedule=schedule_song)
 COMMENTS_LOCK = threading.Lock()
 
 VOTES_FILE = HERE / "votes.json"
@@ -473,6 +511,32 @@ class Handler(SimpleHTTPRequestHandler):
                 return True
         return False
 
+    def _cookie(self, name):
+        for part in self.headers.get("Cookie", "").split(";"):
+            k, _, v = part.strip().partition("=")
+            if k == name:
+                return v
+        return None
+
+    def _profile_account(self):
+        uid = accounts.read_session(self._cookie(SESSION_COOKIE), STATE.session_secret)
+        if uid is None:
+            return None, None
+        acc = accounts.get_account(uid)
+        return (uid, acc) if acc else (None, None)
+
+    def _session(self):
+        if self._is_admin() and not self._is_user_interface():
+            return accounts.build_session("admin", STATE.cred.get("user", "admin"), view_as=self._cookie(VIEW_AS_COOKIE))
+        uid, acc = self._profile_account()
+        if acc:
+            return accounts.build_session("user", acc.get("id") or uid, profile_id=acc.get("profile"))
+        return accounts.build_session("anon", None)
+
+    def _clear_cookies(self):
+        return [f"{name}=; Path=/; Max-Age=0; HttpOnly; SameSite={site}"
+                for name, site in ((COOKIE, "Strict"), (SESSION_COOKIE, "Lax"), (VIEW_AS_COOKIE, "Strict"))]
+
     def _is_user_interface(self):
         return not DEV_UNIFIED and getattr(self.server, "interface", "user") == "user"
 
@@ -517,12 +581,12 @@ class Handler(SimpleHTTPRequestHandler):
     def _redirect(self, location, extra=None):
         self.send_response(303)
         self.send_header("Location", location)
-        for k, v in (extra or {}).items():
+        for k, v in (extra.items() if isinstance(extra, dict) else (extra or [])):
             self.send_header(k, v)
         self.send_header("Content-Length", "0")
         self.end_headers()
 
-    def _login_page(self, err="", nxt="/radio.html", code=200):
+    def _login_page(self, err="", nxt="/", code=200):
         html = LOGIN_PAGE.replace("__ERR__", f'<div class="err">{err}</div>' if err else "").replace("__NEXT__", nxt)
         self._send_text(code, html)
 
@@ -551,11 +615,38 @@ class Handler(SimpleHTTPRequestHandler):
             self.send_error(404)
             return
         if path == "/login":
-            nxt = parse_qs(parts.query).get("next", ["/radio.html"])[0]
-            self._login_page(nxt=nxt if nxt in LOGIN_NEXT else "/radio.html")
+            nxt = parse_qs(parts.query).get("next", ["/"])[0]
+            self._login_page(nxt=nxt if nxt in LOGIN_NEXT else "/")
             return
         if path == "/logout":
-            self._redirect("/ui.html", {"Set-Cookie": f"{COOKIE}=; Path=/; Max-Age=0; HttpOnly; SameSite=Strict"})
+            self._redirect("/", [("Set-Cookie", c) for c in self._clear_cookies()])
+            return
+        if path == "/api/session":
+            self._send_json(200, self._session())
+            return
+        if path in REDIRECT_HOME:
+            self._redirect("/")
+            return
+        if path == "/plugins/index.json":
+            plugins = accounts.load_plugins()
+            if not self._is_admin():
+                plugins = [p for p in plugins if isinstance(p, dict) and p.get("scope") == "user"]
+            self._send_json(200, plugins)
+            return
+        m = PLUGIN_FILE_RE.match(path)
+        if m and not self._is_admin() and m.group(1) in accounts.admin_only_files(accounts.load_plugins()):
+            self.send_error(404)
+            return
+        m = JINGLE_STATUS_RE.match(path)
+        if m:
+            if not self._is_admin():
+                self.send_error(401)
+                return
+            st = JINGLES.status(m.group(1))
+            if st is None:
+                self._send_json(404, {"error": "demande inconnue"})
+            else:
+                self._send_json(200, st)
             return
         if path == "/favicon.ico":
             self.send_response(204)
@@ -579,6 +670,17 @@ class Handler(SimpleHTTPRequestHandler):
                 self.send_error(401)
                 return
             self._send_json(200, ENGINE.stats())
+            return
+        if path == "/api/radio/styles":
+            self._send_json(200, ENGINE.styles())
+            return
+        m = IMAGE_STATUS_RE.match(path) or SONG_STATUS_RE.match(path)
+        if m:
+            st = (IMAGES if path.startswith("/api/images/") else SONGS).status(m.group(1))
+            if st is None:
+                self._send_json(404, {"error": "demande inconnue"})
+            else:
+                self._send_json(200, st)
             return
         if path == "/api/radio/library":
             if not self._is_admin():
@@ -638,6 +740,15 @@ class Handler(SimpleHTTPRequestHandler):
                 return
             self._send_json(200, ENGINE.analytics() or {})
             return
+        if path == "/api/suivi":
+            if not self._is_admin():
+                self.send_error(401)
+                return
+            try:
+                self._send_json(200, json.loads(SUIVI_FILE.read_text(encoding="utf-8")))
+            except (OSError, ValueError):
+                self._send_json(200, {"maj": "", "sections": []})
+            return
         if path in ADMIN_PAGES:
             if not self._is_admin():
                 self._redirect("/login?next=" + path)
@@ -645,12 +756,8 @@ class Handler(SimpleHTTPRequestHandler):
             self.path = path
             self._serve(head)
             return
-        if path in ("/", "/index.html"):
-            if getattr(self.server, "interface", "user") == "user":
-                path = "/user.html"
-            else:
-                self._redirect("/radio.html")
-                return
+        if path == "/":
+            path = "/user.html"
         path = re.sub(r"^/playlists/perso-(electro|folk|rock|classique|gregorien|chorale)/",
                       r"/playlists/francais_tests-\1/", path)
         if not self._allowed_static(path):
@@ -664,11 +771,17 @@ class Handler(SimpleHTTPRequestHandler):
 
     def do_POST(self):
         path = urlsplit(self.path).path
-        if self._is_user_interface() and path not in ("/api/comments", "/api/vote", "/api/vote/reset", "/api/neutral", "/api/dynamics", "/api/skip"):
+        if self._is_user_interface() and path not in ("/api/comments", "/api/vote", "/api/vote/reset", "/api/neutral", "/api/dynamics", "/api/skip", "/api/images", "/api/songs"):
             self.send_error(404)
             return
         if path == "/login":
             self._login()
+            return
+        if path == "/api/images":
+            self._post_image()
+            return
+        if path == "/api/songs":
+            self._post_song()
             return
         if path == "/api/comments":
             self._post_comment()
@@ -709,6 +822,19 @@ class Handler(SimpleHTTPRequestHandler):
                 write_json_atomic(file, data)
                 self.send_response(204)
                 self.end_headers()
+            elif path == "/api/session/view-as":
+                body = self._read_json_body(1024)
+                pid = str(body.get("profile") or "") if isinstance(body, dict) else ""
+                if pid and accounts.load_profile(pid) is None:
+                    self._send_json(400, {"error": "profil inconnu"})
+                    return
+                secure = "; Secure" if self._is_https() else ""
+                cookie = (f"{VIEW_AS_COOKIE}={pid}; Path=/; Max-Age={365 * 86400}; HttpOnly; SameSite=Strict{secure}" if pid
+                          else f"{VIEW_AS_COOKIE}=; Path=/; Max-Age=0; HttpOnly; SameSite=Strict")
+                self._send_json(200, accounts.build_session("admin", STATE.cred.get("user", "admin"), view_as=pid or None),
+                                cookie=cookie)
+            elif path == "/api/admin/jingle":
+                self._post_admin_jingle()
             elif path == "/api/radio/action":
                 body = self._read_json_body(4096)
                 ok = ENGINE.action(str(body.get("action", "")), body)
@@ -868,6 +994,50 @@ class Handler(SimpleHTTPRequestHandler):
         ENGINE.db.set_dynamics(voter, key, level)
         self._send_json(200, {"key": key, "level": level}, cookie=cookie)
 
+    def _post_admin_jingle(self):
+        body = self._read_json_body(4096)
+        if not isinstance(body, dict):
+            self._send_json(400, {"error": "objet JSON attendu"})
+            return
+        text = admin_jingle.clean_text(body.get("text"))
+        if text is None:
+            self._send_json(400, {"error": f"texte vide ou trop long ({admin_jingle.TEXT_MAX} caractères maximum)"})
+            return
+        engine = body.get("engine", "kokoro")
+        if engine not in admin_jingle.ENGINES:
+            self._send_json(400, {"error": "moteur inconnu"})
+            return
+        jid = JINGLES.submit(text, engine, dry_run=body.get("dry_run") is True)
+        if jid is None:
+            self._send_json(429, {"error": "file pleine, réessaie après la fin des jingles en cours"})
+            return
+        self._send_json(201, JINGLES.status(jid))
+
+    def _post_image(self):
+        self._post_request(IMAGES, user_images.clean_prompt, user_images.PROMPT_MAX)
+
+    def _post_song(self):
+        self._post_request(SONGS, user_songs.clean_prompt, user_images.PROMPT_MAX)
+
+    def _post_request(self, queue, clean, limit):
+        if not self.headers.get("Content-Type", "").lower().startswith("application/json"):
+            self._send_json(415, {"error": "type JSON attendu"})
+            return
+        try:
+            body = self._read_json_body(4096)
+        except OverflowError:
+            self._send_json(413, {"error": "requête trop longue"})
+            return
+        except Exception:
+            self._send_json(400, {"error": "requête invalide"})
+            return
+        prompt = clean(body.get("prompt") if isinstance(body, dict) else None)
+        if prompt is None:
+            self._send_json(400, {"error": f"description vide ou trop longue ({limit} caractères maximum)"})
+            return
+        job_id = queue.submit(prompt)
+        self._send_json(201, queue.status(job_id))
+
     def _post_comment(self):
         ip = self._client_ip()
         if not STATE.comment_allowed(ip):
@@ -904,19 +1074,28 @@ class Handler(SimpleHTTPRequestHandler):
             form = parse_qs(self.rfile.read(n).decode("utf-8"))
             user = form.get("user", [""])[0]
             password = form.get("password", [""])[0]
-            nxt = form.get("next", ["/radio.html"])[0]
+            nxt = form.get("next", ["/"])[0]
         except Exception:
             user = password = ""
-            nxt = "/radio.html"
+            nxt = "/"
         if nxt not in LOGIN_NEXT:
-            nxt = "/radio.html"
-        if STATE.check_login(user, password):
-            secure = "; Secure" if self._is_https() else ""
-            cookie = f"{COOKIE}={STATE.session_value()}; Path=/; Max-Age={30 * 86400}; HttpOnly; SameSite=Strict{secure}"
-            self._redirect(nxt, {"Set-Cookie": cookie})
+            nxt = "/"
+        secure = "; Secure" if self._is_https() else ""
+        clear = dict(zip((COOKIE, SESSION_COOKIE, VIEW_AS_COOKIE), self._clear_cookies()))
+        if STATE.is_admin_id(user):
+            if STATE.check_login(user, password):
+                cookie = f"{COOKIE}={STATE.session_value()}; Path=/; Max-Age={30 * 86400}; HttpOnly; SameSite=Strict{secure}"
+                self._redirect(nxt, [("Set-Cookie", cookie), ("Set-Cookie", clear[SESSION_COOKIE])])
+                return
         else:
-            STATE.register_fail()
-            self._login_page("Identifiant ou mot de passe invalide.", nxt=nxt, code=401)
+            uid = accounts.check_account(user, password)
+            if uid:
+                value = accounts.make_session(uid, STATE.session_secret)
+                cookie = f"{SESSION_COOKIE}={value}; Path=/; Max-Age={accounts.SESSION_TTL_S}; HttpOnly; SameSite=Lax{secure}"
+                self._redirect("/", [("Set-Cookie", cookie), ("Set-Cookie", clear[COOKIE]), ("Set-Cookie", clear[VIEW_AS_COOKIE])])
+                return
+        STATE.register_fail()
+        self._login_page("Identifiant ou mot de passe invalide.", nxt=nxt, code=401)
 
     def _serve(self, head):
         rng = self.headers.get("Range")
@@ -983,6 +1162,28 @@ class Handler(SimpleHTTPRequestHandler):
         sys.stderr.write(f"[{datetime.now():%H:%M:%S}] {fmt % a}\n")
 
 
+ANNOUNCE_REQUESTS = HERE / "annonces_requests"
+
+
+def watch_announce_requests():
+    ANNOUNCE_REQUESTS.mkdir(exist_ok=True)
+    while True:
+        for f in sorted(ANNOUNCE_REQUESTS.glob("*.json")):
+            try:
+                key = str(json.loads(f.read_text(encoding="utf-8")).get("key", ""))
+                with ENGINE.lock:
+                    ENGINE.cat.refresh()
+                ok = ENGINE.add_urgent(key)
+                sys.stderr.write(f"[{datetime.now():%H:%M:%S}] annonce {key} : {'programmée' if ok else 'introuvable'}\n")
+            except (OSError, ValueError) as e:
+                sys.stderr.write(f"[{datetime.now():%H:%M:%S}] annonce illisible {f.name} : {e}\n")
+            try:
+                f.unlink()
+            except OSError:
+                pass
+        time.sleep(2)
+
+
 if __name__ == "__main__":
     p = argparse.ArgumentParser()
     p.add_argument("--host", default="127.0.0.1", help="127.0.0.1 par défaut (tunnel local) ; 0.0.0.0 pour le réseau local")
@@ -993,6 +1194,10 @@ if __name__ == "__main__":
 
     os.chdir(HERE)
     threading.Thread(target=ENGINE.run, daemon=True).start()
+    threading.Thread(target=watch_announce_requests, daemon=True).start()
+    threading.Thread(target=IMAGES.run, daemon=True).start()
+    threading.Thread(target=SONGS.run, daemon=True).start()
+    threading.Thread(target=JINGLES.run, daemon=True).start()
     httpd = ThreadingHTTPServer((a.host, a.port), Handler)
     httpd.daemon_threads = True
     httpd.interface = "user"

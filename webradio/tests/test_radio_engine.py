@@ -664,3 +664,19 @@ def test_test_loop_without_playable_tracks_falls_back_to_normal():
         eng.action("test_loop", {"on": True})
         keys = [k for _, k, _ in run(eng, clock, 100, step=1.0)]
         assert keys and all(k.startswith("b:") for k in keys)
+
+
+def test_urgent_jingle_then_created_song():
+    with tempfile.TemporaryDirectory() as tmp:
+        eng, clock = make(tmp, {"a": (5, 60, False), "c": (1, 60, False), "j": (2, 5, True)},
+                          {"jingles_enabled": False, "weights": {"c": 0}, "transitions": preset()})
+        run(eng, clock, 5)
+        assert eng.action("front", {"key": "c:1"})
+        assert eng.add_urgent("j:1", follow="c:1")
+        queue = [q["key"] for q in eng.snapshot(admin=True)["queue"]]
+        assert queue[:2] == ["j:1", "c:1"], queue
+        urgent = eng.snapshot()["nav"]["urgent"]
+        assert urgent[-1]["key"] == "j:1" and urgent[-1]["follow"]["key"] == "c:1"
+        assert not eng.add_urgent("j:1", follow="zzz:1")
+        seq = [k for _, k, _ in run(eng, clock, 200)]
+        assert seq[1:3] == ["j:1", "c:1"], seq

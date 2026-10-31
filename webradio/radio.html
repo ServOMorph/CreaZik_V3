@@ -841,7 +841,7 @@
                 <input type="password" id="pwNew" class="field" placeholder="Nouveau mot de passe" autocomplete="new-password">
                 <div class="actions">
                     <button class="btn" type="submit">Changer</button>
-                    <a class="back" href="/logout">Déconnexion</a>
+                    <a class="back" href="/logout" target="_top">Déconnexion</a>
                     <span class="info" id="pwMsg"></span>
                 </div>
             </form>
@@ -850,7 +850,7 @@
     </div>
 
     <script>
-    if (window.top === window.self) { location.replace("/listen.html"); }
+    if (window.top === window.self) { location.replace("/"); }
         const DEFAULTS = {default_weight: 5, weights: {}, jingle_every: 5, jingles_enabled: true, jingle_volume: 0.8,
 favorites_only: false, no_repeat: 3, no_repeat_songs: 15, excluded: [], loop_playlists: [], thumb_strength: 0.15,
                           ads_enabled: true, ads_every: 5, ad_seconds: 9, ad_offset_s: 10, visual_transition_s: 5,
@@ -1643,7 +1643,7 @@ favorites_only: false, no_repeat: 3, no_repeat_songs: 15, excluded: [], loop_pla
             try {
                 const r = await fetch('/api/me');
                 const me = await r.json();
-                if (!me.admin) { location.href = '/login?next=/radio.html'; return; }
+                if (!me.admin) { window.top.location.href = '/login'; return; }
                 document.getElementById('pwWarn').style.display = me.default_password ? 'block' : 'none';
             } catch (e) {}
         }

@@ -5,6 +5,8 @@ listen_admin_375.png
 _backup_avant_renommage/
 webradio/admin_credentials.json
 webradio/admin_token.txt
+webradio/user_accounts.json
+webradio/session_secret.key
 webradio/comments.json
 webradio/votes.json
 webradio/user_votes.json
@@ -32,3 +34,16 @@ webradio/tests_state.json
 webradio/covers_review_state.json
 webradio/covers_review_state.lock
 webradio/covers_review_state.tmp
+
+# Images des auditeurs (plugin Créer une image)
+webradio/user_images/
+
+# Morceaux des auditeurs (plugin Créer un morceau)
+webradio/user_songs/
+webradio/playlists/creations-auditeurs/
+
+_codex/runs/
+webradio/annonces_requests/
+webradio/annonces_state.json
+webradio/tests_visuels/
+webradio/gpu_pause.flag

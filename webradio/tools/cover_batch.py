@@ -100,7 +100,7 @@ def comfy_process_running():
     return "ACTIVE" in result.stdout
 
 
-def ensure_comfy():
+def ensure_comfy(stop_file=STOP):
     if comfy_ready():
         return
     if os.name != "nt" or not COMFY_LAUNCHER.is_file():
@@ -109,7 +109,7 @@ def ensure_comfy():
         subprocess.Popen(["cmd.exe", "/c", "start", "", str(COMFY_LAUNCHER)], cwd=COMFY_HOME,
                          creationflags=getattr(subprocess, "CREATE_NEW_PROCESS_GROUP", 0))
     for _ in range(120):
-        if STOP.exists():
+        if stop_file is not None and stop_file.exists():
             raise InterruptedError("Arrêt demandé pendant le démarrage de ComfyUI.")
         if comfy_ready():
             return

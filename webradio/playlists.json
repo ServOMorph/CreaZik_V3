@@ -524,6 +524,14 @@
     "category": "webradio"
   },
   {
+    "id": "jingles-traveling-sound",
+    "label": "Jingles Traveling Sound",
+    "results": "jingles/traveling-sound/outputs/playlist_results.json",
+    "role": "jingle",
+    "category": "traveling-sound",
+    "description": "Jingles publicitaires pour Traveling Sound Web Radio."
+  },
+  {
     "id": "jingles-serenia-tech",
     "label": "Jingles SérénIA Tech",
     "results": "jingles/serenia-tech/outputs/playlist_results.json",
@@ -542,5 +550,19 @@
     "label": "Blues-rock guitare claire",
     "results": "playlists/blues-rock-guitare/outputs/playlist_results.json",
     "description": "6 morceaux blues-rock en anglais : guitare claire, basse mélodique, voix grave parlée-chantée."
+  },
+  {
+    "id": "jingles-annonces",
+    "label": "Annonces",
+    "results": "jingles/annonces/outputs/playlist_results.json",
+    "role": "jingle",
+    "category": "annonces",
+    "description": "Annonces parlées des nouveautés de la radio, diffusées à la demande, hors rotation."
+  },
+  {
+    "id": "creations-auditeurs",
+    "label": "Créations des auditeurs",
+    "results": "playlists/creations-auditeurs/outputs/playlist_results.json",
+    "description": "Morceaux créés à la demande des auditeurs (paroles et musique générées en local), hors rotation."
   }
 ]

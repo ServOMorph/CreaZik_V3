@@ -1,0 +1,8 @@
+{
+  "id": "classique",
+  "label": "Classique",
+  "plugins": ["styles"],
+  "sponsor": null,
+  "ad_groups": ["serenia", "radio"],
+  "jingle_categories": []
+}

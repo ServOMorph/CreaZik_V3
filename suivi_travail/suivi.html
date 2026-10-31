@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CréaZik · Suivi du travail</title>
+<style>
+  :root { --bg: #0f1220; --card: #181c30; --line: #2a2f4a; --text: #eef0fa; --muted: #9aa0bf; --run: #f0b34a; --wait: #6aa8ff; --done: #4fd18b; --ko: #ff5a8c; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 15px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; background: var(--bg); color: var(--text); }
+  main { max-width: 720px; margin: 0 auto; padding: 18px 14px 40px; }
+  h1 { font-size: 1.3rem; margin: 0 0 4px; }
+  .maj { color: var(--muted); font-size: .85rem; margin-bottom: 18px; }
+  details.sec { margin-top: 14px; }
+  details.sec > summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 48px; padding: 10px 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); font-weight: 700; user-select: none; }
+  details.sec > summary::-webkit-details-marker { display: none; }
+  details.sec > summary::after { content: "▸"; color: var(--muted); transition: transform .2s ease; }
+  details.sec[open] > summary::after { transform: rotate(90deg); }
+  details.sec > summary .n { margin-left: auto; font-size: .8rem; color: var(--muted); font-weight: 600; }
+  details.sec > .body { padding-top: 10px; }
+  .tools { display: flex; gap: 8px; margin-bottom: 4px; }
+  .tools button { min-height: 40px; padding: 0 14px; border-radius: 20px; border: 1px solid var(--line); background: var(--card); color: var(--text); font: inherit; font-size: .85rem; cursor: pointer; }
+  .item { background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--c); border-radius: 12px; padding: 12px 14px; margin-bottom: 10px; }
+  .top { display: flex; gap: 8px; align-items: baseline; justify-content: space-between; flex-wrap: wrap; }
+  .titre { font-weight: 700; }
+  .badge { font-size: .75rem; font-weight: 700; padding: 2px 9px; border-radius: 99px; background: color-mix(in srgb, var(--c) 22%, transparent); color: var(--c); white-space: nowrap; }
+  .qui { color: var(--muted); font-size: .85rem; margin-top: 2px; }
+  .detail { margin: 8px 0 0; padding-left: 18px; }
+  .detail li { margin: 2px 0; }
+  .vide { color: var(--muted); font-style: italic; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Suivi du travail · CréaZik WebRadio</h1>
+  <div class="maj" id="maj"></div>
+  <div class="tools"><button type="button" id="openAll">Tout déplier</button><button type="button" id="closeAll">Tout replier</button></div>
+  <div id="root"></div>
+</main>
+<script>
+const DATA = {
+  maj: "30/10/2026 20:30",
+  sections: [
+    {nom: "En cours", items: [
+      {titre: "Plugins UI auditeur + plugin « Créer une image »", qui: "Agent Claude 1", statut: "run",
+       detail: ["Cartes de plugins pliables, styles transformés en plugin", "Image Qwen locale, file unique, pour le demandeur seul", "Jingle « image prête » puis image sur le morceau en cours", "Vérifs prévues : image réelle, navigateur, tests, annonce radio"]}
+    ]},
+    {nom: "En attente", items: [
+      {titre: "Plugin « Créer un morceau »", qui: "Agent Claude 2 · après l'agent 1", statut: "wait",
+       detail: ["Prompt libre, paroles par Ollama local + check_lyrics", "ACE-Step, file partagée avec les images", "Jingle « morceau d'un auditeur » puis diffusion à tous"]},
+      {titre: "Revue du code de l'agent 1", qui: "Codex · lecture seule", statut: "wait", detail: []},
+      {titre: "Profil « Olivier » : figer son UI", qui: "Après les agents 1 et 2", statut: "wait", detail: []}
+    ]},
+    {nom: "Fait aujourd'hui", items: [
+      {titre: "Commande /jingle (annonce + rotation)", qui: "OpenCode gratuit, 2e essai · vérifié (compilation, catégorie invalide refusée)", statut: "done", detail: ["/jingle annonce \"texte\" : diffusion prioritaire", "/jingle rotation <catégorie> \"texte\" : ajout à une catégorie"]},
+      {titre: "Page de suivi : sections pliables", qui: "Tout déplier / Tout replier, état mémorisé", statut: "done", detail: []},
+      {titre: "Circuits de délégation Codex et OpenCode (gratuit)", qui: "Testés en écriture : 14 s et 11 s", statut: "done", detail: []},
+      {titre: "Jingles urgents (annonces prioritaires, une fois par auditeur)", qui: "Vérifié côté serveur", statut: "done", detail: []},
+      {titre: "Annonce de mise à jour diffusée", qui: "Passée à 19:41, rediffusée ensuite", statut: "done", detail: []},
+      {titre: "Choix des styles, Précédent / Suivant, anti-spam", qui: "Vérifié au navigateur", statut: "done", detail: []},
+      {titre: "Bugs « relance au milieu » et Suivant lent", qui: "Corrigés, vérifiés au navigateur", statut: "done", detail: []},
+      {titre: "Jingles Traveling Sound tous les 2 morceaux, lien en bas", qui: "Vérifié", statut: "done", detail: []},
+      {titre: "Visuel « Salut Olive, ça farte ? »", qui: "En rotation dans les pubs animées", statut: "done", detail: []}
+    ]}
+  ]
+};
+const LABEL = {run: "En cours", wait: "En attente", done: "Fait", ko: "Bloqué"};
+const COLOR = {run: "var(--run)", wait: "var(--wait)", done: "var(--done)", ko: "var(--ko)"};
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
+document.getElementById("maj").textContent = "Mis à jour le " + DATA.maj;
+const DOT = {"En cours": "var(--run)", "En attente": "var(--wait)", "Fait aujourd'hui": "var(--done)"};
+let saved = {};
+try { saved = JSON.parse(localStorage.getItem("suiviOpen") || "{}"); } catch (e) {}
+const isOpen = s => s.nom in saved ? saved[s.nom] : s.nom !== "Fait aujourd'hui";
+document.getElementById("root").innerHTML = DATA.sections.map(s =>
+  '<details class="sec" data-nom="' + esc(s.nom) + '"' + (isOpen(s) ? " open" : "") + '><summary><span style="color:' + (DOT[s.nom] || "var(--text)") + '">●</span> ' +
+  esc(s.nom) + '<span class="n">' + s.items.length + '</span></summary><div class="body">' + (s.items.length ? s.items.map(it =>
+    '<div class="item" style="--c:' + COLOR[it.statut] + '"><div class="top"><span class="titre">' + esc(it.titre) +
+    '</span><span class="badge">' + LABEL[it.statut] + '</span></div><div class="qui">' + esc(it.qui) + "</div>" +
+    (it.detail.length ? '<ul class="detail">' + it.detail.map(d => "<li>" + esc(d) + "</li>").join("") + "</ul>" : "") +
+    "</div>").join("") : '<p class="vide">Rien</p>') + "</div></details>").join("");
+const secs = [...document.querySelectorAll("details.sec")];
+const remember = () => {
+  secs.forEach(d => { saved[d.dataset.nom] = d.open; });
+  try { localStorage.setItem("suiviOpen", JSON.stringify(saved)); } catch (e) {}
+};
+secs.forEach(d => d.addEventListener("toggle", remember));
+document.getElementById("openAll").addEventListener("click", () => secs.forEach(d => { d.open = true; }));
+document.getElementById("closeAll").addEventListener("click", () => secs.forEach(d => { d.open = false; }));
+</script>
+</body>
+</html>
