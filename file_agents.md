@@ -28,6 +28,7 @@ Rien. Signal GPU envoyé à la session LLM le 2026-10-30 ~22:00 (les files d'ima
 - Agent 1 (plugins + image) et agent 2 (plugin morceau) : vérifiés, annonces diffusées. Rien d'écouté ni testé sur iPhone (voir `tests_manuels.md` 19 à 21).
 
 ## En attente
+0. Stop motion : 3 i/s validé par l'utilisateur ; il veut de vraies images de transition générées (pas de fondu). Script prêt : `webradio/tests_visuels/stop_motion/run_transitions.py` (7 transitions `tNN.png` par piste, ~62 s chacune, GPU). À lancer seulement à la fin de l'entraînement v9 (décision utilisateur) ; ensuite intégrer les `tNN.png` dans `assemble.py` (séquence 00, t00, 01, t01, ...) et republier la planche (slug d940097e-4500-443b-9ae5-5dfef808d2d4).
 1. Profils de démo : la démo actuelle est le profil « Olivier ». Stocker l'UI auditeur telle que développée pour chaque personne (copie figée par profil, servie à part), puis repartir de la version courante pour la démo suivante. Après l'agent 2.
 
 ## Règles de jingle

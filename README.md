@@ -4,7 +4,7 @@ WebRadio IA locale : musique générée en local avec ACE-Step 1.5, diffusée en
 
 ## Stack
 - Génération : ACE-Step 1.5 (RTX 4060 8 Go), voix des jingles Chatterbox multilingue, pochettes ComfyUI-Qwen.
-- Radio : serveur Python (port 5000 pour les auditeurs, port local 5001 pour l'administration), moteur `webradio/radio_engine.py`, audio MP3 uniquement.
+- Radio : serveur Python (port 5000, UI unique auditeur et admin), moteur `webradio/radio_engine.py`, audio MP3 uniquement.
 
 ## Structure
 - `webradio/` : application (serveur, moteur, client, génération, playlists) ; `webradio/user.html` : interface auditeur (page d'accueil du port 5000).
@@ -15,6 +15,6 @@ WebRadio IA locale : musique générée en local avec ACE-Step 1.5, diffusée en
 - `TEXTES/` : paroles classées par artiste et textes destinés à la génération musicale.
 
 ## État actuel
-Interface auditeur dédiée (`user.html`, page d'accueil du port 5000, votes auditeurs collectés à part pour analyse) ; interface admin sur le port 5001 ; section « Tests » pour écouter les créations avant toute diffusion. Chaque ajout à la WebRadio nécessite une demande explicite de l'utilisateur.
-Réorientation vers l'écriture humaine : outils d'extraction de textes, d'apprentissage et de run (`OUTILS/`), 10 textes Funky Yogi relus et 19 versions générées à écouter ; préférences et règles tirées des morceaux négatifs en attente d'accord.
-Radio nettoyée le 2026-10-15 (morceaux négatifs et playlists vides supprimés, scores remis à zéro avec archive) ; playlist « Blues-rock guitare claire » en rotation ; bouton « Test » (boucle d'une playlist) et section « Pochettes » (revue et régénération) en admin. Pubs Traveling Sound supprimées, moteur corrigé après arrêt prolongé. Écoutes, contrôles navigateur et iPhone de l'UI auditeur, validation des préférences et déploiement VPS en attente.
+UI unique sur le port 5000 (`webradio/user.html`) : profils d'UI et comptes, plugins auditeur (styles, création d'image, création de morceau) et admin (programmation, outils, jingle texte, suivi du travail) ; la page `/` sert l'auditeur, l'admin s'y connecte par identifiant. Jingles urgents, lecture personnelle, délégation à Codex et OpenCode (`_codex/`).
+Les files d'images et de morceaux d'auditeurs sont en pause (`webradio/gpu_pause.flag`) pendant un entraînement GPU externe. Section « Tests » pour écouter les créations avant toute diffusion de contenu généré par l'administrateur.
+Réorientation vers l'écriture humaine (`OUTILS/`, 19 versions Funky Yogi à écouter) ; exploration stop motion (robot batteur retenu). Écoutes, contrôles iPhone, validation des préférences et déploiement VPS en attente.

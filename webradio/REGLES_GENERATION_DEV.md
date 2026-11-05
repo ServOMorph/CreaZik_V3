@@ -156,6 +156,7 @@ Document établi à partir des décisions prises au fil des conversations. Chaqu
 - Publicités (`radio_content.json`) : SérénIA Tech (clic vers serenia-tech.fr) et messages CréaZik IA WebRadio (sans clic) ; rotation par groupes. Les pubs et jingles Traveling Sound, supprimés le 2026-10-18, sont rétablis le 2026-10-30 (partenariat) : pubs animées, lien en bas de `user.html`, seuls jingles de rotation (un tous les 2 morceaux, `jingle_every`, les autres catégories dans `excluded`), aussi en lecture personnelle. Depuis le 2026-10-31, réservés au profil `traveling-sound` (voir 3.12).
 - Jingles parlés : voix féminine suave et lente générée par Chatterbox multilingue (CPU) avec un timbre de référence synthétique (Kokoro `ff_siwis`), `exaggeration` 0,4 et `cfg_weight` 0,1 ; le nom s'affiche « CréaZik IA WebRadio » et se prononce avec « IA » (« Créa Zique, I A, Ouèbe Radio ») ; « Sérénia Tèk » pour les pubs ; contrôle d'intelligibilité par transcription (Whisper-small).
 - Design moderne et stylisé, lisible à 375 px, conçu pour le téléphone.
+- Stop motion (exploration, `webradio/tests_visuels/stop_motion/`, dossier ignoré par git) : méthode retenue = image de base text-to-image puis chaque pose par édition de cette image (Qwen-Image 2.1, 12 pas, environ 62 s par image) ; cadence validée par l'utilisateur : 3 poses par seconde avec une image de transition générée entre deux poses (`run_transitions.py`, édition de la pose précédente vers la suivante, pas de fondu), soit 6 images par seconde ; piste retenue : « robot batteur », les quatre autres supprimées le 2026-11-01. Aucune intégration à l'UI auditeur à ce jour.
 
 ## 5. Règles de développement
 
@@ -188,7 +189,8 @@ Document établi à partir des décisions prises au fil des conversations. Chaqu
 ## 6. Points non tranchés ou à valider
 
 - Validation à l'écoute de la prononciation de « IA » dans les jingles 1 à 5 de la catégorie WebRadio (Whisper entend « il y a ») ; si validée, régénérer les 14 autres ; textes des jingles SérénIA Tech non validés.
-- Changement du mot de passe admin par défaut.
+- Mot de passe admin changé le 2026-10-30 (ancien refusé, nouveau accepté) ; à renforcer avant le déploiement avec celui d'Olive.
+- Pause GPU : `webradio/gpu_pause.flag` suspend les files d'images et de morceaux d'auditeurs (entraînement v9 de la session LLM) ; toujours en place au 2026-11-01. Test réel de l'image admin et du morceau d'auditeur en attente de sa suppression.
 - Compte `Olive` (profil `traveling-sound`) créé le 2026-10-31 avec le mot de passe faible `Olive` demandé par l'utilisateur : à renforcer (`tools/user_add.py Olive traveling-sound`). Connexion admin réelle, sélecteur « voir comme » et cartes admin de l'UI unique contrôlés seulement par les tests automatiques, `tools/admin_smoke.py` (banc local à identifiants temporaires) et au navigateur avec une session simulée.
 - Rythme de génération du lot de pochettes ; fiabilité du texte des pochettes (prompt en trois lignes, titre et style plus grands, non testé sur un lot).
 - Comportements iPhone non vérifiés : fondus audio dont le fondu sous jingle, lecture automatique après connexion, écran verrouillé, cycle visuel, transitions et clics sur les pubs.
@@ -199,7 +201,7 @@ Document établi à partir des décisions prises au fil des conversations. Chaqu
 - Voix de femme, pistes de recherche non testées : durée courte, « female vocal » en fin de caption, modèles Base ou XL Turbo (non installés ; Turbo seul).
 - Démo T01 (Arroser Les Roses, Jean-Marc Lagniel) : version 18 retenue par l'utilisateur (voix d'homme, silences `[Silence]` avant chaque « Arroser les roses », texte adapté « posté » et « zoublie ») ; accord de l'auteur non demandé.
 - Avant le déploiement : `DEV_UNIFIED = True` est écrit en dur dans `server.py` (pages admin et connexion atteignables, CSP assoupli) ; les MP3 et résultats de `playlists/tests-ace/` sont lisibles sans connexion par les motifs statiques publics ; la section Tests et ses routes sont à retirer ou verrouiller.
-- À confirmer : seuil `total <= h * 0.688` dans `jlayout` de `motion.js` (introduit hors de cette session, probable faute de frappe) ; suppression du formulaire de commentaires et masquage du bloc « musique humaine » et du contact dans `listen.html` (présente dans le répertoire de travail, non faite pendant cette session).
+- À confirmer : seuil `total <= h * 0.688` dans `jlayout` de `motion.js` (introduit hors de cette session, probable faute de frappe)  (`listen.html` supprimée le 2026-10-31, la partie la concernant est caduque).
 - Mise en ligne permanente : VPS Linux retenu mais non réalisé ; fonctionnement du serveur sous Linux non testé (voir `ARCHITECTURE_WEBRADIO.md` 8.3 bis).
 - Agents de zone `textes` (paroles françaises, commande `/generate_lyrics` créée, avec contrôle `TEXTES/tools/check_lyrics.py` ; grille rimes, répétitions, clichés à compléter) et `modeles_llm` en parallèle : tests GPU à faire à tour de rôle sur la RTX 4060 8 Go.
 - Les services `analyse` et `compression` sont arrêtés (comme `generation`) à la fin de la session du 2026-10-09 : les relancer avant la prochaine génération de morceaux.

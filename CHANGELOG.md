@@ -1,5 +1,17 @@
 # Changelog
 
+## v1.15 — 2026-11-05
+
+### Ajouté
+- UI unique sur le port 5000 en plugins déclaratifs (`webradio/plugins/`), profils d'UI (`classique`, `traveling-sound`), comptes par identifiant (`accounts.py`, `tools/user_add.py`), session signée, « voir comme » pour l'admin ; `/listen.html` et `/suivi.html` redirigent vers `/`.
+- Plugins auditeur : choix des styles, « Créer une image » (Qwen local) et « Créer un morceau » (paroles gemma4, ACE-Step, diffusé à tous après un jingle) ; plugins admin : programmation, dynamique, outils radio, texte vers jingle urgent, tests, pochettes, gestion, suivi du travail.
+- Lecture personnelle (Précédent/Suivant, styles), jingles urgents, Précédent/Suivant globaux pour l'admin ; files d'images et de morceaux avec verrou GPU commun et `gpu_pause.flag`.
+- Délégation Codex et OpenCode gratuit (`_codex/`), template réutilisable `_templates/delegation/` ; commandes `/jingle`, `/tel`, `/pc` ; annonces radio (`webradio/tools/annonce.py`).
+- Exploration stop motion (`webradio/tests_visuels/stop_motion/`, ignoré par git) : piste « robot batteur » retenue, 3 poses par seconde avec images de transition générées.
+
+### Modifié
+- Jingles et pubs Traveling Sound rétablis (tous les 2 morceaux), réservés au profil `traveling-sound` ; mot de passe admin changé.
+
 ## v1.14 — 2026-10-23
 
 ### Ajouté

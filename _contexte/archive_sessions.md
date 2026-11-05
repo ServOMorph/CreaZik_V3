@@ -221,3 +221,31 @@ Arrêter le mode Test, juger les pochettes dans la section « Pochettes », puis
 
 ## Question bloquante pour la session suivante
 Quel morceau du clip L'Invariable est retenu, et les droits du cover de Helmut Fritz sont-ils réglés ?
+
+---
+
+# Session du 2026-10-23
+
+## Décisions prises
+- UI auditeur séparée (`webradio/user.html`) servie à la racine du port 5000 ; sans Suivant, Slow/Medium/High, remise à zéro ni administration ; pouces à vote unique exclusif ; commentaires restaurés ; dev (`/listen.html`, `/radio.html`) inchangé.
+- Votes auditeurs collectés à part, sans effet sur la rotation, pour analyse manuelle avant toute suppression ou pondération.
+- Pubs et jingles Traveling Sound supprimés (demande de l'utilisateur : toutes les pubs).
+- Revue de l'UI auditeur dans un artefact claude.ai (modèle SHORTS) ; lecture du son dans l'artefact impossible.
+
+## Livrables produits ou modifiés
+- `webradio/user.html`, `webradio/listen.js` (`USER_UI`), `webradio/server.py` (racine, `/user.html`, votes auditeurs séparés) : fonctionnels, vérifiés en HTTP, page v2 jamais chargée dans un navigateur.
+- `webradio/radio_engine.py` + test : rattrapage en accéléré après arrêt corrigé.
+- `webradio/tools/user_votes_report.py` + 3 tests : rapport des votes auditeurs (lecture seule), jamais lancé sur de vrais votes.
+- `revue_ui_user/` : artefact de revue (https://claude.ai/artifact/SCjtgCNBYAQhEMr56zaFuU).
+- `radio_content.json`, `playlists.json`, `jingles/traveling-sound/` : pubs Traveling Sound retirées.
+
+## Hypothèses validées / invalidées
+- VALIDE : `/` du port 5000 et du tunnel servent l'UI auditeur (HTTP) ; vote, remplacement et remise à zéro côté serveur sur un morceau réel ; `votes.json` inchangé ; 41 tests passent.
+- INVALIDE : afficher le son de la radio dans l'artefact -> pivot vers écoute sur localhost ou maquette (choix en attente).
+- EN ATTENTE : v2 jamais chargée dans un navigateur ni sur iPhone ; rapport de votes sur de vrais votes ; cause du téléphone qui affichait l'UI dev (URL `/listen.html` supposée, non confirmée).
+
+## Prochaine étape exacte
+Charger `user.html` dans un navigateur et sur iPhone via la racine du tunnel, contrôler pouces, commentaires et absence de pubs Traveling Sound, puis publier la capture v2 dans l'artefact.
+
+## Question bloquante pour la session suivante
+Écoute du son pour la revue : option 1 (localhost) ou option 2 (maquette dans l'artefact avec quelques morceaux téléversés) ?
