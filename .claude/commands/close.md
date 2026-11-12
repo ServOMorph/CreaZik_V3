@@ -1,8 +1,8 @@
-﻿---
+---
 description: Clôture la session d'une zone — synthèse, mise à jour du contexte, commit
 argument-hint: <zone>
 model: sonnet
-allowed-tools: Bash(git status:*), Bash(git diff:*), Bash(git add:*), Bash(git commit:*), Bash(git push:*), PowerShell(python *backup_file.py*)
+allowed-tools: Bash(git status:*), Bash(git diff:*), Bash(git add:*), Bash(git commit:*), Bash(git push:*), Bash(git remote:*), Bash(git check-ignore:*), Bash(git ls-files:*), Bash(git rev-parse:*), Bash(git show:*), PowerShell(python *backup_file.py*)
 ---
 
 # /close <zone>
@@ -51,8 +51,81 @@ Lire `.claude/zones.md` pour obtenir la table des alias → dossiers réels.
 [1 question, ou "Aucune"]
 ```
 
+3-bis. **Attribution par zone.** Avant d'écrire le moindre signal, déterminer la zone propriétaire de
+   chaque action, décision et point d'attention de la session. Critère : la zone dont le dossier
+   (table de `.claude/zones.md`) contient les fichiers concernés ; en cas d'égalité, celle dont le
+   `agent_role.md` couvre le sujet.
+   - **Zone racine** : ne garde que les tâches de coordination réellement transversales (roadmap
+     commune, arbitrage entre zones, décision valable pour plusieurs zones). Une action métier
+     d'une zone n'est jamais recopiée à la racine, même « pour mémoire » ; une action transversale
+     la mentionne au plus par un champ `réf:`.
+   - **Zone fermée ≠ travail réalisé** : si l'essentiel du travail ou des éléments à reporter
+     appartient à une autre zone que celle passée en argument, le dire en une ligne (« /close <A>
+     lancé, travail constaté dans <B> ») et traiter explicitement la destination de chaque
+     élément ; ne jamais les écrire dans la zone fermée par défaut.
+   - **Droits d'écriture** : lire le `agent_role.md` de la zone fermée (s'il existe), sections
+     « Peut écrire » et « Ne doit pas toucher ». Écriture dans le `_contexte/` d'une autre zone
+     permise seulement si ces droits ou une autorisation explicite de l'utilisateur la couvrent
+     (une zone sans `agent_role.md` n'a pas de restriction propre). Sinon : ne pas écrire chez
+     l'autre zone, conserver l'élément dans le `signals.md` de la zone fermée sous la mention
+     `[à transférer vers <alias>]`, et le lister dans le bilan de l'étape 15.
+   - **Session touchant plusieurs zones** : la synthèse de l'étape 3 décrit la zone fermée. Pour
+     chaque autre zone concernée, ne mettre à jour que ses actions et points d'attention
+     (jamais sa section « Dernière session », jamais son `contexte.md` sans demande), et lister
+     chaque fichier de signal touché pour l'étape 13.
+   - **Constat sur une autre zone** : un constat, une obsolescence ou un point d'attention observé
+     sur une autre zone (fichier de contexte périmé, incohérence) est écrit dans le `signals.md` de
+     cette zone, en point d'attention ou en action selon le cas, ou marqué `[à transférer vers
+     <alias>]` si les droits d'écriture de l'étape 3-bis l'interdisent. Il peut aussi figurer en
+     une ligne dans la synthèse de la zone fermée, mais n'y reste jamais seul.
+   - **Pas de doublon, pas de perte** : avant d'ajouter une action dans le `signals.md` d'une
+     zone, le lire ; si une action de même objet existe (une même `réf:` ne suffit pas), la mettre
+     à jour (`fait quand:`, `réf:`, priorité, état) au lieu d'en ajouter une. Un transfert se fait en
+     deux temps : écrire à la destination, relire pour constater la présence, puis seulement
+     retirer l'élément de la source. Si l'écriture à la destination échoue, l'élément reste à la
+     source.
+
 4. Mettre à jour `<dossier>/_contexte/signals.md` :
-   - Lire le fichier existant. Reporter tout élément non résolu.
+   - Lire le fichier existant. Reporter tout élément non résolu **appartenant à cette zone**
+     (attribution de l'étape 3-bis) ; ne jamais supprimer un élément d'une autre zone sans
+     l'avoir transféré selon 3-bis.
+   - **Tri des éléments non résolus** (section des actions ouvertes, quel que soit son titre :
+     « Actions ouvertes », « Questions ouvertes », etc.). Pour chaque élément reporté :
+     - reste dans `signals.md` : ce qui appelle une action ou une décision dans les prochaines
+       sessions (P1 ; P2 avec suite identifiée ; attente de réponse ; décision requise avant
+       déploiement) ;
+     - sinon (dette technique, finding de revue non corrigé, amélioration différée, piste
+       « à juger acceptable ») : `<dossier>/_contexte/backlog.md`, au même format `fait quand:` /
+       `réf:`, ajouté en fin de fichier. Chaque entrée commence par une catégorie entre crochets :
+       `[dette]`, `[finding]`, `[amélioration]` ou `[piste]`. Son `réf:` cite un fichier ou un
+       dossier précis dont l'existence est vérifiée par une commande (`ls` ou `test -e`) avant
+       l'écriture ; si le `réf:` est `[à préciser]` ou désigne un chemin absent, ne pas écrire
+       l'entrée dans le backlog : la laisser dans `signals.md` avec la mention « réf à préciser »,
+       ou corriger le chemin d'abord. Créer le fichier à la première entrée (jamais de fichier
+       vide) ; ne pas ajouter une entrée dont l'objet est identique à celui d'une entrée
+       existante (une même `réf:` ne suffit pas : plusieurs entrées peuvent citer le même fichier).
+   - **Backlog** : `backlog.md` n'est pas chargé par `/start`. Une entrée traitée ou écartée est
+     supprimée du fichier lors du `/close` qui la constate ; le fichier devenu vide est supprimé.
+     Une entrée que la session a rendue urgente est promue : écrire l'action dans `signals.md`,
+     relire pour constater sa présence, puis seulement la retirer du backlog.
+   - **Croisement et contrôle des `réf:`** : si `backlog.md` existe, (1) vérifier par une commande
+     (`ls` ou `test -e`) que chaque chemin cité par un `réf:` existe ; une entrée dont le `réf:`
+     est `[à préciser]` ou désigne un chemin absent est dite « sans `réf:` précis » ; (2) comparer
+     les fichiers modifiés pendant la session (`git status --short`, limité au dossier de la zone)
+     aux `réf:` précis : une entrée qui cite un fichier modifié, ou son dossier, est candidate à
+     la promotion et listée dans le bilan de l'étape 15, sans être déplacée d'office ; (3) au-delà
+     de 3 entrées sans `réf:` précis, proposer dans le bilan de les corriger.
+   - **Ligne de renvoi** : tant que `backlog.md` existe, `signals.md` porte, en fin de section des
+     actions ouvertes, une seule ligne « Backlog : N entrées (dette a, finding b, amélioration c,
+     piste d, sans catégorie e ; dont s sans `réf:` précis) — `_contexte/backlog.md` » (les parties
+     à zéro sont omises), recalculée à chaque `/close`. Ce n'est pas une action : ni priorité, ni `fait quand:`
+     / `réf:`, et elle ne compte pas dans le plafond de 20. Fichier supprimé : supprimer la ligne.
+   - **Contrôle de péremption** : pour chaque action reportée, vérifier que son `fait quand:` est
+     encore atteignable et que son contexte est encore vrai. Une action obsolète est proposée au
+     retrait dans le bilan de l'étape 15 ; ne jamais la supprimer silencieusement.
+   - **Garde-fou de taille** : si la section des actions ouvertes dépasse 20 entrées (ligne de
+     renvoi exclue), proposer dans le bilan de l'étape 15 un tri vers `backlog.md` (liste des
+     entrées candidates), sans l'effectuer d'office.
    - **Rotation des sessions :** Si le nombre de blocs `# Session du` dépasse 1 (seuil) :
      - Déplacer toutes les sessions sauf la plus récente vers `<dossier>/_contexte/archive_sessions.md` (append only, préfixer par `---` si le fichier existe déjà).
      - Conserver uniquement la dernière session dans `signals.md`.
@@ -64,12 +137,6 @@ Lire `.claude/zones.md` pour obtenir la table des alias → dossiers réels.
      - `fait quand: <critère observable en 1 ligne>` — condition concrète permettant de clore l'action
      - `réf: <fichier(s) ou contexte clé>` — où trouver le contexte nécessaire
      Si le contexte est introuvable dans la session, écrire `réf: [à préciser]` plutôt qu'omettre le champ.
-
-4-bis. Mettre à jour `AMELIORATIONS.md` à la racine du projet :
-   - Lire la liste existante et la comparer aux décisions, demandes et améliorations encore ouvertes de la session.
-   - Ajouter les améliorations demandées ou explicitement identifiées pendant la session si elles ne sont pas déjà listées ; décrire chaque entrée comme une action concrète.
-   - Retirer de « À faire » uniquement les améliorations effectivement terminées pendant la session. Ne pas confondre un contrôle manuel en attente avec une amélioration : le conserver dans `tests_manuels.md`.
-   - Si aucune amélioration n'a été ajoutée, terminée ou reformulée, laisser le fichier inchangé.
 
 5. Mettre à jour `<dossier>/_contexte/contexte.md` :
    - Réécrire intégralement la section "État actuel" (5 lignes max).
@@ -105,6 +172,12 @@ Lire `.claude/zones.md` pour obtenir la table des alias → dossiers réels.
 
 9. Bumper la version dans `CHANGELOG.md` :
    - Lire la dernière entrée de `CHANGELOG.md` pour extraire la version actuelle (ex: `v2.2`).
+   - Si `CHANGELOG.md` n'existe pas : le créer avec l'en-tête `# Changelog` et une première entrée
+     `## v0.1 — AAAA-MM-JJ` (pas de calcul de bump), puis passer à l'étape 10.
+   - Si la session n'a modifié ni créé aucun fichier hors `_contexte/`, `README.md`,
+     `CHANGELOG.md`, `tests_manuels.md` et `roadmap*.md` (fichiers de suivi ; hors fichiers
+     régénérés par les commandes de l'étape 12) : ne pas bumper la version et n'ajouter aucune
+     entrée.
    - Déterminer le type de bump à partir de la synthèse de l'étape 3 :
      - **major** si : structure de `_contexte/` modifiée, placeholder renommé ou supprimé, commande supprimée
      - **minor** dans tous les autres cas
@@ -137,6 +210,17 @@ Lire `.claude/zones.md` pour obtenir la table des alias → dossiers réels.
    maintenant, avant le commit — jamais après.
 
 13. Effectuer un commit git :
+    - Pour chaque fichier de signal ou `backlog.md` modifié pendant la session (zone fermée et
+      autres zones de l'étape 3-bis), contrôler son statut Git avant toute annonce de commit :
+      ```bash
+      git check-ignore -v <fichier>             # exit 0 = ignoré
+      git ls-files --error-unmatch <fichier>    # exit 1 = non suivi
+      ```
+      Fichier ignoré : il ne peut pas être commité ; ne pas le forcer (`git add -f`), le signaler
+      dans le bilan. Fichier non suivi et non ignoré : l'ajouter. Si le fichier est dans un autre
+      dépôt Git que le dossier de travail (`git rev-parse --show-toplevel`), committer dans ce
+      dépôt-là ou le signaler. Ne jamais annoncer « commit réussi » pour un fichier absent de
+      `git show --name-only HEAD` après le commit.
     ```bash
     git diff --name-only          # vérifier tous les fichiers modifiés pendant la session
     git status                    # confirmer l'état du repo
@@ -151,18 +235,20 @@ Lire `.claude/zones.md` pour obtenir la table des alias → dossiers réels.
       survenir avec l'étape 12, mais à vérifier via `git status` après coup) : les inclure dans
       ce même commit, jamais dans un commit séparé.
 
-14. Exécuter `git push` :
+14. Push conditionnel. Si une règle du bloc `SPECIFICITES PROJET` de ce fichier ou de
+    `.claude/memory.md` interdit le push : ne pas exécuter `git push`, ne pas le proposer, ne pas
+    le mentionner dans le bilan. Sinon, lister d'abord les remotes :
     ```bash
-    git push
+    git remote
     ```
-    Si le projet n'a pas de remote configuré, ignorer cette étape silencieusement. Si le push
-    échoue (pas de remote tracking, conflit, réseau, etc.) : afficher l'erreur telle quelle dans
-    le bilan de l'étape 15, ne pas tenter de résolution automatique (pas de force push, pas de
-    pull/rebase automatique).
+    Sortie vide (aucun remote) : passer l'étape sans exécuter `git push` et sans la mentionner
+    dans le bilan. Au moins un remote : exécuter `git push`. Si le push échoue (pas de remote
+    tracking, conflit, réseau, etc.) : afficher l'erreur telle quelle dans le bilan de l'étape 15,
+    ne pas tenter de résolution automatique (pas de force push, pas de pull/rebase automatique).
 
 14-ter. **Hook de zone — Fin.** Si `<dossier>/_contexte/on_close.md` existe et contient une section
-    « Fin » : l'exécuter maintenant. Rien à faire sinon. Non bloquant. S'exécute même si le `git
-    push` de l'étape 14 a échoué : une sauvegarde de fin de session ne dépend pas du push.
+    « Fin » : l'exécuter maintenant. Rien à faire sinon. Non bloquant. S'exécute après le commit
+    de l'étape 13, que le push de l'étape 14 ait eu lieu, ait été sauté ou ait échoué.
 
 15. Afficher un bilan des résidus non commités :
     ```bash
@@ -170,6 +256,12 @@ Lire `.claude/zones.md` pour obtenir la table des alias → dossiers réels.
     ```
     S'il reste des fichiers non commités : ajouter à la synthèse finale une ligne
     "résidus non commités : N fichiers". Pas d'action automatique — uniquement rendre visible.
+    Ajouter aussi, si présents : les fichiers de signal ou `backlog.md` ignorés par Git (non
+    commités), les éléments marqués `[à transférer vers <alias>]`, tout écart de zone traité à
+    l'étape 3-bis, les actions obsolètes proposées au retrait, les entrées du backlog croisant un
+    fichier modifié (candidates à la promotion), les entrées du backlog sans `réf:` précis
+    au-delà de 3 et, au-delà de 20 actions ouvertes, les entrées candidates au tri vers
+    `backlog.md` (étape 4).
 
 16. Afficher en fin de réponse en grand format : ✌️😎
 
@@ -189,4 +281,3 @@ attente, lancer `python OUTILS/apprentissage/calculer_preferences.py` puis
 `diff_preferences.py --appliquer` qu'après son accord explicite ; sans accord, laisser
 `preferences.proposition.json` en attente. Ne jamais appliquer automatiquement.
 <!-- SPECIFICITES PROJET : FIN -->
-

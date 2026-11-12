@@ -1,4 +1,4 @@
-﻿---
+---
 description: Ajoute une entrée dans la mémoire projet (.claude/memory.md) ou dans la mémoire d'une zone (_contexte/memory.md)
 argument-hint: [alias_zone] [contenu à mémoriser]
 model: haiku
@@ -31,4 +31,3 @@ model: haiku
 5. Ajouter l'entrée à la fin du fichier cible.
 
 6. Confirmer en une ligne : "Mémorisé (<projet|zone: alias>) : [sujet]"
-
