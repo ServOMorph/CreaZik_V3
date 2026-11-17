@@ -47,7 +47,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("config")
     ap.add_argument("--timeout", type=int, default=0,
-                    help="secondes par piste ; 0 = automatique (3 x durée de la piste, minimum 90 s)")
+                    help="secondes par piste ; 0 = automatique (3 x durée de la piste, minimum 900 s)")
     ap.add_argument("--retries", type=int, default=3)
     args = ap.parse_args()
 
@@ -66,7 +66,7 @@ def main():
             log(f"piste {cid} : déjà générée, ignorée")
             continue
         for attempt in range(1, args.retries + 1):
-            limit = args.timeout or max(90, int(3 * durations[cid]))
+            limit = args.timeout or max(900, int(3 * durations[cid]))
             log(f"piste {cid} : tentative {attempt}/{args.retries} (limite {limit} s)")
             how = run_one(config, cid, limit, out_dir)
             status = results_status(results_path).get(cid)

@@ -1,16 +1,14 @@
+"""Client du portail VertIA : même ligne de commande et mêmes sorties que l'ancien worker ACE-Step local."""
 import argparse
-import gc
 import hashlib
 import json
 import os
-import platform
 import random
 import re
-import shutil
+import struct
 import subprocess
-import sys
-import threading
 import time
+import urllib.request
 from datetime import datetime
 
 parser = argparse.ArgumentParser()
@@ -24,70 +22,84 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 with open(args.config, "r", encoding="utf-8") as f:
     cfg = json.load(f)
 
-ACE = os.path.abspath(cfg["ace_step_path"])
 OUT = os.path.join(ROOT, cfg["output_dir"])
 OUT_REL = os.path.normpath(cfg["output_dir"]).replace(os.sep, "/")
 os.makedirs(OUT, exist_ok=True)
-os.chdir(ACE)
-sys.path.insert(0, ACE)
-for v in ("http_proxy", "https_proxy", "HTTP_PROXY", "HTTPS_PROXY", "ALL_PROXY"):
-    os.environ.pop(v, None)
 
-import torch
-from acestep.handler import AceStepHandler
-from acestep.llm_inference import LLMHandler
-from acestep.inference import GenerationParams, GenerationConfig, generate_music
-from acestep.constants import TASK_INSTRUCTIONS
+VERTIA = os.environ.get("VERTIA_DIR", r"D:\ServOMorph\VertIA_v3")
+VERTIA_PY = os.path.join(VERTIA, ".venv", "Scripts", "python.exe")
+VERTIA_GEN = os.path.join(VERTIA, "vertia_gen.py")
+VERTIA_PORT = os.environ.get("VERTIA_PORT", "4310")
+SESSION = "creazik"
+TIMEOUT_S = int(os.environ.get("CREAZIK_VERTIA_TIMEOUT", "3600"))
+FFMPEG_AUDIO = r"C:\Users\raph6\Documents\ServOMorph\ffmpeg\bin\ffmpeg.exe"
+SECTION_SECONDS = 14.5
+MODEL = "ACE-Step 1.5 turbo" + (" + LM 0.6B" if args.lm else "")
 
 only = {s for s in args.only.split(",") if s}
 cases = [c for c in cfg["test_cases"] if not only or c["id"] in only]
-
-dit = AceStepHandler()
-msg, ok = dit.initialize_service(
-    project_root=ACE, config_path="acestep-v15-turbo", device="auto", offload_to_cpu=True
-)
-if not ok:
-    sys.exit(f"DiT init failed: {msg}")
-
-llm = LLMHandler()
-if args.lm:
-    msg, ok = llm.initialize(
-        checkpoint_dir=os.path.join(ACE, "checkpoints"),
-        lm_model_path="acestep-5Hz-lm-0.6B",
-        backend="pt",
-        device="auto",
-        offload_to_cpu=True,
-        dtype=None,
-    )
-    if not ok:
-        sys.exit(f"LLM init failed: {msg}")
 
 results = {
     "timestamp": datetime.now().isoformat(),
     "mode": "real",
     "playlist": cfg.get("playlist_name", ""),
-    "model": "ACE-Step 1.5 turbo" + (" + LM 0.6B" if args.lm else ""),
+    "model": MODEL,
     "generations": [],
 }
 results_path = os.path.join(OUT, "playlist_results.json")
 
 
-def save():
-    temporary_path = results_path + ".tmp"
+def write_json(path, data):
+    temporary_path = path + ".tmp"
     with open(temporary_path, "w", encoding="utf-8") as f:
-        json.dump(results, f, indent=2, ensure_ascii=False)
-    os.replace(temporary_path, results_path)
+        json.dump(data, f, indent=2, ensure_ascii=False)
+    os.replace(temporary_path, path)
 
 
-def object_values(value):
-    fields = getattr(value, "__dataclass_fields__", None)
-    if fields:
-        return {name: getattr(value, name) for name in fields}
-    values = getattr(value, "__dict__", None)
-    return dict(values) if values else str(value)
+def save():
+    write_json(results_path, results)
 
 
-def write_generation_trace(entry, case, params, generation_config):
+def vertia(*cli, timeout=None):
+    env = dict(os.environ, PYTHONIOENCODING="utf-8")
+    proc = subprocess.run([VERTIA_PY, VERTIA_GEN, *cli], capture_output=True, text=True, encoding="utf-8",
+                          errors="replace", env=env, timeout=timeout,
+                          creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
+    ident = next((l[3:] for l in proc.stderr.splitlines() if l.startswith("id=")), "")
+    return proc.returncode, proc.stdout.splitlines(), ident, proc.stderr.strip()
+
+
+def upload(path):
+    vertia("capacites", timeout=900)
+    ext = os.path.splitext(path)[1].lstrip(".")
+    with open(path, "rb") as f:
+        req = urllib.request.Request(f"http://127.0.0.1:{VERTIA_PORT}/api/v1/inbox?extension={ext}", data=f.read(),
+                                     headers={"Content-Type": "application/octet-stream"})
+    with urllib.request.urlopen(req, timeout=300) as r:
+        return json.load(r)["nom"]
+
+
+def wav_info(path):
+    with open(path, "rb") as f:
+        head = f.read(12)
+        if head[:4] != b"RIFF" or head[8:] != b"WAVE":
+            raise ValueError("WAV RIFF attendu")
+        fmt = None
+        while chunk := f.read(8):
+            name, size = chunk[:4], struct.unpack("<I", chunk[4:])[0]
+            if name == b"fmt ":
+                fmt = struct.unpack("<HHIIHH", f.read(16))
+                f.seek(size - 16 + size % 2, 1)
+            elif name == b"data" and fmt:
+                channels, rate, align = fmt[1], fmt[2], fmt[4]
+                frames = size // align
+                return {"sample_rate": rate, "channels": channels, "frames": frames, "duration_seconds": frames / rate}
+            else:
+                f.seek(size + size % 2, 1)
+    raise ValueError("bloc fmt ou data absent")
+
+
+def write_generation_trace(entry, case, request, meta):
     audio_path = os.path.join(ROOT, entry["output_file"])
     relative_base = os.path.splitext(entry["output_file"])[0]
     metadata_rel = f"{relative_base}.metadata.json"
@@ -98,32 +110,21 @@ def write_generation_trace(entry, case, params, generation_config):
         with open(audio_path, "rb") as audio_file:
             output["sha256"] = hashlib.file_digest(audio_file, "sha256").hexdigest()
         try:
-            import torchaudio
-            info = torchaudio.info(audio_path)
-            output.update({"sample_rate": int(info.sample_rate), "channels": int(info.num_channels),
-                           "frames": int(info.num_frames), "duration_seconds": info.num_frames / info.sample_rate})
+            output.update(wav_info(audio_path))
         except Exception as error:
             output["audio_probe_error"] = str(error)
-    try:
-        revision = subprocess.run(["git", "-C", ACE, "rev-parse", "HEAD"], capture_output=True,
-                                  text=True, timeout=5, check=True).stdout.strip()
-    except Exception:
-        revision = "non disponible"
+    params = meta.get("params") or {}
     metadata = {
         "generated_at": entry.get("generated_at"), "model_name": results["model"],
         "model_version": "ACE-Step 1.5 / acestep-v15-turbo" + (" + acestep-5Hz-lm-0.6B" if args.lm else ""),
-        "model_revision": revision, "runtime": {
-            "os": platform.platform(), "python": sys.version, "torch": str(torch.__version__),
-            "cuda_runtime": str(torch.version.cuda), "cuda_available": bool(torch.cuda.is_available()),
-            "cuda_visible_devices": os.environ.get("CUDA_VISIBLE_DEVICES"),
-            "device_selection": "auto", "offload_to_cpu": True,
-        },
+        "model_revision": meta.get("model_revision", "non disponible"), "runtime": meta.get("runtime", {}),
+        "vertia": {"session": SESSION, "demande_id": entry.get("vertia_id"), "capacite": "musique.generer"},
         "test_case_id": case["id"], "title": case.get("name", ""),
-        "prompt": params.caption, "lyrics": params.lyrics,
+        "prompt": params.get("caption", case["prompt"]), "lyrics": params.get("lyrics", request.get("paroles", "")),
         "input_files": [case["lyrics_file"]] if case.get("lyrics_file") else [],
         "case_config": case,
         "generation_config": {
-            "params": object_values(params), "runner": object_values(generation_config),
+            "params": params, "runner": meta.get("generation_config", {}), "vertia_request": request,
             "worker": {"steps": args.steps, "lm_enabled": args.lm, "batch_size": 1,
                        "audio_format": "wav", "random_seed": False, "elapsed_seconds": entry.get("elapsed_s")},
         },
@@ -131,10 +132,7 @@ def write_generation_trace(entry, case, params, generation_config):
         "listening_review": {"status": "pending"},
     }
     os.makedirs(os.path.dirname(metadata_path), exist_ok=True)
-    temporary_path = metadata_path + ".tmp"
-    with open(temporary_path, "w", encoding="utf-8") as metadata_file:
-        json.dump(metadata, metadata_file, indent=2, ensure_ascii=False)
-    os.replace(temporary_path, metadata_path)
+    write_json(metadata_path, metadata)
     entry["metadata_file"] = metadata_rel.replace(os.sep, "/")
 
     manifest_path = os.path.join(OUT, "generation_manifest.json")
@@ -144,67 +142,14 @@ def write_generation_trace(entry, case, params, generation_config):
     except (OSError, json.JSONDecodeError):
         manifest = {"playlist": cfg.get("playlist_name", ""), "model": results["model"], "tracks": []}
     manifest["updated_at"] = entry.get("generated_at") or datetime.now().astimezone().isoformat(timespec="seconds")
-    manifest["model_revision"] = revision
+    manifest["model_revision"] = metadata["model_revision"]
     manifest["tracks"] = [track for track in manifest.get("tracks", [])
                           if track.get("output_file") != entry["output_file"]]
     manifest["tracks"].append({"test_case_id": case["id"], "name": case.get("name", ""),
                                "output_file": entry["output_file"], "metadata_file": entry["metadata_file"],
                                "generated_at": entry.get("generated_at"), "status": entry.get("status"),
                                "error": entry.get("error")})
-    temporary_path = manifest_path + ".tmp"
-    with open(temporary_path, "w", encoding="utf-8") as manifest_file:
-        json.dump(manifest, manifest_file, indent=2, ensure_ascii=False)
-    os.replace(temporary_path, manifest_path)
-
-
-SECTION_SECONDS = 14.5
-
-
-IDLE_W = 10.0
-
-
-class GpuPowerMeter:
-    def __init__(self, interval=0.5):
-        self.interval = interval
-        self.samples = []
-        self._stop = threading.Event()
-        self._thread = None
-
-    def _read(self):
-        try:
-            out = subprocess.run(
-                ["nvidia-smi", "--query-gpu=utilization.gpu,power.limit", "--format=csv,noheader,nounits"],
-                capture_output=True, text=True, timeout=5)
-            util, limit = [float(x) for x in out.stdout.strip().splitlines()[0].split(",")]
-            self.limit_w = limit
-            return IDLE_W + (limit - IDLE_W) * util / 100.0, util
-        except Exception:
-            return None
-
-    def _run(self):
-        last = time.time()
-        while not self._stop.is_set():
-            reading = self._read()
-            now = time.time()
-            if reading is not None:
-                self.samples.append((reading[0], now - last, reading[1]))
-            last = now
-            self._stop.wait(self.interval)
-
-    def start(self):
-        self._thread = threading.Thread(target=self._run, daemon=True)
-        self._thread.start()
-
-    def stop(self):
-        self._stop.set()
-        if self._thread:
-            self._thread.join(timeout=5)
-        total_s = sum(dt for _, dt, _ in self.samples)
-        if not self.samples or total_s <= 0:
-            return None
-        wh = sum(w * dt for w, dt, _ in self.samples) / 3600.0
-        return {"energy_wh_est": round(wh, 3),
-                "gpu_util_avg_pct": round(sum(u * dt for _, dt, u in self.samples) / total_s, 1)}
+    write_json(manifest_path, manifest)
 
 
 def fit_lyrics(text, duration):
@@ -216,9 +161,6 @@ def fit_lyrics(text, duration):
         return text
     kept = sections[:target - 1] + [sections[-1]]
     return "\n".join(p.strip("\n") + "\n" for p in kept)
-
-
-FFMPEG_AUDIO = r"C:\Users\raph6\Documents\ServOMorph\ffmpeg\bin\ffmpeg.exe"
 
 
 def prepare_audio(path, start=None, dur=None):
@@ -258,6 +200,53 @@ def effective_seed(case):
     return random.SystemRandom().randint(0, 2 ** 32 - 1)
 
 
+def build_request(case, seed):
+    instrumental = case["type"] == "instrumental"
+    request = {
+        "paroles": "" if instrumental else load_lyrics(case), "instrumental": instrumental,
+        "langue": case.get("language", "en"), "duree": case["duration"], "seed": seed,
+        "etapes": args.steps, "lm": args.lm, "ajuster_paroles": False,
+    }
+    if case.get("task_type"):
+        request["tache"] = str(case["task_type"])
+    for key, name in (("reference_audio", "reference"), ("src_audio", "source")):
+        if case.get(key):
+            request[name] = upload(prepare_audio(case[key], case.get("audio_start_s"), case.get("audio_duration_s")))
+    if case.get("cover_noise_strength") is not None:
+        request["force_cover"] = float(case["cover_noise_strength"])
+    if case.get("audio_cover_strength") is not None:
+        request["force_audio"] = float(case["audio_cover_strength"])
+    if case.get("bpm"):
+        request["bpm"] = int(case["bpm"])
+    if case.get("keyscale"):
+        request["tonalite"] = str(case["keyscale"])
+    if case.get("timesignature"):
+        request["mesure"] = str(case["timesignature"])
+    return request
+
+
+def generate(case, entry):
+    request = build_request(case, entry["seed"])
+    cli = ["musique", "--session", SESSION, "--prompt", case["prompt"], "--essais", "1",
+           "--timeout", str(TIMEOUT_S), "--param"]
+    cli += [f"{k}={json.dumps(v, ensure_ascii=False)}" for k, v in request.items()]
+    code, paths, ident, err = vertia(*cli, timeout=TIMEOUT_S + 120)
+    entry["vertia_id"] = ident
+    wav = next((p for p in paths if p.lower().endswith(".wav")), "")
+    if code != 0 or not wav or not os.path.isfile(wav):
+        raise RuntimeError(f"portail VertIA code {code} : {err[-300:]}")
+    meta = {}
+    meta_path = next((p for p in paths if p.lower().endswith(".json")), "")
+    if meta_path:
+        with open(meta_path, "r", encoding="utf-8") as f:
+            meta = json.load(f)
+    with open(wav, "rb") as src, open(os.path.join(ROOT, entry["output_file"]), "wb") as dst:
+        dst.write(src.read())
+    if ident:
+        vertia("retour", ident, "valide", timeout=120)
+    return request, meta
+
+
 previous = {}
 if os.path.exists(results_path):
     try:
@@ -294,69 +283,25 @@ results["generations"] = all_entries
 save()
 
 for i, (case, entry) in enumerate(zip(cases, entries), 1):
-    rel = entry["output_file"]
     entry["status"] = "running"
     save()
     print(f"[{i}/{len(cases)}] {case['name']} ({case['type']})", flush=True)
-
-    instrumental = case["type"] == "instrumental"
-    params = GenerationParams(
-        task_type="text2music",
-        thinking=args.lm,
-        caption=case["prompt"],
-        lyrics=(case.get("lyrics") or "[Instrumental]") if instrumental else load_lyrics(case),
-        instrumental=instrumental,
-        vocal_language=case.get("language", "en"),
-        duration=case["duration"],
-        inference_steps=args.steps,
-        guidance_scale=1.0,
-        seed=entry["seed"],
-    )
-    if case.get("task_type"):
-        params.task_type = str(case["task_type"])
-        params.instruction = TASK_INSTRUCTIONS.get(params.task_type, params.instruction)
-    for key in ("reference_audio", "src_audio"):
-        if case.get(key):
-            setattr(params, key, prepare_audio(case[key], case.get("audio_start_s"), case.get("audio_duration_s")))
-    if case.get("cover_noise_strength") is not None:
-        params.cover_noise_strength = float(case["cover_noise_strength"])
-    if case.get("audio_cover_strength") is not None:
-        params.audio_cover_strength = float(case["audio_cover_strength"])
-    if case.get("bpm"):
-        params.bpm = int(case["bpm"])
-    if case.get("keyscale"):
-        params.keyscale = str(case["keyscale"])
-    if case.get("timesignature"):
-        params.timesignature = str(case["timesignature"])
     t0 = time.time()
-    meter = GpuPowerMeter()
-    meter.start()
+    request, meta = {}, {}
     try:
-        res = generate_music(
-            dit, llm, params=params,
-            config=GenerationConfig(batch_size=1, audio_format="wav", use_random_seed=False),
-            save_dir=os.path.join(ACE, "output", "creazik"),
-        )
-        path = res.audios[0]["path"] if res.success and res.audios else ""
-        if path and os.path.exists(path):
-            shutil.copyfile(path, os.path.join(ROOT, rel))
-            entry["status"] = "generated"
-            entry["generated_at"] = datetime.now().astimezone().isoformat(timespec="seconds")
-            entry["model"] = results["model"]
-        else:
-            entry["status"] = "failed"
-            entry["error"] = res.status_message or "aucun fichier produit"
+        request, meta = generate(case, entry)
+        entry["status"] = "generated"
+        entry["generated_at"] = datetime.now().astimezone().isoformat(timespec="seconds")
+        entry["model"] = results["model"]
+        for key in ("energy_wh_est", "gpu_util_avg_pct"):
+            if meta.get(key) is not None:
+                entry[key] = meta[key]
     except Exception as e:
         entry["status"] = "failed"
         entry["error"] = str(e)[:300]
-    measure = meter.stop()
-    if measure:
-        entry.update(measure)
-    gc.collect()
-    torch.cuda.empty_cache()
     entry["elapsed_s"] = round(time.time() - t0, 1)
     entry.setdefault("generated_at", datetime.now().astimezone().isoformat(timespec="seconds"))
-    write_generation_trace(entry, case, params, GenerationConfig(batch_size=1, audio_format="wav", use_random_seed=False))
+    write_generation_trace(entry, case, request, meta)
     print(f"    -> {entry['status']} en {entry['elapsed_s']}s {entry.get('error', '')}", flush=True)
     save()
 

@@ -60,7 +60,7 @@ def main():
                 continue
             case = pending[0]
             cid = case["id"]
-            limit = max(90, int(3 * case.get("duration", 30)))
+            limit = max(900, int(3 * case.get("duration", 30)))
             done = False
             for attempt in range(1, args.retries + 1):
                 run_queue.log(f"{pid} piste {cid} : tentative {attempt}/{args.retries} (limite {limit} s)")
