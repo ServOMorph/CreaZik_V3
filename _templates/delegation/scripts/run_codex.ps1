@@ -17,7 +17,7 @@ $politiqueFile = Join-Path $codexHome 'politique_delegation.json'
 $verrouFile = Join-Path $codexHome 'delegation.lock'
 
 $politique = [ordered]@{
-    modele = 'gpt-6.1-sol'
+    modele = 'gpt-6.2-sol'
     binaire = ''
     seuil_5h = 50
     seuil_7j = 60
@@ -194,7 +194,7 @@ try {
         $previousPreference = $ErrorActionPreference
         try {
             $ErrorActionPreference = 'Continue'
-            & $cx @arguments *> $log
+            & $cx @arguments 2>&1 | ForEach-Object { $_.ToString() } | Out-File -LiteralPath $log -Encoding utf8
             $code = $LASTEXITCODE
         } finally { $ErrorActionPreference = $previousPreference }
         if (Test-Path -LiteralPath $log) {
